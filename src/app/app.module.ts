@@ -23,6 +23,8 @@ import { AngularMultiSelectModule } from "angular2-multiselect-dropdown/angular2
 import { HttpModule } from "@angular/http";
 import { SignupStepperService } from "./signup-stepper/signup-stepper.service";
 import { CommonService } from "./services/common.service";
+import { AuthGuard } from "./shared/guards/auth-guard.service";
+import { CanDeactivateGuard } from "./shared/guards/can-deactivate-guard.service";
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -65,7 +67,9 @@ export function createTranslateLoader(http: HttpClient) {
     FullLayoutService,
     CommonService,
     LocalstoragedetailsService,
-    SignupStepperService
+    SignupStepperService,
+    AuthGuard,
+    CanDeactivateGuard
   ],
   bootstrap: [AppComponent]
 })

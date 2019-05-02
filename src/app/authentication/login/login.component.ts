@@ -70,7 +70,6 @@ export class LoginComponent implements OnInit {
 
       },
       error => {
-        this.CommonService.handleError(error.error.message);
         if (error.error.message == 'user not exists')
         {
           this.toastr.error(this.translate.instant('Errors.wrongUsername'));
@@ -79,6 +78,9 @@ export class LoginComponent implements OnInit {
         else if(error.error.message == 'wrong password'){
           this.toastr.error(this.translate.instant('Errors.wrongPassword'));
           document.getElementById('pass').focus();
+        } else
+        {
+          this.CommonService.handleError(error.error.message);
         }
       }
     );
