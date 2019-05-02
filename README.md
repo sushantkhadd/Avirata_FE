@@ -36,3 +36,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 7. npm install rxjs-compat
 8. npm i crypto-js
 9. npm i angular2-multiselect-dropdown
+Readme
