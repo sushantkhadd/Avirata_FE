@@ -1,0 +1,77 @@
+<div class="col-sm-12 col-md-12 " *ngIf="!showQuize && !finishExamCard">
+    <div class="instruction-wrap">
+        <div class="borderBlue">
+            <div class="card">
+                <div class="card-header text-white">
+                    <h4>{{'Quiz.note' | translate}}</h4>
+                </div>
+                <div class="card-block inst-text">
+                    <p>{{'Quiz.instruction4' | translate}}</p>
+                    <p>{{'Quiz.instruction5' | translate}}</p>
+                    <p>{{'Quiz.instruction6' | translate}}</p>
+                    <p>{{'Quiz.instruction7' | translate}}</p>
+                </div>
+                <div class="card-footer" *ngIf="moduleNumber==2 || moduleNumber==3">
+                    <div class="float-right hidden-xs-down">
+                        <button class="btn btn-primary" (click)="startExam()">{{'Quiz.start exam' | translate}}</button>
+                    </div>
+                </div>
+                <div class="card-footer" *ngIf="moduleNumber==6">
+                    <div class="float-right hidden-xs-down">
+                        <button class="btn btn-primary" (click)="startEndLine()">{{'Quiz.start exam' | translate}}</button>
+                    </div>
+                    <div class="hidden-sm-up text-center">
+                        <button class="btn btn-primary" (click)="startEndLine()">{{'Quiz.start exam' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12 col-md-12 " *ngIf="!showQuize && finishExamCard">
+    <div class="card">
+        <div class="card-block text-center greenText">
+            {{'Quiz.exam given' | translate}}
+        </div>
+    </div>
+</div>
+
+<div id="quiz" *ngIf="showQuize" class="baseline-instructtion">
+    <h6 class="questionHead">
+       <strong>{{'Quiz.traineebaselineQue' | translate}}</strong>
+    </h6>
+    <hr />
+
+    <div *ngIf="mode=='quiz' && quiz">
+        <div *ngFor="let question of filteredQuestions;">
+                <div class="badge badge-info ml-3">{{'Quiz.Question' | translate}} {{pager.index + 1}} / {{pager.count}}</div>
+                <div class="card p-2">
+                <h6>{{pager.index + 1}}.
+                    <strong><span [innerHTML]="question.name"></span></strong>
+                </h6>
+                <div class="row options ml-3">
+                    <div class="col-md-12" *ngFor="let option of question.options">
+                        <div class="option">
+                            <label class="" [attr.for]="option.id">
+                                <input id="{{option.id}}" type="checkbox" [(ngModel)]="option.selected" (change)="onSelect(question,question.id, option,$event);"
+                                /> {{option.name}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="d-flex justify-content-center mb-3">
+            <button class="btn btn-primary float-left mr-3" *ngIf="config.allowBack" [disabled]="(pager.index + 1)==1" (click)="goTo(pager.index-1,1)">
+                <i class="fa fa-arrow-left btn-arrow" aria-hidden="true"></i> {{'Quiz.back' | translate}}</button>
+            <button class="btn btn-primary float-left marginLeft" (click)="goTo(pager.index + 1,2);" *ngIf="(pager.index + 1)<(pager.count)">{{'Quiz.next' | translate}}
+                <i class="fa fa-arrow-right btn-arrow" aria-hidden="true"></i>
+            </button>
+            <button class="btn btn-primary float-left marginLeft" *ngIf="(pager.index + 1)==(pager.count)" (click)="goTo(pager.index,3)">{{'Quiz.finish' | translate}}
+                <i class="fa fa-arrow-right btn-arrow" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+</div>

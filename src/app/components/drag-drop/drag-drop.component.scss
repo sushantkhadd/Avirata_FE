@@ -1,0 +1,103 @@
+.modal {
+  padding-top: 60px;
+
+  .modal-content {
+    border-width: 15px;
+    border-top: 0;
+    border-radius: 20px;
+    border-color: #4dbd74;
+    position: relative;
+
+    .modal-header {
+      padding: 20px 0 0;
+      background: #4dbd74;
+      position: relative;
+
+      // padding: 40px;
+      span.exp-img {
+        // background: url(./../../../assets/img/expressions/correct_ans.png);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: absolute;
+        z-index: 99;
+        width: 100px;
+        height: 100px;
+        bottom: 35px;
+        margin: 0 auto;
+        left: 0;
+        right: 0;
+      }
+
+      button.close {
+        position: absolute;
+        right: 0;
+        color: #fff;
+        opacity: 1;
+      }
+
+      h5 {
+        margin: 30px auto 0;
+        padding-bottom: 10px;
+      }
+    }
+
+    .modal-body {
+      // -webkit-box-sizing: content-box;
+      // -moz-box-sizing: content-box;
+      // box-sizing: content-box;
+      // border: none;
+      // -o-text-overflow: clip;
+      // text-overflow: clip;
+      // background: -webkit-linear-gradient(0deg, rgba(0, 0, 0, 0) 79px, rgb(171, 206, 212) 79px, rgb(171, 206, 212) 81px, rgba(0, 0, 0, 0) 81px), -webkit-linear-gradient(90deg, rgb(238, 238, 238) 0.1em, rgba(0, 0, 0, 0) 0.1em), rgb(255, 255, 255);
+      // background: -moz-linear-gradient(90deg, rgba(0, 0, 0, 0) 79px, rgb(171, 206, 212) 79px, rgb(171, 206, 212) 81px, rgba(0, 0, 0, 0) 81px), -moz-linear-gradient(0deg, rgb(238, 238, 238) 0.1em, rgba(0, 0, 0, 0) 0.1em), rgb(255, 255, 255);
+      // background: linear-gradient(90deg, rgba(0, 0, 0, 0) 79px, rgb(171, 206, 212) 79px, rgb(171, 206, 212) 81px, rgba(0, 0, 0, 0) 81px), linear-gradient(0deg, rgb(238, 238, 238) 0.1em, rgba(0, 0, 0, 0) 0.1em), rgb(255, 255, 255);
+      // background-position: auto auto;
+      // -webkit-background-origin: padding-box;
+      // background-origin: padding-box;
+      // -webkit-background-clip: border-box;
+      // background-clip: border-box;
+      // -webkit-background-size: 100% 1.2em;
+      // background-size: 100% 1.2em;
+
+      // &::before {
+      //   content: "";
+      //   position: absolute;
+      //   bottom: -1px;
+      //   left: 0px;
+      //   border-width: 16px 0 0 16px;
+      //   border-style: solid;
+      //   border-color: #abced4 #fff;
+    }
+
+    p {
+      // padding-left: 5rem;
+      line-height: 25px;
+      margin-top: 10px;
+      font-size: 1rem;
+    }
+  }
+}
+
+
+.drag-container.differ .draggable-items li {
+  border-radius: 7px;
+  text-align: left;
+  font-weight: 700;
+  border-color: #5abd75;
+  padding: 10px 10px 0px;
+  -webkit-text-shadow: 1px 2px 2px #000;
+  -moz-text-shadow: 1px 2px 2px #000;
+  -ms-text-shadow: 1px 2px 2px #000;
+  -o-text-shadow: 1px 2px 2px #000;
+  text-shadow: 1px 2px 2px #000;
+  color: #fff;
+  height: 60px;
+  box-shadow: none;
+  background: #f7f7f7;
+}
+
+.border-color-gray {
+  border-color: #ddd !important;
+  cursor: default !important;
+}

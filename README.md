@@ -25,3 +25,19 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+1. npm install jquery --save 
+2. npm install bootstrap --save
+3. npm i ngx-bootstrap@3.3.0 --save  
+4. npm install @ngx-translate/core@10.0.0 --save
+5. npm install @ngx-translate/http-loader@3.0.0 --save
+6. npm install rxjs-compat@6.2.1
+7. npm i crypto-js
+8. npm i angular2-multiselect-dropdown
+9. npm i youtube-player@5.4.0
+10. npm install devextreme devextreme-angular --save --save-exact
+11. npm i ng2-pdf-viewer --save
+
+<!-- for error of stream in jszip lib after adding dx libraries -->
+Readme

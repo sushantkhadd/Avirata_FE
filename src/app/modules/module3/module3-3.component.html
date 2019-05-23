@@ -1,0 +1,50 @@
+<div *ngIf="mainFlagModule3 < 3">
+  <div class="card">
+    <div class="card-block">
+      <p>{{ "subModule1_1.1_1" | translate }}</p>
+      <p>
+        <strong>{{ "lock.note" | translate }}</strong>{{ "lock.warn" | translate }}
+      </p>
+    </div>
+  </div>
+</div>
+<div *ngIf="mainFlagModule3 == 3">
+  <div class="assignForm">
+    <div class="card">
+      <div class="card-block pt-2">
+        <form #assignForm="ngForm">
+          <div class="form-group row">
+            <label class="col-sm-12 form-control-label" [for]="questionid1" [innerHTML]="question1"></label>
+            <div class="col-12 controls">
+              <textarea class="form-control" [id]="questionid1" name="answer1" [(ngModel)]="answer1" rows="3"
+                #addr="ngModel" maxlength="500" required></textarea>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-12 form-control-label" [for]="questionid2" [innerHTML]="question2"></label>
+            <div class="col-12 controls">
+              <textarea class="form-control" [id]="questionid2" name="answer2" [(ngModel)]="answer2" rows="3"
+                #addr="ngModel" maxlength="500" required></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer text-center bg-white border-0">
+        <button *ngIf="subFlagModule3 == 1" class="btn btn-primary" [disabled]="assignForm.invalid || trimFlag"
+          (click)="finish(1);">{{'Login.Close' | translate}}</button>
+        <button *ngIf="subFlagModule3 == 2" class="btn btn-primary" [disabled]="assignForm.invalid || trimFlag"
+          (click)="finish(2);">{{'Login.Close' | translate}}</button>
+        <button *ngIf="subFlagModule3 == 3" class="btn btn-primary" [disabled]="assignForm.invalid || trimFlag"
+          (click)="finish(3);">{{'Login.Close' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="mainFlagModule3 > 3">
+  <div class="card submoduleBox">
+    <div class="card-block text-center greenText inst-text">
+      <span>{{ "L2Module3Complete.sm_3_3" | translate }}</span>
+    </div>
+  </div>
+</div>

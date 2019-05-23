@@ -1,0 +1,42 @@
+<div *ngIf="mainFlagModule3 < 14">
+    <div class="card">
+      <div class="card-block">
+        <p>{{'subModule4_1.4_4' | translate}}</p>
+        <p><strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="mainFlagModule3 == 14 ">
+    <div class="instruction-wrap ins-block" *ngIf="!startPdf">
+        <div class="card">
+            <div class="card-header">
+                <h5><em class="fa fa-calendar-minus-o"></em>&nbsp;{{'Quiz.note' | translate}}</h5>
+            </div>
+            <div class="card-block pt-2">
+          <p>{{'L2Module3.subMenu3-14' | translate}}</p>
+            </div>
+            <div class="card-footer">
+                <div class="float-right hidden-xs-down">
+                    <button class="btn btn-primary" (click)="start();">{{'Module4.start' | translate}}</button>
+                </div>
+                <!-- <div class="hidden-sm-up text-center">
+                    <button class="btn btn-primary" (click)="start();">{{'Module4.start' | translate}}</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <div *ngIf="startPdf" class="mb-2">
+      <app-presentation [data]='docData' (ansCorrect)="checkAnswer($event)"></app-presentation>
+    </div>
+  </div>
+  <div *ngIf="mainFlagModule3 > 14">
+      <div class="card">
+          <div class="card-footer">
+              <h6 class="lineHeight">
+                  <div class="text-center">{{'L2Module3.subMenu3-14' | translate}}</div>
+              </h6>
+          </div>
+          <app-presentation [data]='passValues'></app-presentation>
+      </div>
+    </div>
+  

@@ -1,0 +1,592 @@
+<div class="drag-container" *ngIf="data.type=='multiple'">
+  <div class="text-center">
+    <p class="sub-title"><b>{{'L2Module2.drag_title' | translate}}</b></p>
+  </div>
+  <h6 class="questionHead lineHeight m-0"><b>{{'L2Instruction.inst2_4_5' | translate}}</b></h6>
+
+  <div class="card" *ngIf="options">
+    <div class="card-header">
+      <h6>
+        {{question}}
+      </h6>
+    </div>
+    <div class="card-block">
+      <div class="draggable-items">
+        <div class="list-group">
+          <div class="row">
+            <div class="col-md-3" *ngFor="let item of optionArray">
+              <li title="Drag item" class="list-group-item list-group-item-action list-group-item-success bg-success"
+                [draggable] [dragClass]="'active'" [dragData]="item" [dragScope]="item.type"
+                [dragEnabled]="dragEnabled">
+                {{item.name}}
+              </li>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="droppable-items">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-block" [class.disableMe]="check1">
+                <div class="row">
+                  <div class="col-md-9">
+                    <p>{{statement[0].stmt}}</p>
+
+                  </div>
+                  <div class="col-md-3">
+                    <div droppable [dragOverClass]="'drag-target-border'" [dropScope]="['draggable']"
+                      [dragHintClass]="'drag-hint'" [dropEnabled]="!check1"
+                      (onDrop)="onAnyDrop1($event,statement[0].option)" title="Drop items here"
+                      [class.dashed-border]="!check1">
+                      <div class="card-block scroll-list b1 " [class.p-0]="check1">
+                        <span class="v-span">
+                          <li *ngFor="let item of droppedItems1" class="list-group-item droppedItem">
+                            <span>{{item.name}}</span>
+                          </li>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-block" [class.disableMe]="check2">
+                <div class="row">
+                  <div class="col-md-9">
+                    <p>{{statement[1].stmt}}</p>
+                  </div>
+                  <div class="col-md-3">
+                    <div droppable [dragOverClass]="'drag-target-border'" [dropScope]="['draggable']"
+                      [dragHintClass]="'drag-hint'" [dropEnabled]="!check2"
+                      (onDrop)="onAnyDrop2($event,statement[1].option)" title="Drop items here"
+                      [class.dashed-border]="!check2">
+                      <div class="card-block scroll-list b1 " [class.p-0]="check2">
+                        <span class="v-span">
+                          <li *ngFor="let item of droppedItems2" class="list-group-item droppedItem">
+                            <span>{{item.name}}</span>
+                          </li>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-block" [class.disableMe]="check3">
+                <div class="row">
+                  <div class="col-md-9">
+                    <p>{{statement[2].stmt}}</p>
+                  </div>
+                  <div class="col-md-3">
+                    <div droppable [dragOverClass]="'drag-target-border'" [dropScope]="['draggable']"
+                      [dragHintClass]="'drag-hint'" [dropEnabled]="!check3"
+                      (onDrop)="onAnyDrop3($event,statement[2].option)" title="Drop items here"
+                      [class.dashed-border]="!check3">
+                      <div class="card-block scroll-list b1 " [class.p-0]="check3">
+                        <span class="v-span">
+                          <li *ngFor="let item of droppedItems3" class="list-group-item droppedItem">
+                            <span>{{item.name}}</span>
+                          </li>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-block" [class.disableMe]="check4">
+                <div class="row">
+                  <div class="col-md-9">
+                    <p>{{statement[3].stmt}}</p>
+                  </div>
+                  <div class="col-md-3">
+                    <div droppable [dragOverClass]="'drag-target-border'" [dropScope]="['draggable']"
+                      [dragHintClass]="'drag-hint'" [dropEnabled]="!check4"
+                      (onDrop)="onAnyDrop4($event,statement[3].option)" title="Drop items here"
+                      [class.dashed-border]="!check4">
+                      <div class="card-block scroll-list b1 " [class.p-0]="check4">
+                        <span class="v-span">
+                          <li *ngFor="let item of droppedItems4" class="list-group-item droppedItem">
+                            <span>{{item.name}}</span>
+                          </li>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card bs-none">
+          <div class="card-footer bg-none border-0">
+            <div class="text-right">
+              <button class="btn btn-primary mr-2" (click)="reset();">{{'newTranslate.reset' | translate}}</button>
+              <button class="btn btn-primary" [disabled]="!nextFlag"
+                (click)="next();">{{'Stepper.Next' | translate}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="drag-container" *ngIf="data.type=='single' && mainFlagModule1 == 10">
+  <!-- <div class="text-left">
+    <p class="sub-title"><b>{{'L2Module2.drag_title_110' | translate}}</b></p>
+  </div> -->
+  <!--<h6 class="questionHead lineHeight m-0"><b>{{'L2Instruction.inst2_4_5' | translate}}</b></h6> -->
+
+  <!-- <div class="card" *ngIf="options"> -->
+  <div class="card-header">
+    <h6>
+      {{question}}
+    </h6>
+  </div>
+  <div class="card-block">
+    <div class="draggable-items">
+      <div class="list-group">
+        <div class="row">
+          <div class="col-md-3" *ngFor="let item of optionArray">
+            <li title="Drag item" class="list-group-item list-group-item-action list-group-item-success bg-success"
+              [draggable] [dragClass]="'active'" [dragData]="item" [dragScope]="item.type" [dragEnabled]="dragEnabled">
+              {{item.name}}
+            </li>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="droppable-items">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-block" [class.disableMe]="check1">
+              <div class="row">
+                <div class="col-md-9">
+                  <p [innerHTML]="statement[0].stmt"></p>
+
+                </div>
+                <div class="col-md-3">
+                  <div droppable [dragOverClass]="'drag-target-border'" [dropScope]="['draggable']"
+                    [dragHintClass]="'drag-hint'" [dropEnabled]="!check1"
+                    (onDrop)="singleonAnyDrop1($event,statement[0])"
+                    title="Drop items here" [class.dashed-border]="!check1">
+                    <div class="card-block scroll-list b1 " [class.p-0]="check1">
+                      <span class="v-span">
+                        <li *ngFor="let item of droppedItems1" class="list-group-item droppedItem">
+                          <span>{{item.name}}</span>
+                        </li>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-block" [class.disableMe]="check2">
+              <div class="row">
+                <div class="col-md-9">
+                  <p [innerHTML]="statement[1].stmt"></p>
+                </div>
+                <div class="col-md-3">
+                  <div droppable [dragOverClass]="'drag-target-border'" [dropScope]="['draggable']"
+                    [dragHintClass]="'drag-hint'" [dropEnabled]="!check2"
+                    (onDrop)="singleonAnyDrop2($event,statement[1])"
+                    title="Drop items here" [class.dashed-border]="!check2">
+                    <div class="card-block scroll-list b1 " [class.p-0]="check2">
+                      <span class="v-span">
+                        <li *ngFor="let item of droppedItems2" class="list-group-item droppedItem">
+                          <span>{{item.name}}</span>
+                        </li>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-block" [class.disableMe]="check3">
+              <div class="row">
+                <div class="col-md-9">
+                  <p [innerHTML]="statement[2].stmt"></p>
+                </div>
+                <div class="col-md-3">
+                  <div droppable [dragOverClass]="'drag-target-border'" [dropScope]="['draggable']"
+                    [dragHintClass]="'drag-hint'" [dropEnabled]="!check3"
+                    (onDrop)="singleonAnyDrop3($event,statement[2])"
+                    title="Drop items here" [class.dashed-border]="!check3">
+                    <div class="card-block scroll-list b1 " [class.p-0]="check3">
+                      <span class="v-span">
+                        <li *ngFor="let item of droppedItems3" class="list-group-item droppedItem">
+                          <span>{{item.name}}</span>
+                        </li>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-block" [class.disableMe]="check4">
+              <div class="row">
+                <div class="col-md-9">
+                  <p [innerHTML]="statement[3].stmt"></p>
+                </div>
+                <div class="col-md-3">
+                  <div droppable [dragOverClass]="'drag-target-border'" [dropScope]="['draggable']"
+                    [dragHintClass]="'drag-hint'" [dropEnabled]="!check4"
+                    (onDrop)="singleonAnyDrop4($event,statement[3])"
+                    title="Drop items here" [class.dashed-border]="!check4">
+                    <div class="card-block scroll-list b1 " [class.p-0]="check4">
+                      <span class="v-span">
+                        <li *ngFor="let item of droppedItems4" class="list-group-item droppedItem">
+                          <span>{{item.name}}</span>
+                        </li>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-block" [class.disableMe]="check5">
+              <div class="row">
+                <div class="col-md-9">
+                  <p>{{statement[4]}}</p>
+                </div>
+                <div class="col-md-3">
+                  <div droppable [dragOverClass]="'drag-target-border'" [dropScope]="['draggable']"
+                    [dragHintClass]="'drag-hint'" [dropEnabled]="!check5" (onDrop)="singleonAnyDrop5($event,4)"
+                    title="Drop items here" [class.dashed-border]="!check5">
+                    <div class="card-block scroll-list b1 " [class.p-0]="check5">
+                      <span class="v-span">
+                        <li *ngFor="let item of droppedItems5" class="list-group-item droppedItem">
+                          <span>{{item.name}}</span>
+                        </li>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <div class="card bs-none">
+        <div class="card-footer bg-none border-0">
+          <div class="text-right">
+            <button class="btn btn-primary mr-2" (click)="singlereset();">{{'newTranslate.reset' | translate}}</button>
+            <button class="btn btn-primary" [disabled]="!nextFlag"
+              (click)="singlenext();">{{'Stepper.Next' | translate}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- </div> -->
+</div>
+
+<div class="drag-container differ" *ngIf="data.type=='single' && (mainFlagModule1 == 8 || mainFlagModule3 == 12)">
+   <!-- <div class="text-left" *ngIf="mainFlagModule1 == 8">
+     <p class="sub-title"><b>{{'L2Module2.drag_title_18' | translate}}</b></p>
+   </div> -->
+   <!-- <div class="text-center" *ngIf="mainFlagModule3 == 12">
+     <p class="sub-title"><b>{{'L2Module2.drag_title_312' | translate}}</b></p>
+   </div> -->
+  <!-- <div class="text-center">
+    <p class="sub-title"><b>{{'L2Module2.drag_title' | translate}}</b></p>
+  </div>
+  <h6 class="questionHead lineHeight m-0"><b>{{'L2Instruction.inst2_4_5' | translate}}</b></h6> -->
+
+  <!-- <div class="card" *ngIf="options"> -->
+  <div class="card-header">
+    <h6>
+      {{question}}
+    </h6>
+  </div>
+  <div class="card-block">
+    <div class="row">
+    <div class="draggable-items col-md-6">
+      <h6 class="text-center font-weight-bold" *ngIf="description">
+        {{description["sub_que"]}}
+      </h6>
+      <div class="list-group">
+        <div class="row">
+          <div class="col-md-12" *ngIf="check1">
+            <li class="list-group-item list-group-item-action border-color-gray mb-4 mt-2">
+            </li>
+          </div>
+          <div class="col-md-12" *ngIf="check2">
+            <li class="list-group-item list-group-item-action border-color-gray mb-4 mt-2">
+            </li>
+          </div>
+          <div class="col-md-12" *ngIf="check3">
+            <li class="list-group-item list-group-item-action border-color-gray mb-4 mt-2">
+            </li>
+          </div>
+          <div class="col-md-12" *ngIf="check4">
+            <li class="list-group-item list-group-item-action border-color-gray mb-4 mt-2">
+            </li>
+          </div>
+          <div class="col-md-12" *ngFor="let item of optionArray">
+            <li title="Drag item"
+              class="list-group-item list-group-item-action list-group-item-success bg-success mb-3 mt-2"
+              [draggable] [dragClass]="'active'" [dragData]="item" [dragScope]="item.type" [dragEnabled]="dragEnabled">
+              {{item.name}}
+            </li>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="droppable-items col-md-6">
+      <h6 class="text-center font-weight-bold" *ngIf="description">
+        {{description["response"]}}
+      </h6>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-block" [class.disableMe]="check1">
+              <div class="row">
+                <div class="col-md-1 d-none">
+                  <p [innerHTML]="statement[0].stmt"></p>
+
+                </div>
+                <div class="col-md-11 mb-2">
+                  <div droppable [dragOverClass]="'drag-target-border'" [dropScope]="['draggable']"
+                    [dragHintClass]="'drag-hint'" [dropEnabled]="!check1"
+                    (onDrop)="singleonAnyDrop1($event,statement[0])" title="Drop items here"
+                    [class.dashed-border]="!check1">
+                    <div class="card-block scroll-list b1 " [class.p-0]="check1">
+                      <span class="v-span">
+                        <li *ngFor="let item of droppedItems1" class="list-group-item droppedItem">
+                          <span> <strong>प्रश्न : </strong> {{item.name}}</span><br>
+                          <span> <strong>उत्तर : </strong> {{item.response}}</span>
+                        </li>
+                         <span class="placeholder" *ngIf="!check1">
+                          {{'Stepper.1stStatement' | translate}}
+                         </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-block" [class.disableMe]="check2">
+              <div class="row">
+                <div class="col-md-1 d-none">
+                  <p [innerHTML]="statement[1].stmt"></p>
+                </div>
+                <div class="col-md-11 mb-2">
+                  <div droppable [dragOverClass]="'drag-target-border'" [dropScope]="['draggable']"
+                    [dragHintClass]="'drag-hint'" [dropEnabled]="!check2"
+                    (onDrop)="singleonAnyDrop2($event,statement[1])" title="Drop items here"
+                    [class.dashed-border]="!check2">
+                    <div class="card-block scroll-list b1 " [class.p-0]="check2">
+                      <span class="v-span">
+                        <li *ngFor="let item of droppedItems2" class="list-group-item droppedItem">
+                          <span> <strong>प्रश्न : </strong> {{item.name}}</span><br>
+                          <span> <strong>उत्तर : </strong> {{item.response}}</span>
+                        </li>
+                         <span class="placeholder" *ngIf="!check2">
+                          {{'Stepper.2ndStatement' | translate}}
+                         </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-block" [class.disableMe]="check3">
+              <div class="row">
+                <div class="col-md-1 d-none">
+                  <p [innerHTML]="statement[2].stmt"></p>
+                </div>
+                <div class="col-md-11 mb-2">
+                  <div droppable [dragOverClass]="'drag-target-border'" [dropScope]="['draggable']"
+                    [dragHintClass]="'drag-hint'" [dropEnabled]="!check3"
+                    (onDrop)="singleonAnyDrop3($event,statement[2])" title="Drop items here"
+                    [class.dashed-border]="!check3">
+                    <div class="card-block scroll-list b1 " [class.p-0]="check3">
+                      <span class="v-span">
+                        <li *ngFor="let item of droppedItems3" class="list-group-item droppedItem">
+                         <span> <strong>प्रश्न : </strong> {{item.name}}</span><br>
+                         <span> <strong>उत्तर : </strong> {{item.response}}</span>
+                        </li>
+                         <span class="placeholder" *ngIf="!check3">
+                          {{'Stepper.3rdStatement' | translate}}
+                         </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-block" [class.disableMe]="check4">
+              <div class="row">
+                <div class="col-md-1 d-none">
+                  <p [innerHTML]="statement[3].stmt"></p>
+                </div>
+                <div class="col-md-11 mb-2">
+                  <div droppable [dragOverClass]="'drag-target-border'" [dropScope]="['draggable']"
+                    [dragHintClass]="'drag-hint'" [dropEnabled]="!check4"
+                    (onDrop)="singleonAnyDrop4($event,statement[3])" title="Drop items here"
+                    [class.dashed-border]="!check4">
+                    <div class="card-block scroll-list b1 " [class.p-0]="check4">
+                      <span class="v-span">
+                        <li *ngFor="let item of droppedItems4" class="list-group-item droppedItem">
+                          <span> <strong>प्रश्न : </strong> {{item.name}}</span><br>
+                          <span> <strong>उत्तर : </strong> {{item.response}}</span>
+                        </li>
+                         <span class="placeholder" *ngIf="!check4">
+                          {{'Stepper.4thStatement' | translate}}
+                         </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-block" [class.disableMe]="check5">
+              <div class="row">
+                <div class="col-md-9">
+                  <p>{{statement[4]}}</p>
+                </div>
+                <div class="col-md-3">
+                  <div droppable [dragOverClass]="'drag-target-border'" [dropScope]="['draggable']"
+                    [dragHintClass]="'drag-hint'" [dropEnabled]="!check5" (onDrop)="singleonAnyDrop5($event,4)"
+                    title="Drop items here" [class.dashed-border]="!check5">
+                    <div class="card-block scroll-list b1 " [class.p-0]="check5">
+                      <span class="v-span">
+                        <li *ngFor="let item of droppedItems5" class="list-group-item droppedItem">
+                          <span>{{item.name}}</span>
+                        </li>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <div class="card bs-none">
+        <div class="card-footer bg-none border-0 pr-5">
+          <div class="text-right">
+            <button class="btn btn-primary mr-2" [disabled]="!resetFlag" (click)="singlereset();">{{'newTranslate.reset' | translate}}</button>
+            <button class="btn btn-primary" [disabled]="!nextFlag"
+              (click)="singlenext();">{{'Stepper.Next' | translate}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- </div> -->
+</div>
+
+
+<div bsModal #rankModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-primary" role="document">
+    <div class="modal-content" [style.border-color]="rightFlag ? '#4dbd74' : '#f86c6b'">
+      <div class="modal-header" [style.background-color]="rightFlag ? '#4dbd74' : '#f86c6b'">
+        <span class="exp-img"
+          [style.background-image]="rightFlag ? 'url(\'./../../../assets/img/expressions/correct_ans.png\')' : 'url(\'./../../../assets/img/expressions/wrong_ans.png\')'"></span>
+        <!-- <button type="button" class="close" (click)="rankModal.hide()" aria-label="Close" id="btnCloseModal">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+        <h5 *ngIf="rightFlag==true">{{'L2common.rightanswer' | translate }}</h5>
+        <h5 *ngIf="rightFlag==false">{{'L2common.wronganswer' | translate }}</h5>
+      </div>
+
+      <div class="modal-body">
+        <p><b>{{'subModule1_9.correctAns' | translate }} :</b></p>
+        <h6 *ngFor="let item of options">{{item.stmt}} <b>{{jsonForAns[item.ans]}}</b></h6>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-primary" (click)="rankModal.hide();btn5=true;">{{'Profile.Make Change' |
+          translate}}</button> -->
+        <button type="button" [ngClass]="rightFlag ? 'btn-success' : 'btn-danger'" class="btn btn-secondary float-right"
+          (click)="rankConfirmNext()">
+          {{'Stepper.Next' | translate }}</button>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,947 @@
+<div class="signup-stepper">
+  <div class="container-fluid" *ngIf="lang.languageSelection">
+    <div class="row">
+      <div class="col-md-10"></div>
+      <div class="col-md-2">
+        <label class="switch switch-text switch-primary pull-right">
+          <input class="switch-input" type="checkbox" [(ngModel)]="check" (change)="langChange($event)">
+          <span class="switch-label language" data-off="EN" data-on="MR"></span>
+          <span class="switch-handle"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-12 header">
+    <div class="card card-accent-warning">
+      <div class="card-header heading-logo">
+        <div><img src="./../../assets/img/logo_reg-page.png"></div>
+
+        <div class="btn-login">
+          <button type="button" class="btn btn-primary pull-right" [routerLink]="['']">{{'Dashboard.Logout' |
+            translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center resend">
+    <h4 *ngIf="LocalstoragedetailsService.userType=='trainee'">{{'Stepper.TraineeRegistration' | translate}}</h4>
+    <h4 *ngIf="LocalstoragedetailsService.userType=='master_trainer'">{{'Stepper.MasterTrainerRegistration' |
+      translate}}</h4>
+  </div>
+  <div class="container">
+    <div class="stepper">
+      <div class="stepper-steps">
+        <div class="stepper-step " [ngClass]="{'stepper-step-isActive': first===true}">
+          <div class="stepper-stepContent">
+            <span class="stepper-stepMarker">1</span>{{'Stepper.Basic Details' | translate}}
+          </div>
+        </div>
+        <div class="stepper-step /*stepper-step-isActive*/" [ngClass]="{'stepper-step-isActive': second===true}">
+          <div class="stepper-stepContent">
+            <span class="stepper-stepMarker">2</span>{{'Stepper.Personal Details' | translate}}
+          </div>
+        </div>
+        <div class="stepper-step" [ngClass]="{'stepper-step-isActive': three===true}">
+          <div class="stepper-stepContent">
+            <span class="stepper-stepMarker">3</span>{{'Stepper.Service Details' | translate}}
+          </div>
+        </div>
+        <div class="stepper-step" [ngClass]="{'stepper-step-isActive': four===true}">
+          <div class="stepper-stepContent">
+            <span class="stepper-stepMarker">4</span>{{'Stepper.Education Details' | translate}}
+          </div>
+        </div>
+      </div>
+      <div class="card-block">
+        <div class="basic-info" *ngIf="basic">
+          <form class="form-horizontal " #firstStep="ngForm">
+            <div class="form-group row">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="input-small">{{'Stepper.District' | translate}} <span
+                  class="color_red">*</span></label>
+              <div class="col-sm-6">
+                <select class="form-control" id="sel1" [(ngModel)]="SignupStepperModule.district" (change)="getTalukaList($event)"
+                  [ngModelOptions]="{standalone: true}" required>
+                  <option disabled>Select</option>
+                  <option *ngFor="let item of SignupStepperModule.districtJson" [ngValue]="item.districtid">{{item.name}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="input-small">{{'Stepper.Taluka' | translate}} <span class="color_red">*</span></label>
+              <div class="col-sm-6">
+                <select class="form-control" id="sel1" [(ngModel)]="SignupStepperModule.taluka" (change)="getTrainerList($event)"
+                  [ngModelOptions]="{standalone: true}" required>
+                  <option>Select</option>
+                  <option *ngFor="let taluka of SignupStepperModule.talukaJson" value={{taluka.taluka_id}}>{{taluka.taluka_name}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label">{{'Stepper.choose' | translate}} <span class="color_red">*</span></label>
+              <div class="col-sm-4 col-md-3">
+                <label class="radio-inline label-inline" for="inline-radio2">
+                  <input id="schoolIndexRadio" name="schoolIndexRadio" type="radio" value="schoolIndex" [(ngModel)]="SignupStepperModule.selectSchoolBy"
+                    [ngModelOptions]="{standalone: true}"><span>{{'Stepper.School Index Number' | translate}}</span>
+                </label>
+              </div>
+              <div class="col-sm-4 col-md-3">
+                <label class="radio-inline label-inline" for="inline-radio1">
+                  <input id="schoolNameRadio" name="schoolNameRadio" type="radio" value="schoolName" [(ngModel)]="SignupStepperModule.selectSchoolBy"
+                    [ngModelOptions]="{standalone: true}"><span>{{'Stepper.School Name' | translate}} </span>
+                </label>
+              </div>
+            </div>
+
+            <span *ngIf="SignupStepperModule.selectSchoolBy=='schoolName'">
+              <div class="form-group row">
+                <div class="col-sm-2"></div>
+                <label class="col-sm-2 form-control-label" for="input-small">{{'Stepper.School Name' | translate}}
+                  <span class="color_red">*</span></label>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control input-sm" name="schoolname" list="schoolname" [(ngModel)]="SignupStepperModule.schoolName"
+                    (ngModelChange)="getSchoolIndex($event)" autocomplete='off' required />
+                  <datalist id="schoolname">
+                    <select name="schoolname" class="form-control" id="sel1" [(ngModel)]="SignupStepperModule.schoolName"
+                      (change)="getSchoolIndex($event)" [ngModelOptions]="{standalone: true}">
+                      <option *ngFor="let school of SignupStepperModule.schoolModel" value={{school.school_name}}>{{school.school_name}}</option>
+                    </select>
+                  </datalist>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-2"></div>
+                <label class="col-sm-2 form-control-label" for="input-small">{{'Stepper.School Index Number' |
+                  translate}}</label>
+                <div class="col-sm-6">
+                  <input readonly class="form-control input-sm" id="input-small" name="input-small" [(ngModel)]="SignupStepperModule.schoolIndexNo"
+                    [ngModelOptions]="{standalone: true}" type="text">
+                </div>
+              </div>
+            </span>
+            <span *ngIf="SignupStepperModule.selectSchoolBy=='schoolIndex'">
+              <div class="form-group row">
+                <div class="col-sm-2"></div>
+                <label class="col-sm-2 form-control-label" for="input-small">{{'Stepper.School Index Number' |
+                  translate}} <span class="color_red">*</span></label>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control input-sm" name="schoolindex" list="schoolindex" [(ngModel)]="SignupStepperModule.schoolIndexNo"
+                    (ngModelChange)="getSchoolName($event)" #schoolIndex="ngModel" autocomplete='off' required />
+                  <datalist id="schoolindex">
+                    <select name="schoolindex" class="form-control" id="sel1" [(ngModel)]="SignupStepperModule.schoolIndexNo"
+                      (change)="getSchoolName($event)" [ngModelOptions]="{standalone: true}">
+                      <option *ngFor="let school of SignupStepperModule.schoolModel" value={{school.index}}>{{school.index}}</option>
+                    </select>
+                  </datalist>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-2"></div>
+                <label class="col-sm-2 form-control-label" for="input-small">{{'Stepper.School Name' | translate}}</label>
+                <div class="col-sm-6">
+                  <input readonly class="form-control input-sm" id="input-small" name="input-small" [(ngModel)]="SignupStepperModule.schoolName"
+                    [ngModelOptions]="{standalone: true}" type="text">
+                </div>
+              </div>
+            </span>
+            <!-- by amrut new -->
+            <div class="form-group row">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label">{{'Stepper.Designation' | translate}}<span class="color_red">*</span></label>
+              <div class="col-sm-4 col-md-3">
+                <label class="radio-inline label-inline" for="inline-radio1">
+                  <input id="HeadMaster" name="HeadMaster" type="radio" value="headmaster" [(ngModel)]="SignupStepperModule.designation"
+                    [ngModelOptions]="{standalone: true}" (change)="designationChange($event)"><span>{{'Stepper.Head
+                    Master' | translate}}</span>
+                </label>
+              </div>
+              <div class="col-sm-3 col-md-3">
+                <label class="radio-inline label-inline" for="inline-radio2">
+                  <input id="teacher" name="teacher" type="radio" value="teacher" [(ngModel)]="SignupStepperModule.designation"
+                    [ngModelOptions]="{standalone: true}" (change)="designationChange($event)"><span>{{'Stepper.Teacher'
+                    | translate}}</span>
+                </label>
+              </div>
+            </div>
+            <div class="form-group row" *ngIf="designationError">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label"></label>
+              <div class="col-sm-4">
+                {{'Stepper.select designsation' | translate}}
+              </div>
+            </div>
+            <!-- by amrut new -->
+            <div class="card-footer sterpper-footer p-2">
+              <div class="row">
+                <div class="col-6">
+                </div>
+                <div class="col-6">
+                  <button class="btn btn-info active pull-right" type="button" (click)="primaryModal.show();setReviewData()"
+                    *ngIf="next_button" [disabled]="!stepFirst || !designation || firstStep.form.invalid">{{'Stepper.Next'
+                    | translate}}</button>
+                </div>
+                <div bsModal #primaryModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1"
+                  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-primary" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">{{'Stepper.Basic Details' | translate}}</h4>
+                        <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="row">
+                          <div class="col-sm-2"></div>
+                          <label class="col-sm-4 form-control-label" for="input-small">{{'Stepper.District' |
+                            translate}}</label>
+                          <div class="col-sm-6 wordWrap">
+                            {{reviewDistrict}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-2"></div>
+                          <label class="col-sm-4 form-control-label" for="input-small">{{'Stepper.Taluka' | translate}}</label>
+                          <div class="col-sm-6 wordWrap">
+                            {{reviewTaluka}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-2"></div>
+                          <label class="col-sm-4 form-control-label" for="input-small">{{'Stepper.School Name' |
+                            translate}}</label>
+                          <div class="col-sm-6 wordWrap">
+                            {{SignupStepperModule.schoolName}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-2"></div>
+                          <label class="col-sm-4 form-control-label" for="input-small">{{'Stepper.School Index Number'
+                            | translate}}</label>
+                          <div class="col-sm-6 wordWrap">
+                            {{SignupStepperModule.schoolIndexNo}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-2"></div>
+                          <label class="col-sm-4 form-control-label" for="input-small">{{'Stepper.Designation' |
+                            translate}}</label>
+                          <div class="col-sm-6" *ngIf="SignupStepperModule.designation == 'headmaster'">
+                            {{'Stepper.Head Master' | translate}}
+                          </div>
+                          <div class="col-sm-6" *ngIf="SignupStepperModule.designation == 'teacher'">
+                            {{'Stepper.Teacher' | translate}}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" (click)="primaryModal.hide()">{{'Profile.Make
+                          Change' | translate}}</button>
+                        <button type="button" class="btn btn-secondary" (click)="onNext()">{{'Stepper.Next' |
+                          translate}}</button>
+                      </div>
+                    </div>
+                    <!-- /.modal-content -->
+                  </div>
+                  <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- </div> -->
+        <!-- End of If userType is MasterTrainee -->
+
+        <div class="personal-info" *ngIf="personal">
+          <form #secondStep="ngForm">
+            <div class="form-group row" *ngIf="!stepperIncomplete">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="input-small">{{'Stepper.Full Name' | translate}}</label>
+              <div class="col-sm-6">
+                <input class="form-control input-sm" id="input-small" name="input-small" [(ngModel)]="SignupStepperModule.fullName"
+                  [ngModelOptions]="{standalone: true}" type="text" [readonly]="true">
+              </div>
+            </div>
+            <div class="form-group row" *ngIf="!stepperIncomplete">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="input-small">{{'Stepper.E-mail ID' | translate}}</label>
+              <div class="col-sm-6">
+                <input class="form-control input-sm" id="input-small" name="input-small" [(ngModel)]="SignupStepperModule.emailId"
+                  [ngModelOptions]="{standalone: true}" type="text" [readonly]="true">
+              </div>
+            </div>
+            <div class="form-group row" *ngIf="!stepperIncomplete">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="input-small">{{'Stepper.Mobile Number' | translate}}</label>
+              <div class="col-sm-6">
+                <input class="form-control input-sm" id="input-small" name="input-small" [(ngModel)]="SignupStepperModule.mobileNo"
+                  [ngModelOptions]="{standalone: true}" type="text" [readonly]="true">
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-2 col-sm-2"></div>
+              <label class="col-md-2 col-sm-2 form-control-label col-12" for="textarea-input">{{'Stepper.Adhaar Number'
+                | translate}} <span class="color_red">*</span></label>
+              <div class="col-4 col-md-2 col-sm-2">
+                <input type="text" id="adhar1" class="form-control" placeholder="0000" [(ngModel)]="aadharNo1" name="aadhar1"
+                  pattern="^[0-9]{4}$" minlength="4" maxlength="4" #adhar1="ngModel" autocomplete='off' required>
+              </div>
+              <div class="col-4 col-md-2 col-sm-2">
+                <input type="text" id="adhar2" class="form-control" placeholder="0000" [(ngModel)]="aadharNo2" name="aadhar2"
+                  pattern="^[0-9]{4}$" minlength="4" maxlength="4" #adhar2="ngModel" autocomplete='off' required>
+              </div>
+              <div class="col-4 col-md-2 col-sm-2">
+                <input type="text" id="adhar3" class="form-control" placeholder="0000" [(ngModel)]="aadharNo3" name="aadhar3"
+                  pattern="^[0-9]{4}$" minlength="4" maxlength="4" #adhar3="ngModel" autocomplete='off' required>
+              </div>
+            </div>
+
+            <div class="form-group row errorMessage color_red" *ngIf="(adhar1.errors && adhar1.dirty)">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="input-small"></label>
+              <div class="col-sm-6 " [hidden]="(!adhar1.hasError('required'))">
+                {{'Stepper.Adhaar Number required' | translate}}
+              </div>
+              <div class="col-sm-6" [hidden]="(!adhar1.hasError('pattern')) ">{{'Stepper.Invalid Adhaar Number' |
+                translate}}</div>
+            </div>
+
+            <div class="form-group row errorMessage color_red" *ngIf="(adhar2.errors && adhar2.dirty)">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="input-small"></label>
+              <div class="col-sm-6 " [hidden]="(!adhar2.hasError('required'))">
+                {{'Stepper.Adhaar Number required' | translate}}
+              </div>
+              <div class="col-sm-6" [hidden]="( !adhar2.hasError('pattern')) ">{{'Stepper.Invalid Adhaar Number' |
+                translate}}</div>
+            </div>
+            <div class="form-group row errorMessage color_red" *ngIf="(adhar3.errors && adhar3.dirty)">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="input-small"></label>
+              <div class="col-sm-6 " [hidden]="(!adhar3.hasError('required'))">
+                {{'Stepper.Adhaar Number required' | translate}}
+              </div>
+              <div class="col-sm-6" [hidden]="( !adhar3.hasError('pattern')) ">{{'Stepper.Invalid Adhaar Number' |
+                translate}}</div>
+            </div>
+            <!-- <div class="form-group row">
+                                  <div class="col-sm-2"></div>
+                                  <label class="col-sm-2 form-control-label" for="textarea-input">{{'Stepper.uploadAadhar' | translate}}</label>
+                                  <div class="col-md-6 ">
+                                      <image-upload [max]="1" name="file" id="aadharCard" [url]="apiUrlForAdhar" [headers]="[
+                                          {header: 'Authorization', value: token}]" (onFileUploadFinish)="imageUploaded($event)" [extensions]="['*']" class="uploadImage" [buttonCaption]="'आधारकार्ड अपलोड करा'" [dropBoxMessage]="''" widht="400"></image-upload>
+                                  </div>
+                              </div> -->
+
+            <!-- <div class="form-group">
+                  <div class="col-sm-2"></div>
+                  <label class="col-sm-2 form-control-label" for="input-small">{{'Stepper.Date Of Birth' | translate}} <span class="color_red">*</span></label>
+                  <div class="col-sm-3 col-xs-6 col-md-3 controls">
+                      <div class="input-group" daterangepicker [options]="singlePicker" (selected)="singleSelect($event)">
+                          <span class="form-control uneditable-input" name="daterange">
+                              {{ singleDate | date:'dd/MM/yyyy' }}
+                          </span>
+                          <span class="input-group-btn">
+                              <a type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></a>
+                          </span>
+                      </div>
+                  </div>
+              </div> -->
+
+
+            <div class="form-group row">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="input-small">{{'Stepper.Date Of Birth' | translate}}
+                <span class="color_red">*</span></label>
+              <div class="col-sm-3 col-xs-6 col-md-3 controls">
+                <!-- <my-date-picker id="dob" name="mydate" [options]="myDatePickerOptions" [(ngModel)]="modelTemp"
+                  (dateChanged)="dobCheck($event)" #dob="ngModel" required></my-date-picker> -->
+              </div>
+            </div>
+            <div class="form-group row errorMessage color_red" *ngIf="dobError">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="input-small"></label>
+              <div class="col-sm-6 ">
+                {{'Stepper.Invalid Date' | translate}}
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label">{{'Stepper.Gender' | translate}}<span class="color_red">*</span></label>
+              <div class="col-sm-3 col-md-2">
+                <label class="radio-inline label-inline" for="inline-radio1">
+                  <input id="inline-radio1" name="inline-radios" type="radio" value="male" [(ngModel)]="SignupStepperModule.gender"
+                    [ngModelOptions]="{standalone: true}" (change)="handleGenderChange($event)"><span>{{'Stepper.Male'
+                    | translate}}</span>
+                </label>
+              </div>
+              <div class="col-sm-3 col-md-2">
+                <label class="radio-inline label-inline" for="inline-radio2">
+                  <input id="inline-radio2" name="inline-radios" type="radio" value="female" [(ngModel)]="SignupStepperModule.gender"
+                    [ngModelOptions]="{standalone: true}" (change)="handleGenderChange($event)"><span>{{'Stepper.Female'
+                    | translate}}</span>
+                </label>
+              </div>
+            </div>
+            <div class="form-group row" *ngIf="genderError">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label"></label>
+              <div class="col-sm-4">
+                {{'Stepper.Required' | translate}}
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="textarea-input">{{'Stepper.Address' | translate}} <span
+                  class="color_red">*</span></label>
+              <div class="col-md-6 col-sm-6">
+                <textarea class="form-control" id="addr" (focus)="addrFlag=true" (focusout)="addrFlag=false" name="textarea-input"
+                  [(ngModel)]="SignupStepperModule.address" [ngModelOptions]="{standalone: true}" rows="3" #addr="ngModel"
+                  maxlength="500" required></textarea>
+                <span class="help-block right" *ngIf="addrFlag">{{'Common.maxLetterLimit' | translate}}
+                  {{addrCount}}/500</span>
+              </div>
+            </div>
+
+            <div class="form-group row errorMessage color_red" *ngIf="addr.errors && addr.dirty">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="input-small"></label>
+              <div class="col-sm-6 " [hidden]="!addr.hasError('required')">
+                {{'Stepper.Address required' | translate}}
+              </div>
+            </div>
+            <!-- <div class="form-group row">
+                  <div class="col-sm-2"></div>
+                  <label class="col-sm-2 form-control-label" for="textarea-input">{{'Stepper.Profile Picture' | translate}}</label>
+                  <div class="col-md-6 col-sm-6">
+                      <image-upload [max]="1" name="file" id="file" [url]="apiUrlForProfile" [headers]="[
+                                          {header: 'Authorization', value: token}]" (onFileUploadFinish)="imageUploaded($event)" [extensions]="['image/*']" class="uploadImage" [buttonCaption]="'प्रोफाइल फोटो निवडा'" [dropBoxMessage]="''" width="150"></image-upload>
+                  </div>
+              </div> -->
+            <div class="form-group row">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="textarea-input">{{'Stepper.Profile Picture' | translate}}</label>
+              <div class="col-md-6 col-sm-6">
+                <app-image-upload (returnData)="imageUploadStatus($event)"></app-image-upload>
+                <span *ngIf="imageUploaded " class="congratulation">
+                  {{'otherMessages.photoUploaded' | translate}}
+                </span>
+                <span *ngIf="imageUploadeError" class="color_red">
+                  {{'otherMessages.tryAgain-2' | translate}}
+                </span>
+              </div>
+            </div>
+
+            <hr>
+            <div class="form-group row">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="textarea-input">
+                <h5>{{'Stepper.Bank Details' | translate}} </h5>
+              </label>
+              <div class="col-md-6"></div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="textarea-input">{{'Stepper.Bank Name' | translate}} <span
+                  class="color_red">*</span></label>
+              <div class="col-md-6 col-sm-6">
+                <input type="text" id="bankname" class="form-control" placeholder="{{'Stepper.Bank Name' | translate}}"
+                  [(ngModel)]="SignupStepperModule.bankName" pattern="^([a-zA-Z]+)[ A-Za-z0-9_@./#&+\-,]*$" maxlength="70"
+                  name="bankname" #bankname="ngModel" autocomplete='off' required>
+              </div>
+            </div>
+            <div class="form-group row errorMessage color_red" *ngIf="bankname.errors && bankname.dirty">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="input-small"></label>
+              <div class="col-sm-6 " [hidden]="!bankname.hasError('required')">
+                {{'Stepper.Bank Name required' | translate}}
+              </div>
+              <div class="col-sm-6" [hidden]="!bankname.hasError('pattern') ">{{'Stepper.Invalid Bank Name' |
+                translate}}</div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="textarea-input">{{'Stepper.IFSC Code' | translate}} <span
+                  class="color_red">*</span></label>
+              <div class="col-md-6 col-sm-6">
+                <input type="text" id="ifsccode" class="form-control" placeholder="{{'otherMessages.e-g' | translate}}"
+                  [(ngModel)]="SignupStepperModule.IFSCCode" name="ifsccode" maxlength="11" #ifsccode="ngModel" pattern="(\w{11})"
+                  autocomplete='off' required>
+              </div>
+            </div>
+            <div class="form-group row errorMessage color_red" *ngIf="ifsccode.errors && ifsccode.dirty">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="input-small"></label>
+              <div class="col-sm-6 " [hidden]="!ifsccode.hasError('required')">
+                {{'Stepper.IFSC Code required' | translate}}
+              </div>
+              <div class="col-sm-6" [hidden]="!ifsccode.hasError('pattern') ">{{'Stepper.Invalid IFSC Code' |
+                translate}}</div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="textarea-input">{{'Stepper.Bank Account Number' |
+                translate}} <span class="color_red">*</span></label>
+              <div class="col-md-6 col-sm-6">
+                <input type="text" id="bankaccountno" class="form-control" placeholder="{{'Stepper.Bank Account Number' | translate}}"
+                  [(ngModel)]="SignupStepperModule.accountNo" name="bankaccountno" pattern="^[0-9]+$" maxlength="20"
+                  #bankaccountno="ngModel" autocomplete='off' required>
+              </div>
+            </div>
+            <div class="form-group row errorMessage color_red" *ngIf="bankaccountno.errors && bankaccountno.dirty">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="input-small"></label>
+              <div class="col-sm-6 " [hidden]="!bankaccountno.hasError('required')">
+                {{'Stepper.Bank Account Number required' | translate}}
+              </div>
+              <div class="col-sm-6" [hidden]="!bankaccountno.hasError('pattern') ">{{'Stepper.Invalid Bank Account
+                Number' | translate}}</div>
+            </div>
+            <div class="card-footer sterpper-footer p-2">
+              <div class="row">
+                <div class="col-6">
+                </div>
+                <div class="col-6">
+                  <button class="btn btn-info active pull-right" type="button" (click)="primaryModal.show();setReviewData()"
+                    *ngIf="next_button" [disabled]="next2 || secondStep.form.invalid ">{{'Stepper.Next' | translate}}</button>
+                </div>
+                <div bsModal #primaryModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1"
+                  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-primary" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">{{'Stepper.Personal Details' | translate}}</h4>
+                        <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="row" *ngIf="!stepperIncomplete">
+                          <div class="col-sm-2"></div>
+                          <label class="col-sm-4 form-control-label wordWrap" for="input-small">{{'Stepper.Full Name' |
+                            translate}}</label>
+                          <div class="col-sm-6">
+                            {{SignupStepperModule.fullName}}
+                          </div>
+                        </div>
+                        <div class="row" *ngIf="!stepperIncomplete">
+                          <div class="col-sm-2"></div>
+                          <label class="col-sm-4 form-control-label wordWrap" for="input-small">{{'Stepper.E-mail ID' |
+                            translate}}</label>
+                          <div class="col-sm-6">
+                            {{SignupStepperModule.emailId}}
+                          </div>
+                        </div>
+                        <div class="row" *ngIf="!stepperIncomplete">
+                          <div class="col-sm-2"></div>
+                          <label class="col-sm-4 form-control-label wordWrap" for="input-small">{{'Stepper.Mobile
+                            Number' | translate}}</label>
+                          <div class="col-sm-6">
+                            {{SignupStepperModule.mobileNo}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-2"></div>
+                          <label class="col-sm-4 form-control-label wordWrap" for="input-small">{{'Stepper.Adhaar
+                            Number' | translate}}</label>
+                          <div class="col-sm-6">
+                            {{SignupStepperModule.aadharNo}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-2"></div>
+                          <label class="col-sm-4 form-control-label" for="input-small">{{'Stepper.Date Of Birth' |
+                            translate}}</label>
+                          <div class="col-sm-6 wordWrap">
+                            {{birtDate}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-2"></div>
+                          <label class="col-sm-4 form-control-label" for="input-small">{{'Stepper.Gender' | translate}}</label>
+                          <div class="col-sm-6" *ngIf="reviewGender === 'Male'">
+                            {{'Stepper.Male' | translate}}
+                          </div>
+                          <div class="col-sm-6" *ngIf="reviewGender === 'Female'">
+                            {{'Stepper.Female' | translate}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-2"></div>
+                          <label class="col-sm-4 form-control-label" for="input-small">{{'Stepper.Address' |
+                            translate}}</label>
+                          <div class="col-sm-6 wordWrap">
+                            {{SignupStepperModule.address}}
+                          </div>
+                        </div>
+                        <hr>
+
+                        <div class="row">
+                          <div class="col-sm-2"></div>
+                          <label class="col-sm-4 form-control-label" for="input-small">
+                            <h5>{{'Stepper.Bank Details' | translate}}</h5>
+                          </label>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-2"></div>
+                          <label class="col-sm-4 form-control-label" for="input-small">{{'Stepper.Bank Name' |
+                            translate}}</label>
+                          <div class="col-sm-6 wordWrap">
+                            {{SignupStepperModule.bankName}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-2"></div>
+                          <label class="col-sm-4 form-control-label" for="input-small">{{'Stepper.IFSC Code' |
+                            translate}}</label>
+                          <div class="col-sm-6 wordWrap">
+                            {{SignupStepperModule.IFSCCode}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-2"></div>
+                          <label class="col-sm-4 form-control-label" for="input-small">{{'Stepper.Bank Account Number'
+                            | translate}}</label>
+                          <div class="col-sm-6 wordWrap">
+                            {{SignupStepperModule.accountNo}}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" (click)="primaryModal.hide()">{{'Profile.Make
+                          Change' | translate}}</button>
+                        <button type="button" class="btn btn-secondary" (click)="onNext()">{{'Stepper.Next' |
+                          translate}}</button>
+                      </div>
+                    </div>
+                    <!-- /.modal-content -->
+                  </div>
+                  <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="service-info" *ngIf="service">
+          <form #thirdStep="ngForm">
+            <div class="form-group row">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="input-small">{{'Stepper.Date Of Joining' | translate}}
+                <span class="color_red">*</span></label>
+              <div class="col-sm-6">
+
+                <select class="form-control" id="sel1" [(ngModel)]="SignupStepperModule.dateofJoin" [ngModelOptions]="{standalone: true}"
+                  required>
+                  <option disabled>Select</option>
+                  <option *ngFor="let item of SignupStepperModule.dojJson" [ngValue]="item">{{item}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row errorMessage color_red" *ngIf="dojError">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="input-small"></label>
+              <div class="col-sm-6 ">
+                {{'Stepper.Invalid Year' | translate}}
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="input-small">{{'Stepper.Subject' | translate}}<span class="color_red">*</span></label>
+              <div class="col-sm-6">
+                <angular2-multiselect [data]="SignupStepperModule.dropdownListSubject" [(ngModel)]="SignupStepperModule.subject"
+                  [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)"
+                  [ngModelOptions]="{standalone: true}"></angular2-multiselect>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 col-md-2 form-control-label">{{'Stepper.Grades' | translate}}<span class="color_red">*</span></label>
+              <div class="col-sm-2 col-md-2">
+                <label class="checkbox-inline label-inline" for="inline-checkbox1">
+                  <input id="inline-checkbox1" name="grades[]" type="checkbox" [(ngModel)]="SignupStepperModule.grade['8']"
+                    [ngModelOptions]="{standalone: true}" (change)="classCheck($event)"><span>{{'Stepper.Class 8th' |
+                    translate}}</span>
+                </label>
+              </div>
+              <div class="col-sm-2 col-md-2">
+                <label class="checkbox-inline label-inline" for="inline-checkbox2">
+                  <input id="inline-checkbox2" name="grades[]" type="checkbox" [(ngModel)]="SignupStepperModule.grade['9']"
+                    [ngModelOptions]="{standalone: true}" (change)="classCheck1($event)"><span>{{'Stepper.Class 9th' |
+                    translate}}</span>
+                </label>
+              </div>
+              <div class="col-sm-2 col-md-2">
+                <label class="checkbox-inline label-inline" for="inline-checkbox3">
+                  <input id="inline-checkbox3" name="grades[]" type="checkbox" [(ngModel)]="SignupStepperModule.grade['10']"
+                    [ngModelOptions]="{standalone: true}" (change)="classCheck2($event)"><span>{{'Stepper.Class 10th' |
+                    translate}}</span>
+                </label>
+              </div>
+            </div>
+            <div class="form-group row" *ngIf="classError">
+              <div class="col-sm-4"></div>
+              <div class="col-sm-2">
+                {{'Stepper.Select Class' | translate}}
+              </div>
+            </div>
+            <div class="card-footer sterpper-footer p-2" *ngIf="disableFooter">
+              <div class="row">
+                <div class="col-6">
+                </div>
+                <div class="col-6">
+                  <button class="btn btn-info active pull-right" type="button" (click)="primaryModal.show();setReviewData()"
+                    *ngIf="next_button" [disabled]="!next3">{{'Stepper.Next' | translate}}</button>
+                </div>
+                <div bsModal #primaryModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1"
+                  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-primary " role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">{{'Stepper.Service Details' | translate}}</h4>
+                        <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="row">
+                          <div class="col-sm-2"></div>
+                          <label class="col-sm-4 form-control-label" for="input-small">{{'Stepper.Date Of Joining' |
+                            translate}}</label>
+                          <div class="col-sm-6 wordWrap">
+                            {{joinday}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-2"></div>
+                          <label class="col-sm-4 form-control-label" for="input-small">{{'Stepper.Subject' |
+                            translate}}</label>
+                          <div class="col-sm-6 wordWrap">
+                            {{subList}}
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-2"></div>
+                          <label class="col-sm-4 form-control-label" for="input-small">{{'Stepper.Grades' | translate}}</label>
+                          <div class="col-sm-2 wordWrap">
+                            {{classList}}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" (click)="primaryModal.hide()">{{'Profile.Make
+                          Change' | translate}}</button>
+                        <button type="button" class="btn btn-secondary" (click)="onNext()">{{'Stepper.Next' |
+                          translate}}</button>
+                      </div>
+                    </div>
+                    <!-- /.modal-content -->
+                  </div>
+                  <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="education-info" *ngIf="education">
+          <form #forthStep="ngForm">
+            <div class="form-group row">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="input-small">{{'Stepper.Under Graduate' | translate}}
+                <span class="color_red">*</span></label>
+              <div class="col-sm-4 col-xs-12">
+                <select id="underGraduate" class="form-control" [(ngModel)]="SignupStepperModule.underGraduate"
+                  [ngModelOptions]="{standalone: true}" #ug="ngModel" autofocus required>
+                  <option value="">Select</option>
+                  <option value="B.A.">B.A.</option>
+                  <option value="B.Com.">B.Com.</option>
+                  <option value="B.Sc.">B.Sc.</option>
+                  <option value="other">Others</option>
+                </select>
+              </div>
+              <div *ngIf="SignupStepperModule.underGraduate === 'other'" class="col-xs-12 col-sm-4">
+                <input class="form-control input-sm" id="ugSpecialisation" (focus)="otherUgFlag=true" (focusout)="otherUgFlag=false"
+                  id="otherUgSpecial" [(ngModel)]="SignupStepperModule.otherUgSpecial" [ngModelOptions]="{standalone: true}"
+                  maxlength="20" name="input-small" placeholder="{{'Stepper.If Other then Enter Your Degree here' | translate}}"
+                  type="text" autocomplete='off' required>
+                <span class="help-block right" *ngIf="otherUgFlag">{{'Common.maxLetterLimit' | translate}}
+                  {{otherUgCount}}/50</span>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="input-small">{{'Stepper.Under Graduate Specialisation' |
+                translate }} <span class="color_red">*</span></label>
+              <div class="col-sm-4">
+                <input class="form-control input-sm" id="input-small" (focus)="ugSpecialisationFlag=true" (focusout)="ugSpecialisationFlag=false"
+                  name="input-small" [(ngModel)]="SignupStepperModule.ugSpecialisation" maxlength="50" type="text"
+                  autocomplete='off' required>
+                <span class="help-block right" *ngIf="ugSpecialisationFlag">{{'Common.maxLetterLimit' | translate}}
+                  {{ugSpecialisationCount}}/50</span>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="input-small">{{'Stepper.Post Graduate' | translate}}</label>
+              <div class="col-sm-4 col-xs-12">
+                <select class="form-control" id="sel1" [(ngModel)]="SignupStepperModule.postGraduate" [ngModelOptions]="{standalone: true}">
+                  <option value="">Select</option>
+                  <option value="M.A.">M.A.</option>
+                  <option value="M.Com.">M.Com.</option>
+                  <option value="M.Sc.">M.Sc.</option>
+                  <option value="pgother">Others</option>
+                </select>
+              </div>
+              <div *ngIf="SignupStepperModule.postGraduate === 'pgother'" class="col-xs-12 col-sm-4">
+                <input type="text" id="otherPgSpecial" (focus)="otherPgSpecialFlag=true" (focusout)="otherPgSpecialFlag=false"
+                  [(ngModel)]="SignupStepperModule.otherPgSpecial" [ngModelOptions]="{standalone: true}" maxlength="20"
+                  class="form-control" placeholder="{{'Stepper.If Other then Enter Your Degree here' | translate}}"
+                  autocomplete='off' autofocus>
+                <span class="help-block right" *ngIf="otherPgSpecialFlag">{{'Common.maxLetterLimit' | translate}}
+                  {{otherPgSpecialCount}}/50</span>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="input-small">{{'Stepper.Post Graduate Specialisation' |
+                translate}}</label>
+              <div class="col-sm-4">
+                <input class="form-control input-sm" id="input-small" (focus)="pgSpecialisationFlag=true" (focusout)="pgSpecialisationFlag=false"
+                  name="input-small" [(ngModel)]="SignupStepperModule.pgSpecialisation" [ngModelOptions]="{standalone: true}"
+                  maxlength="50" type="text" autocomplete='off' [disabled]="!pgSpecialFlag">
+                <span class="help-block right" *ngIf="pgSpecialisationFlag">{{'Common.maxLetterLimit' | translate}}
+                  {{pgSpecialisationCount}}/50</span>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="input-small">{{'Stepper.Professional' | translate}} <span
+                  class="color_red">*</span></label>
+              <div class="col-sm-4">
+                <select id="professional" class="form-control" [(ngModel)]="SignupStepperModule.professional"
+                  [ngModelOptions]="{standalone: true}" name="professional" #professional="ngModel" autofocus required>
+                  <option value="">Select</option>
+                  <option value="D.Ed.">D.Ed.</option>
+                  <option value="B.Ed.">B.Ed.</option>
+                  <option value="M.Ed.">M.Ed.</option>
+                  <option value="B.P.Ed.">B.P.Ed.</option>
+                  <option value="M.P.Ed.">M.P.Ed.</option>
+                  <option value="A.T.D.">A.T.D.</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="input-small">{{'Stepper.Professional Specialisation' |
+                translate}} <span class="color_red">*</span></label>
+              <div class="col-sm-4">
+                <input class="form-control input-sm" id="input-small" (focus)="professionalSpecializationFlag=true"
+                  (focusout)="professionalSpecializationFlag=false" name="input-small" [(ngModel)]="SignupStepperModule.professionalSpecialization"
+                  [ngModelOptions]="{standalone: true}" maxlength="80" type="text" autocomplete='off' required>
+                <span class="help-block right" *ngIf="professionalSpecializationFlag">{{'Common.maxLetterLimit' |
+                  translate}} {{professionalSpecializationCount}}/80</span>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-2"></div>
+              <label class="col-sm-2 form-control-label" for="input-small">{{'Stepper.Other' | translate}}</label>
+              <div class="col-sm-4">
+                <input class="form-control input-sm" id="input-small" (focus)="othersQualificationFlag=true" (focusout)="othersQualificationFlag=false"
+                  name="input-small" [(ngModel)]="SignupStepperModule.othersQualification" [ngModelOptions]="{standalone: true}"
+                  maxlength="200" type="text" autocomplete='off'>
+                <span class="help-block right" *ngIf="othersQualificationFlag">{{'Common.maxLetterLimit' | translate}}
+                  {{othersQualificationCount}}/200</span>
+              </div>
+            </div>
+            <div class="card-footer sterpper-footer p-2" *ngIf="disableFooter">
+              <div class="row">
+                <div class="col-6">
+                </div>
+                <div class="col-6">
+                  <button class="btn btn-info active pull-right" type="button" (click)="primaryModal.show();setReviewData()"
+                    *ngIf="finish_button" [disabled]="!finishEnable || ug.errors || professional.errors">{{'Stepper.Finish'
+                    | translate}}</button>
+                </div>
+                <div bsModal #primaryModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1"
+                  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-primary" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">{{'Stepper.Education Details' | translate}}</h4>
+                        <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="row">
+                          <div class="col-sm-2"></div>
+                          <label class="col-sm-4 form-control-label" for="input-small">{{'Stepper.Under Graduate' |
+                            translate}}</label>
+                          <div class="col-sm-6 wordWrap" *ngIf="reviewUG!=['undefine']">
+                            {{reviewUG}}<span *ngIf="SignupStepperModule.ugSpecialisation!=['undefine'] || SignupStepperModule.ugSpecialisation!=null">
+                              ( {{SignupStepperModule.ugSpecialisation}} )</span>
+                          </div>
+                          <div class="col-sm-6" *ngIf="reviewUG == ['undefine']"> -</div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-2"></div>
+                          <label class="col-sm-4 form-control-label" for="input-small">{{'Stepper.Post Graduate' |
+                            translate}}</label>
+                          <div class="col-sm-6 wordWrap" *ngIf="reviewPG!=['undefine']">
+                            {{reviewPG}}<span *ngIf="SignupStepperModule.pgSpecialisation != ''"> (
+                              {{SignupStepperModule.pgSpecialisation}} ) </span>
+                          </div>
+                          <div class="col-sm-6 wordWrap" *ngIf="reviewPG == ['undefine']"> -</div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-2"></div>
+                          <label class="col-sm-4 form-control-label" for="input-small">{{'Stepper.Professional' |
+                            translate}}</label>
+                          <div class="col-sm-6 wordWrap" *ngIf="SignupStepperModule.professional != ['undefine']">
+                            {{SignupStepperModule.professional}}<span *ngIf="SignupStepperModule.professionalSpecialization != ['undefine']">
+                              ( {{SignupStepperModule.professionalSpecialization}} ) </span>
+                          </div>
+                          <div class="col-sm-6 wordWrap" *ngIf="SignupStepperModule.professional == ['undefine']"> -</div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-2"></div>
+                          <label class="col-sm-4 form-control-label" for="input-small">{{'Stepper.Other' | translate}}</label>
+                          <div class="col-sm-6 wordWrap" *ngIf="SignupStepperModule.othersQualification != ['undefine']">
+                            {{SignupStepperModule.othersQualification}}
+                          </div>
+                          <div class="col-sm-6 wordWrap" *ngIf="SignupStepperModule.othersQualification == ['undefine']"> -</div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" (click)="primaryModal.hide()">{{'Profile.Make
+                          Change' | translate}}</button>
+                        <button type="button" class="btn btn-secondary" (click)="onNext()">{{'Stepper.Next' |
+                          translate}}</button>
+                      </div>
+                    </div>
+                    <!-- /.modal-content -->
+                  </div>
+                  <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="finish-info text-center" *ngIf="finish">
+          <span class="icon-check"></span>
+          <p class="congratulation">{{'Stepper.Congratulation' | translate}}</p>
+          <p>{{'Stepper.You Have Registered Successfully...!' | translate}}</p>
+          <p>{{'Stepper.Thank You' | translate}}</p>
+          <button class="btn btn-success active" type="button" [routerLink]="['/dashboard']">{{'Stepper.Go To
+            Dashboard' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

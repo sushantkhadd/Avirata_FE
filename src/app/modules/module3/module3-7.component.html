@@ -1,0 +1,27 @@
+<div *ngIf="mainFlagModule3 < 7">
+  <div class="card">
+    <div class="card-block">
+      <p>{{ "subModule1_1.1_1" | translate }}</p>
+      <p>
+        <strong>{{ "lock.note" | translate }}</strong>{{ "lock.warn" | translate }}
+      </p>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="mainFlagModule3 == 7">
+  <div *ngIf="showPart1Flag">
+    <!-- <app-new-baseline [passData]='passFlags' (exam2finish)="sendAnswer($event)"></app-new-baseline> -->
+    <div>
+        <app-new-baseline [passData]='passData'></app-new-baseline>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="mainFlagModule3 > 7">
+  <div class="card submoduleBox">
+    <div class="card-block text-center greenText inst-text">
+      <span>{{ "L2Module3Complete.sm_3_7" | translate }}</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,257 @@
+<div *ngIf="questionType == 'mcqTextOption'">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="card">
+                <div class="" *ngIf="statement">
+                    <div *ngIf="queUrl" class="card-header mcq-title 123">
+                        <span class="inst-text" *ngIf="title"><strong>{{title}} :<br/> </strong></span>
+                        <label class="f-1x p-2"><span [innerHTML]="statement"></span>
+                    </label>
+                    </div>
+                    <div *ngIf="!queUrl" class="card-header mcq-title">
+                        <span class="inst-text" *ngIf="title"><strong>{{title}} :<br/> </strong></span>
+                        <label class="f-1x p-2"><span *ngIf="queCount">{{queCount}}. </span><span [innerHTML]="statement"></span>
+                    </label>
+                    </div>
+                    <!-- <h6 *ngIf="!queUrl" class="lineHeight" [innerHTML]="statement"></h6> -->
+                </div>
+                <div *ngIf="mysubModule3 == 1" class="customimg text-center">
+                    <br>
+                    <img src={{data.url}} class="img-thumbnail imgOption center-block">
+                </div>
+                <div class="card-block mcqBlock">
+                    <div class="col-12 float-left">
+                        <div class="dx-fieldset">
+                            <div class="dx-field">
+                                <div class="dx-field-value">
+                                    <dx-radio-group #eventRadioGroup id="mcq" [items]="priorities" (onValueChanged)="onValueChanged($event)" layout="layout">
+                                    </dx-radio-group>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4"
+      *ngIf="mysubModule == 3 || mysubModule0 == 3 || mysubModule0 == 2|| mysubModule6 == 2|| mysubModule7 == 2|| mysubModule7 == 3 || mysubModule2 == 3 || mysubModule3 == 1 || mysubModule3 == 5 || mysubModule3 == 9 || mysubModule3 == 11">
+        <div class="">
+            <button class="btn btn-primary" [disabled]="!submitFlag" (click)="goNext5_3()">{{'Cfu.submit' | translate}}</button>
+        </div><br>
+    </div>
+</div>
+
+
+<div *ngIf="questionType == 'mcqImageOption'">
+    <div class="card">
+        <div class="" *ngIf="statement">
+            <!-- <label><span [innerHTML]="statement"></span>
+                 </label> -->
+            <h6 class="questionHead lineHeight" [innerHTML]="statement"></h6>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="radio-opt-group">
+                    <div *ngFor="let item of tasks;let i=index" class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="radio">
+                                <label class="radio-answer">
+                                <input id={{item.option}} name="radios" type="radio" value={{item.option}} (click)="setradio(item.option)"><span class="radio-label">{{item.value}}</span>
+                            </label>
+                            </div>
+                        </div>
+                        <div *ngIf="this.data.url">
+                            <img src={{imgUrlJson.images[item.option]}} class="img-thumbnail imgOption center-block">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="questionType == 'checkBoxOption'">
+    <div class="col-sm-12 col-md-12">
+        <div class="card">
+            <div class="" *ngIf="statement">
+                <!-- <label><span [innerHTML]="statement"></span>
+                 </label> -->
+                <h6 class="questionHead lineHeight" [innerHTML]="statement"></h6>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="radio-opt-group">
+                        <div *ngFor="let item of tasks;let i=index" class="col-md-12">
+                            <span class="col-xs-11 col-sm-11 col-md-11">
+              <input type="checkbox" id={{i}} (change)="taskSelect($event,i,item.option)" class="multiCheckStyle">&nbsp;
+              <label for={{i}}>{{item.value}}</label>
+            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="questionType == 'mcqYesNoOption'">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="card">
+                <div class="card-header" *ngIf="statement">
+                    <!-- <label><span [innerHTML]="statement"></span>
+                 </label> -->
+                    <h6 [innerHTML]="statement"></h6>
+                </div>
+                <div class="card-block mcqBlock">
+                    <div class="form float-left">
+                        <div class="dx-fieldset">
+                            <div class="dx-field">
+                                <div class="dx-field-value">
+                                    <dx-radio-group #eventRadioGroup id="mcq" [items]="priorities" (onValueChanged)="onValueChangedYesNoType($event)">
+                                    </dx-radio-group>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="nextQueFlag">
+        <div class="col-sm-12 col-md-12">
+            <div class="card">
+                <div class="card-header mcq-title">
+                    <!-- <label><span>असल्यास प्रमाण?</span>
+                 </label> -->
+                    <h6>असल्यास अशा विद्यार्थ्यांचे प्रमाण किती?</h6>
+                </div>
+                <div class="card-block mcqBlock">
+                    <div class="form float-left">
+                        <div class="dx-fieldset">
+                            <div class="dx-field">
+                                <div class="dx-field-value">
+                                    <dx-radio-group #eventRadioGroup id="mcq" [items]="subPriorities" (onValueChanged)="onValueChangedYesNoType2($event)">
+                                    </dx-radio-group>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <div class="">
+            <button class="btn btn-primary" [disabled]="!submitFlag" (click)="submitYesNo()">{{'Cfu.submit' | translate}}</button>
+        </div><br>
+    </div>
+</div>
+
+<div *ngIf="questionType == 'mcqWithTwoStatements'">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="card">
+                <div class="card-header" *ngIf="statement">
+                    <!-- <label><span [innerHTML]="statement"></span>
+                 </label> -->
+                    <h6 [innerHTML]="statement"></h6>
+                </div>
+                <div class="card-block mcqBlock">
+                    <div class="form float-left">
+                        <div class="dx-fieldset">
+                            <div class="dx-field">
+                                <div class="dx-field-value">
+                                    <dx-radio-group #eventRadioGroup id="mcq" [items]="priorities" (onValueChanged)="onValueChangedYesNoType($event)">
+                                    </dx-radio-group>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <div class="">
+            <button class="btn btn-primary" [disabled]="!submitFlag" (click)="submitYesNo()">{{'Cfu.submit' | translate}}</button>
+        </div><br>
+    </div>
+</div>
+
+<div [class.d-none]="mysubModule3 == 1 || mysubModule3 == 5 || mysubModule3 == 9 || mysubModule3 == 11" class="text-center mt-4" *ngIf="correctAns != '' || passFlags['popuptype'] == 'description'">
+    <div class="">
+        <button class="btn btn-primary" [disabled]="!submitFlag" (click)="submit()">{{'Cfu.submit' | translate}}</button>
+    </div><br>
+</div>
+<!-- <p>dadjjk</p> -->
+<div class="mcqComponentModal">
+<div bsModal #rankModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-primary" role="document">
+        <div class="modal-content" [style.border-color]="rightFlag ? '#259d58' : '#b82020'">
+            <!-- <img class="img-responsive img-rotate" src="assets/img/mitra.png"> -->
+            <div class="modal-header" [style.background-color]="rightFlag ? '#259d58' : '#b82020'">
+                    <span class="exp-img img-rotate" [style.background-image]="rightFlag ? 'url(\'../../../assets/img/mitra_1.png\')' : 'url(\'../../../assets/img/mitra.png\')'"></span>
+                <!-- <span class="exp-img" [style.background-image]="rightFlag ? 'url(\'./../../../assets/img/expressions/correct_ans.png\')' : 'url(\'./../../../assets/img/expressions/wrong_ans.png\')'"></span> -->
+                <!-- <button type="button" class="close" (click)="rankModal.hide()" aria-label="Close" id="btnCloseModal">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+                <h5 class="text-white mb-3" *ngIf="rightFlag==true">{{'L2common.rightanswer' | translate }}</h5>
+                <h5 class="text-white mb-3" *ngIf="rightFlag==false">{{'L2common.wronganswer' | translate }}</h5>
+            </div>
+            <div class="modal-body" *ngIf="questionType != 'checkBoxOption'">
+                <span *ngIf="mysubModule3!=9 && mysubModule4 != 9 && mysubModule4 != 11 && mysubModule4 != 13">
+                <p><b>{{'subModule1_9.correctAns' | translate }} :</b></p>
+                <p>{{showCorrectAns}}</p>
+                </span>
+                <p *ngIf="description"><b>{{'newTranslate.description' | translate }}</b></p>
+                <p *ngIf="description">
+                    <span [innerHTML]="description"></span></p>
+            </div>
+            <!-- <div class="modal-body" *ngIf="rightFlag==true && questionType=='checkBoxOption'">
+                <p><b>{{'McqTest.correctAnswer' | translate }} :</b></p>
+                <p> {{showAns1}}<br> {{showAns2}}</p>
+            </div> -->
+            <div class="modal-body" *ngIf="questionType=='checkBoxOption'">
+                <p><b>{{'subModule1_9.correctAns' | translate }} :</b></p>
+                <p> {{showAns1}}<br>{{showAns2}}</p>
+                <p><b>{{'newTranslate.description' | translate }}</b></p>
+                <p> {{description}}</p>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-primary" (click)="rankModal.hide();btn5=true;">{{'Profile.Make Change' |
+          translate}}</button> -->
+                <button type="button" [ngClass]="rightFlag ? 'btn-success':'btn-danger'" class="btn float-right" (click)="rankConfirmNext()">
+                  {{'Stepper.Next' | translate }}</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+
+<div class="instructionModal">
+    <div bsModal #instructionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-primary" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="exp-img" [style.background-image]="'url(\'../../../assets/img/expressions/instructions.png\')'"></span>
+                    <h4 class="modal-title">{{'1_5.compare_title' | translate}}:</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- <p><b>{{'newTranslate.description' | translate }}</b></p> -->
+                    <p> {{data.description}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary text-center" (click)="emitData();instructionModal.hide()">{{'Stepper.Next' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

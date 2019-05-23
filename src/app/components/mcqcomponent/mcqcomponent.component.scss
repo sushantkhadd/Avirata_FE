@@ -1,0 +1,97 @@
+ .mcqComponentModal{
+  .card{ 
+    border-radius:0;
+    border: none;
+   }
+    .modal {
+      padding-top: 60px;
+    
+      .modal-content {
+        border-width: 5px;
+        // border-top: 0;
+        border-radius: 0;
+        border-color: #4dbd74;
+        position: relative;
+
+            
+        .modal-header {
+          padding: 20px 0 0;
+          background: #4dbd74;
+          position: relative;
+          border-radius: 0;
+    
+          // padding: 40px;
+
+          span.exp-img {
+            // background: url(../../../assets/img/mitra.png);
+            background-size: contain;
+            background-position: left;
+            background-repeat: no-repeat;
+            position: absolute;
+            z-index: 99;
+            width: 115px;
+            height: 115px;
+            bottom: 18px;
+            // margin: 0 auto;
+            // left: 0;
+            right: 0;
+          }
+             
+          button.close {
+            position: absolute;
+            right: 0;
+            color: #fff;
+            opacity: 1;
+          }
+    
+          h5 {
+            margin: 15px auto 0;
+            padding-bottom: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #444;
+          }
+        }
+    
+        .modal-body {
+          // -webkit-box-sizing: content-box;
+          // -moz-box-sizing: content-box;
+          // box-sizing: content-box;
+          // border: none;
+          // -o-text-overflow: clip;
+          // text-overflow: clip;
+          // background: -webkit-linear-gradient(0deg, rgba(0, 0, 0, 0) 79px, rgb(171, 206, 212) 79px, rgb(171, 206, 212) 81px, rgba(0, 0, 0, 0) 81px), -webkit-linear-gradient(90deg, rgb(238, 238, 238) 0.1em, rgba(0, 0, 0, 0) 0.1em), rgb(255, 255, 255);
+          // background: -moz-linear-gradient(90deg, rgba(0, 0, 0, 0) 79px, rgb(171, 206, 212) 79px, rgb(171, 206, 212) 81px, rgba(0, 0, 0, 0) 81px), -moz-linear-gradient(0deg, rgb(238, 238, 238) 0.1em, rgba(0, 0, 0, 0) 0.1em), rgb(255, 255, 255);
+          // background: linear-gradient(90deg, rgba(0, 0, 0, 0) 79px, rgb(171, 206, 212) 79px, rgb(171, 206, 212) 81px, rgba(0, 0, 0, 0) 81px), linear-gradient(0deg, rgb(238, 238, 238) 0.1em, rgba(0, 0, 0, 0) 0.1em), rgb(255, 255, 255);
+          // background-position: auto auto;
+          // -webkit-background-origin: padding-box;
+          // background-origin: padding-box;
+          // -webkit-background-clip: border-box;
+          // background-clip: border-box;
+          // -webkit-background-size: 100% 1.2em;
+          // background-size: 100% 1.2em;
+    
+          // &::before {
+          //   content: "";
+          //   position: absolute;
+          //   bottom: -1px;
+          //   left: 0px;
+          //   border-width: 16px 0 0 16px;
+          //   border-style: solid;
+          //   border-color: #abced4 #fff;
+          }
+    
+          p {
+            // padding-left: 5rem;
+            line-height: 25px;
+            margin-top: 10px;
+            font-size: 0.90rem;
+          }
+        }
+      }
+  }
+
+
+  .customimg img{
+  width: 500px;
+}

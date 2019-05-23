@@ -1,0 +1,313 @@
+<!-- <p>
+  dashboard works!
+</p> -->
+
+<ol class="breadcrumb notification-section">
+  <div class="notify">
+    <marquee onmouseover="this.stop();" onmouseout="this.start();">
+      {{ 'Dashboard.CPD scroll' | translate }}
+    </marquee>
+  </div>
+</ol>
+
+<div class="dashboardContent">
+    <div class="card-group mt-4">
+        <div class="row mx-auto w-100">
+          <div class="col-sm-12 col-md-12">
+            <div class="card">
+              <div class="card-block">
+                <p class="pos-color mar-bottom-0" *ngIf="userType == 'trainee'">
+                  <i class="fa fa-bell-o font-weight-bold" [class.color_red]="remainDays<0"></i>&nbsp;<span [class.color_red]="remainDays<0">{{ 'Dashboard.utype3' | translate }} {{ 'Dashboard.date'
+                  | translate }} {{startDate| date:'dd-MM-yyyy'}} {{ 'Dashboard.to' | translate }} {{endDate| date:'dd-MM-yyyy'}}.</span>
+                  <b><span *ngIf="remainDays>0">{{ 'L2common.remains' | translate }} {{remainDays}}</span>
+                  <span *ngIf="remainDays==0">{{ 'L2common.lastDay' | translate }}</span>
+                  </b>
+                </p>
+                <p class="pos-color mar-bottom-0" *ngIf="userType == 'master_trainer'">
+                  <i class="fa fa-bell-o font-weight-bold" [class.color_red]="remainDays<0"></i>&nbsp; <span [class.color_red]="remainDays<0">{{ 'Dashboard.utype1' | translate }} {{ 'Dashboard.date'
+                  | translate }} {{startDate| date:'dd-MM-yyyy'}} {{ 'Dashboard.to' | translate }} {{endDate| date:'dd-MM-yyyy'}}.</span>
+                  <b><span *ngIf="remainDays>0">{{ 'L2common.remains' | translate }} {{remainDays}}</span>
+                  <span *ngIf="remainDays==0">{{ 'L2common.lastDay' | translate }}</span></b>
+                </p>
+                <p class="pos-color mar-bottom-0" *ngIf="userType == 'co_ordinator'">
+                  <i class="fa fa-bell-o font-weight-bold" [class.color_red]="remainDays<0"></i>&nbsp; <span [class.color_red]="remainDays<0">{{ 'Dashboard.utype2' | translate }} {{ 'Dashboard.date'
+                  | translate }} {{startDate| date:'dd-MM-yyyy'}} {{ 'Dashboard.to' | translate }} {{endDate| date:'dd-MM-yyyy'}}.</span>
+                  <b><span *ngIf="remainDays>0">{{ 'L2common.remains' | translate }} {{remainDays}}</span>
+                  <span *ngIf="remainDays==0">{{ 'L2common.lastDay' | translate }}</span></b>
+                </p>
+                <p class="pos-color mar-bottom-0" *ngIf="userType == 'admin' || userType == 'superadmin'">
+                  <i class="fa fa-bell-o font-weight-bold" [class.color_red]="remainDays<0"></i>&nbsp; <span [class.color_red]="remainDays<0">{{ 'Dashboard.admin' | translate }} {{ 'Dashboard.date' |
+                  translate }} {{startDate| date:'dd-MM-yyyy'}} {{ 'Dashboard.to' | translate }} {{endDate| date:'dd-MM-yyyy'}}.</span>
+                  <b><span *ngIf="remainDays>0">{{ 'L2common.remains' | translate }} {{remainDays}}</span>
+                  <span *ngIf="remainDays==0">{{ 'L2common.lastDay' | translate }}</span></b>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    
+      <div>
+          <!-- <p class="text-center questionHead">
+            <span [innerHTML]="'newTranslate.dashHeadLine1' | translate"></span>
+            <span> {{ assignmentDate | date:'dd-MM-yyyy' }} </span>
+            <span>{{ 'newTranslate.tillSo' | translate }}</span>
+          </p> -->
+          <div class="card-group mt-4">
+            <div class="row mx-auto w-100">
+              <div class="col-sm-12 col-md-12">
+                <div class="card">
+                  <div class="card-block">
+                    <p class="questionHead pos-rel">
+                      <span>{{'L2NewLines.dashHeadLine_hello' | translate}}</span><br>
+                      <span [innerHTML]="'L2NewLines.dashHeadLine1' | translate"></span><br><br>
+        
+                      <span><b>{{'L2NewLines.dashHeadLine1_3_1' | translate}}</b>
+                     <span><img src="../../../assets/img/NEW.gif" class="newGifImg dash-inst"></span> 
+                      </span>
+                      <span class="text-left d-inBlock" [innerHTML]="'L2NewLines.dashHeadLine1_3' | translate"></span><br>
+                      <span>{{'L2NewLines.dashHeadLine2' | translate}}</span><br><br>
+                      <span class="font-weight-bold">{{'L2NewLines.dashHeadLine1_1' | translate}}</span><br>
+                      <span class="text-left d-inBlock" [innerHTML]="'L2NewLines.dashHeadLine1_2' | translate"></span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <p class="text-center questionHead">सर्व प्रशिक्षणार्थीना सूचित करण्यात येते की, ज्या प्रशिक्षणार्थींचे प्रशिक्षण दिलेल्या वेळेत पूर्ण होऊ शकले नाही,<br>अशा सर्व प्रशिक्षणार्थीना दि. 21-03-2018 ते 28-03-2018 पर्यंत प्रशिक्षण पूर्ण करण्याची अंतिम संधी दिलेली आहे.</p>
+            <p class="text-center questionHead">सर्वांसाठी प्रकल्प पूर्ण करण्याचा अवधी दि. {{ assignmentDate | date:'dd-MM-yyyy' }} पर्यंत आहे.</p> -->
+          <!-- <p class="text-center questionHead">{{ 'last_change.assignment_date' | translate }} {{ assignmentDate | date:'dd-MM-yyyy' }} {{ 'last_change.range' | translate }}</p>  -->
+          <div class="card-group mt-4" *ngIf="userType=='master_trainer'">
+            <div class="row mx-auto w-100">
+              <div class="col-sm-12 col-md-12" *ngIf="profileStatus">
+                <div class="card">
+                  <div class="card-header">
+                    <i class="fa fa-align-justify"></i>
+                    <span class="color_red">{{'profile.header' | translate}}</span>
+                  </div>
+                  <div class="card-block">
+                    <div class="row">
+                      <!-- Editable Fields -->
+                      <div class="col-6" *ngIf="emptyCounterForEditable>0">
+                        {{'profile.tobechange' | translate}}
+                        <ul *ngFor="let data of profileFileds">
+                          <li *ngIf="data.status && data.type=='1'">
+                            <span>{{data.value}}</span>
+                          </li>
+                        </ul>
+                        <span class="color_red">{{'profile.footer' | translate}}
+                          <a [routerLink]="['/dashboard/profile']">{{'profile.click' | translate}}</a> {{'profile.footer2' | translate}}</span>
+                      </div>
+                      <!-- Non-Editable Fields -->
+                      <div class="col-6" *ngIf="emptyCounterForNonEditable>0">
+                        {{'profile.dontchange' | translate}}
+                        <ul *ngFor="let data of profileFileds">
+                          <li *ngIf="data.status && data.type=='2'">
+                            <span>{{data.value}}</span>
+                          </li>
+                        </ul>
+                        <span class="color_red">{{'profile.email' | translate}}
+                          <a href="mailto:aviratahelp@gmail.com">{{'profile.mailID' | translate}}</a> {{'profile.send' | translate}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <i class="fa fa-align-justify"></i> {{'Dashboard.co-ordinator' | translate}}
+                  </div>
+                  <div class="card-block">
+                    <table class="table table-condensed">
+                      <thead>
+                        <tr>
+                          <th>{{'Report.srNo' | translate}}</th>
+                          <th>{{'Stepper.Co-ordinator Name' | translate}}</th>
+                          <th>{{'Login.Mobile' | translate}}</th>
+        
+                        </tr>
+                      </thead>
+                      <tbody>
+        
+                        <tr *ngFor="let item of filterDietList;let i = index">
+                          <td *ngIf="item.coordinatorname != 'None'">
+                            {{i+1}}
+                          </td>
+                          <!-- <td *ngIf="LocalstoragedetailsService.userType == 'co_ordinator'"><button class="btn btn-danger">Reject</button></td> -->
+                          <td *ngIf="item.coordinatorname != 'None'">{{item.coordinatorname}}</td>
+                          <td *ngIf="item.coordinatorname != 'None'">{{item.mobilenumber}}</td>
+                          <p class="txt-center" *ngIf="item.coordinatorname == 'None'"> {{'newTranslate.infoNotAvail' | translate}}</p>
+                        </tr>
+        
+                      </tbody>
+                    </table>
+        
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+    
+        <div *ngIf="userType=='trainee'">
+            <!-- <div class="card-group">
+              <div class="row mx-auto w-100">
+                <div class="col-sm-12 col-md-12">
+                  <div class="card">
+                    <div class="card-block">
+                      <p class="questionHead pos-rel">
+                        <span>{{'L2NewLines.dashHeadLine_hello' | translate}}</span><br>
+                        <span [innerHTML]="'L2NewLines.dashHeadLine1' | translate"></span><br><br>
+                        <span>{{'L2NewLines.dashHeadLine2' | translate}}</span><br><br>
+                        <span class="font-weight-bold">{{'L2NewLines.dashHeadLine1_1' | translate}}</span><br>
+                        <span class="text-left d-inBlock" [innerHTML]="'L2NewLines.dashHeadLine1_2' | translate"></span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+            <!-- <p class="text-center questionHead">सर्व प्रशिक्षणार्थीना सूचित करण्यात येते की, ज्या प्रशिक्षणार्थींचे प्रशिक्षण दिलेल्या वेळेत पूर्ण होऊ शकले नाही,<br>अशा सर्व प्रशिक्षणार्थीना दि. 21-03-2018 ते 28-03-2018 पर्यंत प्रशिक्षण पूर्ण करण्याची अंतिम संधी दिलेली आहे.</p>
+              <p class="text-center questionHead">सर्वांसाठी प्रकल्प पूर्ण करण्याचा अवधी दि. {{ assignmentDate | date:'dd-MM-yyyy' }} पर्यंत आहे.</p> -->
+            <!-- <p class="text-center questionHead">{{ 'last_change.assignment_date' | translate }} {{ assignmentDate | date:'dd-MM-yyyy' }} {{ 'last_change.range' | translate }}</p> -->
+            <div class="card-group mt-4">
+              <div class="row mx-auto w-100">
+                <div class="col-sm-12 col-md-12" *ngIf="profileStatus">
+                  <div class="card">
+                    <div class="card-header">
+                      <i class="fa fa-align-justify"></i>
+                      <span class="color_red">{{'profile.header' | translate}}</span>
+                    </div>
+                    <div class="card-block">
+                      <div class="row">
+                        <!-- Editable Fields -->
+                        <div class="col-6" *ngIf="emptyCounterForEditable>0">
+                          {{'profile.tobechange' | translate}}
+                          <ul *ngFor="let data of profileFileds">
+                            <li *ngIf="data.status && data.type=='1'">
+                              <span>{{data.value}}</span>
+                            </li>
+                          </ul>
+                          <span class="color_red">{{'profile.footer' | translate}}
+                            <a [routerLink]="['/dashboard/profile']">{{'profile.click' | translate}}</a> {{'profile.footer2' | translate}}</span>
+                        </div>
+                        <!-- Non-Editable Fields -->
+                        <div class="col-6" *ngIf="emptyCounterForNonEditable>0">
+                          {{'profile.dontchange' | translate}}
+                          <ul *ngFor="let data of profileFileds">
+                            <li *ngIf="data.status && data.type=='2'">
+                              <span>{{data.value}}</span>
+                            </li>
+                          </ul>
+                          <span class="color_red">{{'profile.email' | translate}}
+                            <a href="mailto:aviratahelp@gmail.com">{{'profile.mailID' | translate}}</a> {{'profile.send' | translate}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-12 padd-0">
+          
+                  <div class="card">
+                    <div class="card-header">
+                      <i class="fa fa-align-justify"></i> {{'Registration.Master Trainer' | translate}}
+                    </div>
+                    <div class="card-block">
+                      <table class="table table-condensed">
+                        <thead>
+                          <tr>
+                            <th>{{'Report.srNo' | translate}}</th>
+                            <th>{{'Dashboard.MasterTrainername' | translate}}</th>
+                            <th>{{'Login.Mobile' | translate}}</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of mtList;let i = index">
+                            <td *ngIf="item.mastername != 'None'">
+                              {{i+1}}
+                            </td>
+                            <!-- <td *ngIf="LocalstoragedetailsService.userType == 'co_ordinator'"><button class="btn btn-danger">Reject</button></td> -->
+                            <td *ngIf="item.mastername != 'None'">{{item.mastername}}</td>
+                            <td *ngIf="item.mastername != 'None'">{{item.mobilenumber}}</td>
+                            <p class="txt-center" *ngIf="item.mastername == 'None'">
+                              {{'newTranslate.infoNotAvail' | translate}}</p>
+                          </tr>
+          
+                        </tbody>
+                      </table>
+          
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-12 padd-0">
+                  <div class="card">
+                    <div class="card-header">
+                      <i class="fa fa-align-justify"></i> {{'Dashboard.co-ordinator' | translate}}
+                    </div>
+                    <div class="card-block">
+                      <table class="table table-condensed">
+                        <thead>
+                          <tr>
+                            <th>{{'Report.srNo' | translate}}</th>
+                            <th>{{'Stepper.Co-ordinator Name' | translate}}</th>
+                            <th>{{'Login.Mobile' | translate}}</th>
+          
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of filterDietList;let i = index">
+                            <td *ngIf="item.coordinatorname != 'None'">
+                              {{i+1}}
+                            </td>
+                            <!-- <td *ngIf="LocalstoragedetailsService.userType == 'co_ordinator'"><button class="btn btn-danger">Reject</button></td> -->
+                            <td *ngIf="item.coordinatorname != 'None'">{{item.coordinatorname}}</td>
+                            <td *ngIf="item.coordinatorname != 'None'">{{item.mobilenumber}}</td>
+                            <p class="txt-center" *ngIf="item.coordinatorname == 'None'">
+                              {{'newTranslate.infoNotAvail' | translate}} </p>
+                          </tr>
+          
+                        </tbody>
+                      </table>
+          
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+    
+          <div bsModal #rankModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-primary" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <span class="exp-img"></span>
+            <button type="button" class="close" (click)="rankModal.hide()" aria-label="Close" id="btnCloseModal">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h5>आपले उत्तर बरोबर आहे </h5>
+          </div>
+          <div class="modal-body">
+            <p> {{'Module1.rankConfirm' | translate}}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="rankModal.hide()">{{'Profile.Make Change' |
+              translate}}</button>
+            <button type="button" class="btn btn-secondary" (click)="rankConfirmNext()">{{'Stepper.Next' | translate}}</button>
+          </div>
+        </div>
+    
+      </div>
+    </div>
+</div>
+
+
+
+
+<!-- <button (click)="showSuccess()">Click</button>
+<div [innerHTML]="'Login.Login' | translate"></div> -->
