@@ -88,7 +88,8 @@
             <!-- <img class="img-responsive img-rotate" src="assets/img/mitra.png"> -->
         <div class="modal-content" [style.border-color]="msgFlag ? '#259d58' : '#b82020'">
             <div class="modal-header text-center" [style.background-color]="msgFlag ? '#259d58' : '#b82020'" >
-                <span class="exp-img img-rotate" [style.background-image]="msgFlag ? 'url(\'../../../assets/img/mitra_1.png\')' : 'url(\'../../../assets/img/mitra.png\')'"></span>
+                    <span class="exp-img img-rotate" [style.background-image]="msgFlag ? 'url(\'../../../assets/img/expressions/correct_ans.png\')' : 'url(\'../../../assets/img/expressions/wrong_ans.png\')'"></span>
+                <!-- <span class="exp-img img-rotate" [style.background-image]="msgFlag ? 'url(\'../../../assets/img/mitra_1.png\')' : 'url(\'../../../assets/img/mitra.png\')'"></span> -->
               <h5 class="text-center text-white mb-3" *ngIf="msgFlag==true">{{'McqTest.popupTitle1' | translate}}</h5>
               <h5 class="text-center text-white mb-3" *ngIf="msgFlag==false">{{'McqTest.popupTitle2' | translate}}</h5>
             </div>
