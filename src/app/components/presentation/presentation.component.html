@@ -30,7 +30,7 @@
                   <button *ngIf="data['unlockView'] == 'static'" class="control ripple" disabled> <em class="fa fa-arrow-right"
                       aria-hidden="true"></em> </button>
                  <span *ngIf="data['unlockView'] != 'static'"><button (click)="finishPDF();"
-                     class="btn btn-primary">{{'Stepper.Finish' | translate}} 1</button></span>
+                     class="btn btn-primary">{{'Stepper.Finish' | translate}}</button></span>
       </div>
       <div class="fullscreen float-right">
           <span class="control ripple" id="download" *ngIf="download"><a href={{downloadLink}} download><em class="fa fa-download"

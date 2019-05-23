@@ -44,7 +44,7 @@ export class Module2Component implements OnInit {
   public apiEndStart; apiEndSendAns; apiEndFinish;
   activeItem;
   questionFlag;
-  urlArray = {};
+  urlArray = {};nextFlag;
   ngOnInit() {
     this.vedioCompleteUrl = "79vHVVtmIoQ";
     this.mainFlagModule2 = parseInt(
@@ -125,7 +125,8 @@ export class Module2Component implements OnInit {
     console.log("aaaaaaa");
     if (e == true) {
       console.log(e);
-      this.playVideo = false;
+      this.nextFlag = true; 
+      this.subFlagModule2 = 2;
       this.instructionModal.show();
       var url ={}
       url['2.1.1'] = this.vedioCompleteUrl;
@@ -169,6 +170,7 @@ export class Module2Component implements OnInit {
             window.localStorage.setItem("subFlagModule2", "2");
             this.questionFlag = true;
             this.startEvent2();
+            this.nextFlag = true;
           } 
         }
       },
