@@ -116,6 +116,7 @@ export class Module16Component implements OnInit {
           window.localStorage.setItem("uuid", data["data"].nextuuid);
           this.mainFlagModule1 = 9;
           window.localStorage.setItem("mainFlagModule1", "7");
+          window.localStorage.setItem("subFlagModule1", "1");
           var obj = {
             "type": "submodule",
             "route": true,
