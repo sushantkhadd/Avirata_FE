@@ -19,7 +19,7 @@ export class Module29Component implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
   public data; questionType; passFlags = {}; showAnswer; saveData; answer=[]; sumbitButton; startFlag;
-  public inst = "दिलेल्या प्रसंगी विद्यार्थी तसे का वागत आहेत त्याची कारणे ओळखणे"
+  public inst = "खालीलपैकी कोणती वाक्ये / कृती ह्या विद्यार्थ्यांच्या सामाजिक स्वीकाराच्या दृष्टीने उपयुक्त आहेत?"
   ngOnInit() {
     this.startFlag = false;
     console.log(this.startFlag)
@@ -90,6 +90,7 @@ export class Module29Component implements OnInit {
           } else if (data['status'] == true && data['message'] == "submodule finish")
           {
             this.startFlag = false;
+            this.mainFlagModule2 = 10;
             window.localStorage.setItem('uuid', data['data'].nextuuid);
             window.localStorage.setItem('mainFlagModule2', '10');
             window.localStorage.setItem('source', 'module 2.10.1');

@@ -19,7 +19,7 @@ export class Module23Component implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
   public data; questionType; passFlags = {}; showAnswer; saveData; answer; sumbitButton; startFlag;
-  public inst = "दिलेल्या परिस्थितीत शिक्षक जसे वागत आहेत, जसा प्रतिसाद देत आहेत त्याला <b>सर्वस्वी</b> काय कारणीभूत आहे? तुम्हाला काय वाटते? चारपैकी कोणताही एक पर्याय निवडा."
+  public inst = "एखाद्या संकल्पनेबाबत उजव्या मेंदूमध्ये नवीन जोडण्या निर्माण होणे आणि त्या पक्क्या होणे यासाठी पुढे  दिलेले उदाहरणे बघा आणि त्यातील एक पर्याय निवडा."
   ngOnInit() {
     this.startFlag = false;
     this.showAnswer = true;
@@ -88,6 +88,7 @@ export class Module23Component implements OnInit {
           } else if (data['status'] == true && data['message'] == "submodule finish")
           {
             this.startFlag = false;
+            this.mainFlagModule2 = 4;
             window.localStorage.setItem('uuid', data['data'].nextuuid);
             window.localStorage.setItem('mainFlagModule2', '4');
             window.localStorage.setItem('subFlagModule2', '1');

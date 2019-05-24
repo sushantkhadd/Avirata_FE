@@ -40,7 +40,8 @@
 
 <div id="quiz" *ngIf="showQuize" class="baseline-instructtion">
     <h6 class="questionHead">
-       <strong>{{'Quiz.traineebaselineQue' | translate}}</strong>
+       <strong *ngIf="mySubmodule2 == 1">{{'Quiz.traineebaselineQue' | translate}}</strong>
+       <strong *ngIf="mySubmodule2 == 7">{{'Quiz.traineebaselineQue1' | translate}}</strong>
     </h6>
     <hr />
 

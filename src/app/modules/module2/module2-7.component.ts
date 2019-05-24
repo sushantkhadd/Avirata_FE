@@ -40,7 +40,7 @@ export class Module27Component implements OnInit {
   public playVideo = false;
   public apiEndStart; apiEndSendAns; apiEndFinish;
   vedioCompleteUrl;
-  statVideoFlag;
+  statVideoFlag;nextFlag;
 
   activeItem;
   pager = {
@@ -175,7 +175,8 @@ export class Module27Component implements OnInit {
     console.log("aaaaaaa");
     if (e) {
       console.log(e);
-      this.playVideo = false;
+      this.nextFlag = true; 
+      this.subFlagModule2 = 2;
       this.instructionModal.show();
       var url ={}
       url['2.7.1'] = this.vedioCompleteUrl;
@@ -227,8 +228,8 @@ export class Module27Component implements OnInit {
             this.playVideo = true;
           } else if (fun == "finish1") {
             this.instructionModal.hide();
-            this.playVideo = false;
-            this.statVideoFlag = true;
+            // this.playVideo = false;
+            // this.statVideoFlag = true;
             this.mainFlagModule2 = 7;
             window.localStorage.setItem("uuid", data["data"].nextuuid);
             console.log(data);
@@ -236,6 +237,7 @@ export class Module27Component implements OnInit {
             window.localStorage.setItem("subFlagModule2", "2");
             this.questionFlag = true;
             this.startEvent2();
+            this.nextFlag = false; 
           } else if (fun == "start2") {
             this.questionlist = data["data"].questionlist;
               for (var index = 0; index < this.questionlist.length; index++)

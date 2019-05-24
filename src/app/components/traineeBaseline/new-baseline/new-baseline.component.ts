@@ -19,8 +19,8 @@ import {LanguageService} from '../../../language.service'
   templateUrl: './new-baseline.component.html'
 })
 export class NewBaselineComponent implements OnInit {
-  private selectedQuestionId; selectedAnswer; finishExamCard;userOption={}
-  public moduleNumber;
+  private selectedQuestionId; selectedAnswer; finishExamCard;userOption={};dummyAnsJson={};
+  public moduleNumber; mySubmodule2;
   // public nextButtonFlag;answerJSON;
   // oldSelectedAns;endApiAnsHit;
   @Input() public passData;
@@ -187,7 +187,7 @@ export class NewBaselineComponent implements OnInit {
     // this.oldSelectedAns=""
     // this.nextButtonFlag=false
     // this.endApiAnsHit=false
-
+    this.mySubmodule2=parseInt(window.localStorage.getItem('mainFlagModule2'));
     this.moduleNumber = window.localStorage.getItem('currentstatus');
     if (window.localStorage.getItem('token') == null) {
       this.router.navigate(['/']);
@@ -482,10 +482,15 @@ export class NewBaselineComponent implements OnInit {
     this.token = window.localStorage.getItem('token');
     console.log("useroption",this.userOption)
     // var answerJSON = '{"submoduleid":"' + window.localStorage.getItem('uuid') + '","useranswer":"' + JSON.stringify(this.userOption) + '","event":"answer"}'
+    if(window.localStorage.getItem('mainFlagModule2') == '7'){
+     this.dummyAnsJson[this.selectedQuestionId] = this.selectedAnswer;
+     console.log(this.dummyAnsJson,this.pager.count)
+    }
     var dummyAns = JSON.stringify(this.userOption)
     var mainAns = {};
     mainAns['submoduleid'] = window.localStorage.getItem('uuid');
-    if(this.lastQuestion == 3 && (window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule3') == '7')){
+   
+    if(this.lastQuestion == 3 && (window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule3') == '7') && Object.keys(this.dummyAnsJson).length == this.pager.count){
       mainAns['event'] = "finish";
     }
    else{

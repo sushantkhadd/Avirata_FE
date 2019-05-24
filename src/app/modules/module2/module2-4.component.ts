@@ -39,7 +39,7 @@ export class Module24Component implements OnInit {
   public token;
   public playVideo = false;
   vedioCompleteUrl;
-  statVideoFlag;
+  statVideoFlag;nextFlag;
 
   urlArray = {};
   ngOnInit() {
@@ -125,7 +125,9 @@ export class Module24Component implements OnInit {
     console.log("aaaaaaa");
     if (e == true) {
       console.log(e);
-      this.playVideo = false;
+      this.nextFlag = true; 
+      this.subFlagModule2 = 2;
+      // this.playVideo = false;
       this.instructionModal.show();
       var url ={}
       url['2.4.1'] = this.vedioCompleteUrl;
@@ -193,14 +195,15 @@ export class Module24Component implements OnInit {
             this.playVideo = true;
           } else if (fun == "finish1") {
             this.instructionModal.hide();
-            this.playVideo = false;
-            this.statVideoFlag = true;
+            // this.playVideo = false;
+            // this.statVideoFlag = true;
             this.mainFlagModule2 = 4;
             window.localStorage.setItem("uuid", data["data"].nextuuid);
             console.log(data);
             this.subFlagModule2 = 2;
             window.localStorage.setItem("subFlagModule2", "2");
-            // this.startEvent2();
+            //this.startEvent2();
+            this.nextFlag = false; 
           } 
         }
       },

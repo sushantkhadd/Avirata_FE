@@ -170,7 +170,7 @@ export class Module2Component implements OnInit {
             window.localStorage.setItem("subFlagModule2", "2");
             this.questionFlag = true;
             this.startEvent2();
-            this.nextFlag = true;
+            this.nextFlag = false;
           } 
         }
       },

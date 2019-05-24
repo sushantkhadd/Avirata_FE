@@ -160,7 +160,8 @@
                  </label> -->
                     <h6 [innerHTML]="statement"></h6>
                 </div>
-                <div class="card-block">
+                <div class="card-block pt-0" [class.pt-0]="queCount">
+                    <div *ngIf="queCount" class="badge badge-custom ml-3">{{queCount}} / {{totalQueCount}}</div>
                     <div class="form float-left">
                         <div class="dx-fieldset">
                             <div class="dx-field">

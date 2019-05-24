@@ -26,7 +26,7 @@
       <div *ngIf="playVideo">
         <div class="card">
           <div class="card-footer">
-            <h6 class="text-center">{{'L2Module2.subMenu2-1' | translate}}</h6>
+            <h6 class="text-center">{{'L2Module2.subMenu2-7' | translate}}</h6>
           </div>
           <div class="card-block">
             <app-static-video [receivedData]='passData' (finishCall)="finishVideo($event)"></app-static-video>
@@ -34,7 +34,7 @@
         </div>
       </div>
     </div>
-    <div *ngIf="subFlagModule2 == 2">
+    <div *ngIf="subFlagModule2 == 2 && !nextFlag">
         <div *ngIf="showPart1Flag">
             <!-- <app-new-baseline [passData]='passFlags' (exam2finish)="sendAnswer($event)"></app-new-baseline> -->
             <div>

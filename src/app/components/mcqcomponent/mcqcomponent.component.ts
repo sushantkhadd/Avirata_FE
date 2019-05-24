@@ -21,7 +21,7 @@ export class McqcomponentComponent implements OnInit {
 
   public ansSelectCount; counter; selectedTasks = []; ans1; ans2; showAns1; showAns2; queUrl;title;
   public nextQueFlag; subPriorities; sendYesNoType; mysubModule3; mysubModule4; mysubModule1;
-  public onlyPopUpAns; mysubModule; submitFlagMCQ; mysubModule0; mysubModule6; mysubModule7;mysubModule2;
+  public onlyPopUpAns; mysubModule; submitFlagMCQ; mysubModule0; mysubModule6; mysubModule7;mysubModule2;totalQueCount;
   constructor() { }
 
   ngOnInit() {
@@ -37,7 +37,16 @@ export class McqcomponentComponent implements OnInit {
     if(window.localStorage.getItem('mainFlagModule1')== '1' || window.localStorage.getItem('mainFlagModule1')== '4' || window.localStorage.getItem('mainFlagModule1')== '6'){
       this.queCount = parseInt(window.localStorage.getItem('subFlagModule1'))
     }
+    else if(window.localStorage.getItem('mainFlagModule2')== '3' || window.localStorage.getItem('mainFlagModule2')== '9' || window.localStorage.getItem('mainFlagModule2')== '11'){
+      this.queCount = parseInt(window.localStorage.getItem('subFlagModule2'))
+    }
     
+    if(window.localStorage.getItem('mainFlagModule2')== '9'){
+      this.totalQueCount = 7;
+    }
+    else if(window.localStorage.getItem('mainFlagModule2')== '11'){
+      this.totalQueCount = 5;
+    }
     this.nextQueFlag = false
     this.queUrl = false
     this.counter = 0
@@ -402,6 +411,10 @@ export class McqcomponentComponent implements OnInit {
     if(window.localStorage.getItem('mainFlagModule1')== '2' || window.localStorage.getItem('mainFlagModule1')== '4' || window.localStorage.getItem('mainFlagModule1')== '6'){
       this.queCount = parseInt(window.localStorage.getItem('subFlagModule1'))
     }
+    else if(window.localStorage.getItem('mainFlagModule2')== '3' || window.localStorage.getItem('mainFlagModule2')== '9' || window.localStorage.getItem('mainFlagModule2')== '11'){
+      this.queCount = parseInt(window.localStorage.getItem('subFlagModule2'))
+    }
+
     if (this.questionType == 'checkBoxOption') {
       console.log("ddd ", this.selectedTasks[0], this.selectedTasks[1], this.ans1, this.ans2)
       if (this.selectedTasks.length == 2) {
