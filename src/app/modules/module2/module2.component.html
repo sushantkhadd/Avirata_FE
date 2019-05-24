@@ -10,14 +10,14 @@
 
 <div *ngIf="mainFlagModule2 == 1">
   <div *ngIf="subFlagModule2 == 1">
-    <div class="ins-block" *ngIf="!playVideo">
+    <div class="instruction-wrap ins-block" *ngIf="!playVideo">
       <div class="borderBlue">
         <div class="card">
           <div class="card-header">
-            <h5>
-              <em class="fa fa-calendar-minus"></em>&nbsp;{{'Quiz.note' | translate}}</h5>
+            <span class="exp-img instructions-img"></span>
+            <h5>{{'Quiz.note' | translate}}</h5>
           </div>
-          <div class="card-block pt-2">
+          <div class="card-block pt-4">
             <p>{{'subModule5_1.1' | translate}}</p>
           </div>
           <div class="card-footer text-right">

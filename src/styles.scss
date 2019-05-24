@@ -1897,9 +1897,15 @@ body {
 // new-basline css
 .baseline-instructtion{
   border: 1px solid #ccc;
-
+  .card{
+    border: none;
+  }
   h6{
     padding: 1rem 0 0 1rem;
+
+    span{
+      font-size: 0.90rem;
+    }
   }
 }
 
@@ -1914,4 +1920,11 @@ h6.questionHead.lineHeight {
   // padding: 1.1rem;
   box-shadow: none;
   margin-bottom: 0;
+}
+
+.dx-fieldset{
+  .dx-field{
+    font-size: 0.85rem;
+    line-height: 23px;
+  }
 }
