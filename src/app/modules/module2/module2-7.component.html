@@ -9,10 +9,11 @@
   
   <div *ngIf="mainFlagModule2 == 7">
     <div *ngIf="subFlagModule2 == 1">
-      <div class="ins-block" *ngIf="!playVideo">
+      <div class="instruction-wrap ins-block" *ngIf="!playVideo">
         <div class="card">
-          <div class="card-header">
-            <h5><em class="fa fa-calendar-minus-o"></em>&nbsp;{{'Quiz.note' | translate}}</h5>
+          <div class="card-header text-white">
+            <span class="exp-img instructions-img"></span>
+            <h5>{{'Quiz.note' | translate}}</h5>
           </div>
           <div class="card-block pt-2">
             <p>{{'subModule5_1.1' | translate}}</p>
@@ -54,7 +55,7 @@
     </div>
   </div>
   
-  <div class="videoFinishModal">
+  <div class="videoFinishModal videoFinishedModel">
     <div bsModal #instructionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1"
       role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <!-- <div class="modal-dialog modal-default modal-sm modal-finish" role="document">

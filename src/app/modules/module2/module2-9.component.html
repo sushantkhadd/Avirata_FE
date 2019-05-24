@@ -16,7 +16,7 @@
         <h4>{{'Quiz.note' | translate}}</h4>
       </div>
       <div class="card-block inst-text">
-        <p class="color_red">{{'L2Instruction.inst1_2a' | translate}}</p>
+        <!-- <p class="color_red">{{'L2Instruction.inst1_2a' | translate}}</p> -->
         <p>{{'number.1' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_6' | translate}}</p>
         <p>{{'number.2' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_7' | translate}}</p>
         <p>{{'number.3' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_8' | translate}}</p>
@@ -31,8 +31,7 @@
     </div>
     </div>
   </div>
-  <div *ngIf="startFlag" class="instruction-wrap">
-
+  <div *ngIf="startFlag">
     <h6 class="questionHead lineHeight">{{'L2common.caution' | translate}} <span [innerHTML]="inst"> </span></h6>
     <div class="borderBlue">
     <span *ngIf="data">

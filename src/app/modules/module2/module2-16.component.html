@@ -9,12 +9,12 @@
   </div>
 </div>
 <div *ngIf="mainFlagModule2 == 16">
-  <div class="col-sm-12 col-md-12 ins-block" *ngIf="!startPdf && !nextFlag">
+  <div class="col-sm-12 col-md-12 instruction-wrap ins-block" *ngIf="!startPdf && !nextFlag">
     <div class="borderBlue">
       <div class="card">
-        <div class="card-header">
-          <h5>
-            <em class="fa fa-calendar-minus"></em>&nbsp;{{'Quiz.note' | translate}}</h5>
+        <div class="card-header text-white">
+          <span class="exp-img instructions-img"></span>
+          <h5>{{'Quiz.note' | translate}}</h5>
         </div>
         <div class="card-block pt-2">
           <p>{{'L2Module2.subMenu2-16' | translate}}</p>
