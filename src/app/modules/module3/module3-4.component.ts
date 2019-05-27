@@ -21,7 +21,8 @@ export class Module34Component implements OnInit {
   constructor(public FullLayoutService: FullLayoutService, public LanguageService: LanguageService, public Module3Service: Module3Service, public router: Router, public LocalstoragedetailsService: LocalstoragedetailsService, public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService) {
     this.toastr.setRootViewContainerRef(vcr);
   }
-  public showVideoFlag; nextBtnFlag; passData = {}; passUrl; videoData = {}; urlArray = {}; lnk1; lnk2;
+  public showVideoFlag; nextBtnFlag; passData = {}; passUrl; videoData = {}; urlArray = {}; lnk1; lnk2; urlJson = {}
+
   public statVideoFlag; thumb_title;flag;
   ngOnInit() {
     this.lnk1 = ''
@@ -95,15 +96,13 @@ export class Module34Component implements OnInit {
   }
   finishCFU(e) {
     if (e) {
-      var url ={}
-      url['3.4.1'] = this.passUrl;
-      url['3.4.2'] = e['url'];
-      console.log("urllll",url)
+      this.urlJson['3.4.2'] = e['url'];
+      console.log("urllll", this.urlJson)
       var current3 = [];
-      current3 = JSON.parse(window.localStorage.getItem("currentJson3")); 
+      current3 = JSON.parse(window.localStorage.getItem("currentJson3"));
       var index = current3["children"].findIndex(
         item => item.source == "module 3.4" );
-      current3["children"][index].url = JSON.stringify(url); 
+      current3["children"][index].url = JSON.stringify(this.urlJson);
       window.localStorage.setItem("currentJson3", JSON.stringify(current3));
 
       window.localStorage.setItem('mainFlagModule3', '5');
@@ -125,7 +124,7 @@ export class Module34Component implements OnInit {
           this.passData['videoUrl'] = data['data'].url;
           this.showVideoFlag = true
           this.passUrl = data['data'].url;
-
+          this.urlJson["3.4.1"] = this.passUrl;
           // var dummylocal = JSON.parse(window.localStorage.getItem('currentJson3'))
           // var index1 = dummylocal.children.findIndex(item =>
           //   item.source == "module 3.8");

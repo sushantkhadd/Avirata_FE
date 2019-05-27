@@ -17,7 +17,7 @@ export class Module35Component implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
   public data; questionType; passFlags = {}; showAnswer; saveData; answer; sumbitButton; startFlag;
-  public inst = "दिलेल्या परिस्थितीत शिक्षक जसे वागत आहेत, जसा प्रतिसाद देत आहेत त्याला <b>सर्वस्वी</b> काय कारणीभूत आहे? तुम्हाला काय वाटते? चारपैकी कोणताही एक पर्याय निवडा."
+  public inst = "खालील लक्ष वेधून घेणाऱ्या विद्यार्थ्यांबाबत शिक्षकांनी केलेल्या उपाययोजना योग्य आहेत का ते सांगा: "
   ngOnInit() {
     this.startFlag = false;
     this.showAnswer = true;

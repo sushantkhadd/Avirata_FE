@@ -11,6 +11,12 @@
 <div *ngIf="mainFlagModule3 == 3">
   <div class="assignForm">
     <div class="card">
+      <div class="card-footer p-0">
+        <h6 class="questionHead lineHeight">{{"L2Module3.inst3_3" | translate }}</h6>
+        <h6 *ngIf="subFlagModule3 == 1" class="p-2">{{"L2Module3.v1" | translate }}</h6>
+        <h6 *ngIf="subFlagModule3 == 2" class="p-2">{{"L2Module3.v2" | translate }}</h6>
+        <h6 *ngIf="subFlagModule3 == 3" class="p-2">{{"L2Module3.v3" | translate }}</h6>
+      </div>
       <div class="card-block pt-2">
         <form #assignForm="ngForm">
           <div class="form-group row">
