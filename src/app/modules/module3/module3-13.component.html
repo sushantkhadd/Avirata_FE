@@ -2,7 +2,8 @@
   <div class="card">
     <div class="card-block">
       <p>{{'subModule3_1.3_2' | translate}}</p>
-      <p><strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
+      <p>
+        <strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
     </div>
   </div>
 </div>
@@ -77,7 +78,7 @@
         <div class="col-md-4">
           <p class="title">2. {{'L2Module3.subMenu3-13' | translate}}</p>
           <div class="img-wrap">
-            <a (click)="showVideo(urlArray['src2'],'L2Module3.subMenu3-8',2)">
+            <a (click)="showVideo(urlArray['src2'],'L2Module3.subMenu3-13',2)">
               <img class="img-fluid v_thumb" src="./../../assets/img/thumb/3.8.2.png" alt="">
               <div class="hover-opaque">
                 <i class="fa fa-play-circle-o fa-3x"></i>
@@ -107,30 +108,30 @@
         <div class="card-footer bg-white border-0 mt-3 text-center">
           <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>
         </div>
-      </div> 
+      </div>
     </div>
   </div>
 </div>
 
 <div class="videoFinishModal videoFinishedModel">
   <div bsModal #instructionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
-      aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <img class="img-responsive img-rotate" src="assets/img/mitra.png">
-              <div class="modal-header">
-                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <img class="img-responsive img-rotate" src="assets/img/mitra.png">
+        <div class="modal-header">
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button> -->
-              </div>
-              <div class="modal-body">
-                <p class="px-5 text-center">तुमचा व्हिडिओ पूर्ण झाला</p>
-                <hr/>
-                <div class="col-md-12 text-right">
-                    <button class="btn btn-primary text-center" (click)="next()">{{'Stepper.Next' | translate}}</button>
-                </div>
-              </div>
-            </div>
+        </div>
+        <div class="modal-body">
+          <p class="px-5 text-center">तुमचा व्हिडिओ पूर्ण झाला</p>
+          <hr/>
+          <div class="col-md-12 text-right">
+            <button class="btn btn-primary text-center" (click)="next()">{{'Stepper.Next' | translate}}</button>
           </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

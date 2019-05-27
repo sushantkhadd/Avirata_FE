@@ -2,7 +2,8 @@
   <div class="card">
     <div class="card-block">
       <p>{{'module7.7_2' | translate}}</p>
-      <p><strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
+      <p>
+        <strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
     </div>
   </div>
 </div>
@@ -10,36 +11,37 @@
 
   <div *ngIf="!startFlag" class="instruction-wrap">
     <div class="borderBlue">
-    <div class="card">
-      <div class="card-header text-white">
-        <span class="exp-img instructions-img"></span>
-        <h4>{{'Quiz.note' | translate}}</h4>
-      </div>
-      <div class="card-block inst-text">
-        <p class="color_red">{{'L2Instruction.inst1_2a' | translate}}</p>
-        <p>{{'number.1' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_6' | translate}}</p>
-        <p>{{'number.2' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_7' | translate}}</p>
-        <p>{{'number.3' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_8' | translate}}</p>
-        <p>{{'number.4' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_9' | translate}}</p>
-
-      </div>
-      <div class="card-footer">
-        <div class="float-right">
-          <button class="btn btn-primary" (click)="start();">{{'Module4.start' | translate}}</button>
+      <div class="card">
+        <div class="card-header text-white">
+          <span class="exp-img instructions-img"></span>
+          <h4>{{'Quiz.note' | translate}}</h4>
+        </div>
+        <div class="card-block inst-text">
+          <!-- <p class="color_red">{{'L2Instruction.inst1_2a' | translate}}</p> -->
+          <p>{{'number.1' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_6' | translate}}</p>
+          <p>{{'number.2' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_7' | translate}}</p>
+          <p>{{'number.3' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_8' | translate}}</p>
+          <p>{{'number.4' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_9' | translate}}</p>
+        </div>
+        <div class="card-footer">
+          <div class="float-right">
+            <button class="btn btn-primary" (click)="start();">{{'Module4.start' | translate}}</button>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+  <div *ngIf="startFlag">
+
+    <h6 class="questionHead lineHeight">{{'L2common.caution' | translate}}
+      <span [innerHTML]="inst"> </span>
+    </h6>
+    <div class="borderBlue">
+      <span *ngIf="data">
+        <app-mcqcomponent [passFlags]='passFlags' [data]='data' (sendAns)="saveAnswer($event)"></app-mcqcomponent>
+      </span>
     </div>
   </div>
-  <div *ngIf="startFlag" class="instruction-wrap">
-
-    <h6 class="questionHead lineHeight">{{'L2common.caution' | translate}} <span [innerHTML]="inst"> </span></h6>
-    <div class="borderBlue">
-    <span *ngIf="data">
-      <app-mcqcomponent [passFlags]='passFlags' [data]='data' (sendAns)="saveAnswer($event)"></app-mcqcomponent>
-    </span>
-  </div>
-</div>
 </div>
 <div *ngIf="mainFlagModule3 > 5">
   <div class="card submoduleBox">
