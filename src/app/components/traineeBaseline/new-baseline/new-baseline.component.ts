@@ -490,8 +490,9 @@ export class NewBaselineComponent implements OnInit {
     var mainAns = {};
     mainAns['submoduleid'] = window.localStorage.getItem('uuid');
    
-    if(this.lastQuestion == 3 && (window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule3') == '7') && Object.keys(this.dummyAnsJson).length == this.pager.count){
+    if(((this.pager.index + 1)==(this.pager.count)) && (window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule3') == '7') && Object.keys(this.dummyAnsJson).length == this.pager.count){
       mainAns['event'] = "finish";
+      console.log("lastqu",this.lastQuestion,((this.pager.index + 1)==(this.pager.count)))
     }
    else{
     mainAns['event'] = "answer";

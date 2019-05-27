@@ -261,7 +261,7 @@ export class PresentationComponent implements OnInit {
       else if (this.data.state == 'dyanamic') {
         var jsonBody = {};
         console.log("mailnflag",window.localStorage.getItem('mainFlagModule4'))
-        if (window.localStorage.getItem('mainFlagModule2') == '15' || window.localStorage.getItem('mainFlagModule3') == '14' || window.localStorage.getItem('mainFlagModule3') == '15' || window.localStorage.getItem('mainFlagModule3') == '16') {
+        if (window.localStorage.getItem('mainFlagModule2') == '15' || window.localStorage.getItem('mainFlagModule3') == '14' || window.localStorage.getItem('mainFlagModule3') == '15' || window.localStorage.getItem('mainFlagModule3') == '16' || window.localStorage.getItem('mainFlagModule4') == '13') {
           jsonBody['currentsubmoduleid'] = window.localStorage.getItem('uuid');
           jsonBody['useroption'] = '';
           jsonBody['event'] = 'start';
@@ -277,7 +277,7 @@ export class PresentationComponent implements OnInit {
       }
 
         this.apiUrl = this.data.apiurl;
-        if (window.localStorage.getItem('mainFlagModule2') == '15' || window.localStorage.getItem('mainFlagModule3') == '14' || window.localStorage.getItem('mainFlagModule3') == '15' || window.localStorage.getItem('mainFlagModule3') == '16') {
+        if (window.localStorage.getItem('mainFlagModule2') == '15' || window.localStorage.getItem('mainFlagModule3') == '14' || window.localStorage.getItem('mainFlagModule3') == '15' || window.localStorage.getItem('mainFlagModule3') == '16' || window.localStorage.getItem('mainFlagModule4') == '13') {
           console.log("ma ",this.mainFlagModule5)
         this.CommonComponentService.submoduleFinish(jsonBody,this.apiUrl)
           .subscribe(
@@ -306,7 +306,8 @@ export class PresentationComponent implements OnInit {
                 this.newUrl = this.imgUrl + this.countForModule2.toString() + this.count + ".jpg";
               } else {
 
-                if(window.localStorage.getItem('mainFlagModule2') == '15' || window.localStorage.getItem('mainFlagModule3') == '14' || window.localStorage.getItem('mainFlagModule3') == '15'|| window.localStorage.getItem('mainFlagModule3') == '16'){
+                if(window.localStorage.getItem('mainFlagModule2') == '15' || window.localStorage.getItem('mainFlagModule3') == '14' || window.localStorage.getItem('mainFlagModule3') == '15'|| window.localStorage.getItem('mainFlagModule3') == '16' ||
+                window.localStorage.getItem('mainFlagModule4') == '13'){
                   this.pdfURL=data['data'].nexturl
                   this.newUrl = this.imgUrl + this.count + ".jpg";
                 }
@@ -455,7 +456,7 @@ export class PresentationComponent implements OnInit {
         if (this.selectedAnswer == this.optionsStateDyanamic[i].value) {
            var jsonBody = {};
           this.apiUrl = this.data.apiurlResult;
-          if(window.localStorage.getItem('mainFlagModule2') == '15'|| window.localStorage.getItem('mainFlagModule3') == '14' || window.localStorage.getItem('mainFlagModule3') == '15' || window.localStorage.getItem('mainFlagModule3') == '16'){
+          if(window.localStorage.getItem('mainFlagModule2') == '15'|| window.localStorage.getItem('mainFlagModule3') == '14' || window.localStorage.getItem('mainFlagModule3') == '15' || window.localStorage.getItem('mainFlagModule3') == '16' || window.localStorage.getItem('mainFlagModule4') == '13'){
             jsonBody['currentsubmoduleid'] = window.localStorage.getItem('uuid');
             jsonBody['useroption'] = this.optionsStateDyanamic[i].option;
             jsonBody['event'] = 'answer';
@@ -495,7 +496,7 @@ export class PresentationComponent implements OnInit {
                  this.pdfURL=data['data'].nexturl
                 this.showToasterPopup();
                 window.localStorage.setItem('uuid', data['data'].nextuuid);
-                if(window.localStorage.getItem('mainFlagModule2') == '15' || window.localStorage.getItem('mainFlagModule3') == '14' || window.localStorage.getItem('mainFlagModule3') == '15' || window.localStorage.getItem('mainFlagModule3') == '16' || window.localStorage.getItem('mainFlagModule5') == '9' || window.localStorage.getItem('mainFlagModule5') == '10' || window.localStorage.getItem('mainFlagModule5') == '11' || window.localStorage.getItem('mainFlagModule5') == '12')
+                if(window.localStorage.getItem('mainFlagModule2') == '15' || window.localStorage.getItem('mainFlagModule3') == '14' || window.localStorage.getItem('mainFlagModule3') == '15' || window.localStorage.getItem('mainFlagModule3') == '16' || window.localStorage.getItem('mainFlagModule4') == '13' || window.localStorage.getItem('mainFlagModule5') == '10' || window.localStorage.getItem('mainFlagModule5') == '11' || window.localStorage.getItem('mainFlagModule5') == '12')
                 {
                   this.options = []
 

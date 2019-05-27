@@ -47,4 +47,24 @@
       </div>
     </div>
   </div>
-  
+
+  <div class="videoFinishModal videoFinishedModel">
+      <div bsModal #instructionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <img class="img-responsive img-rotate" src="assets/img/mitra.png">
+            <div class="modal-header">
+              <h5 class="questionHead">{{'McqTest.reason' | translate}}</h5>
+            </div>
+            <div class="modal-body">
+              <p class="px-5 text-center">{{description}}</p>
+              <hr />
+              <div class="col-md-12 text-right">
+                <button class="btn btn-primary text-center" (click)="finish()">{{'Stepper.Next' | translate}}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

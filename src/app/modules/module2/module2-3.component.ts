@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewContainerRef} from '@angular/core';
+import { Component, OnInit,ViewContainerRef, ViewChild} from '@angular/core';
 import { LocalstoragedetailsService } from "../../services/localstoragedetails.service";
 import { LanguageService } from './../../language.service';
 import { Router } from '@angular/router';
@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import {Module2Service} from './module2.service'
 import { FullLayoutService } from '../../layouts/full-layout.service';
 import { ToastsManager } from 'ng6-toastr';
+import { ModalDirective } from 'ngx-bootstrap';
 
 
 @Component({
@@ -13,12 +14,13 @@ import { ToastsManager } from 'ng6-toastr';
   templateUrl: './module2-3.component.html'
 })
 export class Module23Component implements OnInit {
+  @ViewChild('instructionModal') public instructionModal: ModalDirective;
   public mainFlagModule2 = parseInt(window.localStorage.getItem('mainFlagModule2'));
   public subFlagModule2 = parseInt(window.localStorage.getItem('subFlagModule2'));
   constructor(public LanguageService: LanguageService, public LocalstoragedetailsService: LocalstoragedetailsService, public Module2Service: Module2Service, public toastr: ToastsManager, vcr: ViewContainerRef, public router: Router, public translate: TranslateService) {
     this.toastr.setRootViewContainerRef(vcr);
   }
-  public data; questionType; passFlags = {}; showAnswer; saveData; answer; sumbitButton; startFlag;
+  public data; questionType; passFlags = {}; showAnswer; saveData; answer; sumbitButton; startFlag;description;
   public inst = "एखाद्या संकल्पनेबाबत उजव्या मेंदूमध्ये नवीन जोडण्या निर्माण होणे आणि त्या पक्क्या होणे यासाठी पुढे  दिलेले उदाहरणे बघा आणि त्यातील एक पर्याय निवडा."
   ngOnInit() {
     this.startFlag = false;
@@ -85,28 +87,38 @@ export class Module23Component implements OnInit {
             console.log("data ", data['data'])
             this.data = data['data']
             this.sumbitButton = false;
+            this.description = data['data'].description;
+            this.instructionModal.show();
           } else if (data['status'] == true && data['message'] == "submodule finish")
           {
+            this.description = data['data'].description;
+            this.instructionModal.show();
             this.startFlag = false;
-            this.mainFlagModule2 = 4;
             window.localStorage.setItem('uuid', data['data'].nextuuid);
-            window.localStorage.setItem('mainFlagModule2', '4');
-            window.localStorage.setItem('subFlagModule2', '1');
-            window.localStorage.setItem('source', 'module 2.4.1');
-            var obj = {
-              "type": "submodule",
-              "route": true,
-              "current": this.translate.instant('L2Module2.subMenu2-3'),
-              "next": this.translate.instant('L2Module2.subMenu2-4'),
-              "nextRoute": "/modules/module2/Module2.4"
-            }
-            this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
-            this.Module2Service.setLocalStorage2(4);
           }
         },
         error => {
           this.LanguageService.handleError(error.error.message);
         });
 
+  }
+
+  finish(){
+    this.instructionModal.hide()
+    if(window.localStorage.getItem("subFlagModule2") == "5"){
+      this.mainFlagModule2 = 4;
+      window.localStorage.setItem('mainFlagModule2', '4');
+      window.localStorage.setItem('subFlagModule2', '1');
+      window.localStorage.setItem('source', 'module 2.4.1');
+      var obj = {
+        "type": "submodule",
+        "route": true,
+        "current": this.translate.instant('L2Module2.subMenu2-3'),
+        "next": this.translate.instant('L2Module2.subMenu2-4'),
+        "nextRoute": "/modules/module2/Module2.4"
+      }
+      this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+      this.Module2Service.setLocalStorage2(4);
+    }
   }
 }
