@@ -14,7 +14,6 @@ import { ModalDirective } from 'ngx-bootstrap';
   templateUrl: './module2-3.component.html'
 })
 export class Module23Component implements OnInit {
-  @ViewChild('instructionModal') public instructionModal: ModalDirective;
   public mainFlagModule2 = parseInt(window.localStorage.getItem('mainFlagModule2'));
   public subFlagModule2 = parseInt(window.localStorage.getItem('subFlagModule2'));
   constructor(public LanguageService: LanguageService, public LocalstoragedetailsService: LocalstoragedetailsService, public Module2Service: Module2Service, public toastr: ToastsManager, vcr: ViewContainerRef, public router: Router, public translate: TranslateService) {
@@ -26,10 +25,10 @@ export class Module23Component implements OnInit {
     this.startFlag = false;
     this.showAnswer = true;
     this.saveData = true;
-    this.passFlags['saveData'] = this.saveData;
-    this.passFlags['showAnswer'] = this.showAnswer;
+    this.passFlags["saveData"] = this.saveData;
+    this.passFlags["showAnswer"] = this.showAnswer;
     this.questionType = "mcqTextOption";
-    this.passFlags['questionType'] = this.questionType;
+    this.passFlags["questionType"] = this.questionType;;
 
     if (this.mainFlagModule2 == 3)
     {
@@ -88,37 +87,29 @@ export class Module23Component implements OnInit {
             this.data = data['data']
             this.sumbitButton = false;
             this.description = data['data'].description;
-            this.instructionModal.show();
           } else if (data['status'] == true && data['message'] == "submodule finish")
           {
             this.description = data['data'].description;
-            this.instructionModal.show();
             this.startFlag = false;
             window.localStorage.setItem('uuid', data['data'].nextuuid);
+            this.mainFlagModule2 = 4;
+            window.localStorage.setItem('mainFlagModule2', '4');
+            window.localStorage.setItem('subFlagModule2', '1');
+            window.localStorage.setItem('source', 'module 2.4.1');
+            var obj = {
+              "type": "submodule",
+              "route": true,
+              "current": this.translate.instant('L2Module2.subMenu2-3'),
+              "next": this.translate.instant('L2Module2.subMenu2-4'),
+              "nextRoute": "/modules/module2/Module2.4"
+            }
+            this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+            this.Module2Service.setLocalStorage2(4);
           }
         },
         error => {
           this.LanguageService.handleError(error.error.message);
         });
 
-  }
-
-  finish(){
-    this.instructionModal.hide()
-    if(window.localStorage.getItem("subFlagModule2") == "5"){
-      this.mainFlagModule2 = 4;
-      window.localStorage.setItem('mainFlagModule2', '4');
-      window.localStorage.setItem('subFlagModule2', '1');
-      window.localStorage.setItem('source', 'module 2.4.1');
-      var obj = {
-        "type": "submodule",
-        "route": true,
-        "current": this.translate.instant('L2Module2.subMenu2-3'),
-        "next": this.translate.instant('L2Module2.subMenu2-4'),
-        "nextRoute": "/modules/module2/Module2.4"
-      }
-      this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
-      this.Module2Service.setLocalStorage2(4);
-    }
   }
 }

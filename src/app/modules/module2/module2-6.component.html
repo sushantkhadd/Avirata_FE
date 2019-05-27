@@ -35,7 +35,7 @@
 
   <div *ngIf="startFlag">
 
-    <h6 class="questionHead lineHeight">{{questionStatement}}</h6>
+    <h6 class="questionHead lineHeight" [innerHTML]="questionStatement"></h6>
 
     <div class="borderBlue">
     <div class="card p-2">
