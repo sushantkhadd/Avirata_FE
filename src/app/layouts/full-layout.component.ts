@@ -339,9 +339,7 @@ export class FullLayoutComponent implements OnInit {
           }
         },
         error => {
-          this.toastr.error(
-            "०४०: आपली विनंती आत्ता पूर्ण करू शकत नाही, कृपया पुन्हा प्रयत्न करा."
-          );
+          this.LanguageService.handleError(error.error.message);
         } //Catch Error if server is not Found
       );
     }
@@ -442,7 +440,7 @@ export class FullLayoutComponent implements OnInit {
           }
         },
         error => {
-          // if (error.json().message == "session not matches please re-login") {
+          // if (error.error.message == "session not matches please re-login") {
           //   this.toastr.error(
           //     "०१४: आपला सेशन कालबाह्य झाला आहे, कृपया पुन्हा  लॉगइन करा."
           //   );
@@ -451,8 +449,8 @@ export class FullLayoutComponent implements OnInit {
           //   }, 4000);
           // } else
           if (
-            error.json().message == "worng module number" ||
-            error.json().message == 'unknown source"'
+            error.error.message == "worng module number" ||
+            error.error.message == 'unknown source"'
           ) {
             if (moduleNo == 5) {
               this.router.navigate(["/modules/module5"]);
@@ -465,8 +463,8 @@ export class FullLayoutComponent implements OnInit {
               }, 4000);
             }
           } else if (
-            error.json().message == "json key error" ||
-            error.json().message == "current status not available"
+            error.error.message == "json key error" ||
+            error.error.message == "current status not available"
           ) {
             this.toastr.error("००४: चुकीची माहिती, कृपया पुन्हा प्रयत्न करा.");
             if (moduleNo == 5) {
@@ -474,7 +472,7 @@ export class FullLayoutComponent implements OnInit {
             } else if (moduleNo == 4) {
               this.router.navigate(["/modules/module4"]);
             }
-          } else if (error.json().message == 'access denied"') {
+          } else if (error.error.message == 'access denied"') {
             this.toastr.error(
               "०१२: अनुमती नाकारण्यात आली आहे, कृपया पुन्हा लॉगइन करा / योग्य विनंती पाठवा."
             );
@@ -482,9 +480,9 @@ export class FullLayoutComponent implements OnInit {
               this.router.navigate(["/dashboard"]);
             }, 4000);
           } else if (
-            error.json().message == "coordinator not aprroved for this user" ||
-            error.json().message == "authorization failed" ||
-            error.json().message == "user not in date"
+            error.error.message == "coordinator not aprroved for this user" ||
+            error.error.message == "authorization failed" ||
+            error.error.message == "user not in date"
           ) {
             if (moduleNo == 1) {
               this.currentFlag1 = true;
@@ -525,7 +523,7 @@ export class FullLayoutComponent implements OnInit {
             // this.toastr.error(
             //   "०४०: आपली विनंती आत्ता पूर्ण करू शकत नाही, कृपया पुन्हा प्रयत्न करा."
             // );
-            this.LanguageService.handleError(error.json().message);
+            this.LanguageService.handleError(error.error.message);
           }
         }
       );

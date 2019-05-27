@@ -64,7 +64,6 @@ export class McqcomponentComponent implements OnInit {
 
   ngOnChanges() {
     this.submitFlagMCQ = false
-
     this.showCorrectAns = ''
     this.scrollUp()
     // console.log("dsds ",typeof(this.eventRadioGroup.instance.option("value")))
@@ -87,7 +86,7 @@ export class McqcomponentComponent implements OnInit {
     this.questionType = this.passFlags.questionType;
     this.showAnswer = this.passFlags.showAnswer;
     this.statement = this.data.question;
-    console.log(parseInt(window.localStorage.getItem('mainFlagModule7')) ,(this.mysubModule7 == 3),this.data.title)
+    // console.log(parseInt(window.localStorage.getItem('mainFlagModule7')) ,(this.mysubModule7 == 3),this.data.title)
     if(parseInt(window.localStorage.getItem('mainFlagModule7')) == 3){
     this.title=this.data.title;
     }

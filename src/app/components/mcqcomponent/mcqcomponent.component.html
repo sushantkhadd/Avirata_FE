@@ -195,21 +195,18 @@
     aria-hidden="true">
     <div class="modal-dialog modal-primary" role="document">
         <div class="modal-content" [style.border-color]="rightFlag ? '#259d58' : '#b82020'">
-            <!-- <img class="img-responsive img-rotate" src="assets/img/mitra.png"> -->
             <div class="modal-header" [style.background-color]="rightFlag ? '#259d58' : '#b82020'">
-                    <span class="exp-img img-rotate" [style.background-image]="rightFlag ? 'url(\'../../../assets/img/expressions/correct_ans.png\')' : 'url(\'../../../assets/img/expressions/wrong_ans.png\')'"></span>
-                    <!-- <span class="exp-img img-rotate" [style.background-image]="rightFlag ? 'url(\'../../../assets/img/mitra_1.png\')' : 'url(\'../../../assets/img/mitra.png\')'"></span> -->
-                <!-- <span class="exp-img" [style.background-image]="rightFlag ? 'url(\'./../../../assets/img/expressions/correct_ans.png\')' : 'url(\'./../../../assets/img/expressions/wrong_ans.png\')'"></span> -->
-                <!-- <button type="button" class="close" (click)="rankModal.hide()" aria-label="Close" id="btnCloseModal">
-          <span aria-hidden="true">&times;</span>
-        </button> -->
+            <span class="exp-img img-rotate" [style.background-image]="rightFlag ? 'url(\'../../../assets/img/expressions/correct_ans.png\')' : 'url(\'../../../assets/img/expressions/wrong_ans.png\')'"></span>
+            <!-- <button type="button" class="close" (click)="rankModal.hide()" aria-label="Close" id="btnCloseModal">
+            <span aria-hidden="true">&times;</span>
+            </button> -->
                 <h5 class="text-white mb-3" *ngIf="rightFlag==true">{{'L2common.rightanswer' | translate }}</h5>
                 <h5 class="text-white mb-3" *ngIf="rightFlag==false">{{'L2common.wronganswer' | translate }}</h5>
             </div>
             <div class="modal-body" *ngIf="questionType != 'checkBoxOption'">
                 <span *ngIf="mysubModule3!=9 && mysubModule4 != 9 && mysubModule4 != 11 && mysubModule4 != 13">
-                <p><b>{{'subModule1_9.correctAns' | translate }} :</b></p>
-                <p>{{showCorrectAns}}</p>
+                <p *ngIf="rightFlag==false"><b>{{'subModule1_9.correctAns' | translate }} :</b></p>
+                <p *ngIf="rightFlag==false">{{showCorrectAns}}</p>
                 </span>
                 <p *ngIf="description"><b>{{'newTranslate.description' | translate }}</b></p>
                 <p *ngIf="description">
@@ -219,7 +216,7 @@
                 <p><b>{{'McqTest.correctAnswer' | translate }} :</b></p>
                 <p> {{showAns1}}<br> {{showAns2}}</p>
             </div> -->
-            <div class="modal-body" *ngIf="questionType=='checkBoxOption'">
+            <div class="modal-body" *ngIf="questionType =='checkBoxOption'">
                 <p><b>{{'subModule1_9.correctAns' | translate }} :</b></p>
                 <p> {{showAns1}}<br>{{showAns2}}</p>
                 <p><b>{{'newTranslate.description' | translate }}</b></p>

@@ -10,7 +10,7 @@
 
 <div *ngIf="mainFlagModule2 == 6">
   <div *ngIf="!startFlag" class="instruction-wrap">
-    <div class="borderBlue">
+    <div>
       <div class="card">
         <div class="card-header text-white">
           <span class="exp-img instructions-img"></span>
@@ -53,7 +53,7 @@
               </div>
             </div>
             <div class="col-md-12 col-xs-12">
-              <button class="btn btn-info" [disabled]="mcqForm.invalid" (click)="sendAnswer()">Submit</button>
+              <button class="btn btn-info" [disabled]="mcqForm.invalid" (click)="sendAnswer()">{{'Cfu.submit' | translate}}</button>
             </div>
             </form>
           </div>
