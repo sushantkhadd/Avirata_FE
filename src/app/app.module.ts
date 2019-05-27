@@ -3,7 +3,6 @@ import { NgModule } from "@angular/core";
 import { AppComponent } from "./app.component";
 import { ModalModule } from "ngx-bootstrap/modal";
 import { AppRoutingModule } from "./app.routing";
-import { AuthenticationModule } from "./authentication/authentication.module";
 import { FullLayoutComponent } from "./layouts/full-layout.component";
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { HttpClientModule, HttpClient } from "@angular/common/http";
@@ -28,6 +27,7 @@ import { CanDeactivateGuard } from "./shared/guards/can-deactivate-guard.service
 import { PermissionModelService } from "./permission-model.service";
 import { AngularMultiSelectModule } from "angular2-multiselect-dropdown";
 import { LocationStrategy, HashLocationStrategy } from "@angular/common";
+import { SlimLoadingBarModule } from "ng2-slim-loading-bar";
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -44,7 +44,6 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    AuthenticationModule,
     HttpClientModule,
     HttpModule,
     FormsModule,
@@ -53,6 +52,7 @@ export function createTranslateLoader(http: HttpClient) {
     SharedModule,
     AngularMultiSelectModule,
     ToastModule.forRoot(),
+    SlimLoadingBarModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

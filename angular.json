@@ -33,6 +33,7 @@
               "node_modules/devextreme/dist/css/dx.light.compact.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/ng6-toastr/bundles/ng2-toastr.min.css",
+              "node_modules/ng2-slim-loading-bar/style.css",
               "node_modules/ng2-drag-drop/style.css"
             ],
             "scripts": [

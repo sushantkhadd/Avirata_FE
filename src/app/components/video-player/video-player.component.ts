@@ -63,7 +63,6 @@ export class VideoPlayerComponent implements OnInit {
 
     this.levelData = JSON.parse(localStorage.getItem("levelData"));
     console.log(this.levelData);
-
   }
 
   getRewards(event) {
@@ -103,11 +102,11 @@ export class VideoPlayerComponent implements OnInit {
           }
           } else if (event == "askme")
           {
-            if (!this.fiftyFiftyFlag) 
-            { 
+            if (!this.fiftyFiftyFlag)
+            {
               this.hideMe = true;
-            } else 
-             { 
+            } else
+             {
                this.hideMe = false;
              }
             this.rewardImgUrl2 = this.imageJson["a2"];
@@ -203,7 +202,11 @@ export class VideoPlayerComponent implements OnInit {
           this.start = true;
           var thumb = document.querySelector('.static-thumbnail .img-fluid').classList.add('show');
           this.cfuModal.show();
-          this.hideMe = false;
+          if (this.options.length == 1) {
+            this.hideMe = true;
+          } else {
+            this.hideMe = false;
+          }
         }
       });
     }
@@ -294,7 +297,7 @@ export class VideoPlayerComponent implements OnInit {
             setTimeout(() => {
               console.log("timeout")
               this.play();
-            }, 2000);   
+            }, 2000);
           }, 4000)
 
         } else if (data['message'] == 'submodule finish next uuid is' || data['message'] == 'submodule finish') {

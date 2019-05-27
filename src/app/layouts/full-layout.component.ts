@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, HostListener } from '@angular/core';
 import { FullLayoutService } from './full-layout.service';
-import { Router } from '@angular/router';
+import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { LanguageService } from './../language.service';
 import { DashboardService } from './../dashboard/dashboard.service';
 import { LocalstoragedetailsService } from "src/app/services/localstoragedetails.service";
@@ -8,13 +8,16 @@ import { ModalDirective } from "ngx-bootstrap";
 import { ProfileService } from "src/app/dashboard/profile/profile.service";
 import { ToastsManager } from 'ng6-toastr';
 import { PermissionModelService } from "src/app/permission-model.service";
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
+import html2canvas from "html2canvas";
+import { DomSanitizer } from '@angular/platform-browser';
 
 declare var jQuery: any;
 
 @Component({
   selector: "app-dashboard",
   templateUrl: "./full-layout.component.html",
-  styleUrls: ['./full-layout.component.scss']
+  styleUrls: ["./full-layout.component.scss"]
 })
 export class FullLayoutComponent implements OnInit {
   public mainFlagModule5 = 0;
@@ -30,7 +33,8 @@ export class FullLayoutComponent implements OnInit {
   public disabled: boolean = false;
   public status: { isopen: boolean } = { isopen: false };
   private trainee = false;
-  imgUrl;needEfforts;
+  imgUrl;
+  needEfforts;
   @ViewChild("passwordChangeModal") public passwordChangeModal: ModalDirective;
   @ViewChild("moduleStatusModal") public moduleStatusModal: ModalDirective;
   @ViewChild("submoduleStatusModal")
@@ -76,20 +80,28 @@ export class FullLayoutComponent implements OnInit {
   modalDisplay = true;
   public module6OnOffFlag = false;
   mainFlagModule7 = 0;
+  getImage;
   module7OnOffFlag = false;
 
   public module0OnOffFlag;
+  loaderFlag;
   currentFlag0;
-  mainFlagModule0; userName; moduleFinishCount;
-  levelData; rewardImgUrl; statusFlag; finishImgUrl;
+  shareableImage;
+  mainFlagModule0;
+  userName;
+  moduleFinishCount;
+  levelData;
+  rewardImgUrl;
+  statusFlag;
+  finishImgUrl;
   imageJson = {
-    a1:"../../assets/img/rewards/gold star.png",
+    a1: "../../assets/img/rewards/gold star.png",
     a2: "../../assets/img/rewards/silver star.png",
     a3: "../../assets/img/rewards/bronze star.png",
     a4: "",
-    r1:"../../assets/img/rewards/gold_star.png",
-    r2:"../../assets/img/rewards/silver_star.png",
-    r3:"../../assets/img/rewards/bronze_star.png"
+    r1: "../../assets/img/rewards/gold_star.png",
+    r2: "../../assets/img/rewards/silver_star.png",
+    r3: "../../assets/img/rewards/bronze_star.png"
   };
   constructor(
     public LanguageService: LanguageService,
@@ -100,9 +112,14 @@ export class FullLayoutComponent implements OnInit {
     public ProfileService: ProfileService,
     public toastr: ToastsManager,
     public permission: PermissionModelService,
-    vcr: ViewContainerRef
+    vcr: ViewContainerRef,
+    private lBar: SlimLoadingBarService,
+    private _sanitizer: DomSanitizer
   ) {
     this.toastr.setRootViewContainerRef(vcr);
+    this.router.events.subscribe((event: any) => {
+      this.loadingBarInterceptor(event);
+    });
   }
   public toggled(open: boolean): void {}
   public toggleDropdown($event: MouseEvent): void {
@@ -123,12 +140,12 @@ export class FullLayoutComponent implements OnInit {
     // );
     this.FullLayoutService.logoutService(this.token).subscribe(
       data => {
-        if (data['Response'] == "User Logged Out") {
+        if (data["Response"] == "User Logged Out") {
           window.localStorage.clear();
           this.router.navigate(["/"]);
         } else if (
-          data['Response'] == "session not matches please re-login" ||
-          data['Response'] == "session not matches"
+          data["Response"] == "session not matches please re-login" ||
+          data["Response"] == "session not matches"
         ) {
           // alert("कृपया पुन्हा लॉगइन करा")
           this.router.navigate(["/"]);
@@ -143,34 +160,88 @@ export class FullLayoutComponent implements OnInit {
       // alert("आपली विनंती आत्ता पूर्ण करू शकत नाही, कृपया पुन्हा प्रयत्न करा.")
     );
   }
+  private loadingBarInterceptor(event: Event) {
+    if (event instanceof NavigationStart) {
+      this.lBar.start();
+      this.loaderFlag = true;
+    }
+    if (event instanceof NavigationEnd) {
+      this.lBar.complete();
+      setTimeout(() => {
+        this.loaderFlag = false;
+      }, 1000);
+    }
+  }
+
+  downloadReward(){
+    html2canvas(document.querySelector("#capture")).then(canvas => {
+      this.shareableImage = canvas.toDataURL();
+      console.log(canvas, this.shareableImage);
+      var link = document.createElement("a");
+      link.href = this.shareableImage;
+      link.download = "my-reward.png";
+      link.click();
+    });
+  }
+
+  shareReward() {
+    html2canvas(document.querySelector("#capture")).then(canvas => {
+      this.shareableImage = canvas.toDataURL();
+      console.log(canvas, this.shareableImage);
+      var link = document.createElement("a");
+      link.href = this.shareableImage; //function blocks CORS
+      link.download = "my-reward.png";
+      link.click();
+      var file = this.dataURLtoFile(this.shareableImage,'a.png')
+      var shareUrl = "whatsapp://send?text=" + file.name;
+      this.getImage = this._sanitizer.bypassSecurityTrustResourceUrl(shareUrl);
+      console.log(file,file.name,this.getImage)
+    });
+  }
+
+  dataURLtoFile(dataurl, filename) {
+    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+    while (n--)
+    {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, { type: mime });
+  }
+
   ngOnInit() {
     jQuery("#sidebarCollapse").on("click", function() {
       jQuery("#sidebar").toggleClass("active");
     });
 
-    console.log('full')
+    console.log("full");
     //Module 0
     this.module0OnOffFlag = true;
     // this.currentFlag0=true
     // this.mainFlagModule0=4;
-    if (window.localStorage.getItem("firstname") != null && window.localStorage.getItem("firstname") != null && window.localStorage.getItem("firstname") != null)
-    {
+    if (
+      window.localStorage.getItem("firstname") != null &&
+      window.localStorage.getItem("firstname") != null &&
+      window.localStorage.getItem("firstname") != null
+    ) {
       this.userName = window.localStorage.getItem("firstname");
     }
 
-    if (window.localStorage.getItem("moduleFinishCount") != null && window.localStorage.getItem("moduleFinishCount") != null && window.localStorage.getItem("moduleFinishCount") != null)
-    {
-      this.moduleFinishCount = JSON.parse(window.localStorage.getItem("moduleFinishCount"));
+    if (
+      window.localStorage.getItem("moduleFinishCount") != null &&
+      window.localStorage.getItem("moduleFinishCount") != null &&
+      window.localStorage.getItem("moduleFinishCount") != null
+    ) {
+      this.moduleFinishCount = JSON.parse(
+        window.localStorage.getItem("moduleFinishCount")
+      );
     }
-
 
     this.hideMenuFlag = false;
     this.mainFlagModule7 = 0;
     if (window.localStorage.getItem("token") == null) {
       // this.router.navigate(["/"]);
-    }
-    else
-    {
+    } else {
       this.moduleStatusCheck = parseInt(
         window.localStorage.getItem("currentstatus")
       );
@@ -217,39 +288,39 @@ export class FullLayoutComponent implements OnInit {
     }
 
     this.levelData = JSON.parse(localStorage.getItem("levelData"));
-    for (let index = 0; index < this.levelData.length; index++)
-    {
-
+    for (let index = 0; index < this.levelData.length; index++) {
       if (
         this.levelData[index].percent != null &&
         this.levelData[index].percent != undefined &&
         this.levelData[index].percent != ""
-      )
-      {
-        if (this.levelData[index].status === true)
-        {
+      ) {
+        if (this.levelData[index].status === true) {
           this.statusFlag = true;
-        } else
-        {
+        } else {
           this.statusFlag = false;
         }
-        console.log("true", this.levelData[index].percent)
-        if (parseInt(this.levelData[index].percent) > 80)
-        {
+        console.log("true", this.levelData[index].percent);
+        if (parseInt(this.levelData[index].percent) > 80) {
           this.rewardImgUrl = this.imageJson["a1"];
-          console.log("gold", this.levelData[index].percent)
-        } else if (parseInt(this.levelData[index].percent) > 50 && parseInt(this.levelData[index].percent) <= 80)
-        {
+          console.log("gold", this.levelData[index].percent);
+        } else if (
+          parseInt(this.levelData[index].percent) > 50 &&
+          parseInt(this.levelData[index].percent) <= 80
+        ) {
           this.rewardImgUrl = this.imageJson["a2"];
-          console.log("silver", parseInt(this.levelData[index].percent))
-        } else if (parseInt(this.levelData[index].percent) >= 10 && parseInt(this.levelData[index].percent) <= 50)
-        {
+          console.log("silver", parseInt(this.levelData[index].percent));
+        } else if (
+          parseInt(this.levelData[index].percent) >= 10 &&
+          parseInt(this.levelData[index].percent) <= 50
+        ) {
           this.rewardImgUrl = this.imageJson["a3"];
-          console.log("bronze", this.levelData[index].percent)
-        } else if (parseInt(this.levelData[index].percent) >= 0 && parseInt(this.levelData[index].percent) < 10)
-        {
+          console.log("bronze", this.levelData[index].percent);
+        } else if (
+          parseInt(this.levelData[index].percent) >= 0 &&
+          parseInt(this.levelData[index].percent) < 10
+        ) {
           this.rewardImgUrl = this.imageJson["a4"];
-          console.log("other", this.levelData[index].percent)
+          console.log("other", this.levelData[index].percent);
         }
       }
       console.log("statusFlag", this.levelData, this.levelData[index].status);
@@ -317,17 +388,19 @@ export class FullLayoutComponent implements OnInit {
         this.token
       ).subscribe(
         data => {
-          if (data['Response'] == "Password Changed Successfully") {
+          if (data["Response"] == "Password Changed Successfully") {
             this.toastr.success("पासवर्ड यशस्वीरीत्या बदलला.");
 
             this.passwordChangeModal.hide();
-          } else if (data['Response'] == "Wrong Old Password.") {
+          } else if (data["Response"] == "Wrong Old Password.") {
             this.toastr.error("पूर्वीचा पासवर्ड चुकीचा आहे.");
 
             document.getElementById("passwordChange").focus();
-          } else if (data['Response'] == "Password did not Match") {
+          } else if (data["Response"] == "Password did not Match") {
             this.toastr.error("पासवर्ड अयोग्य.");
-          } else if (data['Response'] == "session not matches please re-login") {
+          } else if (
+            data["Response"] == "session not matches please re-login"
+          ) {
             this.toastr.error(
               "०१४: आपला सेशन कालबाह्य झाला आहे, कृपया पुन्हा  लॉगइन करा."
             );
@@ -375,66 +448,67 @@ export class FullLayoutComponent implements OnInit {
         data => {
           window.localStorage.setItem(
             "currentJson" + moduleNo,
-            JSON.stringify(data['data'])
+            JSON.stringify(data["data"])
           );
           window.localStorage.setItem(
-            "currentModule", JSON.stringify(moduleNo)
+            "currentModule",
+            JSON.stringify(moduleNo)
           );
-          this.currentData = data['data'];
+          this.currentData = data["data"];
           this.parseObject(this.currentData);
-          this.FullLayoutService.setCurrentStatus1(data['data']);
+          this.FullLayoutService.setCurrentStatus1(data["data"]);
           if (moduleNo == 5) {
             var status = false;
-            if (data['data'].completedstatus == true) {
+            if (data["data"].completedstatus == true) {
               status = true;
             }
             this.setStatus(status);
             this.currentFlag5 = true;
           } else if (moduleNo == 4) {
             var status = false;
-            if (data['data'].completedstatus == true) {
+            if (data["data"].completedstatus == true) {
               status = true;
             }
             this.setStatus4(status);
             this.currentFlag4 = true;
           } else if (moduleNo == 2) {
             var status = false;
-            if (data['data'].completedstatus == true) {
+            if (data["data"].completedstatus == true) {
               status = true;
             }
             this.setStatus2(status);
             this.currentFlag2 = true;
           } else if (moduleNo == 3) {
             var status = false;
-            if (data['data'].completedstatus == true) {
+            if (data["data"].completedstatus == true) {
               status = true;
             }
             this.setStatus3(status);
             this.currentFlag3 = true;
           } else if (moduleNo == 1) {
             var status = false;
-            if (data['data'].completedstatus == true) {
+            if (data["data"].completedstatus == true) {
               status = true;
             }
             this.setStatus1(status);
             this.currentFlag1 = true;
           } else if (moduleNo == 6) {
             var status = false;
-            if (data['data'].completedstatus == true) {
+            if (data["data"].completedstatus == true) {
               status = true;
             }
             this.setStatus6(status);
             this.currentFlag6 = true;
           } else if (moduleNo == 7) {
             var status = false;
-            if (data['data'].completedstatus == true) {
+            if (data["data"].completedstatus == true) {
               status = true;
             }
             this.setStatus7(status);
             this.currentFlag7 = true; //chech then remove
           } else if (moduleNo == 0) {
             var status = false;
-            if (data['data'].completedstatus == true) {
+            if (data["data"].completedstatus == true) {
               status = true;
             }
             this.setStatus0(status);
@@ -700,18 +774,18 @@ export class FullLayoutComponent implements OnInit {
           "subFlagModule4",
           this.subFlagModule4.toString()
         );
-      } else if (
-        source == "module 4.2"
-      ) {
+      } else if (source == "module 4.2") {
         this.mainFlagModule4 = 2;
         window.localStorage.setItem(
           "subFlagModule4",
           this.subFlagModule4.toString()
         );
-      } else if (source == "module 4.3" ||
-      source == "module 4.3.1" ||
-      source == "module 4.3.2" ||
-      source == "module 4.3.3") {
+      } else if (
+        source == "module 4.3" ||
+        source == "module 4.3.1" ||
+        source == "module 4.3.2" ||
+        source == "module 4.3.3"
+      ) {
         this.mainFlagModule4 = 3;
         if (source == "module 4.3.1") {
           this.subFlagModule4 = 1;
@@ -757,9 +831,9 @@ export class FullLayoutComponent implements OnInit {
           this.subFlagModule4 = 2;
         } else if (source == "module 4.5.3") {
           this.subFlagModule4 = 3;
-        }else if (source == "module 4.5.4") {
+        } else if (source == "module 4.5.4") {
           this.subFlagModule4 = 4;
-        }else if (source == "module 4.5.5") {
+        } else if (source == "module 4.5.5") {
           this.subFlagModule4 = 5;
         }
         window.localStorage.setItem(
@@ -789,12 +863,14 @@ export class FullLayoutComponent implements OnInit {
           "subFlagModule4",
           this.subFlagModule4.toString()
         );
-      } else if (source == "module 4.7" ||
+      } else if (
+        source == "module 4.7" ||
         source == "module 4.7.1" ||
         source == "module 4.7.2" ||
         source == "module 4.7.3" ||
         source == "module 4.7.4" ||
-        source == "module 4.7.5") {
+        source == "module 4.7.5"
+      ) {
         this.mainFlagModule4 = 7;
         if (source == "module 4.7.1") {
           this.subFlagModule4 = 1;
@@ -802,27 +878,26 @@ export class FullLayoutComponent implements OnInit {
           this.subFlagModule4 = 2;
         } else if (source == "module 4.7.3") {
           this.subFlagModule4 = 3;
-        }else if (source == "module 4.7.4") {
+        } else if (source == "module 4.7.4") {
           this.subFlagModule4 = 4;
-        }else if (source == "module 4.7.5") {
+        } else if (source == "module 4.7.5") {
           this.subFlagModule4 = 5;
         }
         window.localStorage.setItem(
           "subFlagModule4",
           this.subFlagModule4.toString()
         );
-      } else if (
-        source == "module 4.8"
-      ) {
+      } else if (source == "module 4.8") {
         this.mainFlagModule4 = 8;
         window.localStorage.setItem(
           "subFlagModule4",
           this.subFlagModule4.toString()
         );
-      } else if (source == "module 4.9" ||
+      } else if (
+        source == "module 4.9" ||
         source == "module 4.9.1" ||
         source == "module 4.9.2"
-        ) {
+      ) {
         this.mainFlagModule4 = 9;
         if (source == "module 4.9.1") {
           this.subFlagModule4 = 1;
@@ -854,15 +929,14 @@ export class FullLayoutComponent implements OnInit {
           "subFlagModule4",
           this.subFlagModule4.toString()
         );
-      } else if (
-        source == "module 4.12"
-      ) {
+      } else if (source == "module 4.12") {
         this.mainFlagModule4 = 12;
         window.localStorage.setItem(
           "subFlagModule4",
           this.subFlagModule4.toString()
         );
-      } else if (source == "module 4.13" ||
+      } else if (
+        source == "module 4.13" ||
         source == "module 4.13.1" ||
         source == "module 4.13.2" ||
         source == "module 4.13.3" ||
@@ -871,7 +945,8 @@ export class FullLayoutComponent implements OnInit {
         source == "module 4.13.4.2" ||
         source == "module 4.13.4.3" ||
         source == "module 4.13.5" ||
-        source == "module 4.13.6" ) {
+        source == "module 4.13.6"
+      ) {
         this.mainFlagModule4 = 13;
         if (source == "module 4.13.1") {
           this.subFlagModule4 = 1;
@@ -879,7 +954,12 @@ export class FullLayoutComponent implements OnInit {
           this.subFlagModule4 = 2;
         } else if (source == "module 4.13.3") {
           this.subFlagModule4 = 3;
-        } else if (source == "module 4.13.4" || source == "module 4.13.4.1" || source == "module 4.13.4.2" || source == "module 4.13.4.3") {
+        } else if (
+          source == "module 4.13.4" ||
+          source == "module 4.13.4.1" ||
+          source == "module 4.13.4.2" ||
+          source == "module 4.13.4.3"
+        ) {
           this.subFlagModule4 = 4;
         } else if (source == "module 4.13.5") {
           this.subFlagModule4 = 5;
@@ -890,9 +970,7 @@ export class FullLayoutComponent implements OnInit {
           "subFlagModule4",
           this.subFlagModule4.toString()
         );
-      } else if (
-        source == "module 4.14"
-      ) {
+      } else if (source == "module 4.14") {
         this.mainFlagModule4 = 14;
         window.localStorage.setItem(
           "subFlagModule4",
@@ -916,14 +994,11 @@ export class FullLayoutComponent implements OnInit {
         source == "module 2.1" ||
         source == "module 2.1.1" ||
         source == "module 2.1.2"
-      )
-      {
+      ) {
         this.mainFlagModule2 = 1;
-        if (source == "module 2.1.1")
-        {
+        if (source == "module 2.1.1") {
           this.subFlagModule2 = 1;
-        } else if (source == "module 2.1.2")
-        {
+        } else if (source == "module 2.1.2") {
           this.subFlagModule2 = 2;
         }
         window.localStorage.setItem(
@@ -935,15 +1010,13 @@ export class FullLayoutComponent implements OnInit {
         source == "module 2.2.1" ||
         source == "module 2.2.2" ||
         source == "module 2.2.3"
-      )
-      {
+      ) {
         this.mainFlagModule2 = 2;
         if (source == "module 2.2.1") {
           this.subFlagModule2 = 1;
         } else if (source == "module 2.2.2") {
           this.subFlagModule2 = 2;
-        } else if (source == "module 2.2.3")
-        {
+        } else if (source == "module 2.2.3") {
           this.subFlagModule2 = 3;
         }
         window.localStorage.setItem(
@@ -965,11 +1038,9 @@ export class FullLayoutComponent implements OnInit {
           this.subFlagModule2 = 2;
         } else if (source == "module 2.3.3") {
           this.subFlagModule2 = 3;
-        } else if (source == "module 2.3.4")
-        {
+        } else if (source == "module 2.3.4") {
           this.subFlagModule2 = 4;
-        } else if (source == "module 2.3.5")
-        {
+        } else if (source == "module 2.3.5") {
           this.subFlagModule2 = 5;
         }
         window.localStorage.setItem(
@@ -996,17 +1067,13 @@ export class FullLayoutComponent implements OnInit {
         source == "module 2.5.1" ||
         source == "module 2.5.2" ||
         source == "module 2.5.3"
-      )
-      {
+      ) {
         this.mainFlagModule2 = 5;
-        if (source == "module 2.5.1")
-        {
+        if (source == "module 2.5.1") {
           this.subFlagModule2 = 1;
-        } else if (source == "module 2.5.2")
-        {
+        } else if (source == "module 2.5.2") {
           this.subFlagModule2 = 2;
-        } else if (source == "module 2.5.3")
-        {
+        } else if (source == "module 2.5.3") {
           this.subFlagModule2 = 3;
         }
         window.localStorage.setItem(
@@ -1039,8 +1106,7 @@ export class FullLayoutComponent implements OnInit {
         source == "module 2.8.1" ||
         source == "module 2.8.2" ||
         source == "module 2.8.3"
-      )
-      {
+      ) {
         this.mainFlagModule2 = 8;
         if (source == "module 2.8.1") {
           this.subFlagModule2 = 1;
@@ -1062,8 +1128,7 @@ export class FullLayoutComponent implements OnInit {
         source == "module 2.9.5" ||
         source == "module 2.9.6" ||
         source == "module 2.9.7"
-      )
-      {
+      ) {
         this.mainFlagModule2 = 9;
         if (source == "module 2.9.1") {
           this.subFlagModule2 = 1;
@@ -1075,11 +1140,9 @@ export class FullLayoutComponent implements OnInit {
           this.subFlagModule2 = 4;
         } else if (source == "module 2.9.5") {
           this.subFlagModule2 = 5;
-        } else if (source == "module 2.9.6")
-        {
+        } else if (source == "module 2.9.6") {
           this.subFlagModule2 = 6;
-        } else if (source == "module 2.9.7")
-        {
+        } else if (source == "module 2.9.7") {
           this.subFlagModule2 = 7;
         }
         window.localStorage.setItem(
@@ -1093,7 +1156,7 @@ export class FullLayoutComponent implements OnInit {
         source == "module 2.10.3"
       ) {
         this.mainFlagModule2 = 10;
-         if (source == "module 2.10.1") {
+        if (source == "module 2.10.1") {
           this.subFlagModule2 = 1;
         } else if (source == "module 2.10.2") {
           this.subFlagModule2 = 2;
@@ -1119,7 +1182,7 @@ export class FullLayoutComponent implements OnInit {
           this.subFlagModule2 = 2;
         } else if (source == "module 2.11.3") {
           this.subFlagModule2 = 3;
-        }else if (source == "module 2.11.4") {
+        } else if (source == "module 2.11.4") {
           this.subFlagModule2 = 4;
         } else if (source == "module 2.11.5") {
           this.subFlagModule2 = 5;
@@ -1163,17 +1226,14 @@ export class FullLayoutComponent implements OnInit {
           source == "module 2.13.2" ||
           source == "module 2.13.2.1" ||
           source == "module 2.13.2.2"
-        )
-        {
+        ) {
           this.subFlagModule2 = 2;
         }
         window.localStorage.setItem(
           "subFlagModule2",
           this.subFlagModule2.toString()
         );
-      } else if (
-        source == "module 2.14"
-      ) {
+      } else if (source == "module 2.14") {
         this.mainFlagModule2 = 14;
         window.localStorage.setItem(
           "subFlagModule2",
@@ -1203,14 +1263,11 @@ export class FullLayoutComponent implements OnInit {
           source == "module 2.15.4.1" ||
           source == "module 2.15.4.2" ||
           source == "module 2.15.4.3"
-        )
-        {
+        ) {
           this.subFlagModule2 = 4;
-        } else if (source == "module 2.15.5")
-        {
+        } else if (source == "module 2.15.5") {
           this.subFlagModule2 = 5;
-        } else if (source == "module 2.15.6")
-        {
+        } else if (source == "module 2.15.6") {
           this.subFlagModule2 = 6;
         }
         window.localStorage.setItem(
@@ -1223,16 +1280,13 @@ export class FullLayoutComponent implements OnInit {
           "subFlagModule2",
           this.subFlagModule2.toString()
         );
-      } else if (
-        source == "module 2.17"
-      ) {
+      } else if (source == "module 2.17") {
         this.mainFlagModule2 = 17;
         window.localStorage.setItem(
           "subFlagModule2",
           this.subFlagModule2.toString()
         );
       }
-
     }
     window.localStorage.setItem(
       "mainFlagModule2",
@@ -1265,7 +1319,17 @@ export class FullLayoutComponent implements OnInit {
         this.mainFlagModule3 = 1;
         if (source == "module 3.1.1") {
           this.subFlagModule3 = 1;
-        } else if (source == "module 3.1.2" || source == "module 3.1.2.1" || source == "module 3.1.2.2" || source == "module 3.1.2.3" || source == "module 3.1.2.4" || source == "module 3.1.2.5" || source == "module 3.1.2.6" || source == "module 3.1.2.7" || source == "module 3.1.2.8") {
+        } else if (
+          source == "module 3.1.2" ||
+          source == "module 3.1.2.1" ||
+          source == "module 3.1.2.2" ||
+          source == "module 3.1.2.3" ||
+          source == "module 3.1.2.4" ||
+          source == "module 3.1.2.5" ||
+          source == "module 3.1.2.6" ||
+          source == "module 3.1.2.7" ||
+          source == "module 3.1.2.8"
+        ) {
           this.subFlagModule3 = 2;
         }
         window.localStorage.setItem(
@@ -1305,19 +1369,25 @@ export class FullLayoutComponent implements OnInit {
           "subFlagModule3",
           this.subFlagModule3.toString()
         );
-      } else if (source == "module 3.4" ||
+      } else if (
+        source == "module 3.4" ||
         source == "module 3.4.1" ||
         source == "module 3.4.2" ||
         source == "module 3.4.2.1" ||
         source == "module 3.4.2.2" ||
         source == "module 3.4.2.3"
+      ) {
+        this.mainFlagModule3 = 4;
+        if (source == "module 3.4.1") {
+          this.subFlagModule3 = 1;
+        } else if (
+          source == "module 3.4.2" ||
+          source == "module 3.4.2.1" ||
+          source == "module 3.4.2.2" ||
+          source == "module 3.4.2.3"
         ) {
-          this.mainFlagModule3 = 4;
-          if (source == "module 3.4.1") {
-            this.subFlagModule3 = 1;
-          } else if (source == "module 3.4.2" ||source == "module 3.4.2.1" || source == "module 3.4.2.2" || source == "module 3.4.2.3") {
-            this.subFlagModule3 = 2;
-          }
+          this.subFlagModule3 = 2;
+        }
         window.localStorage.setItem(
           "subFlagModule3",
           this.subFlagModule3.toString()
@@ -1335,11 +1405,11 @@ export class FullLayoutComponent implements OnInit {
           this.subFlagModule3 = 1;
         } else if (source == "module 3.5.2") {
           this.subFlagModule3 = 2;
-        }else if (source == "module 3.5.3") {
+        } else if (source == "module 3.5.3") {
           this.subFlagModule3 = 3;
-        }else if (source == "module 3.5.4") {
+        } else if (source == "module 3.5.4") {
           this.subFlagModule3 = 4;
-        }else if (source == "module 3.5.5") {
+        } else if (source == "module 3.5.5") {
           this.subFlagModule3 = 5;
         }
         window.localStorage.setItem(
@@ -1380,25 +1450,23 @@ export class FullLayoutComponent implements OnInit {
         this.mainFlagModule3 = 8;
         if (source == "module 3.8.1") {
           this.subFlagModule3 = 1;
-        } else if (
-          source == "module 3.8.2"
-        ) {
+        } else if (source == "module 3.8.2") {
           this.subFlagModule3 = 2;
-        }else if (
-          source == "module 3.8.3"
-        ) {
+        } else if (source == "module 3.8.3") {
           this.subFlagModule3 = 3;
         }
         window.localStorage.setItem(
           "subFlagModule3",
           this.subFlagModule3.toString()
         );
-      } else if (source == "module 3.9" ||
+      } else if (
+        source == "module 3.9" ||
         source == "module 3.9.1" ||
         source == "module 3.9.2" ||
         source == "module 3.9.3" ||
         source == "module 3.9.4" ||
-        source == "module 3.9.5") {
+        source == "module 3.9.5"
+      ) {
         this.mainFlagModule3 = 9;
         if (source == "module 3.9.1") {
           this.subFlagModule3 = 1;
@@ -1422,71 +1490,53 @@ export class FullLayoutComponent implements OnInit {
         source == "module 3.10.3"
       ) {
         this.mainFlagModule3 = 10;
-        if (
-          source == "module 3.10.1"
-        ) {
+        if (source == "module 3.10.1") {
           this.subFlagModule3 = 1;
-        } else if (
-          source == "module 3.10.2"
-        ) {
+        } else if (source == "module 3.10.2") {
           this.subFlagModule3 = 2;
-        }else if (
-          source == "module 3.10.3"
-        ) {
+        } else if (source == "module 3.10.3") {
           this.subFlagModule3 = 3;
         }
         window.localStorage.setItem(
           "subFlagModule3",
           this.subFlagModule3.toString()
         );
-      } else if (source == "module 3.11" ||
+      } else if (
+        source == "module 3.11" ||
         source == "module 3.11.1" ||
         source == "module 3.11.2" ||
         source == "module 3.11.3" ||
         source == "module 3.11.4" ||
-        source == "module 3.11.5") {
+        source == "module 3.11.5"
+      ) {
         this.mainFlagModule3 = 11;
-        if (
-          source == "module 3.11.1"
-        ) {
+        if (source == "module 3.11.1") {
           this.subFlagModule3 = 1;
-        } else if (
-          source == "module 3.11.2"
-        ) {
+        } else if (source == "module 3.11.2") {
           this.subFlagModule3 = 2;
-        }else if (
-          source == "module 3.11.3"
-        ) {
+        } else if (source == "module 3.11.3") {
           this.subFlagModule3 = 3;
-        }else if (
-          source == "module 3.11.4"
-        ) {
+        } else if (source == "module 3.11.4") {
           this.subFlagModule3 = 4;
-        }else if (
-          source == "module 3.11.5"
-        ) {
+        } else if (source == "module 3.11.5") {
           this.subFlagModule3 = 5;
         }
         window.localStorage.setItem(
           "subFlagModule3",
           this.subFlagModule3.toString()
         );
-      } else if (source == "module 3.12" ||
+      } else if (
+        source == "module 3.12" ||
         source == "module 3.12.1" ||
         source == "module 3.12.2" ||
-        source == "module 3.12.3") {
+        source == "module 3.12.3"
+      ) {
         this.mainFlagModule3 = 12;
-        if (
-          source == "module 3.12.1"
-        ) {
+        if (source == "module 3.12.1") {
           this.subFlagModule3 = 1;
-        } else if (
-          source == "module 3.12.2"
-        ) {
+        } else if (source == "module 3.12.2") {
           this.subFlagModule3 = 2;
-        }else if (
-          source == "module 3.12.3"
-        ) {
+        } else if (source == "module 3.12.3") {
           this.subFlagModule3 = 3;
         }
         window.localStorage.setItem(
@@ -1504,7 +1554,12 @@ export class FullLayoutComponent implements OnInit {
         this.mainFlagModule3 = 13;
         if (source == "module 3.13.1") {
           this.subFlagModule3 = 1;
-        } else if (source == "module 3.13.2" || source == "module 3.13.2.1" || source == "module 3.13.2.2" || source == "module 3.13.2.3") {
+        } else if (
+          source == "module 3.13.2" ||
+          source == "module 3.13.2.1" ||
+          source == "module 3.13.2.2" ||
+          source == "module 3.13.2.3"
+        ) {
           this.subFlagModule3 = 2;
         }
         window.localStorage.setItem(
@@ -1544,7 +1599,12 @@ export class FullLayoutComponent implements OnInit {
           this.subFlagModule3 = 2;
         } else if (source == "module 3.16.3") {
           this.subFlagModule3 = 3;
-        } else if (source == "module 3.16.4" || source == "module 3.16.4.1" || source == "module 3.16.4.2" || source == "module 3.16.4.3") {
+        } else if (
+          source == "module 3.16.4" ||
+          source == "module 3.16.4.1" ||
+          source == "module 3.16.4.2" ||
+          source == "module 3.16.4.3"
+        ) {
           this.subFlagModule3 = 4;
         } else if (source == "module 3.16.5") {
           this.subFlagModule3 = 5;
@@ -1596,8 +1656,7 @@ export class FullLayoutComponent implements OnInit {
           source == "module 1.1.2" ||
           source == "module 1.1.2.1" ||
           source == "module 1.1.2.2"
-        )
-        {
+        ) {
           this.subFlagModule1 = 2;
         }
         window.localStorage.setItem(
@@ -1617,14 +1676,11 @@ export class FullLayoutComponent implements OnInit {
           this.subFlagModule1 = 1;
         } else if (source == "module 1.2.2") {
           this.subFlagModule1 = 2;
-        } else if (source == "module 1.2.3")
-        {
+        } else if (source == "module 1.2.3") {
           this.subFlagModule1 = 3;
-        } else if (source == "module 1.2.4")
-        {
+        } else if (source == "module 1.2.4") {
           this.subFlagModule1 = 4;
-        } else if (source == "module 1.2.5")
-        {
+        } else if (source == "module 1.2.5") {
           this.subFlagModule1 = 5;
         }
         window.localStorage.setItem(
@@ -1642,14 +1698,18 @@ export class FullLayoutComponent implements OnInit {
         source == "module 1.3.2.2"
       ) {
         this.mainFlagModule1 = 3;
-        if (source == "module 1.3.1" ||
+        if (
+          source == "module 1.3.1" ||
           source == "module 1.3.1.1" ||
           source == "module 1.3.1.2" ||
-          source == "module 1.3.1.3") {
+          source == "module 1.3.1.3"
+        ) {
           this.subFlagModule1 = 1;
-        } else if (source == "module 1.3.2" ||
+        } else if (
+          source == "module 1.3.2" ||
           source == "module 1.3.2.1" ||
-          source == "module 1.3.2.2") {
+          source == "module 1.3.2.2"
+        ) {
           this.subFlagModule1 = 2;
         }
         window.localStorage.setItem(
@@ -1714,7 +1774,8 @@ export class FullLayoutComponent implements OnInit {
         } else if (
           source == "module 1.5.2" ||
           source == "module 1.5.2.1" ||
-          source == "module 1.5.2.2") {
+          source == "module 1.5.2.2"
+        ) {
           this.subFlagModule1 = 2;
         }
         window.localStorage.setItem(
@@ -1730,8 +1791,7 @@ export class FullLayoutComponent implements OnInit {
         source == "module 1.6.5" ||
         source == "module 1.6.6" ||
         source == "module 1.6.7"
-      )
-      {
+      ) {
         this.mainFlagModule1 = 6;
         if (source == "module 1.6.1") {
           this.subFlagModule1 = 1;
@@ -1739,17 +1799,13 @@ export class FullLayoutComponent implements OnInit {
           this.subFlagModule1 = 2;
         } else if (source == "module 1.6.3") {
           this.subFlagModule1 = 3;
-        } else if (source == "module 1.6.4")
-        {
+        } else if (source == "module 1.6.4") {
           this.subFlagModule1 = 4;
-        } else if (source == "module 1.6.5")
-        {
+        } else if (source == "module 1.6.5") {
           this.subFlagModule1 = 5;
-        } else if (source == "module 1.6.6")
-        {
+        } else if (source == "module 1.6.6") {
           this.subFlagModule1 = 6;
-        } else if (source == "module 1.6.7")
-        {
+        } else if (source == "module 1.6.7") {
           this.subFlagModule1 = 7;
         }
         window.localStorage.setItem(
@@ -1767,8 +1823,7 @@ export class FullLayoutComponent implements OnInit {
           this.subFlagModule1 = 1;
         } else if (source == "module 1.7.2") {
           this.subFlagModule1 = 2;
-        } else if (source == "module 1.7.3")
-        {
+        } else if (source == "module 1.7.3") {
           this.subFlagModule1 = 3;
         }
         window.localStorage.setItem(
@@ -1848,18 +1903,18 @@ export class FullLayoutComponent implements OnInit {
         this.mainFlagModule1 = 11;
         if (source == "module 1.11.1") {
           this.subFlagModule1 = 1;
-        } else if (source == "module 1.11.2" ||
+        } else if (
+          source == "module 1.11.2" ||
           source == "module 1.11.2.1" ||
-          source == "module 1.11.2.2") {
+          source == "module 1.11.2.2"
+        ) {
           this.subFlagModule1 = 2;
         }
         window.localStorage.setItem(
           "subFlagModule1",
           this.subFlagModule1.toString()
         );
-      } else if (
-        source == "module 1.12"
-      ) {
+      } else if (source == "module 1.12") {
         this.mainFlagModule1 = 12;
         window.localStorage.setItem(
           "subFlagModule1",
@@ -2007,24 +2062,34 @@ export class FullLayoutComponent implements OnInit {
   ngDoCheck() {
     this.levelData = JSON.parse(localStorage.getItem("levelData"));
 
-    if (window.localStorage.getItem("moduleFinishCount") != null && window.localStorage.getItem("moduleFinishCount") != null && window.localStorage.getItem("moduleFinishCount") != null)
-    {
-      this.moduleFinishCount = JSON.parse(window.localStorage.getItem("moduleFinishCount"));
-      if (this.moduleFinishCount.percentage > 80)
-      {
-        this.finishImgUrl = this.imageJson["r1"]
+    if (
+      window.localStorage.getItem("moduleFinishCount") != null &&
+      window.localStorage.getItem("moduleFinishCount") != null &&
+      window.localStorage.getItem("moduleFinishCount") != null
+    ) {
+      this.moduleFinishCount = JSON.parse(
+        window.localStorage.getItem("moduleFinishCount")
+      );
+      if (this.moduleFinishCount.percentage > 80) {
+        this.finishImgUrl = this.imageJson["r1"];
         this.needEfforts = false;
-      } else if (this.moduleFinishCount.percentage > 50 && this.moduleFinishCount.percentage <= 80)
-      {
-        this.finishImgUrl = this.imageJson["r2"]
+      } else if (
+        this.moduleFinishCount.percentage > 50 &&
+        this.moduleFinishCount.percentage <= 80
+      ) {
+        this.finishImgUrl = this.imageJson["r2"];
         this.needEfforts = false;
-      } else if (this.moduleFinishCount.percentage >= 10 && this.moduleFinishCount.percentage <= 50)
-      {
-        this.finishImgUrl = this.imageJson["r3"]
+      } else if (
+        this.moduleFinishCount.percentage >= 10 &&
+        this.moduleFinishCount.percentage <= 50
+      ) {
+        this.finishImgUrl = this.imageJson["r3"];
         this.needEfforts = false;
-      } else if (this.moduleFinishCount.percentage >= 0 && this.moduleFinishCount.percentage < 10)
-      {
-        this.finishImgUrl = this.imageJson["r4"] 
+      } else if (
+        this.moduleFinishCount.percentage >= 0 &&
+        this.moduleFinishCount.percentage < 10
+      ) {
+        this.finishImgUrl = this.imageJson["r4"];
         this.needEfforts = true;
       }
     }
@@ -2244,8 +2309,8 @@ export class FullLayoutComponent implements OnInit {
     this.LocalstoragedetailsService.getModuleStatus().subscribe(item => {
       var sumbmodulestatus = JSON.parse(item);
       this.moduleCompleteStatus = sumbmodulestatus;
-      if (this.moduleCompleteStatus['type'] == 'submodule') {
-      this.submoduleStatusModal.show();
+      if (this.moduleCompleteStatus["type"] == "submodule") {
+        this.submoduleStatusModal.show();
       } else {
         this.moduleStatusModal.show();
       }
@@ -2439,10 +2504,10 @@ export class FullLayoutComponent implements OnInit {
     }
     this.moduleStatusModal.hide();
     this.submoduleStatusModal.hide();
-    document.getElementsByTagName("body")[0].classList.remove("modal-open")
-    var paras = jQuery("bs-modal-backdrop"); 
-    paras.hide(); 
-    console.log('hide',paras)
+    document.getElementsByTagName("body")[0].classList.remove("modal-open");
+    var paras = jQuery("bs-modal-backdrop");
+    paras.hide();
+    console.log("hide", paras);
     // var paras = document.getElementsByClassName("modal-backdrop")[0];
     // if (paras.classList.contains("fade")) {
     //   console.log("true");
@@ -2476,18 +2541,17 @@ export class FullLayoutComponent implements OnInit {
   closeInstruction() {
     this.instructionModal.hide();
     var paras = document.getElementsByClassName("modal-backdrop")[0];
-    if( paras.classList.contains('show')){
-      paras.classList.remove('show');
+    if (paras.classList.contains("show")) {
+      paras.classList.remove("show");
     }
     // var paras = document.getElementsByClassName("modal-backdrop");
     // while (paras[0]) {
     //   paras[0].parentNode.removeChild(paras[0]);
     // }
     var paras = document.getElementsByClassName("modal-backdrop")[0];
-    if (paras.classList.contains('fade'))
-    {
-      console.log("true")
-      paras.classList.remove('show');
+    if (paras.classList.contains("fade")) {
+      console.log("true");
+      paras.classList.remove("show");
     }
   }
 
@@ -2497,8 +2561,8 @@ export class FullLayoutComponent implements OnInit {
   closeInstruction0() {
     this.instructionModal0.hide();
     var paras = document.getElementsByClassName("modal-backdrop")[0];
-    if( paras.classList.contains('show')){
-      paras.classList.remove('show');
+    if (paras.classList.contains("show")) {
+      paras.classList.remove("show");
     }
     // var paras = document.getElementsByClassName("modal-backdrop");
     // while (paras[0]) {
@@ -2509,6 +2573,4 @@ export class FullLayoutComponent implements OnInit {
   hideMenu() {
     window.localStorage.setItem("hidemenu", "true");
   }
-
-
 }

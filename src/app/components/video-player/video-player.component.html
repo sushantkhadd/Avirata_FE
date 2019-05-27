@@ -1,12 +1,12 @@
 <div class="video-stat">
   <div class="row">
-      <div class="embed-responsive embed-responsive-16by9">
-          <div id="ytplayer" class="embed-responsive-item"></div>
-          <div class="static-thumbnail">
-            <img class="img-fluid" src="./../../../assets/img/thumb/video_thumbnail.png" alt="">
-          </div>
-          <div class="wrapper-noaction"></div>
+    <div class="embed-responsive embed-responsive-16by9">
+      <div id="ytplayer" class="embed-responsive-item"></div>
+      <div class="static-thumbnail">
+        <img class="img-fluid" src="./../../../assets/img/thumb/video_thumbnail.png" alt="">
       </div>
+      <div class="wrapper-noaction"></div>
+    </div>
   </div>
   <div class="wrapper-noaction1"></div>
   <!-- <div class="holder">
@@ -16,95 +16,102 @@
       </div>
   </div> -->
   <div class="row bg-gray-light">
-      <div class="player-control text-center">
-          <span class="control ripple" (click)="play();start=!start"><i class="icon-control-play" [class.icon-control-play]="start" [class.icon-control-pause]="!start" aria-hidden="true"></i></span>
-          <span class="control ripple" (click)="stop();start=true"><i class="fa fa-stop" aria-hidden="true"></i></span>
-          <span class="control ripple" (click)="volume()"><i class="icon-volume-2" [class.icon-volume-2]="!ismuted" [class.icon-volume-off]="ismuted" aria-hidden="true"></i></span>
-          <!-- <span class="control ripple" (click)="seek()"><i class="fa fa-forward" aria-hidden="true"></i></span> -->
-      </div>
+    <div class="player-control text-center">
+      <span class="control ripple" (click)="play();start=!start"><i class="icon-control-play"
+          [class.icon-control-play]="start" [class.icon-control-pause]="!start" aria-hidden="true"></i></span>
+      <span class="control ripple" (click)="stop();start=true"><i class="fa fa-stop" aria-hidden="true"></i></span>
+      <span class="control ripple" (click)="volume()"><i class="icon-volume-2" [class.icon-volume-2]="!ismuted"
+          [class.icon-volume-off]="ismuted" aria-hidden="true"></i></span>
+      <!-- <span class="control ripple" (click)="seek()"><i class="fa fa-forward" aria-hidden="true"></i></span> -->
+    </div>
   </div>
 </div>
 
 <div class="instructionModal newCFUPopup">
-<div bsModal #cfuModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-primary" role="document">
+  <div bsModal #cfuModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-primary" role="document">
       <div class="modal-content">
-          <div class="modal-header">
-              <span class="exp-img instructions-img mt-4 m-0 w-100" [style.background-image] = "'url(\'./../../../assets/img/expressions/mitra_expression_think.png\')'"></span>
-              <span class="rewards-content row w-100">
-                  <div class="col-md-8 col-sm-12 col-12">
-                    <h4 class="mt-3 ml-1">{{'Cfu.title' | translate}}</h4> 
+        <div class="modal-header">
+          <span class="exp-img instructions-img mt-4 m-0"
+            [style.background-image]="'url(\'./../../../assets/img/expressions/mitra_expression_think.png\')'"></span>
+          <span class="rewards-content row w-100">
+            <div class="col-md-8 col-sm-12 col-12">
+              <h4 class="mt-3 ml-1">{{'Cfu.title' | translate}}</h4>
+            </div>
+            <div class="col-md-2 col-sm-6 col-5">
+              <img class="img-fluid" [class.d-none]="hideMe" [ngClass]="!fiftyFiftyFlag ? 'c-pointer' : 'c-not-allowed'"
+                (click)="!fiftyFiftyFlag ? getRewards('fifty_fifty') : undefined" [src]="rewardImgUrl1" alt="">
+            </div>
+            <div class="col-md-2 col-sm-6 col-5">
+              <img class="img-fluid" [ngClass]="!askMeFlag ? 'c-pointer' : 'c-not-allowed'"
+                (click)="!askMeFlag ? getRewards('askme') : undefined" [src]="rewardImgUrl2" alt="">
+            </div>
+          </span>
+          <button type="button" class="close m-0 p-0" (click)="cfuModal.hide();play();resetRadio();" aria-label="Close"
+            id="btnCloseModal">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body ml-4">
+          <h5 class="mt-3" style="font-size: 0.95rem; font-weight:500; color:#144375;"><span
+              [innerHTML]="question"></span></h5>
+          <span *ngIf="imgUrl">
+            <img src="{{imgUrl}}" width="" class="img-fluid" alt="">
+          </span>
+          <div class="card-block mcqBlock">
+            <div class="form float-left">
+              <div class="dx-fieldset">
+                <div class="dx-field">
+                  <div class="dx-field-value">
+                    <dx-radio-group #eventRadioGroup id="mcq" [items]="options"
+                      (onValueChanged)="onValueChanged($event)">
+                    </dx-radio-group>
                   </div>
-                <div class="col-md-2 col-sm-6 col-5">
-                <img class="img-fluid" [class.d-none]="hideMe"
-                  (click)="!fiftyFiftyFlag ? getRewards('fifty_fifty') : undefined"
-                  [src]="rewardImgUrl1" alt="">
-                  </div>
-                  <div class="col-md-2 col-sm-6 col-5">
-                <img class="img-fluid" (click)="!askMeFlag ? getRewards('askme') : undefined"
-                  [src]="rewardImgUrl2"
-                  alt="">
-                  </div>
-              </span>
-              <button type="button" class="close m-0 p-0" (click)="cfuModal.hide();play();resetRadio();" aria-label="Close" id="btnCloseModal">
-                  <span aria-hidden="true">&times;</span>
-              </button>
-          </div>
-          <div class="modal-body ml-4">
-              <h5 class="mt-3" style="font-size: 0.95rem; font-weight:500; color:#144375;"><span [innerHTML]="question"></span></h5>
-              <span *ngIf="imgUrl">
-              <img src="{{imgUrl}}" width="" class="img-fluid" alt="">
-              </span>
-              <div class="card-block mcqBlock">
-                  <div class="form float-left">
-                      <div class="dx-fieldset">
-                          <div class="dx-field">
-                              <div class="dx-field-value">
-                                  <dx-radio-group #eventRadioGroup id="mcq" [items]="options" (onValueChanged)="onValueChanged($event)">
-                                  </dx-radio-group>
-                              </div>
-                          </div>
-                      </div>
-                      <div *ngIf="viewCorrectAnswer" class="text-primary">
-                          <hr>
-                          <label><strong>{{'subModule1_9.correctAns'|translate}}</strong>:</label> &nbsp;{{ansValueForModule2_9}}
-                      </div>
-                  </div>
+                </div>
               </div>
+              <div *ngIf="viewCorrectAnswer" class="text-primary">
+                <hr>
+                <label><strong>{{'subModule1_9.correctAns'|translate}}</strong>:</label> &nbsp;{{ansValueForModule2_9}}
+              </div>
+            </div>
           </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" [disabled]='!submitDisabled' (click)="submitAnswer()">{{'Cfu.submit' | translate}}</button>
-          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" [disabled]='!submitDisabled'
+            (click)="submitAnswer()">{{'Cfu.submit' | translate}}</button>
+        </div>
       </div>
+    </div>
   </div>
-</div>
 </div>
 
 
 
 <div class="submoduleStatusModal">
-<div bsModal #toasterPopupModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
-    aria-labelledby="myModalLabel" aria-hidden="true">
+  <div bsModal #toasterPopupModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1"
+    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" [ngClass]="msgFlag ? 'modal-primary' : 'modal-danger'" role="document">
-            <!-- <img class="img-responsive img-rotate" src="assets/img/mitra.png"> -->
-        <div class="modal-content" [style.border-color]="msgFlag ? '#259d58' : '#b82020'">
-            <div class="modal-header text-center" [style.background-color]="msgFlag ? '#259d58' : '#b82020'" >
-                    <span class="exp-img img-rotate" [style.background-image]="msgFlag ? 'url(\'../../../assets/img/expressions/correct_ans.png\')' : 'url(\'../../../assets/img/expressions/wrong_ans.png\')'"></span>
-                <!-- <span class="exp-img img-rotate" [style.background-image]="msgFlag ? 'url(\'../../../assets/img/mitra_1.png\')' : 'url(\'../../../assets/img/mitra.png\')'"></span> -->
-              <h5 class="text-center text-white mb-3" *ngIf="msgFlag==true">{{'McqTest.popupTitle1' | translate}}</h5>
-              <h5 class="text-center text-white mb-3" *ngIf="msgFlag==false">{{'McqTest.popupTitle2' | translate}}</h5>
-            </div>
-            <div class="modal-body text-center">
-                 <div *ngIf="msgFlag==true" class="mb-3">
-                    <p class="congratulation inst-text">{{'Errors.rightvedio' | translate}}</p>
-                </div>
-                <div *ngIf="msgFlag==false" class="mb-3">
-                  <p class="congratulation inst-text">{{'Errors.wrongAnsWatchVideo' | translate}}</p>
-              </div>
-              <button class="btn btn-primary text-center" (click)="closeToasterPopup()">{{'McqTest.close' | translate}}</button>
-            </div>
+      <!-- <img class="img-responsive img-rotate" src="assets/img/mitra.png"> -->
+      <div class="modal-content" [style.border-color]="msgFlag ? '#259d58' : '#b82020'">
+        <div class="modal-header text-center" [style.background-color]="msgFlag ? '#259d58' : '#b82020'">
+          <span class="exp-img img-rotate"
+            [style.background-image]="msgFlag ? 'url(\'../../../assets/img/expressions/correct_ans.png\')' : 'url(\'../../../assets/img/expressions/wrong_ans.png\')'"></span>
+          <!-- <span class="exp-img img-rotate" [style.background-image]="msgFlag ? 'url(\'../../../assets/img/mitra_1.png\')' : 'url(\'../../../assets/img/mitra.png\')'"></span> -->
+          <h5 class="text-center text-white mb-3" *ngIf="msgFlag==true">{{'McqTest.popupTitle1' | translate}}</h5>
+          <h5 class="text-center text-white mb-3" *ngIf="msgFlag==false">{{'McqTest.popupTitle2' | translate}}</h5>
         </div>
+        <div class="modal-body text-center">
+          <div *ngIf="msgFlag==true" class="mb-3">
+            <p class="congratulation inst-text">{{'Errors.rightvedio' | translate}}</p>
+          </div>
+          <div *ngIf="msgFlag==false" class="mb-3">
+            <p class="congratulation inst-text">{{'Errors.wrongAnsWatchVideo' | translate}}</p>
+          </div>
+          <button class="btn btn-primary text-center"
+            (click)="closeToasterPopup()">{{'McqTest.close' | translate}}</button>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
 </div>
