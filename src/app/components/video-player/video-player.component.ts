@@ -286,16 +286,20 @@ export class VideoPlayerComponent implements OnInit {
 
           this.msgFlag = false
           this.toasterPopupModal.show();
-
-          this.shuffle(this.options);
+          if(window.localStorage.getItem("mainFlagModule2") == "2" && window.localStorage.getItem("subFlagModule2") == "3"){
+            console.log("not shuffle")
+          }
+          else{
+            this.shuffle(this.options);
+          }
           this.submitDisabled = false;
           setTimeout(() => {
             this.toasterPopupModal.hide();
             setTimeout(() => {
               console.log("timeout")
               this.play();
-            }, 2000);   
-          }, 4000)
+            }, 200);   
+          }, 2000)
 
         } else if (data['message'] == 'submodule finish next uuid is' || data['message'] == 'submodule finish') {
 
@@ -321,11 +325,12 @@ export class VideoPlayerComponent implements OnInit {
             }, 4000)
           }
           else if (
-            window.localStorage.getItem("mainFlagModule2") == "3" || window.localStorage.getItem("mainFlagModule2") == "11" || window.localStorage.getItem("mainFlagModule2") == "13" || window.localStorage.getItem("mainFlagModule2") == "15" || window.localStorage.getItem("mainFlagModule2") == "17" || window.localStorage.getItem("mainFlagModule3") == "2" || window.localStorage.getItem("mainFlagModule3") == "6" ||  window.localStorage.getItem("mainFlagModule3") == "8" || window.localStorage.getItem("mainFlagModule3") == "10") {
+            window.localStorage.getItem("mainFlagModule2") == "3" || window.localStorage.getItem("mainFlagModule2") == "11" || window.localStorage.getItem("mainFlagModule2") == "13" || window.localStorage.getItem("mainFlagModule2") == "15" || window.localStorage.getItem("mainFlagModule2") == "17" || window.localStorage.getItem("mainFlagModule3") == "2" || window.localStorage.getItem("mainFlagModule3") == "6" ||  window.localStorage.getItem("mainFlagModule3") == "8" || window.localStorage.getItem("mainFlagModule3") == "10" || window.localStorage.getItem("mainFlagModule4") == "6") {
             console.log("aa1");
             var result = {};
             result["status"] = true;
             result["urls"] = data['data'].parenturl;
+            console.log("result",result)
             this.finishCall.emit(result);
           } else if (
             window.localStorage.getItem("mainFlagModule1") == "10" ||

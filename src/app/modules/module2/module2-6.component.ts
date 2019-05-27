@@ -6,12 +6,14 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Module2Service } from './module2.service'
 import { FullLayoutService } from '../../layouts/full-layout.service';
+import { ModalDirective } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-module2-6',
   templateUrl: './module2-6.component.html'
 })
 export class Module26Component implements OnInit {
+  @ViewChild("instructionModal") public instructionModal: ModalDirective;
   public data;
   public mainFlagModule2 = parseInt(
     window.localStorage.getItem("mainFlagModule2")
@@ -124,18 +126,7 @@ export class Module26Component implements OnInit {
           if (data["message"] == "submodule finish")
           {
             window.localStorage.setItem("uuid", data["data"].nextuuid);
-            window.localStorage.setItem("mainFlagModule2", "7");
-            window.localStorage.setItem("subFlagModule2", "1");
-            window.localStorage.setItem('source', 'module 2.7.1');
-            var obj = {
-              type: "submodule",
-              route: true,
-              current: this.translate.instant("L2Module2.subMenu2-6"),
-              next: this.translate.instant("L2Module2.subMenu2-7"),
-              nextRoute: "/modules/module2/Module2.7"
-            };
-            this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
-            this.Module2Service.setLocalStorage2(8);
+            this.instructionModal.show();
           }
         },
         error => {
@@ -143,5 +134,21 @@ export class Module26Component implements OnInit {
         }
       );
     }
+  }
+
+  finish(){
+    this.instructionModal.hide();
+    window.localStorage.setItem("mainFlagModule2", "7");
+    window.localStorage.setItem("subFlagModule2", "1");
+    window.localStorage.setItem('source', 'module 2.7.1');
+    var obj = {
+      type: "submodule",
+      route: true,
+      current: this.translate.instant("L2Module2.subMenu2-6"),
+      next: this.translate.instant("L2Module2.subMenu2-7"),
+      nextRoute: "/modules/module2/Module2.7"
+    };
+    this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+    this.Module2Service.setLocalStorage2(8);
   }
 }

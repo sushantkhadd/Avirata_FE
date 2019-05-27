@@ -41,8 +41,9 @@ export class Module24Component implements OnInit {
   vedioCompleteUrl;
   statVideoFlag;nextFlag;
 
-  urlArray = {};
+  urlArray = {};submitFlag;
   ngOnInit() {
+    this.submitFlag = false;
     this.currentSource = window.localStorage.getItem('source');
     this.vedioCompleteUrl = "79vHVVtmIoQ";
     this.mainFlagModule2 = parseInt(
@@ -109,6 +110,7 @@ export class Module24Component implements OnInit {
         if (data['message'] == 'submodule started'){
           this.questionStatement = data['data'].question;
           this.options = data['data'].statementlist;
+          console.log("id",this.selectedId)
         }
       },
       error => {
@@ -117,7 +119,9 @@ export class Module24Component implements OnInit {
   }
 
   onValueChanged($event,id){
-    this.selectedId = id;
+    this.submitFlag = true;
+     this.selectedId = id;
+    console.log("id",this.selectedId)
   }
 
 
@@ -211,5 +215,9 @@ export class Module24Component implements OnInit {
         this.LanguageService.handleError(error.error.message);
       }
     );
+  }
+
+  ngOnChange(){
+    this.submitFlag = false;
   }
 }

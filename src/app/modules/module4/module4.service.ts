@@ -58,4 +58,84 @@ export class Module4Service {
     let options = { headers: headers };
     return this.httpClient.post(this.apiUrl + apiUrl, { body: jsonBody }, options)
   }
+
+  finishSubmodule(jsonBody) {
+    const headers = new HttpHeaders({
+      'Authorization': window.localStorage.getItem('token'),
+      'Content-Type': 'application/json',
+      Source: "WEB"
+    });
+    // if (/Android/i.test(navigator.userAgent)) {
+    //   headers.append("Source", 'MWEB')
+    // } else {
+    //   headers.append("Source", 'WEB')
+    // }
+    let options = { headers: headers };
+    return this.httpClient.post(this.apiUrl + 'modulefoursingleurl/', { body: jsonBody }, options)
+  }
+
+  finishModuleCall(finishJSONBody, submoduleId, routeNavigate, routeNavigateFirst) {
+
+    this.finishSubmodule(finishJSONBody)
+      .subscribe(
+      data => {
+         if (data['message'] == "module4 finish")
+         {
+           window.localStorage.setItem('currentstatus', '5');
+           window.localStorage.setItem('moduleFinishCount', JSON.stringify(data['data']));
+           window.localStorage.setItem('mainFlagModule4', '15');
+            this.setLocalStorage4(15);
+           var obj1 = {
+             "type": "moduleFinish",
+             "route": true,
+             "current": this.translate.instant('L2Module4.subMenu4-14'),
+             "next": this.translate.instant('L2Module5.title'),
+             "nextRoute": "/dashboard", "finishHead": this.translate.instant('L2Module4.title')
+           }
+            this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj1));
+        }
+      },
+      error => {
+        if (error.error.message == 'token not found') {
+          this.toastr.error(this.translate.instant('otherMessages.ServerError'));
+          setTimeout(() => {
+            this.router.navigate(['/']);
+          }, 4000)
+        } else if (error.error.message == 'token not matches please re-login') {
+          this.toastr.error(this.translate.instant('otherMessages.sessionLogout'));
+          setTimeout(() => {
+            this.router.navigate(['/']);
+          }, 4000)
+        } else if (error.error.message == 'complete previous module first') {
+          window.localStorage.setItem('mainFlagModule4', submoduleId);
+          this.router.navigate([routeNavigate]);
+        }
+        else if (error.error.message == 'required currentsubmoduleid key') {
+          window.localStorage.setItem('mainFlagModule4', submoduleId);
+          this.router.navigate([routeNavigate]);
+        } else if (error.error.message == 'required currentsubmoduleid field') {
+          window.localStorage.setItem('mainFlagModule4', submoduleId);
+          this.router.navigate([routeNavigate]);
+        } else if (error.error.message == 'required event key') {
+          window.localStorage.setItem('mainFlagModule4', submoduleId);
+          this.router.navigate([routeNavigate]);
+        } else if (error.error.message == 'invalid event') {
+          window.localStorage.setItem('mainFlagModule4', submoduleId);
+          this.router.navigate([routeNavigate]);
+        } else if (error.error.message == 'access denied') {
+          window.localStorage.setItem('mainFlagModule4', submoduleId);
+          this.toastr.error(this.translate.instant('otherMessages.accessDenied'));
+          setTimeout(() => {
+            this.router.navigate([routeNavigate]);
+          }, 4000)
+        } else if (error.error.message == 'invalid uuid') {
+          window.localStorage.setItem('mainFlagModule4', submoduleId);
+          this.router.navigate([routeNavigate]);
+        }
+        else {
+          this.toastr.error(this.translate.instant('Errors.cannotProceed'))
+        }
+      });
+  }
+
 }

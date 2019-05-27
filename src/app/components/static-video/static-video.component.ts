@@ -69,7 +69,7 @@ export class StaticVideoComponent implements OnInit {
           var thumb = document.querySelector('.static-thumbnail .img-fluid').classList.add('show');
         }
         if (event.data === 0) {
-          if(window.localStorage.getItem('mainFlagModule1') == '1' || window.localStorage.getItem('mainFlagModule1') == '5' || window.localStorage.getItem('mainFlagModule1') == '11' || window.localStorage.getItem('mainFlagModule2') == '1' || window.localStorage.getItem('mainFlagModule2') == '4' || window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule2') == '13'|| window.localStorage.getItem('mainFlagModule2') == '15' || window.localStorage.getItem('mainFlagModule3') == '4' || window.localStorage.getItem('mainFlagModule3') == '13' || window.localStorage.getItem('mainFlagModule3') == '1' || window.localStorage.getItem('mainFlagModule3') == '16'){
+          if(window.localStorage.getItem('mainFlagModule1') == '1' || window.localStorage.getItem('mainFlagModule1') == '5' || window.localStorage.getItem('mainFlagModule1') == '11' || window.localStorage.getItem('mainFlagModule2') == '1' || window.localStorage.getItem('mainFlagModule2') == '4' || window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule2') == '13'|| window.localStorage.getItem('mainFlagModule2') == '15' || window.localStorage.getItem('mainFlagModule3') == '4' || window.localStorage.getItem('mainFlagModule3') == '13' || window.localStorage.getItem('mainFlagModule3') == '1' || window.localStorage.getItem('mainFlagModule3') == '16' || window.localStorage.getItem('mainFlagModule4') == '6' || window.localStorage.getItem('mainFlagModule4') == '13'){
             this.finishCall.emit(true)
           }if (window.localStorage.getItem('mainFlagModule0') == '1') {
             this.finishCall.emit(true);
@@ -116,7 +116,7 @@ export class StaticVideoComponent implements OnInit {
     var jsonBody = {};
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
     if (window.localStorage.getItem('mainFlagModule1')) {
-      if (window.localStorage.getItem('mainFlagModule1') == '1' || window.localStorage.getItem('mainFlagModule1') == '5' || window.localStorage.getItem('mainFlagModule1') == '11' || window.localStorage.getItem('mainFlagModule2') == '1' || window.localStorage.getItem('mainFlagModule2') == '4' || window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule2') == '13' || window.localStorage.getItem('mainFlagModule3') == '4' || window.localStorage.getItem('mainFlagModule3') == '13' || window.localStorage.getItem('mainFlagModule3') == '1' || window.localStorage.getItem('mainFlagModule3') == '16')
+      if (window.localStorage.getItem('mainFlagModule1') == '1' || window.localStorage.getItem('mainFlagModule1') == '5' || window.localStorage.getItem('mainFlagModule1') == '11' || window.localStorage.getItem('mainFlagModule2') == '1' || window.localStorage.getItem('mainFlagModule2') == '4' || window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule2') == '13' || window.localStorage.getItem('mainFlagModule3') == '4' || window.localStorage.getItem('mainFlagModule3') == '13' || window.localStorage.getItem('mainFlagModule3') == '1' || window.localStorage.getItem('mainFlagModule3') == '16' || window.localStorage.getItem('mainFlagModule4') == '6' || window.localStorage.getItem('mainFlagModule4') == '13')
         jsonBody['event'] = 'finish';
     }
     var apiUrl = this.receivedData.apiUrl;

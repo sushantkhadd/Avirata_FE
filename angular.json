@@ -38,7 +38,8 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "node_modules/ng6-toastr/ng2-toastr.js"
+              "node_modules/ng6-toastr/ng2-toastr.js",
+              "src/assets/js/pdf.worker.min.js"
             ]
           },
           "configurations": {

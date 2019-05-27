@@ -83,7 +83,7 @@
                 </div>
               </div>
               <div class="col-md-12 col-xs-12">
-                <button class="btn btn-info" (click)="finish2()">Submit</button>
+                <button class="btn btn-info" [disabled]="!submitFlag" (click)="finish2()">{{'Quiz.finish' | translate}}</button>
               </div>
             </div>
   

@@ -31,6 +31,7 @@
     <app-presentation [data]='passValues' (sendCfuAns)="finishPDF($event)"></app-presentation>
   </div>
   <div class="assignForm" *ngIf="nextFlag">
+      <h6 class="questionHead lineHeight">{{'L2common.caution' | translate}} <span [innerHTML]="inst"> </span></h6>
     <div class="card">
       <div class="card-block pt-2">
         <form #assignForm="ngForm">

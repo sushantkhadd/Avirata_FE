@@ -35,14 +35,14 @@
 
   <div *ngIf="startFlag">
 
-    <h6 class="questionHead lineHeight">{{description}}</h6>
+    <h6 class="questionHead lineHeight">{{questionStatement}}</h6>
 
     <div class="borderBlue">
     <div class="card p-2">
         <div class="card-block mcqBlock">
           <div class="form float-left">
             <form #mcqForm="ngForm">
-            <p class="questionHead"><strong [innerHTML]="questionStatement"></strong></p>
+            <!-- <p class="questionHead"><strong [innerHTML]="questionStatement"></strong></p> -->
             <div class="dx-fieldset">
               <div class="dx-field">
                 <div class="dx-field-value">
@@ -70,3 +70,26 @@
     </div>
   </div>
 </div>
+
+<div class="videoFinishModal videoFinishedModel">
+    <div bsModal #instructionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+      aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <img class="img-responsive img-rotate" src="assets/img/mitra.png">
+          <div class="modal-header">
+            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button> -->
+          </div>
+          <div class="modal-body">
+            <p class="px-5 text-center">{{description}}</p>
+            <hr />
+            <div class="col-md-12 text-right">
+              <button class="btn btn-primary text-center" (click)="finish()">{{'Stepper.Next' | translate}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
