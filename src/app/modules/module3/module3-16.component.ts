@@ -154,7 +154,7 @@ export class Module316Component implements OnInit {
         }
       },
       error => {
-        this.toastr.error(this.translate.instant('Errors.cannotProceed'));
+        this.LanguageService.handleError(error.error.message);
       });
     }
   }

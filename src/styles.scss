@@ -1155,6 +1155,25 @@ body {
     }
   }
 
+  .card-block.mcqBlock {
+    padding: 0.25rem;
+
+    .dx-item-content {
+      font-size: 0.85rem;
+    }
+
+    .dx-fieldset {
+      margin: 0 0 0 0;
+    }
+  }
+
+  .rewards-content{
+    h4{
+      padding-left: 1rem;
+    }
+  }
+
+  
 }
 
 .instructionModal.current .modal-dialog {
@@ -1290,107 +1309,103 @@ body {
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.16), 0 4px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
-.instructionModal {
-  // .modal{
-  //   top: 8%;
-  // }
+// .instructionModal {
+//   .modal-dialog{
+//     margin-top: 3rem;
+//   }
 
-  .modal-dialog{
-    margin-top: 3rem;
-  }
+//   .modal-content {
+//       border-color: #6196cf !important;
+//       border-width: 15px;
+//       border-top: 0;
+//       border-radius: 20px;
 
-  .modal-content {
-      border-color: #6196cf !important;
-      border-width: 15px;
-      border-top: 0;
-      border-radius: 20px;
+//     .modal-header {
+//       background: #6196cf;
+//       border-top-left-radius: 0;
+//       border-top-right-radius: 0;
 
-    .modal-header {
-      background: #6196cf;
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
+//       span.exp-img {
+//         //background-image: url("../../../assets/img/expressions/instructions.png");
+//         background-image: url("../src/assets/img/expressions/instructions.png");
+//         background-size: contain;
+//         background-position: left;
+//         background-repeat: no-repeat;
+//         position: absolute;
+//         z-index: 99;
+//         width: 100px;
+//         height: 100px;
+//         bottom: 0;
+//         right: 0;
+//         left: 0;
+//         top: -6%;
+//         margin: 0 auto;
+//       }
 
-      span.exp-img {
-        //background-image: url("../../../assets/img/expressions/instructions.png");
-        background-image: url("../src/assets/img/expressions/instructions.png");
-        background-size: contain;
-        background-position: left;
-        background-repeat: no-repeat;
-        position: absolute;
-        z-index: 99;
-        width: 100px;
-        height: 100px;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        top: -6%;
-        margin: 0 auto;
-      }
+//     }
+//   }
 
-    }
-  }
+//   .modal-body {
+//     background: none !important;
 
-  .modal-body {
-    background: none !important;
+//     p {
+//       line-height: 20px !important;
+//       margin-top: 0px !important;
+//       font-size: 1rem;
+//       padding-left: 0px !important;
+//       color: #3b97d2;
+//       margin-bottom: 0.90rem;
+//     }
 
-    p {
-      line-height: 20px !important;
-      margin-top: 0px !important;
-      font-size: 1rem;
-      padding-left: 0px !important;
-      color: #3b97d2;
-      margin-bottom: 0.90rem;
-    }
+//     p.questionHead span {
+//       padding-right: 3px;
+//     }
 
-    p.questionHead span {
-      padding-right: 3px;
-    }
+//     h5 {
+//       margin-bottom: 1rem;
+//       font-size: 1rem;
+//     }
 
-    h5 {
-      margin-bottom: 1rem;
-      font-size: 1rem;
-    }
+//   }
 
-  }
+//   .modal-dialog {
+//     max-width: 700px;
+//   }
 
-  .modal-dialog {
-    max-width: 700px;
-  }
+//   .modal-dialog.modal-sm {
+//     max-width: 400px;
+//   }
 
-  .modal-dialog.modal-sm {
-    max-width: 400px;
-  }
+//   .modal-header {
+//     span.exp-img.instructions-img {
+//       bottom: 8px !important;
+//     }
 
-  .modal-header {
-    span.exp-img.instructions-img {
-      bottom: 8px !important;
-    }
+//     .modal-title {
+//       padding-left: 1rem;
+//     }
 
-    .modal-title {
-      padding-left: 1rem;
-    }
+//     h4 {
+//       font-size: 1.2rem;
+//       font-weight: 600;
+//     }
+//   }
 
-    h4 {
-      font-size: 1.2rem;
-      font-weight: 600;
-    }
-  }
+// }
 
-}
+// .instructionModal {
+//   .card-block.mcqBlock {
+//     padding: 0.25rem;
 
-.instructionModal {
-  .card-block.mcqBlock {
-    padding: 0.25rem;
+//     .dx-item-content {
+//       font-size: 0.85rem;
+//     }
 
-    .dx-item-content {
-      font-size: 0.85rem;
-    }
-
-    .dx-fieldset {
-      margin: 0 0 0 0;
-    }
-  }
-}
+//     .dx-fieldset {
+//       margin: 0 0 0 0;
+//     }
+//   }
+// }
 
 .img-rotate {
   -webkit-transform: translateX(0) rotate(-18deg);
@@ -1824,6 +1839,10 @@ body {
     position: relative;
     z-index: 999;
   }
+
+  .img-wrap a{
+    cursor: pointer;
+  }
 }
 
 .padd-0{
@@ -1927,4 +1946,27 @@ h6.questionHead.lineHeight {
     font-size: 0.85rem;
     line-height: 23px;
   }
+}
+
+.newCFUPopup{
+  &.instructionModal{
+  span.exp-img{
+    left: -52px !important;
+    top: 3% !important;
+  }
+}
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px){
+  .instructionModal{
+    h4{
+      font-size: 1rem;
+    }
+  }
+
+  .newCFUPopup.instructionModal span.exp-img {
+    left: -18px !important;
+    top: 12% !important;
+    width: 73px !important;
+  } 
 }

@@ -7,13 +7,18 @@
     </div>
   </div>
   <div *ngIf="mainFlagModule3 ==16">
-    <div class="col-sm-12 col-md-12 ins-block" *ngIf="!startEvent">
+    <div class="col-sm-12 col-md-12 instruction-wrap ins-block" *ngIf="!startEvent">
       <div class="card">
-        <div class="card-header">
-          <h5><em class="fa fa-calendar-minus-o"></em>&nbsp;{{'Quiz.note' | translate}}</h5>
+        <div class="card-header text-white">
+            <span class="exp-img instructions-img"></span>
+          <h5>{{'Quiz.note' | translate}}</h5>
         </div>
-        <div class="card-block pt-2">
-                <p class="mt-4">{{'subModule5_1.1' | translate}}</p>
+        <div class="card-block inst-text pt-4">
+            <p>{{'number.1' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_1' | translate}}</p>
+            <p>{{'number.2' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_2' | translate}}</p>
+            <p>{{'number.3' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_3' | translate}}</p>
+            <p>{{'number.4' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_4' | translate}}</p>
+            <p>{{'number.5' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_5' | translate}}</p>    
         </div>
         <div class="card-footer">
           <div class="float-right hidden-xs-down">
@@ -27,7 +32,7 @@
     </div>
     <div *ngIf="startEvent">
       <div class="card">
-        <div class="card-header">
+        <div class="card-header text-center">
           <p>{{'L2Module3.subMenu3-16' | translate}}</p>
         </div>
         <div class="card-block text-center" *ngIf="subFlagModule3 == 1">

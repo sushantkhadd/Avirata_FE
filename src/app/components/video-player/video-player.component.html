@@ -25,21 +25,23 @@
   </div>
 </div>
 
-<div class="instructionModal">
+<div class="instructionModal newCFUPopup">
 <div bsModal #cfuModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-primary" role="document">
       <div class="modal-content">
           <div class="modal-header">
-              <!-- <span class="exp-img instructions-img" [style.background-image] = "'url(\'./../../../assets/img/expressions/mitra_expression_think.png\')'"></span> -->
-              <h4>{{'Cfu.title' | translate}}</h4>
-              <span class="rewards-content row w-75">
-                <div class="col-md-2 col-sm-2 col-5 offset-md-7 offset-sm-7">
+              <span class="exp-img instructions-img mt-4 m-0 w-100" [style.background-image] = "'url(\'./../../../assets/img/expressions/mitra_expression_think.png\')'"></span>
+              <span class="rewards-content row w-100">
+                  <div class="col-md-8 col-sm-12 col-12">
+                    <h4 class="mt-3 ml-1">{{'Cfu.title' | translate}}</h4> 
+                  </div>
+                <div class="col-md-2 col-sm-6 col-5">
                 <img class="img-fluid" [class.d-none]="hideMe"
                   (click)="!fiftyFiftyFlag ? getRewards('fifty_fifty') : undefined"
                   [src]="rewardImgUrl1" alt="">
                   </div>
-                  <div class="col-md-3 col-sm-3 col-6">
+                  <div class="col-md-2 col-sm-6 col-5">
                 <img class="img-fluid" (click)="!askMeFlag ? getRewards('askme') : undefined"
                   [src]="rewardImgUrl2"
                   alt="">
@@ -49,9 +51,9 @@
                   <span aria-hidden="true">&times;</span>
               </button>
           </div>
-          <div class="modal-body">
-              <h5 style="font-size: 0.95rem; font-weight:500; color:#144375;"><span [innerHTML]="question"></span></h5>
-              <span *ngIf="imgUrl != ''">
+          <div class="modal-body ml-4">
+              <h5 class="mt-3" style="font-size: 0.95rem; font-weight:500; color:#144375;"><span [innerHTML]="question"></span></h5>
+              <span *ngIf="imgUrl">
               <img src="{{imgUrl}}" width="" class="img-fluid" alt="">
               </span>
               <div class="card-block mcqBlock">
@@ -72,7 +74,7 @@
               </div>
           </div>
           <div class="modal-footer">
-              <button type="button" class="btn btn-primary" [disabled]='!submitDisabled' (click)="submitAnswer()">{{'Cfu.submit' | translate}}</button>
+              <button type="button" class="btn btn-secondary" [disabled]='!submitDisabled' (click)="submitAnswer()">{{'Cfu.submit' | translate}}</button>
           </div>
       </div>
   </div>

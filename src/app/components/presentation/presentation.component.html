@@ -1,124 +1,142 @@
 <div class="row imageArea mt-2 mb-4">
-  <div class="mx-auto" style="position:relative;">
-      <pdf-viewer *ngIf="!isLoaded" [autoresize]="true" [original-size]="false" [fit-to-page]="true"
-          style="display: block" [render-text]="true" class="embed-responsive-item"
-          [src]="pdfURL" [show-all]="false" [page]="count"
-          (after-load-complete)="afterLoadComplete($event)">
-          </pdf-viewer>
-       <img class="loader-gif" *ngIf="isLoaded" src="../../../assets/img/loader.gif" alt="">
-  </div>
-  <div class="slide-control form-inline">
-      <div class="mx-auto" *ngIf="!isLoaded">
-      <div *ngIf="!buttonShowFlag && !showFinish" class="mx-auto">
-          <button class="control ripple" (click)="prevPage()" [disabled]="count === 1"> <em class="fa fa-arrow-left"
-                  aria-hidden="true"></em> </button>
-          <span class="p-2">{{ count}} / {{ finalCount }}</span>
-          <button class="control ripple"  (click)="nextPage()" [disabled]="count === finalCount"> <em class="fa fa-arrow-right"
-                  aria-hidden="true"></em> </button>
-      </div>
-      <div class="mx-auto" *ngIf="buttonShowFlag ">
-              <span *ngIf="finalCount > 1">
-                  <button class="control ripple" (click)="prevPage()" [disabled]="count === 1"> <em class="fa fa-arrow-left"
-                          aria-hidden="true"></em> </button>
-              </span>
-              <button (click)="cfuModal.show()" class="btn btn-primary">{{'Stepper.Next' | translate}}</button>
-          </div>
-      <div class="mx-auto" *ngIf="showFinish">
-          <button class="control ripple" (click)="prevPage()" [disabled]="count === 1"> <em class="fa fa-arrow-left"
-                  aria-hidden="true"></em> </button>
-                  <span *ngIf="data['unlockView'] == 'static'" class="p-2">{{ count}} / {{ finalCount }}</span>
-                  <button *ngIf="data['unlockView'] == 'static'" class="control ripple" disabled> <em class="fa fa-arrow-right"
-                      aria-hidden="true"></em> </button>
-                 <span *ngIf="data['unlockView'] != 'static'"><button (click)="finishPDF();"
-                     class="btn btn-primary">{{'Stepper.Finish' | translate}}</button></span>
-      </div>
-      <div class="fullscreen float-right">
-          <span class="control ripple" id="download" *ngIf="download"><a href={{downloadLink}} download><em class="fa fa-download"
-                      aria-hidden="true"></em></a></span>
-          <span class="control ripple" (click)="toggleMe()" id="Fullscreen"><em class="fa fa-arrows-alt text-right"
-                  aria-hidden="true"></em></span>
-      </div>
-      </div>
-  </div>
+    <div class="mx-auto" style="position:relative;">
+        <pdf-viewer *ngIf="!isLoaded" [autoresize]="true" [original-size]="false" [fit-to-page]="true" style="display: block" [render-text]="true"
+            class="embed-responsive-item" [src]="pdfURL" [show-all]="false" [page]="count" (after-load-complete)="afterLoadComplete($event)">
+        </pdf-viewer>
+        <img class="loader-gif" *ngIf="isLoaded" src="../../../assets/img/loader.gif" alt="">
+    </div>
+    <div class="slide-control form-inline">
+        <div class="mx-auto" *ngIf="!isLoaded">
+            <div *ngIf="!buttonShowFlag && !showFinish" class="mx-auto">
+                <button class="control ripple" (click)="prevPage()" [disabled]="count === 1">
+                    <em class="fa fa-arrow-left" aria-hidden="true"></em>
+                </button>
+                <span class="p-2">{{ count}} / {{ finalCount }}</span>
+                <button class="control ripple" (click)="nextPage()" [disabled]="count === finalCount">
+                    <em class="fa fa-arrow-right" aria-hidden="true"></em>
+                </button>
+            </div>
+            <div class="mx-auto" *ngIf="buttonShowFlag ">
+                <span *ngIf="finalCount > 1">
+                    <button class="control ripple" (click)="prevPage()" [disabled]="count === 1">
+                        <em class="fa fa-arrow-left" aria-hidden="true"></em>
+                    </button>
+                </span>
+                <button (click)="cfuModal.show()" class="btn btn-primary">{{'Stepper.Next' | translate}}</button>
+            </div>
+            <div class="mx-auto" *ngIf="showFinish">
+                <button class="control ripple" (click)="prevPage()" [disabled]="count === 1">
+                    <em class="fa fa-arrow-left" aria-hidden="true"></em>
+                </button>
+                <span *ngIf="data['unlockView'] == 'static'" class="p-2">{{ count}} / {{ finalCount }}</span>
+                <button *ngIf="data['unlockView'] == 'static'" class="control ripple" disabled>
+                    <em class="fa fa-arrow-right" aria-hidden="true"></em>
+                </button>
+                <span *ngIf="data['unlockView'] != 'static'">
+                    <button (click)="finishPDF();" class="btn btn-primary">{{'Stepper.Finish' | translate}}</button>
+                </span>
+            </div>
+            <div class="fullscreen float-right">
+                <span class="control ripple" id="download" *ngIf="download">
+                    <a href={{downloadLink}} download>
+                        <em class="fa fa-download" aria-hidden="true"></em>
+                    </a>
+                </span>
+                <span class="control ripple" (click)="toggleMe()" id="Fullscreen">
+                    <em class="fa fa-arrows-alt text-right" aria-hidden="true"></em>
+                </span>
+            </div>
+        </div>
+    </div>
 </div>
 
-
-<div bsModal #cfuModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
-  aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-primary" role="document">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h4>{{ 'Common.CFU' | translate }} </h4>
-              <span class="rewards-content row w-75">
-                <div class="col-md-2 col-sm-2 col-5 offset-md-7 offset-sm-7">
+<div class="instructionModal newCFUPopup">
+    <div bsModal #cfuModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-primary" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h4>{{ 'Common.CFU' | translate }} </h4> -->
+                    <span class="exp-img instructions-img mt-4 m-0 w-100" [style.background-image]="'url(\'./../../../assets/img/expressions/mitra_expression_think.png\')'"></span>
+                    <span class="rewards-content row w-100">
+                        <!-- <div class="col-md-2 col-sm-2 col-5 offset-md-7 offset-sm-7">
                   <img class="img-fluid" (click)="!fiftyFiftyFlag ? getRewards('fifty_fifty') : undefined"
                     [src]="rewardImgUrl1" alt="">
                 </div>
                 <div class="col-md-3 col-sm-3 col-6">
                   <img class="img-fluid" (click)="!askMeFlag ? getRewards('askme') : undefined" [src]="rewardImgUrl2"
                     alt="">
+                </div> -->
+                        <div class="col-md-8 col-sm-12 col-12">
+                            <h4 class="mt-3 ml-1">{{ 'Common.CFU' | translate }} </h4>
+                        </div>
+                        <div class="col-md-2 col-sm-6 col-5">
+                            <img class="img-fluid" (click)="!fiftyFiftyFlag ? getRewards('fifty_fifty') : undefined" [src]="rewardImgUrl1" alt="">
+                        </div>
+                        <div class="col-md-2 col-sm-6 col-5">
+                            <img class="img-fluid" (click)="!askMeFlag ? getRewards('askme') : undefined" [src]="rewardImgUrl2" alt="">
+                        </div>
+                    </span>
+                    <button type="button" class="close" (click)="cfuModal.hide();reset();" aria-label="Close" id="btnCloseModal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-              </span>
-              <button type="button" class="close" (click)="cfuModal.hide();reset();" aria-label="Close" id="btnCloseModal">
-                  <span aria-hidden="true">&times;</span>
-              </button>
-          </div>
-          <div class="modal-body">
-              <h5 [innerHTML]="question"></h5>
-              <div class="card-block mcqBlock">
-                  <div class="form float-left">
-                      <div class="dx-fieldset">
-                          <div class="dx-field">
-                              <div class="dx-field-value">
-                                  <dx-radio-group #eventRadioGroup id="mcq" [items]="options" (onValueChanged)="onValueChanged($event)">
-                                  </dx-radio-group>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-primary" [disabled]='!submitDisabled' (click)="submitAnswer()">{{'Cfu.submit'
-                  | translate}}</button>
-          </div>
-      </div>
-      <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
+                <div class="modal-body">
+                    <h5 class="mt-3" [innerHTML]="question"></h5>
+                    <div class="card-block mcqBlock">
+                        <div class="form float-left">
+                            <div class="dx-fieldset">
+                                <div class="dx-field">
+                                    <div class="dx-field-value">
+                                        <dx-radio-group #eventRadioGroup id="mcq" [items]="options" (onValueChanged)="onValueChanged($event)">
+                                        </dx-radio-group>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" [disabled]='!submitDisabled' (click)="submitAnswer()">{{'Cfu.submit' | translate}}</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
 </div>
 
 <div class="ansCheckModal">
-  <div bsModal #toasterPopupModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
-      aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog" [ngClass]="msgFlag ? 'modal-primary' : 'modal-danger'" role="document">
-          <div class="modal-content" [style.border-color]="msgFlag ? '#259d58' : '#b82020'">
-              <div class="modal-header jusify-content-center" [style.background-color]="msgFlag ? '#259d58' : '#b82020'">
+    <div bsModal #toasterPopupModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" [ngClass]="msgFlag ? 'modal-primary' : 'modal-danger'" role="document">
+            <div class="modal-content" [style.border-color]="msgFlag ? '#259d58' : '#b82020'">
+                <div class="modal-header jusify-content-center" [style.background-color]="msgFlag ? '#259d58' : '#b82020'">
                     <span class="exp-img img-rotate" [style.background-image]="msgFlag ? 'url(\'../../../assets/img/expressions/correct_ans.png\')' : 'url(\'../../../assets/img/expressions/wrong_ans.png\')'"></span>
                     <!-- <span class="exp-img img-rotate" [style.background-image]="msgFlag ? 'url(\'../../../assets/img/mitra_1.png\')' : 'url(\'../../../assets/img/mitra.png\')'"></span> -->
-                <!-- <h5 class="text-center" *ngIf="msgFlag==true">
+                    <!-- <h5 class="text-center" *ngIf="msgFlag==true">
                       <em class="fa fa-check"></em> &nbsp;&nbsp;
                       {{'McqTest.popupTitle1' | translate}}</h5>
                   <h5 class="text-center" *ngIf="msgFlag==false">
                       <em class="fa fa-times"></em> &nbsp;&nbsp;
                       {{'McqTest.popupTitle2' | translate}}</h5> -->
-                <h5 class="text-center text-white mb-3" *ngIf="msgFlag==true">
-                {{'McqTest.popupTitle1' | translate}}</h5>
-                <h5 class="text-center text-white mb-3" *ngIf="msgFlag==false">
-                {{'McqTest.popupTitle2' | translate}}</h5>
-              </div>
-              <!-- <div class="modal-body text-center" [style.border]="msgFlag ? '5px solid #4dbd74' : '5px solid #f86c6b'"> -->
-              <div class="modal-body text-center">
-                <div *ngIf="msgFlag==true">
-                      <h6 class="congratulation inst-text mb-3 mt-2">{{'Errors.rightAns' | translate}}</h6>
-                  </div>
-                  <div *ngIf="msgFlag==false">
-                      <h6 class="congratulation inst-text mb-3 mt-2">{{'Errors.ansWrongGoBack' | translate}}</h6>
-                  </div>
-                  <button class="btn btn-primary text-center mb-1 mt-2" (click)="closeToasterPopup()">{{'McqTest.close' |
-                      translate}}</button>
-              </div>
-          </div>
-      </div>
-  </div>
+                    <h5 class="text-center text-white mb-3" *ngIf="msgFlag==true">
+                        {{'McqTest.popupTitle1' | translate}}</h5>
+                    <h5 class="text-center text-white mb-3" *ngIf="msgFlag==false">
+                        {{'McqTest.popupTitle2' | translate}}</h5>
+                </div>
+                <!-- <div class="modal-body text-center" [style.border]="msgFlag ? '5px solid #4dbd74' : '5px solid #f86c6b'"> -->
+                <div class="modal-body text-center">
+                    <div *ngIf="msgFlag==true">
+                        <h6 class="congratulation inst-text mb-3 mt-2">{{'Errors.rightAns' | translate}}</h6>
+                    </div>
+                    <div *ngIf="msgFlag==false">
+                        <h6 class="congratulation inst-text mb-3 mt-2">{{'Errors.ansWrongGoBack' | translate}}</h6>
+                    </div>
+                    <button class="btn btn-primary text-center mb-1 mt-2" (click)="closeToasterPopup()">{{'McqTest.close' | translate}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

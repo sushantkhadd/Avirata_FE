@@ -7,6 +7,7 @@ import { LocalstoragedetailsService } from "../../services/localstoragedetails.s
 import { ToastsManager } from "ng6-toastr";
 import { TranslateService } from '@ngx-translate/core';
 import { FullLayoutService } from '../../layouts/full-layout.service';
+import { LanguageService } from 'src/app/language.service';
 
 @Injectable()
 export class Module4Service {
@@ -17,7 +18,7 @@ export class Module4Service {
   public resultAfterFirstSumbit: EventEmitter<any> = new EventEmitter();
 
   public url1_1; url1_2; url1_3; url1_4; url1_5; url1_6; url1_7; url1_8; url1_9; url1_10; url1_11; url1_12;
-  constructor(public FullLayoutService: FullLayoutService, public httpClient: HttpClient, public router: Router, public LocalstoragedetailsService: LocalstoragedetailsService, public toastr: ToastsManager, public translate: TranslateService) { }
+  constructor(public FullLayoutService: FullLayoutService, public httpClient: HttpClient, public router: Router, public LocalstoragedetailsService: LocalstoragedetailsService, public toastr: ToastsManager, public translate: TranslateService, public LanguageService: LanguageService) { }
 
   setLocalStorage4(data) {
     // console.log("set")
