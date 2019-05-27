@@ -19,7 +19,7 @@ export class Module3Component implements OnInit {
   constructor(public FullLayoutService: FullLayoutService, public LanguageService: LanguageService, public Module3Service: Module3Service, public router: Router, public LocalstoragedetailsService: LocalstoragedetailsService, public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService) {
     this.toastr.setRootViewContainerRef(vcr);
   }
-  public jsonData; queCount = 0; ansJson = {}; data; showAnswer; passFlags = {}; saveData; showInst;
+  public jsonData; queCount = 0; ansJson = {}; data; showAnswer; passFlags = {}; saveData; showInst; flag; urlArray = {}; thumb_title;
   public dummy; deleteAdd = []; nextBtnFlag; passData = {}; showVideoFlag; passUrl; startFlag;
   ngOnInit() {
     this.passUrl = "6hO_xfdRq1g";
@@ -38,17 +38,17 @@ export class Module3Component implements OnInit {
     } else if (this.mainFlagModule3 > 1) {
       this.passData['apiUrl'] = "";
       this.passData['status'] = false;  //first time call
-
-      if (this.FullLayoutService.currentJson3.length > 0) {
-        var index = this.FullLayoutService.currentJson3.findIndex(item =>
-          item.source == "module 3.1");
-        if (this.FullLayoutService.currentJson3[index].url != null) {
-          this.passData['videoUrl'] = this.FullLayoutService.currentJson3[index].url
-        } else {
-          this.passData['videoUrl'] = this.passUrl
+      var urlJson = {};
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson3"));
+      if (urlJson["children"].length > 0) {
+        var index = urlJson["children"].findIndex(
+          item => item.source == "module 3.1"
+        );
+        if (urlJson["children"][index].url != null) {
+          var mainJson;
+          mainJson = JSON.parse(urlJson["children"][index].url);
+          this.passData["videoUrl"] = mainJson["3.1.1"];
         }
-      } else {
-        this.passData['videoUrl'] = this.passUrl
       }
     }
   }
@@ -100,14 +100,14 @@ export class Module3Component implements OnInit {
           this.passData['videoUrl'] = data['data'].url;
           this.showVideoFlag = true
           this.passUrl = data['data'].url;
-
-          var dummylocal = JSON.parse(window.localStorage.getItem('currentJson3'))
-          var index1 = dummylocal.children.findIndex(item =>
-            item.source == "module 3.1");
-          dummylocal.children[index1].url = this.passUrl
-          window.localStorage.setItem('currentJson3', JSON.stringify(dummylocal))
-
-
+          var url = {}
+          url['3.1.1'] = this.passUrl;
+          var current3 = []
+          current3 = JSON.parse(window.localStorage.getItem('currentJson3'))
+          var index = current3['children'].findIndex(item => item.source == 'module 3.1');
+          current3["children"][index].url = JSON.stringify(url);
+          console.log("FINISH ", current3)
+          window.localStorage.setItem('currentJson3', JSON.stringify(current3))
         } if (fun == 'finish1') {
           this.instructionModal.hide()
           this.showVideoFlag = false
@@ -175,7 +175,8 @@ export class Module3Component implements OnInit {
             this.jsonData = data['data'].questionlist[0]
             this.data = this.jsonData;
             console.log("MY DATA ", this.data)
-          } else if (data['message'] == 'exam finish' || data['message'] == 'submodule finish') {
+          } else if (data['message'] == 'exam finish' || data['message'] == 'submodule finish')
+          {
             this.showVideoFlag = false;
             window.localStorage.setItem('uuid', data['data'].nextuuid)
             this.mainFlagModule3 = 2;

@@ -49,7 +49,7 @@ export class NewBaselineComponent implements OnInit {
     count: 1
   };
   showQuize = false; token; alreadyDone; finishExamCardonRun;
-  public baselineSelectedAns; baselineSelectedQuestion;
+  public baselineSelectedAns; baselineSelectedQuestion; mySubmodule3;
   public apiEndStart; apiEndSendAns; apiEndFinish; startJson = {};
   lastQuestion;
   constructor(private router: Router, private quizService: QuizService,public LocalstoragedetailsService: LocalstoragedetailsService, public Module1Service: Module1Service, public toastr: ToastsManager, vcr: ViewContainerRef, public Module2Service: Module2Service, public translate: TranslateService,public LanguageService:LanguageService) {
@@ -77,8 +77,8 @@ export class NewBaselineComponent implements OnInit {
           // for(var i=0; i<this.quiz.questions.length ; i++){
           //   this.quiz.questions[i].id = i;
           // }
-         
-          
+
+
         }
       },
       error => {
@@ -187,7 +187,8 @@ export class NewBaselineComponent implements OnInit {
     // this.oldSelectedAns=""
     // this.nextButtonFlag=false
     // this.endApiAnsHit=false
-    this.mySubmodule2=parseInt(window.localStorage.getItem('mainFlagModule2'));
+    this.mySubmodule2 = parseInt(window.localStorage.getItem('mainFlagModule2'));
+    this.mySubmodule3 = parseInt(window.localStorage.getItem('mainFlagModule3'));
     this.moduleNumber = window.localStorage.getItem('currentstatus');
     if (window.localStorage.getItem('token') == null) {
       this.router.navigate(['/']);
@@ -238,8 +239,8 @@ export class NewBaselineComponent implements OnInit {
       question.answered = false;
       // this.endApiAnsHit=false
     }
-    question.options.forEach((x) => { 
-      if (x.id !== option.id) x.selected = false; 
+    question.options.forEach((x) => {
+      if (x.id !== option.id) x.selected = false;
     });
     this.baselineSelectedAns = option.id;
     this.baselineSelectedQuestion = question.id;
@@ -274,7 +275,7 @@ export class NewBaselineComponent implements OnInit {
           // this.nextButtonFlag=true
           console.log("selected",this.quiz.questions[index+1])
           console.log("selected1",this.baselineSelectedQuestion,this.baselineSelectedAns,this.quiz.questions[index+1].id)
-          
+
           if(this.baselineSelectedQuestion == this.quiz.questions[index+1].id){
             if(this.quiz.questions[index+1].ans == null){
               console.log("NULLhit",this.baselineSelectedAns,this.baselineSelectedQuestion)
@@ -305,7 +306,7 @@ export class NewBaselineComponent implements OnInit {
                   this.userOption[this.quiz.questions[index + 1].id] = this.quiz.questions[index + 1].ans;
                   console.log("useroption",this.userOption)
                 }
-                
+
               }
             }
           }else{
@@ -319,7 +320,7 @@ export class NewBaselineComponent implements OnInit {
           // this.nextButtonFlag=false
         }
 
-        
+
 
 
       }
@@ -335,7 +336,7 @@ export class NewBaselineComponent implements OnInit {
           // this.nextButtonFlag=true
           console.log("selected",this.quiz.questions[index - 1])
           console.log("selected1",this.baselineSelectedQuestion,this.baselineSelectedAns,this.quiz.questions[index - 1].id)
-          
+
           if(this.baselineSelectedQuestion == this.quiz.questions[index - 1].id){
             if(this.quiz.questions[index - 1].ans == null){
               console.log("NULLhit",this.baselineSelectedAns,this.baselineSelectedQuestion)
@@ -368,7 +369,7 @@ export class NewBaselineComponent implements OnInit {
                 this.userOption[this.quiz.questions[index - 1].id] = this.quiz.questions[index - 1].ans;
                 console.log("useroption",this.userOption)
                 }
-                
+
               }
             }
           }else{
@@ -394,7 +395,7 @@ export class NewBaselineComponent implements OnInit {
           // this.nextButtonFlag=true
           console.log("selected33",this.quiz.questions[index])
           console.log("selected1",this.baselineSelectedQuestion,this.baselineSelectedAns)
-          
+
           if(this.baselineSelectedQuestion == this.quiz.questions[index].id){
             if(this.quiz.questions[index].ans == null){
               console.log("NULLhit",this.baselineSelectedAns,this.baselineSelectedQuestion)
@@ -427,7 +428,7 @@ export class NewBaselineComponent implements OnInit {
                   this.userOption[this.quiz.questions[index].id] = this.quiz.questions[index].ans;
                   console.log("useroptionj",this.userOption)
                 }
-                
+
               }
             }
           }else{
@@ -489,7 +490,7 @@ export class NewBaselineComponent implements OnInit {
     var dummyAns = JSON.stringify(this.userOption)
     var mainAns = {};
     mainAns['submoduleid'] = window.localStorage.getItem('uuid');
-   
+
     if(this.lastQuestion == 3 && (window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule3') == '7') && Object.keys(this.dummyAnsJson).length == this.pager.count){
       mainAns['event'] = "finish";
     }
@@ -522,7 +523,7 @@ export class NewBaselineComponent implements OnInit {
             this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
             this.Module2Service.setLocalStorage2(2);
             window.localStorage.setItem('uuid', data['data'].nextuuid)
-  
+
             window.localStorage.setItem('mainFlagModule2', '2')
             window.localStorage.setItem('subFlagModule2', '1')
           } else if(window.localStorage.getItem('mainFlagModule2') == '7'){
@@ -536,7 +537,7 @@ export class NewBaselineComponent implements OnInit {
             this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
             this.Module2Service.setLocalStorage2(8);
             window.localStorage.setItem('uuid', data['data'].nextuuid)
-  
+
             window.localStorage.setItem('mainFlagModule2', '8')
             window.localStorage.setItem('subFlagModule2', '1')
           } else if(window.localStorage.getItem('mainFlagModule3') == '7'){
@@ -550,11 +551,11 @@ export class NewBaselineComponent implements OnInit {
             this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
             this.Module2Service.setLocalStorage2(8);
             window.localStorage.setItem('uuid', data['data'].nextuuid)
-  
+
             window.localStorage.setItem('mainFlagModule3', '8')
             window.localStorage.setItem('subFlagModule3', '1')
           }
-          
+
         }
       },
       error => {
@@ -700,4 +701,4 @@ export class NewBaselineComponent implements OnInit {
     }
     return arra1;
   }
-}  
+}

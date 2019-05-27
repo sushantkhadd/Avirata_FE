@@ -58,8 +58,8 @@ export class Module15Component implements OnInit {
         {
           var mainJson;
           mainJson = JSON.parse(urlJson["children"][index].url);
-          this.urlArray["src1"] = mainJson["1.1.1"];
-          this.urlArray["src2"] = mainJson["1.1.2"];
+          this.urlArray["src1"] = mainJson["1.5.1"];
+          this.urlArray["src2"] = mainJson["1.5.2"];
         }
       }
     }
