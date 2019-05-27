@@ -178,6 +178,9 @@ ul.comments li,
 .c-pointer {
   cursor: pointer;
 }
+.c-not-allowed {
+  cursor: not-allowed;
+}
 
 body {
   font-family: "Hind", sans-serif;
@@ -676,7 +679,7 @@ body {
   bottom: 0;
   width: 100%;
   overflow: hidden;
-  z-index: 1000;
+  z-index: 99;
   height: 7.5%;
   padding: 8px;
   // @extend .box-shadow-dark;
@@ -964,7 +967,7 @@ body {
   bottom: 0;
   width: 100%;
   overflow: hidden;
-  z-index: 1000;
+  z-index: 99;
   height: 7.5%;
   padding: 8px;
 }
@@ -1063,7 +1066,7 @@ body {
       font-weight: 800;
       top: 40%;
     }
-    
+
   }
 }
 
@@ -1441,7 +1444,7 @@ body {
 }
 
 .submoduleStatusModal{
-  
+
   .modal {
     padding-top: 60px;
 
@@ -1582,12 +1585,12 @@ body {
       border-bottom-right-radius: 5px;
     }
   }
-  
+
 
   .dx-item-content {
     font-size: 0.90rem;
   }
-  
+
 }
 
 .inst-text {
@@ -1833,11 +1836,11 @@ body {
 
 // module 1.11
 .assignForm{
- 
+
   .card{
     border-radius: 0;
     border: none;
-    
+
     .card-header{
       border: 1px solid #ccc;
       border-radius: 0;
@@ -1865,7 +1868,7 @@ body {
     align-items: flex-start;
     justify-content: space-between;
     padding: 0;
-    border-bottom: 1px solid #dee2e6; 
+    border-bottom: 1px solid #dee2e6;
     border-top-left-radius: 0;
     border-top-right-radius:0;
 
@@ -1914,4 +1917,84 @@ h6.questionHead.lineHeight {
   // padding: 1.1rem;
   box-shadow: none;
   margin-bottom: 0;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+.outer-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background-color: #eceff1;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  z-index: 9999;
+
+  img {
+    margin-top: 10%;
+  }
+
+  .loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 80px;
+    height: 80px;
+    margin: 50px auto;
+    @include animation(spin 2s linear infinite);
+  }
+
+}
+
+.inner-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  @include transform(translate(-50%, -50%));
+  background-color: #eceff1;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  z-index: 999;
+
+  img {
+    margin: 10% auto;
+  }
+
+  .loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 80px;
+    height: 80px;
+    margin: -15px auto;
+    @include animation(spin 2s linear infinite);
+  }
+}
+
+.fixed-top{
+  z-index: 9999;
 }

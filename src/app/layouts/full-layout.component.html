@@ -6,6 +6,7 @@
 <a routerLink="/level-selection" class="btn btn-primary">Go to level-selection</a> -->
 <div class="wrapper">
   <!-- Sidebar  -->
+
   <nav id="sidebar" class="style-4">
 
     <div class="sidebar-header">
@@ -1261,6 +1262,7 @@
 
   <!-- Page Content  -->
   <div id="content">
+<!-- <ng2-slim-loading-bar class="loading"></ng2-slim-loading-bar> -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
       <div class="container-fluid">
         <img src="../../assets/img/dash_logo.png" alt="">
@@ -1306,7 +1308,11 @@
       <div class="d-flex">
         <app-timeline class="w-100"></app-timeline>
       </div>
-      <div class="container">
+      <div class="container position-relative" [class.vh-100]="loaderFlag">
+        <div class="inner-loader" *ngIf="loaderFlag">
+          <img src="../../assets/img/logo_cpd_combine_web.png" alt="">
+          <div class="loader"></div>
+        </div>
         <router-outlet></router-outlet>
       </div>
     </main>
@@ -1562,6 +1568,7 @@
        </span>
     </div>
     <div class="modal-content">
+      <div id="capture">
       <div class="modal-body pb-0">
         <div class="row">
           <div class="col-md-12 col-xs-12 col-sm-12">
@@ -1617,21 +1624,25 @@
           <img *ngIf="moduleCompleteStatus['type'] == 'allFinish'" class="img-responsive img-goldcup"
             src="../../assets/img/gold_cup.png">
         </div>
+      </div>
+      </div>
+
         <div class="row mt-2 justify-content-center social-icons" *ngIf="!needEfforts">
           <ul class="social-logo">
             <li>
-              <img class="img-responsive" src="../../assets/img/fb.png">
+             <a class="c-pointer" (click)="downloadReward()"><img class="img-responsive" src="../../assets/img/fb.png"></a>
             </li>
             <li>
-             <a href='https://api.whatsapp.com/send?'> <img class="img-responsive"
+             <a *ngIf="!getImage" id="getImage" class="c-pointer" (click)="shareReward()"> <img class="img-responsive"
                src="../../assets/img/whatsapp.png"></a>
+            <a *ngIf="getImage" class="c-pointer" data-action="share/whatsapp/share" [href]="getImage"><img class="img-responsive"
+                src="../../assets/img/whatsapp.png"></a>
             </li>
             <li>
-              <img class="img-responsive" src="../../assets/img/download.png">
+             <a class="c-pointer" (click)="downloadReward()"><img class="img-responsive" src="../../assets/img/download.png"></a>
             </li>
           </ul>
         </div>
-      </div>
        <div [ngClass]="needEfforts ? 'pt-3': 'pt-1'" class="modal-footer justify-content-center pt-1 pb-4"
          *ngIf="moduleCompleteStatus['type'] != 'allFinish'">
          <span>
@@ -1672,16 +1683,16 @@
                           translate}}.
           </p>
           <p class="congratulation"> {{'layout.pptInst' | translate}}</p>
-  
+
           <p class="congratulation"> {{'layout.nextSubmodule' | translate}} {{moduleCompleteStatus['next']}}
             {{'layout.start' | translate}}</p>
-  
+
         </div> -->
         <div *ngIf="moduleCompleteStatus['type'] == 'submodule'">
           <p class="congratulation">{{'layout.nextSubmodule' | translate}}
             <strong>'{{moduleCompleteStatus['next']}}'</strong> {{'layout.start'
                           | translate}}</p>
-  
+
         </div>
         <!-- <div class="finish-info text-center" *ngIf="moduleCompleteStatus['type'] == 'allFinish'">
           <span class="icon-check"></span>
@@ -1694,6 +1705,6 @@
       </div>
     </div>
   </div>
-  
+
     </div>
   </div>

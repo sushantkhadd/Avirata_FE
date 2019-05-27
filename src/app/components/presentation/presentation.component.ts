@@ -53,7 +53,7 @@ export class PresentationComponent implements OnInit {
   };
   rewardImgUrl1;
   rewardImgUrl2;
-  rewardsOptions = [];
+  rewardsOptions = []; hideMe;
 
   constructor(public _eleRef: ElementRef, public CommonService: CommonService, public CommonComponentService: CommonComponentService, public router: Router, public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService, private sanitizer: DomSanitizer, public domSanitizer: DomSanitizerPipe, public LanguageService: LanguageService) {
     this.toastr.setRootViewContainerRef(vcr);
@@ -98,6 +98,13 @@ export class PresentationComponent implements OnInit {
             }
           } else if (event == "askme")
           {
+            if (!this.fiftyFiftyFlag)
+            {
+              this.hideMe = true;
+            } else
+            {
+              this.hideMe = false;
+            }
             this.rewardImgUrl2 = this.imageJson["a2"];
             this.options = [];
             for (let i = 0; i < this.optionsStateDyanamic.length; i++)
@@ -207,7 +214,7 @@ export class PresentationComponent implements OnInit {
     this.isLoaded = true;
     setTimeout(() => {
       this.isLoaded = false;
-    }, 3000);
+    }, 4000);
     console.log("data",this.data,'count init',this.count)
     this.count = 1;
     this.showFinish = false;
@@ -642,6 +649,13 @@ export class PresentationComponent implements OnInit {
   }
   finishPDF() {
     this.sendCfuAns.emit(true);
+    if (this.options.length == 1)
+    {
+      this.hideMe = true;
+    } else
+    {
+      this.hideMe = false;
+    }
   }
   shuffle(arra1) {
     var ctr = arra1.length, temp, index;
