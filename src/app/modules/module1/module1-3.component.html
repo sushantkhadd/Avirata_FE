@@ -83,12 +83,18 @@
         </div>
       </div>
       <div *ngIf="flag == 1">
+          <div class="card-footer mb-4">
+              <p class="title">1. {{'L2Module1.subMenu1-3a' | translate}}</p>
+          </div>
         <app-static-video [receivedData]='passData'></app-static-video>
         <div class="card-footer text-center bg-white border-0">
           <button class="btn btn-primary" (click)="flag=0;">{{'Stepper.Back' | translate}}</button>
         </div>
       </div>
       <div *ngIf="flag == 2">
+          <div class="card-footer mb-4">
+              <p class="title">2. {{'L2Module1.subMenu1-3b' | translate}}</p>
+          </div>
         <app-static-video [receivedData]='passData'></app-static-video>
         <div class="card-footer text-center bg-white border-0">
           <button class="btn btn-primary" (click)="flag=0;">{{'Stepper.Back' | translate}}</button>
