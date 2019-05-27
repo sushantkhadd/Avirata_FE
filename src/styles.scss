@@ -24,6 +24,7 @@ ul.comments li,
 .post-comments-child,
 .list-checklist.verticleScroll {
   border: none;
+  border-radius: 0;
 }
 
 #content {
@@ -214,13 +215,6 @@ body {
   -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
-.loginBg {
-  .card {
-    background-color: #2368a2;
-    border: none;
-  }
-}
-
 .card {
   position: relative;
   display: -webkit-box;
@@ -298,6 +292,14 @@ body {
 
 .loginBg {
   background-image: url("../src/assets/img/loginBg.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  .card {
+    background-color: #2368a2;
+    border: none;
+  }
 }
 
 .text-white {
@@ -595,6 +597,8 @@ body {
 }
 
 .static-content {
+  padding: 1.5rem;
+
   .img-wrap {
     padding: 10px;
     border: 3px solid #ddd;
@@ -641,6 +645,7 @@ body {
     &.title {
       padding: 5px;
       font-weight: 700;
+      font-size: 0.90rem;
     }
   }
 }
@@ -1125,7 +1130,7 @@ body {
     p {
       line-height: 20px !important;
       margin-top: 0px !important;
-      font-size: 0.85rem;
+      font-size: 1rem;
       padding-left: 0px !important;
       color: #3b97d2;
     }
@@ -1191,13 +1196,15 @@ body {
 .borderBlue {
   // border: 10px solid #3b97d2;
   // border: 2px solid #3b97d2;
-  // @include box-shadow(0 2px 5px 0 rgba(0, 0, 0, 0.16),
-  //     0 2px 10px 0 rgba(0, 0, 0, 0.12));
+  @include box-shadow(0 2px 5px 0 rgba(0, 0, 0, 0.16),
+      0 2px 10px 0 rgba(0, 0, 0, 0.12));
 }
 
 .ins-block {
   .card {
     box-shadow: none;
+    border: none;
+    border-radius: 0;
   }
 
   .card .card-header {
@@ -1306,11 +1313,11 @@ body {
 }
 
 
-.wrapper-noaction1 {
-  -ms-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.16), 0 4px 10px 0 rgba(0, 0, 0, 0.12);
-  -o-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.16), 0 4px 10px 0 rgba(0, 0, 0, 0.12);
-  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.16), 0 4px 10px 0 rgba(0, 0, 0, 0.12);
-}
+// .wrapper-noaction1 {
+//   -ms-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.16), 0 4px 10px 0 rgba(0, 0, 0, 0.12);
+//   -o-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.16), 0 4px 10px 0 rgba(0, 0, 0, 0.12);
+//   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.16), 0 4px 10px 0 rgba(0, 0, 0, 0.12);
+// }
 
 // .instructionModal {
 //   .modal-dialog{
@@ -1456,6 +1463,8 @@ body {
 .level-bg {
   background-image: url("../src/assets/img/levelScreenBg.png");
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .submoduleStatusModal{
@@ -1549,7 +1558,7 @@ body {
 // Instruction-wrap
 .instruction-wrap {
   padding-top: 3rem;
-  // padding: 1rem;
+  
   .card {
     border-top: 0;
     border-radius: 20px;
@@ -1557,12 +1566,16 @@ body {
     @include box-shadow(0 2px 5px 0 rgba(0, 0, 0, 0.16),
       0 2px 10px 0 rgba(0, 0, 0, 0.12));
 
+      p{
+        font-size: 0.85rem;
+      }  
+
     .card-header {
       padding: 30px 0 0;
       background: #6196cf;
       position: relative;
       font-size: 0.85rem;
-
+      
       span.exp-img {
         background-image: url("../src/assets/img/expressions/instructions.png");
         background-size: contain;
@@ -1584,7 +1597,7 @@ body {
         font-size: 1.3rem;
         font-weight: 600;
       }
-
+      
       .mcq-title {
         color: #fff;
         font-weight: 600;
@@ -1706,9 +1719,11 @@ body {
 
 //submodule shadow
 .submoduleBox {
-  -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  .card-block{
+    -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  }
 }
 
 // FAQ section
@@ -1729,6 +1744,12 @@ body {
 }
 
 .drag-container {
+
+  h5{
+    font-size: 0.90rem;
+    line-height: 24px;
+  }
+
   div.scroll-list {
     overflow: auto;
   }
@@ -1792,6 +1813,10 @@ body {
     .card-block.scroll-list {
       padding: 1.25rem;
     }
+
+    .placeholder{
+      color: #777;
+    }
   }
 
   .bg-none {
@@ -1810,6 +1835,7 @@ body {
     box-shadow: none;
     margin-bottom: 0;
     border: none;
+    border-radius: 0;   
   }
 
   .list-group {
@@ -1838,6 +1864,19 @@ body {
 }
 
 .unlock-view {
+
+  .card-block {
+    padding: 0;
+  }
+  
+  .card-header{
+    margin-bottom: 1rem;
+
+    h5 {
+      font-size: 1rem;
+    }
+  }
+
   .card-footer{
     position: relative;
     z-index: 999;
@@ -1942,6 +1981,8 @@ h6.questionHead.lineHeight {
   // padding: 1.1rem;
   box-shadow: none;
   margin-bottom: 0;
+  border: none;
+  border-radius: 0;  
 }
 
 .dx-fieldset{
@@ -2063,4 +2104,5 @@ table,
 .errorMessage,
 .card {
   @include animation(slide-up 0.4s linear);
-}
+  } 
+

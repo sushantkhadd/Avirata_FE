@@ -14,6 +14,7 @@
       <div class="col-md-12">
         <div class="card ">
           <div class="card-block text-center">
+            <p class="title">1. {{'L2Module2.mitra' | translate}}</p>
             <app-static-video [receivedData]='passData' (finishCall)="videoFinish($event)"></app-static-video>
           </div>
         </div>
@@ -25,8 +26,8 @@
   </div>
 
   <div *ngIf="subFlagModule1 == 2">
-    <div class="instruction-wrap" *ngIf="!showVideoFlag">
-      <div class="borderBlue">
+    <div *ngIf="!showVideoFlag">
+      <div class="instruction-wrap">
       <div class="card">
         <div class="card-header text-white">
           <span class="exp-img instructions-img"></span>
@@ -77,6 +78,9 @@
           <div class="img-wrap">
             <a (click)="showVideo(urlArray['src1'],'L2Module2.mitra',1)">
               <img class="img-fluid v_thumb" src="./../../assets/img/thumb/3.8.1-Mitra-(M3B).png" alt="">
+              <div class="hover-opaque">
+                <i class="fa fa-play-circle fa-2x"></i>
+              </div>
             </a>
           </div>
         </div>
@@ -86,14 +90,14 @@
             <a (click)="showVideo(urlArray['src2'],'L2Module1.subMenu1-1',2)">
               <img class="img-fluid v_thumb" src="./../../assets/img/thumb/3.8.2.png" alt="">
               <div class="hover-opaque">
-                <i class="fa fa-play-circle-o fa-3x"></i>
+                <i class="fa fa-play-circle fa-2x"></i>
               </div>
             </a>
           </div>
         </div>
       </div>
       <div *ngIf="flag == 1">
-        <div class="card-header text-center bg-white border-0">
+        <div class="card-header text-center border-0">
           <h5>
             {{thumb_title | translate}}
           </h5>
@@ -104,7 +108,7 @@
         </div>
       </div>
       <div *ngIf="flag == 2">
-        <div class="card-header text-center bg-white border-0">
+        <div class="card-header text-center border-0">
           <h5>
             {{thumb_title | translate}}
           </h5>
