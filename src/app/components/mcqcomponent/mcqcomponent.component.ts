@@ -37,10 +37,13 @@ export class McqcomponentComponent implements OnInit {
     if(window.localStorage.getItem('mainFlagModule1')== '1' || window.localStorage.getItem('mainFlagModule1')== '4' || window.localStorage.getItem('mainFlagModule1')== '6'){
       this.queCount = parseInt(window.localStorage.getItem('subFlagModule1'))
     }
-    else if(window.localStorage.getItem('mainFlagModule2')== '3' || window.localStorage.getItem('mainFlagModule2')== '9' || window.localStorage.getItem('mainFlagModule2')== '11'){
+    else if(window.localStorage.getItem('mainFlagModule2')== '3' || window.localStorage.getItem('mainFlagModule2')== '9' || window.localStorage.getItem('mainFlagModule2')== '11' || window.localStorage.getItem('mainFlagModule4')== '5'){
       this.queCount = parseInt(window.localStorage.getItem('subFlagModule2'))
     }
-    
+    else if(window.localStorage.getItem('mainFlagModule4')== '5'){
+      this.queCount = parseInt(window.localStorage.getItem('subFlagModule4'))
+    }
+
     if(window.localStorage.getItem('mainFlagModule2')== '9'){
       this.totalQueCount = 7;
     }
@@ -108,7 +111,7 @@ export class McqcomponentComponent implements OnInit {
         for(var i=0; i< this.data.statementlist.length ; i++){
           this.priorities.push(this.data.statementlist[i].statement)
         }
-    } else if (this.questionType == 'mcqTextOption' && window.localStorage.getItem('mainFlagModule2') == '3') {
+    } else if (this.questionType == 'mcqTextOption' && (window.localStorage.getItem('mainFlagModule2') == '3' || window.localStorage.getItem('mainFlagModule4') == '5')) {
         console.log("data",this.data.questionlist[0].question,this.data.questionlist[0].options)
         this.priorities= []
        // this.priorities = this.data.questionlist[0].question;
@@ -116,7 +119,7 @@ export class McqcomponentComponent implements OnInit {
         this.statement = this.data.questionlist[0].question;
       for (var i = 0; i < this.tasks.length; i++)
       {
-        if (this.data.questionlist[0].options[i].value != null)
+        if (this.data.questionlist[0].options[i].value != null && this.data.questionlist[0].options[i].value != "")
         {
           this.priorities.push(this.data.questionlist[0].options[i].value)
         }
@@ -138,6 +141,7 @@ export class McqcomponentComponent implements OnInit {
       }
       if (this.showAnswer == true) {
         this.correctAns = this.data.rightanswer;
+        console.log("correctans",this.correctAns)
         if (window.localStorage.getItem('mainFlagModule2') == '3' && window.localStorage.getItem('subFlagModule2') == '4') {
           this.description = this.data.statement
         } else {
@@ -188,7 +192,7 @@ export class McqcomponentComponent implements OnInit {
       this.mysubModule7 != 2
     ) {
       if (this.showAnswer == true) {
-        if (this.questionType == 'mcqTextOption' && window.localStorage.getItem('mainFlagModule2') == '3'){
+        if (this.questionType == 'mcqTextOption' && (window.localStorage.getItem('mainFlagModule2') == '3' || window.localStorage.getItem('mainFlagModule4') == '5')){
           for(var i=0; i< this.data.questionlist[0].options.length ; i++){
             // console.log("optionsadddddd",$event.value,this.data.questionlist[0].options)
       
@@ -253,7 +257,17 @@ export class McqcomponentComponent implements OnInit {
   goNext5_3() {
     console.log("qsaDDDDDD",this.onlyPopUpAns)
     this.submitFlagMCQ = false
-    this.sendAns.emit(this.onlyPopUpAns)
+    if(window.localStorage.getItem('mainFlagModule2') == '3'){
+      this.instructionModal.show()
+     this.data.description = this.data.description
+     console.log("data.sescr",this.data.description)
+    }else{
+      this.sendAns.emit(this.onlyPopUpAns)   
+    }
+    // setTimeout(() => {
+    // this.sendAns.emit(this.onlyPopUpAns)      
+    // }, 1000);
+   
   }
 
   onValueChangedYesNoType($event) {
@@ -413,6 +427,9 @@ export class McqcomponentComponent implements OnInit {
     }
     else if(window.localStorage.getItem('mainFlagModule2')== '3' || window.localStorage.getItem('mainFlagModule2')== '9' || window.localStorage.getItem('mainFlagModule2')== '11'){
       this.queCount = parseInt(window.localStorage.getItem('subFlagModule2'))
+    }
+    else if(window.localStorage.getItem('mainFlagModule4')== '5'){
+      this.queCount = parseInt(window.localStorage.getItem('subFlagModule4'))
     }
 
     if (this.questionType == 'checkBoxOption') {
