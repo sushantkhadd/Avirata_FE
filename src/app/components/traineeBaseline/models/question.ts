@@ -13,7 +13,7 @@ export class Question {
         this.id = data.questionid;
         this.name = data.question;
         this.ans = data.answer;
-        if (this.ans == null)
+        if (this.ans == null || this.ans == "" || this.ans == undefined)
             this.answered = false;
         else
             this.answered = true;
