@@ -5,6 +5,13 @@
 // @import './assets/scss/style';
 /* Scrollbar CSS */
 
+body{
+ font-size: 0.875rem;
+  font-weight: normal;
+  line-height: 1.5;
+  color: #263238;
+}
+
 body::-webkit-scrollbar {
   width: 0.70em;
 }
@@ -29,7 +36,7 @@ ul.comments li,
 
 #content {
   // width: 100%;
-  padding: 5px 20px;
+  padding: 3px 20px;
   min-height: 100vh;
   @include transition(all 0.6s cubic-bezier(0.945, 0.02, 0.27, 0.665));
 
@@ -192,7 +199,7 @@ body {
 }
 
 .avirata-logo {
-  margin: 5px 0 20px 0;
+  margin: 5px 0 5px 0;
 }
 
 .logo-tagline {
@@ -529,8 +536,11 @@ body {
 
 //Dashboard Notification section
 .breadcrumb {
-  padding: 0.75rem 1rem;
-  margin-bottom: 1rem;
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  padding: .75rem 1rem;
+  margin-bottom: 2rem;
   list-style: none;
   background-color: #fff !important;
   -ms-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.16), 0 4px 10px 0 rgba(0, 0, 0, 0.12);
@@ -1052,7 +1062,8 @@ body {
   }
 
   .d-inBlock {
-    display: inline-block;
+    // display: inline-block;
+    display: block;
     margin-left: 1rem;
   }
 
@@ -1198,6 +1209,7 @@ body {
   // border: 2px solid #3b97d2;
   @include box-shadow(0 2px 5px 0 rgba(0, 0, 0, 0.16),
       0 2px 10px 0 rgba(0, 0, 0, 0.12));
+      background: #fff;
 }
 
 .ins-block {
@@ -1558,6 +1570,7 @@ body {
 // Instruction-wrap
 .instruction-wrap {
   padding-top: 3rem;
+  padding-bottom: 3rem; 
   
   .card {
     border-top: 0;
@@ -1661,7 +1674,6 @@ body {
   }
 }
 
-// Footer CSS
 // footer CSS
 .footerSection {
   position: absolute;
@@ -1675,8 +1687,8 @@ body {
 }
 
 #content {
-  position: relative;
-  margin-left: 240px;
+  // position: relative;
+  margin-left: 250px;
 }
 
 //Sidebar Menu scroll css
@@ -2106,3 +2118,6 @@ table,
   @include animation(slide-up 0.4s linear);
   } 
 
+.main .container{
+  padding: 0 30px;
+}

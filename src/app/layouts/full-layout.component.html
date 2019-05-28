@@ -1044,7 +1044,9 @@
     </nav>
     <main class="main mb-5">
       <div class="d-flex">
-        <app-timeline class="w-100"></app-timeline>
+        <div class="breadcrumb">
+            <app-timeline class="w-100"></app-timeline>
+        </div>
       </div>
       <div class="container position-relative" [class.vh-100]="loaderFlag">
         <div class="inner-loader" *ngIf="loaderFlag">
