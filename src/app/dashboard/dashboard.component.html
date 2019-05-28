@@ -46,8 +46,8 @@
           </div>
         </div>
       </div>
-    
-    
+
+
       <div>
           <!-- <p class="text-center questionHead">
             <span [innerHTML]="'newTranslate.dashHeadLine1' | translate"></span>
@@ -62,9 +62,9 @@
                     <p class="questionHead pos-rel">
                       <span>{{'L2NewLines.dashHeadLine_hello' | translate}}</span><br>
                       <span [innerHTML]="'L2NewLines.dashHeadLine1' | translate"></span><br><br>
-        
+
                       <span><b>{{'L2NewLines.dashHeadLine1_3_1' | translate}}</b>
-                     <span><img src="../../../assets/img/NEW.gif" class="newGifImg dash-inst"></span> 
+                     <span><img src="../../../assets/img/NEW.gif" class="newGifImg dash-inst"></span>
                       </span>
                       <span class="text-left d-inBlock" [innerHTML]="'L2NewLines.dashHeadLine1_3' | translate"></span><br>
                       <span>{{'L2NewLines.dashHeadLine2' | translate}}</span><br><br>
@@ -127,11 +127,11 @@
                           <th>{{'Report.srNo' | translate}}</th>
                           <th>{{'Stepper.Co-ordinator Name' | translate}}</th>
                           <th>{{'Login.Mobile' | translate}}</th>
-        
+
                         </tr>
                       </thead>
                       <tbody>
-        
+
                         <tr *ngFor="let item of filterDietList;let i = index">
                           <td *ngIf="item.coordinatorname != 'None'">
                             {{i+1}}
@@ -141,18 +141,18 @@
                           <td *ngIf="item.coordinatorname != 'None'">{{item.mobilenumber}}</td>
                           <p class="txt-center" *ngIf="item.coordinatorname == 'None'"> {{'newTranslate.infoNotAvail' | translate}}</p>
                         </tr>
-        
+
                       </tbody>
                     </table>
-        
+
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-    
-    
+
+
         <div *ngIf="userType=='trainee'">
             <!-- <div class="card-group">
               <div class="row mx-auto w-100">
@@ -211,7 +211,7 @@
                   </div>
                 </div>
                 <div class="col-sm-12 col-md-12 padd-0">
-          
+
                   <div class="card">
                     <div class="card-header">
                       <i class="fa fa-align-justify"></i> {{'Registration.Master Trainer' | translate}}
@@ -236,15 +236,15 @@
                             <p class="txt-center" *ngIf="item.mastername == 'None'">
                               {{'newTranslate.infoNotAvail' | translate}}</p>
                           </tr>
-          
+
                         </tbody>
                       </table>
-          
+
                     </div>
                   </div>
                 </div>
                 <div class="col-sm-12 col-md-12 padd-0">
-                  <div class="card">
+                  <div class="card mt-4">
                     <div class="card-header">
                       <i class="fa fa-align-justify"></i> {{'Dashboard.co-ordinator' | translate}}
                     </div>
@@ -255,7 +255,7 @@
                             <th>{{'Report.srNo' | translate}}</th>
                             <th>{{'Stepper.Co-ordinator Name' | translate}}</th>
                             <th>{{'Login.Mobile' | translate}}</th>
-          
+
                           </tr>
                         </thead>
                         <tbody>
@@ -269,18 +269,18 @@
                             <p class="txt-center" *ngIf="item.coordinatorname == 'None'">
                               {{'newTranslate.infoNotAvail' | translate}} </p>
                           </tr>
-          
+
                         </tbody>
                       </table>
-          
+
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-    
-    
+
+
           <div bsModal #rankModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
       aria-hidden="true">
       <div class="modal-dialog modal-primary" role="document">
@@ -301,7 +301,7 @@
             <button type="button" class="btn btn-secondary" (click)="rankConfirmNext()">{{'Stepper.Next' | translate}}</button>
           </div>
         </div>
-    
+
       </div>
     </div>
 </div>

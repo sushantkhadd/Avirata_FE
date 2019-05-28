@@ -217,9 +217,14 @@ body {
 
 .card-group {
   border-radius: 0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  // -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  // -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+
+  .card {
+    @include box-shadow(0 1px 3px rgba(0, 0, 0, 0.12),
+      0 1px 2px rgba(0, 0, 0, 0.24));
+  }
 }
 
 .card {
@@ -1570,8 +1575,8 @@ body {
 // Instruction-wrap
 .instruction-wrap {
   padding-top: 3rem;
-  padding-bottom: 3rem; 
-  
+  padding-bottom: 3rem;
+
   .card {
     border-top: 0;
     border-radius: 20px;
@@ -1581,14 +1586,14 @@ body {
 
       p{
         font-size: 0.85rem;
-      }  
+      }
 
     .card-header {
       padding: 30px 0 0;
       background: #6196cf;
       position: relative;
       font-size: 0.85rem;
-      
+
       span.exp-img {
         background-image: url("../src/assets/img/expressions/instructions.png");
         background-size: contain;
@@ -1610,7 +1615,7 @@ body {
         font-size: 1.3rem;
         font-weight: 600;
       }
-      
+
       .mcq-title {
         color: #fff;
         font-weight: 600;
@@ -1847,7 +1852,7 @@ body {
     box-shadow: none;
     margin-bottom: 0;
     border: none;
-    border-radius: 0;   
+    border-radius: 0;
   }
 
   .list-group {
@@ -1880,7 +1885,7 @@ body {
   .card-block {
     padding: 0;
   }
-  
+
   .card-header{
     margin-bottom: 1rem;
 
@@ -1994,7 +1999,7 @@ h6.questionHead.lineHeight {
   box-shadow: none;
   margin-bottom: 0;
   border: none;
-  border-radius: 0;  
+  border-radius: 0;
 }
 
 .dx-fieldset{
@@ -2116,8 +2121,12 @@ table,
 .errorMessage,
 .card {
   @include animation(slide-up 0.4s linear);
-  } 
+  }
 
 .main .container{
   padding: 0 30px;
+}
+
+.bottom-part {
+  margin-top: 1.9rem;
 }
