@@ -20,7 +20,7 @@ import {LanguageService} from '../../../language.service'
 })
 export class NewBaselineComponent implements OnInit {
   private selectedQuestionId; selectedAnswer; finishExamCard;userOption={};dummyAnsJson={};
-  public moduleNumber; mySubmodule2;
+  public moduleNumber; mySubmodule2;lastAns;
   // public nextButtonFlag;answerJSON;
   // oldSelectedAns;endApiAnsHit;
   @Input() public passData;
@@ -51,7 +51,7 @@ export class NewBaselineComponent implements OnInit {
   showQuize = false; token; alreadyDone; finishExamCardonRun;
   public baselineSelectedAns; baselineSelectedQuestion; mySubmodule3;
   public apiEndStart; apiEndSendAns; apiEndFinish; startJson = {};
-  lastQuestion;
+  lastQueId;
   constructor(private router: Router, private quizService: QuizService,public LocalstoragedetailsService: LocalstoragedetailsService, public Module1Service: Module1Service, public toastr: ToastsManager, vcr: ViewContainerRef, public Module2Service: Module2Service, public translate: TranslateService,public LanguageService:LanguageService) {
     this.toastr.setRootViewContainerRef(vcr);
   }
@@ -77,26 +77,32 @@ export class NewBaselineComponent implements OnInit {
           // for(var i=0; i<this.quiz.questions.length ; i++){
           //   this.quiz.questions[i].id = i;
           // }
-
-
+         for(var i=0; i<this.quiz.questions.length; i++){
+           if(this.quiz.questions[i].answered == true){
+            this.dummyAnsJson[this.quiz.questions[i].id] = this.quiz.questions[i].ans;
+            this.lastAns = this.quiz.questions[i].ans;
+            this.lastQueId = this.quiz.questions[i].id;
+           }
+         }
+         console.log("ansarr",this.dummyAnsJson)
         }
       },
       error => {
-        if (error.json().message == 'token not found' || error.json().message == 'token not match') {
+        if (error.error.message == 'token not found' || error.error.message == 'token not match') {
 
           this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
           setTimeout(() => {
             this.router.navigate(['/']);
           }, 4000)
-        } else if (error.json().message == 'examtype is required' || error.json().message == 'examtype key is required') {
+        } else if (error.error.message == 'examtype is required' || error.error.message == 'examtype key is required') {
           this.toastr.error(this.translate.instant('Errors.examTypeReqAndWrong'));
-        } else if (error.json().message == 'wrong examtype') {
+        } else if (error.error.message == 'wrong examtype') {
           this.toastr.error(this.translate.instant('Errors.examTypeReqAndWrong'));
-        } else if (error.json().message == 'json key error' || error.json().message == 'invalid request'|| error.json().message == 'unknown source'|| error.json().message == 'source is required') {
+        } else if (error.error.message == 'json key error' || error.error.message == 'invalid request'|| error.error.message == 'unknown source'|| error.error.message == 'source is required') {
           this.toastr.error(this.translate.instant('Errors.wrongInfo'));
-        } else if (error.json().message == 'access denied') {
+        } else if (error.error.message == 'access denied') {
           this.toastr.error(this.translate.instant('Errors.accessDenied'));
-        }else if (error.json().message == 'your baseline test already done') {
+        }else if (error.error.message == 'your baseline test already done') {
           this.showQuize=false;
           this.finishExamCard=true;
         }
@@ -129,44 +135,44 @@ export class NewBaselineComponent implements OnInit {
         }
       },
       error => {
-        if (error.json().message == 'token not found' || error.json().message == 'token not match') {
+        if (error.error.message == 'token not found' || error.error.message == 'token not match') {
 
           this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
           setTimeout(() => {
             this.router.navigate(['/']);
           }, 4000)
-        } else if (error.json().message == 'examtype is required') {
+        } else if (error.error.message == 'examtype is required') {
           this.toastr.error(this.translate.instant('Errors.examTypeReqAndWrong'));
-        } else if (error.json().message == 'wrong examtype') {
+        } else if (error.error.message == 'wrong examtype') {
           this.toastr.error(this.translate.instant('Errors.examTypeReqAndWrong'));
-        } else if (error.json().message == 'json key error') {
+        } else if (error.error.message == 'json key error') {
           this.toastr.error(this.translate.instant('Errors.wrongInfo'));
-        } else if (error.json().message == 'access denied') {
+        } else if (error.error.message == 'access denied') {
           this.toastr.error(this.translate.instant('Errors.accessDenied'));
-        } else if (error.json().message == 'source is required' || error.json().message == 'unknown source') {
+        } else if (error.error.message == 'source is required' || error.error.message == 'unknown source') {
           this.toastr.error(this.translate.instant('Errors.incompleteInfo'));
-        } else if (error.json().message == 'module not started') {
+        } else if (error.error.message == 'module not started') {
           this.toastr.error(this.translate.instant('Errors.moduleNotStarted'));
-        } else if (error.json().message == 'event is required') {
+        } else if (error.error.message == 'event is required') {
           this.toastr.error(this.translate.instant('Errors.userEventKeyReq'));
-        } else if (error.json().message == 'wrong event') {
+        } else if (error.error.message == 'wrong event') {
           this.toastr.error(this.translate.instant('Errors.wrongEvent'));
-        } else if (error.json().message == "exam not started") {
+        } else if (error.error.message == "exam not started") {
           this.toastr.error(this.translate.instant('Errors.checkInfoAll'));
-        } else if (error.json().message == "required quizid key") {
+        } else if (error.error.message == "required quizid key") {
           this.toastr.error(this.translate.instant('Errors.checkInfoAll'));
-        } else if (error.json().message == "quizid is required") {
+        } else if (error.error.message == "quizid is required") {
           this.toastr.error(this.translate.instant('Errors.checkInfoAll'));
-        } else if (error.json().message == "required useroption key") {
+        } else if (error.error.message == "required useroption key") {
           this.toastr.error(this.translate.instant('Errors.checkInfoAll'));
-        } else if (error.json().message == 'useroption is required') {
+        } else if (error.error.message == 'useroption is required') {
           this.toastr.error(this.translate.instant('Errors.checkInfoAll'));
-        } else if (error.json().message == 'wrong quizid') {
+        } else if (error.error.message == 'wrong quizid') {
           this.toastr.error(this.translate.instant('Errors.checkInfoAll'));
-        } else if (error.json().message == 'wrong useroption') {
+        } else if (error.error.message == 'wrong useroption') {
           this.toastr.error(this.translate.instant('Errors.checkInfoAll'));
-        } else if (error.json().message == 'your endline test already done') {
-          window.localStorage.setItem('uuid', error.json().data.nextuuid)
+        } else if (error.error.message == 'your endline test already done') {
+          window.localStorage.setItem('uuid', error.error.data.nextuuid)
 
           window.localStorage.setItem('mainFlagModule6', '2')
           this.Module2Service.setLocalStorage2(2);
@@ -216,6 +222,8 @@ export class NewBaselineComponent implements OnInit {
       console.log("check",question,option,e,id)
     //  question.id = parseInt(this.LanguageService.get('aesEncryptionKey', question.id))
       console.log("question.id",this.filteredQuestions,this.pager.index,this.pager.index + this.pager.size,this.quiz.questions,question.id)
+      this.lastAns='';
+      this.lastQueId='';
     //   question.options.forEach((x) => { if (x.id !== option.id) x.selected = false; });
     // this.baselineSelectedAns = option.id;
     // this.baselineSelectedQuestion = question.id;
@@ -237,6 +245,7 @@ export class NewBaselineComponent implements OnInit {
     }
     else {
       question.answered = false;
+      console.log("not checked")
       // this.endApiAnsHit=false
     }
     question.options.forEach((x) => {
@@ -262,7 +271,6 @@ export class NewBaselineComponent implements OnInit {
 
   goTo(index: number, opearation: number) {
    if(opearation == 3){
-    this.lastQuestion = opearation;
    }
     if (opearation == 1) {
       if (this.quiz.questions[index].answered == true && index >= 0 && index < this.pager.count) {
@@ -280,7 +288,11 @@ export class NewBaselineComponent implements OnInit {
             if(this.quiz.questions[index+1].ans == null){
               console.log("NULLhit",this.baselineSelectedAns,this.baselineSelectedQuestion)
               console.log("NULLhit1",this.quiz.questions[index+1].ans,this.quiz.questions[index+1].id)
-              this.quiz.questions[index+1].ans=this.baselineSelectedAns
+              if(window.localStorage.getItem('mainFlagModule2') == '1'){
+                this.quiz.questions[index+1].ans=this.baselineSelectedAns
+                this.userOption[this.quiz.questions[index + 1].id] = this.quiz.questions[index + 1].ans;
+                console.log("useroption",this.userOption)
+              }
               if (window.localStorage.getItem('currentstatus') == '1'){
                 console.log("1")
                 this.sendAnswer(this.baselineSelectedAns, this.baselineSelectedQuestion, this.apiEndSendAns);
@@ -329,6 +341,7 @@ export class NewBaselineComponent implements OnInit {
       }
     }
     else if(opearation == 2){
+      console.log("index",index,opearation,this.quiz.questions[index - 1].answered,this.pager.count)
       if (this.quiz.questions[index - 1].answered == true && index >= 0 && index < this.pager.count) {
         if (this.quizService.answerSendingError === false) {
           this.pager.index = index;
@@ -380,11 +393,13 @@ export class NewBaselineComponent implements OnInit {
         }
         else {
           this.toastr.error(this.translate.instant('Errors.chooseOptions'));
+          console.log("else")
           // this.nextButtonFlag=false
         }
       }
       else {
         this.toastr.error(this.translate.instant('Errors.chooseOptions'));
+        console.log("else1")
         // this.nextButtonFlag=false
       }
     }else{
@@ -468,32 +483,42 @@ export class NewBaselineComponent implements OnInit {
       }
       else {
         console.log("finish")
-        var obj = { "type": "submodule", "route": true, "current": this.translate.instant('Errors.currentChachni1'), "next": this.translate.instant('Errors.nextChachni1'), "nextRoute": "/modules/module6/endline2" }
-        //  check here
-        this.Module2Service.setLocalStorage2(2);
-        this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
-        window.localStorage.setItem('mainFlagModule6', '2')
-        window.localStorage.setItem('subFlagModule6', '1')
+        // var obj = { "type": "submodule", "route": true, "current": this.translate.instant('Errors.currentChachni1'), "next": this.translate.instant('Errors.nextChachni1'), "nextRoute": "/modules/module6/endline2" }
+        // //  check here
+        // this.Module2Service.setLocalStorage2(2);
+        // this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+        // window.localStorage.setItem('mainFlagModule6', '2')
+        // window.localStorage.setItem('subFlagModule6', '1')
       }
     }
   }
   sendAnswer(baselineAns, baselineQueId, apiEndSendAns) {
     this.selectedQuestionId = baselineQueId;
     this.selectedAnswer = baselineAns;
+    if(window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule3') == '7'){
+      if((this.lastAns != "" && this.lastAns != null && this.lastAns != undefined) && (this.lastQueId != "" && this.lastQueId != null && this.lastQueId != undefined))
+      {
+        console.log("lastans",this.lastAns,this.dummyAnsJson,this.lastQueId)
+      }
+      else{
+        this.lastAns = baselineAns;
+        this.dummyAnsJson[this.selectedQuestionId] = this.selectedAnswer;
+        console.log("lastans1",this.lastAns)
+        this.lastQueId = baselineQueId;
+      }
+      console.log("dummyjson",this.dummyAnsJson,this.pager.count)
+     }
+    
     this.token = window.localStorage.getItem('token');
     console.log("useroption",this.userOption)
     // var answerJSON = '{"submoduleid":"' + window.localStorage.getItem('uuid') + '","useranswer":"' + JSON.stringify(this.userOption) + '","event":"answer"}'
-    if(window.localStorage.getItem('mainFlagModule2') == '7'){
-     this.dummyAnsJson[this.selectedQuestionId] = this.selectedAnswer;
-     console.log(this.dummyAnsJson,this.pager.count)
-    }
+    
     var dummyAns = JSON.stringify(this.userOption)
     var mainAns = {};
     mainAns['submoduleid'] = window.localStorage.getItem('uuid');
-
-    if(((this.pager.index + 1)==(this.pager.count)) && (window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule3') == '7') && Object.keys(this.dummyAnsJson).length == this.pager.count){
+    console.log("lastqu",this.pager.index,this.pager.count)
+    if(((this.pager.index + 1)==(this.pager.count)) && (window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule3') == '7')  && Object.keys(this.dummyAnsJson).length == this.pager.count){
       mainAns['event'] = "finish";
-      console.log("lastqu",this.lastQuestion,((this.pager.index + 1)==(this.pager.count)))
     }
    else{
     mainAns['event'] = "answer";
@@ -502,8 +527,8 @@ export class NewBaselineComponent implements OnInit {
       mainAns['useranswer'] = JSON.parse(dummyAns);
     }
     else if(window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule3') == '7'){
-      mainAns['useranswer'] = this.selectedAnswer;
-      mainAns['questionid'] = this.selectedQuestionId;
+      mainAns['useranswer'] = this.lastAns;
+      mainAns['questionid'] = this.lastQueId;
     }
 
     console.log("jsonbody",mainAns)
@@ -595,41 +620,41 @@ export class NewBaselineComponent implements OnInit {
         }
       },
       error => {
-        if (error.json().message == 'token not found' || error.json().message == 'token not match') {
+        if (error.error.message == 'token not found' || error.error.message == 'token not match') {
 
           this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
           setTimeout(() => {
             this.router.navigate(['/']);
           }, 4000)
-        } else if (error.json().message == 'examtype is required' || error.json().message == 'examtype is required') {
+        } else if (error.error.message == 'examtype is required' || error.error.message == 'examtype is required') {
           this.toastr.error(this.translate.instant('Errors.examTypeReqAndWrong'));
-        } else if (error.json().message == 'wrong examtype') {
+        } else if (error.error.message == 'wrong examtype') {
           this.toastr.error(this.translate.instant('Errors.examTypeReqAndWrong'));
-        } else if (error.json().message == 'json key error') {
+        } else if (error.error.message == 'json key error') {
           this.toastr.error(this.translate.instant('Errors.wrongInfo'));
-        } else if (error.json().message == 'access denied') {
+        } else if (error.error.message == 'access denied') {
           this.toastr.error(this.translate.instant('Errors.accessDenied'));
-        } else if (error.json().message == 'source is required' || error.json().message == 'unknown source') {
+        } else if (error.error.message == 'source is required' || error.error.message == 'unknown source') {
           this.toastr.error(this.translate.instant('Errors.incompleteInfo'));
-        } else if (error.json().message == 'module not started') {
+        } else if (error.error.message == 'module not started') {
           this.toastr.error(this.translate.instant('Errors.moduleNotStarted'));
-        } else if (error.json().message == 'event is required') {
+        } else if (error.error.message == 'event is required') {
           this.toastr.error(this.translate.instant('Errors.userEventKeyReq'));
-        } else if (error.json().message == 'wrong event') {
+        } else if (error.error.message == 'wrong event') {
           this.toastr.error(this.translate.instant('Errors.wrongEvent'));
-        } else if (error.json().message == "exam not started") {
+        } else if (error.error.message == "exam not started") {
           this.toastr.error(this.translate.instant('Errors.checkInfoAll'));
-        } else if (error.json().message == "required quizid key") {
+        } else if (error.error.message == "required quizid key") {
           this.toastr.error(this.translate.instant('Errors.checkInfoAll'));
-        } else if (error.json().message == "quizid is required") {
+        } else if (error.error.message == "quizid is required") {
           this.toastr.error(this.translate.instant('Errors.checkInfoAll'));
-        } else if (error.json().message == "required useroption key") {
+        } else if (error.error.message == "required useroption key") {
           this.toastr.error(this.translate.instant('Errors.checkInfoAll'));
-        } else if (error.json().message == 'useroption is required') {
+        } else if (error.error.message == 'useroption is required') {
           this.toastr.error(this.translate.instant('Errors.checkInfoAll'));
-        } else if (error.json().message == 'wrong quizid') {
+        } else if (error.error.message == 'wrong quizid') {
           this.toastr.error(this.translate.instant('Errors.checkInfoAll'));
-        } else if (error.json().message == 'wrong useroption') {
+        } else if (error.error.message == 'wrong useroption') {
           this.toastr.error(this.translate.instant('Errors.checkInfoAll'));
         }
         else {
