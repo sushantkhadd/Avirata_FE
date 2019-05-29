@@ -573,13 +573,15 @@ body {
   color: #263238;
   background: #eceff1;
   border-top: 1px solid #cfd8dc;
-  font-size: 13px;
+  font-size: 14px;
   margin-left: -32px;
   margin-right: -32px;
+  font-weight: 500;
 }
 
 .app-footer marquee {
   margin-bottom: -10px;
+  font-weight: 500;
 }
 
 .video-stat {
@@ -1235,8 +1237,8 @@ body {
   }
 
   .card .card-header {
-    background-color: #3b97d2;
-    border-bottom: 10px solid #3b97d2;
+    background-color: #6196cf;
+    border-bottom: 10px solid #6196cf;
     padding-left: 0.50rem;
   }
 
@@ -1698,11 +1700,13 @@ body {
 .footerSection {
   position: absolute;
   bottom: 0;
-}
 
-.footerSection {
   .marquee-border {
     border-top: 1px solid #cfd8dc;
+  }
+  span a{
+    color: #20a8d8 !important;
+    text-decoration: none;
   }
 }
 
@@ -1941,6 +1945,9 @@ body {
 
 // presentation modal
 .ansCheckModal{
+  .modal-dialog{
+    margin-top: 5rem;
+  }
   .modal-content {
     border-width: 5px;
     // border-top: 0;
@@ -2141,12 +2148,17 @@ table,
 .bottom-part {
   margin-top: 1.9rem;
 }
-
-.counter {
-  position: absolute;
-  z-index: 99;
-  right: 0;
+.badge{
+  &.counter {
+    position: absolute;
+    z-index: 99;
+    right: 0;
+    top: -21%;
+    font-size: 80%;
+    background: none;
+  }
 }
+
 
 .rating-count {
   position: absolute;

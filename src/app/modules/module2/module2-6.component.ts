@@ -113,7 +113,7 @@ export class Module26Component implements OnInit {
     var jsonBody = {};
     if (this.answerData.length == 0)
     {
-      this.toastr.error("You must select at least one option");
+      this.toastr.error(this.translate.instant("Errors.requiredOneOpt"));
     } else
     {
       jsonBody["submoduleid"] = window.localStorage.getItem("uuid");

@@ -39,7 +39,7 @@
 </div>
 
 <div id="quiz" *ngIf="showQuize" class="baseline-instructtion">
-    <h6 class="questionHead lineHeight">
+    <h6 class="questionHead lineHeight p-2">
        <strong *ngIf="mySubmodule2 == 1">{{'Quiz.traineebaselineQue' | translate}}</strong>
        <strong *ngIf="mySubmodule2 == 7">{{'Quiz.traineebaselineQue1' | translate}}</strong>
        <strong *ngIf="mySubmodule3 == 7">{{'Quiz.traineebaselineQue2' | translate}}</strong>
@@ -48,7 +48,7 @@
 
     <div *ngIf="mode=='quiz' && quiz">
         <div *ngFor="let question of filteredQuestions;" class="position-relative">
-                <div class="badge badge-info ml-3 float-right mt-2 p-2 mr-2 counter">{{'Quiz.Question' | translate}}
+                <div class="badge badge-info ml-3 float-right mt-3 p-2 mr-2 counter">{{'Quiz.Question' | translate}}
                   {{pager.index + 1}} / {{pager.count}}</div>
                 <div class="card p-2">
                 <h6>{{pager.index + 1}}.

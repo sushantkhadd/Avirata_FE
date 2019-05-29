@@ -16,8 +16,8 @@
           <span class="exp-img instructions-img"></span>
           <h5>{{'Quiz.note' | translate}}</h5>
         </div>
-        <div class="card-block pt-2">
-            <p>{{'number.1' | translate}}.&nbsp;{{'L2Instruction.inst_ppt1' | translate}}</p>
+        <div class="card-block pt-4">
+          <p>{{'number.1' | translate}}.&nbsp;{{'L2Instruction.inst_ppt1' | translate}}</p>
         </div>
         <div class="card-footer">
           <div class="float-right hidden-xs-down">
@@ -28,37 +28,44 @@
     </div>
   </div>
   <div *ngIf="startPdf && !nextFlag">
-    <app-presentation [data]='passValues' (sendCfuAns)="finishPDF($event)"></app-presentation>
+    <div class="card">
+      <div class="card-footer text-center">
+        <h6>{{'L2Module2.subMenu2-16' | translate}}</h6>
+      </div>
+      <app-presentation [data]='passValues' (sendCfuAns)="finishPDF($event)"></app-presentation>
+    </div>
   </div>
   <div class="assignForm" *ngIf="nextFlag">
-      <h6 class="questionHead lineHeight">{{'L2common.caution' | translate}} <span [innerHTML]="inst"> </span></h6>
+    <h6 class="questionHead lineHeight">{{'L2common.caution' | translate}}
+      <span [innerHTML]="inst"> </span>
+    </h6>
     <div class="card">
-      <div class="card-block pt-2">
+      <div class="card-block pt-4">
         <form #assignForm="ngForm">
           <div class="form-group row">
-            <label class="col-sm-12 form-control-label" [for]="questionid1" [innerHTML]="question1"></label>
-            <div class="col-12 controls">
+            <label class="col-4 col-md-4 col-sm-4 form-control-label" [for]="questionid1" [innerHTML]="question1"></label>
+            <div class="col-8 col-sm-8 col-md-8 controls">
               <textarea class="form-control" [id]="questionid1" name="answer1" [(ngModel)]="answer1" rows="3" #addr="ngModel" maxlength="500"
                 required></textarea>
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-12 form-control-label" [for]="questionid2" [innerHTML]="question2"></label>
-            <div class="col-12 controls">
+            <label class="col-4 col-md-4 col-sm-4 form-control-label" [for]="questionid2" [innerHTML]="question2"></label>
+            <div class="col-8 col-sm-8 col-md-8 controls">
               <textarea class="form-control" [id]="questionid2" name="answer2" [(ngModel)]="answer2" rows="3" #addr="ngModel" maxlength="500"
                 required></textarea>
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-12 form-control-label" [for]="questionid3" [innerHTML]="question3"></label>
-            <div class="col-12 controls">
+            <label class="col-4 col-md-4 col-sm-4 form-control-label" [for]="questionid3" [innerHTML]="question3"></label>
+            <div class="col-8 col-sm-8 col-md-8 controls">
               <textarea class="form-control" [id]="questionid3" name="answer3" [(ngModel)]="answer3" rows="3" #addr="ngModel" maxlength="500"
                 required></textarea>
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-12 form-control-label" [for]="questionid4" [innerHTML]="question4"></label>
-            <div class="col-12 controls">
+            <label class="col-4 col-md-4 col-sm-4 form-control-label" [for]="questionid4" [innerHTML]="question4"></label>
+            <div class="col-8 col-sm-8 col-md-8 controls">
               <textarea class="form-control" [id]="questionid4" name="answer4" [(ngModel)]="answer4" rows="3" #addr="ngModel" maxlength="500"
                 required></textarea>
             </div>

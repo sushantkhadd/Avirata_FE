@@ -17,7 +17,7 @@
                     <span class="exp-img instructions-img"></span>
                     <h5>{{'Quiz.note' | translate}}</h5>
                 </div>
-                <div class="card-block pt-2">
+                <div class="card-block pt-4">
                     <p>{{'number.1' | translate}}.&nbsp;{{'L2Instruction.inst_ppt1' | translate}}</p>
                 </div>
                 <div class="card-footer">
@@ -33,7 +33,12 @@
     </div>
 
     <div *ngIf="startPdf">
-        <app-presentation [data]='passValues' (sendCfuAns)="finishPDF($event)"></app-presentation>
+        <div class="card">
+            <div class="card-footer text-center">
+                <h6>{{'L2Module2.subMenu2-17' | translate}}</h6>
+            </div>
+            <app-presentation [data]='passValues' (sendCfuAns)="finishPDF($event)"></app-presentation>
+        </div>
     </div>
 </div>
 <div *ngIf="mainFlagModule2 > 17">
