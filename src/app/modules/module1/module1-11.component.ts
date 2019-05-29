@@ -62,6 +62,9 @@ export class Module111Component implements OnInit {
   questionFlag;
   trimFlag;
   urlArray = {};nextFlag;
+  public inst =
+    "Assignment: दिलेल्या प्रसंगातील अविवेकी विचार शोधून त्यांच्याशी तिन्ही पद्धतीने प्रतिवाद कसा कराल ते लिहा. इतरांनी लिहिलेल्या उत्तरांवर प्रतिक्रिया दया.";
+
   ngOnInit() {
     this.vedioCompleteUrl = "79vHVVtmIoQ";
     this.mainFlagModule1 = parseInt(

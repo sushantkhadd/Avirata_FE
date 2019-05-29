@@ -41,6 +41,7 @@
   <div *ngIf="subFlagModule1 == 2 && !nextFlag">
     <div class="assignForm">
       <div class="card">
+          <h6 class="questionHead lineHeight">{{'L2common.caution' | translate}} <span [innerHTML]="inst"> </span></h6>
         <div class="card-header">
           <h5 [innerHTML]="description">
           </h5>
@@ -48,50 +49,50 @@
         <div class="card-block pt-2">
           <form #assignForm="ngForm">
             <div class="form-group row">
-              <label class="col-sm-12 form-control-label" for="answer1" [innerHTML]="question1"></label>
-              <div class="col-12 controls">
+              <label class="col-sm-4 col-md-4 col-4 form-control-label" for="answer1" [innerHTML]="question1"></label>
+              <div class="col-md-8 col-sm-8 col-8 controls">
                 <textarea class="form-control" id="answer1" name="answer1" [(ngModel)]="answer1" rows="3" #addr="ngModel" maxlength="500"
                   required></textarea>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-12 form-control-label" for="answer2" [innerHTML]="question2"></label>
-              <div class="col-12 controls">
+              <label class="col-sm-4 col-md-4 col-4 form-control-label" for="answer2" [innerHTML]="question2"></label>
+              <div class="col-md-8 col-sm-8 col-8 controls">
                 <textarea class="form-control" id="answer2" name="answer2" [(ngModel)]="answer2" rows="3" #addr="ngModel" maxlength="500"
                   required></textarea>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-12 form-control-label" for="answer3" [innerHTML]="question3"></label>
-              <div class="col-12 controls">
+              <label class="col-sm-4 col-md-4 col-4 form-control-label" for="answer3" [innerHTML]="question3"></label>
+              <div class="col-md-8 col-sm-8 col-8 controls">
                 <textarea class="form-control" id="answer3" name="answer3" [(ngModel)]="answer3" rows="3" #addr="ngModel" maxlength="500"
                   required></textarea>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-12 form-control-label" for="answer4" [innerHTML]="question4"></label>
-              <div class="col-12 controls">
+              <label class="col-sm-4 col-md-4 col-4 form-control-label" for="answer4" [innerHTML]="question4"></label>
+              <div class="col-md-8 col-sm-8 col-8 controls">
                 <textarea class="form-control" id="answer4" name="answer4" [(ngModel)]="answer4" rows="3" #addr="ngModel" maxlength="500"
                   required></textarea>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-12 form-control-label" for="answer5" [innerHTML]="question5"></label>
-              <div class="col-12 controls">
+              <label class="col-sm-4 col-md-4 col-4 form-control-label" for="answer5" [innerHTML]="question5"></label>
+              <div class="col-md-8 col-sm-8 col-8 controls">
                 <textarea class="form-control" id="answer5" name="answer5" [(ngModel)]="answer5" rows="3" #addr="ngModel" maxlength="500"
                   required></textarea>
               </div>
             </div>
             <div class="form-group row" *ngIf="questionFlag == true">
-              <label class="col-sm-12 form-control-label" for="answer6" [innerHTML]="question6"></label>
-              <div class="col-12 controls">
+              <label class="col-sm-4 col-md-4 col-4 form-control-label" for="answer6" [innerHTML]="question6"></label>
+              <div class="col-md-8 col-sm-8 col-8 controls">
                 <textarea class="form-control" id="answer6" name="answer6" [(ngModel)]="answer6" rows="3" #addr="ngModel" maxlength="500"
                   required></textarea>
               </div>
             </div>
           </form>
         </div>
-        <div class="card-footer text-center bg-white border-0">
+        <div class="card-footer text-right bg-white border-0">
           <button class="btn btn-primary" [disabled]="assignForm.invalid || trimFlag" (click)="questionFlag == true ? submit() : finish2();">{{'Login.Close' | translate}}</button>
         </div>
       </div>

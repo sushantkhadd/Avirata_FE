@@ -4,12 +4,17 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css');
 // @import './assets/scss/style';
 /* Scrollbar CSS */
+@import url('https://fonts.googleapis.com/css?family=Hind:300,400,500,600,700');
 
-body{
- font-size: 0.875rem;
-  font-weight: normal;
-  line-height: 1.5;
-  color: #263238;
+html{
+  body{
+    font-family: 'Hind', sans-serif !important;
+    font-size: 1rem;
+    font-weight: normal;
+    line-height: 1.5;
+    color: #263238;
+    padding-right: 0 !important;
+  }
 }
 
 body::-webkit-scrollbar {
@@ -548,13 +553,6 @@ body {
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.16), 0 4px 10px 0 rgba(0, 0, 0, 0.12);
   border-radius: 0 !important;
 }
-
-// .notification-section {
-//   margin-left: -46px;
-//   margin-right: -47px;
-//   margin-top: -24px;
-//   margin-bottom: 1.5rem;
-// }
 
 .notify {
   width: 100%;
@@ -1115,6 +1113,7 @@ body {
 
     .modal-header {
       background: #6196cf;
+      padding: 0.5rem;
 
       span.exp-img {
         // background-image: url("../../../assets/img/expressions/instructions.png");
@@ -1124,12 +1123,12 @@ body {
         background-repeat: no-repeat;
         position: absolute;
         z-index: 99;
-        width: 100px;
-        height: 100px;
+        width: 120px;
+        height: 120px;
         bottom: 0;
         right: 0;
         left: 0;
-        top: -6%;
+        top: -9%;
         margin: 0 auto;
       }
     }
@@ -1141,7 +1140,7 @@ body {
     p {
       line-height: 20px !important;
       margin-top: 0px !important;
-      font-size: 1rem;
+      font-size: 1.1rem;
       padding-left: 0px !important;
       color: #3b97d2;
     }
@@ -1154,6 +1153,8 @@ body {
       margin-bottom: 1rem;
       font-size: 1rem;
     }
+
+   
   }
 
   .modal-dialog {
@@ -1178,7 +1179,7 @@ body {
     padding: 0.25rem;
 
     .dx-item-content {
-      font-size: 0.85rem;
+      font-size: 1rem;
     }
 
     .dx-fieldset {
@@ -1188,7 +1189,11 @@ body {
 
   .rewards-content{
     h4{
-      padding-left: 1rem;
+      padding-left: 3.5rem;
+    }
+
+    img{
+      width: 80%;
     }
   }
 
@@ -1201,7 +1206,10 @@ body {
 
 .instructionModal .modal-header .modal-title {
   padding-left: 1rem;
-  font-size: 1rem;
+  // font-size: 1rem;
+  h4{
+    font-size: 1.5rem;
+  }
 }
 
 .borderBlue {
@@ -1524,7 +1532,6 @@ body {
           margin: 30px auto 0px;
           padding-bottom: 10px;
           color: #444;
-          font-size: 1rem;
           font-weight: 600;
         }
       }
@@ -1580,7 +1587,8 @@ body {
       0 2px 10px 0 rgba(0, 0, 0, 0.12));
 
       p{
-        font-size: 0.85rem;
+        // font-size: 0.85rem;
+        line-height: 16px;
       }  
 
     .card-header {
@@ -1635,7 +1643,7 @@ body {
 }
 
 .inst-text {
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .submoduleStatusModal {
@@ -1883,10 +1891,6 @@ body {
   
   .card-header{
     margin-bottom: 1rem;
-
-    h5 {
-      font-size: 1rem;
-    }
   }
 
   .card-footer{
@@ -2007,8 +2011,8 @@ h6.questionHead.lineHeight {
 .newCFUPopup{
   &.instructionModal{
   span.exp-img{
-    left: -52px !important;
-    top: 3% !important;
+    left: -56px !important;
+    top: -9% !important;
   }
 }
 }
@@ -2120,4 +2124,43 @@ table,
 
 .main .container{
   padding: 0 30px;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px){
+  .app-footer{
+    margin-left: 0;
+    margin-right: 0;
+    font-size: 10px;
+    line-height: 22px;
+  }
+
+  .modal-dialog {
+    margin: 2rem !important;
+  }
+}
+
+.dx-radiogroup .dx-radiobutton, .dx-radiogroup{
+  font-family: 'Hind', sans-serif !important;
+}
+
+.card{
+  .card-footer{
+    h6{
+      font-size: 1.2rem;
+      padding: 0.5rem 0;
+    }
+  }
+}
+
+.notification-section {
+  top: -17px;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.notifySection {
+  .row{
+    margin-right: -30px !important;
+    margin-left: -30px !important;
+  }
 }

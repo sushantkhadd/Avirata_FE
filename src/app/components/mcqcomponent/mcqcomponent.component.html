@@ -234,14 +234,14 @@
 </div>
 </div>
 
-<div class="instructionModal">
+<div class="mcqComponentModal">
     <div bsModal #instructionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
         aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-primary" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <span class="exp-img" [style.background-image]="'url(\'../../../assets/img/expressions/instructions.png\')'"></span>
-                    <h4 class="modal-title">{{'1_5.compare_title' | translate}}:</h4>
+            <div class="modal-content" [style.border-color]="'#20a8d8'">
+                <div class="modal-header pl-3">
+                    <span class="exp-img img-rotate" [style.background-image]="'url(\'../../../assets/img/expressions/instructions.png\')'"></span>
+                    <h4 class="modal-title ml-2 pl-4">{{'newTranslate.description' | translate}}</h4>
                 </div>
                 <div class="modal-body">
                     <!-- <p><b>{{'newTranslate.description' | translate }}</b></p> -->
