@@ -152,7 +152,7 @@
 </div>
 
 
-<div class="drag-container" *ngIf="data.type=='single' && mainFlagModule1 == 10">
+<div class="drag-container" *ngIf="data.type=='single' && (mainFlagModule1 == 10 || mainFlagModule3 == 12)">
   <!-- <div class="text-left">
     <p class="sub-title"><b>{{'L2Module2.drag_title_110' | translate}}</b></p>
   </div> -->
@@ -161,7 +161,7 @@
   <!-- <div class="card" *ngIf="options"> -->
   <div class="card-header">
     <h5>
-      {{question}}
+     {{queCount}}.&nbsp; {{question}}
     </h5>
   </div>
   <div class="card-block">
@@ -332,7 +332,7 @@
   <!-- </div> -->
 </div>
 
-<div class="drag-container differ" *ngIf="data.type=='single' && (mainFlagModule1 == 8 || mainFlagModule3 == 12)">
+<div class="drag-container differ" *ngIf="data.type=='single' && (mainFlagModule1 == 8)">
    <!-- <div class="text-left" *ngIf="mainFlagModule1 == 8">
      <p class="sub-title"><b>{{'L2Module2.drag_title_18' | translate}}</b></p>
    </div> -->
@@ -347,14 +347,14 @@
   <!-- <div class="card" *ngIf="options"> -->
   <div class="card-header">
     <h5>
-      {{question}}
+     {{queCount}}.&nbsp; {{question}}
     </h5>
   </div>
   <div class="card-block">
     <div class="row">
     <div class="draggable-items col-md-6">
       <h6 class="text-center font-weight-bold" *ngIf="description">
-        {{description["sub_que"]}}
+       {{description["sub_que"]}}
       </h6>
       <div class="list-group">
         <div class="row">

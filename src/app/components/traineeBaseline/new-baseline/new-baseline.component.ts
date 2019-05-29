@@ -476,7 +476,7 @@ export class NewBaselineComponent implements OnInit {
       }));
 
     if (answers.length < this.pager.count) {
-      this.toastr.error(this.translate.instant('Errors.giveAllAns'));
+      // this.toastr.error(this.translate.instant('Errors.giveAllAns'));
     } else if (answers.length == this.pager.count) {
       if (window.localStorage.getItem('currentstatus') == '2'){
         this.sendAnswer(this.baselineSelectedAns, this.baselineSelectedQuestion, this.apiEndSendAns);
@@ -508,11 +508,11 @@ export class NewBaselineComponent implements OnInit {
       }
       console.log("dummyjson",this.dummyAnsJson,this.pager.count)
      }
-    
+
     this.token = window.localStorage.getItem('token');
     console.log("useroption",this.userOption)
     // var answerJSON = '{"submoduleid":"' + window.localStorage.getItem('uuid') + '","useranswer":"' + JSON.stringify(this.userOption) + '","event":"answer"}'
-    
+
     var dummyAns = JSON.stringify(this.userOption)
     var mainAns = {};
     mainAns['submoduleid'] = window.localStorage.getItem('uuid');
@@ -566,7 +566,9 @@ export class NewBaselineComponent implements OnInit {
 
             window.localStorage.setItem('mainFlagModule2', '8')
             window.localStorage.setItem('subFlagModule2', '1')
-          } else if(window.localStorage.getItem('mainFlagModule3') == '7'){
+          } else if (window.localStorage.getItem('mainFlagModule3') == '7')
+          {
+            console.log('module 3.7')
             var obj = {
               "type": "submodule",
               "route": true,

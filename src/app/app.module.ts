@@ -28,6 +28,7 @@ import { PermissionModelService } from "./permission-model.service";
 import { AngularMultiSelectModule } from "angular2-multiselect-dropdown";
 import { LocationStrategy, HashLocationStrategy } from "@angular/common";
 import { SlimLoadingBarModule } from "ng2-slim-loading-bar";
+import { BarRatingModule } from "ngx-bar-rating";
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -53,6 +54,7 @@ export function createTranslateLoader(http: HttpClient) {
     AngularMultiSelectModule,
     ToastModule.forRoot(),
     SlimLoadingBarModule.forRoot(),
+    BarRatingModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -45,7 +45,7 @@ export class DragDropComponent implements OnInit {
   jsonForAns = {};
   nextFlag = false;
   resetFlag = false;
-  optionArray; description;
+  optionArray; description; queCount;
   singlejsonForAns = {};
   public singleDummy = {};
 
@@ -66,6 +66,13 @@ export class DragDropComponent implements OnInit {
       "4": "चतुर्थ पातळी:",
       "5": "पाचवी पातळी:"
     };
+    if (window.localStorage.getItem('mainFlagModule1') == '8' || window.localStorage.getItem('mainFlagModule1') == '10')
+    {
+      this.queCount = parseInt(window.localStorage.getItem('subFlagModule1'))
+    }else if (window.localStorage.getItem('mainFlagModule3') == '12')
+    {
+      this.queCount = parseInt(window.localStorage.getItem('subFlagModule3'))
+    }
   }
   ngOnChanges() {
     this.statement = [];
@@ -121,7 +128,7 @@ export class DragDropComponent implements OnInit {
       console.log("stmt:- ", this.statement);
     } else if (this.data.type == "single")
     {
-        if (this.mainFlagModule1 == 10) {
+      if (this.mainFlagModule1 == 10 || this.mainFlagModule3 == 12) {
           this.optionArray = [];
           var i = 0;
           this.options.forEach(element => {
@@ -159,8 +166,7 @@ export class DragDropComponent implements OnInit {
             this.shuffle(this.statement);
           }
         } else if (
-          this.mainFlagModule1 == 8 ||
-          this.mainFlagModule3 == 12
+          this.mainFlagModule1 == 8
         )
         {
           this.optionArray = [];
@@ -318,6 +324,14 @@ export class DragDropComponent implements OnInit {
         this.nextFlag = false;
         this.resetFlag = true;
       }
+    }
+
+    if (window.localStorage.getItem('mainFlagModule1') == '8' || window.localStorage.getItem('mainFlagModule1') == '10')
+    {
+      this.queCount = parseInt(window.localStorage.getItem('subFlagModule1'))
+    }else if (window.localStorage.getItem('mainFlagModule3') == '12')
+    {
+      this.queCount = parseInt(window.localStorage.getItem('subFlagModule3'))
     }
   }
 

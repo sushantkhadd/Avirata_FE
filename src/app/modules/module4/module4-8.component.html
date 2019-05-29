@@ -1,3 +1,105 @@
-<p>
-  module4-8 works!
-</p>
+<div *ngIf="mainFlagModule4 < 8">
+  <div class="card">
+    <div class="card-block">
+      <p>{{'subModule5_1.5_1' | translate}}</p>
+      <p>
+        <strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="mainFlagModule4 == 8">
+  <div class="assignForm">
+    <div class="card">
+      <div class="card-header">
+        <h5 [innerHTML]="mainQuestion">
+        </h5>
+      </div>
+      <div class="card-block pt-2">
+        <form #assignForm="ngForm">
+          <div class="form-group row">
+            <label class="col-sm-6 col-md-6 form-control-label" for="answer1" [innerHTML]="question1"></label>
+            <div class="col-sm-6 col-md-6 controls">
+              <bar-rating [ngModelOptions]="{standalone: true}" [theme]="'default'" [(ngModel)]="answer1" [max]="10"
+                required></bar-rating>
+              <span class="badge badge-info ml-2 rating-count">{{answer1}}</span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-6 col-md-6 form-control-label" for="answer2" [innerHTML]="question2"></label>
+            <div class="col-sm-6 col-md-6 controls">
+               <bar-rating [ngModelOptions]="{standalone: true}" [theme]="'default'" [(ngModel)]="answer2" [max]="10"
+                 required></bar-rating>
+              <span class="badge badge-info ml-2 rating-count">{{answer2}}</span>
+
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-6 col-md-6 form-control-label" for="answer3" [innerHTML]="question3"></label>
+            <div class="col-sm-6 col-md-6 controls">
+               <bar-rating [ngModelOptions]="{standalone: true}" [theme]="'default'" [(ngModel)]="answer3" [max]="10"
+                 required></bar-rating>
+              <span class="badge badge-info ml-2 rating-count">{{answer3}}</span>
+
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-6 col-md-6 form-control-label" for="answer4" [innerHTML]="question4"></label>
+            <div class="col-sm-6 col-md-6 controls">
+               <bar-rating [ngModelOptions]="{standalone: true}" [theme]="'default'" [(ngModel)]="answer4" [max]="10"
+                 required></bar-rating>
+              <span class="badge badge-info ml-2 rating-count">{{answer4}}</span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-6 col-md-6 form-control-label" for="answer5" [innerHTML]="question5"></label>
+            <div class="col-sm-6 col-md-6 controls">
+               <bar-rating [ngModelOptions]="{standalone: true}" [theme]="'default'" [(ngModel)]="answer5" [max]="10"
+                 required></bar-rating>
+              <span class="badge badge-info ml-2 rating-count">{{answer5}}</span>
+
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer text-center bg-white border-0">
+        <button class="btn btn-primary" [disabled]="assignForm.invalid || trimFlag"
+          (click)="submit()">{{'Login.Close' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="mainFlagModule4 > 8">
+  <div class="card submoduleBox">
+    <div class="card-block text-center greenText inst-text">
+      <span>{{ "L2Module4Complete.sm_4_8" | translate }}</span>
+    </div>
+  </div>
+</div>
+
+<div class="videoFinishModal videoFinishedModel">
+  <div bsModal #ratingModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <img class="img-responsive img-rotate" src="assets/img/mitra.png">
+        <div class="modal-header">
+        </div>
+        <div class="modal-body">
+          <h5 class="text-center">
+          {{'Stepper.totalCount' | translate}} <span class="badge badge-info ml-2">{{overallRating}}</span>
+          </h5>
+          <p class="px-5 text-center font-weight-normal">
+            {{description}}
+          </p>
+          <hr />
+          <div class="col-md-12 text-center">
+            <button class="btn btn-primary text-center" (click)="next()">{{'Stepper.Next' | translate}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

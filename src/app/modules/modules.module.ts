@@ -82,6 +82,7 @@ import { Module414Component } from './module4/module4-14.component';
 import { Module4Service } from "./module4/module4.service";
 import { NewBaselineComponent } from "../components/traineeBaseline/new-baseline/new-baseline.component"
 import { QuizService } from "../components/traineeBaseline/services/quiz.service";
+import { BarRatingModule } from "ngx-bar-rating";
 
 @NgModule({
   imports: [
@@ -99,7 +100,8 @@ import { QuizService } from "../components/traineeBaseline/services/quiz.service
     DxPopupModule,
     DxCheckBoxModule,
     DxListModule,
-    DxPieChartModule
+    DxPieChartModule,
+    BarRatingModule
   ],
   declarations: [
     Module0Component,
@@ -172,7 +174,14 @@ import { QuizService } from "../components/traineeBaseline/services/quiz.service
     Module414Component,
     NewBaselineComponent
   ],
-  providers: [Module0Service, Module1Service, Module2Service,Module3Service,Module4Service,QuizService],
+  providers: [
+    Module0Service,
+    Module1Service,
+    Module2Service,
+    Module3Service,
+    Module4Service,
+    QuizService
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ModulesModule {}
