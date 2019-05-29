@@ -42,6 +42,12 @@ export class McqcomponentComponent implements OnInit {
     }
     else if(window.localStorage.getItem('mainFlagModule4')== '5'){
       this.queCount = parseInt(window.localStorage.getItem('subFlagModule4'))
+    } else if (window.localStorage.getItem('mainFlagModule3') == '9')
+    {
+      this.queCount = parseInt(window.localStorage.getItem('subFlagModule3'))
+    } else if (window.localStorage.getItem('mainFlagModule3') == '11')
+    {
+      this.queCount = parseInt(window.localStorage.getItem('subFlagModule3'))
     }
 
     if(window.localStorage.getItem('mainFlagModule2')== '9'){
@@ -110,7 +116,7 @@ export class McqcomponentComponent implements OnInit {
         for(var i=0; i< this.data.statementlist.length ; i++){
           this.priorities.push(this.data.statementlist[i].statement)
         }
-    } else if (this.questionType == 'mcqTextOption' && (window.localStorage.getItem('mainFlagModule2') == '3' || window.localStorage.getItem('mainFlagModule4') == '5')) {
+    } else if (this.questionType == 'mcqTextOption' && (window.localStorage.getItem('mainFlagModule2') == '3' || window.localStorage.getItem('mainFlagModule4') == '5' || window.localStorage.getItem('mainFlagModule3') == '9' || window.localStorage.getItem('mainFlagModule3') == '11')) {
         console.log("data",this.data.questionlist[0].question,this.data.questionlist[0].options)
         this.priorities= []
        // this.priorities = this.data.questionlist[0].question;
@@ -191,26 +197,26 @@ export class McqcomponentComponent implements OnInit {
       this.mysubModule7 != 2
     ) {
       if (this.showAnswer == true) {
-        if (this.questionType == 'mcqTextOption' && (window.localStorage.getItem('mainFlagModule2') == '3' || window.localStorage.getItem('mainFlagModule4') == '5')){
+        if (this.questionType == 'mcqTextOption' && (window.localStorage.getItem('mainFlagModule2') == '3' || window.localStorage.getItem('mainFlagModule4') == '5' || window.localStorage.getItem('mainFlagModule3') == '9' || window.localStorage.getItem('mainFlagModule3') == '11')){
           for(var i=0; i< this.data.questionlist[0].options.length ; i++){
             // console.log("optionsadddddd",$event.value,this.data.questionlist[0].options)
-      
+
               if($event.value == this.data.questionlist[0].options[i].value){
                this.onlyPopUpAns = this.data.questionlist[0].options[i].option;
                 console.log("dfdgfdgfdff" , this.onlyPopUpAns)
               }
-              
+
              }
         }else if (window.localStorage.getItem('mainFlagModule3') == '1' || window.localStorage.getItem('mainFlagModule3') == '5' || window.localStorage.getItem('mainFlagModule3') == '9' || window.localStorage.getItem('mainFlagModule3') == '11'){
           console.log("sadfffffffff",this.data)
           for(var i=0; i< this.data.options.length ; i++){
             // console.log("optionsadddddd",$event.value,this.data.questionlist[0].options)
-      
+
               if($event.value == this.data.options[i].value){
                this.onlyPopUpAns = this.data.options[i].option;
                 console.log("dfdgfdgfdff" , this.onlyPopUpAns)
               }
-              
+
              }
         } else{
           for (var item1 of this.tasks) {
@@ -228,7 +234,7 @@ export class McqcomponentComponent implements OnInit {
             }
           }
         }
-       
+
       } else {
         this.submitFlagMCQ = true;
         for (var item of this.tasks) {
@@ -256,17 +262,17 @@ export class McqcomponentComponent implements OnInit {
   goNext5_3() {
     console.log("qsaDDDDDD",this.onlyPopUpAns)
     this.submitFlagMCQ = false
-    if(window.localStorage.getItem('mainFlagModule2') == '3'){
+    if (window.localStorage.getItem('mainFlagModule2') == '3' || window.localStorage.getItem('mainFlagModule3') == '9' || window.localStorage.getItem('mainFlagModule3') == '11'){
       this.instructionModal.show()
      this.data.description = this.data.description
      console.log("data.sescr",this.data.description)
     }else{
-      this.sendAns.emit(this.onlyPopUpAns)   
+      this.sendAns.emit(this.onlyPopUpAns)
     }
     // setTimeout(() => {
-    // this.sendAns.emit(this.onlyPopUpAns)      
+    // this.sendAns.emit(this.onlyPopUpAns)
     // }, 1000);
-   
+
   }
 
   onValueChangedYesNoType($event) {
@@ -281,7 +287,7 @@ export class McqcomponentComponent implements OnInit {
     }
 
     if(this.questionType == 'mcqWithTwoStatements'){
-    
+
       console.log("option",$event,this.data.statementlist)
       this.sendYesNoType= "";
       for(var i=0; i< this.data.statementlist.length ; i++){
@@ -291,7 +297,7 @@ export class McqcomponentComponent implements OnInit {
          this.sendYesNoType = this.data.statementlist[i].statementid;
           console.log("dfdgfdgfdff" , this.sendYesNoType)
         }
-        
+
        }
     }
   }
@@ -302,7 +308,7 @@ export class McqcomponentComponent implements OnInit {
         this.sendYesNoType = item.option
       }
     }
-    
+
   }
 
   submitYesNo() {
@@ -429,6 +435,12 @@ export class McqcomponentComponent implements OnInit {
     }
     else if(window.localStorage.getItem('mainFlagModule4')== '5'){
       this.queCount = parseInt(window.localStorage.getItem('subFlagModule4'))
+    } else if (window.localStorage.getItem('mainFlagModule3') == '9')
+    {
+      this.queCount = parseInt(window.localStorage.getItem('subFlagModule3'))
+    } else if (window.localStorage.getItem('mainFlagModule3') == '11')
+    {
+      this.queCount = parseInt(window.localStorage.getItem('subFlagModule3'))
     }
 
     if (this.questionType == 'checkBoxOption') {

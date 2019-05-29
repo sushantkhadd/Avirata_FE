@@ -7,18 +7,17 @@
     </div>
   </div>
   <div *ngIf="mainFlagModule3 ==16">
-    <div class="col-sm-12 col-md-12 instruction-wrap ins-block" *ngIf="!startEvent">
+    <div class="col-sm-12 col-md-12 instruction-wrap" *ngIf="!startEvent">
       <div class="card">
         <div class="card-header text-white">
             <span class="exp-img instructions-img"></span>
           <h5>{{'Quiz.note' | translate}}</h5>
         </div>
-        <div class="card-block inst-text pt-4">
-            <p>{{'number.1' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_1' | translate}}</p>
-            <p>{{'number.2' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_2' | translate}}</p>
-            <p>{{'number.3' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_3' | translate}}</p>
-            <p>{{'number.4' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_4' | translate}}</p>
-            <p>{{'number.5' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_5' | translate}}</p>    
+        <div class="card-block pt-4">
+            <p>{{'number.1' | translate}}.&nbsp;{{'L2Instruction.inst_ppt1' | translate}}</p>
+            <p>{{'number.2' | translate}}.&nbsp;{{'L2Instruction.inst_ppt2' | translate}}</p>
+            <p>{{'number.3' | translate}}.&nbsp;{{'L2Instruction.inst_ppt3' | translate}}</p>
+            <p>{{'number.4' | translate}}.&nbsp;{{'L2Instruction.inst_ppt4' | translate}}</p>
         </div>
         <div class="card-footer">
           <div class="float-right hidden-xs-down">
@@ -48,9 +47,9 @@
         <div *ngIf="subFlagModule3 == 2 || subFlagModule3 == 3 || subFlagModule3 == 5 || subFlagModule3 == 6">
           <div *ngIf="playVideo">
             <div class="card">
-              <div class="card-footer">
+              <!-- <div class="card-footer">
                 <h6 class="text-center"><strong>मित्र</strong></h6>
-              </div>
+              </div> -->
               <div class="moduleOne card-block">
                 <app-static-video [receivedData]='passData' (finishCall)="finishVideo($event)"></app-static-video>
               </div>
@@ -65,7 +64,7 @@
       </div>
     </div>
   </div>
-  
+
   <div class="videoFinishModal videoFinishedModel">
     <div bsModal #instructionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1"
       role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -88,7 +87,7 @@
       </div>
     </div>
   </div>
-  
+
   <!-- <div *ngIf="mainFlagModule3 > 16">
     <div class="card submoduleBox unlock-view">
       <div class="card-block text-center">
@@ -131,7 +130,7 @@
       </div>
     </div>
   </div> -->
-  
+
 
   <div *ngIf="mainFlagModule3 > 16">
     <div class="card unlock-view">
@@ -240,4 +239,3 @@
       </div>
     </div>
   </div>
-  

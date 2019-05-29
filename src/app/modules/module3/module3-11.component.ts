@@ -17,7 +17,7 @@ export class Module311Component implements OnInit {
   constructor(public LanguageService: LanguageService, public LocalstoragedetailsService: LocalstoragedetailsService, public Module3Service: Module3Service, public toastr: ToastsManager, vcr: ViewContainerRef, public router: Router, public translate: TranslateService) {
     this.toastr.setRootViewContainerRef(vcr);
   }
-  public data; questionType; passFlags = {}; showAnswer; saveData; answer; sumbitButton; startFlag;
+  public data; questionType; passFlags = {}; showAnswer; saveData; answer; sumbitButton; startFlag; description;
   public inst = "दिलेल्या परिस्थितीत शिक्षक जसे वागत आहेत, जसा प्रतिसाद देत आहेत त्याला <b>सर्वस्वी</b> काय कारणीभूत आहे? तुम्हाला काय वाटते? चारपैकी कोणताही एक पर्याय निवडा."
   ngOnInit() {
     this.startFlag = false;
@@ -48,7 +48,7 @@ export class Module311Component implements OnInit {
           {
             // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 1.3', window.localStorage.getItem('username'), 10);
             console.log("data ", data['data'])
-            this.data = data['data'].questionlist[0]
+            this.data = data['data']
             this.startFlag = true;
           }
         },
@@ -82,10 +82,12 @@ export class Module311Component implements OnInit {
             this.subFlagModule3 = this.subFlagModule3 + 1
             window.localStorage.setItem('subFlagModule3', this.subFlagModule3.toString())
             console.log("data ", data['data'])
-            this.data = data['data'].questionlist[0]
+            this.data = data['data']
             this.sumbitButton = false;
+            this.description = data["data"].description;
           } else if (data['status'] == true && data['message'] == "submodule finish")
           {
+            this.description = data["data"].description;
             this.startFlag = false;
             this.mainFlagModule3 = 12;
             window.localStorage.setItem('uuid', data['data'].nextuuid);

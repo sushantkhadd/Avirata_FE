@@ -49,6 +49,7 @@ export class Module314Component implements OnInit {
       this.docData['download'] = false
       this.docData['link'] = ''
       this.docData['state'] = 'static';
+      this.passValues["unlockView"] = "static";
        var unlockJson={}
        unlockJson=JSON.parse(window.localStorage.getItem('currentJson3'))
       if (unlockJson['children'].length > 0) {
@@ -57,7 +58,7 @@ export class Module314Component implements OnInit {
 
         if (unlockJson['children'][index].url != null) {
           this.passValues['url'] = unlockJson['children'][index].url
-        } 
+        }
       }
       this.docData['showcfu'] = false;
 
@@ -101,6 +102,6 @@ export class Module314Component implements OnInit {
       nextRoute: "/modules/module3/Module3.15"
     };
     this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
-   
-  } 
+
+  }
 }

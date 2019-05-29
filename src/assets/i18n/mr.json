@@ -202,7 +202,8 @@
     "1stStatement" : "Drop 1st statement here...",
      "2ndStatement": "Drop 2nd statement here...",
      "3rdStatement": "Drop 3rd statement here...",
-     "4thStatement": "Drop 4th statement here..."
+     "4thStatement": "Drop 4th statement here...",
+     "totalCount": "एकूण मिळालेले गुण"
   },
   "Dashboard": {
     "Dashboard": "डॅशबोर्ड",
