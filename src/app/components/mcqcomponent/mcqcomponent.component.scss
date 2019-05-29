@@ -1,8 +1,13 @@
  .mcqComponentModal{
+  .card-header span{
+    font-size: 1rem;
+   }
+
   .card{ 
     border-radius:0;
     border: none;
    }
+
     .modal {
       padding-top: 60px;
     
@@ -47,7 +52,6 @@
           h5 {
             margin: 15px auto 0;
             padding-bottom: 20px;
-            font-size: 1.2rem;
             font-weight: 600;
             color: #444;
           }
@@ -85,7 +89,7 @@
             // padding-left: 5rem;
             line-height: 25px;
             margin-top: 10px;
-            font-size: 0.90rem;
+            font-size: 1rem;
           }
         }
       }

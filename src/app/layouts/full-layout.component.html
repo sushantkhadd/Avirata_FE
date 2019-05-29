@@ -999,12 +999,12 @@
 
   <!-- Page Content  -->
   <div id="content">
-<!-- <ng2-slim-loading-bar class="loading"></ng2-slim-loading-bar> -->
+    <!-- <ng2-slim-loading-bar class="loading"></ng2-slim-loading-bar> -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
       <div class="container-fluid">
         <img src="../../assets/img/dash_logo.png" alt="">
         <button type="button" id="sidebarCollapse" class="btn btn-default ml-5 ripple">
-          <i class="fas fa-align-left"></i>
+          <i class="fa fa-bars"></i>
         </button>
         <!-- <div class="onoffswitch">
           <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch"
@@ -1042,12 +1042,16 @@
         </div>
       </div>
     </nav>
+
+
+
     <main class="main mb-5">
       <div class="d-flex">
         <div class="breadcrumb">
-            <app-timeline class="w-100"></app-timeline>
+          <app-timeline class="w-100"></app-timeline>
         </div>
       </div>
+
       <div class="container position-relative" [class.vh-100]="loaderFlag">
         <div class="inner-loader" *ngIf="loaderFlag">
           <img src="../../assets/img/logo_cpd_combine_web.png" alt="">
@@ -1090,7 +1094,7 @@
     aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-primary" role="document">
       <div class="modal-content">
-        <div class="modal-header p-4">
+        <div class="modal-header p-3">
           <span class="exp-img"></span>
           <!-- <span class="exp-img instructions-img"
             [style.background-image]="'url(\'./../../../assets/img/expressions/instructions.png\')'"></span> -->
@@ -1137,7 +1141,7 @@
     aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-primary" role="document">
       <div class="modal-content">
-        <div class="modal-header p-4">
+        <div class="modal-header p-3">
           <span class="exp-img"></span>
           <!-- <span class="exp-img instructions-img"
             [style.background-image]="'url(\'./../../../assets/img/expressions/instructions.png\')'"></span> -->
@@ -1307,104 +1311,108 @@
     </div>
     <div class="modal-content">
       <div id="capture">
-      <div class="modal-body pb-0">
-        <div class="row">
-          <div class="col-md-12 col-xs-12 col-sm-12">
-            <div class="text-center">
-              <img class="img-responsive img-logo" src="../../assets/img/Avirata_Round_Logo.png">
+        <div class="modal-body pb-0">
+          <div class="row">
+            <div class="col-md-12 col-xs-12 col-sm-12">
+              <div class="text-center">
+                <img class="img-responsive img-logo" src="../../assets/img/Avirata_Round_Logo.png">
+              </div>
             </div>
           </div>
-        </div>
-        <div class="row mt-2">
-          <div class="col-md-10 col-xs-12 col-sm-12">
+          <div class="row mt-2">
+            <div class="col-md-10 col-xs-12 col-sm-12">
+              <div id="main">
+                <div>
+                  <img *ngIf="!needEfforts" class="img-responsive img-mitra" src="../../assets/img/expressions/correct_ans.png">
+                  <img *ngIf="needEfforts" class="img-responsive img-mitra" src="../../assets/img/expressions/wrong_ans.png">
+                </div>
+                <div [class.pl-4]="needEfforts">
+                  <h1 class="congrats-text" *ngIf="!needEfforts">{{'layout.congo' | translate}} </h1>
+                  <h5 class="congrats-text" *ngIf="needEfforts">
+                    {{'layout.workHard' | translate}}
+                  </h5>
+                  <h5>{{userName}}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-2 justify-content-center">
             <div id="main">
-              <div>
-                <img *ngIf="!needEfforts" class="img-responsive img-mitra" src="../../assets/img/expressions/correct_ans.png">
-                <img *ngIf="needEfforts" class="img-responsive img-mitra" src="../../assets/img/expressions/wrong_ans.png">
-              </div>
-              <div [class.pl-4]="needEfforts">
-                <h1 class="congrats-text" *ngIf="!needEfforts">{{'layout.congo' | translate}} </h1>
-                <h5 class="congrats-text" *ngIf="needEfforts">
-                  {{'layout.workHard' | translate}}
-                </h5>
-                <h5>{{userName}}</h5>
-              </div>
+              <h5 class="success-title">
+                <span *ngIf="moduleCompleteStatus['type'] == 'moduleFinish'">
+                  {{'layout.module' | translate}} {{moduleCompleteStatus['finishHead']}}
+                </span>
+                <span *ngIf="moduleCompleteStatus['type'] == 'allFinish'">
+                  {{'layout.course' | translate}}
+                </span>
+              </h5>
             </div>
           </div>
-        </div>
-        <div class="row mt-2 justify-content-center">
-          <div id="main">
-            <h5 class="success-title">
-              <span *ngIf="moduleCompleteStatus['type'] == 'moduleFinish'">
-                {{'layout.module' | translate}} {{moduleCompleteStatus['finishHead']}}
-              </span>
-              <span *ngIf="moduleCompleteStatus['type'] == 'allFinish'">
-                {{'layout.course' | translate}}
-              </span>
+          <div class="row mt-2 justify-content-center">
+            <h5 id="demo1" class="success-line" *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' && !needEfforts">
+              {{'layout.moduleFinish' | translate}}
+            </h5>
+            <h5 id="demo1" class="success-line" *ngIf="moduleCompleteStatus['type'] == 'allFinish' && !needEfforts">
+              {{'layout.congrats' | translate}}
             </h5>
           </div>
+          <div>
+          </div>
+          <div class="row mt-2 justify-content-center">
+            <img *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' && !needEfforts" class="img-responsive img-goldcup" [src]="finishImgUrl">
+            <span *ngIf="needEfforts && moduleCompleteStatus['type'] == 'moduleFinish'">
+              {{'layout.needEfforts' | translate}}
+            </span>
+            <img *ngIf="moduleCompleteStatus['type'] == 'allFinish'" class="img-responsive img-goldcup" src="../../assets/img/gold_cup.png">
+          </div>
         </div>
-        <div class="row mt-2 justify-content-center">
-          <h5 id="demo1" class="success-line" *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' && !needEfforts">
-            {{'layout.moduleFinish' | translate}}
-          </h5>
-          <h5 id="demo1" class="success-line" *ngIf="moduleCompleteStatus['type'] == 'allFinish' && !needEfforts">
-            {{'layout.congrats' | translate}}
-          </h5>
-        </div>
-        <div>
-        </div>
-        <div class="row mt-2 justify-content-center">
-          <img *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' && !needEfforts" class="img-responsive img-goldcup" [src]="finishImgUrl">
-          <span *ngIf="needEfforts && moduleCompleteStatus['type'] == 'moduleFinish'">
-            {{'layout.needEfforts' | translate}}
-          </span>
-          <img *ngIf="moduleCompleteStatus['type'] == 'allFinish'" class="img-responsive img-goldcup" src="../../assets/img/gold_cup.png">
-        </div>
-      </div>
       </div>
 
-        <div class="row mt-2 justify-content-center social-icons" *ngIf="!needEfforts">
-          <ul class="social-logo">
-            <li>
-             <a class="c-pointer" (click)="downloadReward()"><img class="img-responsive" src="../../assets/img/fb.png"></a>
-            </li>
-            <li>
-             <a *ngIf="!getImage" id="getImage" class="c-pointer" (click)="shareReward()"> <img class="img-responsive"
-               src="../../assets/img/whatsapp.png"></a>
-            <a *ngIf="getImage" class="c-pointer" data-action="share/whatsapp/share" [href]="getImage"><img class="img-responsive"
-                src="../../assets/img/whatsapp.png"></a>
-            </li>
-            <li>
-             <a class="c-pointer" (click)="downloadReward()"><img class="img-responsive" src="../../assets/img/download.png"></a>
-            </li>
-          </ul>
-        </div>
-       <div [ngClass]="needEfforts ? 'pt-3': 'pt-1'" class="modal-footer justify-content-center pt-1 pb-4"
-         *ngIf="moduleCompleteStatus['type'] != 'allFinish'">
-         <span>
-           <button class="btn btn-primary text-center"
-             (click)="moduleComplete($event)">{{'Stepper.Next' | translate}}</button>
-         </span>
-       </div>
+      <div class="row mt-2 justify-content-center social-icons" *ngIf="!needEfforts">
+        <ul class="social-logo">
+          <li>
+            <a class="c-pointer" (click)="downloadReward()">
+              <img class="img-responsive" src="../../assets/img/fb.png">
+            </a>
+          </li>
+          <li>
+            <a *ngIf="!getImage" id="getImage" class="c-pointer" (click)="shareReward()">
+              <img class="img-responsive" src="../../assets/img/whatsapp.png">
+            </a>
+            <a *ngIf="getImage" class="c-pointer" data-action="share/whatsapp/share" [href]="getImage">
+              <img class="img-responsive" src="../../assets/img/whatsapp.png">
+            </a>
+          </li>
+          <li>
+            <a class="c-pointer" (click)="downloadReward()">
+              <img class="img-responsive" src="../../assets/img/download.png">
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div [ngClass]="needEfforts ? 'pt-3': 'pt-1'" class="modal-footer justify-content-center pt-1 pb-4" *ngIf="moduleCompleteStatus['type'] != 'allFinish'">
+        <span>
+          <button class="btn btn-primary text-center" (click)="moduleComplete($event)">{{'Stepper.Next' | translate}}</button>
+        </span>
+      </div>
     </div>
 
   </div>
 </div>
 
 <div class="submoduleStatusModal">
-    <div bsModal #submoduleStatusModal="bs-modal" class="modal" [config]="{backdrop: 'static'}" tabindex="-1"
-      role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-primary" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <span class="exp-img"></span>
-            <img class="img-responsive img-rotate" src="assets/img/expressions/complete_module.png">
-            <!-- <img class="img-responsive img-rotate" src="assets/img/mitra.png"> -->
-            <!-- <i class="fa fa-check-circle-o fa-3x ml-2 mt-1" aria-hidden="true"></i> -->
-            <h5 *ngIf="moduleCompleteStatus['type'] == 'submodule'" class="modal-title text-white mb-3">
-              {{'layout.subModule' | translate}} {{'layout.successfully' | translate}}</h5>
-            <!-- <h5 *ngIf="moduleCompleteStatus['type'] == 'moduleFinish'" class="modal-title text-white mb-3">
+  <div bsModal #submoduleStatusModal="bs-modal" class="modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-primary" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="exp-img"></span>
+          <img class="img-responsive img-rotate" src="assets/img/expressions/complete_module.png">
+          <!-- <img class="img-responsive img-rotate" src="assets/img/mitra.png"> -->
+          <!-- <i class="fa fa-check-circle-o fa-3x ml-2 mt-1" aria-hidden="true"></i> -->
+          <h5 *ngIf="moduleCompleteStatus['type'] == 'submodule'" class="modal-title text-white mb-3">
+            {{'layout.subModule' | translate}} {{'layout.successfully' | translate}}</h5>
+          <!-- <h5 *ngIf="moduleCompleteStatus['type'] == 'moduleFinish'" class="modal-title text-white mb-3">
               {{'layout.module' | translate}} {{'layout.successfully' | translate}}</h5>
             <h5 *ngIf="moduleCompleteStatus['type'] == 'allFinish'" class="modal-title">{{'layout.course' | translate}}
               {{'layout.successfully' | translate}}</h5>
@@ -1426,13 +1434,12 @@
             {{'layout.start' | translate}}</p>
 
         </div> -->
-        <div *ngIf="moduleCompleteStatus['type'] == 'submodule'">
-          <p class="congratulation">{{'layout.nextSubmodule' | translate}}
-            <strong>'{{moduleCompleteStatus['next']}}'</strong> {{'layout.start'
-                          | translate}}</p>
+          <div *ngIf="moduleCompleteStatus['type'] == 'submodule'">
+            <p class="congratulation">{{'layout.nextSubmodule' | translate}}
+              <strong>'{{moduleCompleteStatus['next']}}'</strong> {{'layout.start' | translate}}</p>
 
-        </div>
-        <!-- <div class="finish-info text-center" *ngIf="moduleCompleteStatus['type'] == 'allFinish'">
+          </div>
+          <!-- <div class="finish-info text-center" *ngIf="moduleCompleteStatus['type'] == 'allFinish'">
           <span class="icon-check"></span>
           <p class="congratulation" style="line-height: 24px;"> {{'layout.congrats' | translate}}
         </div> -->
@@ -1445,4 +1452,4 @@
 
   </div>
 
-    </div>
+</div>

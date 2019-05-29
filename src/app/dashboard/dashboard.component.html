@@ -2,16 +2,20 @@
   dashboard works!
 </p> -->
 
-<ol class="breadcrumb notification-section">
-  <div class="notify">
-    <marquee onmouseover="this.stop();" onmouseout="this.start();">
-      {{ 'Dashboard.CPD scroll' | translate }}
-    </marquee>
+<div class="notifySection">
+<div class="row">
+    <ol class="breadcrumb notification-section">
+      <div class="notify">
+        <marquee onmouseover="this.stop();" onmouseout="this.start();" class="pt-1">
+          {{ 'Dashboard.CPD scroll' | translate }}
+        </marquee>
+      </div>
+    </ol>
   </div>
-</ol>
+</div> 
 
 <div class="dashboardContent">
-    <div class="card-group mt-4">
+    <div class="card-group">
         <div class="row mx-auto w-100">
           <div class="col-sm-12 col-md-12 padd-0">
             <div class="card">
@@ -298,7 +302,7 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" (click)="rankModal.hide()">{{'Profile.Make Change' |
               translate}}</button>
-            <button type="button" class="btn btn-secondary" (click)="rankConfirmNext()">{{'Stepper.Next' | translate}}</button>
+            <button type="button" class="btn btn-info" (click)="rankConfirmNext()">{{'Stepper.Next' | translate}}</button>
           </div>
         </div>
 

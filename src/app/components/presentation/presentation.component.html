@@ -73,7 +73,7 @@
             <div class="col-md-8 col-sm-12 col-12">
               <h4 class="mt-3 ml-1">{{ 'Common.CFU' | translate }} </h4>
             </div>
-            <div class="col-md-2 col-sm-6 col-5">
+            <div class="col-md-2 col-sm-6 col-5 text-right">
               <img class="img-fluid" [class.d-none]="hideMe" [ngClass]="!fiftyFiftyFlag ? 'c-pointer' : 'c-not-allowed'"
                 (click)="!fiftyFiftyFlag ? getRewards('fifty_fifty') : undefined" [src]="rewardImgUrl1" alt="">
             </div>
@@ -86,7 +86,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body ml-5">
           <h5 class="mt-3" [innerHTML]="question"></h5>
           <div class="card-block mcqBlock">
             <div class="form float-left">
@@ -103,7 +103,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" [disabled]='!submitDisabled'
+          <button type="button" class="btn btn-info" [disabled]='!submitDisabled'
             (click)="submitAnswer()">{{'Cfu.submit' | translate}}</button>
         </div>
       </div>
