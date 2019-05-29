@@ -478,7 +478,7 @@ export class NewBaselineComponent implements OnInit {
     if (answers.length < this.pager.count) {
       // this.toastr.error(this.translate.instant('Errors.giveAllAns'));
     } else if (answers.length == this.pager.count) {
-      if (window.localStorage.getItem('currentstatus') == '2'){
+      if (window.localStorage.getItem('currentstatus') == '2' || window.localStorage.getItem('currentstatus') == '3'){
         this.sendAnswer(this.baselineSelectedAns, this.baselineSelectedQuestion, this.apiEndSendAns);
       }
       else {
