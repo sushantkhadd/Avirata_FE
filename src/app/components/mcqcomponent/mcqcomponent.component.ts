@@ -18,7 +18,7 @@ export class McqcomponentComponent implements OnInit {
   @ViewChild("eventRadioGroup") eventRadioGroup: DxRadioGroupComponent;
   public statement; tasks; priorities = []; questionType; showAnswer; selectedAnswer; description;
   public correctAns; rightFlag; submitFlag; imgUrlJson; ansTypeFlag; showCorrectAns;
-
+  public bunchCounter;bunchList;bunchOptions;userOptions={};mcqBunchFlag = false;totalBunchCounter = 1;bunchSelectedAns=[];
   public ansSelectCount; counter; selectedTasks = []; ans1; ans2; showAns1; showAns2; queUrl;title;
   public nextQueFlag; subPriorities; sendYesNoType; mysubModule3; mysubModule4; mysubModule1;
   public onlyPopUpAns; mysubModule; submitFlagMCQ; mysubModule0; mysubModule6; mysubModule7;mysubModule2;totalQueCount;
@@ -125,7 +125,62 @@ export class McqcomponentComponent implements OnInit {
       }
       console.log("options",this.priorities)
 
-  } else {
+    } else if(this.questionType == 'mcqInBunch'){
+      this.tasks = this.data.statementlist;
+      console.log("bunchmcq",this.tasks);
+      this.bunchOptions = [{"option":"a","value":"अस्वास्थ्याशी निगडित"},
+                          {"option":"b","value":"आजाराशी निगडित"},
+                          {"option":"c","value":"निगडित नाहीत"}];
+        for(var i=0; i<this.bunchOptions.length;i++){
+          this.priorities.push(this.bunchOptions[i].value) 
+        
+        }
+      console.log("mcqbunch options",this.priorities)
+      for(var i=0; i<this.tasks.length;i++){
+        this.statement = this.tasks[i].statement;
+      }
+     
+      this.bunchCounter = 5;
+      this.totalBunchCounter = 25 - this.tasks.length;
+      this.bunchList = this.tasks.splice(0,this.bunchCounter)
+      if(window.localStorage.getItem('mainFlagModule4') == "12"){
+         console.log("ansss",this.bunchList[0].answer,this.bunchOptions[0].option)
+         var dummyObj={}
+         for(let i=0;i<this.bunchOptions.length;i++){
+          
+            if(this.bunchList[0].answer == this.bunchOptions[i].option){
+              dummyObj['1']=this.bunchOptions[i].value;
+            }
+           if(this.bunchList[1].answer == this.bunchOptions[i].option){
+              dummyObj['2']=this.bunchOptions[i].value;
+            }
+           if(this.bunchList[2].answer == this.bunchOptions[i].option){
+              dummyObj['3']=this.bunchOptions[i].value;
+            }
+           if(this.bunchList[3].answer == this.bunchOptions[i].option){
+              dummyObj['4']=this.bunchOptions[i].value;
+            }
+           if(this.bunchList[4].answer == this.bunchOptions[i].option){
+              dummyObj['5']=this.bunchOptions[i].value;
+            }
+            console.log("final", dummyObj)
+        }
+        this.bunchSelectedAns.push(dummyObj['1'])
+        this.bunchSelectedAns.push(dummyObj['2'])
+        this.bunchSelectedAns.push(dummyObj['3'])
+        this.bunchSelectedAns.push(dummyObj['4'])
+        this.bunchSelectedAns.push(dummyObj['5'])
+
+        for(let j=0; j< this.bunchList.length;j++){
+          this.userOptions[this.bunchList[j].statementid] = this.bunchList[j].answer
+        }
+        if(Object.keys(this.userOptions).length == 5){
+          this.mcqBunchFlag = true;
+         }
+      }
+
+      console.log("mcqbunch options",this.bunchList,this.totalBunchCounter,this.tasks.length,this.bunchSelectedAns,dummyObj,this.userOptions)
+    }else {
 
       this.tasks = this.data.options;
       console.log("rewewewses",this.data,this.tasks)
@@ -304,9 +359,72 @@ export class McqcomponentComponent implements OnInit {
     }
     
   }
-
+  onValueChangedMcqBunch($event,id,i){
+    console.log("onvalue",$event.value,id)
+    for(let j=0; j< this.bunchOptions.length;j++){
+      if($event.value == this.bunchOptions[j].value){
+        var optionId = this.bunchOptions[j].option
+      }
+    }
+  
+      this.userOptions[id]=optionId
+      
+      console.log("useroption",this.userOptions,Object.keys(this.userOptions).length)
+      if(Object.keys(this.userOptions).length == 5){
+        this.mcqBunchFlag = true;
+       }
+  }
   submitYesNo() {
-    this.sendAns.emit(this.sendYesNoType)
+    
+    if(this.questionType == "mcqInBunch"){
+      console.log("mcqbunch",this.bunchCounter)
+      this.bunchList = this.tasks.splice(0,this.bunchCounter)
+      this.sendAns.emit(this.userOptions)
+      this.userOptions={};
+      this.totalBunchCounter = this.totalBunchCounter + this.bunchCounter;
+      this.mcqBunchFlag = false;
+      this.bunchSelectedAns = [];
+      if(window.localStorage.getItem('mainFlagModule4') == "12"){
+        var dummyObj={}
+        for(let i=0;i<this.bunchOptions.length;i++){
+            if(this.bunchList.length !=0)
+           {
+             if(this.bunchList[0].answer == this.bunchOptions[i].option){
+             dummyObj['1']=this.bunchOptions[i].value;
+           }
+          if(this.bunchList[1].answer == this.bunchOptions[i].option){
+             dummyObj['2']=this.bunchOptions[i].value;
+           }
+          if(this.bunchList[2].answer == this.bunchOptions[i].option){
+             dummyObj['3']=this.bunchOptions[i].value;
+           }
+          if(this.bunchList[3].answer == this.bunchOptions[i].option){
+             dummyObj['4']=this.bunchOptions[i].value;
+           }
+          if(this.bunchList[4].answer == this.bunchOptions[i].option){
+             dummyObj['5']=this.bunchOptions[i].value;
+            }
+          }
+           console.log("final", dummyObj)
+       }
+       this.bunchSelectedAns.push(dummyObj['1'])
+       this.bunchSelectedAns.push(dummyObj['2'])
+       this.bunchSelectedAns.push(dummyObj['3'])
+       this.bunchSelectedAns.push(dummyObj['4'])
+       this.bunchSelectedAns.push(dummyObj['5'])
+       for(let j=0; j< this.bunchList.length;j++){
+        this.userOptions[this.bunchList[j].statementid] = this.bunchList[j].answer
+      }
+      if(Object.keys(this.userOptions).length == 5){
+        this.mcqBunchFlag = true;
+       }
+
+     }
+     console.log("anssss",this.bunchSelectedAns)
+    }
+    else{
+      this.sendAns.emit(this.sendYesNoType)
+    }
 
   }
   submit() {
