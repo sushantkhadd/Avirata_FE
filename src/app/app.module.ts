@@ -28,7 +28,7 @@ import { PermissionModelService } from "./permission-model.service";
 import { AngularMultiSelectModule } from "angular2-multiselect-dropdown";
 import { LocationStrategy, HashLocationStrategy } from "@angular/common";
 import { SlimLoadingBarModule } from "ng2-slim-loading-bar";
-import { BarRatingModule } from "ngx-bar-rating";
+import { Ng5SliderModule } from "ng5-slider";
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -54,7 +54,7 @@ export function createTranslateLoader(http: HttpClient) {
     AngularMultiSelectModule,
     ToastModule.forRoot(),
     SlimLoadingBarModule.forRoot(),
-    BarRatingModule,
+    Ng5SliderModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -79,7 +79,7 @@ export function createTranslateLoader(http: HttpClient) {
     PermissionModelService,
     AuthGuard,
     CanDeactivateGuard,
-    {provide: LocationStrategy, useClass: HashLocationStrategy}
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]
 })
