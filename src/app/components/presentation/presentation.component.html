@@ -37,9 +37,9 @@
           <button (click)="finishPDF();" class="btn btn-primary">{{'Stepper.Finish' | translate}}</button>
         </span>
       </div>
-      <div class="fullscreen float-right">
-        <span class="control ripple" id="download" *ngIf="download">
-          <a href={{downloadLink}} download>
+      <div class="fullscreen float-right download-pdf" *ngIf="data['unlockView'] == 'static'">
+        <span class="control ripple" id="download" *ngIf="downloadLink">
+          <a href={{downloadLink}} class="c-pointer text-white" target="_blank" [download]="downloadLink">
             <em class="fa fa-download" aria-hidden="true"></em>
           </a>
         </span>

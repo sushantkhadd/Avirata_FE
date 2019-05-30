@@ -82,7 +82,7 @@ import { Module414Component } from './module4/module4-14.component';
 import { Module4Service } from "./module4/module4.service";
 import { NewBaselineComponent } from "../components/traineeBaseline/new-baseline/new-baseline.component"
 import { QuizService } from "../components/traineeBaseline/services/quiz.service";
-import { BarRatingModule } from "ngx-bar-rating";
+import { Ng5SliderModule } from "ng5-slider";
 
 @NgModule({
   imports: [
@@ -101,7 +101,7 @@ import { BarRatingModule } from "ngx-bar-rating";
     DxCheckBoxModule,
     DxListModule,
     DxPieChartModule,
-    BarRatingModule
+    Ng5SliderModule
   ],
   declarations: [
     Module0Component,
