@@ -184,13 +184,13 @@
     </div>
 </div>
 
-<div *ngIf="questionType == 'mcqInBunch'">
+<div *ngIf="questionType == 'mcqInBunch'" class="bunch-mcqs">
     <div class="row" *ngFor="let item of bunchList;let i=index">
         <div class="col-sm-12 col-md-12">
             <div class="card">
                 <div class="card-header" *ngIf="item.statement">
-                  <span>{{totalBunchCounter +(i + 1)}}. </span>
-                    <h6 [innerHTML]="item.statement"></h6>
+                  <span class="pr-2">{{totalBunchCounter +(i + 1)}}. </span>
+                    <h6 [innerHTML]="item.statement" class="d-inline-block"></h6>
                 </div>
                 <div class="card-block pt-0" [class.pt-0]="queCount">
                     <div *ngIf="queCount" class="badge badge-custom ml-3">{{queCount}} / {{totalQueCount}}</div>
@@ -212,6 +212,7 @@
             </div>
         </div>
     </div>
+    <br>
 
     <div class="text-center">
         <div class="">

@@ -174,7 +174,7 @@ export class Module3Component implements OnInit {
             this.passFlags['questionType'] = "mcqTextOption";
             this.jsonData = data['data'].questionlist[0]
             this.data = this.jsonData;
-            console.log("MY DATA ", this.data)
+            console.log("MY DATA ", this.data,this.queCount)
           } else if (data['message'] == 'exam finish' || data['message'] == 'submodule finish')
           {
             this.showVideoFlag = false;

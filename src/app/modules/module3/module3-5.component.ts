@@ -16,16 +16,16 @@ export class Module35Component implements OnInit {
   constructor(public LanguageService: LanguageService, public LocalstoragedetailsService: LocalstoragedetailsService, public Module3Service: Module3Service, public toastr: ToastsManager, vcr: ViewContainerRef, public router: Router, public translate: TranslateService) {
     this.toastr.setRootViewContainerRef(vcr);
   }
-  public data; questionType; passFlags = {}; showAnswer; saveData; answer; sumbitButton; startFlag;
-  public inst = "खालील लक्ष वेधून घेणाऱ्या विद्यार्थ्यांबाबत शिक्षकांनी केलेल्या उपाययोजना योग्य आहेत का ते सांगा: "
+  public data; questionType; passFlags = {}; showAnswer; saveData; answer; sumbitButton; startFlag;description;
+  public inst = "एखाद्या संकल्पनेबाबत उजव्या मेंदूमध्ये नवीन जोडण्या निर्माण होणे आणि त्या पक्क्या होणे यासाठी पुढे  दिलेले उदाहरणे बघा आणि त्यातील एक पर्याय निवडा."
   ngOnInit() {
     this.startFlag = false;
     this.showAnswer = true;
     this.saveData = true;
-    this.passFlags['saveData'] = this.saveData;
-    this.passFlags['showAnswer'] = this.showAnswer;
+    this.passFlags["saveData"] = this.saveData;
+    this.passFlags["showAnswer"] = this.showAnswer;
     this.questionType = "mcqTextOption";
-    this.passFlags['questionType'] = this.questionType;
+    this.passFlags["questionType"] = this.questionType;;
 
     if (this.mainFlagModule3 == 5)
     {
@@ -47,7 +47,7 @@ export class Module35Component implements OnInit {
           {
             // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 1.3', window.localStorage.getItem('username'), 10);
             console.log("data ", data['data'])
-            this.data = data['data'].questionlist[0]
+            this.data = data['data']
             this.startFlag = true;
           }
         },
@@ -81,14 +81,17 @@ export class Module35Component implements OnInit {
             this.subFlagModule3 = this.subFlagModule3 + 1
             window.localStorage.setItem('subFlagModule3', this.subFlagModule3.toString())
             console.log("data ", data['data'])
-            this.data = data['data'].questionlist[0]
+            this.data = data['data']
             this.sumbitButton = false;
+            this.description = data['data'].description;
           } else if (data['status'] == true && data['message'] == "submodule finish")
           {
+            this.description = data['data'].description;
             this.startFlag = false;
-            this.mainFlagModule3 = 6;
             window.localStorage.setItem('uuid', data['data'].nextuuid);
+            this.mainFlagModule3 = 6;
             window.localStorage.setItem('mainFlagModule3', '6');
+            window.localStorage.setItem('subFlagModule3', '1');
             window.localStorage.setItem('source', 'module 3.6.1');
             var obj = {
               "type": "submodule",
@@ -106,5 +109,4 @@ export class Module35Component implements OnInit {
         });
 
   }
-
 }

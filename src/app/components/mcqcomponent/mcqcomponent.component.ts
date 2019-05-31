@@ -42,13 +42,10 @@ export class McqcomponentComponent implements OnInit {
     }
     else if(window.localStorage.getItem('mainFlagModule4')== '5' || window.localStorage.getItem('mainFlagModule4')== '7'){
       this.queCount = parseInt(window.localStorage.getItem('subFlagModule4'))
-    } else if (window.localStorage.getItem('mainFlagModule3') == '9')
+    } else if (window.localStorage.getItem('mainFlagModule3') == '9' || window.localStorage.getItem('mainFlagModule3') == '11' || window.localStorage.getItem('mainFlagModule3') == '5')
     {
       this.queCount = parseInt(window.localStorage.getItem('subFlagModule3'))
-    } else if (window.localStorage.getItem('mainFlagModule3') == '11')
-    {
-      this.queCount = parseInt(window.localStorage.getItem('subFlagModule3'))
-    }
+    } 
 
     if(window.localStorage.getItem('mainFlagModule2')== '9'){
       this.totalQueCount = 7;
@@ -116,7 +113,7 @@ export class McqcomponentComponent implements OnInit {
         for(var i=0; i< this.data.statementlist.length ; i++){
           this.priorities.push(this.data.statementlist[i].statement)
         }
-    } else if (this.questionType == 'mcqTextOption' && (window.localStorage.getItem('mainFlagModule2') == '3' || window.localStorage.getItem('mainFlagModule4') == '5' || window.localStorage.getItem('mainFlagModule3') == '9' || window.localStorage.getItem('mainFlagModule3') == '11'  || window.localStorage.getItem('mainFlagModule4')== '7')) {
+    } else if (this.questionType == 'mcqTextOption' && (window.localStorage.getItem('mainFlagModule2') == '3' || window.localStorage.getItem('mainFlagModule4') == '5' || window.localStorage.getItem('mainFlagModule3') == '9' || window.localStorage.getItem('mainFlagModule3') == '11' || window.localStorage.getItem('mainFlagModule3') == '5' || window.localStorage.getItem('mainFlagModule4')== '7')) {
         console.log("data",this.data.questionlist[0].question,this.data.questionlist[0].options)
         this.priorities= []
        // this.priorities = this.data.questionlist[0].question;
@@ -252,7 +249,7 @@ export class McqcomponentComponent implements OnInit {
       this.mysubModule7 != 2
     ) {
       if (this.showAnswer == true) {
-        if (this.questionType == 'mcqTextOption' && (window.localStorage.getItem('mainFlagModule2') == '3' || window.localStorage.getItem('mainFlagModule4') == '5' || window.localStorage.getItem('mainFlagModule3') == '9' || window.localStorage.getItem('mainFlagModule3') == '11' || window.localStorage.getItem('mainFlagModule4')== '7')){
+        if (this.questionType == 'mcqTextOption' && (window.localStorage.getItem('mainFlagModule2') == '3' || window.localStorage.getItem('mainFlagModule4') == '5' || window.localStorage.getItem('mainFlagModule3') == '9' || window.localStorage.getItem('mainFlagModule3') == '11' || window.localStorage.getItem('mainFlagModule3') == '5' || window.localStorage.getItem('mainFlagModule4')== '7')){
           for(var i=0; i< this.data.questionlist[0].options.length ; i++){
             // console.log("optionsadddddd",$event.value,this.data.questionlist[0].options)
 
@@ -262,7 +259,7 @@ export class McqcomponentComponent implements OnInit {
               }
 
              }
-        }else if (window.localStorage.getItem('mainFlagModule3') == '1' || window.localStorage.getItem('mainFlagModule3') == '5' || window.localStorage.getItem('mainFlagModule3') == '9' || window.localStorage.getItem('mainFlagModule3') == '11'){
+        }else if (window.localStorage.getItem('mainFlagModule3') == '1' || window.localStorage.getItem('mainFlagModule3') == '9' || window.localStorage.getItem('mainFlagModule3') == '11'){
           console.log("sadfffffffff",this.data)
           for(var i=0; i< this.data.options.length ; i++){
             // console.log("optionsadddddd",$event.value,this.data.questionlist[0].options)
@@ -317,7 +314,7 @@ export class McqcomponentComponent implements OnInit {
   goNext5_3() {
     console.log("qsaDDDDDD",this.onlyPopUpAns)
     this.submitFlagMCQ = false
-    if (window.localStorage.getItem('mainFlagModule2') == '3' || window.localStorage.getItem('mainFlagModule3') == '9' || window.localStorage.getItem('mainFlagModule3') == '11'){
+    if (window.localStorage.getItem('mainFlagModule2') == '3' || window.localStorage.getItem('mainFlagModule3') == '9' || window.localStorage.getItem('mainFlagModule3') == '11' || window.localStorage.getItem('mainFlagModule3') == '5'){
       this.instructionModal.show()
      this.data.description = this.data.description
      console.log("data.sescr",this.data.description)
@@ -553,13 +550,10 @@ export class McqcomponentComponent implements OnInit {
     }
     else if(window.localStorage.getItem('mainFlagModule4')== '5' || window.localStorage.getItem('mainFlagModule4')== '7'){
       this.queCount = parseInt(window.localStorage.getItem('subFlagModule4'))
-    } else if (window.localStorage.getItem('mainFlagModule3') == '9')
+    } else if (window.localStorage.getItem('mainFlagModule3') == '9' || window.localStorage.getItem('mainFlagModule3') == '11' || window.localStorage.getItem('mainFlagModule3') == '5')
     {
       this.queCount = parseInt(window.localStorage.getItem('subFlagModule3'))
-    } else if (window.localStorage.getItem('mainFlagModule3') == '11')
-    {
-      this.queCount = parseInt(window.localStorage.getItem('subFlagModule3'))
-    }
+    } 
 
     if (this.questionType == 'checkBoxOption') {
       console.log("ddd ", this.selectedTasks[0], this.selectedTasks[1], this.ans1, this.ans2)
