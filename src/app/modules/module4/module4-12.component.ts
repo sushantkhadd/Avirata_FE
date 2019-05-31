@@ -20,7 +20,7 @@ export class Module412Component implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
   public data; questionType; passFlags = {}; showAnswer; saveData; answer; sumbitButton; startFlag;description;
-  public inst = "खालील व्यक्ती समायोजित आहेत की नाही त्याबद्दल योग्य पर्याय निवडा."
+  public inst = "खाली दिलेल्या पर्यायांतील काही मानसिक अस्वास्थ्याशी निगडित आहेत, तर काही मानसिक आजाराशी निगडित आहेत आणि काही दोन्हीशी निगडित नाहीत. प्रत्येक पर्यायावर विचार करून तो योग्य पर्याय निवडा."
   ngOnInit() {
     this.startFlag = false;
     this.showAnswer = true;
@@ -90,7 +90,7 @@ export class Module412Component implements OnInit {
           } else if (data['status'] == true && data['message'] == "submodule finish")
           {
             this.description = data['data'].description;
-            this.startFlag = false;
+           // this.startFlag = false;
             window.localStorage.setItem('uuid', data['data'].nextuuid);
             this.mainFlagModule4 = 13;
             window.localStorage.setItem('mainFlagModule4', '13');

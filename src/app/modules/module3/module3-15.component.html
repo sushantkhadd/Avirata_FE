@@ -26,8 +26,13 @@
             </div>
         </div>
     </div>
-    <div *ngIf="startPdf" class="mb-2">
-      <app-presentation [data]='docData' (ansCorrect)="checkAnswer($event)"></app-presentation>
+    <div class="card" *ngIf="startPdf">
+      <div class="card-footer">
+          <h6 class="text-center">{{'L2Module3.subMenu3-15' | translate}}</h6>
+      </div>
+          <div class="mb-2">
+              <app-presentation [data]='docData' (ansCorrect)="checkAnswer($event)"></app-presentation>
+          </div>
     </div>
   </div>
   <div *ngIf="mainFlagModule3 > 15">

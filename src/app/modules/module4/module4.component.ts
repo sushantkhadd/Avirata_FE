@@ -44,7 +44,7 @@ export class Module4Component implements OnInit {
   statVideoFlag;nextFlag;
   questionFlag;;
   urlArray = {};
-  public inst = "खालील व्यक्ती समायोजित आहेत की नाही त्याबद्दल योग्य पर्याय निवडा."
+  public inst = "खाली दिलेल्या पर्यायांतील काही मानसिक अस्वास्थ्याशी निगडित आहेत, तर काही मानसिक आजाराशी निगडित आहेत आणि काही दोन्हीशी निगडित नाहीत. प्रत्येक पर्यायावर विचार करून तो योग्य पर्याय निवडा."
   ngOnInit() {
     this.vedioCompleteUrl = "79vHVVtmIoQ";
     this.mainFlagModule4 = parseInt(
@@ -80,15 +80,15 @@ export class Module4Component implements OnInit {
       console.log("vcxxxx", urlJson);
       if (urlJson["children"].length > 0) {
         var index = urlJson["children"].findIndex(
-          item => item.source == "module 4.7"
+          item => item.source == "module 4.1"
         );
         console.log("qWSS", index);
-        var mainJson;
-        mainJson = JSON.parse(urlJson["children"][index].url);
-        console.log("hjbhjb", mainJson);
+        // var mainJson;
+        // mainJson = JSON.parse(urlJson["children"][index].url);
+        // console.log("hjbhjb", mainJson);
         if (urlJson["children"][index].url != null) {
-          this.urlArray["src1"] = mainJson["4.1.1"];
-          this.passData["videoUrl"] = this.urlArray["src1"];
+          // this.urlArray["src1"] = mainJson["4.1.1"];
+          this.passData["videoUrl"] = urlJson["children"][index].url;
         }
       }
     }
@@ -141,14 +141,14 @@ export class Module4Component implements OnInit {
       this.nextFlag = true; 
       this.subFlagModule4 = 2;
       this.instructionModal.show();
-      var url ={}
-      url['4.1.1'] = this.vedioCompleteUrl;
-      console.log("urllll",url)
+      // var url ={}
+      // url['4.1.1'] = this.vedioCompleteUrl;
+      // console.log("urllll",url)
       var current4 = [];
       current4 = JSON.parse(window.localStorage.getItem("currentJson4")); 
       var index = current4["children"].findIndex(
         item => item.source == "module 4.1" );
-      current4["children"][index].url = JSON.stringify(url); 
+      current4["children"][index].url = this.vedioCompleteUrl; 
       window.localStorage.setItem("currentJson4", JSON.stringify(current4));
     } else {
       window.localStorage.setItem("mainFlagModule4", "1");
@@ -214,7 +214,7 @@ export class Module4Component implements OnInit {
     this.Module4Service.apiCall(jsonBody, apiUrl)
       .subscribe(
         data => {
-          if (data['status'] == true && data['message'] == "your answer stored next question and uuid is")
+          if (data['message'] == "your answer stored next question and uuid is")
           {
             window.localStorage.setItem('uuid', data['data'].nextuuid);
             this.subFlagModule4 = this.subFlagModule4 + 1
@@ -223,12 +223,12 @@ export class Module4Component implements OnInit {
             this.data = data['data']
             this.sumbitButton = false;
             this.description = data['data'].description;
-          } else if (data['status'] == true && data['message'] == "submodule finish")
+          } else if (data['message'] == "submodule finish")
           {
-            this.description = data['data'].description;
-            this.startFlag = false;
+           // this.nextFlag= true;
+           // this.startFlag = false;
             window.localStorage.setItem('uuid', data['data'].nextuuid);
-            // this.mainFlagModule4 = 2;
+            // this.subFlagModule4 =1;
             window.localStorage.setItem('mainFlagModule4', '2');
             window.localStorage.setItem('subFlagModule4', '1');
             window.localStorage.setItem('source', 'module 4.2.1');

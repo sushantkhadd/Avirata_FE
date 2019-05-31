@@ -28,9 +28,13 @@
             </div>
         </div>
     </div>
-  
-    <div *ngIf="startPdf">
-        <app-presentation [data]='passValues' (sendCfuAns)="finishPDF($event)"></app-presentation>
+    <div class="card" *ngIf="startPdf">
+            <div class="card-footer">
+                <h6 class="text-center">{{'L2Module3.subMenu3-18' | translate}}</h6>
+            </div>
+            <div>
+              <app-presentation [data]='passValues' (sendCfuAns)="finishPDF($event)"></app-presentation>
+            </div>
     </div>
   </div>
   <div *ngIf="mainFlagModule3 > 18">
