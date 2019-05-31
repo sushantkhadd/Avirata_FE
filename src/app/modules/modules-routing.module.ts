@@ -62,6 +62,21 @@ import { Module411Component } from "./module4/module4-11.component";
 import { Module412Component } from "./module4/module4-12.component";
 import { Module413Component } from "./module4/module4-13.component";
 import { Module414Component } from "./module4/module4-14.component";
+import { Module5Component } from "./module5/module5.component";
+import { Module52Component } from "./module5/module5-2.component";
+import { Module53Component } from "./module5/module5-3.component";
+import { Module54Component } from "./module5/module5-4.component";
+import { Module55Component } from "./module5/module5-5.component";
+import { Module56Component } from "./module5/module5-6.component";
+import { Module57Component } from "./module5/module5-7.component";
+import { Module58Component } from "./module5/module5-8.component";
+import { Module59Component } from "./module5/module5-9.component";
+import { Module510Component } from "./module5/module5-10.component";
+import { Module511Component } from "./module5/module5-11.component";
+import { Module512Component } from "./module5/module5-12.component";
+import { Module513Component } from "./module5/module5-13.component";
+import { Module514Component } from "./module5/module5-14.component";
+import { Module515Component } from "./module5/module5-15.component";
 
 const routes: Routes = [
   {
@@ -318,6 +333,63 @@ const routes: Routes = [
         path: "module4/Module4.14",
         component: Module414Component
       },
+      {
+        path: "module5",
+        component: Module5Component
+      },
+      {
+        path: "module5/Module5.2",
+        component: Module52Component
+      },
+      {
+        path: "module5/Module5.3",
+        component: Module53Component
+      },
+      {
+        path: "module5/Module5.4",
+        component: Module54Component
+      },
+      {
+        path: "module5/Module5.5",
+        component: Module55Component
+      },{
+        path: "module5/Module5.6",
+        component: Module56Component
+      },
+      {
+        path: "module5/Module5.7",
+        component: Module57Component
+      },
+      {
+        path: "module5/Module5.8",
+        component: Module58Component
+      },
+      {
+        path: "module5/Module5.9",
+        component: Module59Component
+      },{
+        path: "module5/Module5.10",
+        component: Module510Component
+      },
+      {
+        path: "module5/Module5.11",
+        component: Module511Component
+      },
+      {
+        path: "module5/Module5.12",
+        component: Module512Component
+      },
+      {
+        path: "module5/Module5.13",
+        component: Module513Component
+      },{
+        path: "module5/Module5.14",
+        component: Module514Component
+      },
+      {
+        path: "module5/Module5.15",
+        component: Module515Component
+      }
     ]
   }
 ];
