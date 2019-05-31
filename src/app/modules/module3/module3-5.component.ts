@@ -17,7 +17,7 @@ export class Module35Component implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
   public data; questionType; passFlags = {}; showAnswer; saveData; answer; sumbitButton; startFlag;description;
-  public inst = "एखाद्या संकल्पनेबाबत उजव्या मेंदूमध्ये नवीन जोडण्या निर्माण होणे आणि त्या पक्क्या होणे यासाठी पुढे  दिलेले उदाहरणे बघा आणि त्यातील एक पर्याय निवडा."
+  public inst = "खालील लक्ष वेधून घेणाऱ्या विद्यार्थ्यांबाबत शिक्षकांनी केलेल्या उपाययोजना योग्य आहेत का ते सांगा:"
   ngOnInit() {
     this.startFlag = false;
     this.showAnswer = true;
