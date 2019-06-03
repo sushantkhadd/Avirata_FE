@@ -15,7 +15,7 @@
         <div class="col-md-12">
           <div class="card ">
              <div class="card-footer">
-               <h6 class="text-center">{{'L2Module3.subMenu3-1' | translate}}</h6>
+               <h6 class="text-center">{{'L2Module2.mitra' | translate}}</h6>
              </div>
             <div class="card-block text-center">
               <app-static-video [receivedData]='passData' (finishCall)="videoFinish($event)"></app-static-video>
@@ -32,6 +32,7 @@
       <div *ngIf="jsonData != undefined && !showInst">
         <h6 class="questionHead lineHeight">
           <b>{{'L2common.caution' | translate}}&nbsp;{{'L2Module3.que3_1' | translate}}</b>
+           <!-- <span class="f-right">{{queCount +1}} / 10</span> -->
         </h6>
         <app-mcqcomponent [passFlags]='passFlags' [data]='data' (sendAns)="getAnswer($event)"></app-mcqcomponent>
       </div>

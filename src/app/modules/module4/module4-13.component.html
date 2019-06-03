@@ -37,7 +37,7 @@
           <img alt="" [src]="imgUrl" class="mx-auto img-fluid">
           <hr>
           <div class="text-center" *ngIf="mainFlagModule4 ==13">
-            <button class="btn btn-primary btn-pad " (click)="finish()">{{'Stepper.Finish' | translate}}</button>
+            <button class="btn btn-primary btn-pad " (click)="finish()">{{'Stepper.Next' | translate}}</button>
           </div>
           <div class="text-center" *ngIf="mainFlagModule4 >13">
             <button class="btn btn-primary btn-pad " (click)="nextRoute()">{{'Stepper.Next' | translate}}</button>
@@ -152,7 +152,7 @@
             </div>
           </div>
         </div>
-        <div *ngIf="flag == 1">
+        <div class="text-center" *ngIf="flag == 1">
           <img class="img-fluid" [src]="urlArray['src1']" alt="">
           <div class="card-footer text-center bg-white border-0">
             <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>
