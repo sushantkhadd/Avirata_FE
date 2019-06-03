@@ -11,6 +11,8 @@ import { PermissionModelService } from "src/app/permission-model.service";
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import html2canvas from "html2canvas";
 import { DomSanitizer } from '@angular/platform-browser';
+import { map, filter, take } from "rxjs/operators";
+import { interval, pipe } from "rxjs";
 
 declare var jQuery: any;
 
@@ -33,7 +35,7 @@ export class FullLayoutComponent implements OnInit {
   public disabled: boolean = false;
   public status: { isopen: boolean } = { isopen: false };
   private trainee = false;
-  imgUrl;
+  imgUrl; rewardsFlag;
   needEfforts;
   @ViewChild("passwordChangeModal") public passwordChangeModal: ModalDirective;
   @ViewChild("moduleStatusModal") public moduleStatusModal: ModalDirective;
@@ -93,7 +95,7 @@ export class FullLayoutComponent implements OnInit {
   levelData;
   rewardImgUrl;
   statusFlag;
-  finishImgUrl;
+  finishImgUrl; intVal;
   imageJson = {
     a1: "../../assets/img/rewards/gold star.png",
     a2: "../../assets/img/rewards/silver star.png",
@@ -102,6 +104,17 @@ export class FullLayoutComponent implements OnInit {
     r1: "../../assets/img/rewards/gold_star.png",
     r2: "../../assets/img/rewards/silver_star.png",
     r3: "../../assets/img/rewards/bronze_star.png"
+  };
+  animatedImageJson = {
+    a1: "../../assets/img/rewards/single-stars/gold_small.png",
+    a2: "../../assets/img/rewards/single-stars/gold.png",
+    a3: "../../assets/img/rewards/single-stars/gold_small.png",
+    b1: "../../assets/img/rewards/single-stars/silver_small.png",
+    b2: "../../assets/img/rewards/single-stars/silver.png",
+    b3: "../../assets/img/rewards/single-stars/silver_small.png",
+    c1: "../../assets/img/rewards/single-stars/bronze_small.png",
+    c2: "../../assets/img/rewards/single-stars/bronze.png",
+    c3: "../../assets/img/rewards/single-stars/bronze_small.png"
   };
   constructor(
     public LanguageService: LanguageService,
@@ -173,7 +186,7 @@ export class FullLayoutComponent implements OnInit {
     }
   }
 
-  downloadReward(){
+  downloadReward() {
     html2canvas(document.querySelector("#capture")).then(canvas => {
       this.shareableImage = canvas.toDataURL();
       console.log(canvas, this.shareableImage);
@@ -192,24 +205,36 @@ export class FullLayoutComponent implements OnInit {
       link.href = this.shareableImage; //function blocks CORS
       link.download = "my-reward.png";
       link.click();
-      var file = this.dataURLtoFile(this.shareableImage,'a.png')
+      var file = this.dataURLtoFile(this.shareableImage, "a.png");
       var shareUrl = "whatsapp://send?text=" + file.name;
       this.getImage = this._sanitizer.bypassSecurityTrustResourceUrl(shareUrl);
-      console.log(file,file.name,this.getImage)
+      console.log(file, file.name, this.getImage);
     });
   }
 
   dataURLtoFile(dataurl, filename) {
-    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-      bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-    while (n--)
-    {
+    var arr = dataurl.split(","),
+      mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]),
+      n = bstr.length,
+      u8arr = new Uint8Array(n);
+    while (n--) {
       u8arr[n] = bstr.charCodeAt(n);
     }
     return new File([u8arr], filename, { type: mime });
   }
 
   ngOnInit() {
+
+    // if (this.moduleCompleteStatus["type"] == "submodule")
+    // {
+    //   this.setInterval()
+    // } else
+    // {
+    //   this.setInterval()
+    // }
+
+
     jQuery("#sidebarCollapse").on("click", function() {
       jQuery("#sidebar").toggleClass("active");
     });
@@ -326,6 +351,16 @@ export class FullLayoutComponent implements OnInit {
       console.log("statusFlag", this.levelData, this.levelData[index].status);
     }
     // console.log("leveldata",this.levelData,this.statusFlag)
+  }
+
+  setInterval() {
+    interval(1000)
+      .pipe(
+        take(3)
+      )
+      .subscribe(value => {
+        this.intVal = value;
+      });
   }
 
   langChange(e) {
@@ -630,113 +665,178 @@ export class FullLayoutComponent implements OnInit {
   //Set status for module5- to set mainFlagModule5,subFlagModule5
   setStatus(val) {
     if (val == true) {
-      this.mainFlagModule5 = 14;
+      this.mainFlagModule5 = 16;
       this.subFlagModule5 = 1;
     } else {
       var source = window.localStorage.getItem("source");
-      if (source == "module 5") {
-        this.mainFlagModule5 = 1;
-        this.subFlagModule5 = 0;
-      } else if (source == "module 5.1.1" || source == "module 5.1.2") {
+      if (
+        source == "module 5" ||
+        source == "module 5.1" ||
+        source == "module 5.1.1" ||
+        source == "module 5.1.2"
+      ) {
         this.mainFlagModule5 = 1;
         if (source == "module 5.1.1") {
           this.subFlagModule5 = 1;
         } else if (source == "module 5.1.2") {
           this.subFlagModule5 = 2;
         }
-      } else if (source == "module 5.2") {
+        window.localStorage.setItem(
+          "subFlagModule5",
+          this.subFlagModule5.toString()
+        );
+      } else if (
+        source == "module 5.2" ||
+        source == "module 5.2.1" ||
+        source == "module 5.2.2" ||
+        source == "module 5.2.3"
+      ) {
         this.mainFlagModule5 = 2;
-        this.subFlagModule5 = 1;
-      } else if (source == "module 5.3") {
+        if (source == "module 5.2.1") {
+          this.subFlagModule5 = 1;
+        } else if (source == "module 5.2.2") {
+          this.subFlagModule5 = 2;
+        } else if (source == "module 5.2.3") {
+          this.subFlagModule5 = 3;
+        }
+        window.localStorage.setItem(
+          "subFlagModule5",
+          this.subFlagModule5.toString()
+        );
+      } else if (
+        source == "module 5.3" ||
+        source == "module 5.3.1" ||
+        source == "module 5.3.2" ||
+        source == "module 5.3.3"
+      ) {
         this.mainFlagModule5 = 3;
-        this.subFlagModule5 = 1;
-      } else if (source == "module 5.4") {
+        if (source == "module 5.3.1") {
+          this.subFlagModule5 = 1;
+        } else if (source == "module 5.3.2") {
+          this.subFlagModule5 = 2;
+        } else if (source == "module 5.3.3") {
+          this.subFlagModule5 = 3;
+        }
+        window.localStorage.setItem(
+          "subFlagModule5",
+          this.subFlagModule5.toString()
+        );
+      } else if (
+        source == "module 5.4" ||
+        source == "module 5.4.1" ||
+        source == "module 5.4.2" ||
+        source == "module 5.4.3"
+      ) {
         this.mainFlagModule5 = 4;
-        this.subFlagModule5 = 0;
-      } else if (source == "module 5.5.1" || source == "module 5.5.2") {
+        if (source == "module 5.4.1") {
+          this.subFlagModule5 = 1;
+        } else if (source == "module 5.4.2") {
+          this.subFlagModule5 = 2;
+        } else if (source == "module 5.4.3") {
+          this.subFlagModule5 = 3;
+        }
+        window.localStorage.setItem(
+          "subFlagModule5",
+          this.subFlagModule5.toString()
+        );
+      } else if (
+        source == "module 5.5" ||
+        source == "module 5.5.1" ||
+        source == "module 5.5.2" ||
+        source == "module 5.5.3"
+      ) {
         this.mainFlagModule5 = 5;
         if (source == "module 5.5.1") {
           this.subFlagModule5 = 1;
         } else if (source == "module 5.5.2") {
           this.subFlagModule5 = 2;
+        } else if (source == "module 5.5.3") {
+          this.subFlagModule5 = 3;
         }
+        window.localStorage.setItem(
+          "subFlagModule5",
+          this.subFlagModule5.toString()
+        );
       } else if (
         source == "module 5.6" ||
         source == "module 5.6.1" ||
-        source == "module 5.6.2" ||
-        source == "module 5.6.3" ||
-        source == "module 5.6.4" ||
-        source == "module 5.6.5" ||
-        source == "module 5.6.6"
+        source == "module 5.6.2" 
       ) {
         this.mainFlagModule5 = 6;
         if (source == "module 5.6.1") {
           this.subFlagModule5 = 1;
         } else if (source == "module 5.6.2") {
           this.subFlagModule5 = 2;
-        } else if (source == "module 5.6.3") {
-          this.subFlagModule5 = 3;
-        } else if (source == "module 5.6.4") {
-          this.subFlagModule5 = 4;
-        } else if (source == "module 5.6.5") {
-          this.subFlagModule5 = 5;
-        } else if (source == "module 5.6.6") {
-          this.subFlagModule5 = 6;
-        }
-      } else if (source == "module 5.7.1" || source == "module 5.7.2") {
+        } 
+        window.localStorage.setItem(
+          "subFlagModule5",
+          this.subFlagModule5.toString()
+        );
+      } else if (source == "module 5.7") {
         this.mainFlagModule5 = 7;
-        if (source == "module 5.7.1") {
-          this.subFlagModule5 = 1;
-        } else if (source == "module 5.7.2") {
-          this.subFlagModule5 = 2;
-        }
-      } else if (
-        source == "module 5.8.1" ||
-        source == "module 5.8.2" ||
-        source == "module 5.8.3"
-      ) {
+        window.localStorage.setItem(
+          "subFlagModule5",
+          this.subFlagModule5.toString()
+        );
+      } else if (source == "module 5.8") {
         this.mainFlagModule5 = 8;
-        if (source == "module 5.8.1") {
-          this.subFlagModule5 = 1;
-        } else if (source == "module 5.8.2") {
-          this.subFlagModule5 = 2;
-        } else if (source == "module 5.8.3") {
-          this.subFlagModule5 = 3;
-        }
-      } else if (source == "module 5.9.1" || source == "module 5.9.2") {
+        window.localStorage.setItem(
+          "subFlagModule5",
+          this.subFlagModule5.toString()
+        );
+      } else if (source == "module 5.9") {
         this.mainFlagModule5 = 9;
-        if (source == "module 5.9.1") {
-          this.subFlagModule5 = 1;
-        } else if (source == "module 5.9.2") {
-          this.subFlagModule5 = 2;
-        }
-      } else if (source == "module 5.10.1" || source == "module 5.10.2") {
+        window.localStorage.setItem(
+          "subFlagModule5",
+          this.subFlagModule5.toString()
+        );
+      } else if (source == "module 5.10") {
         this.mainFlagModule5 = 10;
-        if (source == "module 5.10.1") {
-          this.subFlagModule5 = 1;
-        } else if (source == "module 5.10.2") {
-          this.subFlagModule5 = 2;
-        }
-      } else if (source == "module 5.11.1" || source == "module 5.11.2") {
+        window.localStorage.setItem(
+          "subFlagModule5",
+          this.subFlagModule5.toString()
+        );
+      } else if (source == "module 5.11") {
         this.mainFlagModule5 = 11;
-        if (source == "module 5.11.1") {
-          this.subFlagModule5 = 1;
-        } else if (source == "module 5.11.2") {
-          this.subFlagModule5 = 2;
-        }
+        window.localStorage.setItem(
+          "subFlagModule5",
+          this.subFlagModule5.toString()
+        );
       } else if (source == "module 5.12") {
         this.mainFlagModule5 = 12;
-        this.subFlagModule5 = 1;
+        window.localStorage.setItem(
+          "subFlagModule5",
+          this.subFlagModule5.toString()
+        );
       } else if (source == "module 5.13") {
         this.mainFlagModule5 = 13;
-        this.subFlagModule5 = 1;
+        window.localStorage.setItem(
+          "subFlagModule5",
+          this.subFlagModule5.toString()
+        );
+      } else if (source == "module 5.14") {
+        this.mainFlagModule5 = 14;
+        window.localStorage.setItem(
+          "subFlagModule5",
+          this.subFlagModule5.toString()
+        );
+      } else if (
+        source == "module 5.15" ||
+        source == "module 5.15.1" ||
+        source == "module 5.15.2" 
+      ) {
+        this.mainFlagModule5 = 15;
+        if (source == "module 5.15.1") {
+          this.subFlagModule5 = 1;
+        } else if (source == "module 5.15.2") {
+          this.subFlagModule5 = 2;
+        } 
+        window.localStorage.setItem(
+          "subFlagModule5",
+          this.subFlagModule5.toString()
+        );
       }
-      // else if (source == 'module 5.14') {
-      //   this.mainFlagModule5 = 14;
-      // }
-      // else if (source == 'module 5.15') {
-      //   this.mainFlagModule5 = 15;
-      // }
+      
     }
     this.LocalstoragedetailsService.setModule5Falgs(
       this.mainFlagModule5,
@@ -746,15 +846,11 @@ export class FullLayoutComponent implements OnInit {
       "mainFlagModule5",
       this.mainFlagModule5.toString()
     );
-    window.localStorage.setItem(
-      "subFlagModule5",
-      this.subFlagModule5.toString()
-    );
   }
 
   setStatus4(val) {
     if (val == true) {
-      this.mainFlagModule4 = 14;
+      this.mainFlagModule4 = 15;
     } else {
       var source = window.localStorage.getItem("source");
       if (
@@ -984,7 +1080,7 @@ export class FullLayoutComponent implements OnInit {
   setStatus2(val) {
     console.log("so ", window.localStorage.getItem("source"));
     if (val == true) {
-      this.mainFlagModule2 = 17;
+      this.mainFlagModule2 = 18;
     } else {
       var source = window.localStorage.getItem("source");
 
@@ -1295,7 +1391,7 @@ export class FullLayoutComponent implements OnInit {
 
   setStatus3(val) {
     if (val == true) {
-      this.mainFlagModule3 = 18;
+      this.mainFlagModule3 = 19;
     } else {
       var source = window.localStorage.getItem("source");
 
@@ -1636,7 +1732,7 @@ export class FullLayoutComponent implements OnInit {
   }
   setStatus1(val) {
     if (val == true) {
-      this.mainFlagModule1 = 12;
+      this.mainFlagModule1 = 13;
     } else {
       var source = window.localStorage.getItem("source");
 
@@ -2071,24 +2167,37 @@ export class FullLayoutComponent implements OnInit {
       if (this.moduleFinishCount.percentage > 80) {
         this.finishImgUrl = this.imageJson["r1"];
         this.needEfforts = false;
+        this.rewardsFlag = 1;
+        jQuery(".animate-reward img").each(function (i) {
+          jQuery(this).delay(100 * i).fadeIn(1500);
+        });
       } else if (
         this.moduleFinishCount.percentage > 50 &&
         this.moduleFinishCount.percentage <= 80
       ) {
         this.finishImgUrl = this.imageJson["r2"];
         this.needEfforts = false;
+        this.rewardsFlag = 2;
+        jQuery(".animate-reward img").each(function (i) {
+          jQuery(this).delay(100 * i).fadeIn(1500);
+        });
       } else if (
         this.moduleFinishCount.percentage >= 10 &&
         this.moduleFinishCount.percentage <= 50
       ) {
         this.finishImgUrl = this.imageJson["r3"];
         this.needEfforts = false;
+        this.rewardsFlag = 3;
+        jQuery(".animate-reward img").each(function (i) {
+          jQuery(this).delay(100 * i).fadeIn(1500);
+        });
       } else if (
         this.moduleFinishCount.percentage >= 0 &&
         this.moduleFinishCount.percentage < 10
       ) {
         this.finishImgUrl = this.imageJson["r4"];
         this.needEfforts = true;
+        this.rewardsFlag = 4;
       }
     }
 

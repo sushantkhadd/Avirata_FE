@@ -240,7 +240,7 @@ export class PresentationComponent implements OnInit {
       this.newUrl = this.data.url + this.count + ".jpg";
     }
 
-    this.downloadLink = this.data.link;
+    this.downloadLink = this.data.url;
     this.download = this.data.download;
     this.showCFU = this.data.showcfu;
     this.apiUrl = this.data.apiurl;

@@ -30,7 +30,7 @@
                                         </span>
                                     </div>
                                     <input type="text" id="userName" name="userName" class="form-control input_user" #userName="ngModel" [(ngModel)]="username"
-                                        placeholder="Username" autocomplete="off" required>
+                                        placeholder="{{ 'Login.E-mail ID / Mobile' | translate }}" autocomplete="off" required>
                                 </div>
                                 <div class="input-group errorMessage alert alert-danger row loginInput ml-3" *ngIf="userName.errors && userName.dirty">
                                     <div [hidden]="!userName.errors.required"> {{ 'Login.Email mobile required' | translate }}
@@ -43,7 +43,7 @@
                                         </span>
                                     </div>
                                     <input type="password" id="pass" name="passWord" class="form-control input_pass" #_password="ngModel" [(ngModel)]="password"
-                                        placeholder="Password" (keyup.enter)="login();" autocomplete="off" required>
+                                        placeholder="{{ 'Login.password' | translate }}" (keyup.enter)="login();" autocomplete="off" required>
                                 </div>
 
                                 <div class="input-group errorMessage alert alert-danger loginInput" *ngIf="_password.errors && _password.dirty">

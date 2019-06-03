@@ -1054,7 +1054,7 @@
 
       <div class="container position-relative" [class.vh-100]="loaderFlag">
         <div class="inner-loader" *ngIf="loaderFlag">
-          <img src="../../assets/img/logo_cpd_combine_web.png" alt="">
+          <!-- <img src="../../assets/img/logo_cpd_combine_web.png" alt=""> -->
           <div class="loader"></div>
         </div>
         <router-outlet></router-outlet>
@@ -1353,7 +1353,24 @@
           <div>
           </div>
           <div class="row mt-2 justify-content-center">
-            <img *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' && !needEfforts" class="img-responsive img-goldcup" [src]="finishImgUrl">
+            <!-- <img *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' && !needEfforts" class="img-responsive img-goldcup" [src]="finishImgUrl"> -->
+            <div *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' && !needEfforts" class="rewards-animate">
+            <div *ngIf="rewardsFlag == 1">
+              <img [src]="animatedImageJson['a1']" alt="" class="img3 mt-5 pt-3">
+              <img [src]="animatedImageJson['a2']" alt="" class="img2">
+              <img [src]="animatedImageJson['a3']" alt="" class="img3 mt-5 pt-3">
+            </div>
+            <div *ngIf="rewardsFlag == 2">
+              <img [src]="animatedImageJson['b1']" alt="" class="img3 mt-5 pt-3">
+              <img [src]="animatedImageJson['b2']" alt="" class="img2">
+              <img [src]="animatedImageJson['b3']" alt="" class="img3 mt-5 pt-3">
+            </div>
+            <div *ngIf="rewardsFlag == 3">
+              <img [src]="animatedImageJson['c1']" alt="" class="img3 mt-5 pt-3">
+              <img [src]="animatedImageJson['c2']" alt="" class="img3">
+              <img [src]="animatedImageJson['c3']" alt="" class="img3 mt-5 pt-3">
+            </div>
+            </div>
             <span *ngIf="needEfforts && moduleCompleteStatus['type'] == 'moduleFinish'">
               {{'layout.needEfforts' | translate}}
             </span>

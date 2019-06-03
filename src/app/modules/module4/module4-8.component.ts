@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Module4Service } from './module4.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ModalDirective } from 'ngx-bootstrap';
+import { Options } from 'ng5-slider';
 
 @Component({
   selector: "app-module4-8",
@@ -24,7 +25,8 @@ export class Module48Component implements OnInit {
   startVideoEvent;
   public passData = {}; //used when CFU completed
   public videoData = {};
-  passUrl; trimFlag;
+  passUrl;
+  trimFlag;
   mainQuestion;
   assignData;
   statementlist;
@@ -38,7 +40,26 @@ export class Module48Component implements OnInit {
   question3;
   question4;
   question5;
-  description; overallRating;
+  description;
+  overallRating;
+
+  options: Options = {
+    showTicksValues: true,
+    showSelectionBar: true,
+    stepsArray: [
+      { value: 0 },
+      { value: 1 },
+      { value: 2 },
+      { value: 3 },
+      { value: 4 },
+      { value: 5 },
+      { value: 6 },
+      { value: 7 },
+      { value: 8 },
+      { value: 9 },
+      { value: 10 }
+    ]
+  };
 
   public currentSource = window.localStorage.getItem("source");
 
@@ -52,6 +73,9 @@ export class Module48Component implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.options.stepsArray.forEach(ele => {
+      console.log(ele)
+    })
     this.passUrl = "IkzkQ-Xft4c";
     this.currentSource = window.localStorage.getItem("source");
     this.startVideoEvent = false;
@@ -106,7 +130,8 @@ export class Module48Component implements OnInit {
   }
 
   submit() {
-    this.overallRating = this.answer1 + this.answer2 + this.answer3 + this.answer4 + this.answer5
+    this.overallRating =
+      this.answer1 + this.answer2 + this.answer3 + this.answer4 + this.answer5;
     this.ratingModal.show();
   }
 
@@ -122,7 +147,7 @@ export class Module48Component implements OnInit {
     ansJson[this.statementlist[4].statementid] = this.answer5;
     jsonBody["useranswer"] = ansJson;
     jsonBody["event"] = "answer";
-    jsonBody["score"] = (this.overallRating).toString();
+    jsonBody["score"] = this.overallRating.toString();
     console.log(ansJson, jsonBody);
     this.apiCall(jsonBody, apiUrl, "finish");
   }
@@ -134,11 +159,9 @@ export class Module48Component implements OnInit {
       this.answer3 == "" ||
       this.answer4 == "" ||
       this.answer5 == ""
-    )
-    {
+    ) {
       this.trimFlag = true;
-    } else
-    {
+    } else {
       this.trimFlag = false;
     }
   }
@@ -157,9 +180,8 @@ export class Module48Component implements OnInit {
             this.question3 = this.statementlist[2].statement;
             this.question4 = this.statementlist[3].statement;
             this.question5 = this.statementlist[4].statement;
-            console.log(data)
-          } else if (fun == "finish")
-          {
+            console.log(data);
+          } else if (fun == "finish") {
             this.ratingModal.hide();
             this.mainFlagModule4 = 12;
             window.localStorage.setItem("uuid", data["data"].nextuuid);

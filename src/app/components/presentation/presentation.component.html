@@ -37,9 +37,9 @@
           <button (click)="finishPDF();" class="btn btn-primary">{{'Stepper.Finish' | translate}}</button>
         </span>
       </div>
-      <div class="fullscreen float-right">
-        <span class="control ripple" id="download" *ngIf="download">
-          <a href={{downloadLink}} download>
+      <div class="fullscreen float-right download-pdf" *ngIf="data['unlockView'] == 'static'">
+        <span class="control ripple" id="download" *ngIf="downloadLink">
+          <a href={{downloadLink}} class="c-pointer text-white" target="_blank" [download]="downloadLink">
             <em class="fa fa-download" aria-hidden="true"></em>
           </a>
         </span>
@@ -71,7 +71,7 @@
                     alt="">
                 </div> -->
             <div class="col-md-8 col-sm-12 col-12">
-              <h4 class="mt-3 ml-1">{{ 'Common.CFU' | translate }} </h4>
+              <h4 class="mt-3 ml-1">{{ 'Cfu.title' | translate }} </h4>
             </div>
             <div class="col-md-2 col-sm-6 col-5 text-right">
               <img class="img-fluid" [class.d-none]="hideMe" [ngClass]="!fiftyFiftyFlag ? 'c-pointer' : 'c-not-allowed'"

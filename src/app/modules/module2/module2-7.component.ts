@@ -41,13 +41,6 @@ export class Module27Component implements OnInit {
   public apiEndStart; apiEndSendAns; apiEndFinish;
   vedioCompleteUrl;
   statVideoFlag;nextFlag;
-
-  activeItem;
-  pager = {
-    index: 0,
-    size: 1,
-    count: 1
-  };
   questionFlag;
   urlArray = {};
   ngOnInit() {
@@ -126,51 +119,6 @@ export class Module27Component implements OnInit {
       this.passData['jsonData'] = jsonData;
   }
 
-  onValueChange(e, value, id) {
-    this.jsonObject = {};
-    this.jsonObject["useranswer"] = value;
-    this.jsonObject["questionid"] = id;
-    this.ansJson[id] = value;
-    this.ansJsonLength = Object.keys(this.ansJson).length;
-    console.log(value, id, this.jsonObject, e);
-    // if (Object.keys(this.jsonObject).length == 0)
-    // {
-    //   console.log("no hit", Object.keys(this.jsonObject).length);
-    // } else
-    // {
-      var jsonBody = {};
-      jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
-      jsonBody["event"] = "answer";
-      jsonBody["useranswer"] = this.jsonObject["useranswer"];
-      jsonBody["questionid"] = this.jsonObject["questionid"];
-      var apiUrl = "l3module_ans_return_mcq/";
-      this.apiCall(jsonBody, apiUrl, "next");
-    // }
-    if (e.target.checked == true)
-    {
-      this.disableIt = false;
-    } else
-    {
-      this.disableIt = true;
-    }
-  }
-
-  previous() {
-    this.counter = this.questionlist.indexOf(this.activeItem);
-    const newIndex = this.counter === 0 ? this.questionlist.length - 1 : this.counter - 1;
-    this.activeItem = this.questionlist[newIndex];
-    console.log(this.counter)
-    this.counter--;
-  }
-
-  next() {
-    this.counter = this.questionlist.indexOf(this.activeItem);
-    const newIndex = this.counter === this.questionlist.length - 1 ? 0 : this.counter + 1;
-    this.activeItem = this.questionlist[newIndex];
-    console.log(this.counter, Object.keys(this.jsonObject).length);
-    this.counter++;
-  }
-
   finishVideo(e) {
     console.log("aaaaaaa");
     if (e) {
@@ -190,23 +138,6 @@ export class Module27Component implements OnInit {
     } else {
       window.localStorage.setItem("mainFlagModule2", "1");
       this.router.navigate(["/modules/module2/Module2.7"]);
-    }
-  }
-
-  finish2() {
-    if (Object.keys(this.ansJson).length != 5)
-    {
-      this.toastr.error("You must give all answers");
-      console.log("no hit", Object.keys(this.ansJson).length);
-    } else
-    {
-      var jsonBody = {}
-      jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
-      jsonBody["event"] = "finish";
-      jsonBody["useranswer"] = this.jsonObject["useranswer"];
-      jsonBody["questionid"] = this.jsonObject["questionid"];
-      var apiUrl = "l3module_ans_return_mcq/";
-      this.apiCall(jsonBody, apiUrl, "finish2");
     }
   }
 
@@ -238,39 +169,7 @@ export class Module27Component implements OnInit {
             this.questionFlag = true;
             this.startEvent2();
             this.nextFlag = false; 
-          } else if (fun == "start2") {
-            this.questionlist = data["data"].questionlist;
-              for (var index = 0; index < this.questionlist.length; index++)
-              {
-                this.questionlist[index].options.splice(2, 2);
-                this.optionArray = this.questionlist[index].options;
-                this.questionId = this.questionlist[index].questionid;
-                this.dummyArray.push({
-                  counter: index,
-                  options: this.questionlist[index].options,
-                  question: this.questionlist[index].question,
-                  questionid: this.questionlist[index].questionid
-                });
-              }
-              this.questionlist = this.dummyArray;
-              this.activeItem = this.questionlist[0];
-              this.counter = 0;
-          } else if (fun == "finish2") {
-            this.mainFlagModule2 = 8;
-              window.localStorage.setItem('uuid', data['data'].nextuuid);
-              window.localStorage.setItem('mainFlagModule2', '8');
-              window.localStorage.setItem('subFlagModule2', '1');
-              window.localStorage.setItem('source', 'module 2.8.1');
-              this.Module2Service.setLocalStorage2(8);
-              var obj = {
-                "type": "submodule",
-                "route": true,
-                "current": this.translate.instant('L2Module2.subMenu2-7'),
-                "next": this.translate.instant('L2Module2.subMenu2-8'),
-                "nextRoute": "/modules/module2/Module2.8"
-              }
-              this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
-          }
+          } 
         }
       },
       error => {

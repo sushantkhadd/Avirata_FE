@@ -184,6 +184,43 @@
     </div>
 </div>
 
+<div *ngIf="questionType == 'mcqInBunch'" class="bunch-mcqs">
+    <div class="row" *ngFor="let item of bunchList;let i=index">
+        <div class="col-sm-12 col-md-12">
+            <div class="card">
+                <div class="card-header" *ngIf="item.statement">
+                  <span class="pr-2">{{totalBunchCounter +(i + 1)}}. </span>
+                    <h6 [innerHTML]="item.statement" class="d-inline-block"></h6>
+                </div>
+                <div class="card-block pt-0" [class.pt-0]="queCount">
+                    <div *ngIf="queCount" class="badge badge-custom ml-3">{{queCount}} / {{totalQueCount}}</div>
+                    <div class="form float-left">
+                        <div class="dx-fieldset">
+                            <div class="dx-field">
+                                <div class="dx-field-value" *ngIf="mysubModule4==1">
+                                    <dx-radio-group #eventRadioGroup id="mcq" [items]="priorities" (onValueChanged)="onValueChangedMcqBunch($event,item.statementid,i)">
+                                    </dx-radio-group>
+                                </div>
+                                <div class="dx-field-value" *ngIf="mysubModule4==12">
+                                    <dx-radio-group #eventRadioGroup id="mcq" [value]="bunchSelectedAns[i]" [items]="priorities" (onValueChanged)="onValueChangedMcqBunch($event,item.statementid,i)">
+                                    </dx-radio-group>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="text-center">
+        <div class="">
+            <button class="btn btn-primary mt-4" [disabled]="!mcqBunchFlag" (click)="submitYesNo()">{{'Cfu.submit' | translate}}</button>
+        </div><br>
+    </div>
+</div>
+
 <div [class.d-none]="mysubModule3 == 1 || mysubModule3 == 5 || mysubModule3 == 9 || mysubModule3 == 11" class="text-center mt-4" *ngIf="correctAns != '' || passFlags['popuptype'] == 'description'">
     <div class="">
         <button class="btn btn-primary" [disabled]="!submitFlag" (click)="submit()">{{'Cfu.submit' | translate}}</button>

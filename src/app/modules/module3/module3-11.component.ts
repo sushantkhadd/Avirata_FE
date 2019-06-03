@@ -18,7 +18,7 @@ export class Module311Component implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
   public data; questionType; passFlags = {}; showAnswer; saveData; answer; sumbitButton; startFlag; description;
-  public inst = "दिलेल्या परिस्थितीत शिक्षक जसे वागत आहेत, जसा प्रतिसाद देत आहेत त्याला <b>सर्वस्वी</b> काय कारणीभूत आहे? तुम्हाला काय वाटते? चारपैकी कोणताही एक पर्याय निवडा."
+  public inst = "प्रियांका अभ्यासात खूपच मागे आहे. कितीही प्रोत्साहन दिले तरी एखादी कृती करून बघत नाही. सतत मागे-मागे राहते. आपण चुकणारच आहोत असे कृती करायच्या आधीच तिच्या मनाने घेतलेले असते. रागावले तरी फक्त बारीक हसते. प्रियांकाबाबत (असक्षमता दर्शवणाऱ्या विद्यार्थ्याबाबत) शिक्षकांनी केलेल्या खालील कृतींमुळे काय होईल असे तुम्हांला वाटते?"
   ngOnInit() {
     this.startFlag = false;
     this.showAnswer = true;
@@ -90,6 +90,7 @@ export class Module311Component implements OnInit {
             this.description = data["data"].description;
             this.startFlag = false;
             this.mainFlagModule3 = 12;
+            window.localStorage.setItem('subFlagModule3', '1');
             window.localStorage.setItem('uuid', data['data'].nextuuid);
             window.localStorage.setItem('mainFlagModule3', '12');
             window.localStorage.setItem('source', 'module 3.12.1');

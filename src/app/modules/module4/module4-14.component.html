@@ -32,10 +32,14 @@
         </div>
       </div>
     </div>
-  
-    <div *ngIf="startPdf">
+    <div class="card" *ngIf="startPdf">
+    <div class="card-footer">
+        <h6 class="text-center">{{'L2Module4.subMenu4-14' | translate}}</h6>
+      </div>
+    <div>
       <app-presentation [data]='passValues' (sendCfuAns)="finishPDF($event)"></app-presentation>
     </div>
+  </div>
   </div>
   <div *ngIf="mainFlagModule4 > 14">
     <div class="card">

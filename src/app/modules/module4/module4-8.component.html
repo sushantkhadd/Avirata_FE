@@ -16,48 +16,40 @@
         </h5>
       </div>
       <div class="card-block pt-2">
-        <form #assignForm="ngForm">
+        <form #assignForm="ngForm" class="rating-form">
           <div class="form-group row">
-            <label class="col-sm-6 col-md-6 form-control-label" for="answer1" [innerHTML]="question1"></label>
-            <div class="col-sm-6 col-md-6 controls">
-              <bar-rating [ngModelOptions]="{standalone: true}" [theme]="'default'" [(ngModel)]="answer1" [max]="10"
-                required></bar-rating>
-              <span class="badge badge-info ml-2 rating-count">{{answer1}}</span>
+            <label class="col-sm-4 col-md-4 form-control-label" for="answer1" [innerHTML]="question1"></label>
+            <div class="col-sm-8 col-md-8 controls">
+              <ng5-slider [(ngModel)]="answer1" [ngModelOptions]="{standalone: true}" [options]="options"></ng5-slider>
+              <!-- <span class="badge badge-info ml-2 rating-count">{{answer1}}</span> -->
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-6 col-md-6 form-control-label" for="answer2" [innerHTML]="question2"></label>
-            <div class="col-sm-6 col-md-6 controls">
-               <bar-rating [ngModelOptions]="{standalone: true}" [theme]="'default'" [(ngModel)]="answer2" [max]="10"
-                 required></bar-rating>
-              <span class="badge badge-info ml-2 rating-count">{{answer2}}</span>
-
+            <label class="col-sm-4 col-md-4 form-control-label" for="answer2" [innerHTML]="question2"></label>
+            <div class="col-sm-8 col-md-8 controls">
+              <ng5-slider [(ngModel)]="answer2" [ngModelOptions]="{standalone: true}" [options]="options"></ng5-slider>
+              <!-- <span class="badge badge-info ml-2 rating-count">{{answer2}}</span> -->
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-6 col-md-6 form-control-label" for="answer3" [innerHTML]="question3"></label>
-            <div class="col-sm-6 col-md-6 controls">
-               <bar-rating [ngModelOptions]="{standalone: true}" [theme]="'default'" [(ngModel)]="answer3" [max]="10"
-                 required></bar-rating>
-              <span class="badge badge-info ml-2 rating-count">{{answer3}}</span>
-
+            <label class="col-sm-4 col-md-4 form-control-label" for="answer3" [innerHTML]="question3"></label>
+            <div class="col-sm-8 col-md-8 controls">
+              <ng5-slider [(ngModel)]="answer3" [ngModelOptions]="{standalone: true}" [options]="options"></ng5-slider>
+              <!-- <span class="badge badge-info ml-2 rating-count">{{answer3}}</span> -->
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-6 col-md-6 form-control-label" for="answer4" [innerHTML]="question4"></label>
-            <div class="col-sm-6 col-md-6 controls">
-               <bar-rating [ngModelOptions]="{standalone: true}" [theme]="'default'" [(ngModel)]="answer4" [max]="10"
-                 required></bar-rating>
-              <span class="badge badge-info ml-2 rating-count">{{answer4}}</span>
+            <label class="col-sm-4 col-md-4 form-control-label" for="answer4" [innerHTML]="question4"></label>
+            <div class="col-sm-8 col-md-8 controls">
+             <ng5-slider [(ngModel)]="answer4" [ngModelOptions]="{standalone: true}" [options]="options"></ng5-slider>
+              <!-- <span class="badge badge-info ml-2 rating-count">{{answer4}}</span> -->
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-6 col-md-6 form-control-label" for="answer5" [innerHTML]="question5"></label>
-            <div class="col-sm-6 col-md-6 controls">
-               <bar-rating [ngModelOptions]="{standalone: true}" [theme]="'default'" [(ngModel)]="answer5" [max]="10"
-                 required></bar-rating>
-              <span class="badge badge-info ml-2 rating-count">{{answer5}}</span>
-
+            <label class="col-sm-4 col-md-4 form-control-label" for="answer5" [innerHTML]="question5"></label>
+            <div class="col-sm-8 col-md-8 controls">
+             <ng5-slider [(ngModel)]="answer5" [ngModelOptions]="{standalone: true}" [options]="options"></ng5-slider>
+              <!-- <span class="badge badge-info ml-2 rating-count">{{answer5}}</span> -->
             </div>
           </div>
         </form>
@@ -89,7 +81,7 @@
         </div>
         <div class="modal-body">
           <h5 class="text-center">
-          {{'Stepper.totalCount' | translate}} <span class="badge badge-info ml-2">{{overallRating}}</span>
+            {{'Stepper.totalCount' | translate}} <span class="badge badge-info ml-2">{{overallRating}}</span>
           </h5>
           <p class="px-5 text-center font-weight-normal">
             {{description}}

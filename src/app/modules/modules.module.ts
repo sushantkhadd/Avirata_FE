@@ -82,7 +82,23 @@ import { Module414Component } from './module4/module4-14.component';
 import { Module4Service } from "./module4/module4.service";
 import { NewBaselineComponent } from "../components/traineeBaseline/new-baseline/new-baseline.component"
 import { QuizService } from "../components/traineeBaseline/services/quiz.service";
-import { BarRatingModule } from "ngx-bar-rating";
+import { Ng5SliderModule } from "ng5-slider";
+import { Module5Component } from './module5/module5.component';
+import { Module52Component } from './module5/module5-2.component';
+import { Module53Component } from './module5/module5-3.component';
+import { Module54Component } from './module5/module5-4.component';
+import { Module55Component } from './module5/module5-5.component';
+import { Module56Component } from './module5/module5-6.component';
+import { Module57Component } from './module5/module5-7.component';
+import { Module58Component } from './module5/module5-8.component';
+import { Module59Component } from './module5/module5-9.component';
+import { Module510Component } from './module5/module5-10.component';
+import { Module511Component } from './module5/module5-11.component';
+import { Module512Component } from './module5/module5-12.component';
+import { Module513Component } from './module5/module5-13.component';
+import { Module514Component } from './module5/module5-14.component';
+import { Module515Component } from './module5/module5-15.component';
+import { Module5Service } from "./module5/module5.service";
 
 @NgModule({
   imports: [
@@ -101,7 +117,7 @@ import { BarRatingModule } from "ngx-bar-rating";
     DxCheckBoxModule,
     DxListModule,
     DxPieChartModule,
-    BarRatingModule
+    Ng5SliderModule
   ],
   declarations: [
     Module0Component,
@@ -172,7 +188,22 @@ import { BarRatingModule } from "ngx-bar-rating";
     Module412Component,
     Module413Component,
     Module414Component,
-    NewBaselineComponent
+    NewBaselineComponent,
+    Module5Component,
+    Module52Component,
+    Module53Component,
+    Module54Component,
+    Module55Component,
+    Module56Component,
+    Module57Component,
+    Module58Component,
+    Module59Component,
+    Module510Component,
+    Module511Component,
+    Module512Component,
+    Module513Component,
+    Module514Component,
+    Module515Component
   ],
   providers: [
     Module0Service,
@@ -180,6 +211,7 @@ import { BarRatingModule } from "ngx-bar-rating";
     Module2Service,
     Module3Service,
     Module4Service,
+    Module5Service,
     QuizService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
