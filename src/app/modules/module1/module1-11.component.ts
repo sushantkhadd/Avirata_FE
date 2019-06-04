@@ -201,7 +201,7 @@ export class Module111Component implements OnInit {
     console.log("aaaaaaa");
     if (e == true) {
       console.log(e);
-      this.nextFlag = true; 
+      this.nextFlag = true;
       this.subFlagModule1 = 2;
       this.instructionModal.show();
     } else {
@@ -296,7 +296,7 @@ export class Module111Component implements OnInit {
             this.question3 = this.questionlist[2].question;
             this.question4 = this.questionlist[3].question;
             this.question5 = this.questionlist[4].question;
-            if (this.questionFlag == true) {
+            if (this.questionlist.length == 6) {
               console.log(this.subFlagModule1, "subFlagModule1");
               this.question6 = this.questionlist[5].question;
             }

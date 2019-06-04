@@ -190,10 +190,13 @@ export class FullLayoutComponent implements OnInit {
     html2canvas(document.querySelector("#capture")).then(canvas => {
       this.shareableImage = canvas.toDataURL();
       console.log(canvas, this.shareableImage);
-      var link = document.createElement("a");
-      link.href = this.shareableImage;
-      link.download = "my-reward.png";
-      link.click();
+      if (this.shareableImage)
+      {
+        var link = document.createElement("a");
+        link.href = this.shareableImage;
+        link.download = "my-reward.png";
+        link.click();
+      }
     });
   }
 

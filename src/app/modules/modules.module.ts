@@ -99,6 +99,7 @@ import { Module513Component } from './module5/module5-13.component';
 import { Module514Component } from './module5/module5-14.component';
 import { Module515Component } from './module5/module5-15.component';
 import { Module5Service } from "./module5/module5.service";
+import { AudioPlayerComponent } from "../components/audio-player/audio-player.component";
 
 @NgModule({
   imports: [
@@ -139,6 +140,7 @@ import { Module5Service } from "./module5/module5.service";
     Module110Component,
     Module112Component,
     DragDropComponent,
+    AudioPlayerComponent,
     Module2Component,
     Module22Component,
     Module23Component,
