@@ -42,7 +42,7 @@ export class Module53Component implements OnInit {
     {
     } else if (this.mainFlagModule5 == 3)
     {
-      this.startEvent();
+      // this.startEvent();
     } else if (this.mainFlagModule5 > 3)
     {
       this.flag = 0;

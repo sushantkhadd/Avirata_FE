@@ -45,7 +45,7 @@ export class Module55Component implements OnInit {
 
     if (this.mainFlagModule5 < 5) {
     } else if (this.mainFlagModule5 == 5) {
-      this.startEvent();
+      // this.startEvent();
     } else if (this.mainFlagModule5 > 5) {
       this.flag = 0;
       var urlJson = {};
