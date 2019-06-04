@@ -22,7 +22,7 @@ import { DxRadioGroupComponent } from 'devextreme-angular';
 export class PresentationComponent implements OnInit {
   private myWidth: any = 'auto';
   private myHeight: any = 'auto';
-  private toggled: boolean = false;
+  private toggled: boolean = false; audioSrc = {};
   public countForModule2 = 0; msgFlag; isLoaded;
   @Input() public data;
   @Input() public question1;
@@ -30,6 +30,7 @@ export class PresentationComponent implements OnInit {
   @ViewChild('cfuModal') public cfuModal: ModalDirective; //To Open/Close Modal from Typescript
   @ViewChild("eventRadioGroup") eventRadioGroup: DxRadioGroupComponent;
   @ViewChild('toasterPopupModal') public toasterPopupModal: ModalDirective;
+  @ViewChild('audioModal') public audioModal: ModalDirective;
 
   public mainFlagModule3 = parseInt(window.localStorage.getItem('mainFlagModule3'));
   @Output() public showDoc = new EventEmitter<string>();
@@ -37,12 +38,12 @@ export class PresentationComponent implements OnInit {
   public mainFlagModule5 = parseInt(window.localStorage.getItem('mainFlagModule5'));
   public mainFlagModule1 = parseInt(window.localStorage.getItem('mainFlagModule1'));
   public count = 1; finalCount; page; pdfURL;totalPages;
-  public imgUrl; downloadLink; download; newUrl;
+  public imgUrl; downloadLink; download; newUrl; nextParentUrl;
   public showCFU; buttonShowFlag; question; selectedAnswer; submitDisabled; apiUrl;
   public questionSet = {}; options = []; showFinish; optionsStateDyanamic;
   @Output() public ansCorrect = new EventEmitter();  //For interest Video 5.6 to send result success
 
-
+  subFlagModule5;
   fiftyFiftyFlag; askMeFlag; levelData; rightanswer;
 
   imageJson = {
@@ -221,6 +222,8 @@ export class PresentationComponent implements OnInit {
     this.submitDisabled = false;
     this.buttonShowFlag = false;
     this.imgUrl = this.data.url;
+    this.subFlagModule5 = parseInt(window.localStorage.getItem('subFlagModule5'));
+
     if (window.localStorage.getItem('mainFlagModule2') == '1') {
       if (window.localStorage.getItem('subFlagModule2') == '1') {
         this.countForModule2 = 0;
@@ -245,8 +248,10 @@ export class PresentationComponent implements OnInit {
     this.showCFU = this.data.showcfu;
     this.apiUrl = this.data.apiurl;
     this.page = 1;
-    this.count=this.page
+    this.count = this.page;
+
     this.pdfURL = this.data.url;
+
     this.showCFU = this.data.showcfu;
     console.log("fdgdfxa", this.showCFU, this.data.state, this.pdfURL)
     if (this.showCFU == true) {
@@ -261,71 +266,151 @@ export class PresentationComponent implements OnInit {
       else if (this.data.state == 'dyanamic') {
         var jsonBody = {};
         console.log("mailnflag",window.localStorage.getItem('mainFlagModule4'))
-        if (window.localStorage.getItem('mainFlagModule2') == '15' || window.localStorage.getItem('mainFlagModule3') == '14' || window.localStorage.getItem('mainFlagModule3') == '15' || window.localStorage.getItem('mainFlagModule3') == '16' || window.localStorage.getItem('mainFlagModule4') == '13') {
-          jsonBody['currentsubmoduleid'] = window.localStorage.getItem('uuid');
-          jsonBody['useroption'] = '';
-          jsonBody['event'] = 'start';
-          console.log("mailnflag",window.localStorage.getItem('mainFlagModule4'))
+        if (
+          window.localStorage.getItem("mainFlagModule2") == "15" ||
+          window.localStorage.getItem("mainFlagModule3") == "14" ||
+          window.localStorage.getItem("mainFlagModule3") == "15" ||
+          window.localStorage.getItem("mainFlagModule3") == "16" ||
+          window.localStorage.getItem("mainFlagModule4") == "13" ||
+          window.localStorage.getItem("mainFlagModule5") == "2" ||
+          window.localStorage.getItem("mainFlagModule5") == "3" ||
+          window.localStorage.getItem("mainFlagModule5") == "4" ||
+          window.localStorage.getItem("mainFlagModule5") == "5"
+        ) {
+          jsonBody["currentsubmoduleid"] = window.localStorage.getItem(
+            "uuid"
+          );
+          jsonBody["useroption"] = "";
+          jsonBody["event"] = "start";
+          console.log(
+            "mailnflag",
+            window.localStorage.getItem("mainFlagModule4")
+          );
+        } else {
+          jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
+          if (window.localStorage.getItem("mainFlagModule2") == "1") {
+            jsonBody["useranswer"] = "";
+            jsonBody["event"] = "start";
+            jsonBody["review"] = "";
+          }
         }
-        else{
-          jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
-        if (window.localStorage.getItem('mainFlagModule2') == '1') {
-          jsonBody['useranswer'] = '';
-          jsonBody['event'] = 'start';
-          jsonBody['review'] = '';
-        }
-      }
 
         this.apiUrl = this.data.apiurl;
-        if (window.localStorage.getItem('mainFlagModule2') == '15' || window.localStorage.getItem('mainFlagModule3') == '14' || window.localStorage.getItem('mainFlagModule3') == '15' || window.localStorage.getItem('mainFlagModule3') == '16' || window.localStorage.getItem('mainFlagModule4') == '13') {
-          console.log("ma ",this.mainFlagModule5)
-        this.CommonComponentService.submoduleFinish(jsonBody,this.apiUrl)
-          .subscribe(
+        if (
+          window.localStorage.getItem("mainFlagModule2") == "15" ||
+          window.localStorage.getItem("mainFlagModule3") == "14" ||
+          window.localStorage.getItem("mainFlagModule3") == "15" ||
+          window.localStorage.getItem("mainFlagModule3") == "16" ||
+          window.localStorage.getItem("mainFlagModule4") == "13" ||
+          window.localStorage.getItem("mainFlagModule5") == "2" ||
+          window.localStorage.getItem("mainFlagModule5") == "3" ||
+          window.localStorage.getItem("mainFlagModule5") == "4" ||
+          window.localStorage.getItem("mainFlagModule5") == "5"
+        ) {
+          console.log("ma ", this.mainFlagModule5);
+          this.CommonComponentService.submoduleFinish(
+            jsonBody,
+            this.apiUrl
+          ).subscribe(
             data => {
-              if (data["data"].rightanswer != null && data["data"].rightanswer != "" && data["data"].rightanswer != undefined)
-              {
-                this.rightanswer = this.LanguageService.get('aesEncryptionKey', data["data"].rightanswer)
+              if (
+                data["data"].rightanswer != null &&
+                data["data"].rightanswer != "" &&
+                data["data"].rightanswer != undefined
+              ) {
+                this.rightanswer = this.LanguageService.get(
+                  "aesEncryptionKey",
+                  data["data"].rightanswer
+                );
                 console.log("rightanswer", this.rightanswer);
               }
-            if (data['status'] == true) {
-              if (window.localStorage.getItem('mainFlagModule2') == '1') {
-                if (window.localStorage.getItem('subFlagModule2') == '1') {
-                  this.countForModule2 = 0;
-                } else if (window.localStorage.getItem('subFlagModule2') == '2') {
-                  this.countForModule2 = 1;
-                } else if (window.localStorage.getItem('subFlagModule2') == '3') {
-                  this.countForModule2 = 2;
-                } else if (window.localStorage.getItem('subFlagModule2') == '4') {
-                  this.countForModule2 = 3;
-                } else if (window.localStorage.getItem('subFlagModule2') == '5') {
-                  this.countForModule2 = 4;
-                } else if (window.localStorage.getItem('subFlagModule2') == '6') {
-                  this.countForModule2 = 5;
+              if (data["status"] == true) {
+                if (
+                  window.localStorage.getItem("mainFlagModule2") == "1"
+                ) {
+                  if (
+                    window.localStorage.getItem("subFlagModule2") == "1"
+                  ) {
+                    this.countForModule2 = 0;
+                  } else if (
+                    window.localStorage.getItem("subFlagModule2") == "2"
+                  ) {
+                    this.countForModule2 = 1;
+                  } else if (
+                    window.localStorage.getItem("subFlagModule2") == "3"
+                  ) {
+                    this.countForModule2 = 2;
+                  } else if (
+                    window.localStorage.getItem("subFlagModule2") == "4"
+                  ) {
+                    this.countForModule2 = 3;
+                  } else if (
+                    window.localStorage.getItem("subFlagModule2") == "5"
+                  ) {
+                    this.countForModule2 = 4;
+                  } else if (
+                    window.localStorage.getItem("subFlagModule2") == "6"
+                  ) {
+                    this.countForModule2 = 5;
+                  }
+                  this.pdfURL = data["data"].url;
+                  this.newUrl =
+                    this.imgUrl +
+                    this.countForModule2.toString() +
+                    this.count +
+                    ".jpg";
+                } else {
+                  if (
+                    window.localStorage.getItem("mainFlagModule2") ==
+                      "15" ||
+                    window.localStorage.getItem("mainFlagModule3") ==
+                      "14" ||
+                    window.localStorage.getItem("mainFlagModule3") ==
+                      "15" ||
+                    window.localStorage.getItem("mainFlagModule3") ==
+                      "16" ||
+                    window.localStorage.getItem("mainFlagModule4") ==
+                      "13" ||
+                    window.localStorage.getItem("mainFlagModule5") ==
+                    "2" ||
+                    window.localStorage.getItem("mainFlagModule5") ==
+                    "3" ||
+                    window.localStorage.getItem("mainFlagModule5") ==
+                      "4" ||
+                    window.localStorage.getItem("mainFlagModule5") ==
+                      "5"
+                  ) {
+                    if (
+                      this.mainFlagModule5 == 2 ||
+                      this.mainFlagModule5 == 3 ||
+                      this.mainFlagModule5 == 4 ||
+                      this.mainFlagModule5 == 5
+                    ) {
+                      this.nextParentUrl = JSON.parse(
+                        data["data"].nexturl
+                      );
+                      this.pdfURL = this.nextParentUrl["1"];
+                    } else {
+                      this.pdfURL = data["data"].nexturl;
+                    }
+                    console.log(data);
+                    // this.pdfURL=data['data'].nexturl
+                    this.newUrl = this.imgUrl + this.count + ".jpg";
+                  } else {
+                    this.pdfURL = data["data"].url;
+                    this.newUrl = this.imgUrl + this.count + ".jpg";
+                  }
                 }
-                this.pdfURL=data['data'].url
-                this.newUrl = this.imgUrl + this.countForModule2.toString() + this.count + ".jpg";
-              } else {
-
-                if(window.localStorage.getItem('mainFlagModule2') == '15' || window.localStorage.getItem('mainFlagModule3') == '14' || window.localStorage.getItem('mainFlagModule3') == '15'|| window.localStorage.getItem('mainFlagModule3') == '16' ||
-                window.localStorage.getItem('mainFlagModule4') == '13'){
-                  this.pdfURL=data['data'].nexturl
-                  this.newUrl = this.imgUrl + this.count + ".jpg";
-                }
-                else{
-                  this.pdfURL=data['data'].url
-                this.newUrl = this.imgUrl + this.count + ".jpg";
-                }
+                this.question = data["data"].question;
+                this.optionsStateDyanamic = data["data"].options;
+                data["data"].options.forEach(element => {
+                  this.options.push(element.value);
+                });
               }
-               this.question = data['data'].question;
-              this.optionsStateDyanamic = data['data'].options;
-              data['data'].options.forEach(element => {
-                this.options.push(element.value);
-              });
-            }
-          },
-          error => {
-            this.CommonService.handleError(error.error.message);
-          }//Catch Error if server is not Found
+            },
+            error => {
+              this.CommonService.handleError(error.error.message);
+            } //Catch Error if server is not Found
           );
         }
       }
@@ -456,30 +541,57 @@ export class PresentationComponent implements OnInit {
         if (this.selectedAnswer == this.optionsStateDyanamic[i].value) {
            var jsonBody = {};
           this.apiUrl = this.data.apiurlResult;
-          if(window.localStorage.getItem('mainFlagModule2') == '15'|| window.localStorage.getItem('mainFlagModule3') == '14' || window.localStorage.getItem('mainFlagModule3') == '15' || window.localStorage.getItem('mainFlagModule3') == '16' || window.localStorage.getItem('mainFlagModule4') == '13'){
-            jsonBody['currentsubmoduleid'] = window.localStorage.getItem('uuid');
-            jsonBody['useroption'] = this.optionsStateDyanamic[i].option;
-            jsonBody['event'] = 'answer';
+          if (
+            window.localStorage.getItem("mainFlagModule2") == "15" ||
+            window.localStorage.getItem("mainFlagModule3") == "14" ||
+            window.localStorage.getItem("mainFlagModule3") == "15" ||
+            window.localStorage.getItem("mainFlagModule3") == "16" ||
+            window.localStorage.getItem("mainFlagModule4") == "13" ||
+            window.localStorage.getItem("mainFlagModule5") == "2" ||
+            window.localStorage.getItem("mainFlagModule5") == "3" ||
+            window.localStorage.getItem("mainFlagModule5") == "4" ||
+            window.localStorage.getItem("mainFlagModule5") == "5"
+          ) {
+            jsonBody[
+              "currentsubmoduleid"
+            ] = window.localStorage.getItem("uuid");
+            jsonBody["useroption"] = this.optionsStateDyanamic[
+              i
+            ].option;
+            jsonBody["event"] = "answer";
 
             this.apiUrl = this.data.apiurl;
-          }
-          else if (
-            window.localStorage.getItem('mainFlagModule5') == '6' || window.localStorage.getItem('mainFlagModule5') == '7' || window.localStorage.getItem('mainFlagModule5') == '8' || window.localStorage.getItem('mainFlagModule5') == '9' || window.localStorage.getItem('mainFlagModule5') == '10' || window.localStorage.getItem('mainFlagModule5') == '11' || window.localStorage.getItem('mainFlagModule5') == '12')
-          {
-            jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
-            jsonBody['useranswer'] = this.optionsStateDyanamic[i].option;
+          } else if (
+            window.localStorage.getItem("mainFlagModule5") == "6" ||
+            window.localStorage.getItem("mainFlagModule5") == "7" ||
+            window.localStorage.getItem("mainFlagModule5") == "8" ||
+            window.localStorage.getItem("mainFlagModule5") == "9" ||
+            window.localStorage.getItem("mainFlagModule5") == "10" ||
+            window.localStorage.getItem("mainFlagModule5") == "11" ||
+            window.localStorage.getItem("mainFlagModule5") == "12"
+          ) {
+            jsonBody["submoduleid"] = window.localStorage.getItem(
+              "uuid"
+            );
+            jsonBody["useranswer"] = this.optionsStateDyanamic[
+              i
+            ].option;
             this.apiUrl = this.data.apiurlResult;
+          } else {
+            jsonBody["submoduleid"] = window.localStorage.getItem(
+              "uuid"
+            );
+            if (
+              window.localStorage.getItem("mainFlagModule2") == "1"
+            ) {
+              jsonBody["useranswer"] = this.optionsStateDyanamic[
+                i
+              ].option;
+              jsonBody["event"] = "answer";
+              jsonBody["review"] = "start";
+              this.apiUrl = this.data.apiurl;
+            }
           }
-          else{
-          jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
-          if (window.localStorage.getItem('mainFlagModule2') == '1') {
-
-            jsonBody['useranswer'] = this.optionsStateDyanamic[i].option;
-            jsonBody['event'] = 'answer';
-            jsonBody['review'] = 'start';
-            this.apiUrl = this.data.apiurl;
-          }
-        }
 
           this.CommonComponentService.submoduleFinish(jsonBody, this.apiUrl)     //check apiurl
             .subscribe(
@@ -492,11 +604,27 @@ export class PresentationComponent implements OnInit {
                 if (data['message'] == 'your answer correct' || data['message'] == 'your answer is correct')
                 {
 
-                this.msgFlag = true;
-                 this.pdfURL=data['data'].nexturl
+                  this.msgFlag = true;
+                  if (
+                    this.mainFlagModule5 == 2 ||
+                    this.mainFlagModule5 == 3 ||
+                    this.mainFlagModule5 == 4 ||
+                    this.mainFlagModule5 == 5
+                  ) {
+                    let url = JSON.parse(
+                      data["data"].nexturl
+                    );
+                    this.pdfURL = url["1"];
+                    // this.audioSrc = {};
+                    // this.audioSrc['url'] = url["2"];
+                  } else {
+                    this.pdfURL = data["data"].nexturl;
+                  }
+                //  this.pdfURL=data['data'].nexturl
                 this.showToasterPopup();
                 window.localStorage.setItem('uuid', data['data'].nextuuid);
-                if(window.localStorage.getItem('mainFlagModule2') == '15' || window.localStorage.getItem('mainFlagModule3') == '14' || window.localStorage.getItem('mainFlagModule3') == '15' || window.localStorage.getItem('mainFlagModule3') == '16' || window.localStorage.getItem('mainFlagModule4') == '13' || window.localStorage.getItem('mainFlagModule5') == '10' || window.localStorage.getItem('mainFlagModule5') == '11' || window.localStorage.getItem('mainFlagModule5') == '12')
+                  if (window.localStorage.getItem('mainFlagModule2') == '15' || window.localStorage.getItem('mainFlagModule3') == '14' || window.localStorage.getItem('mainFlagModule3') == '15' || window.localStorage.getItem('mainFlagModule3') == '16' || window.localStorage.getItem('mainFlagModule4') == '13' || window.localStorage.getItem('mainFlagModule5') == '10' || window.localStorage.getItem('mainFlagModule5') == '11' || window.localStorage.getItem('mainFlagModule5') == '12' || window.localStorage.getItem('mainFlagModule5') == '2' ||
+                    window.localStorage.getItem('mainFlagModule5') == '3' ||  window.localStorage.getItem('mainFlagModule5') == '4' || window.localStorage.getItem('mainFlagModule5') == '5')
                 {
                   this.options = []
 
@@ -506,9 +634,21 @@ export class PresentationComponent implements OnInit {
                   data['data'].options.forEach(element => {
                     this.options.push(element.value);
                   });
-                  window.scrollTo(0, 0);
-                  window.localStorage.setItem('subFlagModule2', "4");
-
+                    window.scrollTo(0, 0);
+                    if (window.localStorage.getItem('mainFlagModule2') == '15')
+                    {
+                      window.localStorage.setItem('subFlagModule2', "4");
+                   }
+                    if (
+                      window.localStorage.getItem('mainFlagModule5') == '2' ||
+                      window.localStorage.getItem('mainFlagModule5') == '3' ||
+                      window.localStorage.getItem('mainFlagModule5') == '4' ||
+                      window.localStorage.getItem('mainFlagModule5') == '5'
+                    )
+                  {
+                    this.subFlagModule5++;
+                    window.localStorage.setItem('subFlagModule5', JSON.stringify(this.subFlagModule5));
+                  }
                 }
                 else{
                     this.cfuModal.hide();
@@ -594,7 +734,12 @@ export class PresentationComponent implements OnInit {
                 }
                 console.log("finishhhhhh")
                 this.ansCorrect.emit(pass); //send true if all doc mcq successfully completed
-                if (window.localStorage.getItem('mainFlagModule1') == '11' || window.localStorage.getItem('mainFlagModule3') == '5')
+                  if (
+                    window.localStorage.getItem('mainFlagModule1') == '11' || window.localStorage.getItem('mainFlagModule3') == '5' || window.localStorage.getItem('mainFlagModule5') == '2' ||
+                    window.localStorage.getItem('mainFlagModule1') == '11' || window.localStorage.getItem('mainFlagModule3') == '5' || window.localStorage.getItem('mainFlagModule5') == '3' ||
+                    window.localStorage.getItem('mainFlagModule5') == '4' ||
+                    window.localStorage.getItem('mainFlagModule5') == '5'
+                  )
                   {
                     this.sendCfuAns.emit(true);
                   }
@@ -678,6 +823,14 @@ export class PresentationComponent implements OnInit {
     this.finalCount =  pdfData.numPages;
   }
 
+  finishAudio(e) {
+    console.log(e);
+    if (e == true)
+    {
+      this.audioModal.hide();
+    }
+  }
+
   nextPage() {
 
               console.log('next page', this.count)
@@ -690,13 +843,43 @@ export class PresentationComponent implements OnInit {
       else{
       console.log('else next11')
       this.count++;
-      console.log(' this.count++', this.count)
+                console.log(' this.count++', this.count);
+                if (this.count == 12 && this.mainFlagModule5 == 2)
+                {
+                  this.audioModal.show();
+                  this.audioSrc = {};
+                  this.audioSrc['url'] = this.nextParentUrl["2"];
+                  this.audioSrc["state"] = "dynamic";
+                  console.log(' mainFlagModule5.count++', this.count, this.audioSrc['url']);
+                }
+                else if (this.count == 9 && this.mainFlagModule5 == 3)
+                {
+                  this.audioModal.show();
+                  this.audioSrc = {};
+                  this.audioSrc['url1'] = this.nextParentUrl["2"];
+                  this.audioSrc['url2'] = this.nextParentUrl["3"];
+                  this.audioSrc["state"] = "dynamic";
+                  console.log(' mainFlagModule5.count++', this.count, this.audioSrc['url']);
+                }else if (this.count == 3 && this.mainFlagModule5 == 4)
+                {
+                  this.audioModal.show();
+                  this.audioSrc = {};
+                  this.audioSrc['url'] = this.nextParentUrl["2"];
+                  this.audioSrc["state"] = "dynamic";
+                  console.log(' mainFlagModule5.count++', this.count, this.audioSrc['url']);
+                } else if (this.count == 6 && this.mainFlagModule5 == 5)
+                {
+                  this.audioModal.show();
+                  this.audioSrc = {};
+                  this.audioSrc['url'] = this.nextParentUrl["2"];
+                  this.audioSrc["state"] = "dynamic";
+                  console.log(' mainFlagModule5.count++', this.count, this.audioSrc['url']);
+                }
       if(this.count == this.finalCount && this.showCFU == true){
         console.log('else count1',this.count,this.finalCount)
        console.log('this.buttonshowflag 11',this.buttonShowFlag)
        this.buttonShowFlag=true
        console.log('this.buttonshowflag 11',this.buttonShowFlag)
-
       }
 
       }

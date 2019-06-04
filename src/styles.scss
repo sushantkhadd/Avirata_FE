@@ -1716,7 +1716,8 @@ body {
   .marquee-border {
     border-top: 1px solid #cfd8dc;
   }
-  span a{
+
+  span a {
     color: #20a8d8 !important;
     text-decoration: none;
   }
@@ -1956,10 +1957,11 @@ body {
 }
 
 // presentation modal
-.ansCheckModal{
-  .modal-dialog{
+.ansCheckModal {
+  .modal-dialog {
     margin-top: 5rem;
   }
+
   .modal-content {
     border-width: 5px;
     // border-top: 0;
@@ -2151,8 +2153,8 @@ h6.questionHead.lineHeight {
 
 .rewards-animate {
   img {
-      animation: fadeInAnimate 1.5s ease-in both;
-      opacity: 0;
+    animation: fadeInAnimate 1.5s ease-in both;
+    opacity: 0;
   }
 
   img:nth-child(2) {
@@ -2203,7 +2205,8 @@ table,
 .bottom-part {
   margin-top: 1.9rem;
 }
-.badge{
+
+.badge {
   &.counter {
     position: absolute;
     z-index: 99;
@@ -2286,6 +2289,62 @@ table,
   }
 }
 
-.f-right{
+.f-right {
   float: right;
+}
+
+.mw-50 {
+  min-width: 50%;
+}
+
+body {
+  .unlock-view {
+    .audio-player {
+      width: 70%;
+    }
+
+    span.disable._seek {
+      top: 0;
+    }
+
+    .card {
+      background: #153647;
+      color: #fff;
+      padding: 3rem 0rem;
+    }
+
+    .card-block {
+      margin-top: 15px;
+    }
+
+    span.disable {
+      &._play {
+        position: absolute;
+        left: 16%;
+        width: 30px;
+        top: 10%;
+        height: 30px;
+        background: #f1f3f4;
+      }
+
+      &._volume {
+        position: absolute;
+        right: 16%;
+        width: 30px;
+        top: 10%;
+        height: 30px;
+        background: #f1f3f4;
+      }
+    }
+
+    .audio-controls {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+  }
+
+}
+
+.bg-inherit {
+  background-color: inherit !important;
 }
