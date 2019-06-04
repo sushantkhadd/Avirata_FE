@@ -902,6 +902,14 @@
                 <a class="nav-link submenu-label" routerLinkActive="active" [routerLink]="['/modules/module5/Module5.13']">{{'number.5' | translate}}.{{'number.13' | translate}} {{'L2Module5.subMenu5-13' | translate}}</a>
               </span>
             </li>
+            <li class="nav-item" routerLinkActive="activeMenu">
+              <span *ngIf="mainFlagModule5 < 14">
+                <a class="deactive-menu submenu-label" routerLinkActive="active">{{'number.5' | translate}}.{{'number.14' | translate}} {{'L2Module5.subMenu5-14' | translate}}</a>
+              </span>
+              <span *ngIf="mainFlagModule5 >= 14">
+                <a class="nav-link submenu-label" routerLinkActive="active" [routerLink]="['/modules/module5/Module5.14']">{{'number.5' | translate}}.{{'number.14' | translate}} {{'L2Module5.subMenu5-14' | translate}}</a>
+              </span>
+            </li>
           </ul>
         </li>
       </div>

@@ -347,12 +347,8 @@ export class VideoPlayerComponent implements OnInit {
           } else if (
             window.localStorage.getItem("mainFlagModule5") == "6" ||
             window.localStorage.getItem("mainFlagModule5") == "7" ||
-            window.localStorage.getItem("mainFlagModule5") == "8" ||
-
             window.localStorage.getItem("mainFlagModule5") == "9" ||
-            window.localStorage.getItem("mainFlagModule5") == "10" ||
-            window.localStorage.getItem("mainFlagModule5") == "11" ||
-            window.localStorage.getItem("mainFlagModule5") == "12"
+            window.localStorage.getItem("mainFlagModule5") == "11" 
           ) {
             console.log("aa3");
             console.log("mod5 ", data['data']);
