@@ -62,8 +62,8 @@ export class Module54Component implements OnInit {
         console.log("hjbhjb", mainJson["1"])
         if (mainJson != null)
         {
-          this.urlArray["src1"] = mainJson["5.4.1"];
-          this.urlArray["src2"] = mainJson["5.4.2"];
+          this.urlArray["src1"] = mainJson["1"];
+          this.urlArray["src2"] = mainJson["2"];
         }
       }
     }
@@ -89,8 +89,8 @@ export class Module54Component implements OnInit {
       this.audioSrc["state"] = "static";
     let dummyUrl = {};
     let dummyData = JSON.parse(e["url"]);
-    dummyUrl["5.4.1"] = dummyData["1"];
-    dummyUrl["5.4.2"] = dummyData["2"];
+    dummyUrl["1"] = dummyData["1"];
+    dummyUrl["2"] = dummyData["2"];
     current5["children"][index].url = JSON.stringify(dummyUrl);
     window.localStorage.setItem("currentJson5", JSON.stringify(current5));
     this.mainFlagModule5 = 5;

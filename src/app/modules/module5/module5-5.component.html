@@ -27,7 +27,7 @@
   </div>
    <div class="card" *ngIf="startPdf">
      <div class="card-footer">
-       <h6 class="text-center">{{'L2Module5.subMenu5-4' | translate}}</h6>
+       <h6 class="text-center">{{'L2Module5.subMenu5-5' | translate}}</h6>
      </div>
      <div class="card-block">
       <app-presentation [data]='docData' (ansCorrect)="checkAnswer($event)"></app-presentation>
@@ -40,20 +40,20 @@
     <div class="card-block cc p-4">
       <div class="row static-content" *ngIf="flag == 0">
         <div class="col-md-4">
-          <p class="title">1. {{'L2Module2.mitra' | translate}}</p>
+          <p class="title">1. {{'L2Module5.subMenu5-5' | translate}}</p>
           <div class="img-wrap">
             <a (click)="showVideo(urlArray['src1'],'L2Module2.mitra',1)">
-              <img class="img-fluid v_thumb" src="./../../assets/img/thumb/3.8.1-Mitra-(M3B).png" alt="">
+              <img class="img-fluid v_thumb" src="../../../assets/img/pdf_thumb.png" alt="">
               <div class="hover-opaque">
               </div>
             </a>
           </div>
         </div>
         <div class="col-md-4">
-          <p class="title">2. {{'L2Module2.subMenu2-15' | translate}}</p>
+          <p class="title">2. {{'L2Module5.subMenu5-5' | translate}}</p>
           <div class="img-wrap">
             <a (click)="showVideo(urlArray['src2'],'L2Module2.subMenu2-15',2)">
-              <img class="img-fluid v_thumb" src="./../../assets/img/thumb/3.8.2.png" alt="">
+              <img class="img-fluid v_thumb" src="../../../assets/img/audio_thumb.png" alt="">
               <div class="hover-opaque">
                 <i class="fa fa-play-circle fa-2x"></i>
               </div>

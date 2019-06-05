@@ -201,6 +201,7 @@ export class McqcomponentComponent implements OnInit {
         }
       }
      console.log("options",this.bunchList)
+     this.queCount = 1;
   } else if (this.questionType == 'checkBoxOption') {
     console.log("data",this.data)
     this.tasks = this.data.statementlist
@@ -545,6 +546,7 @@ export class McqcomponentComponent implements OnInit {
       }
     } else if(window.localStorage.getItem('mainFlagModule5') == '7'){
       this.rankModal.hide()
+      this.queCount = this.queCount + 1;
       if(Object.keys(this.userOptions).length == 3){
         this.sendAns.emit(this.userOptions)
        }

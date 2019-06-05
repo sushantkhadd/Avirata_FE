@@ -844,6 +844,7 @@ export class PresentationComponent implements OnInit {
       console.log('else next11')
       this.count++;
                 console.log(' this.count++', this.count);
+                if(this.data.unlockView != "static"){
                 if (this.count == 12 && this.mainFlagModule5 == 2)
                 {
                   this.audioModal.show();
@@ -875,6 +876,7 @@ export class PresentationComponent implements OnInit {
                   this.audioSrc["state"] = "dynamic";
                   console.log(' mainFlagModule5.count++', this.count, this.audioSrc['url']);
                 }
+              }
       if(this.count == this.finalCount && this.showCFU == true){
         console.log('else count1',this.count,this.finalCount)
        console.log('this.buttonshowflag 11',this.buttonShowFlag)

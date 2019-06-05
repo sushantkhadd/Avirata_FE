@@ -668,7 +668,6 @@ export class FullLayoutComponent implements OnInit {
     } else {
       var source = window.localStorage.getItem("source");
       if (
-        source == "module 5" ||
         source == "module 5.1" ||
         source == "module 5.1.1" ||
         source == "module 5.1.2"
@@ -852,7 +851,6 @@ export class FullLayoutComponent implements OnInit {
     } else {
       var source = window.localStorage.getItem("source");
       if (
-        source == "module 4" ||
         source == "module 4.1.1" ||
         source == "module 4.1.2"
       ) {
@@ -1392,10 +1390,7 @@ export class FullLayoutComponent implements OnInit {
       this.mainFlagModule3 = 19;
     } else {
       var source = window.localStorage.getItem("source");
-
-      if (source == "module 3") {
-        this.mainFlagModule3 = 1;
-      } else if (
+       if (
         source == "module 3.1" ||
         source == "module 3.1.1" ||
         source == "module 3.1.2" ||
