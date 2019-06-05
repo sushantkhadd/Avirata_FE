@@ -308,7 +308,7 @@ export class VideoPlayerComponent implements OnInit {
 
           window.localStorage.setItem('uuid', data['data'].nextuuid)
           this.result['success'] = true;
-          if(window.localStorage.getItem("mainFlagModule1") == "3" && window.localStorage.getItem("subFlagModule1") == "1"){
+          if(window.localStorage.getItem("mainFlagModule1") == "3" && window.localStorage.getItem("subFlagModule1") == "1" && window.localStorage.getItem("subFlagModule5") == "1"){
             console.log("b part")
             this.vUrl=data['data'].parenturl;
             this.msgFlag = true
@@ -345,7 +345,7 @@ export class VideoPlayerComponent implements OnInit {
             result["urls"] = this.module1_10Url;
             this.finishCall.emit(result);
           } else if (
-            window.localStorage.getItem("mainFlagModule5") == "6" ||
+            // window.localStorage.getItem("mainFlagModule5") == "6" ||
             window.localStorage.getItem("mainFlagModule5") == "7" ||
             window.localStorage.getItem("mainFlagModule5") == "8" ||
 

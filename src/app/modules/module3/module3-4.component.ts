@@ -96,6 +96,8 @@ export class Module34Component implements OnInit {
   }
   finishCFU(e) {
     if (e) {
+      var url = {};
+      this.urlJson["3.4.1"] = this.passUrl;
       this.urlJson['3.4.2'] = e['url'];
       console.log("urllll", this.urlJson)
       var current3 = [];
@@ -124,7 +126,8 @@ export class Module34Component implements OnInit {
           this.passData['videoUrl'] = data['data'].url;
           this.showVideoFlag = true
           this.passUrl = data['data'].url;
-          this.urlJson["3.4.1"] = this.passUrl;
+          console.log('data url', this.passUrl);
+          // this.urlJson["3.4.1"] = this.passUrl;
           // var dummylocal = JSON.parse(window.localStorage.getItem('currentJson3'))
           // var index1 = dummylocal.children.findIndex(item =>
           //   item.source == "module 3.8");

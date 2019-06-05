@@ -902,6 +902,22 @@
                 <a class="nav-link submenu-label" routerLinkActive="active" [routerLink]="['/modules/module5/Module5.13']">{{'number.5' | translate}}.{{'number.13' | translate}} {{'L2Module5.subMenu5-13' | translate}}</a>
               </span>
             </li>
+            <li class="nav-item" routerLinkActive="activeMenu">
+              <span *ngIf="mainFlagModule5 < 14">
+                <a class="deactive-menu submenu-label" routerLinkActive="active">{{'number.5' | translate}}.{{'number.14' | translate}} {{'L2Module5.subMenu5-14' | translate}}</a>
+              </span>
+              <span *ngIf="mainFlagModule5 >= 14">
+                <a class="nav-link submenu-label" routerLinkActive="active" [routerLink]="['/modules/module5/Module5.14']">{{'number.5' | translate}}.{{'number.14' | translate}} {{'L2Module5.subMenu5-14' | translate}}</a>
+              </span>
+            </li>
+            <li class="nav-item" routerLinkActive="activeMenu">
+              <span *ngIf="mainFlagModule5 < 15">
+                <a class="deactive-menu submenu-label" routerLinkActive="active">{{'number.5' | translate}}.{{'number.15' | translate}} {{'L2Module5.subMenu5-15' | translate}}</a>
+              </span>
+              <span *ngIf="mainFlagModule5 >= 15">
+                <a class="nav-link submenu-label" routerLinkActive="active" [routerLink]="['/modules/module5/Module5.15']">{{'number.5' | translate}}.{{'number.15' | translate}} {{'L2Module5.subMenu5-15' | translate}}</a>
+              </span>
+            </li>
           </ul>
         </li>
       </div>
@@ -1064,18 +1080,21 @@
     <div class="footerSection">
       <footer class="app-footer mt-4">
         <div class="float-right contact-bottom">
-          <span>{{'Registration.Email' | translate}} : <a href="mailto:aviratahelp@gmail.com">aviratahelp@gmail.com</a></span> &nbsp;| &nbsp;
+          <span>{{'Registration.Email' | translate}} :
+            <a href="mailto:aviratahelp@gmail.com">aviratahelp@gmail.com</a>
+          </span> &nbsp;| &nbsp;
           <span class="mx-4">{{'Dashboard.Helpline Number' | translate}}
             <a href="tel:8600245245" target="_blank">{{'Dashboard.8600245245' | translate}} </a>
           </span>
           <!-- &nbsp;<span>({{'Dashboard.Time' | translate}})</span> -->
         </div>
         <div>
-          <marquee scrollamount="5" onmouseover="this.stop();" onmouseout="this.start();" class="marquee-border">Copyright © 2017, Maharashtra Academic Authority (MAA), Shyamchi Aai Foundation (SAF). All rights reserved. 
-            <span class="color_red">Unauthorized copy, use, reproduction or distribution of any / all the content or part of the content from this website through
-            any medium is prohibited. </span>
-            कॉपीराईट@२०१८, महाराष्ट्र राज्य शैक्षणिक संशोधन आणि प्रशिक्षण परिषद(MSCERT), श्यामची आई फाऊंडेशन(SAF). सर्व हक्क सुरक्षित. 
-            <span class="color_red">कोणत्याही माध्यमाद्वारे या वेबसाइटवरील कोणतीही सामग्री/साहित्य किंवा सामग्रीचा / साहित्याचा भाग अनधिकृतरित्या कॉपी, वापर, पुनरुत्पादन किंवा वितरण करणे प्रतिबंधित आहे.</span>
+          <marquee scrollamount="5" onmouseover="this.stop();" onmouseout="this.start();" class="marquee-border">Copyright © 2017, Maharashtra Academic Authority (MAA), Shyamchi Aai Foundation (SAF). All rights reserved.
+            <span class="color_red">Unauthorized copy, use, reproduction or distribution of any / all the content or part of the content from this
+              website through any medium is prohibited. </span>
+            कॉपीराईट@२०१८, महाराष्ट्र राज्य शैक्षणिक संशोधन आणि प्रशिक्षण परिषद(MSCERT), श्यामची आई फाऊंडेशन(SAF). सर्व हक्क सुरक्षित.
+            <span class="color_red">कोणत्याही माध्यमाद्वारे या वेबसाइटवरील कोणतीही सामग्री/साहित्य किंवा सामग्रीचा / साहित्याचा भाग अनधिकृतरित्या
+              कॉपी, वापर, पुनरुत्पादन किंवा वितरण करणे प्रतिबंधित आहे.</span>
           </marquee>
         </div>
       </footer>
@@ -1355,21 +1374,21 @@
           <div class="row mt-2 justify-content-center">
             <!-- <img *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' && !needEfforts" class="img-responsive img-goldcup" [src]="finishImgUrl"> -->
             <div *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' && !needEfforts" class="rewards-animate">
-            <div *ngIf="rewardsFlag == 1">
-              <img [src]="animatedImageJson['a1']" alt="" class="img3 mt-5 pt-3">
-              <img [src]="animatedImageJson['a2']" alt="" class="img2">
-              <img [src]="animatedImageJson['a3']" alt="" class="img3 mt-5 pt-3">
-            </div>
-            <div *ngIf="rewardsFlag == 2">
-              <img [src]="animatedImageJson['b1']" alt="" class="img3 mt-5 pt-3">
-              <img [src]="animatedImageJson['b2']" alt="" class="img2">
-              <img [src]="animatedImageJson['b3']" alt="" class="img3 mt-5 pt-3">
-            </div>
-            <div *ngIf="rewardsFlag == 3">
-              <img [src]="animatedImageJson['c1']" alt="" class="img3 mt-5 pt-3">
-              <img [src]="animatedImageJson['c2']" alt="" class="img3">
-              <img [src]="animatedImageJson['c3']" alt="" class="img3 mt-5 pt-3">
-            </div>
+              <div *ngIf="rewardsFlag == 1">
+                <img [src]="animatedImageJson['a1']" alt="" class="img3 mt-5 pt-3">
+                <img [src]="animatedImageJson['a2']" alt="" class="img2">
+                <img [src]="animatedImageJson['a3']" alt="" class="img3 mt-5 pt-3">
+              </div>
+              <div *ngIf="rewardsFlag == 2">
+                <img [src]="animatedImageJson['b1']" alt="" class="img3 mt-5 pt-3">
+                <img [src]="animatedImageJson['b2']" alt="" class="img2">
+                <img [src]="animatedImageJson['b3']" alt="" class="img3 mt-5 pt-3">
+              </div>
+              <div *ngIf="rewardsFlag == 3">
+                <img [src]="animatedImageJson['c1']" alt="" class="img3 mt-5 pt-3">
+                <img [src]="animatedImageJson['c2']" alt="" class="img3">
+                <img [src]="animatedImageJson['c3']" alt="" class="img3 mt-5 pt-3">
+              </div>
             </div>
             <span *ngIf="needEfforts && moduleCompleteStatus['type'] == 'moduleFinish'">
               {{'layout.needEfforts' | translate}}
