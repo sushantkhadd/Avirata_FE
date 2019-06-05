@@ -25,6 +25,7 @@ export class McqcomponentComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
     this.submitFlagMCQ = false
     this.mysubModule = parseInt(window.localStorage.getItem('mainFlagModule5'))
     this.mysubModule3 = parseInt(window.localStorage.getItem('mainFlagModule3'))
@@ -200,7 +201,25 @@ export class McqcomponentComponent implements OnInit {
         }
       }
      console.log("options",this.bunchList)
-  } else {
+  } else if (this.questionType == 'checkBoxOption') {
+    console.log("data",this.data)
+    this.tasks = this.data.statementlist
+    this.ansSelectCount = this.tasks.length + 1;
+    // this.priorities= []
+    // // this.priorities = this.data.questionlist[0].question;
+    // this.bunchList = this.data.questionlist.splice(0,1)
+    // this.statement = this.bunchList[0].question;
+    // this.tasks = this.bunchList[0].options;
+    // for (var i = 0; i < this.tasks.length; i++)
+    // {
+    //   if (this.bunchList[0].options[i].value != "")
+    //   {
+    //     this.priorities.push(this.bunchList[0].options[i].value)
+    //     console.log("priorities",this.priorities)
+    //   }
+    // }
+   console.log("options",this.bunchList)
+} else {
 
       this.tasks = this.data.options;
       console.log("rewewewses",this.data,this.tasks)
@@ -359,6 +378,18 @@ export class McqcomponentComponent implements OnInit {
          
      
       // this.userOptions[this.bunchList[0].questionid] = 
+    }
+    else if(this.questionType == 'checkBoxOption'){
+      if(window.localStorage.getItem('mainFlagModule5') == '11'){
+        this.instructionModal.show()
+        this.data.description = this.data.description
+        console.log("data.sescr",this.data.description)
+        //this.onlyPopUpAns = this.selectedTasks
+      }
+      else{
+        this.sendAns.emit(this.selectedTasks)
+      }
+     
     }
     else{
       this.sendAns.emit(this.onlyPopUpAns)
@@ -601,7 +632,11 @@ export class McqcomponentComponent implements OnInit {
   emitData() {
     this.instructionModal.hide()
     console.log("ans", this.onlyPopUpAns)
-    this.sendAns.emit(this.onlyPopUpAns)
+    if(window.localStorage.getItem('mainFlagModule5')== '11'){
+      this.sendAns.emit(this.selectedTasks)
+    }else{
+      this.sendAns.emit(this.onlyPopUpAns)
+    }
   }
 
   ngDoCheck() {
@@ -619,17 +654,18 @@ export class McqcomponentComponent implements OnInit {
     } 
 
     if (this.questionType == 'checkBoxOption') {
-      console.log("ddd ", this.selectedTasks[0], this.selectedTasks[1], this.ans1, this.ans2)
-      if (this.selectedTasks.length == 2) {
-        this.submitFlag = true
-
-        if ((this.ans1 == this.selectedTasks[0] || this.ans2 == this.selectedTasks[0]) && (this.ans1 == this.selectedTasks[1] || this.ans2 == this.selectedTasks[1])) {
-          this.rightFlag = true
-        } else {
-          this.rightFlag = false
+      // console.log("ddd ", this.selectedTasks[0], this.selectedTasks[1], this.ans1, this.ans2)
+      if(window.localStorage.getItem('mainFlagModule5')== '9'){
+        if (this.selectedTasks.length >= 5) {
+          this.submitFlag = true
         }
-
       }
+      else if(window.localStorage.getItem('mainFlagModule5')== '11' || window.localStorage.getItem('mainFlagModule5')== '13'){
+        if (this.selectedTasks.length >= 1) {
+          this.submitFlag = true
+        } 
+      }
+      
     }
   }
 
