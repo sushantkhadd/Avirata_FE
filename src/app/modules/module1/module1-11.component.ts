@@ -61,7 +61,7 @@ export class Module111Component implements OnInit {
   description;
   questionFlag;
   trimFlag;
-  urlArray = {};nextFlag;
+  urlArray = {}; nextFlag; queFlag;
   public inst =
     "Assignment: दिलेल्या प्रसंगातील अविवेकी विचार शोधून त्यांच्याशी तिन्ही पद्धतीने प्रतिवाद कसा कराल ते लिहा. इतरांनी लिहिलेल्या उत्तरांवर प्रतिक्रिया दया.";
 
@@ -91,6 +91,7 @@ export class Module111Component implements OnInit {
     this.answer4 = "";
     this.answer5 = "";
     this.answer6 = "";
+    this.queFlag = false;
 
     if (this.mainFlagModule1 == 11) {
       if (this.subFlagModule1 == 1) {
@@ -296,9 +297,14 @@ export class Module111Component implements OnInit {
             this.question3 = this.questionlist[2].question;
             this.question4 = this.questionlist[3].question;
             this.question5 = this.questionlist[4].question;
-            if (this.questionlist.length == 6) {
+            if (this.questionlist.length == 6)
+            {
+              this.queFlag = true;
               console.log(this.subFlagModule1, "subFlagModule1");
               this.question6 = this.questionlist[5].question;
+            } else
+            {
+              this.queFlag = false;
             }
             console.log(data);
             console.log(this.question6, "this.question6");
