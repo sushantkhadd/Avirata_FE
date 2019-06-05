@@ -72,27 +72,35 @@
     </div>
 </div>
 
-<div class="row" *ngIf="questionType == 'checkBoxOption'">
-    <div class="col-sm-12 col-md-12">
-        <div class="card">
-            <div class="" *ngIf="statement">
-                <!-- <label><span [innerHTML]="statement"></span>
+<div *ngIf="questionType == 'checkBoxOption'">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="card">
+                <div class="card-header" *ngIf="statement">
+                    <!-- <label><span [innerHTML]="statement"></span>
                  </label> -->
-                <h6 class="questionHead lineHeight" [innerHTML]="statement"></h6>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="radio-opt-group">
-                        <div *ngFor="let item of tasks;let i=index" class="col-md-12">
-                            <span class="col-xs-11 col-sm-11 col-md-11">
-              <input type="checkbox" id={{i}} (change)="taskSelect($event,i,item.option)" class="multiCheckStyle">&nbsp;
-              <label for={{i}}>{{item.value}}</label>
-            </span>
+                 <h6 [innerHTML]="statement"></h6>
+                </div>
+                <div class="card-block pt-0" [class.pt-0]="queCount">
+                    <div class="row">
+                        <div class="radio-opt-group">
+                            <div *ngFor="let item of tasks;let i=index" class="col-md-12">
+                                <span class="col-xs-11 col-sm-11 col-md-11">
+                  <input type="checkbox" id={{i}} (change)="taskSelect($event,i,item.statementid)" class="multiCheckStyle">&nbsp;
+                  <label for={{i}}>{{item.statement}}</label>
+                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="text-center">
+        <div class="">
+            <button class="btn btn-primary mt-4" [disabled]="!submitFlag" (click)="goNext5_3()">{{'Cfu.submit' | translate}}</button>
+        </div><br>
     </div>
 </div>
 
