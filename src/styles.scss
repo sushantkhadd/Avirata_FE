@@ -315,9 +315,26 @@ body {
   background-position: center;
   background-size: cover;
 
+  .card-group {
+    border-radius: 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  }
   .card {
     background-color: #2368a2;
     border: none;
+    box-shadow: none;
+
+    .card-block{
+      .appBox{
+        padding-top: 5rem;
+      }
+      label{
+        font-size: 1.1rem;
+        margin-bottom: 0;
+      }
+    }
   }
 }
 
@@ -440,6 +457,7 @@ body {
   color: rgba(0, 0, 0, 0.87);
   position: relative;
   text-align: center;
+  margin-bottom: -15px;
 }
 
 .stepper-step:first-child {
@@ -581,7 +599,7 @@ body {
 }
 
 .app-footer marquee {
-  margin-bottom: -10px;
+  margin-bottom: -20px;
   font-weight: 500;
 }
 
@@ -614,12 +632,12 @@ body {
 }
 
 .static-content {
-  padding: 1.5rem;
+  padding: 1rem 1.5rem;
 
   .img-wrap {
     padding: 10px;
     border: 3px solid #ddd;
-    margin: 10px 10px 20px 5px;
+    margin: 10px 10px 10px 5px;
     position: relative;
     @include transition(all 0.5s ease);
 
@@ -660,8 +678,8 @@ body {
 
   p {
     &.title {
-      padding: 5px;
-      font-weight: 700;
+      // padding: 5px;
+      font-weight: 600;
       font-size: 0.90rem;
     }
   }
@@ -1920,6 +1938,9 @@ body {
 
   .card-header {
     margin-bottom: 1rem;
+    h5{
+      margin-bottom: 0;
+    }
   }
 
   .card-footer {
@@ -2064,6 +2085,31 @@ h6.questionHead.lineHeight {
     top: 12% !important;
     width: 73px !important;
   }
+
+  //login form
+  .card-border {
+    border-right: none;
+    height: 63%;
+  }
+
+  .loginBg{
+    .card{
+      margin-bottom: 0 !important;
+
+      .p-2 {
+        padding: 0!important;
+      }
+    }
+
+    .appBox{
+      padding-top: 0 !important;
+
+      label{
+        font-size: 1rem;
+      }
+    }
+  }
+  
 }
 
 @include keyframes(spin) {
@@ -2203,7 +2249,7 @@ table,
 }
 
 .bottom-part {
-  margin-top: 1.9rem;
+  margin-top: 1.7rem;
 }
 
 .badge {
@@ -2347,4 +2393,12 @@ body {
 
 .bg-inherit {
   background-color: inherit !important;
+}
+.w-35{
+  width: 30%;
+}
+
+// radio button circle color
+.dx-radiobutton-icon:before {
+  border: 1px solid #828181!important;
 }

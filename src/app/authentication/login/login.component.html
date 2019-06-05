@@ -3,7 +3,7 @@
         <img class="img-fluid avirata-logo" src="../../../assets/img/logo_cpd_combine_web.png">
     </div>
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-6 p-1">
             <p class="logo-tagline">
                 {{'L2NewLines.loginTitle' | translate}}
                 <br>
@@ -43,7 +43,8 @@
                                         </span>
                                     </div>
                                     <input type="password" id="pass" name="passWord" class="form-control input_pass" #_password="ngModel" [(ngModel)]="password"
-                                        placeholder="{{ 'Login.password' | translate }}" (keyup.enter)="login();" autocomplete="off" required>
+                                        placeholder="{{ 'Login.password' | translate }}" (keyup.enter)="login();" autocomplete="off"
+                                        required>
                                 </div>
 
                                 <div class="input-group errorMessage alert alert-danger loginInput" *ngIf="_password.errors && _password.dirty">
@@ -102,16 +103,17 @@
                                                                     <button (click)="sendEmailOTP(1)" class="btn btn-info resend" [disabled]="timerFlag">परत पाठवा</button>
                                                                 </label> -->
                                                                 <div class="col-12 col-md-12">
-                                                                        <div class="col-sm-9 form-control-label passform-labels text-center" for="input-small">
-                                                                            <span id="countdown"><i class="fa fa-stopwatch"></i>&nbsp;{{countDown | async | formatTime}}</span>
-                                                                        </div>
+                                                                    <div class="col-sm-9 form-control-label passform-labels text-center" for="input-small">
+                                                                        <span id="countdown">
+                                                                            <i class="fa fa-stopwatch"></i>&nbsp;{{countDown | async | formatTime}}</span>
                                                                     </div>
+                                                                </div>
 
-                                                                    <div class="col-12 col-md-12 text-right">
-                                                                        <div class="form-control-label passform-labels text-right" for="input-small">जर ५ मिनिटात ओटीपी मिळाला नसेल तर
-                                                                            <button (click)="sendEmailOTP(1)" class="btn btn-info resend" [disabled]="timerFlag">परत पाठवा</button>
-                                                                        </div>
+                                                                <div class="col-12 col-md-12 text-right">
+                                                                    <div class="form-control-label passform-labels text-right" for="input-small">जर ५ मिनिटात ओटीपी मिळाला नसेल तर
+                                                                        <button (click)="sendEmailOTP(1)" class="btn btn-info resend" [disabled]="timerFlag">परत पाठवा</button>
                                                                     </div>
+                                                                </div>
 
                                                             </div>
                                                             <div class="input-group  row loginInput errorMessage color_red ml-3" *ngIf="emailOTP.errors && emailOTP.dirty">
@@ -155,7 +157,8 @@
                                                             <div class="input-group row loginInput errorMessage" *ngIf="mobileVerifyClicked">
                                                                 <div class="col-12 col-md-12">
                                                                     <div class="col-sm-9 form-control-label passform-labels text-center" for="input-small">
-                                                                        <span id="countdown"><i class="fa fa-stopwatch"></i>&nbsp;{{countDown | async | formatTime}}</span>
+                                                                        <span id="countdown">
+                                                                            <i class="fa fa-stopwatch"></i>&nbsp;{{countDown | async | formatTime}}</span>
                                                                     </div>
                                                                 </div>
 
@@ -246,9 +249,14 @@
                         </form>
                     </div>
                 </div>
-                <div class="card card-inverse card-primary pt-3 d-none d-sm-block" style="width:44%">
-                    <div class="card-block text-center d-none d-sm-block">
-
+                <div class="card card-inverse card-primary pt-3 col-12 col-sm-12 col-md-12" style="width:44%">
+                    <div class="card-block">
+                        <div class="row appBox justify-content-center">
+                            <label class="text-white">{{'Login.appDownload' | translate}}</label>
+                            <a target="_blank" href="https://play.google.com/store/apps/details?id=com.cpd&hl=en">
+                                <img src="../assets/img/appcopy.png" class="img-fluid">
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -265,19 +273,29 @@
         </div> -->
             <div class="d-flex bottom-part justify-content-center">
                 <div class="info-link text-white">
-                    <ul class="pad-0">
+                    <!-- <ul class="pad-0">
                         <li>{{'Login.appDownload' | translate}}</li>
                         <li class="text-center">
-                            <img class="img-fluid avirata-logo" src="../../../assets/img/playstore.png">
+                            <a target="_blank" href="https://play.google.com/store/apps/details?id=com.cpd&hl=en">
+                                <img class="img-fluid avirata-logo" src="../../../assets/img/playstore.png">
+                            </a>
+                        </li>
+                    </ul> -->
+                    <ul>
+                        <li>
+                            <strong>{{'Registration.Email' | translate}} </strong>:
+                            <a class="text-white" href="mailto:aviratahelp@gmail.com">
+                            aviratahelp@gmail.com </a>
                         </li>
                     </ul>
                 </div>
                 <div class="info-link text-white">
                     <ul>
                         <li>
-                            <strong>{{'Registration.Email' | translate}} </strong>: aviratahelp@gmail.com </li>
-                        <li>
-                            <strong>{{'Dashboard.Helpline Number' | translate}}</strong>: (०२०) ६७६८६७८८</li>
+                            <strong>{{'Dashboard.Helpline Number' | translate}}</strong>
+                            <a class="text-white" href="tel:8600245245"
+                                target="_blank"> (०२०) ६७६८६७८८</a>
+                        </li>
                     </ul>
                 </div>
             </div>

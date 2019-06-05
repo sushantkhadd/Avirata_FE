@@ -7,10 +7,18 @@
                     <h4>{{'Quiz.note' | translate}}</h4>
                 </div>
                 <div class="card-block inst-text">
+                    <div *ngIf="mySubmodule3 == 7">
+                            <p>{{'number.1' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_6' | translate}}</p>
+                            <p>{{'number.2' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_7' | translate}}</p>
+                            <p>{{'number.3' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_8' | translate}}</p>
+                            <p>{{'number.4' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_9' | translate}}</p>
+                    </div>
+                    <div *ngIf="mySubmodule3 != 7">
                     <p>{{'Quiz.instruction4' | translate}}</p>
                     <p>{{'Quiz.instruction5' | translate}}</p>
                     <p>{{'Quiz.instruction6' | translate}}</p>
                     <p>{{'Quiz.instruction7' | translate}}</p>
+                </div>
                 </div>
                 <div class="card-footer" *ngIf="moduleNumber==2 || moduleNumber==3 || moduleNumber==4">
                     <div class="float-right hidden-xs-down">
