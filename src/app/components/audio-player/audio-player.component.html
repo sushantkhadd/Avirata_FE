@@ -58,7 +58,7 @@
         <span class="disable _volume"></span>
         <div class="audio-controls">
           <a class="btn c-pointer" (click)="handleBackword()"><i class="fa fa-backward"></i></a>
-          <a class="btn c-pointer" (click)="play($event)"><i
+          <a class="btn c-pointer" (click)="play()"><i
               [ngClass]="playFlag ? 'fa fa-play' : 'fa fa-pause'"></i></a>
         </div>
         <div class="card-footer bg-inherit" *ngIf="src['unlockView'] != 'static'">
