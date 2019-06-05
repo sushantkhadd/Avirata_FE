@@ -83,7 +83,7 @@
                   required></textarea>
               </div>
             </div>
-            <div class="form-group row" *ngIf="questionFlag == true">
+            <div class="form-group row" *ngIf="queFlag">
               <label class="col-sm-4 col-md-4 col-4 form-control-label" for="answer6" [innerHTML]="question6"></label>
               <div class="col-md-8 col-sm-8 col-8 controls">
                 <textarea class="form-control" id="answer6" name="answer6" [(ngModel)]="answer6" rows="3" #addr="ngModel" maxlength="500"
@@ -93,7 +93,8 @@
           </form>
         </div>
         <div class="card-footer text-right bg-white border-0">
-          <button class="btn btn-primary" [disabled]="assignForm.invalid || trimFlag" (click)="questionFlag == true ? submit() : finish2();">{{'Login.Close' | translate}}</button>
+          <button class="btn btn-primary" [disabled]="assignForm.invalid || trimFlag"
+            (click)="queFlag ? submit() : finish2();">{{'Login.Close' | translate}}</button>
         </div>
       </div>
 

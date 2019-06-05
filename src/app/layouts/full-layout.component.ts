@@ -86,7 +86,6 @@ export class FullLayoutComponent implements OnInit {
   module7OnOffFlag = false;
 
   public module0OnOffFlag;
-  loaderFlag;
   currentFlag0;
   shareableImage;
   mainFlagModule0;
@@ -176,13 +175,9 @@ export class FullLayoutComponent implements OnInit {
   private loadingBarInterceptor(event: Event) {
     if (event instanceof NavigationStart) {
       this.lBar.start();
-      this.loaderFlag = true;
     }
     if (event instanceof NavigationEnd) {
       this.lBar.complete();
-      setTimeout(() => {
-        this.loaderFlag = false;
-      }, 1000);
     }
   }
 
@@ -190,10 +185,13 @@ export class FullLayoutComponent implements OnInit {
     html2canvas(document.querySelector("#capture")).then(canvas => {
       this.shareableImage = canvas.toDataURL();
       console.log(canvas, this.shareableImage);
-      var link = document.createElement("a");
-      link.href = this.shareableImage;
-      link.download = "my-reward.png";
-      link.click();
+      if (this.shareableImage)
+      {
+        var link = document.createElement("a");
+        link.href = this.shareableImage;
+        link.download = "my-reward.png";
+        link.click();
+      }
     });
   }
 
@@ -760,14 +758,14 @@ export class FullLayoutComponent implements OnInit {
       } else if (
         source == "module 5.6" ||
         source == "module 5.6.1" ||
-        source == "module 5.6.2" 
+        source == "module 5.6.2"
       ) {
         this.mainFlagModule5 = 6;
         if (source == "module 5.6.1") {
           this.subFlagModule5 = 1;
         } else if (source == "module 5.6.2") {
           this.subFlagModule5 = 2;
-        } 
+        }
         window.localStorage.setItem(
           "subFlagModule5",
           this.subFlagModule5.toString()
@@ -823,20 +821,20 @@ export class FullLayoutComponent implements OnInit {
       } else if (
         source == "module 5.15" ||
         source == "module 5.15.1" ||
-        source == "module 5.15.2" 
+        source == "module 5.15.2"
       ) {
         this.mainFlagModule5 = 15;
         if (source == "module 5.15.1") {
           this.subFlagModule5 = 1;
         } else if (source == "module 5.15.2") {
           this.subFlagModule5 = 2;
-        } 
+        }
         window.localStorage.setItem(
           "subFlagModule5",
           this.subFlagModule5.toString()
         );
       }
-      
+
     }
     this.LocalstoragedetailsService.setModule5Falgs(
       this.mainFlagModule5,

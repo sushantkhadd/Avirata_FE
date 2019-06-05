@@ -1,3 +1,78 @@
-<p>
-  module5-2 works!
-</p>
+<div *ngIf="mainFlagModule5 < 2">
+  <div class="card">
+    <div class="card-block">
+      <p>{{'subModule2_1.2_15' | translate}}</p>
+      <p><strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="mainFlagModule5 == 2">
+  <div class="instruction-wrap ins-block" *ngIf="!startPdf">
+    <div>
+      <div class="card">
+        <div class="card-header">
+          <span class="exp-img instructions-img"></span>
+          <h5>
+            {{'Quiz.note' | translate}}</h5>
+        </div>
+        <div class="card-block pt-2">
+          <p>{{'L2Instruction.inst_ppt1' | translate}}</p>
+        </div>
+        <div class="card-footer text-right">
+          <button class="btn btn-primary" (click)="startEvent()">{{'Login.Close' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card" *ngIf="startPdf">
+    <div class="card-footer">
+      <h6 class="text-center">{{'L2Module5.subMenu5-2' | translate}}</h6>
+    </div>
+    <div class="card-block">
+      <app-presentation [data]='docData' (ansCorrect)="checkAnswer($event)"></app-presentation>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="mainFlagModule5 > 2">
+  <div class="card unlock-view">
+    <div class="card-block cc p-4">
+      <div class="row static-content" *ngIf="flag == 0">
+        <div class="col-md-4">
+          <p class="title">1. {{'L2Module2.mitra' | translate}}</p>
+          <div class="img-wrap">
+            <a (click)="showVideo(urlArray['src1'],'L2Module2.mitra',1)">
+              <img class="img-fluid v_thumb" src="./../../assets/img/thumb/3.8.1-Mitra-(M3B).png" alt="">
+              <div class="hover-opaque">
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <p class="title">2. {{'L2Module2.subMenu2-15' | translate}}</p>
+          <div class="img-wrap">
+            <a (click)="showVideo(urlArray['src2'],'L2Module2.subMenu2-15',2)">
+              <img class="img-fluid v_thumb" src="./../../assets/img/thumb/3.8.2.png" alt="">
+              <div class="hover-opaque">
+                <i class="fa fa-play-circle fa-2x"></i>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+       <div *ngIf="flag == 1">
+         <app-presentation [data]='passValues'></app-presentation>
+         <div class="card-footer text-center bg-white border-0">
+           <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>
+         </div>
+       </div>
+       <div *ngIf="flag == 2">
+         <app-audio-player-component [src]="audioSrc"></app-audio-player-component>
+         <div class="card-footer text-center bg-white border-0">
+           <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>
+         </div>
+       </div>
+    </div>
+  </div>
+</div>

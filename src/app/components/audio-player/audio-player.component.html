@@ -1,0 +1,75 @@
+<div class="row audio-container">
+  <div class="col-12">
+    <div class="card">
+      <div id="container-audio" [class.pause-animation]="!playFlag" class="container-audio text-center">
+        <div class="colum1">
+          <div class="row"></div>
+        </div>
+        <div class="colum1">
+          <div class="row"></div>
+        </div>
+        <div class="colum1">
+          <div class="row"></div>
+        </div>
+        <div class="colum1">
+          <div class="row"></div>
+        </div>
+        <div class="colum1">
+          <div class="row"></div>
+        </div>
+        <div class="colum1">
+          <div class="row"></div>
+        </div>
+        <div class="colum1">
+          <div class="row"></div>
+        </div>
+        <div class="colum1">
+          <div class="row"></div>
+        </div>
+        <div class="colum1">
+          <div class="row"></div>
+        </div>
+        <div class="colum1">
+          <div class="row"></div>
+        </div>
+        <div class="colum1">
+          <div class="row"></div>
+        </div>
+        <div class="colum1">
+          <div class="row"></div>
+        </div>
+        <div class="colum1">
+          <div class="row"></div>
+        </div>
+        <div class="colum1">
+          <div class="row"></div>
+        </div>
+        <div class="colum1">
+          <div class="row"></div>
+        </div>
+      </div>
+      <div class="card-block text-center position-relative">
+        <audio class="audio-player" id="audio" controls controlsList="nodownload" [src]="audioSrc">
+          Your browser does not support the
+          <code>audio</code> element.
+        </audio>
+        <span class="disable _play"></span>
+        <span class="disable _seek"></span>
+        <span class="disable _volume"></span>
+        <div class="audio-controls">
+          <a class="btn c-pointer" (click)="handleBackword()"><i class="fa fa-backward"></i></a>
+          <a class="btn c-pointer" (click)="play()"><i
+              [ngClass]="playFlag ? 'fa fa-play' : 'fa fa-pause'"></i></a>
+        </div>
+        <div class="card-footer bg-inherit" *ngIf="src['unlockView'] != 'static'">
+          <div class="audio-controls">
+            <button class="btn btn-primary" [disabled]="nextFlag" (click)="secondUrlFlag ? next() : audioFinish()"><span
+                [innerHTML]="secondUrlFlag ? 'Next' : 'Finish'"></span></button>
+            <!-- <button class="btn btn-primary" [disabled]="nextFlag"
+               (click)="src['1'] ? next() : audioFinish()">Next</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

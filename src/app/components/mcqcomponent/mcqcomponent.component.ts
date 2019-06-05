@@ -21,7 +21,7 @@ export class McqcomponentComponent implements OnInit {
   public bunchCounter;bunchList;bunchOptions;userOptions={};mcqBunchFlag = false;totalBunchCounter = 1;bunchSelectedAns=[];
   public ansSelectCount; counter; selectedTasks = []; ans1; ans2; showAns1; showAns2; queUrl;title;
   public nextQueFlag; subPriorities; sendYesNoType; mysubModule3; mysubModule4; mysubModule1;
-  public onlyPopUpAns; mysubModule; submitFlagMCQ; mysubModule0; mysubModule6; mysubModule7;mysubModule2;totalQueCount;
+  public onlyPopUpAns; mysubModule; submitFlagMCQ; mysubModule0; mysubModule6; mysubModule7;mysubModule2;mysubModule5;totalQueCount;
   constructor() { }
 
   ngOnInit() {
@@ -29,6 +29,7 @@ export class McqcomponentComponent implements OnInit {
     this.mysubModule = parseInt(window.localStorage.getItem('mainFlagModule5'))
     this.mysubModule3 = parseInt(window.localStorage.getItem('mainFlagModule3'))
     this.mysubModule4 = parseInt(window.localStorage.getItem('mainFlagModule4'))
+    this.mysubModule5 = parseInt(window.localStorage.getItem('mainFlagModule5'))
     this.mysubModule0 = parseInt(window.localStorage.getItem('mainFlagModule0'))
     this.mysubModule6 = parseInt(window.localStorage.getItem('mainFlagModule6'))
     this.mysubModule7 = parseInt(window.localStorage.getItem('mainFlagModule7'))
@@ -183,7 +184,23 @@ export class McqcomponentComponent implements OnInit {
       }
 
       console.log("mcqbunch options",this.bunchList,this.totalBunchCounter,this.tasks.length,this.bunchSelectedAns,dummyObj,this.userOptions)
-    }else {
+    } else if (window.localStorage.getItem('mainFlagModule5') == '7') {
+      console.log("data",this.data)
+      this.priorities= []
+      // this.priorities = this.data.questionlist[0].question;
+      this.bunchList = this.data.questionlist.splice(0,1)
+      this.statement = this.bunchList[0].question;
+      this.tasks = this.bunchList[0].options;
+      for (var i = 0; i < this.tasks.length; i++)
+      {
+        if (this.bunchList[0].options[i].value != "")
+        {
+          this.priorities.push(this.bunchList[0].options[i].value)
+          console.log("priorities",this.priorities)
+        }
+      }
+     console.log("options",this.bunchList)
+  } else {
 
       this.tasks = this.data.options;
       console.log("rewewewses",this.data,this.tasks)
@@ -270,6 +287,25 @@ export class McqcomponentComponent implements OnInit {
               }
 
              }
+        } else if(window.localStorage.getItem('mainFlagModule5') == '7'){
+          for(let j=0; j< this.bunchList[0].options.length;j++){
+            if($event.value == this.bunchList[0].options[j].value){
+              var optionId = this.bunchList[0].options[j].option
+            }
+            if(this.bunchList[0].rightanswer == this.bunchList[0].options[j].option){
+             this.showCorrectAns = this.bunchList[0].options[j].value
+             if($event.value == this.showCorrectAns){
+               this.rightFlag = true;
+             }
+             else{
+               this.rightFlag = false;
+             }
+            }
+          }
+        
+             this.userOptions[this.bunchList[0].questionid]=optionId
+          console.log("val",$event.value,optionId,this.userOptions)
+            
         } else{
           for (var item1 of this.tasks) {
             console.log("dd ", item1);
@@ -318,7 +354,13 @@ export class McqcomponentComponent implements OnInit {
       this.instructionModal.show()
      this.data.description = this.data.description
      console.log("data.sescr",this.data.description)
-    }else{
+    }else if(window.localStorage.getItem('mainFlagModule5') == '7'){
+      this.rankModal.show()
+         
+     
+      // this.userOptions[this.bunchList[0].questionid] = 
+    }
+    else{
       this.sendAns.emit(this.onlyPopUpAns)
     }
     // setTimeout(() => {
@@ -470,7 +512,28 @@ export class McqcomponentComponent implements OnInit {
           this.eventRadioGroup.instance.option("value", '');
         }
       }
-    }
+    } else if(window.localStorage.getItem('mainFlagModule5') == '7'){
+      this.rankModal.hide()
+      if(Object.keys(this.userOptions).length == 3){
+        this.sendAns.emit(this.userOptions)
+       }
+       else{
+        this.priorities= []
+        // this.priorities = this.data.questionlist[0].question;
+        this.bunchList = this.data.questionlist.splice(0,1)
+        this.statement = this.bunchList[0].question;
+        this.tasks = this.bunchList[0].options;
+        for (var i = 0; i < this.tasks.length; i++)
+        {
+          if (this.bunchList[0].options[i].value != "")
+          {
+            this.priorities.push(this.bunchList[0].options[i].value)
+            console.log("priorities",this.priorities)
+          }
+        }
+       console.log("options",this.bunchList,this.userOptions)
+       }
+    } 
     else {
       console.log("this.tasks",this.tasks,this.selectedAnswer)
       for (var item of this.tasks) {

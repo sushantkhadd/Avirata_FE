@@ -149,3 +149,14 @@
     </div>
   </div>
 </div>
+
+<div class="audioModal">
+  <div bsModal #audioModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1"
+    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-primary mw-50" role="document">
+      <div class="modal-content">
+          <app-audio-player-component [src]="audioSrc" (finishAudio)="finishAudio($event)"></app-audio-player-component>
+      </div>
+    </div>
+  </div>
+</div>
