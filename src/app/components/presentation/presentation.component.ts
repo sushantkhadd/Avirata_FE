@@ -845,7 +845,7 @@ export class PresentationComponent implements OnInit {
       this.count++;
                 console.log(' this.count++', this.count);
                 if(this.data.unlockView != "static"){
-                if (this.count == 12 && this.mainFlagModule5 == 2)
+                if (this.count == 13 && this.mainFlagModule5 == 2)
                 {
                   this.audioModal.show();
                   this.audioSrc = {};
@@ -853,7 +853,7 @@ export class PresentationComponent implements OnInit {
                   this.audioSrc["state"] = "dynamic";
                   console.log(' mainFlagModule5.count++', this.count, this.audioSrc['url']);
                 }
-                else if (this.count == 9 && this.mainFlagModule5 == 3)
+                else if (this.count == 10 && this.mainFlagModule5 == 3)
                 {
                   this.audioModal.show();
                   this.audioSrc = {};
@@ -861,14 +861,14 @@ export class PresentationComponent implements OnInit {
                   this.audioSrc['url2'] = this.nextParentUrl["3"];
                   this.audioSrc["state"] = "dynamic";
                   console.log(' mainFlagModule5.count++', this.count, this.audioSrc['url']);
-                }else if (this.count == 3 && this.mainFlagModule5 == 4)
+                }else if (this.count == 4 && this.mainFlagModule5 == 4)
                 {
                   this.audioModal.show();
                   this.audioSrc = {};
                   this.audioSrc['url'] = this.nextParentUrl["2"];
                   this.audioSrc["state"] = "dynamic";
                   console.log(' mainFlagModule5.count++', this.count, this.audioSrc['url']);
-                } else if (this.count == 6 && this.mainFlagModule5 == 5)
+                } else if (this.count == 7 && this.mainFlagModule5 == 5)
                 {
                   this.audioModal.show();
                   this.audioSrc = {};

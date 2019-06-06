@@ -18,7 +18,7 @@ export class Module110Component implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
   public mainJson = {}; passData6 = {}; showInst; queCount;
-  startFlag;
+  startFlag;audioSrc ={};startAudio;
   public inst =
     "दिलेल्या प्रसंगातील A - B - C - D हे ओळखा. प्रत्येक प्रसंगाचा ऑडिओ दिला आहे.";
   ngOnInit() {
@@ -53,6 +53,10 @@ export class Module110Component implements OnInit {
             this.passData6 = data["data"];
             this.passData6['type'] = 'single'
             this.showInst = false;
+            console.log("audioourl",data["data"].url)
+            this.audioSrc['url'] = data["data"].url;
+            this.audioSrc["state"] = "dynamic";
+            this.startAudio = true;
             // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 4.12', window.localStorage.getItem('username'), 10);
           } else if (fun == "finish1")
           {
@@ -86,4 +90,9 @@ export class Module110Component implements OnInit {
         });
   }
 
+  finishAudio(e){
+    if(e){
+      this.startAudio=false;
+    }
+  }
 }

@@ -13,14 +13,11 @@ export class AudioPlayerComponent implements OnInit {
   @Output("finishAudio") public finishAudio = new EventEmitter<any>();
   nextFlag;
   playFlag;
-  player;
-  mainFlagModule5; secondUrlFlag;
+  player; secondUrlFlag;
   ngOnInit() {
     // this.pause();
     // this.ended();
-    this.mainFlagModule5 = parseInt(
-      window.localStorage.getItem("mainFlagModule5")
-    );
+   
     this.player = document.getElementById("audio") as HTMLAudioElement;
     this.nextFlag = true;
     this.player.onended = event => {
@@ -41,11 +38,11 @@ export class AudioPlayerComponent implements OnInit {
     {
       if (this.src.state == "dynamic")
       {
-        if (this.mainFlagModule5 == 2 || this.mainFlagModule5 == 4 || this.mainFlagModule5 == 5)
+        if (window.localStorage.getItem('mainFlagModule5') == '2' || window.localStorage.getItem('mainFlagModule5') == '4' || window.localStorage.getItem('mainFlagModule5') == '5' ||  window.localStorage.getItem('mainFlagModule1') == '10')
         {
-          this.audioSrc = this.sanitizer.bypassSecurityTrustResourceUrl(
-            this.src.url
-          );
+            this.audioSrc = this.sanitizer.bypassSecurityTrustResourceUrl(
+              this.src.url
+            );
           this.secondUrlFlag = false;
         } else
         {

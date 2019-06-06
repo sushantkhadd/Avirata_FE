@@ -2402,3 +2402,17 @@ body {
 .dx-radiobutton-icon:before {
   border: 1px solid #828181!important;
 }
+
+.card.dynamic-view span.disable._play {
+  top: 13%;
+  left: 16%;
+  width: 25px;
+  height: 25px;
+}
+
+.card.dynamic-view span.disable._volume {
+  top: 13%;
+  right: 15%;
+  width: 25px;
+  height: 25px;
+}

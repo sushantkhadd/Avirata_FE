@@ -31,8 +31,16 @@
   </div>
 </div>
 <div *ngIf="startFlag" class="borderBlue">
+  <div>
+    <div class="card dynamic-view" *ngIf="startAudio">
+        <div class="card-block cc p-4">
+    <app-audio-player-component  [src]="audioSrc" (finishAudio)="finishAudio($event)"></app-audio-player-component>
+    </div></div>
+</div>
+    <div *ngIf="!startAudio">
     <h6 class="questionHead lineHeight">{{'L2common.caution' | translate}} <span [innerHTML]="inst"> </span></h6>
     <app-drag-drop-component [data]='passData6' (sendAns)="getAnswer6($event)"></app-drag-drop-component>
+    </div>
   </div>
 </div>
 
