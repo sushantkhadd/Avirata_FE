@@ -944,6 +944,16 @@ body {
 
 }
 
+.pdfViewer,
+.loader-gif {
+  height: 490px !important;
+  width: 100% !important;
+
+  img {
+    padding-top: 150px;
+  }
+}
+
 
 .pdfViewer .canvasWrapper canvas {
   height: auto !important;
@@ -2109,7 +2119,7 @@ h6.questionHead.lineHeight {
       }
     }
   }
-  
+
 }
 
 @include keyframes(spin) {
@@ -2402,3 +2412,5 @@ body {
 .dx-radiobutton-icon:before {
   border: 1px solid #828181!important;
 }
+
+

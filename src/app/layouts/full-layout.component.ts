@@ -2416,8 +2416,10 @@ export class FullLayoutComponent implements OnInit {
       this.moduleCompleteStatus = sumbmodulestatus;
       if (this.moduleCompleteStatus["type"] == "submodule") {
         this.submoduleStatusModal.show();
+        document.getElementsByTagName("body")[0].classList.add("modal-open");
       } else {
         this.moduleStatusModal.show();
+        document.getElementsByTagName("body")[0].classList.add("modal-open");
       }
     });
 
@@ -2642,22 +2644,26 @@ export class FullLayoutComponent implements OnInit {
   }
   instruction() {
     this.instructionModal.show();
+    document.getElementsByTagName("body")[0].classList.add("modal-open");
   }
   closeInstruction() {
     this.instructionModal.hide();
-    var paras = document.getElementsByClassName("modal-backdrop")[0];
-    if (paras.classList.contains("show")) {
-      paras.classList.remove("show");
-    }
+    document.getElementsByTagName("body")[0].classList.remove("modal-open");
+    var paras = jQuery("bs-modal-backdrop");
+    paras.hide();
+    // var paras = document.getElementsByClassName("modal-backdrop")[0];
+    // if (paras.classList.contains("show")) {
+    //   paras.classList.remove("show");
+    // }
     // var paras = document.getElementsByClassName("modal-backdrop");
     // while (paras[0]) {
     //   paras[0].parentNode.removeChild(paras[0]);
+    // // }
+    // var paras = document.getElementsByClassName("modal-backdrop")[0];
+    // if (paras.classList.contains("fade")) {
+    //   console.log("true");
+    //   paras.classList.remove("show");
     // }
-    var paras = document.getElementsByClassName("modal-backdrop")[0];
-    if (paras.classList.contains("fade")) {
-      console.log("true");
-      paras.classList.remove("show");
-    }
   }
 
   instruction0() {
