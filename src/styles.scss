@@ -901,9 +901,9 @@ body {
   padding-bottom: 10px;
 }
 
-.dx-radiobutton-icon:before {
-  border: 1px solid #6196cf;
-}
+// .dx-radiobutton-icon:before {
+//   border: 1px solid #6196cf;
+// }
 
 .dx-field-value:not(.dx-switch):not(.dx-checkbox):not(.dx-button),
 .dx-field-value-static {
@@ -1615,8 +1615,8 @@ body {
 
 // Instruction-wrap
 .instruction-wrap {
-  padding-top: 4rem;
-  padding-bottom: 3rem;
+  padding-top: 2rem;
+  padding-bottom: 0;
 
   .borderBlue {
     @include box-shadow(none);
@@ -1632,11 +1632,11 @@ body {
 
     p {
       // font-size: 0.85rem;
-      line-height: 16px;
+      line-height: 14px;
     }
 
     .card-header {
-      padding: 30px 0 0;
+      padding: 10px 0 0;
       background: #6196cf;
       position: relative;
       font-size: 0.85rem;
@@ -1650,7 +1650,7 @@ body {
         z-index: 99;
         width: 115px;
         height: 115px;
-        bottom: 18px;
+        bottom: 0;
         margin: 0 auto;
         left: 0;
         right: 0;
@@ -1671,6 +1671,10 @@ body {
         margin-bottom: 0;
         // background: #eceff1;
       }
+    }
+
+    .card-block{
+      padding: 1.25rem 1.25rem 0 1.25rem;
     }
 
     .card-footer {
@@ -1728,12 +1732,18 @@ body {
 
 // footer CSS
 .footerSection {
-  position: absolute;
-  bottom: 0;
+  // position: absolute;
+  // bottom: 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 99;
 
-  .marquee-border {
-    border-top: 1px solid #cfd8dc;
-  }
+  // .marquee-border {
+  //   border-top: 1px solid #cfd8dc;
+  // }
 
   span a {
     color: #20a8d8 !important;
@@ -1945,7 +1955,7 @@ body {
 
   .card-footer {
     position: relative;
-    z-index: 999;
+    z-index: 99;
   }
 
   .img-wrap a {
@@ -2292,7 +2302,8 @@ table,
   .card-footer {
     h6 {
       font-size: 1.2rem;
-      padding: 0.5rem 0;
+      padding: 0.2rem 0 0 0;
+      margin-bottom: 0;
     }
   }
 }
@@ -2360,6 +2371,9 @@ body {
     }
 
     .card-block {
+      &.cc{
+        margin-top: 0;
+      }
       margin-top: 15px;
     }
 
@@ -2400,5 +2414,17 @@ body {
 
 // radio button circle color
 .dx-radiobutton-icon:before {
-  border: 1px solid #828181!important;
+  border: 1px solid #555454!important;
+}
+
+// video player padding
+.embed-responsive-16by9::before{
+  padding-top: 55%;
+}
+
+// model backdrop show opacity increased
+.modal-backdrop{
+  &.show{
+    opacity: .9!important;
+  }
 }
