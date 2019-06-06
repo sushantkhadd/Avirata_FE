@@ -10,6 +10,7 @@ import { CommonService } from 'src/app/services/common.service';
 import { LanguageService } from 'src/app/language.service';
 import { DxRadioGroupComponent } from 'devextreme-angular'
 
+declare var jQuery: any;
 let player;
 @Component({
   selector: 'app-video-player',
@@ -30,11 +31,12 @@ export class VideoPlayerComponent implements OnInit {
   @ViewChild("eventRadioGroup") eventRadioGroup: DxRadioGroupComponent;
   @ViewChild('cfuModal') public cfuModal: ModalDirective;
   @ViewChild('toasterPopupModal') public toasterPopupModal: ModalDirective;
+  @ViewChild('askMeModal') public askMeModal: ModalDirective;
 
   public result = {}; module1_10Url;vUrl;imgUrl
   public ansOptionForModule2_9; ansValueForModule2_9; viewCorrectAnswer = false;
 
-  fiftyFiftyFlag; askMeFlag; levelData;hideMe;
+  fiftyFiftyFlag; askMeFlag; levelData; hideMe; strikeFlag; selectedValue;
 
   imageJson = {
     f1: "../../../assets/img/rewards/50-50.png",
@@ -49,6 +51,7 @@ export class VideoPlayerComponent implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
   ngOnInit() {
+    this.selectedValue = "";
     this.viewCorrectAnswer = false;
     this.submitDisabled = false;
     player = YouTubePlayer('ytplayer', {
@@ -85,11 +88,42 @@ export class VideoPlayerComponent implements OnInit {
               }
               if (this.optionsArray[i].option == this.rightanswer)
               {
+                // var randomOption2 = this.optionsArray[i].value;
                 this.options.push(this.optionsArray[i].value)
               }
+              // let rewardObj = {};
+              // rewardObj['1'] = randomOption;
+              // rewardObj["2"] = randomOption2;
+
+              // if (rewardObj["1"] != this.optionsArray[i].value) {
+              //   this.strikeFlag = true;
+              //   console.log("rewardObj[1]",rewardObj,this.strikeFlag);
+              // } else
+              // {
+              //   jQuery(".instructionModal .card-block.mcqBlock .dx-item-content")
+              //     .addClass("strikeThrough")
+              //   this.strikeFlag = false;
+              //   break;
+              //   console.log("rewardObj[1], else", rewardObj, this.strikeFlag);
+              // }
+
+              // if (rewardObj["2"] != this.optionsArray[i].value)
+              // {
+              //   this.strikeFlag = true;
+              //   console.log("rewardObj[2]", rewardObj, this.strikeFlag);
+              // } else
+              // {
+              //   jQuery(".instructionModal .card-block.mcqBlock .dx-item-content")
+              //   .addClass("strikeThrough")
+              //   this.strikeFlag = false;
+              //   break;
+              //   console.log("rewardObj[2] else", rewardObj, this.strikeFlag);
+              // }
+
+              // console.log(rewardObj)
             }
             this.options.push(randomOption);
-            console.log(this.optionsArray, this.options, this.rightanswer,randomOption)
+            console.log(this.optionsArray, this.options, this.rightanswer, randomOption, this.strikeFlag)
           for (let index = 0; index < this.levelData.length; index++)
           {
               let current1 = [];
@@ -102,6 +136,7 @@ export class VideoPlayerComponent implements OnInit {
           }
           } else if (event == "askme")
           {
+            this.askMeModal.hide();
             if (!this.fiftyFiftyFlag)
             {
               this.hideMe = true;
@@ -114,7 +149,8 @@ export class VideoPlayerComponent implements OnInit {
             for (let i = 0; i < this.optionsArray.length; i++) {
               if (this.optionsArray[i].option == this.rightanswer)
               {
-                this.options.push(this.optionsArray[i].value)
+                this.options.push(this.optionsArray[i].value);
+                this.selectedValue = this.optionsArray[i].value;
               }
             }
             console.log(this.optionsArray, this.options,this.rightanswer)
@@ -301,7 +337,7 @@ export class VideoPlayerComponent implements OnInit {
             setTimeout(() => {
               console.log("timeout")
               this.play();
-            }, 200);   
+            }, 200);
           }, 2000)
 
         } else if (data['message'] == 'submodule finish next uuid is' || data['message'] == 'submodule finish') {
@@ -348,7 +384,7 @@ export class VideoPlayerComponent implements OnInit {
             // window.localStorage.getItem("mainFlagModule5") == "6" ||
             window.localStorage.getItem("mainFlagModule5") == "7" ||
             window.localStorage.getItem("mainFlagModule5") == "9" ||
-            window.localStorage.getItem("mainFlagModule5") == "11" 
+            window.localStorage.getItem("mainFlagModule5") == "11"
           ) {
             console.log("aa3");
             console.log("mod5 ", data['data']);

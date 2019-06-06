@@ -31,6 +31,7 @@ export class PresentationComponent implements OnInit {
   @ViewChild("eventRadioGroup") eventRadioGroup: DxRadioGroupComponent;
   @ViewChild('toasterPopupModal') public toasterPopupModal: ModalDirective;
   @ViewChild('audioModal') public audioModal: ModalDirective;
+  @ViewChild('askMeModal') public askMeModal: ModalDirective;
 
   public mainFlagModule3 = parseInt(window.localStorage.getItem('mainFlagModule3'));
   @Output() public showDoc = new EventEmitter<string>();
@@ -53,7 +54,7 @@ export class PresentationComponent implements OnInit {
     a2: "../../../assets/img/rewards/ask mitra - done.png"
   };
   rewardImgUrl1;
-  rewardImgUrl2;
+  rewardImgUrl2; selectedValue;
   rewardsOptions = []; hideMe;
 
   constructor(public _eleRef: ElementRef, public CommonService: CommonService, public CommonComponentService: CommonComponentService, public router: Router, public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService, private sanitizer: DomSanitizer, public domSanitizer: DomSanitizerPipe, public LanguageService: LanguageService) {
@@ -99,6 +100,7 @@ export class PresentationComponent implements OnInit {
             }
           } else if (event == "askme")
           {
+            this.askMeModal.hide();
             if (!this.fiftyFiftyFlag)
             {
               this.hideMe = true;
@@ -112,7 +114,8 @@ export class PresentationComponent implements OnInit {
             {
               if (this.optionsStateDyanamic[i].option == this.rightanswer)
               {
-                this.options.push(this.optionsStateDyanamic[i].value)
+                this.options.push(this.optionsStateDyanamic[i].value);
+                this.selectedValue = this.optionsStateDyanamic[i].value;
               }
             }
             console.log(this.optionsStateDyanamic, this.options, this.rightanswer)
@@ -134,6 +137,19 @@ export class PresentationComponent implements OnInit {
           this.LanguageService.handleError(error.error.message);
       }
     );
+  }
+
+  showCfuModal() {
+    this.cfuModal.show();
+    if (this.options.length == 1)
+    {
+      for (let i = 0; i < this.options.length; i++) {
+        if (this.options[i].option == this.rightanswer) {
+          this.selectedValue = this.options[i].value;
+        }
+      }
+    }
+    console.log(this.options.length,this.options)
   }
 
 
@@ -213,6 +229,7 @@ export class PresentationComponent implements OnInit {
 
   ngOnInit() {
     this.isLoaded = true;
+    this.selectedValue = "";
     setTimeout(() => {
       this.isLoaded = false;
     }, 4000);
@@ -745,7 +762,14 @@ export class PresentationComponent implements OnInit {
                   }
               }
               this.eventRadioGroup.instance.option("value", '');
-              this.submitDisabled = false;
+                this.submitDisabled = false;
+                if (this.options.length == 1)
+                {
+                  this.hideMe = true;
+                } else
+                {
+                  this.hideMe = false;
+                }
             },
             error => {
               this.CommonService.handleError(error.json().message);

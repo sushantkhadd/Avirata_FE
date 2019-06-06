@@ -47,7 +47,7 @@ export class McqcomponentComponent implements OnInit {
     } else if (window.localStorage.getItem('mainFlagModule3') == '9' || window.localStorage.getItem('mainFlagModule3') == '11' || window.localStorage.getItem('mainFlagModule3') == '5')
     {
       this.queCount = parseInt(window.localStorage.getItem('subFlagModule3'))
-    } 
+    }
 
     if(window.localStorage.getItem('mainFlagModule2')== '9'){
       this.totalQueCount = 7;
@@ -137,14 +137,14 @@ export class McqcomponentComponent implements OnInit {
                           {"option":"b","value":"आजाराशी निगडित"},
                           {"option":"c","value":"निगडित नाहीत"}];
         for(var i=0; i<this.bunchOptions.length;i++){
-          this.priorities.push(this.bunchOptions[i].value) 
-        
+          this.priorities.push(this.bunchOptions[i].value)
+
         }
       console.log("mcqbunch options",this.priorities)
       for(var i=0; i<this.tasks.length;i++){
         this.statement = this.tasks[i].statement;
       }
-     
+
       this.bunchCounter = 5;
       this.totalBunchCounter = 25 - this.tasks.length;
       this.bunchList = this.tasks.splice(0,this.bunchCounter)
@@ -152,7 +152,7 @@ export class McqcomponentComponent implements OnInit {
          console.log("ansss",this.bunchList[0].answer,this.bunchOptions[0].option)
          var dummyObj={}
          for(let i=0;i<this.bunchOptions.length;i++){
-          
+
             if(this.bunchList[0].answer == this.bunchOptions[i].option){
               dummyObj['1']=this.bunchOptions[i].value;
             }
@@ -322,10 +322,10 @@ export class McqcomponentComponent implements OnInit {
              }
             }
           }
-        
+
              this.userOptions[this.bunchList[0].questionid]=optionId
           console.log("val",$event.value,optionId,this.userOptions)
-            
+
         } else{
           for (var item1 of this.tasks) {
             console.log("dd ", item1);
@@ -376,9 +376,9 @@ export class McqcomponentComponent implements OnInit {
      console.log("data.sescr",this.data.description)
     }else if(window.localStorage.getItem('mainFlagModule5') == '7'){
       this.rankModal.show()
-         
-     
-      // this.userOptions[this.bunchList[0].questionid] = 
+
+
+      // this.userOptions[this.bunchList[0].questionid] =
     }
     else if(this.questionType == 'checkBoxOption'){
       if(window.localStorage.getItem('mainFlagModule5') == '11'){
@@ -443,16 +443,16 @@ export class McqcomponentComponent implements OnInit {
         var optionId = this.bunchOptions[j].option
       }
     }
-  
+
       this.userOptions[id]=optionId
-      
+
       console.log("useroption",this.userOptions,Object.keys(this.userOptions).length)
       if(Object.keys(this.userOptions).length == 5){
         this.mcqBunchFlag = true;
        }
   }
   submitYesNo() {
-    
+
     if(this.questionType == "mcqInBunch"){
       console.log("mcqbunch",this.bunchCounter)
       this.bunchList = this.tasks.splice(0,this.bunchCounter)
@@ -495,9 +495,10 @@ export class McqcomponentComponent implements OnInit {
       if(Object.keys(this.userOptions).length == 5){
         this.mcqBunchFlag = true;
        }
-
+       window.scroll(0,0)
      }
-     console.log("anssss",this.bunchSelectedAns)
+      console.log("anssss", this.bunchSelectedAns)
+      window.scroll(0, 0)
     }
     else{
       this.sendAns.emit(this.sendYesNoType)
@@ -566,7 +567,7 @@ export class McqcomponentComponent implements OnInit {
         }
        console.log("options",this.bunchList,this.userOptions)
        }
-    } 
+    }
     else {
       console.log("this.tasks",this.tasks,this.selectedAnswer)
       for (var item of this.tasks) {
@@ -653,7 +654,7 @@ export class McqcomponentComponent implements OnInit {
     } else if (window.localStorage.getItem('mainFlagModule3') == '9' || window.localStorage.getItem('mainFlagModule3') == '11' || window.localStorage.getItem('mainFlagModule3') == '5')
     {
       this.queCount = parseInt(window.localStorage.getItem('subFlagModule3'))
-    } 
+    }
 
     if (this.questionType == 'checkBoxOption') {
       // console.log("ddd ", this.selectedTasks[0], this.selectedTasks[1], this.ans1, this.ans2)

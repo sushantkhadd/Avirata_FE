@@ -6,16 +6,24 @@ import { Router, NavigationStart, NavigationEnd } from "@angular/router";
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"]
+  styleUrls: ["./app.component.scss"],
+  host: {
+    "(document:keydown)": "disableInspect($event)"
+  }
 })
 export class AppComponent implements OnInit {
-  title = "CPD-L3"; loader;
-  constructor(public toastr: ToastsManager, vcr: ViewContainerRef,
+  title = "CPD-L3";
+  loader;
+  constructor(
+    public toastr: ToastsManager,
+    vcr: ViewContainerRef,
     private lBar: SlimLoadingBarService,
-    private _router: Router ) {
+    private _router: Router
+  ) {
     this.toastr.setRootViewContainerRef(vcr);
     this._router.events.subscribe((event: any) => {
       this.loadingBarInterceptor(event);
+      window.scroll(0, 0);
     });
   }
 
@@ -26,13 +34,23 @@ export class AppComponent implements OnInit {
     }, 2000);
   }
 
+  disableInspect(e) {
+    if (e.keyCode === 17) {
+      e.preventDefault();
+    }
+    if (e.keyCode === 16) {
+      e.preventDefault();
+    }
+    if (e.keyCode === 123) {
+      e.preventDefault();
+    }
+  }
+
   private loadingBarInterceptor(event: Event) {
-    if (event instanceof NavigationStart)
-    {
+    if (event instanceof NavigationStart) {
       this.lBar.start();
     }
-    if (event instanceof NavigationEnd)
-    {
+    if (event instanceof NavigationEnd) {
       this.lBar.complete();
     }
   }

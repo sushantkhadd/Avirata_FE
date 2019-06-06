@@ -1,10 +1,13 @@
-<div class="row imageArea mt-2 mb-4">
+<div class="row imageArea mt-2 mb-4" [class.bg-white]="isLoaded">
   <div class="mx-auto" style="position:relative;">
     <pdf-viewer *ngIf="!isLoaded" [autoresize]="true" [original-size]="false" [fit-to-page]="true"
-      style="display: block" [render-text]="true" class="embed-responsive-item" [src]="pdfURL" [show-all]="false"
+      style="display: block" [render-text]="true" class="embed-responsive-item pdfViewer" [src]="pdfURL"
+      [show-all]="false"
       [page]="count" (after-load-complete)="afterLoadComplete($event)">
     </pdf-viewer>
-    <img class="loader-gif" *ngIf="isLoaded" src="../../../assets/img/loader.gif" alt="">
+    <div class="loader-gif" *ngIf="isLoaded">
+    <img src="../../../assets/img/loader-fb.svg" class="img-fluid" alt="">
+    </div>
   </div>
   <div class="slide-control form-inline">
     <div class="mx-auto" *ngIf="!isLoaded">
@@ -23,7 +26,7 @@
             <em class="fa fa-arrow-left" aria-hidden="true"></em>
           </button>
         </span>
-        <button (click)="cfuModal.show()" class="btn btn-primary">{{'Stepper.Next' | translate}}</button>
+        <button (click)="showCfuModal()" class="btn btn-primary">{{'Stepper.Next' | translate}}</button>
       </div>
       <div class="mx-auto" *ngIf="showFinish">
         <button class="control ripple" (click)="prevPage()" [disabled]="count === 1">
@@ -79,7 +82,7 @@
             </div>
             <div class="col-md-2 col-sm-6 col-5">
               <img class="img-fluid" [ngClass]="!askMeFlag ? 'c-pointer' : 'c-not-allowed'"
-                (click)="!askMeFlag ? getRewards('askme') : undefined" [src]="rewardImgUrl2" alt="">
+                (click)="!askMeFlag ? askMeModal.show() : undefined" [src]="rewardImgUrl2" alt="">
             </div>
           </span>
           <button type="button" class="close" (click)="cfuModal.hide();reset();" aria-label="Close" id="btnCloseModal">
@@ -93,7 +96,7 @@
               <div class="dx-fieldset">
                 <div class="dx-field">
                   <div class="dx-field-value">
-                    <dx-radio-group #eventRadioGroup id="mcq" [items]="options"
+                    <dx-radio-group [value]="selectedValue" #eventRadioGroup id="mcq" [items]="options"
                       (onValueChanged)="onValueChanged($event)">
                     </dx-radio-group>
                   </div>
@@ -156,6 +159,24 @@
     <div class="modal-dialog modal-primary mw-50" role="document">
       <div class="modal-content">
           <app-audio-player-component [src]="audioSrc" (finishAudio)="finishAudio($event)"></app-audio-player-component>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="askMeModal">
+  <div bsModal #askMeModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-primary modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-body text-center">
+       <h5>{{'Cfu.giveAns' | translate}}</h5>
+       <p>{{'Cfu.useCaution' | translate}}</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+         <button (click)="askMeModal.hide()" class="btn btn-danger">{{'Cfu.no' | translate}}</button>
+         <button (click)="getRewards('askme')" class="btn btn-success">{{'Cfu.yes' | translate}}</button>
+      </div>
       </div>
     </div>
   </div>

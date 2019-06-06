@@ -64,7 +64,7 @@
               <div class="dx-fieldset">
                 <div class="dx-field">
                   <div class="dx-field-value">
-                    <dx-radio-group #eventRadioGroup id="mcq" [items]="options"
+                    <dx-radio-group #eventRadioGroup id="mcq" [value]="selectedValue" [items]="options"
                       (onValueChanged)="onValueChanged($event)">
                     </dx-radio-group>
                   </div>
@@ -110,6 +110,24 @@
           </div>
           <button class="btn btn-primary text-center"
             (click)="closeToasterPopup()">{{'McqTest.close' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="askMeModal">
+  <div bsModal #askMeModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-primary modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-body text-center">
+          <h5>{{'Cfu.giveAns' | translate}}</h5>
+          <p>{{'Cfu.useCaution' | translate}}</p>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button (click)="askMeModal.hide()" class="btn btn-danger">{{'Cfu.no' | translate}}</button>
+          <button (click)="getRewards('askme')" class="btn btn-success">{{'Cfu.yes' | translate}}</button>
         </div>
       </div>
     </div>

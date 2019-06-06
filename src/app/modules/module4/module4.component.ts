@@ -138,17 +138,17 @@ export class Module4Component implements OnInit {
     console.log("aaaaaaa");
     if (e) {
       console.log(e);
-      this.nextFlag = true; 
+      this.nextFlag = true;
       this.subFlagModule4 = 2;
       this.instructionModal.show();
       // var url ={}
       // url['4.1.1'] = this.vedioCompleteUrl;
       // console.log("urllll",url)
       var current4 = [];
-      current4 = JSON.parse(window.localStorage.getItem("currentJson4")); 
+      current4 = JSON.parse(window.localStorage.getItem("currentJson4"));
       var index = current4["children"].findIndex(
         item => item.source == "module 4.1" );
-      current4["children"][index].url = this.vedioCompleteUrl; 
+      current4["children"][index].url = this.vedioCompleteUrl;
       window.localStorage.setItem("currentJson4", JSON.stringify(current4));
     } else {
       window.localStorage.setItem("mainFlagModule4", "1");
@@ -191,8 +191,8 @@ export class Module4Component implements OnInit {
             window.localStorage.setItem("subFlagModule4", "2");
             this.questionFlag = true;
             this.startEvent2();
-            this.nextFlag = false; 
-          } 
+            this.nextFlag = false;
+          }
         }
       },
       error => {
@@ -225,7 +225,7 @@ export class Module4Component implements OnInit {
             this.description = data['data'].description;
           } else if (data['message'] == "submodule finish")
           {
-           // this.nextFlag= true;
+           this.nextFlag= true;
            // this.startFlag = false;
             window.localStorage.setItem('uuid', data['data'].nextuuid);
             // this.subFlagModule4 =1;
