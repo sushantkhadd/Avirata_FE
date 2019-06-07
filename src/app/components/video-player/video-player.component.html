@@ -45,7 +45,7 @@
             </div>
             <div class="col-md-2 col-sm-6 col-5">
               <img class="img-fluid" [ngClass]="!askMeFlag ? 'c-pointer' : 'c-not-allowed'"
-                (click)="!askMeFlag ? getRewards('askme') : undefined" [src]="rewardImgUrl2" alt="">
+                (click)="!askMeFlag ? askMeModal.show() : undefined" [src]="rewardImgUrl2" alt="">
             </div>
           </span>
           <button type="button" class="close m-0 p-0" (click)="cfuModal.hide();play();resetRadio();" aria-label="Close"

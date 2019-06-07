@@ -80,14 +80,14 @@ export class Module214Component implements OnInit {
             else if (fun == "finish")
             {
               this.mainFlagModule2 = 15;
-              window.localStorage.setItem("subFlagModule1", "1");
+              window.localStorage.setItem("subFlagModule2", "1");
               window.localStorage.setItem(
                 "uuid",
                 data["data"].nextuuid
               );
               window.localStorage.setItem("mainFlagModule2", "15");
-              window.localStorage.setItem("subFlagModule1", "1");
-              window.localStorage.setItem("source", "module 1.15.1");
+              window.localStorage.setItem("subFlagModule2", "1");
+              window.localStorage.setItem("source", "module 2.15.1");
               this.Module2Service.setLocalStorage2(15);
               var obj = {
                 type: "submodule",

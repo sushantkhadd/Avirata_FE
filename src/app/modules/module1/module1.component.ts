@@ -23,7 +23,7 @@ export class Module1Component implements OnInit {
   constructor(public FullLayoutService: FullLayoutService, public LanguageService: LanguageService, public Module1Service: Module1Service, public router: Router, public LocalstoragedetailsService: LocalstoragedetailsService, public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService) {
     this.toastr.setRootViewContainerRef(vcr);
   }
-  public showVideoFlag; nextBtnFlag; passData = {}; passUrl; videoData = {}; urlArray = {}; lnk1; lnk2; flag;
+  public showVideoFlag; nextBtnFlag; passData = {}; passUrl; videoData = {}; urlArray = {}; lnk1; lnk2; flag;parentUrlJson = {}
   public statVideoFlag; thumb_title;
   ngOnInit() {
     this.lnk1 = ''
@@ -100,15 +100,12 @@ export class Module1Component implements OnInit {
   finishCFU(e) {
     if (e)
     {
-      var url = {}
-      url['1.1.1'] = this.passUrl;
-      url['1.1.2'] = e['url'];
-      console.log("urllll", url)
+      this.parentUrlJson['1.1.2'] = e['url'];
       var current1 = [];
       current1 = JSON.parse(window.localStorage.getItem("currentJson1"));
       var index = current1["children"].findIndex(
         item => item.source == "module 1.1");
-      current1["children"][index].url = JSON.stringify(url);
+      current1["children"][index].url = JSON.stringify(this.parentUrlJson);
 
       window.localStorage.setItem("currentJson1", JSON.stringify(current1));
       window.localStorage.setItem('mainFlagModule1', '2');
@@ -131,6 +128,15 @@ export class Module1Component implements OnInit {
             this.passData['videoUrl'] = data['data'].url;
             this.showVideoFlag = true
             this.passUrl = data['data'].url;
+
+            this.parentUrlJson["1.1.1"] = this.passUrl;
+            var current1 = [];
+            current1 = JSON.parse(window.localStorage.getItem("currentJson1"));
+            var index = current1["children"].findIndex(
+              item => item.source == "module 1.1");
+            current1["children"][index].url = JSON.stringify(this.parentUrlJson);
+
+            window.localStorage.setItem("currentJson1", JSON.stringify(current1));
 
             // var dummylocal = JSON.parse(window.localStorage.getItem('currentJson1'))
             // var index1 = dummylocal.children.findIndex(item =>

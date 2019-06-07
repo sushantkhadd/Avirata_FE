@@ -329,15 +329,21 @@ export class McqcomponentComponent implements OnInit {
         } else{
           for (var item1 of this.tasks) {
             console.log("dd ", item1);
-            if (item1.value == $event.value) {
-              if (item1.option == this.correctAns) {
-                this.rightFlag = true;
-                // this.rankModal.show()
-                console.log("right ans")
-              } else {
-                this.rightFlag = false;
-                console.log("wrong ans")
-                // this.rankModal.show()
+            if (item1.value != "")
+            {
+              if (item1.value == $event.value)
+              {
+                if (item1.option == this.correctAns)
+                {
+                  this.rightFlag = true;
+                  // this.rankModal.show()
+                  console.log("right ans")
+                } else
+                {
+                  this.rightFlag = false;
+                  console.log("wrong ans")
+                  // this.rankModal.show()
+                }
               }
             }
           }
@@ -390,7 +396,7 @@ export class McqcomponentComponent implements OnInit {
       else{
         this.sendAns.emit(this.selectedTasks)
       }
-     
+
     }
     else{
       this.sendAns.emit(this.onlyPopUpAns)
@@ -666,9 +672,9 @@ export class McqcomponentComponent implements OnInit {
       else if(window.localStorage.getItem('mainFlagModule5')== '11' || window.localStorage.getItem('mainFlagModule5')== '13'){
         if (this.selectedTasks.length >= 1) {
           this.submitFlag = true
-        } 
+        }
       }
-      
+
     }
   }
 
