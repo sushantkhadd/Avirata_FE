@@ -125,20 +125,35 @@ export class LevelSelectionComponent implements OnInit {
             data["data"].modulestatus.level3[0]["status"] == true
           ) {
             window.localStorage.setItem("currentstatus", "0");
-          } if (data['data'].modulestatus.level3[1]["module"] == "1" &&
-            data["data"].modulestatus.level3[1]["status"] == true) {
+          } if (
+            data['data'].modulestatus.level3[1]["module"] == "1" &&
+            data["data"].modulestatus.level3[1]["status"] == true
+          )
+          {
             window.localStorage.setItem('currentstatus', '1');
-          } if (data['data'].modulestatus.level3[2]["module"] == "2" &&
-            data["data"].modulestatus.level3[2]["status"] == true) {
+          } if (
+            data['data'].modulestatus.level3[2]["module"] == "2" &&
+            data["data"].modulestatus.level3[2]["status"] == true
+          )
+          {
             window.localStorage.setItem('currentstatus', '2');
-          } if (data['data'].modulestatus.level3[3]["module"] == "3"  &&
-            data["data"].modulestatus.level3[3]["status"] == true) {
+          } if (
+            data['data'].modulestatus.level3[3]["module"] == "3" &&
+            data["data"].modulestatus.level3[3]["status"] == true
+          )
+          {
             window.localStorage.setItem('currentstatus', '3');
-          } if (data['data'].modulestatus.level3[4]["module"] == "4"  &&
-            data["data"].modulestatus.level3[4]["status"] == true) {
+          } if (
+            data['data'].modulestatus.level3[4]["module"] == "4" &&
+            data["data"].modulestatus.level3[4]["status"] == true
+          )
+          {
             window.localStorage.setItem('currentstatus', '4');
-          } if (data['data'].modulestatus.level3[5]["module"] == "5"  &&
-            data["data"].modulestatus.level3[5]["status"] == true) {
+          } if (
+            data['data'].modulestatus.level3[5]["module"] == "5" &&
+            data["data"].modulestatus.level3[5]["status"] == true
+          )
+          {
             window.localStorage.setItem('currentstatus', '5');
           }
 

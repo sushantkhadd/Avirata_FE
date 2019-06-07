@@ -65,7 +65,7 @@ export class PresentationComponent implements OnInit {
     var jsonBody = {};
     var apiUrl = "helpline/";
     jsonBody["submoduleid"] = window.localStorage.getItem('uuid');
-    jsonBody["module"] = window.localStorage.getItem("currentModule");
+    jsonBody["module"] = window.localStorage.getItem("currentstatus");
     jsonBody["event"] = event;
     this.CommonComponentService.submoduleFinish(jsonBody, apiUrl).subscribe(
       data => {

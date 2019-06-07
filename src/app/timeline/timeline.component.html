@@ -1,89 +1,178 @@
-<div class="timeline p-3">
-    <!-- <div class="stepper-step " [ngClass]="{'stepper-step-isActive': LocalstoragedetailsService.timelineState>=1}" *ngIf="LocalstoragedetailsService.userType != 'trainee'"> -->
-           <div class="stepper-step " [ngClass]="{'stepper-step-isActive': completedModule['module0'] == true}">
-        <div class="stepper-stepContent" (click)="showAlert()">
-            <span class="stepper-stepMarker ripple">
-            <span class="d-none d-md-block">{{'Dashboard.Baseline Exam' | translate}}</span>
-            <span class="d-block d-md-none" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">{{'Dashboard.1' | translate}}</span>
-            </span>
-                <!-- <span class="label">{{'Dashboard.Module 1' | translate}}</span> -->
-        </div>
+<div class="timeline p-3 custom-timeline">
+  <!-- <div class="stepper-step " [ngClass]="{'stepper-step-isActive': LocalstoragedetailsService.timelineState>=1}" *ngIf="LocalstoragedetailsService.userType != 'trainee'"> -->
+  <div class="stepper-step " [ngClass]="{'stepper-step-isActive': completedModule['module0'] == true}">
+    <div class="stepper-stepContent" (click)="showAlert()">
+      <span class="stepper-stepMarker ripple">
+        <span class="d-none d-md-block">{{'Dashboard.Baseline Exam' | translate}}</span>
+        <span class="d-block d-md-none" data-toggle="tooltip" data-placement="bottom"
+          title="Tooltip on bottom">{{'Dashboard.1' | translate}}</span>
+      </span>
+      <!-- <span class="label">{{'Dashboard.Module 1' | translate}}</span> -->
     </div>
-    <div class="stepper-step " [ngClass]="{'stepper-step-isActive': completedModule['module1'] == true}">
-        <div class="stepper-stepContent" (click)="showAlert()">
-            <span class="stepper-stepMarker ripple">
-                <span class="d-none d-md-block">{{'Dashboard.Module 1' | translate}}</span>
-                <span class="d-block d-md-none" *ngIf="LocalstoragedetailsService.userType != 'trainee'">{{'Dashboard.2' | translate}}</span>
-                <span class="d-block d-md-none" *ngIf="LocalstoragedetailsService.userType == 'trainee'">{{'Dashboard.1' | translate}}</span>
-            </span>
-            <!-- <span class="label">{{'Dashboard.Module 1' | translate}}</span> -->
-        </div>
+  </div>
+  <div class="stepper-step " [ngClass]="{'stepper-step-isActive': completedModule['module1'] == true}">
+    <div class="stepper-stepContent" (click)="showAlert()">
+      <span class="stepper-stepMarker ripple">
+        <span class="d-none d-md-block">{{'Dashboard.Module 1' | translate}}</span>
+        <span class="d-block d-md-none"
+          *ngIf="LocalstoragedetailsService.userType != 'trainee'">{{'Dashboard.2' | translate}}</span>
+        <span class="d-block d-md-none"
+          *ngIf="LocalstoragedetailsService.userType == 'trainee'">{{'Dashboard.1' | translate}}</span>
+      </span>
+      <!-- <span class="label">{{'Dashboard.Module 1' | translate}}</span> -->
     </div>
-    <div class="stepper-step" [ngClass]="{'stepper-step-isActive': completedModule['module2'] == true}">
-        <div class="stepper-stepContent" (click)="showAlert()">
-            <span class="stepper-stepMarker ripple">
-                <span class="d-none d-md-block">{{'Dashboard.Module 2' | translate}}</span>
-                <span class="d-block d-md-none" *ngIf="LocalstoragedetailsService.userType != 'trainee'">{{'Dashboard.3' | translate}}</span>
-                <span class="d-block d-md-none" *ngIf="LocalstoragedetailsService.userType == 'trainee'">{{'Dashboard.2' | translate}}</span>
-            </span>
-            <!-- <span class="label">{{'Dashboard.Module 2' | translate}}</span> -->
-        </div>
+  </div>
+  <div class="stepper-step" [ngClass]="{'stepper-step-isActive': completedModule['module2'] == true}">
+    <div class="stepper-stepContent" (click)="showAlert()">
+      <span class="stepper-stepMarker ripple">
+        <span class="d-none d-md-block">{{'Dashboard.Module 2' | translate}}</span>
+        <span class="d-block d-md-none"
+          *ngIf="LocalstoragedetailsService.userType != 'trainee'">{{'Dashboard.3' | translate}}</span>
+        <span class="d-block d-md-none"
+          *ngIf="LocalstoragedetailsService.userType == 'trainee'">{{'Dashboard.2' | translate}}</span>
+      </span>
+      <!-- <span class="label">{{'Dashboard.Module 2' | translate}}</span> -->
     </div>
-    <div class="stepper-step" [ngClass]="{'stepper-step-isActive': completedModule['module3'] == true}">
-        <div class="stepper-stepContent" (click)="showAlert()">
-            <span class="stepper-stepMarker ripple">
-                <span class="d-none d-md-block">{{'Dashboard.Module 3' | translate}}</span>
-                <span class="d-block d-md-none" *ngIf="LocalstoragedetailsService.userType != 'trainee'">{{'Dashboard.4' | translate}}</span>
-                <span class="d-block d-md-none" *ngIf="LocalstoragedetailsService.userType == 'trainee'">{{'Dashboard.3' | translate}}</span>
-            </span>
-            <!-- <span class="label">{{'Dashboard.Module 3' | translate}}</span> -->
-        </div>
+  </div>
+  <div class="stepper-step" [ngClass]="{'stepper-step-isActive': completedModule['module3'] == true}">
+    <div class="stepper-stepContent" (click)="showAlert()">
+      <span class="stepper-stepMarker ripple">
+        <span class="d-none d-md-block">{{'Dashboard.Module 3' | translate}}</span>
+        <span class="d-block d-md-none"
+          *ngIf="LocalstoragedetailsService.userType != 'trainee'">{{'Dashboard.4' | translate}}</span>
+        <span class="d-block d-md-none"
+          *ngIf="LocalstoragedetailsService.userType == 'trainee'">{{'Dashboard.3' | translate}}</span>
+      </span>
+      <!-- <span class="label">{{'Dashboard.Module 3' | translate}}</span> -->
     </div>
-    <div class="stepper-step" [ngClass]="{'stepper-step-isActive': completedModule['module4'] == true}">
-        <div class="stepper-stepContent" (click)="showAlert()">
-            <span class="stepper-stepMarker ripple">
-                <span class="d-none d-md-block">{{'Dashboard.Module 4' | translate}}</span>
-                <span class="d-block d-md-none" *ngIf="LocalstoragedetailsService.userType != 'trainee'">{{'Dashboard.5' | translate}}</span>
-                <span class="d-block d-md-none" *ngIf="LocalstoragedetailsService.userType == 'trainee'">{{'Dashboard.4' | translate}}</span>
-            </span>
-            <!-- <span class="label">{{'Dashboard.Module 4' | translate}}</span> -->
-        </div>
+  </div>
+  <div class="stepper-step" [ngClass]="{'stepper-step-isActive': completedModule['module4'] == true}">
+    <div class="stepper-stepContent" (click)="showAlert()">
+      <span class="stepper-stepMarker ripple">
+        <span class="d-none d-md-block">{{'Dashboard.Module 4' | translate}}</span>
+        <span class="d-block d-md-none"
+          *ngIf="LocalstoragedetailsService.userType != 'trainee'">{{'Dashboard.5' | translate}}</span>
+        <span class="d-block d-md-none"
+          *ngIf="LocalstoragedetailsService.userType == 'trainee'">{{'Dashboard.4' | translate}}</span>
+      </span>
+      <!-- <span class="label">{{'Dashboard.Module 4' | translate}}</span> -->
     </div>
-    <div class="stepper-step" [ngClass]="{'stepper-step-isActive': completedModule['module5'] == true}">
-        <div class="stepper-stepContent" (click)="showAlert()">
-            <span class="stepper-stepMarker ripple">
-                <span class="d-none d-md-block">{{'Dashboard.Module 5' | translate}}</span>
-                <span class="d-block d-md-none" *ngIf="LocalstoragedetailsService.userType != 'trainee'">{{'Dashboard.6' | translate}}</span>
-                <span class="d-block d-md-none" *ngIf="LocalstoragedetailsService.userType == 'trainee'">{{'Dashboard.5' | translate}}</span>
-            </span>
-            <!-- <span class="label">{{'Dashboard.Module 5' | translate}}</span> -->
-        </div>
+  </div>
+  <div class="stepper-step" [ngClass]="{'stepper-step-isActive': completedModule['module5'] == true}">
+    <div class="stepper-stepContent" (click)="showAlert()">
+      <span class="stepper-stepMarker ripple">
+        <span class="d-none d-md-block">{{'Dashboard.Module 5' | translate}}</span>
+        <span class="d-block d-md-none"
+          *ngIf="LocalstoragedetailsService.userType != 'trainee'">{{'Dashboard.6' | translate}}</span>
+        <span class="d-block d-md-none"
+          *ngIf="LocalstoragedetailsService.userType == 'trainee'">{{'Dashboard.5' | translate}}</span>
+      </span>
+      <!-- <span class="label">{{'Dashboard.Module 5' | translate}}</span> -->
     </div>
+  </div>
 
-    <div class="stepper-step" [ngClass]="{'stepper-step-isActive': completedModule['module6'] == true}">
-        <div class="stepper-stepContent" (click)="showAlert()">
-            <span class="stepper-stepMarker ripple">
-                <span class="d-none d-md-block" >{{'Dashboard.endTest' | translate}}</span>
-                <span class="d-block d-md-none" *ngIf="LocalstoragedetailsService.userType != 'trainee'">{{'Dashboard.7' | translate}}</span>
-                 <span class="d-block d-md-none" *ngIf="LocalstoragedetailsService.userType == 'trainee'">{{'Dashboard.6' | translate}}</span>
-            </span>
-                <!-- <span class="label">{{'Dashboard.Module 5' | translate}}</span> -->
-        </div>
+  <div class="stepper-step" [ngClass]="{'stepper-step-isActive': completedModule['module6'] == true}">
+    <div class="stepper-stepContent" (click)="showAlert()">
+      <span class="stepper-stepMarker ripple">
+        <span class="d-none d-md-block">{{'Dashboard.endTest' | translate}}</span>
+        <span class="d-block d-md-none"
+          *ngIf="LocalstoragedetailsService.userType != 'trainee'">{{'Dashboard.7' | translate}}</span>
+        <span class="d-block d-md-none"
+          *ngIf="LocalstoragedetailsService.userType == 'trainee'">{{'Dashboard.6' | translate}}</span>
+      </span>
+      <!-- <span class="label">{{'Dashboard.Module 5' | translate}}</span> -->
     </div>
+  </div>
 
-    <div class="stepper-step" [ngClass]="{'stepper-step-isActive': completedModule['module7'] == true}">
-        <div class="stepper-stepContent" (click)="showAlert()">
-            <span class="stepper-stepMarker ripple">
-                <span class="d-none d-md-block" >{{'Dashboard.Assignments' | translate}}</span>
-                <span class="d-block d-md-none" *ngIf="LocalstoragedetailsService.userType != 'trainee'">{{'Dashboard.8' | translate}}</span>
-                 <span class="d-block d-md-none" *ngIf="LocalstoragedetailsService.userType == 'trainee'">{{'Dashboard.7' | translate}}</span>
-            </span>
-                <!-- <span class="label">{{'Dashboard.Module 5' | translate}}</span> -->
-        </div>
+  <div class="stepper-step" [ngClass]="{'stepper-step-isActive': completedModule['module7'] == true}">
+    <div class="stepper-stepContent" (click)="showAlert()">
+      <span class="stepper-stepMarker ripple">
+        <span class="d-none d-md-block">{{'Dashboard.Assignments' | translate}}</span>
+        <span class="d-block d-md-none"
+          *ngIf="LocalstoragedetailsService.userType != 'trainee'">{{'Dashboard.8' | translate}}</span>
+        <span class="d-block d-md-none"
+          *ngIf="LocalstoragedetailsService.userType == 'trainee'">{{'Dashboard.7' | translate}}</span>
+      </span>
+      <!-- <span class="label">{{'Dashboard.Module 5' | translate}}</span> -->
     </div>
-    <!-- <div class="stepper-step" [ngClass]="{'stepper-step-isActive': four===true}">
+  </div>
+  <!-- <div class="stepper-step" [ngClass]="{'stepper-step-isActive': four===true}">
         <div class="stepper-stepContent">
             <span class="stepper-stepMarker ripple"><span class="hidden-sm-down">{{'Dashboard.Exam' | translate}}</span><span class="hidden-sm-up">8</span></span>
         </div>
     </div> -->
+  <div class="row m-0 mt-2 mb-2 justify-content-center">
+    <div class="col-2" [ngClass]="{
+      'stepper-step-isActive': completedModule['module0'] == true,
+      'isCurrentstatus': currentstatus == '0'
+    }">
+      <span class="complete-circle">0</span>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" [ngClass]="{
+              'w-100': completedModule['module0'] == true
+            }" [style.width]="counterValue0"> <span class="d-none d-md-block">{{counterValue0}}</span>
+        </div>
+      </div>
+      <span class="d-block d-md-none mob-counter">{{counterValue0}}</span>
+    </div>
+    <div class="col-2" [ngClass]="{
+      'stepper-step-isActive': completedModule['module1'] == true,
+      'isCurrentstatus': currentstatus == '1'
+    }">
+      <span class="complete-circle">1</span>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" [ngClass]="{
+              'w-100': completedModule['module1'] == true
+            }" [style.width]="counterValue1">
+          <span class="d-none d-md-block">{{counterValue1}}</span>
+        </div>
+      </div>
+      <span class="d-block d-md-none mob-counter">{{counterValue1}}</span>
+    </div>
+    <div class="col-2"
+      [ngClass]="{'stepper-step-isActive': completedModule['module2'] == true,'isCurrentstatus': currentstatus == '2'}">
+      <span class="complete-circle">2</span>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" [ngClass]="{
+              'w-100': completedModule['module2'] == true
+            }" [style.width]="counterValue2">
+          <span class="d-none d-md-block">{{counterValue2}}</span>
+        </div>
+      </div>
+      <span class="d-block d-md-none mob-counter">{{counterValue2}}</span>
+    </div>
+    <div class="col-2"
+      [ngClass]="{'stepper-step-isActive': completedModule['module3'] == true,'isCurrentstatus': currentstatus == '3'}">
+      <span class="complete-circle">3</span>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" [ngClass]="{
+              'w-100': completedModule['module3'] == true
+            }" [style.width]="counterValue3"> <span class="d-none d-md-block">{{counterValue3}}</span>
+        </div>
+      </div>
+      <span class="d-block d-md-none mob-counter">{{counterValue3}}</span>
+    </div>
+    <div class="col-2"
+      [ngClass]="{'stepper-step-isActive': completedModule['module4'] == true,'isCurrentstatus': currentstatus == '4'}">
+      <span class="complete-circle">4</span>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" [ngClass]="{
+              'w-100': completedModule['module4'] == true
+            }" [style.width]="counterValue4"> <span class="d-none d-md-block">{{counterValue4}}</span>
+        </div>
+      </div>
+      <span class="d-block d-md-none mob-counter">{{counterValue4}}</span>
+    </div>
+    <div class="col-2"
+      [ngClass]="{'stepper-step-isActive': completedModule['module5'] == true,'isCurrentstatus': currentstatus == '5'}">
+      <span class="complete-circle">5</span>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" [ngClass]="{
+              'w-100': completedModule['module5'] == true
+            }" [style.width]="counterValue5"> <span class="d-none d-md-block">{{counterValue5}}</span>
+        </div>
+      </div>
+      <span class="d-block d-md-none mob-counter">{{counterValue5}}</span>
+    </div>
+  </div>
 </div>

@@ -121,7 +121,7 @@ export class Module216Component implements OnInit {
           if (fun == "start") {
             this.question1 = data["data"]["questionlist"][0].question;
             this.question2 = data["data"]["questionlist"][1].question;
-            this.question3 = data["data"]["questionlist"][1].question;
+            this.question3 = data["data"]["questionlist"][2].question;
             this.question4 = data["data"]["questionlist"][3].question;
 
             this.questionid1 = data["data"]["questionlist"][0].questionid;

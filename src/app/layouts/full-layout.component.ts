@@ -14,6 +14,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { map, filter, take } from "rxjs/operators";
 import { interval, pipe } from "rxjs";
 import { SignupStepperService } from '../signup-stepper/signup-stepper.service';
+import { SharedDataService } from '../services/shared-data.service';
 
 declare var jQuery: any;
 
@@ -128,7 +129,8 @@ export class FullLayoutComponent implements OnInit {
     public permission: PermissionModelService,
     vcr: ViewContainerRef,
     private lBar: SlimLoadingBarService,
-    private _sanitizer: DomSanitizer
+    private _sanitizer: DomSanitizer,
+    private sharedService : SharedDataService
   ) {
     this.toastr.setRootViewContainerRef(vcr);
     this.router.events.subscribe((event: any) => {
@@ -233,7 +235,10 @@ export class FullLayoutComponent implements OnInit {
     // {
     //   this.setInterval()
     // }
-
+    this.sharedService.getData().subscribe(data => {
+      console.log("sharedServicedata", data);
+      this.currentStatus(data)
+    })
 
     jQuery("#sidebarCollapse").on("click", function() {
       jQuery("#sidebar").toggleClass("active");
@@ -351,6 +356,10 @@ export class FullLayoutComponent implements OnInit {
       console.log("statusFlag", this.levelData, this.levelData[index].status);
     }
     // console.log("leveldata",this.levelData,this.statusFlag)
+  }
+
+  ngOnDestroy(){
+    this.sharedService.clearData();
   }
 
   setInterval() {
