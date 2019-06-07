@@ -12,6 +12,7 @@ import { ToastsManager } from 'ng6-toastr';
 @Component({
   selector: 'app-signup-stepper',
   templateUrl: './signup-stepper.component.html'
+
 })
 export class SignupStepperComponent implements OnInit {
   public apiUrlForProfile = environment.apiUrl + 'profilepic/';

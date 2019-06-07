@@ -13,6 +13,7 @@ import html2canvas from "html2canvas";
 import { DomSanitizer } from '@angular/platform-browser';
 import { map, filter, take } from "rxjs/operators";
 import { interval, pipe } from "rxjs";
+import { SignupStepperService } from '../signup-stepper/signup-stepper.service';
 
 declare var jQuery: any;
 
@@ -20,6 +21,7 @@ declare var jQuery: any;
   selector: "app-dashboard",
   templateUrl: "./full-layout.component.html",
   styleUrls: ["./full-layout.component.scss"]
+
 })
 export class FullLayoutComponent implements OnInit {
   public mainFlagModule5 = 0;
@@ -293,19 +295,19 @@ export class FullLayoutComponent implements OnInit {
       this.userType = this.LocalstoragedetailsService.userType;
       this.modalDisplay = true;
       this.LocalstoragedetailsService.timelineState = this.moduleStatusCheck;
-      // this.DashboardService.getProfilePic(this.userId).subscribe(
-      //   data => {
-      //     if (data.results.length != 0) {
-      //       this.imgUrl = data.results[0].file;
-      //     } else {
-      //       this.imgUrl = "/assets/img/Profile_pic.png";
-      //     }
-      //   },
-      //   error =>
-      //     this.toastr.error(
-      //       "०४०: आपली विनंती आत्ता पूर्ण करू शकत नाही, कृपया पुन्हा प्रयत्न करा."
-      //     )
-      // );
+      this.DashboardService.getProfilePic(this.userId).subscribe(
+        data => {
+          if (data['results'].length != 0) {
+            this.imgUrl = data['results'][0].file;
+          } else {
+            this.imgUrl = "/assets/img/Profile_pic.png";
+          }
+        },
+        error =>
+          this.toastr.error(
+            "०४०: आपली विनंती आत्ता पूर्ण करू शकत नाही, कृपया पुन्हा प्रयत्न करा."
+          )
+      );
 
       this.setDisableMenu();
     }

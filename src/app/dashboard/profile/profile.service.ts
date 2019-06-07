@@ -10,10 +10,15 @@ export class ProfileService {
   public apiUrl = environment.apiUrl;
   constructor(private http: HttpClient) {}
   getProfileDetails(token) {
-    let headers = new HttpHeaders();
-    headers.append("Authorization", token);
+    const headers = new HttpHeaders({
+      Authorization: token
+    });
     return this.http
       .get(this.apiUrl + "profile/", { headers: headers })
+    // let headers = new HttpHeaders();
+    // headers.append("Authorization", token);
+    // return this.http
+    //   .get(this.apiUrl + "profile/", { headers: headers })
       
   } //End of ProfileDetails
 
@@ -32,9 +37,9 @@ export class ProfileService {
   sendOTPToMobile(newMobileJson: any, token) {
     const body = JSON.parse(newMobileJson);
     const headers = new HttpHeaders({
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Authorization: token
     });
-    headers.append("Authorization", token);
     return this.http
       .post(this.apiUrl + "mobileupdate/", { body: body }, { headers: headers })
      
@@ -58,9 +63,9 @@ export class ProfileService {
   verifyOtpMobile(verifyMobileOtpJson: any, token) {
     const body = JSON.parse(verifyMobileOtpJson);
     const headers = new HttpHeaders({
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Authorization: token
     });
-    headers.append("Authorization", token);
     return this.http
       .post(
         this.apiUrl + "updatedmobileverify/",
@@ -72,9 +77,9 @@ export class ProfileService {
   changePassword(changePasswordJson: any, token) {
     const body = JSON.parse(changePasswordJson);
     const headers = new HttpHeaders({
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Authorization: token
     });
-    headers.append("Authorization", token);
     return this.http
       .post(
         this.apiUrl + "changepassword/",

@@ -16,7 +16,8 @@ import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile',
-  templateUrl: './profile.component.html'
+  templateUrl: './profile.component.html',
+  providers: [SignupStepper],
 })
 export class ProfileComponent implements OnInit {
   cancleSubject: any;
@@ -122,6 +123,7 @@ export class ProfileComponent implements OnInit {
   ]
   public dojArray = [1955, 1956, 1957, 1958, 1959, 1960, 1961, 1962, 1963, 1964, 1965, 1966, 1967, 1968, 1969, 1970, 1971, 1972, 1973, 1974, 1975, 1976, 1977, 1978, 1979, 1980, 1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
   ngOnInit() {
+    console.log("profile")
     this.profileFields = [
       { "field": "gender", "status": false, "type": "1", "value": "लिंग" },
       { "field": "position", "status": false, "type": "1", "value": "हुद्दा" },
@@ -195,12 +197,12 @@ export class ProfileComponent implements OnInit {
     this.showErrorMsg = false;
     this.checkAgree = false;
     this.emailAccept = false;
-    if (this.LocalstoragedetailsService.token == null) {
-      this.router.navigate(['/']);
-    }
+    // if (this.LocalstoragedetailsService.token == null) {
+    //   this.router.navigate(['/']);
+    // }
 
     if ((window.localStorage.getItem('profile') == null) || (window.localStorage.getItem('profile') == undefined) || (window.localStorage.getItem('profile') == "")) {
-
+      console.log("token",this.LocalstoragedetailsService.token)
       this.ProfileService.getProfileDetails(this.LocalstoragedetailsService.token)
         .subscribe(
         data => {
@@ -1148,19 +1150,19 @@ export class ProfileComponent implements OnInit {
   }
 
   imageUploaded() {
-    this.userId = window.localStorage.getItem('userid')
-    // this.DashboardService.getProfilePic(this.userId)
-    //   .subscribe(
-    //   data => {
-    //     this.changeProfile = false;
-    //     if (data.results.length != 0) {
-    //       this.profileImage = data.results[0].file;
-    //       this.FullLayoutComponent.imgUrl = this.profileImage;
-    //     }
-    //   },
-    //   err =>
-    //     this.toastr.error(this.translate.instant('Errors.cannotProceed'))
-    //   );
+    this.userId = window.localStorage.getItem('user_id')
+    this.DashboardService.getProfilePic(this.userId)
+      .subscribe(
+      data => {
+        this.changeProfile = false;
+        if (data['results'].length != 0) {
+          this.profileImage = data['results'][0].file;
+          this.FullLayoutComponent.imgUrl = this.profileImage;
+        }
+      },
+      err =>
+        this.toastr.error(this.translate.instant('Errors.cannotProceed'))
+      );
   }
 
   generateEmailOtp() {
@@ -1574,8 +1576,15 @@ export class ProfileComponent implements OnInit {
   }
 
   confirmGenerateEmailOTP() {
-    var newEmailJson = '{"email": "' + this.newEmail + '","oldemail":"' + this.email + '","username":"' + this.mobile + '","password":"' + this.password + '"}';
-    this.ProfileService.sendOTPToNewEmail(newEmailJson, this.token)
+    const emailJson = {};
+    emailJson['email']= this.newEmail;
+    emailJson['oldemail']= this.email;
+    emailJson['username']= this.mobile;
+    emailJson['password']= this.password;
+
+    // var newEmailJson = '{"email": "' + this.newEmail + '","oldemail":"' + this.email + '","username":"' + this.mobile + '","password":"' + this.password + '"}';
+    console.log(emailJson)
+    this.ProfileService.sendOTPToNewEmail(JSON.stringify(emailJson), this.token)
       .subscribe(
       data => {
         if (data['Response'] == "Email Already Exist") {

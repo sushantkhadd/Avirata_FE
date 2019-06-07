@@ -18,7 +18,6 @@ import { LocalstoragedetailsService } from "./services/localstoragedetails.servi
 import { TimelineComponent } from "./timeline/timeline.component";
 import { SignupStepperComponent } from "./signup-stepper/signup-stepper.component";
 import { SharedModule } from "./shared/shared.module";
-import { HttpModule } from "@angular/http";
 import { SignupStepperService } from "./signup-stepper/signup-stepper.service";
 import { CommonComponentService } from './components/common-component.service';
 import { CommonService } from "./services/common.service";
@@ -46,7 +45,6 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    HttpModule,
     FormsModule,
     ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
@@ -71,12 +69,11 @@ export function createTranslateLoader(http: HttpClient) {
     LanguageService,
     FullLayoutService,
     LocalstoragedetailsService,
-    SignupStepperService,
     CommonComponentService,
     CommonService,
     LocalstoragedetailsService,
-    SignupStepperService,
     PermissionModelService,
+    SignupStepperService,
     AuthGuard,
     CanDeactivateGuard,
     { provide: LocationStrategy, useClass: HashLocationStrategy }

@@ -10,6 +10,8 @@ import { NgForm } from '@angular/forms';
 import { ViewChild } from '@angular/core';
 import { ModalDirective } from "ngx-bootstrap";
 import { Observable } from "rxjs";
+import { FullLayoutService } from '../../layouts/full-layout.service'
+import { SharedDataService } from 'src/app/services/shared-data.service';
 
 @Component({
   selector: 'app-login',
@@ -31,14 +33,14 @@ export class LoginComponent implements OnInit {
   public otpEmailEnable = false;
   public otpMobileEnable = false;
   public confirmPaswwordTrue = false;
-  public mobile; mobileotp; uuid;
+  public mobile; mobileotp; uuid;token;
   public show; checkAgree: any;
   public timerFlag; time1; tmSec1; tick = 1000; countDown;
 
   @ViewChild('forgetPasswordForm') public forgetPasswordForm: NgForm;
   @ViewChild('primaryModal') public primaryModal: ModalDirective;
 
-  constructor(public CommonService: CommonService, public router: Router, public fb: FormBuilder, public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService, public lang: LanguageService) {
+  constructor(public CommonService: CommonService, public router: Router, public fb: FormBuilder, public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService, public lang: LanguageService,public FullLayoutService : FullLayoutService, public _sharedService : SharedDataService) {
     this.toastr.setRootViewContainerRef(vcr);
   }
   ngOnInit() {
@@ -55,8 +57,38 @@ export class LoginComponent implements OnInit {
     this.checkAgree = false;
     this.loginModel.newPassword = '';
     this.loginModel.confirmPassword = '';
+    this.token = window.localStorage.getItem("token")
+    if(this.token =="" || this.token == null || this.token == undefined){
+    }else{
+    this.FullLayoutService.logoutService(this.token).subscribe(
+      data => {
+        if (data["Response"] == "User Logged Out") {
+          window.localStorage.clear();
+          this.router.navigate(["/"]);
+        } else if (
+          data["Response"] == "session not matches please re-login" ||
+          data["Response"] == "session not matches"
+        ) {
+          // alert("कृपया पुन्हा लॉगइन करा")
+          this.router.navigate(["/"]);
+        } else {
+          this.router.navigate(["/"]);
+        }
+        this._sharedService.sendData(true)
+      },
+      error =>
+        this.toastr.error(
+          "०४०: आपली विनंती आत्ता पूर्ण करू शकत नाही, कृपया पुन्हा प्रयत्न करा."
+        )
+      // alert("आपली विनंती आत्ता पूर्ण करू शकत नाही, कृपया पुन्हा प्रयत्न करा.")
+    );
+   }
   }
 
+  ngOnDestroy(){
+    this._sharedService.clearData()
+  }
+  
   ngDoCheck() {
     if (this.username.trim().length == 0 || this.password.trim().length == 0) {
       this.disableLogin = false;

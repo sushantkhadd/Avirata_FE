@@ -12,10 +12,13 @@ import { DashboardService } from "./dashboard.service";
 import { ProfileService } from "./profile/profile.service";
 import { FaqComponent } from "src/app/dashboard/faq/faq.component";
 import { AngularMultiSelectModule } from "angular2-multiselect-dropdown";
+import { SignupStepperService } from "../signup-stepper/signup-stepper.service";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   imports: [
     CommonModule,
+    HttpClientModule,
     FormsModule,
     AngularMultiSelectModule,
     ModalModule.forRoot(),
@@ -24,6 +27,6 @@ import { AngularMultiSelectModule } from "angular2-multiselect-dropdown";
     SharedModule
   ],
   declarations: [DashboardComponent, ProfileComponent, FaqComponent],
-  providers: [LanguageService,DashboardService,ProfileService,DatePipe]
+  providers: [LanguageService,DashboardService,ProfileService,DatePipe,SignupStepperService]
 })
 export class DashboardModule {}

@@ -16,9 +16,12 @@ export class UploadService {
     let xhr: XMLHttpRequest = new XMLHttpRequest();
     let formData = new FormData();
     formData.append("image", imageResult);
-    let headers = new HttpHeaders();
+    //let headers = new HttpHeaders();
+    const headers = new HttpHeaders({
+      Authorization:  window.localStorage.getItem('token')
+    });
     headers.append('Content-Type', 'multipart/form-data;boundary=----amrut');
-    headers.append('Authorization', window.localStorage.getItem('token'));
+  //  headers.append('Authorization', window.localStorage.getItem('token'));
     headers.append('Accept', 'application/json');
     return this.http.post(this.apiUrl + 'profilepic/', formData, { headers: headers })
       

@@ -17,7 +17,7 @@ export class LocalstoragedetailsService {
   constructor(
   ) {
     this.token = window.localStorage.getItem('token');
-    this.userId = window.localStorage.getItem('userid');
+    this.userId = window.localStorage.getItem('user_id');
     this.userType = window.localStorage.getItem('group_name');
     this.userName = window.localStorage.getItem('name');
     this.setdistrictId = window.localStorage.getItem('districtid');
