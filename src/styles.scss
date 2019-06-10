@@ -2060,6 +2060,19 @@ body {
       font-size: 0.90rem;
     }
   }
+
+  .options{
+    .option{
+      label{
+        //to align checkbox and label
+        span{
+          display: block;
+          margin-left: 16px;
+          margin-top: -26px;
+        }
+      }
+    }
+  }
 }
 
 h6.questionHead.lineHeight {
@@ -2420,6 +2433,8 @@ body {
 }
 .w-35{
   width: 30%;
+  // max-width: 100%;
+  // width: 40%;
 }
 
 // radio button circle color

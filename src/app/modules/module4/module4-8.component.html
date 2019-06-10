@@ -11,11 +11,11 @@
 <div *ngIf="mainFlagModule4 == 8">
   <div class="assignForm">
     <div class="card">
-      <div class="card-header">
-        <h5 [innerHTML]="mainQuestion">
-        </h5>
+      <div class="card-header p-0">
+        <h6 class="questionHead lineHeight p-3" [innerHTML]="mainQuestion">
+        </h6>
       </div>
-      <div class="card-block pt-2">
+      <div class="card-block pt-2 mr-2">
         <form #assignForm="ngForm" class="rating-form">
           <div class="form-group row">
             <label class="col-sm-4 col-md-4 form-control-label" for="answer1" [innerHTML]="question1"></label>
