@@ -73,6 +73,7 @@ export class PresentationComponent implements OnInit {
         {
           if (event == "fifty_fifty")
           {
+            this.reset();
             this.rewardImgUrl1 = this.imageJson["f2"];
             this.options = [];
             for (let i = 0; i < this.optionsStateDyanamic.length; i++)
@@ -763,7 +764,7 @@ export class PresentationComponent implements OnInit {
               }
               this.eventRadioGroup.instance.option("value", '');
                 this.submitDisabled = false;
-                if (this.options.length == 1)
+                if (this.options.length == 1 && !this.fiftyFiftyFlag)
                 {
                   this.hideMe = true;
                 } else

@@ -78,6 +78,7 @@ export class VideoPlayerComponent implements OnInit {
       data => {
         if (data["message"] == "event is done") {
           if (event == "fifty_fifty") {
+            this.resetRadio();
             this.rewardImgUrl1 = this.imageJson["f2"];
             this.options = [];
             for (let i = 0; i < this.optionsArray.length; i++)
@@ -238,7 +239,7 @@ export class VideoPlayerComponent implements OnInit {
           this.start = true;
           var thumb = document.querySelector('.static-thumbnail .img-fluid').classList.add('show');
           this.cfuModal.show();
-          if (this.options.length == 1) {
+          if (this.options.length == 1 && !this.fiftyFiftyFlag) {
             this.hideMe = true;
           } else {
             this.hideMe = false;
