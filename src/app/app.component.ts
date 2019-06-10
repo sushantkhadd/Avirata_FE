@@ -3,6 +3,7 @@ import { ToastsManager } from "ng6-toastr";
 import { SlimLoadingBarService } from "ng2-slim-loading-bar";
 import { Router, NavigationStart, NavigationEnd } from "@angular/router";
 import { SharedDataService } from "./services/shared-data.service";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-root",
@@ -14,7 +15,8 @@ import { SharedDataService } from "./services/shared-data.service";
 })
 export class AppComponent implements OnInit {
   title = "CPD-L3";
-  loader;_loaderBar;
+  loader; _loaderBar;
+  subscription: Subscription;
   constructor(
     public toastr: ToastsManager,
     vcr: ViewContainerRef,
@@ -35,12 +37,19 @@ export class AppComponent implements OnInit {
       this.loader = false;
     }, 2000);
 
-    this._sharedService.getData().subscribe(
+    this.subscription= this._sharedService.getData().subscribe(
       data=>{
-        console.log("dta",data)
-        this._loaderBar = data;
+        console.log("dta", data)
+        if (data == true)
+        {
+          this._loaderBar = data;
+        }
       }
     )
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   disableInspect(e) {

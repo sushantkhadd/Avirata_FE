@@ -85,10 +85,10 @@ export class LoginComponent implements OnInit {
    }
   }
 
-  ngOnDestroy(){
-    this._sharedService.clearData()
-  }
-  
+  // ngOnDestroy(){
+  //   this._sharedService.clearData()
+  // }
+
   ngDoCheck() {
     if (this.username.trim().length == 0 || this.password.trim().length == 0) {
       this.disableLogin = false;

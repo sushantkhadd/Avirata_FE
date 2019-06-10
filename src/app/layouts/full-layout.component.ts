@@ -12,7 +12,7 @@ import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import html2canvas from "html2canvas";
 import { DomSanitizer } from '@angular/platform-browser';
 import { map, filter, take } from "rxjs/operators";
-import { interval, pipe } from "rxjs";
+import { interval, pipe, Subscription } from "rxjs";
 import { SignupStepperService } from '../signup-stepper/signup-stepper.service';
 import { SharedDataService } from '../services/shared-data.service';
 
@@ -40,6 +40,8 @@ export class FullLayoutComponent implements OnInit {
   private trainee = false;
   imgUrl; rewardsFlag;
   needEfforts;
+  subscription: Subscription;
+
   @ViewChild("passwordChangeModal") public passwordChangeModal: ModalDirective;
   @ViewChild("moduleStatusModal") public moduleStatusModal: ModalDirective;
   @ViewChild("submoduleStatusModal")
@@ -235,9 +237,12 @@ export class FullLayoutComponent implements OnInit {
     // {
     //   this.setInterval()
     // }
-    this.sharedService.getData().subscribe(data => {
+    this.subscription = this.sharedService.getData().subscribe(data => {
       console.log("sharedServicedata", data);
-      this.currentStatus(data)
+      if (data)
+      {
+        this.currentStatus(data);
+      }
     })
 
     jQuery("#sidebarCollapse").on("click", function() {
@@ -359,7 +364,7 @@ export class FullLayoutComponent implements OnInit {
   }
 
   ngOnDestroy(){
-    this.sharedService.clearData();
+    this.subscription.unsubscribe();
   }
 
   setInterval() {
