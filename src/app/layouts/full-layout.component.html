@@ -1045,7 +1045,7 @@
                   </div>
                   <a class="dropdown-item" [routerLink]="['/dashboard/profile']">
                     <em class="fa fa-user"></em>&nbsp;&nbsp;{{'Dashboard.Profile' | translate}}</a>
-                  <a class="dropdown-item" href="#">
+                  <a class="dropdown-item" (click)="passwordChangeModal.show();clearFieldsResetPassword();">
                     <em class="fa fa-key"></em>&nbsp;&nbsp;{{'Profile.edit password' | translate}}</a>
                   <a class="dropdown-item" href="#">
                     <em class="fa fa-list-alt"></em>&nbsp;&nbsp;{{'Dashboard.form' | translate}}</a>
