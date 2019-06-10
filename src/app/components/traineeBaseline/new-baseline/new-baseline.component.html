@@ -69,7 +69,8 @@
                         <div class="option">
                             <label class="" [attr.for]="option.id">
                                 <input id="{{option.id}}" type="checkbox" [(ngModel)]="option.selected" (change)="onSelect(question,question.id, option,$event);"
-                                /> {{option.name}}
+                                /> <span>{{option.name}}</span> 
+                                <!-- span added to align checkbox and label -->
                             </label>
                         </div>
                     </div>
