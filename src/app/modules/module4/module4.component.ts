@@ -7,6 +7,7 @@ import { ToastsManager } from 'ng6-toastr';
 import { TranslateService } from '@ngx-translate/core';
 import {Module4Service} from './module4.service'
 import { CommonService } from 'src/app/services/common.service';
+declare var jQuery: any;
 
 @Component({
   selector: 'app-module4-1',
@@ -138,18 +139,13 @@ export class Module4Component implements OnInit {
     console.log("aaaaaaa");
     if (e) {
       console.log(e);
-      this.nextFlag = true;
+      this.nextFlag = false;
       this.subFlagModule4 = 2;
       this.instructionModal.show();
+      document.getElementsByTagName("body")[0].classList.add("modal-open");
       // var url ={}
       // url['4.1.1'] = this.vedioCompleteUrl;
       // console.log("urllll",url)
-      var current4 = [];
-      current4 = JSON.parse(window.localStorage.getItem("currentJson4"));
-      var index = current4["children"].findIndex(
-        item => item.source == "module 4.1" );
-      current4["children"][index].url = this.vedioCompleteUrl;
-      window.localStorage.setItem("currentJson4", JSON.stringify(current4));
     } else {
       window.localStorage.setItem("mainFlagModule4", "1");
       this.router.navigate(["/modules/module4/Module4.1"]);
@@ -179,9 +175,18 @@ export class Module4Component implements OnInit {
             // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 1.1', window.localStorage.getItem('username'), 10);
             this.passData["videoUrl"] = data["data"].url;
             this.vedioCompleteUrl = data["data"].url;
+            var current4 = [];
+            current4 = JSON.parse(window.localStorage.getItem("currentJson4"));
+            var index = current4["children"].findIndex(
+              item => item.source == "module 4.1");
+            current4["children"][index].url = this.vedioCompleteUrl;
+            window.localStorage.setItem("currentJson4", JSON.stringify(current4));
             this.playVideo = true;
           } else if (fun == "finish1") {
             this.instructionModal.hide();
+            document.getElementsByTagName("body")[0].classList.remove("modal-open");
+            var paras = jQuery("bs-modal-backdrop");
+            paras.hide();
             // this.playVideo = false;
             // this.statVideoFlag = true;
             this.mainFlagModule4 = 1;
