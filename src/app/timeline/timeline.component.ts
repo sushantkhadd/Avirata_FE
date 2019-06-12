@@ -28,7 +28,7 @@ export class TimelineComponent implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
   counterValue0;
-  counterValue1;
+  counterValue1 : number;
   counterValue2;
   counterValue3;
   counterValue4;
@@ -41,6 +41,9 @@ export class TimelineComponent implements OnInit {
   mainFlagModule3;
   mainFlagModule4;
   mainFlagModule5;
+  totalPer;
+  width: number ;
+  barWidth1;barWidth2;barWidth3;barWidth4;barWidth5;
   ngOnInit() {
     if (window.localStorage.getItem("token") == null) {
       this.router.navigate(["/"]);
@@ -118,35 +121,51 @@ export class TimelineComponent implements OnInit {
       );
     }
 
-    if (this.currentstatus)
-    {
-      if (this.mainFlagModule0)
-      {
-        this.counterValue0 = Math.round((this.mainFlagModule0 - 1) * this.calPercentage(1) )+ "%";
-      } else if (this.mainFlagModule1)
-      {
-        this.counterValue1 = Math.round((this.mainFlagModule1 - 1) * this.calPercentage(12)) + "%";
-      } else if (this.mainFlagModule2)
-      {
-        this.counterValue2 = Math.round((this.mainFlagModule2 - 1) * this.calPercentage(17)) + "%";
-      } else if (this.mainFlagModule3)
-      {
-        this.counterValue3 = Math.round((this.mainFlagModule3 - 1) * this.calPercentage(18)) + "%";
-      } else if (this.mainFlagModule4)
-      {
-        this.counterValue4 = Math.round((this.mainFlagModule4 - 1) * this.calPercentage(14)) + "%";
-      } else if (this.mainFlagModule5)
-      {
-        this.counterValue5 = Math.round((this.mainFlagModule5 - 1) * this.calPercentage(15)) + "%";
-      }
-    }
+    // if (this.currentstatus)
+    // {
+    //   if (this.mainFlagModule0)
+    //   {
+    //     this.counterValue0 = 0;
+    //     console.log("0",this.counterValue0)
+    //   } else if (this.mainFlagModule1 && this.currentstatus  == 1)
+    //   {
+    //     this.counterValue1 = Math.round((this.mainFlagModule1 - 1) * this.calPercentage(12));
+    //     this.totalPer = this.counterValue1;
+    //     console.log("1",this.totalPer)
+    //   } else if (this.mainFlagModule2 && this.currentstatus  == 2)
+    //   {
+    //     this.counterValue2 = Math.round((this.mainFlagModule2 - 1) * this.calPercentage(17));
+    //     this.totalPer = 20 + this.counterValue2;
+    //     console.log("2", this.totalPer)
+
+    //   } else if (this.mainFlagModule3)
+    //   {
+    //     this.counterValue3 = Math.round((this.mainFlagModule3 - 1) * this.calPercentage(18));
+    //     this.totalPer = 40 + this.counterValue3;
+    //     console.log("3", this.totalPer)
+    //   } else if (this.mainFlagModule4)
+    //   {
+    //     this.counterValue4 = Math.round((this.mainFlagModule4 - 1) * this.calPercentage(14));
+    //     this.totalPer = 60 + this.counterValue4;
+    //     console.log("4", this.totalPer)
+    //   } else if (this.mainFlagModule5)
+    //   {
+    //     this.counterValue5 = Math.round((this.mainFlagModule5 - 1) * this.calPercentage(15));
+    //     this.totalPer = 80 + this.counterValue5;
+    //     console.log("5", this.totalPer)
+    //   }
+    // }
     console.log(this.counterValue0, this.counterValue1, this.counterValue2, this.counterValue3, this.counterValue4, this.counterValue5);
   }
 
   calPercentage(val) {
-    let perval = 100 / val;
+    let perval = 20 / val;
+    var a =  perval.toString().split(".")[1]
+    // console.log("a",a)
+    // if()
     return (perval)
   }
+  
 
   ngDoCheck() {
     if (
@@ -211,24 +230,48 @@ export class TimelineComponent implements OnInit {
       window.localStorage.getItem("currentstatus") != "" &&
       window.localStorage.getItem("currentstatus") != undefined))
     {
-      if (this.mainFlagModule0)
+    //  if (this.mainFlagModule0)
+    //   {
+    //     this.counterValue0 = 0;
+    //     console.log("0",this.counterValue0)
+    //   } else 
+      this.width = 4;
+
+      if (this.mainFlagModule1 && this.currentstatus  == 1)
       {
-        this.counterValue0 = Math.round((this.mainFlagModule0 - 1) * this.calPercentage(1)) + "%";
-      } else if (this.mainFlagModule1)
+        this.counterValue1 = Math.round((this.mainFlagModule1 - 1) * this.calPercentage(12));
+        this.totalPer = this.counterValue1;
+        this.barWidth1 = this.counterValue1 * this.width + '%';
+        console.log("counterValue1",this.counterValue1)
+      } else if (this.mainFlagModule2 && this.currentstatus  == 2)
       {
-        this.counterValue1 = Math.round((this.mainFlagModule1 - 1) * this.calPercentage(12)) + "%";
-      } else if (this.mainFlagModule2)
+        this.totalPer =20
+        this.counterValue2 = Math.round((this.mainFlagModule2 - 1) * this.calPercentage(17));
+        this.totalPer = 20 + this.counterValue2;
+        this.barWidth2 = this.counterValue2 * this.width + '%';
+
+      } else if (this.mainFlagModule3 && this.currentstatus  == 3)
       {
-        this.counterValue2 = Math.round((this.mainFlagModule2 - 1) * this.calPercentage(17)) + "%";
-      } else if (this.mainFlagModule3)
+        this.totalPer =40
+        this.counterValue3 = Math.round((this.mainFlagModule3 - 1) * this.calPercentage(18));
+        this.totalPer = 40 + this.counterValue3;
+        this.barWidth3 = this.counterValue3 * this.width + '%';
+      } else if (this.mainFlagModule4 && this.currentstatus  == 4)
       {
-        this.counterValue3 = Math.round((this.mainFlagModule3 - 1) * this.calPercentage(18)) + "%";
-      } else if (this.mainFlagModule4)
+        this.totalPer =60
+        this.counterValue4 = Math.round((this.mainFlagModule4 - 1) * this.calPercentage(14));
+        this.totalPer = 60 + this.counterValue4;
+        this.barWidth4 = this.counterValue4 * this.width + '%';
+      } else if (this.mainFlagModule5 && this.currentstatus  == 5)
       {
-        this.counterValue4 = Math.round((this.mainFlagModule4 - 1) * this.calPercentage(14)) + "%";
-      } else if (this.mainFlagModule5)
+        this.totalPer =80
+        this.counterValue5 = Math.round((this.mainFlagModule5 - 1) * this.calPercentage(15));
+        this.totalPer = 80 + this.counterValue5;
+        this.barWidth5 = this.counterValue5 * this.width + '%';
+      }else if (this.currentstatus  == 6)
       {
-        this.counterValue5 = Math.round((this.mainFlagModule5 - 1) * this.calPercentage(15)) + "%";
+        this.totalPer =100 + '%'
+        // this.width = 1;
       }
     }
   }

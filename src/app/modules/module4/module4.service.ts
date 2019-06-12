@@ -100,6 +100,7 @@ export class Module4Service {
              }
            }
            window.localStorage.setItem("currentstatus", "5");
+           window.localStorage.setItem('mainFlagModule5', '1');
             this.setLocalStorage4(15);
            var obj1 = {
              "type": "moduleFinish",

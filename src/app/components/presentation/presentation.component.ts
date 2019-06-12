@@ -750,17 +750,29 @@ export class PresentationComponent implements OnInit {
                 {
                   pass['url']=this.pdfURL;
                   console.log("url",pass['url'])
+                  this.ansCorrect.emit(pass);
                 } else if (window.localStorage.getItem('mainFlagModule1') == '9')
                 {
                   var url = JSON.parse(data["data"].parenturl);
                   pass["url"] = url["1"];
                   console.log('passs', pass)
+                  this.ansCorrect.emit(pass);
+                }
+                else if(window.localStorage.getItem('mainFlagModule2') == '15' || window.localStorage.getItem('mainFlagModule3') == '16' || window.localStorage.getItem('mainFlagModule4') == '13'){
+                  console.log('enter')
+                  this.msgFlag = true;
+                  this.showToasterPopup();
+                  pass['url'] = data['data'].parenturl; 
+                  setTimeout(() => {
+                    console.log("finishhhhhh")
+                    this.ansCorrect.emit(pass); 
+                    }, 3000);
                 }
                 else{
                   pass['url'] = data['data'].parenturl;
+                  this.ansCorrect.emit(pass); 
                 }
-                console.log("finishhhhhh")
-                this.ansCorrect.emit(pass); //send true if all doc mcq successfully completed
+               
                   if (
                     window.localStorage.getItem('mainFlagModule1') == '11' || window.localStorage.getItem('mainFlagModule3') == '5' || window.localStorage.getItem('mainFlagModule5') == '2' ||
                     window.localStorage.getItem('mainFlagModule1') == '11' || window.localStorage.getItem('mainFlagModule3') == '5' || window.localStorage.getItem('mainFlagModule5') == '3' ||

@@ -101,30 +101,31 @@
             <span class="stepper-stepMarker ripple"><span class="hidden-sm-down">{{'Dashboard.Exam' | translate}}</span><span class="hidden-sm-up">8</span></span>
         </div>
     </div> -->
-  <div class="row m-0 mt-2 mb-0 justify-content-center">
-    <div class="col-2" [ngClass]="{
+  <div class="row m-0 pt-2 mb-2 justify-content-center">
+    <!-- <div class="col-2" [ngClass]="{
       'stepper-step-isActive': completedModule['module0'] == true,
       'isCurrentstatus': currentstatus == '0'
     }">
-      <span class="complete-circle">0</span>
+      <span class="complete-circle"></span>
       <div class="progress">
         <div class="progress-bar progress-bar-striped progress-bar-animated" [ngClass]="{
               'w-100': completedModule['module0'] == true
             }" [style.width]="counterValue0">
-            <!-- <span class="d-none d-md-block">{{counterValue0}}</span> -->
+            <span class="d-none d-md-block">{{counterValue0}}</span>
         </div>
       </div>
-      <!-- <span class="d-block d-md-none mob-counter">{{counterValue0}}</span> -->
-    </div>
+      <span class="d-block d-md-none mob-counter">{{counterValue0}}</span>
+    </div> -->
     <div class="col-2" [ngClass]="{
       'stepper-step-isActive': completedModule['module1'] == true,
       'isCurrentstatus': currentstatus == '1'
     }">
-      <span class="complete-circle">1</span>
-      <div class="progress">
-        <div class="progress-bar progress-bar-striped progress-bar-animated" [ngClass]="{
+      <span class="complete-circle"></span>
+      <span class="circle start">Start</span>
+      <div class="progress" [class.shine]="currentstatus == '1'">
+        <div class="progress-bar" [ngClass]="{
               'w-100': completedModule['module1'] == true
-            }" [style.width]="counterValue1">
+            }" [style.width]="barWidth1">
           <!-- <span class="d-none d-md-block">{{counterValue1}}</span> -->
         </div>
       </div>
@@ -132,11 +133,11 @@
     </div>
     <div class="col-2"
       [ngClass]="{'stepper-step-isActive': completedModule['module2'] == true,'isCurrentstatus': currentstatus == '2'}">
-      <span class="complete-circle">2</span>
-      <div class="progress">
-        <div class="progress-bar progress-bar-striped progress-bar-animated" [ngClass]="{
+      <span class="complete-circle">1</span>
+      <div class="progress" [class.shine]="currentstatus == '2'">
+        <div class="progress-bar" [ngClass]="{
               'w-100': completedModule['module2'] == true
-            }" [style.width]="counterValue2">
+            }" [style.width]="barWidth2">
           <!-- <span class="d-none d-md-block">{{counterValue2}}</span> -->
         </div>
       </div>
@@ -144,11 +145,11 @@
     </div>
     <div class="col-2"
       [ngClass]="{'stepper-step-isActive': completedModule['module3'] == true,'isCurrentstatus': currentstatus == '3'}">
-      <span class="complete-circle">3</span>
-      <div class="progress">
-        <div class="progress-bar progress-bar-striped progress-bar-animated" [ngClass]="{
+      <span class="complete-circle">2</span>
+      <div class="progress" [class.shine]="currentstatus == '3'">
+        <div class="progress-bar" [ngClass]="{
               'w-100': completedModule['module3'] == true
-            }" [style.width]="counterValue3">
+            }" [style.width]="barWidth3">
              <!-- <span class="d-none d-md-block">{{counterValue3}}</span> -->
         </div>
       </div>
@@ -156,11 +157,11 @@
     </div>
     <div class="col-2"
       [ngClass]="{'stepper-step-isActive': completedModule['module4'] == true,'isCurrentstatus': currentstatus == '4'}">
-      <span class="complete-circle">4</span>
-      <div class="progress">
-        <div class="progress-bar progress-bar-striped progress-bar-animated" [ngClass]="{
+      <span class="complete-circle">3</span>
+      <div class="progress" [class.shine]="currentstatus == '4'">
+        <div class="progress-bar" [ngClass]="{
               'w-100': completedModule['module4'] == true
-            }" [style.width]="counterValue4">
+            }" [style.width]="barWidth4">
              <!-- <span class="d-none d-md-block">{{counterValue4}}</span> -->
         </div>
       </div>
@@ -168,17 +169,31 @@
     </div>
     <div class="col-2"
       [ngClass]="{'stepper-step-isActive': completedModule['module5'] == true,'isCurrentstatus': currentstatus == '5'}">
-      <span class="complete-circle">5</span>
-      <div class="progress">
-        <div class="progress-bar progress-bar-striped progress-bar-animated" [ngClass]="{
+      <span class="complete-circle">4</span>
+      <div class="progress" [class.shine]="currentstatus == '5'">
+        <div class="progress-bar" [ngClass]="{
               'w-100': completedModule['module5'] == true
-            }" [style.width]="counterValue5">
+            }" [style.width]="barWidth5">
             <!-- <span class="d-none d-md-block">{{counterValue5}}</span> -->
         </div>
       </div>
       <!-- <span class="d-block d-md-none mob-counter">{{counterValue5}}</span> -->
     </div>
+    <div class="col-2"
+    [ngClass]="{'stepper-step-isActive': completedModule['module5'] == true,'isCurrentstatus': currentstatus == '5'}">
+    <span class="complete-circle"></span>
+    <span class="circle finish">Finish</span>
 
-    <!-- <div class="col-12 mt-4 text-center">{{overAllPercentage}}</div> -->
+    <div class="float-right final-percent">{{totalPer}}%</div>
+    <!-- <div class="progress">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" [ngClass]="{
+            'w-100': completedModule['module5'] == true
+          }" [style.width]="counterValue5 + '%'">
+          <span class="d-none d-md-block">{{counterValue5}}</span>
+      </div>
+    </div> -->
+    <!-- <span class="d-block d-md-none mob-counter">{{counterValue5}}</span> -->
+  </div>
+    <!-- <div class="col-12 mt-4 text-center"></div> -->
   </div>
 </div>
