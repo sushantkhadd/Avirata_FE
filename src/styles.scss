@@ -333,8 +333,9 @@ body {
       }
 
       label {
-        font-size: 1.1rem;
+        font-size: 1rem;
         margin-bottom: 0;
+        font-weight: 600;
       }
     }
   }
@@ -611,7 +612,7 @@ body {
 }
 
 #ytplayer {
-  border: 2px solid;
+  border: 1.5px solid;
 }
 
 .static-thumbnail {
@@ -948,7 +949,7 @@ body {
 
 .pdfViewer,
 .loader-gif {
-  height: 490px !important;
+  height: 510px !important;
   width: 100% !important;
 
   img {
@@ -1147,22 +1148,19 @@ body {
 //Instruction model
 .instructionModal {
 
-  // .modal{
-  //   top: 8%;
-  // }
   .modal-dialog {
     margin-top: 3rem;
   }
 
   .modal-content {
-    border-color: #6196cf !important;
-    border-width: 15px;
     border-top: 0;
     border-radius: 20px;
 
     .modal-header {
-      background: #6196cf;
+      background: #2368a2;
       padding: 0.5rem;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
 
       span.exp-img {
         // background-image: url("../../../assets/img/expressions/instructions.png");
@@ -1172,8 +1170,8 @@ body {
         background-repeat: no-repeat;
         position: absolute;
         z-index: 99;
-        width: 120px;
-        height: 120px;
+        width: 100px;
+        height: 100px;
         bottom: 0;
         right: 0;
         left: 0;
@@ -1181,15 +1179,43 @@ body {
         margin: 0 auto;
       }
     }
+
+    .modal-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      border-top: 1px solid #dee2e6;
+      background: #eff8ff;
+      border: none;
+      text-align: center;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+
+      .btn.btn-info{
+        background: #a7d2f4;
+        color: #545e62;
+        font-weight: 500;
+        border: 1px solid #a7d2f4;
+      }
+
+      .btn.btn-primary{
+        background: #a7d2f4;
+        color: #545e62;
+        font-weight: 500;
+        border: 1px solid #a7d2f4;
+      }
+    }
   }
 
   .modal-body {
     background: none !important;
+    padding: 3.5rem 2rem;
 
     p {
       line-height: 20px !important;
       margin-top: 0px !important;
-      font-size: 1.1rem;
+      font-size: 1rem;
       padding-left: 0px !important;
       color: #3b97d2;
     }
@@ -1220,7 +1246,14 @@ body {
     }
 
     .modal-title {
-      padding-left: 1rem;
+      // padding-left: 1rem;
+      font-size: 1.3rem;
+      font-weight: 600;
+      position: absolute;
+      top: 55px;
+      z-index: 1;
+      color: #2368a2;
+      left: 15px;
     }
   }
 
@@ -1229,6 +1262,8 @@ body {
 
     .dx-item-content {
       font-size: 1rem;
+      line-height: 22px;
+      color: #545e62;
     }
 
     .dx-fieldset {
@@ -1239,10 +1274,13 @@ body {
   .rewards-content {
     h4 {
       padding-left: 3.5rem;
+      padding-top: 2rem;
     }
 
     img {
       width: 80%;
+      vertical-align: middle;
+      padding-top: 1.1rem;
     }
   }
 
@@ -1279,8 +1317,7 @@ body {
   }
 
   .card .card-header {
-    background-color: #6196cf;
-    border-bottom: 10px solid #6196cf;
+    background-color: #2368a2;
     padding-left: 0.50rem;
   }
 
@@ -1318,6 +1355,9 @@ body {
     -o-box-shadow: 4px 5px 0px -1px #5f6061;
     box-shadow: 4px 5px 0px -1px #5f6061;
     color: #fff;
+  }
+  .card-footer.text-right{
+    text-align: center !important;
   }
 }
 
@@ -1507,15 +1547,27 @@ body {
     pointer-events: auto;
     background-color: #fff;
     background-clip: padding-box;
-    border: 5px solid #2368a2;
-    border-radius: 0;
+    border-radius: 20px;
     outline: 0;
+    border: none;
+
+    .img-rotate{
+    transform: none;
+    max-width: 23%;
+    position: absolute;
+    top: -49px;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    margin: 0 auto;
+    }
   }
 
   .modal-header {
-    background: #fff;
-    border-radius: 0;
-    padding: 1.5rem;
+    background: #2368a2;
+    padding: 2rem;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
   }
 
   .modal-footer {
@@ -1524,8 +1576,33 @@ body {
   }
 
   .modal-body {
+    padding: 0;
+
     p {
       font-weight: 600;
+      padding: 1rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0;
+    }
+    hr{
+      margin-bottom: 0;
+      margin-top: 0;
+    }
+
+    .text-right{
+      background: #eff8ff;
+      padding: 1rem;
+      width: 100%;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      text-align: center!important;
+
+      .btn.btn-primary{
+        background: #aad4f5;
+        color: #545e62;
+        font-weight: 500;
+        border-color: #aad4f5;
+      }
     }
   }
 }
@@ -1544,28 +1621,21 @@ body {
     padding-top: 60px;
 
     .modal-content {
-      border-width: 5px;
+      // border-width: 5px;
       // border-top: 0;
-      border-radius: 0;
-      border-color: #ef991c;
+      border-radius: 20px;
+      // border-color: #4cacbd;
       position: relative;
 
       .modal-header {
         padding: 0;
-        background: #ef991c;
+        background: #4cacbd;
         position: relative;
-        border-radius: 0;
-
-        // padding: 40px;
-        // button.close {
-        //   position: absolute;
-        //   right: 0;
-        //   color: #fff;
-        //   opacity: 1;
-        // }
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
 
         span.exp-img {
-          // background-image: url(../../../assets/img/mitra.png);
+          background-image: url("../src/assets/img/expressions/instructions.png");
           background-size: contain;
           background-position: left;
           background-repeat: no-repeat;
@@ -1575,7 +1645,8 @@ body {
           height: 115px;
           bottom: 18px;
           // margin: 0 auto;
-          // left: 0;
+          text-align: left;
+          left: 0;
           right: 0;
         }
 
@@ -1619,6 +1690,19 @@ body {
           // padding-left: 5rem;
           line-height: 15px;
           margin-top: -3px;
+          font-size: 1rem;
+        }
+      }
+      .modal-footer{
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        background: #ecfcff;
+
+        .btn.btn-primary{
+          background: #a7d2f4;
+          color: #545e62;
+          font-weight: 500;
+          border: 1px solid #a7d2f4;
         }
       }
     }
@@ -1627,8 +1711,10 @@ body {
 
 // Instruction-wrap
 .instruction-wrap {
-  padding-top: 2rem;
-  padding-bottom: 0;
+    padding-top: 3rem;
+    padding-bottom: 0;
+    width: 75%;
+    margin: 0 auto;
 
   .borderBlue {
     @include box-shadow(none);
@@ -1636,22 +1722,24 @@ body {
   }
 
   .card {
-    border-top: 0;
-    border-radius: 20px;
-    border: 15px solid #6196cf;
-    @include box-shadow(0 2px 5px 0 rgba(0, 0, 0, 0.16),
-      0 2px 10px 0 rgba(0, 0, 0, 0.12));
+      border-top: 0;
+      border-radius: 20px;
+      border: none;
+      @include box-shadow(0 8px 8px 0 rgba(0, 0, 0, 0.16),
+      0 8px 8px 0 rgba(0, 0, 0, 0.16));
 
     p {
-      // font-size: 0.85rem;
       line-height: 14px;
+      color: #203d54;
     }
 
     .card-header {
-      padding: 10px 0 0;
-      background: #6196cf;
+      background: #2368a2;
+      padding: 1.8rem;
       position: relative;
       font-size: 0.85rem;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
 
       span.exp-img {
         background-image: url("../src/assets/img/expressions/instructions.png");
@@ -1668,11 +1756,13 @@ body {
         right: 0;
       }
 
-      h4 {
-        padding-left: 1rem;
-        margin-bottom: 1rem;
+      h4, h5 {
         font-size: 1.3rem;
         font-weight: 600;
+        position: absolute;
+        bottom: -45px;
+        z-index: 1;
+        color: #2368a2;
       }
 
       .mcq-title {
@@ -1681,17 +1771,32 @@ body {
         font-size: 0.90rem;
         font-weight: 600;
         margin-bottom: 0;
-        // background: #eceff1;
       }
     }
 
     .card-block {
-      padding: 1.25rem 1.25rem 0 1.25rem;
+      padding: 2.5rem 1.25rem 0 2rem;
+      background: #fff;
+      margin-top: 25px;
     }
 
     .card-footer {
-      border-bottom-left-radius: 5px;
-      border-bottom-right-radius: 5px;
+      background: #eff8ff;
+      border: none;
+      text-align: center;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+
+      .btn.btn-primary{
+        background: #a7d2f4;
+        color: #545e62;
+        font-weight: 500;
+        border: 1px solid #a7d2f4;
+      }
+
+      .float-right{
+        float: none !important;
+      }
     }
   }
 
@@ -1699,7 +1804,6 @@ body {
   .dx-item-content {
     font-size: 0.90rem;
   }
-
 }
 
 .inst-text {
@@ -1786,17 +1890,17 @@ body {
 
 .style-4::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #F5F5F5;
+  background-color: #f9f9f9;
 }
 
 .style-4::-webkit-scrollbar {
   width: 10px;
-  background-color: #F5F5F5;
+  background-color: #f9f9f9;
 }
 
 .style-4::-webkit-scrollbar-thumb {
-  background-color: #171719;
-  border: 1px solid #171719;
+  background-color: #a9a9a9;
+  border: 1px solid #939090;
 }
 
 // ng-pdf-viewer css
@@ -2007,10 +2111,10 @@ body {
   }
 
   .modal-content {
-    border-width: 5px;
+    // border-width: 5px;
     // border-top: 0;
-    border-radius: 0;
-    // border-color: #ef991c;
+    border-radius: 20px;
+    // border-color: #ecfcff;
     position: relative;
   }
 
@@ -2019,23 +2123,22 @@ body {
     align-items: flex-start;
     justify-content: space-between;
     padding: 0;
-    border-bottom: 1px solid #dee2e6;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 
     span.exp-img {
       // background-image: url(../../../assets/img/mitra.png);
       background-size: contain;
-      background-position: left;
-      background-repeat: no-repeat;
-      position: absolute;
-      z-index: 99;
-      width: 115px;
-      height: 115px;
-      bottom: 18px;
-      // margin: 0 auto;
-      // left: 0;
-      right: 0;
+        background-position: left;
+        background-repeat: no-repeat;
+        position: absolute;
+        z-index: 99;
+        width: 100px;
+        height: 100px;
+        bottom: 0;
+        right: 0;
+        left: 25px;
+        top: -12%;
     }
 
     h5 {
@@ -2044,6 +2147,19 @@ body {
       color: #444;
       font-size: 1rem;
       font-weight: 600;
+    }
+  }
+
+  .modal-footer{
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background: #ecfcff;
+
+    .btn.btn-primary{
+      background: #a7d2f4;
+      color: #545e62;
+      font-weight: 500;
+      border: 1px solid #a7d2f4;
     }
   }
 }
@@ -2103,8 +2219,12 @@ h6.questionHead.lineHeight {
 .newCFUPopup {
   &.instructionModal {
     span.exp-img {
-      left: -56px !important;
-      top: -9% !important;
+      left: 23px !important;
+      top: -17% !important;
+    }
+    .modal-body {
+      background: none !important;
+      padding: 1rem 4.5rem;
     }
   }
 }
@@ -2469,7 +2589,7 @@ body {
 // model backdrop show opacity increased
 .modal-backdrop {
   &.show {
-    opacity: .9 !important;
+    opacity: .8 !important;
   }
 }
 
@@ -2538,3 +2658,75 @@ body {
     max-width: 15.666667%;
   }
 }
+
+// SCSS for audio-player in firefox
+@-moz-document url-prefix() { 
+  .audio-container{
+    .card{
+      .card-block{
+        span.disable._play{
+          position: absolute;
+          top: 11%;
+          height: 30px;
+          background: #192023!important;
+        }
+        span.disable._volume{
+          position: absolute;
+          right: 16%;
+          width: 99px;
+          top: 11%;
+          background: #192023!important;
+        }
+      }
+    }
+  }
+
+  @media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
+    /* For portrait layouts only */
+    #container-audio.container-audio{
+      .colum1{
+        width: 15px;
+        height: 5em;
+        border-radius: 5px;
+        margin: 0 9px 0px 0px;
+        display: inline-block;
+        position: relative;
+      }
+    }
+  }
+
+  @media only screen 
+  and (min-device-width: 414px) 
+  and (max-device-width: 736px) 
+  and (-webkit-min-device-pixel-ratio: 3) { 
+    .audio-container{
+      .card{
+        .card-block{
+          span.disable._play{
+            position: absolute;
+            top: 11%;
+            height: 30px;
+            background: #192023 !important;
+            left: 8%;
+          }
+          span.disable._volume{
+            position: absolute;
+            right: 7%;
+            width: 43px;
+            top: 11%;
+            background: #192023 !important;
+          }
+
+          .audio-player{
+            width: 100%;
+          }
+        }
+
+      }
+    }
+  }
+}
+  
+
+
+

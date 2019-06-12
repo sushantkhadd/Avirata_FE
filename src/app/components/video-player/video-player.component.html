@@ -33,11 +33,11 @@
     <div class="modal-dialog modal-primary" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <span class="exp-img instructions-img mt-4 m-0"
+          <span class="exp-img img-rotate instructions-img mt-4 m-0"
             [style.background-image]="'url(\'./../../../assets/img/expressions/mitra_expression_think.png\')'"></span>
           <span class="rewards-content row w-100">
             <div class="col-md-8 col-sm-12 col-12">
-              <h4 class="mt-3 ml-1">{{'Cfu.title' | translate}}</h4>
+              <h4 class="mt-3 ml-5">{{'Cfu.title' | translate}}</h4>
             </div>
             <div class="col-md-2 col-sm-6 col-5 text-right">
               <img class="img-fluid" [class.d-none]="hideMe" [ngClass]="!fiftyFiftyFlag ? 'c-pointer' : 'c-not-allowed'"
@@ -92,10 +92,9 @@
   <div bsModal #toasterPopupModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1"
     role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" [ngClass]="msgFlag ? 'modal-primary' : 'modal-danger'" role="document">
-      <!-- <img class="img-responsive img-rotate" src="assets/img/mitra.png"> -->
-      <div class="modal-content" [style.border-color]="msgFlag ? '#259d58' : '#b82020'">
-        <div class="modal-header text-center" [style.background-color]="msgFlag ? '#259d58' : '#b82020'">
-          <span class="exp-img img-rotate"
+      <div class="modal-content">
+        <div class="modal-header text-center" [style.background-color]="msgFlag ? '#259d58' : '#ef0505'">
+          <span class="exp-img"
             [style.background-image]="msgFlag ? 'url(\'../../../assets/img/expressions/correct_ans.png\')' : 'url(\'../../../assets/img/expressions/wrong_ans.png\')'"></span>
           <!-- <span class="exp-img img-rotate" [style.background-image]="msgFlag ? 'url(\'../../../assets/img/mitra_1.png\')' : 'url(\'../../../assets/img/mitra.png\')'"></span> -->
           <h5 class="text-center text-white mb-3" *ngIf="msgFlag==true">{{'McqTest.popupTitle1' | translate}}</h5>
@@ -108,8 +107,11 @@
           <div *ngIf="msgFlag==false" class="mb-3">
             <p class="congratulation inst-text">{{'Errors.wrongAnsWatchVideo' | translate}}</p>
           </div>
-          <button class="btn btn-primary text-center"
-            (click)="closeToasterPopup()">{{'McqTest.close' | translate}}</button>
+          
+        </div>
+        <div class="modal-footer justify-content-center" [style.background-color]="msgFlag ? '#e7fff1' : '#ffeeee'">
+          <button class="btn text-center" [style.background-color]="msgFlag ? '#69cd93' : '#fa7d7d'"
+          [style.color]="msgFlag ? '#545e62' : '#545e62'" (click)="closeToasterPopup()">{{'McqTest.close' | translate}}</button>
         </div>
       </div>
     </div>

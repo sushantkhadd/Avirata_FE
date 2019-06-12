@@ -239,9 +239,9 @@
 <div bsModal #rankModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-primary" role="document">
-        <div class="modal-content" [style.border-color]="rightFlag ? '#259d58' : '#b82020'">
-            <div class="modal-header" [style.background-color]="rightFlag ? '#259d58' : '#b82020'">
-            <span class="exp-img img-rotate" [style.background-image]="rightFlag ? 'url(\'../../../assets/img/expressions/correct_ans.png\')' : 'url(\'../../../assets/img/expressions/wrong_ans.png\')'"></span>
+        <div class="modal-content">
+            <div class="modal-header" [style.background-color]="rightFlag ? '#259d58' : '#ef0505'">
+            <span class="exp-img img-fluid" [style.background-image]="rightFlag ? 'url(\'../../../assets/img/expressions/correct_ans.png\')' : 'url(\'../../../assets/img/expressions/wrong_ans.png\')'"></span>
             <!-- <button type="button" class="close" (click)="rankModal.hide()" aria-label="Close" id="btnCloseModal">
             <span aria-hidden="true">&times;</span>
             </button> -->
@@ -268,10 +268,10 @@
                 <p><b>{{'newTranslate.description' | translate }}</b></p>
                 <p> {{description}}</p>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer justify-content-center" [style.background-color]="rightFlag ? '#e7fff1' : '#ffeeee'">
                 <!-- <button type="button" class="btn btn-primary" (click)="rankModal.hide();btn5=true;">{{'Profile.Make Change' |
           translate}}</button> -->
-                <button type="button" [ngClass]="rightFlag ? 'btn-success':'btn-danger'" class="btn float-right" (click)="rankConfirmNext()">
+                <button type="button" [ngClass]="rightFlag ? 'btn-success':'btn-danger'" class="btn" (click)="rankConfirmNext()">
                   {{'Stepper.Next' | translate }}</button>
             </div>
         </div>
