@@ -101,6 +101,7 @@ export class Module1Service {
            window.localStorage.setItem('currentstatus', '2');
            window.localStorage.setItem('moduleFinishCount', JSON.stringify(data['data']));
            window.localStorage.setItem('mainFlagModule1', '13');
+           window.localStorage.setItem('mainFlagModule2', '1');
             this.setLocalStorage1(13);
            var obj1 = {
              "type": "moduleFinish",

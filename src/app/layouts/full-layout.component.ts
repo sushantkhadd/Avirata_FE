@@ -2345,7 +2345,7 @@ export class FullLayoutComponent implements OnInit {
     this.mainFlagModule5 = parseInt(
       window.localStorage.getItem("mainFlagModule5")
     );
-    if (this.mainFlagModule5 > 13) {
+    if (this.mainFlagModule5 > 15) {
       this.currentFlag6 = false;
       this.module6OnOffFlag = true;
       this.module5OnOffFlag = true;
