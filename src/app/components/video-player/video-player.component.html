@@ -41,10 +41,12 @@
             </div>
             <div class="col-md-2 col-sm-6 col-5 text-right">
               <img class="img-fluid" [class.d-none]="hideMe" [ngClass]="!fiftyFiftyFlag ? 'c-pointer' : 'c-not-allowed'"
+                [class.breathing]="!fiftyFiftyFlag"
                 (click)="!fiftyFiftyFlag ? getRewards('fifty_fifty') : undefined" [src]="rewardImgUrl1" alt="">
             </div>
             <div class="col-md-2 col-sm-6 col-5">
               <img class="img-fluid" [ngClass]="!askMeFlag ? 'c-pointer' : 'c-not-allowed'"
+              [class.breathing]="!askMeFlag"
                 (click)="!askMeFlag ? askMeModal.show() : undefined" [src]="rewardImgUrl2" alt="">
             </div>
           </span>

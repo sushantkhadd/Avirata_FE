@@ -109,7 +109,7 @@
               <span>{{'number.1' | translate}}.
               </span>{{'L2Module1.title' | translate}}
               <span *ngIf="statusFlag">
-                <img class="rewardImg" [src]="rewardImgUrl" alt="">
+                <img class="rewardImg" [src]="rewardImgUrl1" alt="">
               </span>
             </a>
           </span>
@@ -119,7 +119,7 @@
               <span>{{'number.1' | translate}}.
               </span>{{'L2Module1.title' | translate}}
               <span *ngIf="statusFlag">
-                <img class="rewardImg" [src]="rewardImgUrl" alt="">
+                <img class="rewardImg" [src]="rewardImgUrl1" alt="">
               </span>
             </a>
           </span>
@@ -260,7 +260,7 @@
               <span>{{'number.2' | translate}}.</span>
               {{'L2Module2.title' | translate}}
               <span *ngIf="statusFlag">
-                <img class="rewardImg" [src]="rewardImgUrl" alt="">
+                <img class="rewardImg" [src]="rewardImgUrl2" alt="">
               </span>
             </a>
           </span>
@@ -270,7 +270,7 @@
               <span>{{'number.2' | translate}}.</span>
               {{'L2Module2.title' | translate}}
               <span *ngIf="statusFlag">
-                <img class="rewardImg" [src]="rewardImgUrl" alt="">
+                <img class="rewardImg" [src]="rewardImgUrl2" alt="">
               </span>
             </a>
           </span>
@@ -467,7 +467,7 @@
               <span>{{'number.3' | translate}}.</span>
               {{'L2Module3.title' | translate}}
               <span *ngIf="statusFlag">
-                <img class="rewardImg" [src]="rewardImgUrl" alt="">
+                <img class="rewardImg" [src]="rewardImgUrl3" alt="">
               </span>
             </a>
           </span>
@@ -477,7 +477,7 @@
               <span>{{'number.3' | translate}}.</span>
               {{'L2Module3.title' | translate}}
               <span *ngIf="statusFlag">
-                <img class="rewardImg" [src]="rewardImgUrl" alt="">
+                <img class="rewardImg" [src]="rewardImgUrl3" alt="">
               </span>
             </a>
           </span>
@@ -637,7 +637,7 @@
               <span>{{'number.4' | translate}}.
               </span>{{'L2Module4.title' | translate}}
               <span *ngIf="statusFlag">
-                <img class="rewardImg" [src]="rewardImgUrl" alt="">
+                <img class="rewardImg" [src]="rewardImgUrl4" alt="">
               </span>
             </a>
           </span>
@@ -645,7 +645,7 @@
             <a href="#module4Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [class.deactive-menu1]="!module4OnOffFlag">
               <span>{{'number.4' | translate}}. </span>{{'L2Module4.title' | translate}}
               <span *ngIf="statusFlag">
-                <img class="rewardImg" [src]="rewardImgUrl" alt="">
+                <img class="rewardImg" [src]="rewardImgUrl4" alt="">
               </span>
             </a>
           </span>
@@ -784,7 +784,7 @@
               <span>{{'number.5' | translate}}.
               </span>{{'L2Module5.title' | translate}}
               <span *ngIf="statusFlag">
-                <img class="rewardImg" [src]="rewardImgUrl" alt="">
+                <img class="rewardImg" [src]="rewardImgUrl5" alt="">
               </span>
             </a>
           </span>
@@ -792,7 +792,7 @@
             <a href="#module5Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [class.deactive-menu1]="!module5OnOffFlag">
               <span>{{'number.5' | translate}}. </span>{{'L2Module5.title' | translate}}
               <span *ngIf="statusFlag">
-                <img class="rewardImg" [src]="rewardImgUrl" alt="">
+                <img class="rewardImg" [src]="rewardImgUrl5" alt="">
               </span>
             </a>
           </span>
@@ -921,19 +921,19 @@
           </ul>
         </li>
       </div>
-      <li>
+      <!-- <li>
         <span *ngIf="!currentFlag6">
           <a href="#module6Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" (click)="currentStatus(6)"
             [class.deactive-menu1]="!module6OnOffFlag">{{'number.6' | translate}}. {{'L2Module6.title' | translate}}
             <span *ngIf="statusFlag">
-              <img class="rewardImg" [src]="rewardImgUrl" alt="">
+              <img class="rewardImg" [src]="rewardImgUrl4" alt="">
             </span>
           </a>
         </span>
         <span *ngIf="currentFlag6">
           <a href="#module6Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [class.deactive-menu1]="!module6OnOffFlag">{{'number.6' | translate}}. {{'L2Module6.title' | translate}}
             <span *ngIf="statusFlag">
-              <img class="rewardImg" [src]="rewardImgUrl" alt="">
+              <img class="rewardImg" [src]="rewardImgUrl4" alt="">
             </span>
           </a>
         </span>
@@ -963,14 +963,14 @@
           <a href="#module7Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" (click)="currentStatus(7)"
             [class.deactive-menu1]="!module7OnOffFlag">{{'number.7' | translate}}. {{'L2Module7.title' | translate}}
             <span *ngIf="statusFlag">
-              <img class="rewardImg" [src]="rewardImgUrl" alt="">
+              <img class="rewardImg" [src]="rewardImgUrl4" alt="">
             </span>
           </a>
         </span>
         <span *ngIf="currentFlag7" class="bottom-divider">
           <a href="#module7Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [class.deactive-menu1]="!module7OnOffFlag">{{'number.7' | translate}}. {{'L2Module7.title' | translate}}
             <span *ngIf="statusFlag">
-              <img class="rewardImg" [src]="rewardImgUrl" alt="">
+              <img class="rewardImg" [src]="rewardImgUrl4" alt="">
             </span>
           </a>
         </span>
@@ -1002,7 +1002,8 @@
             </span>
           </li>
         </ul>
-      </li>
+      </li> -->
+
       <hr class="bottom_hr">
       <div>
         <li class="nav-item" [class.activeMenu]="router.url==='/dashboard/faq'">

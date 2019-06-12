@@ -18,7 +18,7 @@ export class Module2Service {
   public passDataResponse: EventEmitter<any> = new EventEmitter();
   public resultAfterFirstSumbit: EventEmitter<any> = new EventEmitter();
 
-  public url1_1; url1_2; url1_3; url1_4; url1_5; url1_6; url1_7; url1_8; url1_9; url1_10; url1_11; url1_12;
+  public url1_1; url1_2; url1_3; url1_4; url1_5; url1_6; url1_7; url1_8; url1_9; url1_10; url1_11; url1_12; levelData;
   constructor(public FullLayoutService: FullLayoutService, public httpClient: HttpClient, public router: Router, public LocalstoragedetailsService: LocalstoragedetailsService, public toastr: ToastsManager, public translate: TranslateService, public LanguageService: LanguageService) { }
 
   setLocalStorage2(data) {
@@ -101,6 +101,20 @@ export class Module2Service {
          {
           window.localStorage.setItem('moduleFinishCount', JSON.stringify(data['data']));
            window.localStorage.setItem('mainFlagModule2', '18');
+           this.levelData = localStorage.getItem("levelData");
+           for (let index = 0; index < this.levelData.length; index++)
+           {
+             if (parseInt(window.localStorage.getItem("currentstatus")) == index)
+             {
+               let current1 = [];
+               current1 = JSON.parse(window.localStorage.getItem("levelData"));
+               let index1 = current1.findIndex(
+                 item => item.module == index);
+               current1[index1].percent = JSON.stringify(data['data'].percentage);
+               window.localStorage.setItem("levelData", JSON.stringify(current1));
+               console.log(current1, "fifirty")
+             }
+           }
            window.localStorage.setItem("currentstatus", "3");
             this.setLocalStorage2(18);
             var obj1 = { "type": "moduleFinish", "route": true, "current": this.translate.instant('L2Module2.subMenu2-17'), "next": this.translate.instant('L2Module3.title'), "nextRoute": "/dashboard", "finishHead": this.translate.instant('L2Module2.title') }

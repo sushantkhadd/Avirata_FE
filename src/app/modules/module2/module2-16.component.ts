@@ -102,10 +102,10 @@ export class Module216Component implements OnInit {
     var jsonBody = {};
     jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
     var ansJson = {};
-    ansJson[this.questionid1] = this.answer1;
-    ansJson[this.questionid2] = this.answer2;
-    ansJson[this.questionid3] = this.answer3;
-    ansJson[this.questionid4] = this.answer4;
+    ansJson[this.questionid1] = (this.answer1).trim();
+    ansJson[this.questionid2] = (this.answer2).trim();
+    ansJson[this.questionid3] = (this.answer3).trim();
+    ansJson[this.questionid4] = (this.answer4).trim();
 
     jsonBody["useranswer"] = ansJson;
     jsonBody["event"] = "answer";

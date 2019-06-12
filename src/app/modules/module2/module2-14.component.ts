@@ -59,7 +59,7 @@ export class Module214Component implements OnInit {
     var jsonBody = {};
     jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
     var ansJson = {};
-    ansJson[this.questionid] = this.answer;
+    ansJson[this.questionid] = (this.answer).trim();
     jsonBody["useranswer"] = ansJson;
     jsonBody["event"] = "answer";
     var apiUrl = "l3freetext/";

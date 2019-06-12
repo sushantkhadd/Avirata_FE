@@ -1,20 +1,26 @@
-import { Component, OnInit, ViewChild, ViewContainerRef, HostListener } from '@angular/core';
-import { FullLayoutService } from './full-layout.service';
-import { Router, NavigationStart, NavigationEnd } from '@angular/router';
-import { LanguageService } from './../language.service';
-import { DashboardService } from './../dashboard/dashboard.service';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ViewContainerRef,
+  HostListener
+} from "@angular/core";
+import { FullLayoutService } from "./full-layout.service";
+import { Router, NavigationStart, NavigationEnd } from "@angular/router";
+import { LanguageService } from "./../language.service";
+import { DashboardService } from "./../dashboard/dashboard.service";
 import { LocalstoragedetailsService } from "src/app/services/localstoragedetails.service";
 import { ModalDirective } from "ngx-bootstrap";
 import { ProfileService } from "src/app/dashboard/profile/profile.service";
-import { ToastsManager } from 'ng6-toastr';
+import { ToastsManager } from "ng6-toastr";
 import { PermissionModelService } from "src/app/permission-model.service";
-import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
+import { SlimLoadingBarService } from "ng2-slim-loading-bar";
 import html2canvas from "html2canvas";
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer } from "@angular/platform-browser";
 import { map, filter, take } from "rxjs/operators";
 import { interval, pipe, Subscription } from "rxjs";
-import { SignupStepperService } from '../signup-stepper/signup-stepper.service';
-import { SharedDataService } from '../services/shared-data.service';
+import { SignupStepperService } from "../signup-stepper/signup-stepper.service";
+import { SharedDataService } from "../services/shared-data.service";
 
 declare var jQuery: any;
 
@@ -22,7 +28,6 @@ declare var jQuery: any;
   selector: "app-dashboard",
   templateUrl: "./full-layout.component.html",
   styleUrls: ["./full-layout.component.scss"]
-
 })
 export class FullLayoutComponent implements OnInit {
   public mainFlagModule5 = 0;
@@ -38,7 +43,8 @@ export class FullLayoutComponent implements OnInit {
   public disabled: boolean = false;
   public status: { isopen: boolean } = { isopen: false };
   private trainee = false;
-  imgUrl; rewardsFlag;
+  imgUrl;
+  rewardsFlag;
   needEfforts;
   subscription: Subscription;
 
@@ -97,18 +103,26 @@ export class FullLayoutComponent implements OnInit {
   userName;
   moduleFinishCount;
   levelData;
-  rewardImgUrl;
+  rewardImgUrl0;
+  rewardImgUrl1;
+  rewardImgUrl2;
+  rewardImgUrl3;
+  rewardImgUrl4;
+  rewardImgUrl5;
+
   statusFlag;
-  finishImgUrl; intVal;
+  finishImgUrl;
+  intVal;
   imageJson = {
-    a1: "../../assets/img/rewards/gold star.png",
-    a2: "../../assets/img/rewards/silver star.png",
-    a3: "../../assets/img/rewards/bronze star.png",
+    a1: "../../assets/img/rewards/side_gold_star.png",
+    a2: "../../assets/img/rewards/side_silver_star.png",
+    a3: "../../assets/img/rewards/side_bronze_star.png",
     a4: "",
     r1: "../../assets/img/rewards/gold_star.png",
     r2: "../../assets/img/rewards/silver_star.png",
     r3: "../../assets/img/rewards/bronze_star.png"
   };
+
   animatedImageJson = {
     a1: "../../assets/img/rewards/single-stars/gold_small.png",
     a2: "../../assets/img/rewards/single-stars/gold.png",
@@ -132,7 +146,7 @@ export class FullLayoutComponent implements OnInit {
     vcr: ViewContainerRef,
     private lBar: SlimLoadingBarService,
     private _sanitizer: DomSanitizer,
-    private sharedService : SharedDataService
+    private sharedService: SharedDataService
   ) {
     this.toastr.setRootViewContainerRef(vcr);
     this.router.events.subscribe((event: any) => {
@@ -191,8 +205,7 @@ export class FullLayoutComponent implements OnInit {
     html2canvas(document.querySelector("#capture")).then(canvas => {
       this.shareableImage = canvas.toDataURL();
       console.log(canvas, this.shareableImage);
-      if (this.shareableImage)
-      {
+      if (this.shareableImage) {
         var link = document.createElement("a");
         link.href = this.shareableImage;
         link.download = "my-reward.png";
@@ -229,7 +242,6 @@ export class FullLayoutComponent implements OnInit {
   }
 
   ngOnInit() {
-
     // if (this.moduleCompleteStatus["type"] == "submodule")
     // {
     //   this.setInterval()
@@ -239,11 +251,10 @@ export class FullLayoutComponent implements OnInit {
     // }
     this.subscription = this.sharedService.getData().subscribe(data => {
       console.log("sharedServicedata", data);
-      if (data)
-      {
+      if (data) {
         this.currentStatus(data);
       }
-    })
+    });
 
     jQuery("#sidebarCollapse").on("click", function() {
       jQuery("#sidebar").toggleClass("active");
@@ -307,8 +318,8 @@ export class FullLayoutComponent implements OnInit {
       this.LocalstoragedetailsService.timelineState = this.moduleStatusCheck;
       this.DashboardService.getProfilePic(this.userId).subscribe(
         data => {
-          if (data['results'].length != 0) {
-            this.imgUrl = data['results'][0].file;
+          if (data["results"].length != 0) {
+            this.imgUrl = data["results"][0].file;
           } else {
             this.imgUrl = "/assets/img/Profile_pic.png";
           }
@@ -321,57 +332,18 @@ export class FullLayoutComponent implements OnInit {
 
       this.setDisableMenu();
     }
+    this.statusFlag = true;
 
     this.levelData = JSON.parse(localStorage.getItem("levelData"));
-    for (let index = 0; index < this.levelData.length; index++) {
-      if (
-        this.levelData[index].percent != null &&
-        this.levelData[index].percent != undefined &&
-        this.levelData[index].percent != ""
-      ) {
-        if (this.levelData[index].status === true) {
-          this.statusFlag = true;
-        } else {
-          this.statusFlag = false;
-        }
-        console.log("true", this.levelData[index].percent);
-        if (parseInt(this.levelData[index].percent) > 80) {
-          this.rewardImgUrl = this.imageJson["a1"];
-          console.log("gold", this.levelData[index].percent);
-        } else if (
-          parseInt(this.levelData[index].percent) > 50 &&
-          parseInt(this.levelData[index].percent) <= 80
-        ) {
-          this.rewardImgUrl = this.imageJson["a2"];
-          console.log("silver", parseInt(this.levelData[index].percent));
-        } else if (
-          parseInt(this.levelData[index].percent) >= 10 &&
-          parseInt(this.levelData[index].percent) <= 50
-        ) {
-          this.rewardImgUrl = this.imageJson["a3"];
-          console.log("bronze", this.levelData[index].percent);
-        } else if (
-          parseInt(this.levelData[index].percent) >= 0 &&
-          parseInt(this.levelData[index].percent) < 10
-        ) {
-          this.rewardImgUrl = this.imageJson["a4"];
-          console.log("other", this.levelData[index].percent);
-        }
-      }
-      console.log("statusFlag", this.levelData, this.levelData[index].status);
-    }
-    // console.log("leveldata",this.levelData,this.statusFlag)
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
   setInterval() {
     interval(1000)
-      .pipe(
-        take(3)
-      )
+      .pipe(take(3))
       .subscribe(value => {
         this.intVal = value;
       });
@@ -572,7 +544,7 @@ export class FullLayoutComponent implements OnInit {
           //   }, 4000);
           // } else
           if (
-            error.error.message == "worng module number" ||
+            error.error.message == "wrong module number" ||
             error.error.message == 'unknown source"'
           ) {
             if (moduleNo == 5) {
@@ -849,7 +821,6 @@ export class FullLayoutComponent implements OnInit {
           this.subFlagModule5.toString()
         );
       }
-
     }
     this.LocalstoragedetailsService.setModule5Falgs(
       this.mainFlagModule5,
@@ -866,10 +837,7 @@ export class FullLayoutComponent implements OnInit {
       this.mainFlagModule4 = 15;
     } else {
       var source = window.localStorage.getItem("source");
-      if (
-        source == "module 4.1.1" ||
-        source == "module 4.1.2"
-      ) {
+      if (source == "module 4.1.1" || source == "module 4.1.2") {
         this.mainFlagModule4 = 1;
         if (source == "module 4.1.1") {
           this.subFlagModule4 = 1;
@@ -1406,7 +1374,7 @@ export class FullLayoutComponent implements OnInit {
       this.mainFlagModule3 = 19;
     } else {
       var source = window.localStorage.getItem("source");
-       if (
+      if (
         source == "module 3.1" ||
         source == "module 3.1.1" ||
         source == "module 3.1.2" ||
@@ -2163,12 +2131,103 @@ export class FullLayoutComponent implements OnInit {
   }
 
   ngDoCheck() {
-    this.levelData = JSON.parse(localStorage.getItem("levelData"));
+
+    if (
+      localStorage.getItem("levelData") != null &&
+      localStorage.getItem("levelData") != "" &&
+      localStorage.getItem("levelData") != undefined
+    )
+    {
+      this.levelData = JSON.parse(localStorage.getItem("levelData"));
+
+      let percent0 = parseInt(this.levelData[0].percent);
+      let percent1 = parseInt(this.levelData[1].percent);
+      let percent2 = parseInt(this.levelData[2].percent);
+      let percent3 = parseInt(this.levelData[3].percent);
+      let percent4 = parseInt(this.levelData[4].percent);
+      let percent5 = parseInt(this.levelData[5].percent);
+
+      var perval0 = isNaN(percent0);
+      var perval1 = isNaN(percent1);
+      var perval2 = isNaN(percent2);
+      var perval3 = isNaN(percent3);
+      var perval4 = isNaN(percent4);
+      var perval5 = isNaN(percent5);
+
+      if (perval0 == false && this.levelData[0].status == true) {
+        if (percent0 > 80) {
+          this.rewardImgUrl0 = this.imageJson["a1"];
+        } else if (percent0 <= 80 && percent0 > 50) {
+          this.rewardImgUrl0 = this.imageJson["a2"];
+        } else if (percent0 >= 10 && percent0 <= 50) {
+          this.rewardImgUrl0 = this.imageJson["a3"];
+        } else if (percent0 >= 0 && percent0 < 10) {
+          this.rewardImgUrl0 = this.imageJson["a2"];
+        }
+      }
+      if (perval1 == false && this.levelData[1].status == true) {
+        if (percent1 > 80) {
+          this.rewardImgUrl1 = this.imageJson["a1"];
+        } else if (percent1 <= 80 && percent1 > 50) {
+          this.rewardImgUrl1 = this.imageJson["a2"];
+        } else if (percent1 >= 10 && percent1 <= 50) {
+          this.rewardImgUrl1 = this.imageJson["a3"];
+        } else if (percent1 >= 0 && percent1 < 10) {
+          this.rewardImgUrl1 = this.imageJson["a4"];
+        }
+      }
+      if (perval2 == false && this.levelData[2].status == true) {
+        if (percent2 > 80) {
+          this.rewardImgUrl2 = this.imageJson["a1"];
+        } else if (percent2 <= 80 && percent2 > 50) {
+          this.rewardImgUrl2 = this.imageJson["a2"];
+        } else if (percent2 >= 10 && percent2 <= 50) {
+          this.rewardImgUrl2 = this.imageJson["a3"];
+        } else if (percent2 >= 0 && percent2 < 10) {
+          this.rewardImgUrl2 = this.imageJson["a4"];
+        }
+      }
+      if (perval3 == false && this.levelData[3].status == true) {
+        if (percent3 > 80) {
+          this.rewardImgUrl3 = this.imageJson["a1"];
+        } else if (percent3 <= 80 && percent3 > 50) {
+          this.rewardImgUrl3 = this.imageJson["a2"];
+        } else if (percent3 >= 10 && percent3 <= 50) {
+          this.rewardImgUrl3 = this.imageJson["a3"];
+        } else if (percent3 >= 0 && percent3 < 10) {
+          this.rewardImgUrl3 = this.imageJson["a4"];
+        }
+      }
+
+      if (perval4 == false && this.levelData[4].status == true) {
+        if (percent4 > 80) {
+          this.rewardImgUrl4 = this.imageJson["a1"];
+        } else if (percent4 <= 80 && percent4 > 50) {
+          this.rewardImgUrl4 = this.imageJson["a2"];
+        } else if (percent4 >= 10 && percent4 < 50) {
+          this.rewardImgUrl4 = this.imageJson["a3"];
+        } else if (percent4 >= 0 && percent4 < 10) {
+          this.rewardImgUrl4 = this.imageJson["a4"];
+        }
+      }
+
+      if (perval5 == false && this.levelData[5].status == true) {
+        if (percent5 > 80) {
+          this.rewardImgUrl5 = this.imageJson["a1"];
+        } else if (percent5 <= 80 && percent5 > 50) {
+          this.rewardImgUrl5 = this.imageJson["a2"];
+        } else if (percent5 >= 10 && percent5 < 50) {
+          this.rewardImgUrl5 = this.imageJson["a3"];
+        } else if (percent5 >= 0 && percent5 < 10) {
+          this.rewardImgUrl5 = this.imageJson["a4"];
+        }
+      }
+    }
 
     if (
       window.localStorage.getItem("moduleFinishCount") != null &&
-      window.localStorage.getItem("moduleFinishCount") != null &&
-      window.localStorage.getItem("moduleFinishCount") != null
+      window.localStorage.getItem("moduleFinishCount") != "" &&
+      window.localStorage.getItem("moduleFinishCount") != undefined
     ) {
       this.moduleFinishCount = JSON.parse(
         window.localStorage.getItem("moduleFinishCount")
@@ -2177,8 +2236,10 @@ export class FullLayoutComponent implements OnInit {
         this.finishImgUrl = this.imageJson["r1"];
         this.needEfforts = false;
         this.rewardsFlag = 1;
-        jQuery(".animate-reward img").each(function (i) {
-          jQuery(this).delay(100 * i).fadeIn(1500);
+        jQuery(".animate-reward img").each(function(i) {
+          jQuery(this)
+            .delay(100 * i)
+            .fadeIn(1500);
         });
       } else if (
         this.moduleFinishCount.percentage > 50 &&
@@ -2187,8 +2248,10 @@ export class FullLayoutComponent implements OnInit {
         this.finishImgUrl = this.imageJson["r2"];
         this.needEfforts = false;
         this.rewardsFlag = 2;
-        jQuery(".animate-reward img").each(function (i) {
-          jQuery(this).delay(100 * i).fadeIn(1500);
+        jQuery(".animate-reward img").each(function(i) {
+          jQuery(this)
+            .delay(100 * i)
+            .fadeIn(1500);
         });
       } else if (
         this.moduleFinishCount.percentage >= 10 &&
@@ -2197,8 +2260,10 @@ export class FullLayoutComponent implements OnInit {
         this.finishImgUrl = this.imageJson["r3"];
         this.needEfforts = false;
         this.rewardsFlag = 3;
-        jQuery(".animate-reward img").each(function (i) {
-          jQuery(this).delay(100 * i).fadeIn(1500);
+        jQuery(".animate-reward img").each(function(i) {
+          jQuery(this)
+            .delay(100 * i)
+            .fadeIn(1500);
         });
       } else if (
         this.moduleFinishCount.percentage >= 0 &&

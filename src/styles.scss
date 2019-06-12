@@ -1245,8 +1245,10 @@ body {
       width: 80%;
     }
   }
+}
 
-
+.breathing {
+      @include animation(breathing 1s ease-out infinite normal);
 }
 
 .instructionModal.current .modal-dialog {
@@ -2064,11 +2066,12 @@ body {
     }
   }
 
-  .options{
-    .option{
-      label{
+  .options {
+    .option {
+      label {
+
         //to align checkbox and label
-        span{
+        span {
           display: block;
           margin-left: 16px;
           margin-top: -26px;
@@ -2148,13 +2151,31 @@ h6.questionHead.lineHeight {
 
 }
 
-@include keyframes(spin) {
+@include keyframes (breathing) {
   0% {
-    -webkit-transform: rotate(0deg);
+    @include transform(scale(0.9));
+  }
+
+  25% {
+    @include transform(scale(1));
+  }
+
+  60% {
+    @include transform(scale(0.9));
   }
 
   100% {
-    -webkit-transform: rotate(360deg);
+    @include transform(scale(0.9));
+  }
+}
+
+@include keyframes(spin) {
+  0% {
+    @include transform(rotate(0deg));
+  }
+
+  100% {
+    @include transform(rotate(360deg));
   }
 }
 

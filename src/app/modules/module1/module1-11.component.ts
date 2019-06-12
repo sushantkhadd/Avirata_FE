@@ -217,11 +217,11 @@ export class Module111Component implements OnInit {
 
     jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
     var ansJson = {};
-    ansJson[this.questionlist[0].questionid] = this.answer1;
-    ansJson[this.questionlist[1].questionid] = this.answer2;
-    ansJson[this.questionlist[2].questionid] = this.answer3;
-    ansJson[this.questionlist[3].questionid] = this.answer4;
-    ansJson[this.questionlist[4].questionid] = this.answer5;
+    ansJson[this.questionlist[0].questionid] = (this.answer1).trim();
+    ansJson[this.questionlist[1].questionid] = (this.answer2).trim();
+    ansJson[this.questionlist[2].questionid] = (this.answer3).trim();
+    ansJson[this.questionlist[3].questionid] = (this.answer4).trim();
+    ansJson[this.questionlist[4].questionid] = (this.answer5).trim();
     jsonBody["useranswer"] = ansJson;
     jsonBody["event"] = "answer";
     console.log(ansJson, jsonBody);
@@ -233,12 +233,12 @@ export class Module111Component implements OnInit {
     var apiUrl = "moduleonerebtmcq/";
     jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
     var ansJson = {};
-    ansJson[this.questionlist[0].questionid] = this.answer1;
-    ansJson[this.questionlist[1].questionid] = this.answer2;
-    ansJson[this.questionlist[2].questionid] = this.answer3;
-    ansJson[this.questionlist[3].questionid] = this.answer4;
-    ansJson[this.questionlist[4].questionid] = this.answer5;
-    ansJson[this.questionlist[5].questionid] = this.answer6;
+    ansJson[this.questionlist[0].questionid] = (this.answer1).trim();
+    ansJson[this.questionlist[1].questionid] = (this.answer2).trim();
+    ansJson[this.questionlist[2].questionid] = (this.answer3).trim();
+    ansJson[this.questionlist[3].questionid] = (this.answer4).trim();
+    ansJson[this.questionlist[4].questionid] = (this.answer5).trim();
+    ansJson[this.questionlist[5].questionid] = (this.answer6).trim();
     jsonBody["useranswer"] = ansJson;
     jsonBody["event"] = "answer";
     console.log(ansJson, jsonBody);
