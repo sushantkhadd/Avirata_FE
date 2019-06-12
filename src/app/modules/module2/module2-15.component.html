@@ -8,7 +8,7 @@
   </div>
 </div>
 <div *ngIf="mainFlagModule2 ==15">
-  <div class="col-sm-12 col-md-12 instruction-wrap ins-block" *ngIf="!startEvent">
+  <div class="instruction-wrap ins-block" *ngIf="!startEvent">
     <div>
       <div class="card">
         <div class="card-header text-white">
@@ -87,12 +87,16 @@
 
 <div *ngIf="mainFlagModule2 > 15">
   <div class="card unlock-view">
+      <div class="card-footer text-center mb-3">
+          <h6 class="text-center" *ngIf="flag == 0">{{'L2Module2.subMenu2-15' | translate}}</h6>
+          <h6 class="text-center" *ngIf="flag != 0">{{thumb_title | translate}}</h6>
+        </div>
     <div class="card-block cc p-4">
       <div class="row static-content" *ngIf="flag == 0">
         <div class="col-md-4">
-          <p class="title">1. {{'L2Module2.mitra' | translate}}</p>
+          <p class="title">1. {{'L2Module2.unlock_sub2_15_1' | translate}}</p>
           <div class="img-wrap">
-            <a (click)="showVideo(urlArray['src1'],'L2Module2.mitra',1)">
+            <a (click)="showVideo(urlArray['src1'],'L2Module2.unlock_sub2_15_1',1)">
               <img class="img-fluid v_thumb" src="./../../assets/img/thumb/3.8.1-Mitra-(M3B).png" alt="">
               <div class="hover-opaque">
               </div>
@@ -100,9 +104,9 @@
           </div>
         </div>
         <div class="col-md-4">
-          <p class="title">2. {{'L2Module2.subMenu2-15' | translate}}</p>
+          <p class="title">2. {{'L2Module2.unlock_sub2_15_2' | translate}}</p>
           <div class="img-wrap">
-            <a (click)="showVideo(urlArray['src2'],'L2Module2.subMenu2-15',2)">
+            <a (click)="showVideo(urlArray['src2'],'L2Module2.unlock_sub2_15_2',2)">
               <img class="img-fluid v_thumb" src="./../../assets/img/thumb/3.8.2.png" alt="">
               <div class="hover-opaque">
                 <i class="fa fa-play-circle fa-2x"></i>
@@ -111,9 +115,9 @@
           </div>
         </div>
         <div class="col-md-4">
-          <p class="title">3. {{'L2Module2.subMenu2-15' | translate}}</p>
+          <p class="title">3. {{'L2Module2.unlock_sub2_15_3' | translate}}</p>
           <div class="img-wrap">
-            <a (click)="showVideo(urlArray['src3'],'L2Module2.subMenu2-15',3)">
+            <a (click)="showVideo(urlArray['src3'],'L2Module2.unlock_sub2_15_3',3)">
               <img class="img-fluid v_thumb" src="./../../assets/img/thumb/3.8.2.png" alt="">
               <div class="hover-opaque">
                 <i class="fa fa-play-circle fa-2x"></i>
@@ -122,9 +126,9 @@
           </div>
         </div>
         <div class="col-md-4">
-          <p class="title">4. {{'L2Module2.subMenu2-15' | translate}}</p>
+          <p class="title">4. {{'L2Module2.unlock_sub2_15_4' | translate}}</p>
           <div class="img-wrap">
-            <a (click)="showVideo(urlArray['src4'],'L2Module2.subMenu2-15',4)">
+            <a (click)="showVideo(urlArray['src4'],'L2Module2.unlock_sub2_15_4',4)">
               <img class="img-fluid v_thumb" src="./../../assets/img/thumb/3.8.2.png" alt="">
               <div class="hover-opaque">
               </div>
@@ -132,9 +136,9 @@
           </div>
         </div>
         <div class="col-md-4">
-          <p class="title">5. {{'L2Module2.subMenu2-15' | translate}}</p>
+          <p class="title">5. {{'L2Module2.unlock_sub2_15_5' | translate}}</p>
           <div class="img-wrap">
-            <a (click)="showVideo(urlArray['src5'],'L2Module2.subMenu2-15',5)">
+            <a (click)="showVideo(urlArray['src5'],'L2Module2.unlock_sub2_15_5',5)">
               <img class="img-fluid v_thumb" src="./../../assets/img/thumb/3.8.2.png" alt="">
               <div class="hover-opaque">
                 <i class="fa fa-play-circle fa-2x"></i>
@@ -143,9 +147,9 @@
           </div>
         </div>
         <div class="col-md-4">
-          <p class="title">6. {{'L2Module2.subMenu2-15' | translate}}</p>
+          <p class="title">6. {{'L2Module2.unlock_sub2_15_6' | translate}}</p>
           <div class="img-wrap">
-            <a (click)="showVideo(urlArray['src6'],'L2Module2.subMenu2-15',6)">
+            <a (click)="showVideo(urlArray['src6'],'L2Module2.unlock_sub2_15_6',6)">
               <img class="img-fluid v_thumb" src="./../../assets/img/thumb/3.8.2.png" alt="">
               <div class="hover-opaque">
                 <i class="fa fa-play-circle fa-2x"></i>
@@ -154,7 +158,7 @@
           </div>
         </div>
       </div>
-      <div *ngIf="flag == 1">
+      <div *ngIf="flag == 1" class="text-center">
         <img class="img-fluid" [src]="urlArray['src1']" alt="">
         <div class="card-footer text-center bg-white border-0">
           <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>

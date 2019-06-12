@@ -1129,7 +1129,7 @@
     aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-primary" role="document">
       <div class="modal-content">
-        <div class="modal-header p-3">
+        <div class="modal-header p-4">
           <span class="exp-img"></span>
           <!-- <span class="exp-img instructions-img"
             [style.background-image]="'url(\'./../../../assets/img/expressions/instructions.png\')'"></span> -->
@@ -1176,7 +1176,7 @@
     aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-primary" role="document">
       <div class="modal-content">
-        <div class="modal-header p-3">
+        <div class="modal-header p-4">
           <span class="exp-img"></span>
           <!-- <span class="exp-img instructions-img"
             [style.background-image]="'url(\'./../../../assets/img/expressions/instructions.png\')'"></span> -->
@@ -1459,7 +1459,8 @@
       <div class="modal-content">
         <div class="modal-header">
           <span class="exp-img"></span>
-          <img class="img-responsive img-rotate" src="assets/img/expressions/complete_module.png">
+          <!-- <img class="img-responsive" src="assets/img/expressions/complete_module.png"> -->
+          
           <!-- <img class="img-responsive img-rotate" src="assets/img/mitra.png"> -->
           <!-- <i class="fa fa-check-circle-o fa-3x ml-2 mt-1" aria-hidden="true"></i> -->
           <h5 *ngIf="moduleCompleteStatus['type'] == 'submodule'" class="modal-title text-white mb-3">
@@ -1495,6 +1496,9 @@
           <span class="icon-check"></span>
           <p class="congratulation" style="line-height: 24px;"> {{'layout.congrats' | translate}}
         </div> -->
+          
+        </div>
+        <div class="modal-footer justify-content-center">
           <span *ngIf="moduleCompleteStatus['type'] != 'allFinish'">
             <button class="btn btn-primary text-center" (click)="moduleComplete($event)">{{'Stepper.Next' | translate}}</button>
           </span>

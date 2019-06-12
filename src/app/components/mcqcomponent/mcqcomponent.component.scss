@@ -12,10 +12,7 @@
       padding-top: 60px;
 
       .modal-content {
-        border-width: 5px;
-        // border-top: 0;
-        border-radius: 0;
-        // border-color: #4dbd74;
+        border-radius: 20px;
         position: relative;
 
 
@@ -23,9 +20,8 @@
           padding: 20px 0 0;
           // background: #4dbd74;
           position: relative;
-          border-radius: 0;
-
-          // padding: 40px;
+          border-top-left-radius: 20px;
+          border-top-right-radius: 20px;
 
           span.exp-img {
             // background: url(../../../assets/img/mitra.png);
@@ -34,12 +30,11 @@
             background-repeat: no-repeat;
             position: absolute;
             z-index: 99;
-            width: 115px;
-            height: 115px;
-            bottom: 18px;
-            // margin: 0 auto;
-            // left: 0;
+            width: 100px;
+            height: 100px;
+            bottom: 42px;
             right: 0;
+            left: 12px;
           }
 
           button.close {
@@ -92,6 +87,11 @@
             font-size: 1rem;
           }
         }
+      }
+
+      .modal-footer{
+        border-bottom-right-radius: 20px;
+        border-bottom-left-radius: 20px;
       }
   }
 
