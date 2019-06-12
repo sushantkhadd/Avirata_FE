@@ -43,7 +43,7 @@ export class Module4Component implements OnInit {
   public apiEndStart; apiEndSendAns; apiEndFinish;
   vedioCompleteUrl;
   statVideoFlag;nextFlag;
-  questionFlag;;
+  questionFlag;unlockVideoFlag;
   urlArray = {};
   public inst = "खाली दिलेल्या पर्यायांतील काही मानसिक अस्वास्थ्याशी निगडित आहेत, तर काही मानसिक आजाराशी निगडित आहेत आणि काही दोन्हीशी निगडित नाहीत. प्रत्येक पर्यायावर विचार करून तो योग्य पर्याय निवडा."
   ngOnInit() {
@@ -76,6 +76,7 @@ export class Module4Component implements OnInit {
         this.startEvent2();
       }
     } else if (this.mainFlagModule4 > 1) {
+      this.unlockVideoFlag = true;
       var urlJson = {};
       urlJson = JSON.parse(window.localStorage.getItem("currentJson4"));
       console.log("vcxxxx", urlJson);
@@ -230,7 +231,10 @@ export class Module4Component implements OnInit {
             this.description = data['data'].description;
           } else if (data['message'] == "submodule finish")
           {
-           this.nextFlag= true;
+            this.statVideoFlag = true;
+           this.mainFlagModule4 = 2;
+          
+           this.nextFlag = true;
            // this.startFlag = false;
             window.localStorage.setItem('uuid', data['data'].nextuuid);
             // this.subFlagModule4 =1;

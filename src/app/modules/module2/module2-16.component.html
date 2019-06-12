@@ -80,9 +80,13 @@
 </div>
 
 <div *ngIf="mainFlagModule2 > 16">
-  <div class="card submoduleBox">
-    <div class="card-block text-center greenText inst-text">
-      <span>{{ "L2Module2Complete.sm_2_16" | translate }}</span>
+  <div class="card">
+    <div class="card-footer">
+        <h6 class="lineHeight">
+            <div class="text-center">{{'L2Module2.subMenu2-16' | translate}}</div>
+        </h6>
     </div>
-  </div>
+    <app-presentation [data]='passValues'></app-presentation>
+    <!-- <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a> -->
+</div>
 </div>

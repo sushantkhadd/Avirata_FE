@@ -32,10 +32,15 @@
   <div *ngIf="startEvent">
     <div class="card">
       <div class="card-footer text-center">
-        <h6>{{'L2Module2.subMenu2-15' | translate}}</h6>
+        <h6 *ngIf="subFlagModule2 == 1">{{'L2Module2.sm2_15_1' | translate}}</h6>
+        <h6 *ngIf="subFlagModule2 == 2">{{'L2Module2.sm2_15_2' | translate}}</h6>
+        <h6 *ngIf="subFlagModule2 == 3">{{'L2Module2.sm2_15_3' | translate}}</h6>
+        <h6 *ngIf="subFlagModule2 == 4">{{'L2Module2.sm2_15_4' | translate}}</h6>
+        <h6 *ngIf="subFlagModule2 == 5">{{'L2Module2.sm2_15_5' | translate}}</h6>
+        <h6 *ngIf="subFlagModule2 == 6">{{'L2Module2.sm2_15_6' | translate}}</h6>
       </div>
       <div class="card-block text-center" *ngIf="subFlagModule2 == 1">
-        <img alt="" [src]="imgUrl" class="mx-auto img-fluid">
+        <img alt="" [src]="imgUrl" class="mx-auto img-fluid w-35">
         <hr>
         <div class="text-center" *ngIf="mainFlagModule2 ==15">
           <button class="btn btn-primary btn-pad " (click)="finish()">{{'Stepper.Finish' | translate}}</button>
@@ -159,7 +164,7 @@
         </div>
       </div>
       <div *ngIf="flag == 1" class="text-center">
-        <img class="img-fluid" [src]="urlArray['src1']" alt="">
+        <img class="img-fluid w-35" [src]="urlArray['src1']" alt="">
         <div class="card-footer text-center bg-white border-0">
           <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>
         </div>

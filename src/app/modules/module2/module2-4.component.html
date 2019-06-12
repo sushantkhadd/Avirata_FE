@@ -28,7 +28,7 @@
     <div *ngIf="playVideo">
       <div class="card">
         <div class="card-footer">
-          <h6 class="text-center">{{'L2Module2.subMenu2-4' | translate}}</h6>
+          <h6 class="text-center">{{'L2Module2.mitra' | translate}}</h6>
         </div>
         <div class="card-block">
           <app-static-video [receivedData]='passData' (finishCall)="finishVideo($event)"></app-static-video>
@@ -63,18 +63,20 @@
   
     <div *ngIf="startFlag">
       <!-- <h6 class="questionHead lineHeight">{{'L2common.caution' | translate}} <span [innerHTML]="inst"> </span></h6> -->
-      <div class="borderBlue">
-      <div class="card p-2">
+      <div class="">
+      <div class="card">
+        <div class="card-header p-0">
+            <h6 class="questionHead lineHeight"><strong>{{questionStatement}}</strong></h6>
+        </div>
           <div class="card-block mcqBlock">
             <div class="form float-left">
-              <h6 class="questionHead lineHeight"><strong>{{questionStatement}}</strong></h6>
               <div class="dx-fieldset">
                 <div class="dx-field">
                   <div class="dx-field-value">
                     <!-- <dx-radio-group #eventRadioGroup id="mcq" [items]="options" (onValueChanged)="onValueChanged($event)">
                     </dx-radio-group> -->
   
-                    <div *ngFor="let enum of options;let i=index" class="mb-2">
+                    <div *ngFor="let enum of options;let i=index" class="mb-1 fa-1x">
                        <input [id]='enum.statementid' type="radio" name="enums" (change)='onValueChanged($event,enum.statementid)' class="mr-2"> 
                        <label [for]="enum.statementid"> {{enum.statement}} </label> 
                       </div>
@@ -97,7 +99,7 @@
 <div *ngIf="mainFlagModule2 > 4">
   <div class="card" *ngIf="!statVideoFlag">
     <div class="card-footer">
-      <h6 class="text-center">{{'L2Module2.subMenu2-4' | translate}}</h6>
+      <h6 class="text-center">{{'L2Module2.mitra' | translate}}</h6>
     </div>
     <div class="card-block">
       <app-static-video [receivedData]='passData'></app-static-video>

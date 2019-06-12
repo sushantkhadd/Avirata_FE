@@ -45,6 +45,7 @@ export class Module216Component implements OnInit {
   passValues = {};
   nextFlag;
   trimFlag;
+  public download; link; showCFU; apiUrl;finalCount;
   public inst =
     "विद्यार्थ्यांच्या डाव्या मेंदू इतकीच चालना विद्यार्थ्यांच्या उजव्या मेंदूला देखील मिळावी  यासाठी तुम्ही कोणते उपक्रम घ्याल? कोणतीही एक संकल्पना निवडून त्याबाबत उजव्या मेंदूला चालना मिळण्याच्या दृष्टीने काय उपक्रम घ्याल ते लिहा. पुढे दोन उदाहरणे  दिली आहेत. त्या आधारे आपल्या स्वतःच्या विषयासंदर्भात विचार करून लिहा.";
   ngOnInit() {
@@ -65,8 +66,28 @@ export class Module216Component implements OnInit {
       window.localStorage.getItem("subFlagModule2")
     );
 
-    if (this.mainFlagModule2 == 16) {
-      // this.startEvent();
+    if (this.mainFlagModule2 > 16) {
+      this.showCFU = false;
+      this.download = false;
+      this.link = '';
+      this.apiUrl = '/assets/jsonfile/module4_6.json'
+      this.finalCount = 22;
+      this.passValues['download'] = this.download;
+      this.passValues['link'] = this.link;
+      this.passValues['finalcount'] = this.finalCount;
+      this.passValues['showcfu'] = this.showCFU;
+      this.passValues['apiurl'] = this.apiUrl;
+      this.passValues["unlockView"] = "static";
+      var unlockJson={}
+       unlockJson=JSON.parse(window.localStorage.getItem('currentJson2'))
+      if (unlockJson['children'].length > 0) {
+        var index = unlockJson['children'].findIndex(item =>
+          item.source == "module 2.16");
+
+        if (unlockJson['children'][index].url != null) {
+          this.passValues['url'] = unlockJson['children'][index].url
+        } 
+      }
     }
   }
 
@@ -132,11 +153,12 @@ export class Module216Component implements OnInit {
             this.passValues["url"] = data["data"].url;
             this.startPdf = true;
             console.log(this.passValues["url"], data);
-            // var current1 = []
-            // current1 = JSON.parse(window.localStorage.getItem('currentJson2'))
-            // var index = current1['children'].findIndex(item => item.source == 'module 2.15');
-            // current1['children'][index].url = data['data'].url;
-            // window.localStorage.setItem('currentJson2', JSON.stringify(current1))
+            var current2=[]
+          current2=JSON.parse(window.localStorage.getItem('currentJson2'))
+          var child={}
+          var index=current2['children'].findIndex(item => item.source=='module 2.16');
+          current2['children'][index].url=data['data'].url;
+          window.localStorage.setItem('currentJson2',JSON.stringify(current2))
           } else if (fun == "finish") {
             this.mainFlagModule2 = 17;
             window.localStorage.setItem("subFlagModule1", "1");

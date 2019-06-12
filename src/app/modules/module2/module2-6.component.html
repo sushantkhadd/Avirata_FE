@@ -44,7 +44,7 @@
               <div class="dx-fieldset">
                 <div class="dx-field">
                   <div class="dx-field-value">
-                    <div *ngFor="let enum of options;let i=index">
+                    <div class="fa-1x" *ngFor="let enum of options;let i=index">
                       <label for="{{enum.statementid}}" class="mb-2">
                         <input class="mr-2" [id]='enum.statementid' type="checkbox" name="enums" (change)='onValueChanged($event,i,enum.statementid)'
                           required> {{enum.statement}} </label>

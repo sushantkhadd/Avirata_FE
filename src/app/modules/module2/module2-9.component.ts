@@ -19,7 +19,7 @@ export class Module29Component implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
   public data; questionType; passFlags = {}; showAnswer; saveData; answer=[]; sumbitButton; startFlag;
-  public inst = "खालीलपैकी कोणती वाक्ये / कृती ह्या विद्यार्थ्यांच्या सामाजिक स्वीकाराच्या दृष्टीने उपयुक्त आहेत?"
+  public inst = "खालीलपैकी कोणते पर्याय हे विद्यार्थ्यांना स्वतःचे निर्णय घेण्याच्या, स्वावलंबी बनविण्याच्या दृष्टीने उपयुक्त आहेत असे तुम्हांला वाटते?"
   ngOnInit() {
     this.startFlag = false;
     console.log(this.startFlag)
