@@ -159,37 +159,42 @@ export class PresentationComponent implements OnInit {
 
 
   ngDoCheck() {
-
-    this.levelData = JSON.parse(localStorage.getItem("levelData"));
-
-    for (let index = 0; index < this.levelData.length; index++)
+    if (
+      localStorage.getItem("levelData") != null &&
+      localStorage.getItem("levelData") != "" &&
+      localStorage.getItem("levelData") != undefined
+    )
     {
-      const element = this.levelData[index];
-      if (
-        (this.levelData[index].module == "0" && this.levelData[index].status == true) ||
-        (this.levelData[index].module == "1" && this.levelData[index].status == true) ||
-        (this.levelData[index].module == "2" && this.levelData[index].status == true) ||
-        (this.levelData[index].module == "3" && this.levelData[index].status == true) ||
-        (this.levelData[index].module == "4" && this.levelData[index].status == true) ||
-        (this.levelData[index].module == "5" && this.levelData[index].status == true)
-      )
+      this.levelData = JSON.parse(localStorage.getItem("levelData"));
+      for (let index = 0; index < this.levelData.length; index++)
       {
-        this.askMeFlag = this.levelData[index].askme;
-        this.fiftyFiftyFlag = this.levelData[index].fifty_fifty;
-        if (this.askMeFlag == true)
+        const element = this.levelData[index];
+        if (
+          (this.levelData[index].module == "0" && this.levelData[index].status == true) ||
+          (this.levelData[index].module == "1" && this.levelData[index].status == true) ||
+          (this.levelData[index].module == "2" && this.levelData[index].status == true) ||
+          (this.levelData[index].module == "3" && this.levelData[index].status == true) ||
+          (this.levelData[index].module == "4" && this.levelData[index].status == true) ||
+          (this.levelData[index].module == "5" && this.levelData[index].status == true)
+        )
         {
-          this.rewardImgUrl2 = this.imageJson["a2"];
-        } else
-        {
-          this.rewardImgUrl2 = this.imageJson["a1"];
-        }
+          this.askMeFlag = this.levelData[index].askme;
+          this.fiftyFiftyFlag = this.levelData[index].fifty_fifty;
+          if (this.askMeFlag == true)
+          {
+            this.rewardImgUrl2 = this.imageJson["a2"];
+          } else
+          {
+            this.rewardImgUrl2 = this.imageJson["a1"];
+          }
 
-        if (this.fiftyFiftyFlag == true)
-        {
-          this.rewardImgUrl1 = this.imageJson["f2"];
-        } else
-        {
-          this.rewardImgUrl1 = this.imageJson["f1"];
+          if (this.fiftyFiftyFlag == true)
+          {
+            this.rewardImgUrl1 = this.imageJson["f2"];
+          } else
+          {
+            this.rewardImgUrl1 = this.imageJson["f1"];
+          }
         }
       }
     }

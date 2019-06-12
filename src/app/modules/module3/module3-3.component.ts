@@ -85,8 +85,8 @@ export class Module33Component implements OnInit {
       var jsonBody = {};
       jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
       var ansJson = {};
-      ansJson[this.questionid1] = this.answer1;
-      ansJson[this.questionid2] = this.answer2;
+      ansJson[this.questionid1] = (this.answer1).trim();
+      ansJson[this.questionid2] = (this.answer2).trim();
       jsonBody["useranswer"] = ansJson;
       jsonBody["event"] = "answer";
       var apiUrl = "l3module3freetext/";
@@ -95,8 +95,8 @@ export class Module33Component implements OnInit {
       var jsonBody = {};
       jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
       var ansJson = {};
-      ansJson[this.questionid1] = this.answer1;
-      ansJson[this.questionid2] = this.answer2;
+      ansJson[this.questionid1] = (this.answer1).trim();
+      ansJson[this.questionid2] = (this.answer2).trim();
       jsonBody["useranswer"] = ansJson;
       jsonBody["event"] = "answer";
       var apiUrl = "l3module3freetext/";
@@ -105,8 +105,8 @@ export class Module33Component implements OnInit {
       var jsonBody = {};
       jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
       var ansJson = {};
-      ansJson[this.questionid1] = this.answer1;
-      ansJson[this.questionid2] = this.answer2;
+      ansJson[this.questionid1] = (this.answer1).trim();
+      ansJson[this.questionid2] = (this.answer2).trim();
       jsonBody["useranswer"] = ansJson;
       jsonBody["event"] = "answer";
       var apiUrl = "l3module3freetext/";
