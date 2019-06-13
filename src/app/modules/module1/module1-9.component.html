@@ -12,9 +12,9 @@
   <div class="ins-block instruction-wrap" *ngIf="!startPdf">
     <div class="">
       <div class="card">
-          <div class="card-header text-white"> 
-            <span class="exp-img instructions-img"></span> 
-            <h4>{{'Quiz.note' | translate}}</h4> 
+          <div class="card-header text-white">
+            <span class="exp-img instructions-img"></span>
+            <h4>{{'Quiz.note' | translate}}</h4>
          </div>
         <div class="card-block inst-text">
             <p>{{'number.1' | translate}}.&nbsp;{{'L2Instruction.inst_ppt1' | translate}}</p>
@@ -24,7 +24,8 @@
         </div>
         <div class="card-footer">
           <div class="float-right hidden-xs-down">
-            <button class="btn btn-primary" (click)="start();">{{'Module4.start' | translate}}</button>
+            <button class="btn btn-primary" appPreventDoubleClick
+              (click)="start();">{{'Module4.start' | translate}}</button>
           </div>
           <!-- <div class="hidden-sm-up text-center">
                     <button class="btn btn-primary" (click)="start();">{{'Module4.start' | translate}}</button>

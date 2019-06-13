@@ -6,8 +6,8 @@
       </div>
     </div>
   </div>
-  
-  
+
+
   <div *ngIf="mainFlagModule4 == 6">
     <div *ngIf="subFlagModule4 == 1 && showVideoFlag">
       <div class="row">
@@ -26,7 +26,7 @@
         <button type=" button " class="text-center btn btn-primary mt-2" [disabled]="!nextBtnFlag" data-toggle="modal " (click)="next(); ">{{'Stepper.Next' | translate}}</button>
       </div> -->
     </div>
-  
+
     <div *ngIf="subFlagModule4 == 2">
       <div class="instruction-wrap" *ngIf="!showVideoFlag">
         <div class="borderBlue">
@@ -44,7 +44,8 @@
           </div>
           <div class="card-footer">
             <div class="float-right hidden-xs-down">
-              <button class="btn btn-primary" (click)="start1();">{{'Module4.start' | translate}}</button>
+              <button class="btn btn-primary" appPreventDoubleClick
+                (click)="start1();">{{'Module4.start' | translate}}</button>
             </div>
             <!-- <div class="hidden-sm-up text-center">
               <button class="btn btn-primary" (click)="start1();">{{'Module4.start' | translate}}</button>
@@ -53,7 +54,7 @@
         </div>
       </div>
       </div>
-  
+
       <div *ngIf="showVideoFlag">
         <div class="card">
           <div class="card-footer">
@@ -70,7 +71,7 @@
       </div>
     </div>
   </div>
-  
+
   <div *ngIf="mainFlagModule4 > 6">
     <div class="card unlock-view">
       <div class="card-block cc">
@@ -120,7 +121,7 @@
       </div>
     </div>
   </div>
-  
+
   <div class="videoFinishModal videoFinishedModel">
     <div bsModal #instructionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1"
       role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -143,4 +144,3 @@
       </div>
     </div>
   </div>
-  

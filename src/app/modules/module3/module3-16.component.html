@@ -44,10 +44,10 @@
         <img alt="" [src]="imgUrl" class="mx-auto img-fluid w-35">
         <hr>
         <div class="text-center" *ngIf="mainFlagModule3 ==16">
-          <button class="btn btn-primary btn-pad " (click)="finish()">{{'Stepper.Next' | translate}}</button>
+          <button class="btn btn-primary btn-pad " appPreventDoubleClick (click)="finish()">{{'Stepper.Next' | translate}}</button>
         </div>
         <div class="text-center" *ngIf="mainFlagModule3 >16">
-          <button class="btn btn-primary btn-pad " (click)="nextRoute()">{{'Stepper.Next' | translate}}</button>
+          <button class="btn btn-primary btn-pad " appPreventDoubleClick (click)="nextRoute()">{{'Stepper.Next' | translate}}</button>
         </div>
       </div>
       <div *ngIf="subFlagModule3 == 2 || subFlagModule3 == 3 || subFlagModule3 == 5 || subFlagModule3 == 6">
@@ -143,7 +143,7 @@
     <div class="card-footer text-center mb-3">
       <h6 class="text-center" *ngIf="flag == 0">{{'L2Module3.subMenu3-16' | translate}}</h6>
       <h6 class="text-center" *ngIf="flag != 0">{{thumb_title | translate}}</h6>
-      
+
     </div>
     <div class="card-block cc">
       <div class="row static-content" *ngIf="flag == 0">

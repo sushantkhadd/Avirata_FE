@@ -109,6 +109,7 @@ export class Module1Service {
                let index1 = current1.findIndex(
                  item => item.module == index);
                current1[index1].percent = JSON.stringify(data['data'].percentage);
+               current1[index1 + 1].status = true;
                window.localStorage.setItem("levelData", JSON.stringify(current1));
                console.log(current1, "fifirty")
              }

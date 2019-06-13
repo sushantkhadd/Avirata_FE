@@ -20,7 +20,8 @@
           <p>{{'subModule5_1.1' | translate}}</p>
         </div>
         <div class="card-footer text-right">
-          <button class="btn btn-primary" (click)="startEvent1()">{{'Login.Close' | translate}}</button>
+          <button class="btn btn-primary" appPreventDoubleClick
+            (click)="startEvent1()">{{'Login.Close' | translate}}</button>
         </div>
       </div>
     </div>
@@ -50,17 +51,18 @@
             <p>{{'number.2' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_7' | translate}}</p>
             <p>{{'number.3' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_8' | translate}}</p>
             <p>{{'number.4' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_9' | translate}}</p>
-  
+
           </div>
           <div class="card-footer">
             <div class="float-right">
-              <button class="btn btn-primary" (click)="startEvent2();">{{'Module4.start' | translate}}</button>
+              <button class="btn btn-primary" appPreventDoubleClick
+                (click)="startEvent2();">{{'Module4.start' | translate}}</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-  
+
     <div *ngIf="startFlag">
       <!-- <h6 class="questionHead lineHeight">{{'L2common.caution' | translate}} <span [innerHTML]="inst"> </span></h6> -->
       <div class="">
@@ -75,20 +77,21 @@
                   <div class="dx-field-value">
                     <!-- <dx-radio-group #eventRadioGroup id="mcq" [items]="options" (onValueChanged)="onValueChanged($event)">
                     </dx-radio-group> -->
-  
+
                     <div *ngFor="let enum of options;let i=index" class="mb-1 fa-1x">
-                       <input [id]='enum.statementid' type="radio" name="enums" (change)='onValueChanged($event,enum.statementid)' class="mr-2"> 
-                       <label [for]="enum.statementid"> {{enum.statement}} </label> 
+                       <input [id]='enum.statementid' type="radio" name="enums" (change)='onValueChanged($event,enum.statementid)' class="mr-2">
+                       <label [for]="enum.statementid"> {{enum.statement}} </label>
                       </div>
-  
+
                   </div>
                 </div>
               </div>
               <div class="col-md-12 col-xs-12">
-                <button class="btn btn-info" [disabled]="!submitFlag" (click)="finish2()">{{'Cfu.submit' | translate}}</button>
+                <button class="btn btn-info" appPreventDoubleClick [disabled]="!submitFlag"
+                  (click)="finish2()">{{'Cfu.submit' | translate}}</button>
               </div>
             </div>
-  
+
           </div>
         </div>
       </div>

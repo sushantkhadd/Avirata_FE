@@ -22,7 +22,8 @@
             <p>{{'subModule5_1.1' | translate}}</p>
           </div>
           <div class="card-footer text-right">
-            <button class="btn btn-primary" (click)="startEvent1()">{{'Login.Close' | translate}}</button>
+            <button class="btn btn-primary" appPreventDoubleClick
+              (click)="startEvent1()">{{'Login.Close' | translate}}</button>
           </div>
         </div>
       </div>

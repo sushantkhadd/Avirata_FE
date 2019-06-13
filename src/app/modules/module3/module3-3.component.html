@@ -36,11 +36,11 @@
         </form>
       </div>
       <div class="card-footer text-center bg-white border-0">
-        <button *ngIf="subFlagModule3 == 1" class="btn btn-primary" [disabled]="assignForm.invalid || trimFlag"
+        <button *ngIf="subFlagModule3 == 1" class="btn btn-primary" appPreventDoubleClick [disabled]="assignForm.invalid || trimFlag"
           (click)="finish(1);">{{'Login.Close' | translate}}</button>
-        <button *ngIf="subFlagModule3 == 2" class="btn btn-primary" [disabled]="assignForm.invalid || trimFlag"
+        <button *ngIf="subFlagModule3 == 2" class="btn btn-primary" appPreventDoubleClick [disabled]="assignForm.invalid || trimFlag"
           (click)="finish(2);">{{'Login.Close' | translate}}</button>
-        <button *ngIf="subFlagModule3 == 3" class="btn btn-primary" [disabled]="assignForm.invalid || trimFlag"
+        <button *ngIf="subFlagModule3 == 3" class="btn btn-primary" appPreventDoubleClick [disabled]="assignForm.invalid || trimFlag"
           (click)="finish(3);">{{'Login.Close' | translate}}</button>
       </div>
     </div>

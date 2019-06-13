@@ -28,7 +28,7 @@ export class TimelineComponent implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
   counterValue0;
-  counterValue1 : number;
+  counterValue1;
   counterValue2;
   counterValue3;
   counterValue4;
@@ -165,7 +165,7 @@ export class TimelineComponent implements OnInit {
     // if()
     return (perval)
   }
-  
+
 
   ngDoCheck() {
     if (
@@ -234,7 +234,7 @@ export class TimelineComponent implements OnInit {
     //   {
     //     this.counterValue0 = 0;
     //     console.log("0",this.counterValue0)
-    //   } else 
+    //   } else
       this.width = 4;
 
       if (this.mainFlagModule1 && this.currentstatus  == 1)
@@ -242,7 +242,6 @@ export class TimelineComponent implements OnInit {
         this.counterValue1 = Math.round((this.mainFlagModule1 - 1) * this.calPercentage(12));
         this.totalPer = this.counterValue1;
         this.barWidth1 = this.counterValue1 * this.width + '%';
-        console.log("counterValue1",this.counterValue1)
       } else if (this.mainFlagModule2 && this.currentstatus  == 2)
       {
         this.totalPer =20

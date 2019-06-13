@@ -55,8 +55,8 @@ export class LoginComponent implements OnInit {
     this.otpMobileEnable = false;
     this.show = false;
     this.checkAgree = false;
-    this.loginModel.newPassword = '';
-    this.loginModel.confirmPassword = '';
+    this.loginModel.newPassword = "";
+    this.loginModel.confirmPassword = "";
     this.token = window.localStorage.getItem("token")
     if(this.token =="" || this.token == null || this.token == undefined){
     }else{
@@ -379,13 +379,18 @@ export class LoginComponent implements OnInit {
   }
 
   checkPassword() {
-    if (this.loginModel.newPassword == this.loginModel.confirmPassword) {
-      this.confirmPaswwordTrue = true;
+    if (this.loginModel.confirmPassword != null && this.loginModel.confirmPassword != "" && this.loginModel.confirmPassword != undefined)
+    {
+      if (this.loginModel.newPassword == this.loginModel.confirmPassword)
+      {
+        this.confirmPaswwordTrue = true;
+      }
+      else
+      {
+        this.confirmPaswwordTrue = false;
+      }
+      this.show = false;
     }
-    else {
-      this.confirmPaswwordTrue = false;
-    }
-    this.show = false;
     console.log('show pass', this.show);
   }
 

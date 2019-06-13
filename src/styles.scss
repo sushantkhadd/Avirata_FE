@@ -1735,7 +1735,7 @@ body {
     );
 
     p {
-      line-height: 14px;
+      line-height: 25px;
       color: #203d54;
     }
 
@@ -2827,6 +2827,23 @@ body {
           }
         }
       }
+    }
+  }
+}
+
+.marks-modal {
+  .modal-footer{
+    background: #eff8ff;
+    border: none;
+    text-align: center;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+
+    button {
+          background: #a7d2f4;
+          color: #545e62;
+          font-weight: 500;
+          border: 1px solid #a7d2f4;
     }
   }
 }

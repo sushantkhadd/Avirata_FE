@@ -18,7 +18,8 @@
             </div>
             <div class="card-footer">
                 <div class="float-right hidden-xs-down">
-                    <button class="btn btn-primary" (click)="start();">{{'Module4.start' | translate}}</button>
+                    <button class="btn btn-primary" appPreventDoubleClick
+                      (click)="start();">{{'Module4.start' | translate}}</button>
                 </div>
                 <!-- <div class="hidden-sm-up text-center">
                     <button class="btn btn-primary" (click)="start();">{{'Module4.start' | translate}}</button>
@@ -45,4 +46,3 @@
           <app-presentation [data]='passValues'></app-presentation>
       </div>
     </div>
-  

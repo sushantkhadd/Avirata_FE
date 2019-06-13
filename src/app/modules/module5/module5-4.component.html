@@ -20,7 +20,8 @@
           <p>{{'L2Instruction.inst_ppt1' | translate}}</p>
         </div>
         <div class="card-footer text-right">
-          <button class="btn btn-primary" (click)="startEvent()">{{'Login.Close' | translate}}</button>
+          <button class="btn btn-primary" appPreventDoubleClick
+            (click)="startEvent()">{{'Login.Close' | translate}}</button>
         </div>
       </div>
     </div>

@@ -89,6 +89,7 @@ export class PresentationComponent implements OnInit {
             }
             this.options.push(randomOption);
             console.log(this.optionsStateDyanamic, this.options, this.rightanswer, randomOption)
+            this.levelData = localStorage.getItem("levelData");
             for (let index = 0; index < this.levelData.length; index++)
             {
               if(parseInt(window.localStorage.getItem("currentstatus")) == index){
@@ -96,7 +97,7 @@ export class PresentationComponent implements OnInit {
               current1 = JSON.parse(window.localStorage.getItem("levelData"));
               let index1 = current1.findIndex(
                 item => item.module == index);
-              current1[index1].fifty_fifty = true;
+                current1[index1].fifty_fifty = true;
               window.localStorage.setItem("levelData", JSON.stringify(current1));
               console.log(current1, "fifirty")
             }
@@ -122,7 +123,7 @@ export class PresentationComponent implements OnInit {
               }
             }
             console.log(this.optionsStateDyanamic, this.options, this.rightanswer)
-
+            this.levelData = localStorage.getItem("levelData");
             for (let index = 0; index < this.levelData.length; index++)
             {
               if(parseInt(window.localStorage.getItem("currentstatus")) == index){
@@ -130,7 +131,7 @@ export class PresentationComponent implements OnInit {
               current1 = JSON.parse(window.localStorage.getItem("levelData"));
               let index1 = current1.findIndex(
                 item => item.module == index);
-              current1[index1].askme = true;
+                current1[index1].askme = true;
               window.localStorage.setItem("levelData", JSON.stringify(current1));
               console.log(current1, "askme")
             }
@@ -762,17 +763,17 @@ export class PresentationComponent implements OnInit {
                   console.log('enter')
                   this.msgFlag = true;
                   this.showToasterPopup();
-                  pass['url'] = data['data'].parenturl; 
+                  pass['url'] = data['data'].parenturl;
                   setTimeout(() => {
                     console.log("finishhhhhh")
-                    this.ansCorrect.emit(pass); 
+                    this.ansCorrect.emit(pass);
                     }, 3000);
                 }
                 else{
                   pass['url'] = data['data'].parenturl;
-                  this.ansCorrect.emit(pass); 
+                  this.ansCorrect.emit(pass);
                 }
-               
+
                   if (
                     window.localStorage.getItem('mainFlagModule1') == '11' || window.localStorage.getItem('mainFlagModule3') == '5' || window.localStorage.getItem('mainFlagModule5') == '2' ||
                     window.localStorage.getItem('mainFlagModule1') == '11' || window.localStorage.getItem('mainFlagModule3') == '5' || window.localStorage.getItem('mainFlagModule5') == '3' ||
