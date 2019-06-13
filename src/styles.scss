@@ -1216,7 +1216,7 @@ body {
 
   .modal-body {
     background: none !important;
-    padding: 3.5rem 2rem;
+    padding: 3.5rem 2rem 1rem 2rem;
 
     p {
       line-height: 20px !important;
@@ -2828,5 +2828,15 @@ body {
         }
       }
     }
+  }
+}
+
+
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation:landscape) {
+  .app-footer{
+    font-size: 11px;
+  }
+  .instruction-wrap .card p{
+    line-height: 20px;
   }
 }
