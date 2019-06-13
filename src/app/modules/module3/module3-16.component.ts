@@ -275,6 +275,7 @@ export class Module316Component implements OnInit {
       this.passValues["url"] = src;
       this.thumb_title = title;
       this.flag = value;
+      this.passValues["unlockView"] = "static";
     }else if (value == 5)
     {
       this.passData['videoUrl'] = src;
