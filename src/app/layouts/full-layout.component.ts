@@ -395,6 +395,8 @@ export class FullLayoutComponent implements OnInit {
     }
   }
   clearFieldsResetPassword() {
+    this.passwordChangeModal.show();
+    this.LanguageService.toShow()
     this.newPasswordChange1 = "";
     this.passwordChange = "";
     this.confirmPassword1 = "";
@@ -422,6 +424,7 @@ export class FullLayoutComponent implements OnInit {
             this.toastr.success("पासवर्ड यशस्वीरीत्या बदलला.");
 
             this.passwordChangeModal.hide();
+            this.LanguageService.toHide();
           } else if (data["Response"] == "Wrong Old Password.") {
             this.toastr.error("पूर्वीचा पासवर्ड चुकीचा आहे.");
 
@@ -2501,10 +2504,10 @@ export class FullLayoutComponent implements OnInit {
       this.moduleCompleteStatus = sumbmodulestatus;
       if (this.moduleCompleteStatus["type"] == "submodule") {
         this.submoduleStatusModal.show();
-        document.getElementsByTagName("body")[0].classList.add("modal-open");
+        this.LanguageService.toShow()
       } else {
         this.moduleStatusModal.show();
-        document.getElementsByTagName("body")[0].classList.add("modal-open");
+        this.LanguageService.toShow()
       }
     });
 
@@ -2695,11 +2698,9 @@ export class FullLayoutComponent implements OnInit {
       this.router.navigate([this.moduleCompleteStatus["nextRoute"]]);
     }
     this.moduleStatusModal.hide();
+    this.LanguageService.toHide();
     this.submoduleStatusModal.hide();
-    document.getElementsByTagName("body")[0].classList.remove("modal-open");
-    var paras = jQuery("bs-modal-backdrop");
-    paras.hide();
-    console.log("hide", paras);
+    this.LanguageService.toHide();
     // var paras = document.getElementsByClassName("modal-backdrop")[0];
     // if (paras.classList.contains("fade")) {
     //   console.log("true");
@@ -2729,13 +2730,11 @@ export class FullLayoutComponent implements OnInit {
   }
   instruction() {
     this.instructionModal.show();
-    document.getElementsByTagName("body")[0].classList.add("modal-open");
+    this.LanguageService.toShow()
   }
   closeInstruction() {
     this.instructionModal.hide();
-    document.getElementsByTagName("body")[0].classList.remove("modal-open");
-    var paras = jQuery("bs-modal-backdrop");
-    paras.hide();
+    this.LanguageService.toHide();
     // var paras = document.getElementsByClassName("modal-backdrop")[0];
     // if (paras.classList.contains("show")) {
     //   paras.classList.remove("show");
@@ -2753,13 +2752,11 @@ export class FullLayoutComponent implements OnInit {
 
   instruction0() {
     this.instructionModal0.show();
+    this.LanguageService.toShow();
   }
   closeInstruction0() {
     this.instructionModal0.hide();
-    var paras = document.getElementsByClassName("modal-backdrop")[0];
-    if (paras.classList.contains("show")) {
-      paras.classList.remove("show");
-    }
+    this.LanguageService.toHide();
     // var paras = document.getElementsByClassName("modal-backdrop");
     // while (paras[0]) {
     //   paras[0].parentNode.removeChild(paras[0]);
@@ -2768,5 +2765,10 @@ export class FullLayoutComponent implements OnInit {
 
   hideMenu() {
     window.localStorage.setItem("hidemenu", "true");
+  }
+
+  passwordChangeModalHide(){
+    this.passwordChangeModal.hide();
+    this.LanguageService.toHide();
   }
 }

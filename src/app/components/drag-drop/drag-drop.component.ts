@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ViewContaine
 import { ModalDirective } from "ngx-bootstrap";
 import { TranslateService } from "@ngx-translate/core";
 import { ToastsManager } from "ng6-toastr";
+import { LanguageService } from "../../language.service"
 
 @Component({
   selector: "app-drag-drop-component",
@@ -21,7 +22,8 @@ export class DragDropComponent implements OnInit {
   constructor(
     public translate: TranslateService,
     public toastr: ToastsManager,
-    vcr: ViewContainerRef
+    vcr: ViewContainerRef,
+    public LanguageService: LanguageService
   ) {
     this.toastr.setRootViewContainerRef(vcr);
   }
@@ -300,6 +302,8 @@ export class DragDropComponent implements OnInit {
     }
 
     this.rankModal.show();
+    this.LanguageService.toShow();
+    
   }
 
   ngDoCheck() {
@@ -337,6 +341,7 @@ export class DragDropComponent implements OnInit {
 
   rankConfirmNext() {
     this.rankModal.hide();
+    this.LanguageService.toHide();
     this.sendAns.emit(this.ansJson);
   }
   reset() {

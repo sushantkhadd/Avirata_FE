@@ -205,6 +205,7 @@ export class Module111Component implements OnInit {
       this.nextFlag = true;
       this.subFlagModule1 = 2;
       this.instructionModal.show();
+      this.LanguageService.toShow()
     } else {
       window.localStorage.setItem("mainFlagModule1", "11");
       this.router.navigate(["/modules/Module1.11"]);
@@ -276,6 +277,7 @@ export class Module111Component implements OnInit {
             this.playVideo = true;
           } else if (fun == "finish1") {
             this.instructionModal.hide();
+            this.LanguageService.toHide();
             // this.playVideo = false;
             //this.statVideoFlag = true;
             this.mainFlagModule1 = 11;

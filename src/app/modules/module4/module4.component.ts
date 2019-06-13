@@ -143,7 +143,7 @@ export class Module4Component implements OnInit {
       this.nextFlag = false;
       this.subFlagModule4 = 2;
       this.instructionModal.show();
-      document.getElementsByTagName("body")[0].classList.add("modal-open");
+      this.LanguageService.toShow();
       // var url ={}
       // url['4.1.1'] = this.vedioCompleteUrl;
       // console.log("urllll",url)
@@ -185,9 +185,7 @@ export class Module4Component implements OnInit {
             this.playVideo = true;
           } else if (fun == "finish1") {
             this.instructionModal.hide();
-            document.getElementsByTagName("body")[0].classList.remove("modal-open");
-            var paras = jQuery("bs-modal-backdrop");
-            paras.hide();
+            this.LanguageService.toHide();
             // this.playVideo = false;
             // this.statVideoFlag = true;
             this.mainFlagModule4 = 1;

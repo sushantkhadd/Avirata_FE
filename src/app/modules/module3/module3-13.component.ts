@@ -80,6 +80,7 @@ this.apiCall(jsonBody, 'modulethreesingleurl/', 'start')
 videoFinish(e) {
 if (e == true) {
   this.instructionModal.show()
+  this.LanguageService.toShow();
   this.nextBtnFlag = true
 }
 }
@@ -134,6 +135,7 @@ this.Module3Service.apiCall(jsonBody, apiUrl)
 
     } if (fun == 'finish1') {
       this.instructionModal.hide()
+      this.LanguageService.toHide();
       this.showVideoFlag = false
       window.localStorage.setItem('uuid', data['data'].nextuuid)
       this.subFlagModule3 = this.subFlagModule3 + 1
@@ -169,6 +171,7 @@ showVideo(src, title,value) {
   this.statVideoFlag = false;
   this.passData['videoUrl'] = "";
   this.staticImageModal.hide();
+  this.LanguageService.toHide();
   }
 
   singleCFUComplete(e){

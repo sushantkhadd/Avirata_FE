@@ -291,7 +291,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <span class="exp-img"></span>
-            <button type="button" class="close" (click)="rankModal.hide()" aria-label="Close" id="btnCloseModal">
+            <button type="button" class="close" (click)="rankModalHide()" aria-label="Close" id="btnCloseModal">
               <span aria-hidden="true">&times;</span>
             </button>
             <h5>आपले उत्तर बरोबर आहे </h5>
@@ -300,7 +300,7 @@
             <p> {{'Module1.rankConfirm' | translate}}</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" (click)="rankModal.hide()">{{'Profile.Make Change' |
+            <button type="button" class="btn btn-primary" (click)="rankModalHide()">{{'Profile.Make Change' |
               translate}}</button>
             <button type="button" class="btn btn-info" (click)="rankConfirmNext()">{{'Stepper.Next' | translate}}</button>
           </div>

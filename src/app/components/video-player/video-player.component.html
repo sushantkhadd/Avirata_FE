@@ -47,10 +47,10 @@
             <div class="col-md-2 col-sm-6 col-5">
               <img class="img-fluid" [ngClass]="!askMeFlag ? 'c-pointer' : 'c-not-allowed'"
               [class.breathing]="!askMeFlag"
-                (click)="!askMeFlag ? askMeModal.show() : undefined" [src]="rewardImgUrl2" alt="">
+                (click)="!askMeFlag ? askMeshow() : undefined" [src]="rewardImgUrl2" alt="">
             </div>
           </span>
-          <button type="button" class="close m-0 p-0" (click)="cfuModal.hide();play();resetRadio();" aria-label="Close"
+          <button type="button" class="close m-0 p-0" (click)="cfuModalHide();play();resetRadio();" aria-label="Close"
             id="btnCloseModal">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -131,7 +131,7 @@
           <p>{{'Cfu.useCaution' | translate}}</p>
         </div>
         <div class="modal-footer justify-content-center">
-          <button (click)="askMeModal.hide()" class="btn btn-danger">{{'Cfu.no' | translate}}</button>
+          <button (click)="askMeModalHide()" class="btn btn-danger">{{'Cfu.no' | translate}}</button>
           <button (click)="getRewards('askme')" appPreventDoubleClick
             class="btn btn-success">{{'Cfu.yes' | translate}}</button>
         </div>

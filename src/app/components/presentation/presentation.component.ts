@@ -105,6 +105,7 @@ export class PresentationComponent implements OnInit {
           } else if (event == "askme")
           {
             this.askMeModal.hide();
+            this.LanguageService.toHide();
             if (!this.fiftyFiftyFlag)
             {
               this.hideMe = true;
@@ -147,6 +148,7 @@ export class PresentationComponent implements OnInit {
 
   showCfuModal() {
     this.cfuModal.show();
+    this.LanguageService.toShow();
     if (this.options.length == 1)
     {
       for (let i = 0; i < this.options.length; i++) {
@@ -547,10 +549,12 @@ export class PresentationComponent implements OnInit {
 
           if (this.data.cfuOption[i].id == this.data.answer) {
             this.cfuModal.hide();
+            this.LanguageService.toHide();
             this.ansCorrect.emit(true);  //For interest Video 5.6 to send result success
             this.sendCfuAns.emit({ "question": this.question, "answer": this.selectedAnswer });
           } else {
             this.cfuModal.hide();
+            this.LanguageService.toHide();
             this.toastr.error(this.translate.instant('Errors.ansWrongGoBack'));
             this.eventRadioGroup.instance.option("value", '');
             this.shuffle(this.options);
@@ -680,6 +684,7 @@ export class PresentationComponent implements OnInit {
                 }
                 else{
                     this.cfuModal.hide();
+                    this.LanguageService.toHide();
                   setTimeout(() => {
                     this.ansCorrect.emit(true);
                   }, 5000);
@@ -701,6 +706,7 @@ export class PresentationComponent implements OnInit {
                   this.showToasterPopup();
 
                   this.cfuModal.hide();
+                  this.LanguageService.toHide();
                   this.eventRadioGroup.instance.option("value", '');
 
                   this.shuffle(this.options);
@@ -716,6 +722,7 @@ export class PresentationComponent implements OnInit {
 
 
                 this.cfuModal.hide();
+                this.LanguageService.toHide();
                 this.eventRadioGroup.instance.option("value", '');
                 this.sendCfuAns.emit(true);
                 window.localStorage.setItem('uuid', data['data'].nextuuid);
@@ -745,6 +752,7 @@ export class PresentationComponent implements OnInit {
               else if (data['message'] == 'submodule finish' || data['message'] == 'submodule finish next uuid is') {
                 window.localStorage.setItem('uuid', data['data'].nextuuid);
                 this.cfuModal.hide();
+                this.LanguageService.toHide();
                 var pass={}
                 pass['status']=true
                 if (window.localStorage.getItem('mainFlagModule3') == '14' || window.localStorage.getItem('mainFlagModule3') == '15' || window.localStorage.getItem('mainFlagModule4') == '7' )
@@ -799,6 +807,7 @@ export class PresentationComponent implements OnInit {
               if (error.json().message == 'json Key Error' || error.json().message == 'source is required'  || error.json().message == 'unknown source' || error.json().message == 'required submoduleid key'
                  || error.json().message == 'required useranswer key' || error.json().message == 'required event key'|| error.json().message == 'required review key') {
                 this.cfuModal.hide();
+                this.LanguageService.toHide();
                 this.toastr.error(this.translate.instant('Errors.goBackReadAns'));
                 this.eventRadioGroup.instance.option("value", '');
                 this.count = 1;
@@ -808,6 +817,7 @@ export class PresentationComponent implements OnInit {
               else if (error.json().message == 'invalid option') {
                 //again start DOC from Start slide
                 this.cfuModal.hide();
+                this.LanguageService.toHide();
                 this.toastr.error(this.translate.instant('Errors.goBackReadAns'));
                 this.eventRadioGroup.instance.option("value", '');
                 this.count = 1;
@@ -818,6 +828,7 @@ export class PresentationComponent implements OnInit {
                 this.toastr.error(this.translate.instant('Errors.cannotProceed'));
               }
               this.cfuModal.hide();
+              this.LanguageService.toHide();
               this.eventRadioGroup.instance.option("value", '');
               this.submitDisabled = false;
             }//Catch Error if server is not Found
@@ -830,6 +841,7 @@ export class PresentationComponent implements OnInit {
       for (var i = 0; i < this.data.questions.options.length; i++) {
         if (this.selectedAnswer == this.data.questions.options[i].value) {
           this.cfuModal.hide();
+          this.LanguageService.toHide();
           this.showDoc.emit(this.data.questions.options[i].option);
         }
       }
@@ -839,6 +851,11 @@ export class PresentationComponent implements OnInit {
   reset() {
     this.eventRadioGroup.instance.option("value", '');
     this.submitDisabled = false;
+  }
+
+  cfuModalHide(){
+    this.cfuModal.hide()
+    this.LanguageService.toHide()
   }
   finishPDF() {
     this.sendCfuAns.emit(true);
@@ -875,6 +892,7 @@ export class PresentationComponent implements OnInit {
     if (e == true)
     {
       this.audioModal.hide();
+      this.LanguageService.toHide();
     }
   }
 
@@ -895,6 +913,7 @@ export class PresentationComponent implements OnInit {
                 if (this.count == 13 && this.mainFlagModule5 == 2)
                 {
                   this.audioModal.show();
+                  this.LanguageService.toShow()
                   this.audioSrc = {};
                   this.audioSrc['url'] = this.nextParentUrl["2"];
                   this.audioSrc["state"] = "dynamic";
@@ -903,6 +922,7 @@ export class PresentationComponent implements OnInit {
                 else if (this.count == 10 && this.mainFlagModule5 == 3)
                 {
                   this.audioModal.show();
+                  this.LanguageService.toShow()
                   this.audioSrc = {};
                   this.audioSrc['url1'] = this.nextParentUrl["2"];
                   this.audioSrc['url2'] = this.nextParentUrl["3"];
@@ -911,6 +931,7 @@ export class PresentationComponent implements OnInit {
                 }else if (this.count == 4 && this.mainFlagModule5 == 4)
                 {
                   this.audioModal.show();
+                  this.LanguageService.toShow()
                   this.audioSrc = {};
                   this.audioSrc['url'] = this.nextParentUrl["2"];
                   this.audioSrc["state"] = "dynamic";
@@ -918,6 +939,7 @@ export class PresentationComponent implements OnInit {
                 } else if (this.count == 7 && this.mainFlagModule5 == 5)
                 {
                   this.audioModal.show();
+                  this.LanguageService.toShow();
                   this.audioSrc = {};
                   this.audioSrc['url'] = this.nextParentUrl["2"];
                   this.audioSrc["state"] = "dynamic";
@@ -941,12 +963,25 @@ export class PresentationComponent implements OnInit {
 
   showToasterPopup() {
     this.toasterPopupModal.show();
+    this.LanguageService.toShow();
     setTimeout(() => {
       this.toasterPopupModal.hide();
+      this.LanguageService.toHide();
     }, 5000);
   }
 
   closeToasterPopup() {
     this.toasterPopupModal.hide();
+    this.LanguageService.toHide();
+  }
+
+  askMeshow(){
+    this.askMeModal.show();
+    this.LanguageService.toShow();
+  }
+
+  askMeModalHide(){
+    this.askMeModal.hide();
+    this.LanguageService.toHide();
   }
 }

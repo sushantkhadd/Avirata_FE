@@ -84,6 +84,7 @@ export class Module515Component implements OnInit {
   videoFinish(e) {
     if (e == true) {
       this.instructionModal.show()
+      this.LanguageService.toShow();
       this.nextBtnFlag = true
     }
   }
@@ -141,6 +142,7 @@ export class Module515Component implements OnInit {
 
         } if (fun == 'finish1') {
           this.instructionModal.hide()
+          this.LanguageService.toHide();
           this.showVideoFlag = false
           window.localStorage.setItem('uuid', data['data'].nextuuid)
           this.subFlagModule5 = this.subFlagModule5 + 1
@@ -173,6 +175,7 @@ export class Module515Component implements OnInit {
     this.statVideoFlag = false;
     this.passData['videoUrl'] = "";
     this.staticImageModal.hide();
+    this.LanguageService.toHide();
   }
 
   singleCFUComplete(e) {

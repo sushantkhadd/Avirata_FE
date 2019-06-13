@@ -160,6 +160,8 @@ export class LoginComponent implements OnInit {
   }
 
   forgetPassword() {
+    this.primaryModal.show();
+    this.lang.toShow();
     this.activeNewPassword = false;
     this.activeForgetPassword = true;
     this.otpEmailEnable = false;
@@ -234,6 +236,7 @@ export class LoginComponent implements OnInit {
             } else if (data['Response'] == "please set password") {
               this.toastr.error(this.translate.instant('Errors.notreg'));
               this.primaryModal.hide()
+              this.lang.toHide();
               // this.registrationModal.show()
               // this.newRegistration()
             } else if (data['Response'] == "mobile not verify") {
@@ -360,6 +363,7 @@ export class LoginComponent implements OnInit {
           setTimeout(() => {
             // document.getElementById("btnCloseModal").click();
             this.primaryModal.hide();
+            this.lang.toHide();
             this.router.navigate(['/']);
             this.checkAgree = "";
           }, 500)
@@ -433,6 +437,8 @@ export class LoginComponent implements OnInit {
   }
 
   closeMe() {
+    this.primaryModal.hide();
+    this.lang.toHide();
     // this.forgetPasswordForm.reset();
     this.loginModel.email = '';
     this.loginModel.mobileNo = '';

@@ -7,6 +7,7 @@ import YouTubePlayer from 'youtube-player';
 import { ModalDirective } from "ngx-bootstrap";
 import { ToastsManager } from "ng6-toastr";
 import { TranslateService } from '@ngx-translate/core';
+import { LanguageService } from 'src/app/language.service';
 let player;
 @Component({
   selector: 'app-static-video',
@@ -19,9 +20,10 @@ export class StaticVideoComponent implements OnInit {
   @Input() public inputData;
   @Output() public finishCall = new EventEmitter<Boolean>();
   @ViewChild('staticVideoFinishModal') public staticVideoFinishModal: ModalDirective;
+  @ViewChild('fakeModal') public fakeModal: ModalDirective;
   @Input() public receivedData;
   public videoUrl;
-  constructor(private sanitizer: DomSanitizer, public LocalstoragedetailsService: LocalstoragedetailsService, public router: Router, public CommonComponentService: CommonComponentService, public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService) {
+  constructor(private sanitizer: DomSanitizer, public LocalstoragedetailsService: LocalstoragedetailsService, public router: Router, public CommonComponentService: CommonComponentService, public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService,public LanguageService :LanguageService) {
     this.toastr.setRootViewContainerRef(vcr);
 
   }
@@ -77,9 +79,10 @@ export class StaticVideoComponent implements OnInit {
             this.finishCall.emit(true);
           }
           this.start = true;
-          if (this.receivedData.status)
+          if (this.receivedData.status){
             this.staticVideoFinishModal.show();
-
+            this.LanguageService.toShow();
+          }
           if (this.receivedData.throwEmmit) {
             this.finishCall.emit(true)
           }
@@ -204,5 +207,10 @@ export class StaticVideoComponent implements OnInit {
           this.toastr.error(this.translate.instant('Errors.cannotProceed'));
         }
       });
+  }
+
+  fakeModalHide(){
+    this.fakeModal.hide()
+    this.LanguageService.toHide()
   }
 }

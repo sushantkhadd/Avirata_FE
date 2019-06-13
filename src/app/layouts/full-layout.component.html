@@ -1046,7 +1046,7 @@
                   </div>
                   <a class="dropdown-item" [routerLink]="['/dashboard/profile']">
                     <em class="fa fa-user"></em>&nbsp;&nbsp;{{'Dashboard.Profile' | translate}}</a>
-                  <a class="dropdown-item" (click)="passwordChangeModal.show();clearFieldsResetPassword();">
+                  <a class="dropdown-item" (click)="clearFieldsResetPassword();">
                     <em class="fa fa-key"></em>&nbsp;&nbsp;{{'Profile.edit password' | translate}}</a>
                   <a class="dropdown-item" href="#">
                     <em class="fa fa-list-alt"></em>&nbsp;&nbsp;{{'Dashboard.form' | translate}}</a>
@@ -1220,7 +1220,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">{{ 'Registration.PasswordCreate' | translate }}</h4>
-        <button type="button" class="close" (click)="passwordChangeModal.hide()" aria-label="Close" id="btnCloseModal">
+        <button type="button" class="close" (click)="passwordChangeModalHide()" aria-label="Close" id="btnCloseModal">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>

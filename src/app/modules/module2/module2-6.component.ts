@@ -127,6 +127,7 @@ export class Module26Component implements OnInit {
           {
             window.localStorage.setItem("uuid", data["data"].nextuuid);
             this.instructionModal.show();
+            this.LanguageService.toShow();
           }
         },
         error => {
@@ -138,6 +139,7 @@ export class Module26Component implements OnInit {
 
   finish(){
     this.instructionModal.hide();
+    this.LanguageService.toHide();
     window.localStorage.setItem("mainFlagModule2", "7");
     window.localStorage.setItem("subFlagModule2", "1");
     window.localStorage.setItem('source', 'module 2.7.1');

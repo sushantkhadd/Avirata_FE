@@ -182,6 +182,7 @@ export class Module215Component implements OnInit {
       console.log(e)
       this.playVideo = false;
       this.instructionModal.show()
+      this.LanguageService.toShow();
     }
     else {
       window.localStorage.setItem('mainFlagModule2', '15');
@@ -212,10 +213,12 @@ export class Module215Component implements OnInit {
           this.subFlagModule2++;
           window.localStorage.setItem('subFlagModule2', JSON.stringify(this.subFlagModule2));
           this.instructionModal.hide()
+          this.LanguageService.toHide();
           this.start();
         }
        else if (data['message'] == "submodule finish") {
         this.instructionModal.hide()
+        this.LanguageService.toHide();
         var url = (data["data"].parenturl); 
         var current2 = [];
         current2 = JSON.parse(window.localStorage.getItem("currentJson2")); 
@@ -238,6 +241,7 @@ export class Module215Component implements OnInit {
           this.subFlagModule2++;
           window.localStorage.setItem('subFlagModule2', JSON.stringify(this.subFlagModule2));
           this.instructionModal.hide()
+          this.LanguageService.toHide();
           this.start();
          }
 

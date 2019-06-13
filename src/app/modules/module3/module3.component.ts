@@ -62,6 +62,7 @@ export class Module3Component implements OnInit {
   videoFinish(e) {
     if (e == true) {
       this.instructionModal.show()
+      this.LanguageService.toShow();
       this.nextBtnFlag = true
     }
   }
@@ -110,6 +111,7 @@ export class Module3Component implements OnInit {
           window.localStorage.setItem('currentJson3', JSON.stringify(current3))
         } if (fun == 'finish1') {
           this.instructionModal.hide()
+          this.LanguageService.toHide();
           this.showVideoFlag = false
           window.localStorage.setItem('uuid', data['data'].nextuuid)
           this.subFlagModule3 = this.subFlagModule3 + 1
