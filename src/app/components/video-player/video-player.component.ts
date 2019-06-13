@@ -125,6 +125,7 @@ export class VideoPlayerComponent implements OnInit {
             }
             this.options.push(randomOption);
             console.log(this.optionsArray, this.options, this.rightanswer, randomOption, this.strikeFlag)
+            this.levelData = localStorage.getItem("levelData");
           for (let index = 0; index < this.levelData.length; index++)
           {
             if(parseInt(window.localStorage.getItem("currentstatus")) == index){
@@ -136,7 +137,7 @@ export class VideoPlayerComponent implements OnInit {
               window.localStorage.setItem("levelData", JSON.stringify(current1));
               console.log(current1,"fifirty")
             }
-              
+
           }
           } else if (event == "askme")
           {
@@ -158,7 +159,7 @@ export class VideoPlayerComponent implements OnInit {
               }
             }
             console.log(this.optionsArray, this.options,this.rightanswer)
-
+            this.levelData = localStorage.getItem("levelData");
             for (let index = 0; index < this.levelData.length; index++)
             {
               if(parseInt(window.localStorage.getItem("currentstatus")) == index){
@@ -166,7 +167,7 @@ export class VideoPlayerComponent implements OnInit {
               current1 = JSON.parse(window.localStorage.getItem("levelData"));
               let index1 = current1.findIndex(
                 item => item.module == index);
-              current1[index1].askme = true;
+                current1[index1].askme = true;
               window.localStorage.setItem("levelData", JSON.stringify(current1));
               console.log(current1, "askme")
             }

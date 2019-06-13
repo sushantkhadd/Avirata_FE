@@ -108,7 +108,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-info" [disabled]='!submitDisabled'
+          <button type="button" class="btn btn-info" appPreventDoubleClick [disabled]='!submitDisabled'
             (click)="submitAnswer()">{{'Cfu.submit' | translate}}</button>
         </div>
       </div>
@@ -146,7 +146,7 @@
           <div *ngIf="msgFlag==false">
             <h6 class="congratulation inst-text mb-3 mt-2">{{'Errors.ansWrongGoBack' | translate}}</h6>
           </div>
-          
+
         </div>
         <div class="modal-footer justify-content-center" [style.background-color]="msgFlag ? '#e7fff1' : '#ffeeee'">
           <button class="btn text-center mb-1 mt-2" [style.background-color]="msgFlag ? '#69cd93' : '#fa7d7d'"
@@ -180,7 +180,8 @@
       </div>
       <div class="modal-footer justify-content-center">
          <button (click)="askMeModal.hide()" class="btn btn-danger">{{'Cfu.no' | translate}}</button>
-         <button (click)="getRewards('askme')" class="btn btn-success">{{'Cfu.yes' | translate}}</button>
+         <button (click)="getRewards('askme')" appPreventDoubleClick
+           class="btn btn-success">{{'Cfu.yes' | translate}}</button>
       </div>
       </div>
     </div>

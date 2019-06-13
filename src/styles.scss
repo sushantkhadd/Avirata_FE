@@ -1729,7 +1729,7 @@ body {
       0 8px 8px 0 rgba(0, 0, 0, 0.16));
 
     p {
-      line-height: 14px;
+      line-height: 25px;
       color: #203d54;
     }
 
@@ -2708,7 +2708,7 @@ body {
     font-weight: 800;
   }
 
-  
+
 }
 // .glow{
 //   box-shadow: 0 5px 5px rgba(255, 255, 255, 0.7) inset,
@@ -2745,7 +2745,7 @@ body {
   left: 0;
   background: #fff;
   border-radius: 3px;
-  animation: animate-shine 2s ease-out infinite;             
+  animation: animate-shine 2s ease-out infinite;
 }
 
 @keyframes animate-shine {
@@ -2755,7 +2755,7 @@ body {
 }
 
 // SCSS for audio-player in firefox
-@-moz-document url-prefix() { 
+@-moz-document url-prefix() {
   .audio-container{
     .card{
       .card-block{
@@ -2790,10 +2790,10 @@ body {
     }
   }
 
-  @media only screen 
-  and (min-device-width: 414px) 
-  and (max-device-width: 736px) 
-  and (-webkit-min-device-pixel-ratio: 3) { 
+  @media only screen
+  and (min-device-width: 414px)
+  and (max-device-width: 736px)
+  and (-webkit-min-device-pixel-ratio: 3) {
     .audio-container{
       .card{
         .card-block{
@@ -2821,7 +2821,7 @@ body {
     }
   }
 }
-  
+
 
 
 

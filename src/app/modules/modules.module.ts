@@ -100,6 +100,7 @@ import { Module514Component } from './module5/module5-14.component';
 import { Module515Component } from './module5/module5-15.component';
 import { Module5Service } from "./module5/module5.service";
 import { AudioPlayerComponent } from "../components/audio-player/audio-player.component";
+import { PreventDoubleClickDirective } from "../shared/directives/prevent-double-click.directive";
 
 @NgModule({
   imports: [
@@ -205,7 +206,8 @@ import { AudioPlayerComponent } from "../components/audio-player/audio-player.co
     Module512Component,
     Module513Component,
     Module514Component,
-    Module515Component
+    Module515Component,
+    PreventDoubleClickDirective
   ],
   providers: [
     Module0Service,

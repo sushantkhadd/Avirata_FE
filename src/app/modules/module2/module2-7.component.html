@@ -6,7 +6,7 @@
       </div>
     </div>
   </div>
-  
+
   <div *ngIf="mainFlagModule2 == 7">
     <div *ngIf="subFlagModule2 == 1">
       <div class="instruction-wrap ins-block" *ngIf="!playVideo">
@@ -19,7 +19,8 @@
             <p>{{'subModule5_1.1' | translate}}</p>
           </div>
           <div class="card-footer text-right">
-            <button class="btn btn-primary" (click)="startEvent1()">{{'Login.Close' | translate}}</button>
+            <button class="btn btn-primary" appPreventDoubleClick
+              (click)="startEvent1()">{{'Login.Close' | translate}}</button>
           </div>
         </div>
       </div>
@@ -43,7 +44,7 @@
           </div>
     </div>
   </div>
-  
+
   <div *ngIf="mainFlagModule2 > 7">
     <div class="card" *ngIf="!statVideoFlag">
       <div class="card-footer">
@@ -54,7 +55,7 @@
       </div>
     </div>
   </div>
-  
+
   <div class="videoFinishModal videoFinishedModel">
     <div bsModal #instructionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1"
       role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -73,7 +74,7 @@
                 </div>
             </div>
         </div> -->
-  
+
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <img class="img-responsive img-rotate" src="assets/img/mitra.png">

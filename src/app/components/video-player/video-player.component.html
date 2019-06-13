@@ -80,7 +80,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-info" [disabled]='!submitDisabled'
+          <button type="button" class="btn btn-info" appPreventDoubleClick [disabled]='!submitDisabled'
             (click)="submitAnswer()">{{'Cfu.submit' | translate}}</button>
         </div>
       </div>
@@ -109,11 +109,12 @@
           <div *ngIf="msgFlag==false" class="mb-3">
             <p class="congratulation inst-text">{{'Errors.wrongAnsWatchVideo' | translate}}</p>
           </div>
-          
+
         </div>
         <div class="modal-footer justify-content-center" [style.background-color]="msgFlag ? '#e7fff1' : '#ffeeee'">
           <button class="btn text-center" [style.background-color]="msgFlag ? '#69cd93' : '#fa7d7d'"
-          [style.color]="msgFlag ? '#545e62' : '#545e62'" (click)="closeToasterPopup()">{{'McqTest.close' | translate}}</button>
+          [style.color]="msgFlag ? '#545e62' : '#545e62'"
+          (click)="closeToasterPopup()">{{'McqTest.close' | translate}}</button>
         </div>
       </div>
     </div>
@@ -131,7 +132,8 @@
         </div>
         <div class="modal-footer justify-content-center">
           <button (click)="askMeModal.hide()" class="btn btn-danger">{{'Cfu.no' | translate}}</button>
-          <button (click)="getRewards('askme')" class="btn btn-success">{{'Cfu.yes' | translate}}</button>
+          <button (click)="getRewards('askme')" appPreventDoubleClick
+            class="btn btn-success">{{'Cfu.yes' | translate}}</button>
         </div>
       </div>
     </div>

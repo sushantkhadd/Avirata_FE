@@ -38,7 +38,8 @@
     <div class="text-center mt-4"
       *ngIf="mysubModule == 3 || mysubModule0 == 3 || mysubModule0 == 2|| mysubModule6 == 2|| mysubModule7 == 2|| mysubModule7 == 3 || mysubModule2 == 3 || mysubModule3 == 1 || mysubModule3 == 5 || mysubModule3 == 9 || mysubModule3 == 11 || mysubModule4 == 5 || mysubModule4 == 7 || mysubModule5 == 7 ">
         <div class="">
-            <button class="btn btn-primary" [disabled]="!submitFlag" (click)="goNext5_3()">{{'Cfu.submit' | translate}}</button>
+            <button class="btn btn-primary" appPreventDoubleClick [disabled]="!submitFlag"
+              (click)="goNext5_3()">{{'Cfu.submit' | translate}}</button>
         </div><br>
     </div>
 </div>
@@ -99,7 +100,8 @@
 
     <div class="text-center">
         <div class="">
-            <button class="btn btn-primary mt-4" [disabled]="!submitFlag" (click)="goNext5_3()">{{'Cfu.submit' | translate}}</button>
+            <button class="btn btn-primary mt-4" appPreventDoubleClick [disabled]="!submitFlag"
+              (click)="goNext5_3()">{{'Cfu.submit' | translate}}</button>
         </div><br>
     </div>
 </div>
@@ -271,7 +273,8 @@
             <div class="modal-footer justify-content-center" [style.background-color]="rightFlag ? '#e7fff1' : '#ffeeee'">
                 <!-- <button type="button" class="btn btn-primary" (click)="rankModal.hide();btn5=true;">{{'Profile.Make Change' |
           translate}}</button> -->
-                <button type="button" [ngClass]="rightFlag ? 'btn-success':'btn-danger'" class="btn" (click)="rankConfirmNext()">
+                <button type="button" appPreventDoubleClick [ngClass]="rightFlag ? 'btn-success':'btn-danger'"
+                  class="btn" (click)="rankConfirmNext()">
                   {{'Stepper.Next' | translate }}</button>
             </div>
         </div>
@@ -294,7 +297,8 @@
                     <p> {{data.description}}</p>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary text-center" (click)="emitData();instructionModal.hide()">{{'Stepper.Next' | translate}}</button>
+                    <button class="btn btn-primary text-center" appPreventDoubleClick
+                      (click)="emitData();instructionModal.hide()">{{'Stepper.Next' | translate}}</button>
                 </div>
             </div>
         </div>

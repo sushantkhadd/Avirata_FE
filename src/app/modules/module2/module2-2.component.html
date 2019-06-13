@@ -24,7 +24,8 @@
                 </div>
                 <div class="card-footer">
                     <div class="float-right hidden-xs-down">
-                        <button class="btn btn-primary" (click)="startVideoEvent=true;start();">{{'Module4.start' | translate}}</button>
+                        <button class="btn btn-primary" appPreventDoubleClick
+                          (click)="startVideoEvent=true;start();">{{'Module4.start' | translate}}</button>
                     </div>
                 </div>
             </div>

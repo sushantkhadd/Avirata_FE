@@ -16,11 +16,12 @@
           <h5>&nbsp;{{'Quiz.note' | translate}}</h5>
         </div>
         <div class="card-block inst-text">
-          <p class="mt-4">{{'subModule5_1.1' | translate}}</p>
+          <p class="">{{'subModule5_1.1' | translate}}</p>
         </div>
         <div class="card-footer">
           <div class="float-right hidden-xs-down">
-            <button class="btn btn-primary" (click)="startEvent=true;start();">{{'Login.Close' | translate}}</button>
+            <button class="btn btn-primary" appPreventDoubleClick
+              (click)="startEvent=true;start();">{{'Login.Close' | translate}}</button>
           </div>
           <!-- <div class="hidden-sm-up text-center">
                     <button class="btn btn-primary" (click)="startEvent=true;start();">{{'Module2.see' | translate}}</button>
@@ -38,10 +39,12 @@
         <img alt="" [src]="imgUrl" class="mx-auto img-fluid">
         <hr>
         <div class="text-center" *ngIf="mainFlagModule2 ==15">
-          <button class="btn btn-primary btn-pad " (click)="finish()">{{'Stepper.Finish' | translate}}</button>
+          <button class="btn btn-primary btn-pad " appPreventDoubleClick
+            (click)="finish()">{{'Stepper.Finish' | translate}}</button>
         </div>
         <div class="text-center" *ngIf="mainFlagModule2 >15">
-          <button class="btn btn-primary btn-pad " (click)="nextRoute()">{{'Stepper.Next' | translate}}</button>
+          <button class="btn btn-primary btn-pad " appPreventDoubleClick
+            (click)="nextRoute()">{{'Stepper.Next' | translate}}</button>
         </div>
       </div>
       <div *ngIf="subFlagModule2 == 2 || subFlagModule2 == 3 || subFlagModule2 == 5 || subFlagModule2 == 6">

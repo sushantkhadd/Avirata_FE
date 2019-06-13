@@ -14,6 +14,6 @@ import { TranslateModule } from '@ngx-translate/core';
     ImageCropperModule
   ],
   declarations: [ImageUploadComponent],
-  exports:[ImageUploadComponent]
+  exports: [ImageUploadComponent]
 })
-export class SharedModule { }
+export class SharedModule {}

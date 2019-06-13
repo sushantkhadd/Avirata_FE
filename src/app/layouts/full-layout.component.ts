@@ -379,10 +379,19 @@ export class FullLayoutComponent implements OnInit {
   }
 
   checkPassword() {
-    if (this.newPasswordChange1 == this.confirmPassword1) {
-      this.confirmPaswwordTrue = true;
-    } else {
-      this.confirmPaswwordTrue = false;
+    if (
+      this.confirmPassword1 != null &&
+      this.confirmPassword1 != "" &&
+      this.confirmPassword1 != undefined
+    )
+    {
+      if (this.newPasswordChange1 == this.confirmPassword1)
+      {
+        this.confirmPaswwordTrue = true;
+      } else
+      {
+        this.confirmPaswwordTrue = false;
+      }
     }
   }
   clearFieldsResetPassword() {
