@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ViewContainerRef } from '@angular/core';
 import { SignupStepperService } from './signup-stepper.service';
 import { SignupStepper } from './signup-stepper.model';
@@ -8,6 +8,7 @@ import { environment } from './../../environments/environment';
 import { LocalstoragedetailsService } from '../services/localstoragedetails.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastsManager } from 'ng6-toastr';
+import { ModalDirective } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-signup-stepper',
@@ -15,6 +16,7 @@ import { ToastsManager } from 'ng6-toastr';
 
 })
 export class SignupStepperComponent implements OnInit {
+  @ViewChild('primaryModal') public primaryModal: ModalDirective;
   public apiUrlForProfile = environment.apiUrl + 'profilepic/';
   constructor(public SignupStepperService: SignupStepperService, public router: Router, public lang: LanguageService, public LocalstoragedetailsService: LocalstoragedetailsService, public toastr: ToastsManager, vcr: ViewContainerRef,public translate: TranslateService) {
     this.toastr.setRootViewContainerRef(vcr);
@@ -642,6 +644,8 @@ export class SignupStepperComponent implements OnInit {
   }
 
   setReviewData() {
+    this.primaryModal.show();
+    this.lang.toShow();
     if (this.counter == 1) {
       for (var i = 0; i < this.SignupStepperModule.districtJson.length; i++) {
         if (this.SignupStepperModule.districtJson[i].districtid == this.SignupStepperModule.district) {
@@ -932,5 +936,10 @@ export class SignupStepperComponent implements OnInit {
     else {
       this.imageUploadeError = true;
     }
+  }
+
+  primaryModalHide(){
+    this.primaryModal.hide();
+    this.lang.toHide()
   }
 }

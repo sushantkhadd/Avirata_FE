@@ -181,6 +181,7 @@ export class Module316Component implements OnInit {
       console.log(e)
       this.playVideo = false;
       this.instructionModal.show()
+      this.LanguageService.toShow();
     }
     else {
       window.localStorage.setItem('mainFlagModule3', '16');
@@ -211,10 +212,12 @@ export class Module316Component implements OnInit {
           this.subFlagModule3++;
           window.localStorage.setItem('subFlagModule3', JSON.stringify(this.subFlagModule3));
           this.instructionModal.hide()
+          this.LanguageService.toHide();
           this.start();
         }
        else if (data['message'] == "submodule finish") {
         this.instructionModal.hide()
+        this.LanguageService.toHide();
           var url = (data["data"].parenturl); 
           var current3 = [];
           current3 = JSON.parse(window.localStorage.getItem("currentJson3")); 
@@ -236,6 +239,7 @@ export class Module316Component implements OnInit {
           this.subFlagModule3++;
           window.localStorage.setItem('subFlagModule3', JSON.stringify(this.subFlagModule3));
           this.instructionModal.hide()
+          this.LanguageService.toHide();
           this.start();
          }
 
@@ -275,6 +279,7 @@ export class Module316Component implements OnInit {
       this.passValues["url"] = src;
       this.thumb_title = title;
       this.flag = value;
+      this.passValues["unlockView"] = "static";
     }else if (value == 5)
     {
       this.passData['videoUrl'] = src;

@@ -142,6 +142,7 @@ export class VideoPlayerComponent implements OnInit {
           } else if (event == "askme")
           {
             this.askMeModal.hide();
+            this.LanguageService.toHide();
             if (!this.fiftyFiftyFlag)
             {
               this.hideMe = true;
@@ -253,6 +254,7 @@ export class VideoPlayerComponent implements OnInit {
           this.start = true;
           var thumb = document.querySelector('.static-thumbnail .img-fluid').classList.add('show');
           this.cfuModal.show();
+          this.LanguageService.toShow();
           if (this.options.length == 1 && !this.fiftyFiftyFlag) {
             this.hideMe = true;
           } else {
@@ -308,6 +310,7 @@ export class VideoPlayerComponent implements OnInit {
 
     this.callService(sendAnswer, 'answer');
     this.cfuModal.hide();
+    this.LanguageService.toHide();
   }
 
   callService(answer, event) {
@@ -340,6 +343,7 @@ export class VideoPlayerComponent implements OnInit {
 
           this.msgFlag = false
           this.toasterPopupModal.show();
+          this.LanguageService.toShow();
           if(window.localStorage.getItem("mainFlagModule2") == "2" && window.localStorage.getItem("subFlagModule2") == "3"){
             console.log("not shuffle")
           }
@@ -349,6 +353,7 @@ export class VideoPlayerComponent implements OnInit {
           this.submitDisabled = false;
           setTimeout(() => {
             this.toasterPopupModal.hide();
+            this.LanguageService.toHide();
             setTimeout(() => {
               console.log("timeout")
               this.play();
@@ -364,12 +369,14 @@ export class VideoPlayerComponent implements OnInit {
             this.vUrl=data['data'].parenturl;
             this.msgFlag = true
             this.toasterPopupModal.show()
+            this.LanguageService.toShow();
             // window.localStorage.setItem('subFlagModule1', "2")
             var pass = {};
             pass["status"] = true;
             pass["url"] = data["data"].parenturl;
             setTimeout(() => {
               this.toasterPopupModal.hide()
+              this.LanguageService.toHide();
               // this.singleCFUCompleteStatus.emit(true);
               setTimeout(() => {
                 console.log("timeout")
@@ -428,9 +435,11 @@ export class VideoPlayerComponent implements OnInit {
 
             this.msgFlag = true
             this.toasterPopupModal.show()
+            this.LanguageService.toShow();
 
             setTimeout(() => {
               this.toasterPopupModal.hide()
+              this.LanguageService.toHide();
               setTimeout(() => {
                 console.log("timeout")
                 this.singleCFUCompleteStatus.emit(true);
@@ -596,12 +605,30 @@ export class VideoPlayerComponent implements OnInit {
 
   showToasterPopup() {
     this.toasterPopupModal.show();
+    this.LanguageService.toShow();
     setTimeout(() => {
       this.toasterPopupModal.hide();
+      this.LanguageService.toHide();
     }, 3000);
   }
 
   closeToasterPopup() {
     this.toasterPopupModal.hide();
+    this.LanguageService.toHide();
+  }
+
+  askMeshow(){
+    this.askMeModal.show();
+    this.LanguageService.toShow();
+  }
+
+  askMeModalHide(){
+    this.askMeModal.hide();
+    this.LanguageService.toHide();
+  }
+
+  cfuModalHide(){
+    this.cfuModal.hide();
+    this.LanguageService.toHide();
   }
 }

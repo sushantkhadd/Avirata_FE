@@ -1238,6 +1238,7 @@ export class ProfileComponent implements OnInit {
 
           } else if (data['Response'] == "Email Verified Thank You") {
             this.emailChangeProfile.hide();
+            this.lang.toHide();
             this.email = this.newEmail;
             this.emailVerified = true;
           } else if (data['Response'] == "Otp Does Not Match") {
@@ -1285,6 +1286,7 @@ export class ProfileComponent implements OnInit {
 
           } else if (data['Response'] == "Mobile Verified Thank You") {
             this.mobileChangeProfile.hide();
+            this.lang.toHide();
             this.mobile = this.newMobile;
           } else if (data['Response'] == "Otp Does Not Match") {
             this.toastr.error(this.translate.instant('Errors.wrongOtp'));
@@ -1305,6 +1307,11 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  changeProfile1(){
+    this.emailChangeProfile.show()
+    this.lang.toShow();
+  }
+
   clearFields() {
     this.newEmail = "";
     this.password = "";
@@ -1316,6 +1323,11 @@ export class ProfileComponent implements OnInit {
     this.emailAccept = false;
   }
 
+  mobileChangeProfileShow()
+  {
+    this.mobileChangeProfile.show()
+    this.lang.toShow();
+  }
   singleOTPGenerateRequest(generateOTPfor) {
     if (generateOTPfor == 1) {
       this.generateEmailOtp();
@@ -1485,6 +1497,7 @@ export class ProfileComponent implements OnInit {
           if (data['Response'] == "email Verified Thank You" || data['Response'] == "Email Verified Thank You") {
             this.toastr.success(this.translate.instant('Errors.emailVerifiedThankYou'))
             this.emailVerifyProfile.hide()
+            this.lang.toHide();
             this.emailVerified = true;
           } else if (data['Response'] == "Otp Does Not Match") {
             this.toastr.error(this.translate.instant('Errors.wrongOtp'))
@@ -1637,5 +1650,27 @@ export class ProfileComponent implements OnInit {
       this.dummyDate = this.dayDate.slice();
       this.dummyDate = this.dummyDate.splice(0, nDays);
     }
+  }
+
+  changeEmail(){
+    this.emailVerifyProfile.hide();
+    this.lang.toHide();
+    this.emailChangeProfile.show()
+    this.lang.toShow();
+  }
+
+  emailChangeProfileHide(){
+    this.emailChangeProfile.hide();
+    this.lang.toHide();
+  }
+
+  mobileChangeProfileHide(){
+    this.mobileChangeProfile.hide();
+    this.lang.toHide();
+  }
+
+  emailVerifyProfileHide(){
+    this.emailVerifyProfile.hide();
+    this.lang.toHide();
   }
 }

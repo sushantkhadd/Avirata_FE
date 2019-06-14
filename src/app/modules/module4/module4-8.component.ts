@@ -133,6 +133,7 @@ export class Module48Component implements OnInit {
     this.overallRating =
       this.answer1 + this.answer2 + this.answer3 + this.answer4 + this.answer5;
     this.ratingModal.show();
+    this.LanguageService.toShow();
   }
 
   next() {
@@ -183,6 +184,7 @@ export class Module48Component implements OnInit {
             console.log(data);
           } else if (fun == "finish") {
             this.ratingModal.hide();
+            this.LanguageService.toHide();
             this.mainFlagModule4 = 12;
             window.localStorage.setItem("uuid", data["data"].nextuuid);
             window.localStorage.setItem("mainFlagModule4", "9");

@@ -33,7 +33,7 @@
                     <div class="col-sm-8 col-xs-12 col-md-8 controls">
                       <div class="input-group">
                         <input class="form-control input-sm" id="email" name="email" [(ngModel)]="email" type="email" [readonly]="true" required>
-                        <button type="button" class="btn btn-primary verifyButtonWidth marginLeft" (click)="emailChangeProfile.show();sendEmailOtp=true;clearFields();">{{'Profile.Make Change' | translate}}</button>
+                        <button type="button" class="btn btn-primary verifyButtonWidth marginLeft" (click)="changeProfile1();sendEmailOtp=true;clearFields();">{{'Profile.Make Change' | translate}}</button>
                       </div>
                     </div>
                   </div>
@@ -52,7 +52,7 @@
                     <div class="col-sm-8 col-xs-12 col-md-8 controls">
                       <div class="input-group">
                         <input class="form-control input-sm" id="mobileNo" name="mobileNo" [(ngModel)]="mobile" type="text" [readonly]="true" required>
-                        <button type="button" class="btn btn-primary verifyButtonWidth marginLeft" (click)="mobileChangeProfile.show();sendMobileOtp=true;clearFields();">{{'Profile.Make Change' | translate}}</button>
+                        <button type="button" class="btn btn-primary verifyButtonWidth marginLeft" (click)="mobileChangeProfileShow();sendMobileOtp=true;clearFields();">{{'Profile.Make Change' | translate}}</button>
                       </div>
                     </div>
                   </div>
@@ -658,7 +658,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title">{{ 'Profile.Change Email' | translate }}</h4>
-          <button type="button" class="close" (click)="emailChangeProfile.hide()" aria-label="Close" id="btnCloseModal">
+          <button type="button" class="close" (click)="emailChangeProfileHide()" aria-label="Close" id="btnCloseModal">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -758,7 +758,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title">{{ 'Profile.Change Mobile' | translate }}</h4>
-          <button type="button" class="close" (click)="mobileChangeProfile.hide()" aria-label="Close" id="btnCloseModal">
+          <button type="button" class="close" (click)="mobileChangeProfileHide()" aria-label="Close" id="btnCloseModal">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -841,7 +841,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title">{{ 'Profile.emailNotVerified' | translate }}</h4>
-          <button type="button" class="close" (click)="emailVerifyProfile.hide();sendEmail=false;click_here_email=false" aria-label="Close"
+          <button type="button" class="close" (click)="emailVerifyProfileHide();sendEmail=false;click_here_email=false" aria-label="Close"
             id="btnCloseModal">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -865,7 +865,7 @@
                 <div class="form-group row" *ngIf="!click_here_email">
                   <label class="col-sm-3 form-control-label " for="input-small"></label>
                   <P class="input-group col-sm-9 color_red">ई-मेल बदल करण्यासाठी इथे
-                    <a class="click_here" (click)="click_here_email=true;emailVerifyProfile.hide();emailChangeProfile.show()">
+                    <a class="click_here" (click)="click_here_email=true;changeEmail();">
                     &nbsp;क्लिक करा</a>
                   </P>
                 </div>

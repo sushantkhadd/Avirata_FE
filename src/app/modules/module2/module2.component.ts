@@ -128,6 +128,7 @@ export class Module2Component implements OnInit {
       this.nextFlag = true; 
       this.subFlagModule2 = 2;
       this.instructionModal.show();
+      this.LanguageService.toShow();
       var url ={}
       url['2.1.1'] = this.vedioCompleteUrl;
       console.log("urllll",url)
@@ -161,6 +162,7 @@ export class Module2Component implements OnInit {
             this.playVideo = true;
           } else if (fun == "finish1") {
             this.instructionModal.hide();
+            this.LanguageService.toHide();
             this.playVideo = false;
             this.statVideoFlag = true;
             this.mainFlagModule2 = 1;

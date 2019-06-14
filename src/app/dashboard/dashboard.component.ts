@@ -123,7 +123,10 @@ export class DashboardComponent implements OnInit {
     else if (this.userType == "admin") {
     }
   }
-
+  rankModalHide(){
+    this.rankModal.hide();
+    this.lang.toHide();
+  }
   // showSuccess() {
   //   this.toastr.success(
   //     this.translate.instant("Login.Login")

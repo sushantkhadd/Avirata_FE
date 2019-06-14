@@ -40,6 +40,7 @@ export class Module318Component implements OnInit {
       this.passValues['finalcount'] = this.finalCount;
       this.passValues['showcfu'] = this.showCFU;
       this.passValues['apiurl'] = this.apiUrl;
+      this.passValues["unlockView"] = "static";
       var unlockJson={}
        unlockJson=JSON.parse(window.localStorage.getItem('currentJson3'))
       if (unlockJson['children'].length > 0) {

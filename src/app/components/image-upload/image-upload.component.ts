@@ -5,6 +5,7 @@ import { UploadService } from './upload.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastsManager } from 'ng6-toastr';
 import { LocalstoragedetailsService } from 'src/app/services/localstoragedetails.service';
+import { LanguageService } from 'src/app/language.service';
 
 @Component({
   selector: 'app-image-upload',
@@ -21,7 +22,7 @@ export class ImageUploadComponent implements OnInit {
   croppedImage;
   emptySumbitMessage = false;
   wrongFileSelection = false;
-  constructor(public UploadService: UploadService,public LocalstoragedetailsService:LocalstoragedetailsService,public toastr: ToastsManager, vcr: ViewContainerRef,  public translate: TranslateService) {
+  constructor(public UploadService: UploadService,public LocalstoragedetailsService:LocalstoragedetailsService,public toastr: ToastsManager, vcr: ViewContainerRef,  public translate: TranslateService,public lang: LanguageService) {
     this.toastr.setRootViewContainerRef(vcr);
 
     this.cropperSettings = new CropperSettings();
@@ -106,6 +107,7 @@ export class ImageUploadComponent implements OnInit {
       this.croppedImage = "";
       this.cropper.reset();
       this.uploadImageModal.hide();
+      this.lang.toHide();
     }
   }
 }

@@ -179,7 +179,7 @@
                 <div class="col-6">
                 </div>
                 <div class="col-6">
-                  <button class="btn btn-info active pull-right" type="button" (click)="primaryModal.show();setReviewData()"
+                  <button class="btn btn-info active pull-right" type="button" (click)="setReviewData()"
                     *ngIf="next_button" [disabled]="!stepFirst || !designation || firstStep.form.invalid">{{'Stepper.Next'
                     | translate}}</button>
                 </div>
@@ -189,7 +189,7 @@
                     <div class="modal-content">
                       <div class="modal-header">
                         <h4 class="modal-title">{{'Stepper.Basic Details' | translate}}</h4>
-                        <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
+                        <button type="button" class="close" (click)="primaryModalHide()" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
@@ -238,7 +238,7 @@
                         </div>
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" (click)="primaryModal.hide()">{{'Profile.Make
+                        <button type="button" class="btn btn-primary" (click)="primaryModalHide()">{{'Profile.Make
                           Change' | translate}}</button>
                         <button type="button" class="btn btn-secondary" (click)="onNext()">{{'Stepper.Next' |
                           translate}}</button>
@@ -506,7 +506,7 @@
                 <div class="col-6">
                 </div>
                 <div class="col-6">
-                  <button class="btn btn-info active pull-right" type="button" (click)="primaryModal.show();setReviewData()"
+                  <button class="btn btn-info active pull-right" type="button" (click)="setReviewData()"
                     *ngIf="next_button" [disabled]="next2 || secondStep.form.invalid ">{{'Stepper.Next' | translate}}</button>
                 </div>
                 <div bsModal #primaryModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1"
@@ -515,7 +515,7 @@
                     <div class="modal-content">
                       <div class="modal-header">
                         <h4 class="modal-title">{{'Stepper.Personal Details' | translate}}</h4>
-                        <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
+                        <button type="button" class="close" (click)="primaryModalHide()" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
@@ -612,7 +612,7 @@
                         </div>
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" (click)="primaryModal.hide()">{{'Profile.Make
+                        <button type="button" class="btn btn-primary" (click)="primaryModalHide()">{{'Profile.Make
                           Change' | translate}}</button>
                         <button type="button" class="btn btn-secondary" (click)="onNext()">{{'Stepper.Next' |
                           translate}}</button>
@@ -694,7 +694,7 @@
                 <div class="col-6">
                 </div>
                 <div class="col-6">
-                  <button class="btn btn-info active pull-right" type="button" (click)="primaryModal.show();setReviewData()"
+                  <button class="btn btn-info active pull-right" type="button" (click)="setReviewData()"
                     *ngIf="next_button" [disabled]="!next3">{{'Stepper.Next' | translate}}</button>
                 </div>
                 <div bsModal #primaryModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1"
@@ -703,7 +703,7 @@
                     <div class="modal-content">
                       <div class="modal-header">
                         <h4 class="modal-title">{{'Stepper.Service Details' | translate}}</h4>
-                        <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
+                        <button type="button" class="close" (click)="primaryModalHide()" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
@@ -733,7 +733,7 @@
                         </div>
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" (click)="primaryModal.hide()">{{'Profile.Make
+                        <button type="button" class="btn btn-primary" (click)="primaryModalHide()">{{'Profile.Make
                           Change' | translate}}</button>
                         <button type="button" class="btn btn-secondary" (click)="onNext()">{{'Stepper.Next' |
                           translate}}</button>
@@ -863,7 +863,7 @@
                 <div class="col-6">
                 </div>
                 <div class="col-6">
-                  <button class="btn btn-info active pull-right" type="button" (click)="primaryModal.show();setReviewData()"
+                  <button class="btn btn-info active pull-right" type="button" (click)="setReviewData()"
                     *ngIf="finish_button" [disabled]="!finishEnable || ug.errors || professional.errors">{{'Stepper.Finish'
                     | translate}}</button>
                 </div>
@@ -873,7 +873,7 @@
                     <div class="modal-content">
                       <div class="modal-header">
                         <h4 class="modal-title">{{'Stepper.Education Details' | translate}}</h4>
-                        <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
+                        <button type="button" class="close" (click)="primaryModalHide()" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
@@ -918,7 +918,7 @@
                         </div>
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" (click)="primaryModal.hide()">{{'Profile.Make
+                        <button type="button" class="btn btn-primary" (click)="primaryModalHide()">{{'Profile.Make
                           Change' | translate}}</button>
                         <button type="button" class="btn btn-secondary" (click)="onNext()">{{'Stepper.Next' |
                           translate}}</button>

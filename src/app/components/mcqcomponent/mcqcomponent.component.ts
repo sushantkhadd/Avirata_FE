@@ -22,7 +22,7 @@ export class McqcomponentComponent implements OnInit {
   public ansSelectCount; counter; selectedTasks = []; ans1; ans2; showAns1; showAns2; queUrl;title;
   public nextQueFlag; subPriorities; sendYesNoType; mysubModule3; mysubModule4; mysubModule1;
   public onlyPopUpAns; mysubModule; submitFlagMCQ; mysubModule0; mysubModule6; mysubModule7;mysubModule2;mysubModule5;totalQueCount;
-  constructor() { }
+  constructor(public lang: LanguageService) { }
 
   ngOnInit() {
 
@@ -378,17 +378,19 @@ export class McqcomponentComponent implements OnInit {
     this.submitFlagMCQ = false
     if (window.localStorage.getItem('mainFlagModule2') == '3' || window.localStorage.getItem('mainFlagModule3') == '9' || window.localStorage.getItem('mainFlagModule3') == '11' || window.localStorage.getItem('mainFlagModule3') == '5'){
       this.instructionModal.show()
+      this.lang.toShow();
      this.data.description = this.data.description
      console.log("data.sescr",this.data.description)
     }else if(window.localStorage.getItem('mainFlagModule5') == '7'){
       this.rankModal.show()
-
+      this.lang.toShow();
 
       // this.userOptions[this.bunchList[0].questionid] =
     }
     else if(this.questionType == 'checkBoxOption'){
       if(window.localStorage.getItem('mainFlagModule5') == '11'){
         this.instructionModal.show()
+        this.ans1.lang.toShow()
         this.data.description = this.data.description
         console.log("data.sescr",this.data.description)
         //this.onlyPopUpAns = this.selectedTasks
@@ -514,8 +516,10 @@ export class McqcomponentComponent implements OnInit {
   submit() {
     if (this.passFlags['popuptype'] != 'description') {
       this.rankModal.show()
+      this.lang.toShow()
     } else {
       this.instructionModal.show()
+      this.lang.toShow()
     }
   }
 
@@ -524,12 +528,14 @@ export class McqcomponentComponent implements OnInit {
     if (window.localStorage.getItem('mainFlagModule2') == '3' && window.localStorage.getItem('subFlagModule2') == '4') {
       this.sendAns.emit(this.selectedAnswer)
       this.rankModal.hide()
+      this.lang.toHide();
       if (this.eventRadioGroup != undefined && this.eventRadioGroup != null) {
         this.eventRadioGroup.instance.option("value", '');
       }
     } else if (window.localStorage.getItem('mainFlagModule2') == '3' && window.localStorage.getItem('subFlagModule2') == '10') {
       this.sendAns.emit(this.selectedTasks)
       this.rankModal.hide()
+      this.lang.toHide();
     }else if (window.localStorage.getItem('mainFlagModule1') == '2' || window.localStorage.getItem('mainFlagModule1') == '6') {
       var dummy=this.tasks;
       var obj=[];
@@ -548,11 +554,13 @@ export class McqcomponentComponent implements OnInit {
           console.log("emit even6t")
           this.sendAns.emit(item.option)
           this.rankModal.hide()
+          this.lang.toHide();
           this.eventRadioGroup.instance.option("value", '');
         }
       }
     } else if(window.localStorage.getItem('mainFlagModule5') == '7'){
       this.rankModal.hide()
+      this.lang.toHide();
       this.queCount = this.queCount + 1;
       if(Object.keys(this.userOptions).length == 3){
         this.sendAns.emit(this.userOptions)
@@ -581,6 +589,7 @@ export class McqcomponentComponent implements OnInit {
           console.log("emit even6t")
           this.sendAns.emit(item.option)
           this.rankModal.hide()
+          this.lang.toHide();
           this.eventRadioGroup.instance.option("value", '');
         }
       }
@@ -640,6 +649,7 @@ export class McqcomponentComponent implements OnInit {
 
   emitData() {
     this.instructionModal.hide()
+    this.lang.toHide();
     console.log("ans", this.onlyPopUpAns)
     if(window.localStorage.getItem('mainFlagModule5')== '11'){
       this.sendAns.emit(this.selectedTasks)

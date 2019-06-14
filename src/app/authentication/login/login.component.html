@@ -52,7 +52,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <button class="btn password-link px-3" type="button" data-toggle="modal" (click)="emailVerifyClicked=false;mobileVerifyClicked=false;forgetPassword();primaryModal.show();">
+                                    <button class="btn password-link px-3" type="button" data-toggle="modal" (click)="emailVerifyClicked=false;mobileVerifyClicked=false;forgetPassword();">
                                         {{'Login.Forget Password' | translate}} ?
                                     </button>
                                     <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" [config]="{backdrop: 'static'}" role="dialog" aria-labelledby="myModalLabel"
@@ -61,7 +61,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h4 class="modal-title pass-title">{{ 'Login.Forget Password' | translate }}</h4>
-                                                    <button type="button" class="close" (click)="primaryModal.hide();emailVerifyClicked=false;mobileVerifyClicked=false;confirmPaswwordTrue=false;closeMe()"
+                                                    <button type="button" class="close" (click)="emailVerifyClicked=false;mobileVerifyClicked=false;confirmPaswwordTrue=false;closeMe()"
                                                         aria-label="Close" id="btnCloseModal">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>

@@ -84,6 +84,7 @@ export class Module515Component implements OnInit {
   videoFinish(e) {
     if (e == true) {
       this.instructionModal.show()
+      this.LanguageService.toShow();
       this.nextBtnFlag = true
     }
   }
@@ -116,7 +117,7 @@ export class Module515Component implements OnInit {
       window.localStorage.setItem('subFlagModule5', '1');
       // window.localStorage.setItem('source', 'module 5.16');
       this.Module5Service.setLocalStorage5(16);
-      var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module5.subMenu5-15'), "next": this.translate.instant('L2Module5.subMenu5-15'), "nextRoute": "/dashboard" }
+      var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module5.subMenu5-15'), "next": this.translate.instant('L2Module5.subMenu5-15'), "nextRoute": "/modules/module5/Module5.16" }
       this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
     }
   }
@@ -141,6 +142,7 @@ export class Module515Component implements OnInit {
 
         } if (fun == 'finish1') {
           this.instructionModal.hide()
+          this.LanguageService.toHide();
           this.showVideoFlag = false
           window.localStorage.setItem('uuid', data['data'].nextuuid)
           this.subFlagModule5 = this.subFlagModule5 + 1
@@ -173,6 +175,7 @@ export class Module515Component implements OnInit {
     this.statVideoFlag = false;
     this.passData['videoUrl'] = "";
     this.staticImageModal.hide();
+    this.LanguageService.toHide();
   }
 
   singleCFUComplete(e) {

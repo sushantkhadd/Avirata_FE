@@ -62,6 +62,7 @@ export class Module3Component implements OnInit {
   videoFinish(e) {
     if (e == true) {
       this.instructionModal.show()
+      this.LanguageService.toShow();
       this.nextBtnFlag = true
     }
   }
@@ -110,6 +111,7 @@ export class Module3Component implements OnInit {
           window.localStorage.setItem('currentJson3', JSON.stringify(current3))
         } if (fun == 'finish1') {
           this.instructionModal.hide()
+          this.LanguageService.toHide();
           this.showVideoFlag = false
           window.localStorage.setItem('uuid', data['data'].nextuuid)
           this.subFlagModule3 = this.subFlagModule3 + 1
@@ -135,9 +137,31 @@ export class Module3Component implements OnInit {
           this.dummy = []
           this.dummy = this.deleteAdd
           this.data = this.dummy[this.queCount]
-
-
-
+          console.log("quec",this.queCount)
+          if(window.localStorage.getItem("source") == "module 3.1.2.1"){
+            this.queCount = 1;
+          }
+          else if(window.localStorage.getItem("source") == "module 3.1.2.2"){
+            this.queCount = 2;
+          }
+          else if(window.localStorage.getItem("source") == "module 3.1.2.3"){
+            this.queCount = 3;
+          }
+          else if(window.localStorage.getItem("source") == "module 3.1.2.4"){
+            this.queCount = 4;
+          }
+          else if(window.localStorage.getItem("source") == "module 3.1.2.5"){
+            this.queCount = 5;
+          }
+          else if(window.localStorage.getItem("source") == "module 3.1.2.6"){
+            this.queCount = 6;
+          }
+          else if(window.localStorage.getItem("source") == "module 3.1.2.7"){
+            this.queCount = 7;
+          }
+          else if(window.localStorage.getItem("source") == "module 3.1.2.8"){
+            this.queCount = 8;
+          }
           // for (var rec in this.dummy) {
           //   if (this.dummy[rec].answer != null) {
           //     this.deleteAdd.push(rec)

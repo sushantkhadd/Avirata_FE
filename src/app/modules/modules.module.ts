@@ -101,6 +101,15 @@ import { Module515Component } from './module5/module5-15.component';
 import { Module5Service } from "./module5/module5.service";
 import { AudioPlayerComponent } from "../components/audio-player/audio-player.component";
 import { PreventDoubleClickDirective } from "../shared/directives/prevent-double-click.directive";
+import { Module516Component } from './module5/module5-16.component';
+import { Module517Component } from './module5/module5-17.component';
+import { Module518Component } from './module5/module5-18.component';
+import { Module519Component } from './module5/module5-19.component';
+import { Module520Component } from './module5/module5-20.component';
+import { Module521Component } from './module5/module5-21.component';
+import { Module522Component } from './module5/module5-22.component';
+import { Module523Component } from './module5/module5-23.component';
+import { Module524Component } from './module5/module5-24.component';
 
 @NgModule({
   imports: [
@@ -207,7 +216,16 @@ import { PreventDoubleClickDirective } from "../shared/directives/prevent-double
     Module513Component,
     Module514Component,
     Module515Component,
-    PreventDoubleClickDirective
+    PreventDoubleClickDirective,
+    Module516Component,
+    Module517Component,
+    Module518Component,
+    Module519Component,
+    Module520Component,
+    Module521Component,
+    Module522Component,
+    Module523Component,
+    Module524Component
   ],
   providers: [
     Module0Service,

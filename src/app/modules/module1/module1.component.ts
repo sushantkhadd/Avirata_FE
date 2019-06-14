@@ -84,6 +84,7 @@ export class Module1Component implements OnInit {
     if (e == true)
     {
       this.instructionModal.show()
+      this.LanguageService.toShow();
       this.nextBtnFlag = true
     }
   }
@@ -147,6 +148,7 @@ export class Module1Component implements OnInit {
           } if (fun == 'finish1')
           {
             this.instructionModal.hide()
+            this.LanguageService.toHide();
             this.showVideoFlag = false
             window.localStorage.setItem('uuid', data['data'].nextuuid)
             this.subFlagModule1 = this.subFlagModule1 + 1
@@ -182,6 +184,7 @@ export class Module1Component implements OnInit {
     this.statVideoFlag = false;
     this.passData['videoUrl'] = "";
     this.staticImageModal.hide();
+    this.LanguageService.toHide();
   }
 
   singleCFUComplete(e) {

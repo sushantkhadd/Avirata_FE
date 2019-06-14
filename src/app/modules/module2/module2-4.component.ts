@@ -133,6 +133,7 @@ export class Module24Component implements OnInit {
       this.subFlagModule2 = 2;
       // this.playVideo = false;
       this.instructionModal.show();
+      this.LanguageService.toShow();
       var url ={}
       url['2.4.1'] = this.vedioCompleteUrl;
       console.log("urllll",url)
@@ -199,6 +200,7 @@ export class Module24Component implements OnInit {
             this.playVideo = true;
           } else if (fun == "finish1") {
             this.instructionModal.hide();
+            this.LanguageService.toHide();
             // this.playVideo = false;
             // this.statVideoFlag = true;
             this.mainFlagModule2 = 4;

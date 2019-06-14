@@ -106,7 +106,7 @@ export class Module4Component implements OnInit {
   }
 
   startEvent2() {
-    this.startFlag = false;
+    // this.startFlag = false;
     this.showAnswer = true;
     this.saveData = true;
     this.passFlags['saveData'] = this.saveData;
@@ -128,7 +128,7 @@ export class Module4Component implements OnInit {
             // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 1.3', window.localStorage.getItem('username'), 10);
             console.log("data ", data['data'])
             this.data = data['data']
-            this.startFlag = true;
+            // this.startFlag = true;
           }
         },
         error => {
@@ -143,7 +143,7 @@ export class Module4Component implements OnInit {
       this.nextFlag = false;
       this.subFlagModule4 = 2;
       this.instructionModal.show();
-      document.getElementsByTagName("body")[0].classList.add("modal-open");
+      this.LanguageService.toShow();
       // var url ={}
       // url['4.1.1'] = this.vedioCompleteUrl;
       // console.log("urllll",url)
@@ -185,19 +185,16 @@ export class Module4Component implements OnInit {
             this.playVideo = true;
           } else if (fun == "finish1") {
             this.instructionModal.hide();
-            document.getElementsByTagName("body")[0].classList.remove("modal-open");
-            var paras = jQuery("bs-modal-backdrop");
-            paras.hide();
+            this.LanguageService.toHide();
             // this.playVideo = false;
             // this.statVideoFlag = true;
             this.mainFlagModule4 = 1;
             window.localStorage.setItem("uuid", data["data"].nextuuid);
-            console.log(data);
             this.subFlagModule4 = 2;
             window.localStorage.setItem("subFlagModule4", "2");
             this.questionFlag = true;
             this.startEvent2();
-            this.nextFlag = false;
+            // this.nextFlag = false;
           }
         }
       },
@@ -220,24 +217,10 @@ export class Module4Component implements OnInit {
     this.Module4Service.apiCall(jsonBody, apiUrl)
       .subscribe(
         data => {
-          if (data['message'] == "your answer stored next question and uuid is")
-          {
-            window.localStorage.setItem('uuid', data['data'].nextuuid);
-            this.subFlagModule4 = this.subFlagModule4 + 1
-            window.localStorage.setItem('subFlagModule4', this.subFlagModule4.toString())
-            console.log("data ", data['data'])
-            this.data = data['data']
-            this.sumbitButton = false;
-            this.description = data['data'].description;
-          } else if (data['message'] == "submodule finish")
+          if (data['message'] == "submodule finish")
           {
             this.statVideoFlag = true;
-           this.mainFlagModule4 = 2;
-          
-           this.nextFlag = true;
-           // this.startFlag = false;
             window.localStorage.setItem('uuid', data['data'].nextuuid);
-            // this.subFlagModule4 =1;
             window.localStorage.setItem('mainFlagModule4', '2');
             window.localStorage.setItem('subFlagModule4', '1');
             window.localStorage.setItem('source', 'module 4.2.1');
