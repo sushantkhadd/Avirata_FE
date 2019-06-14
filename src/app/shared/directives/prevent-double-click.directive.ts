@@ -9,6 +9,8 @@ export class PreventDoubleClickDirective {
 
   @HostListener('click', ['$event'])
   clickEvent(event) {
+    event.preventDefault();
+    event.stopPropagation();
     event.srcElement.setAttribute('disabled', true);
     setTimeout(function(){
       event.srcElement.removeAttribute('disabled');

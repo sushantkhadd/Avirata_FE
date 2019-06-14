@@ -6,7 +6,7 @@
       [page]="count" (after-load-complete)="afterLoadComplete($event)">
     </pdf-viewer>
     <div class="loader-gif" *ngIf="isLoaded">
-    <img src="../../../assets/img/loader-fb.svg" class="img-fluid" alt="">
+    <img [src]="loaderSrc" class="img-fluid" alt="">
     </div>
   </div>
   <div class="slide-control form-inline">
@@ -37,7 +37,8 @@
           <em class="fa fa-arrow-right" aria-hidden="true"></em>
         </button>
         <span *ngIf="data['unlockView'] != 'static'">
-          <button (click)="finishPDF();" class="btn btn-primary">{{'Stepper.Finish' | translate}}</button>
+          <button (click)="finishPDF();" appPreventDoubleClick
+            class="btn btn-primary">{{'Stepper.Finish' | translate}}</button>
         </span>
       </div>
       <div class="fullscreen float-right download-pdf" *ngIf="data['unlockView'] == 'static'">
