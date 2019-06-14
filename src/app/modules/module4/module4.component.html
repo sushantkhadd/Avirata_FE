@@ -35,16 +35,16 @@
       </div>
     </div>
   </div>
-  <div *ngIf="subFlagModule4 == 2 && !nextFlag">
-  <div *ngIf="startFlag">
-    <h6 class="questionHead lineHeight">{{'L2common.caution' | translate}} <span [innerHTML]="inst"> </span></h6>
-    <div class="borderBlue">
-    <span *ngIf="data">
-      <app-mcqcomponent [passFlags]='passFlags' [data]='data' (sendAns)="saveAnswer($event)"></app-mcqcomponent>
-    </span>
+  <div *ngIf="subFlagModule4 == 2">
+    <div *ngIf="data">
+      <h6 class="questionHead lineHeight">{{'L2common.caution' | translate}} <span [innerHTML]="inst"> </span></h6>
+      <div class="borderBlue">
+        <span>
+          <app-mcqcomponent [passFlags]='passFlags' [data]='data' (sendAns)="saveAnswer($event)"></app-mcqcomponent>
+        </span>
+      </div>
+    </div>
   </div>
-</div>
-</div>
 </div>
 
 <div *ngIf="mainFlagModule4 > 1">
