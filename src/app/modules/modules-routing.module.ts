@@ -77,6 +77,15 @@ import { Module512Component } from "./module5/module5-12.component";
 import { Module513Component } from "./module5/module5-13.component";
 import { Module514Component } from "./module5/module5-14.component";
 import { Module515Component } from "./module5/module5-15.component";
+import { Module516Component } from "./module5/module5-16.component";
+import { Module517Component } from "./module5/module5-17.component";
+import { Module518Component } from "./module5/module5-18.component";
+import { Module519Component } from "./module5/module5-19.component";
+import { Module520Component } from "./module5/module5-20.component";
+import { Module521Component } from "./module5/module5-21.component";
+import { Module522Component } from "./module5/module5-22.component";
+import { Module523Component } from "./module5/module5-23.component";
+import { Module524Component } from "./module5/module5-24.component";
 
 const routes: Routes = [
   {
@@ -389,6 +398,42 @@ const routes: Routes = [
       {
         path: "module5/Module5.15",
         component: Module515Component
+      },
+      {
+        path: "module5/Module5.16",
+        component: Module516Component
+      },
+      {
+        path: "module5/Module5.17",
+        component: Module517Component
+      },
+      {
+        path: "module5/Module5.18",
+        component: Module518Component
+      },
+      {
+        path: "module5/Module5.19",
+        component: Module519Component
+      },
+      {
+        path: "module5/Module5.20",
+        component: Module520Component
+      },
+      {
+        path: "module5/Module5.21",
+        component: Module521Component
+      },
+      {
+        path: "module5/Module5.22",
+        component: Module522Component
+      },
+      {
+        path: "module5/Module5.23",
+        component: Module523Component
+      },
+      {
+        path: "module5/Module5.24",
+        component: Module524Component
       }
     ]
   }

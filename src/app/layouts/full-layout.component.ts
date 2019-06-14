@@ -832,6 +832,81 @@ export class FullLayoutComponent implements OnInit {
           "subFlagModule5",
           this.subFlagModule5.toString()
         );
+      } else if (source == "module 5.16") {
+        this.mainFlagModule5 = 16;
+        window.localStorage.setItem(
+          "subFlagModule5",
+          this.subFlagModule5.toString()
+        );
+      } else if (
+        source == "module 5.17" ||
+        source == "module 5.17.1" ||
+        source == "module 5.17.2"
+      ) {
+        this.mainFlagModule5 = 17;
+        if (source == "module 5.17.1") {
+          this.subFlagModule5 = 1;
+        } else if (source == "module 5.17.2") {
+          this.subFlagModule5 = 2;
+        }
+        window.localStorage.setItem(
+          "subFlagModule5",
+          this.subFlagModule5.toString()
+        );
+      } else if (source == "module 5.18") {
+        this.mainFlagModule5 = 18;
+        window.localStorage.setItem(
+          "subFlagModule5",
+          this.subFlagModule5.toString()
+        );
+      } else if (source == "module 5.19") {
+        this.mainFlagModule5 = 19;
+        window.localStorage.setItem(
+          "subFlagModule5",
+          this.subFlagModule5.toString()
+        );
+      } else if (source == "module 5.20") {
+        this.mainFlagModule5 = 20;
+        window.localStorage.setItem(
+          "subFlagModule5",
+          this.subFlagModule5.toString()
+        );
+      } else if (
+        source == "module 5.21" ||
+        source == "module 5.21.1" ||
+        source == "module 5.21.2" ||
+        source == "module 5.21.3"
+      ) {
+        this.mainFlagModule5 = 21;
+        if (source == "module 5.21.1") {
+          this.subFlagModule5 = 1;
+        } else if (source == "module 5.21.2") {
+          this.subFlagModule5 = 2;
+        } else if (source == "module 5.21.3") {
+          this.subFlagModule5 = 3;
+        }
+        window.localStorage.setItem(
+          "subFlagModule5",
+          this.subFlagModule5.toString()
+        );
+      } else if (source == "module 5.22") {
+        this.mainFlagModule5 = 22;
+        window.localStorage.setItem(
+          "subFlagModule5",
+          this.subFlagModule5.toString()
+        );
+      } else if (source == "module 5.23") {
+        this.mainFlagModule5 = 23;
+        window.localStorage.setItem(
+          "subFlagModule5",
+          this.subFlagModule5.toString()
+        );
+      } else if (source == "module 5.24") {
+        this.mainFlagModule5 = 24;
+        window.localStorage.setItem(
+          "subFlagModule5",
+          this.subFlagModule5.toString()
+        );
       }
     }
     this.LocalstoragedetailsService.setModule5Falgs(
