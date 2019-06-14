@@ -81,7 +81,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-info" appPreventDoubleClick [disabled]='!submitDisabled'
-            (click)="submitAnswer()">{{'Cfu.submit' | translate}}</button>
+            (debounceClick)="submitAnswer()">{{'Cfu.submit' | translate}}</button>
         </div>
       </div>
     </div>
@@ -132,7 +132,7 @@
         </div>
         <div class="modal-footer justify-content-center">
           <button (click)="askMeModalHide()" class="btn btn-danger">{{'Cfu.no' | translate}}</button>
-          <button (click)="getRewards('askme')" appPreventDoubleClick
+          <button (debounceClick)="getRewards('askme')" appPreventDoubleClick
             class="btn btn-success">{{'Cfu.yes' | translate}}</button>
         </div>
       </div>

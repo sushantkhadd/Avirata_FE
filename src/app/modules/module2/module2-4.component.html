@@ -21,7 +21,7 @@
         </div>
         <div class="card-footer text-right">
           <button class="btn btn-primary" appPreventDoubleClick
-            (click)="startEvent1()">{{'Login.Close' | translate}}</button>
+            (debounceClick)="startEvent1()">{{'Login.Close' | translate}}</button>
         </div>
       </div>
     </div>
@@ -56,7 +56,7 @@
           <div class="card-footer">
             <div class="float-right">
               <button class="btn btn-primary" appPreventDoubleClick
-                (click)="startEvent2();">{{'Module4.start' | translate}}</button>
+                (debounceClick)="startEvent2();">{{'Module4.start' | translate}}</button>
             </div>
           </div>
         </div>
@@ -88,7 +88,7 @@
               </div>
               <div class="col-md-12 col-xs-12">
                 <button class="btn btn-info" appPreventDoubleClick [disabled]="!submitFlag"
-                  (click)="finish2()">{{'Cfu.submit' | translate}}</button>
+                  (debounceClick)="finish2()">{{'Cfu.submit' | translate}}</button>
               </div>
             </div>
 

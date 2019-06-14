@@ -21,7 +21,7 @@
         </div>
         <div class="card-footer text-right">
           <button class="btn btn-primary" appPreventDoubleClick
-            (click)="startEvent()">{{'Login.Close' | translate}}</button>
+            (debounceClick)="startEvent()">{{'Login.Close' | translate}}</button>
         </div>
       </div>
     </div>

@@ -44,10 +44,12 @@
         <img alt="" [src]="imgUrl" class="mx-auto img-fluid w-35">
         <hr>
         <div class="text-center" *ngIf="mainFlagModule3 ==16">
-          <button class="btn btn-primary btn-pad " appPreventDoubleClick (click)="finish()">{{'Stepper.Next' | translate}}</button>
+          <button class="btn btn-primary btn-pad " appPreventDoubleClick
+            (debounceClick)="finish()">{{'Stepper.Next' | translate}}</button>
         </div>
         <div class="text-center" *ngIf="mainFlagModule3 >16">
-          <button class="btn btn-primary btn-pad " appPreventDoubleClick (click)="nextRoute()">{{'Stepper.Next' | translate}}</button>
+          <button class="btn btn-primary btn-pad " appPreventDoubleClick
+            (debounceClick)="nextRoute()">{{'Stepper.Next' | translate}}</button>
         </div>
       </div>
       <div *ngIf="subFlagModule3 == 2 || subFlagModule3 == 3 || subFlagModule3 == 5 || subFlagModule3 == 6">

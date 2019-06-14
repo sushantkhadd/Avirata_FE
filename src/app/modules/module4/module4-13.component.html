@@ -20,7 +20,7 @@
         <div class="card-footer">
           <div class="float-right hidden-xs-down">
             <button class="btn btn-primary" appPreventDoubleClick
-              (click)="startEvent=true;start();">{{'Login.Close' | translate}}</button>
+              (debounceClick)="startEvent=true;start();">{{'Login.Close' | translate}}</button>
           </div>
           <!-- <div class="hidden-sm-up text-center">
                     <button class="btn btn-primary" (click)="startEvent=true;start();">{{'Module2.see' | translate}}</button>
@@ -43,10 +43,12 @@
           <img alt="" [src]="imgUrl" class="mx-auto img-fluid w-35">
           <hr>
           <div class="text-center" *ngIf="mainFlagModule4 ==13">
-            <button class="btn btn-primary btn-pad " appPreventDoubleClick (click)="finish()">{{'Stepper.Next' | translate}}</button>
+            <button class="btn btn-primary btn-pad " appPreventDoubleClick
+              (debounceClick)="finish()">{{'Stepper.Next' | translate}}</button>
           </div>
           <div class="text-center" *ngIf="mainFlagModule4 >13">
-            <button class="btn btn-primary btn-pad " appPreventDoubleClick (click)="nextRoute()">{{'Stepper.Next' | translate}}</button>
+            <button class="btn btn-primary btn-pad " appPreventDoubleClick
+              (debounceClick)="nextRoute()">{{'Stepper.Next' | translate}}</button>
           </div>
         </div>
         <div *ngIf="subFlagModule4 == 2 || subFlagModule4 == 3 || subFlagModule4 == 5 || subFlagModule4 == 6">

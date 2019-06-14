@@ -264,7 +264,7 @@ export class TimelineComponent implements OnInit {
       } else if (this.mainFlagModule5 && this.currentstatus  == 5)
       {
         this.totalPer =80
-        this.counterValue5 = Math.round((this.mainFlagModule5 - 1) * this.calPercentage(15));
+        this.counterValue5 = Math.round((this.mainFlagModule5 - 1) * this.calPercentage(24));
         this.totalPer = 80 + this.counterValue5;
         this.barWidth5 = this.counterValue5 * this.width + '%';
       }else if (this.currentstatus  == 6)

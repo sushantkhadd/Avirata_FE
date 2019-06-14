@@ -23,15 +23,17 @@
                 <div class="card-footer" *ngIf="moduleNumber==2 || moduleNumber==3 || moduleNumber==4">
                     <div class="float-right hidden-xs-down">
                         <button class="btn btn-primary" appPreventDoubleClick
-                          (click)="startExam()">{{'Quiz.start exam' | translate}}</button>
+                          (debounceClick)="startExam()">{{'Quiz.start exam' | translate}}</button>
                     </div>
                 </div>
                 <div class="card-footer" *ngIf="moduleNumber==6">
                     <div class="float-right hidden-xs-down">
-                        <button class="btn btn-primary" appPreventDoubleClick (click)="startEndLine()">{{'Quiz.start exam' | translate}}</button>
+                        <button class="btn btn-primary" appPreventDoubleClick
+                          (debounceClick)="startEndLine()">{{'Quiz.start exam' | translate}}</button>
                     </div>
                     <div class="hidden-sm-up text-center">
-                        <button class="btn btn-primary" appPreventDoubleClick (click)="startEndLine()">{{'Quiz.start exam' | translate}}</button>
+                        <button class="btn btn-primary" appPreventDoubleClick
+                          (debounceClick)="startEndLine()">{{'Quiz.start exam' | translate}}</button>
                     </div>
                 </div>
             </div>
@@ -79,16 +81,16 @@
                 <hr />
                 <div class="d-flex justify-content-center mb-3">
                   <button class="btn btn-primary float-left mr-3" appPreventDoubleClick *ngIf="config.allowBack"
-                    [disabled]="(pager.index + 1)==1" (click)="goTo(pager.index-1,1)">
+                    [disabled]="(pager.index + 1)==1" (debounceClick)="goTo(pager.index-1,1)">
                     <i class="fa fa-arrow-left btn-arrow" aria-hidden="true"></i> {{'Quiz.back' | translate}}</button>
                   <button class="btn btn-primary float-left marginLeft" appPreventDoubleClick
-                    (click)="goTo(pager.index + 1,2);"
+                    (debounceClick)="goTo(pager.index + 1,2);"
                     *ngIf="(pager.index + 1)<(pager.count)">{{'Quiz.next' | translate}}
                     <i class="fa fa-arrow-right btn-arrow" aria-hidden="true"></i>
                   </button>
                   <button class="btn btn-primary float-left marginLeft" appPreventDoubleClick
                     *ngIf="(pager.index + 1)==(pager.count)"
-                    (click)="goTo(pager.index,3)">{{'Quiz.finish' | translate}}
+                    (debounceClick)="goTo(pager.index,3)">{{'Quiz.finish' | translate}}
                     <i class="fa fa-arrow-right btn-arrow" aria-hidden="true"></i>
                   </button>
                 </div>
