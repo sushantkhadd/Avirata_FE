@@ -1,3 +1,5 @@
+@import "../../../assets/scss1/mixins";
+
 .modal {
   padding-top: 60px;
 
@@ -100,4 +102,25 @@
 .border-color-gray {
   border-color: #ddd !important;
   cursor: default !important;
+}
+
+@include iMobile(){
+  .drag-container.differ .draggable-items li {
+    height: 95px;
+    font-size: 0.80rem;
+    font-weight: 500;
+  }
+
+  .drag-container{
+    .card-footer{
+      padding: .75rem 0;
+      &.pr-5{
+        padding-right: 0rem!important;
+        .text-right{
+          text-align: center!important;
+        }
+      }
+    }
+  }
+  
 }

@@ -1,3 +1,6 @@
+
+@import "../../assets/scss1/mixins";
+
 /*
     DEMO STYLE
 */
@@ -434,3 +437,48 @@ nav#sidebar.active+#content {
 //   content: none;
 // }
 
+// @include iMobile(){
+//   #content{
+//     .navbar{
+//       .container-fluid{
+//         .btn.btn-dark{
+//         visibility: hidden!important;
+//           position: relative!important;
+//         }
+
+//         .navbar-collapse {
+//           flex-basis: 100%;
+//           flex-grow: 1;
+//           align-items: center;
+//           position: relative!important;
+//       }
+//       .navbar-nav {
+//         display: flex;
+//         flex-direction: column;
+//         padding-left: 0;
+//         margin-bottom: 0;
+//         list-style: none;
+//       }
+//       .navbar-nav .dropdown-menu {
+//         top: 15px!important;
+//         position: absolute!important;
+//         dropdown-toggle::after {
+//         display: block;
+//         position: absolute;
+//         top: -19px!important;
+//         right: 20px;
+//         -webkit-transform: translateY(-50%);
+//         transform: translateY(-50%);
+//         }
+//       }
+//       }
+      
+//     }
+      
+    
+    
+    
+//   }
+ 
+  
+// }
