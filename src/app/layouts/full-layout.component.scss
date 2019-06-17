@@ -437,48 +437,85 @@ nav#sidebar.active+#content {
 //   content: none;
 // }
 
-// @include iMobile(){
-//   #content{
-//     .navbar{
-//       .container-fluid{
-//         .btn.btn-dark{
-//         visibility: hidden!important;
-//           position: relative!important;
-//         }
+@include iMobile(){
+  // #content{
+  //   .navbar{
+  //     .container-fluid{
+  //       .btn.btn-dark{
+  //       visibility: hidden!important;
+  //         position: relative!important;
+  //       }
 
-//         .navbar-collapse {
-//           flex-basis: 100%;
-//           flex-grow: 1;
-//           align-items: center;
-//           position: relative!important;
-//       }
-//       .navbar-nav {
-//         display: flex;
-//         flex-direction: column;
-//         padding-left: 0;
-//         margin-bottom: 0;
-//         list-style: none;
-//       }
-//       .navbar-nav .dropdown-menu {
-//         top: 15px!important;
-//         position: absolute!important;
-//         dropdown-toggle::after {
-//         display: block;
-//         position: absolute;
-//         top: -19px!important;
-//         right: 20px;
-//         -webkit-transform: translateY(-50%);
-//         transform: translateY(-50%);
-//         }
-//       }
-//       }
+  //       .navbar-collapse {
+  //         flex-basis: 100%;
+  //         flex-grow: 1;
+  //         align-items: center;
+  //         position: relative!important;
+  //     }
+  //     .navbar-nav {
+  //       display: flex;
+  //       flex-direction: column;
+  //       padding-left: 0;
+  //       margin-bottom: 0;
+  //       list-style: none;
+  //     }
+  //     .navbar-nav {
+  //     .dropdown-menu {
+  //       top: 15px!important;
+  //       position: absolute!important;
+  //       }
+  //       .dropdown-toggle::after {
+  //         display: block;
+  //         position: absolute;
+  //         top: -22px!important;
+  //         right: 20px;
+  //         -webkit-transform: translateY(-50%);
+  //         transform: translateY(-50%);
+  //         }
+  //     }
       
-//     }
-      
-    
-    
-    
-//   }
- 
-  
-// }
+  //     }
+  //   }
+  // }
+
+  #content{
+    .navbar{
+      .container-fluid{
+        .btn.btn-dark{
+          position: relative;
+          visibility: hidden;
+        }
+
+        .navbar-nav{
+          .dropdown-menu {
+            position: absolute;
+            float: none;
+            top: 27px;
+          }
+        } 
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1440px) {
+  #content{
+    .navbar{
+      .container-fluid{
+        .btn.btn-dark{
+          position: relative;
+          visibility: hidden;
+        }
+
+        .navbar-nav{
+          .dropdown-menu {
+            position: absolute;
+            float: none;
+            top: 14px;
+            right: -11px;
+          }
+        } 
+      }
+    }
+  }
+}
