@@ -1256,7 +1256,7 @@
           <h4 class="modal-title">{{'Quiz.note' | translate}}:</h4>
         </div>
         <div class="modal-body">
-          <h5 class="color_red">
+          <h5 class="color_darkred">
             {{'L2Module0.pop0' | translate}}
             <!-- {{'newTranslate.noteTitle' | translate}} -->
           </h5>
@@ -1466,29 +1466,45 @@
           </div>
           <div>
           </div>
-          <div class="row mt-2 justify-content-center">
+          <div class="row mt-2 justify-content-center" [ngClass]="{
+          'gold-bg': rewardsFlag == 1,
+          'silver-bg': rewardsFlag == 2,
+          'bronze-bg': rewardsFlag == 3,
+          'cup-bg': moduleCompleteStatus['type'] == 'allFinish'
+          }
+          ">
             <!-- <img *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' && !needEfforts" class="img-responsive img-goldcup" [src]="finishImgUrl"> -->
             <div *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' && !needEfforts" class="rewards-animate">
               <div *ngIf="rewardsFlag == 1">
-                <img [src]="animatedImageJson['a1']" alt="" class="img3 mt-5 pt-3">
-                <img [src]="animatedImageJson['a2']" alt="" class="img2">
-                <img [src]="animatedImageJson['a3']" alt="" class="img3 mt-5 pt-3">
+                <img [src]="animatedImageJson['a1']" alt="" class="">
+                <!-- <img [src]="animatedImageJson['a2']" alt="" class="img2">
+                <img [src]="animatedImageJson['a3']" alt="" class="img3 mt-5 pt-3"> -->
               </div>
               <div *ngIf="rewardsFlag == 2">
-                <img [src]="animatedImageJson['b1']" alt="" class="img3 mt-5 pt-3">
-                <img [src]="animatedImageJson['b2']" alt="" class="img2">
-                <img [src]="animatedImageJson['b3']" alt="" class="img3 mt-5 pt-3">
+                <img [src]="animatedImageJson['a2']" alt="" class="">
+                <!-- <img [src]="animatedImageJson['b2']" alt="" class="img2">
+                <img [src]="animatedImageJson['b3']" alt="" class="img3 mt-5 pt-3"> -->
               </div>
               <div *ngIf="rewardsFlag == 3">
-                <img [src]="animatedImageJson['c1']" alt="" class="img3 mt-5 pt-3">
-                <img [src]="animatedImageJson['c2']" alt="" class="img3">
-                <img [src]="animatedImageJson['c3']" alt="" class="img3 mt-5 pt-3">
+                <img [src]="animatedImageJson['a3']" alt="" class="">
+                <!-- <img [src]="animatedImageJson['c2']" alt="" class="img3">
+                <img [src]="animatedImageJson['c3']" alt="" class="img3 mt-5 pt-3"> -->
               </div>
             </div>
             <span *ngIf="needEfforts && moduleCompleteStatus['type'] == 'moduleFinish'">
               {{'layout.needEfforts' | translate}}
             </span>
-            <img *ngIf="moduleCompleteStatus['type'] == 'allFinish'" class="img-responsive img-goldcup" src="../../assets/img/gold_cup.png">
+            <div *ngIf="moduleCompleteStatus['type'] == 'allFinish'">
+              <div *ngIf="cupImg == 1">
+                <img class="img-responsive img-goldcup" src="../../assets/img/rewards/single-stars/gold_cup.png">
+              </div>
+              <div *ngIf="cupImg == 2">
+                <img class="img-responsive img-goldcup" src="../../assets/img/rewards/single-stars/Silver_cup.png">
+              </div>
+              <div *ngIf="cupImg == 3">
+                <img class="img-responsive img-goldcup" src="../../assets/img/rewards/single-stars/bronze_cup.png">
+              </div>
+            </div>
           </div>
         </div>
       </div>

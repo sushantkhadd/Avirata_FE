@@ -181,10 +181,10 @@ export class LanguageService {
       this.modalClass.classList.remove("modal-open");
       var paras = jQuery("bs-modal-backdrop");
       paras.hide();
-      console.log("true")
+      // console.log("true")
     }
     else{
-      console.log("false")
+      // console.log("false")
     }
   }
 
@@ -192,10 +192,10 @@ export class LanguageService {
     this.modalClass = document.getElementsByTagName("body")[0];
     if (!this.modalClass.classList.contains("modal-open")) {
       this.modalClass.classList.add("modal-open");
-      console.log("true")
+      // console.log("true")
     }
     else{
-      console.log("false")
+      // console.log("false")
     }
   }
 }

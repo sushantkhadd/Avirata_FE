@@ -519,3 +519,32 @@ nav#sidebar.active+#content {
     }
   }
 }
+
+//rewards background
+.gold-bg{
+  background: url("../../assets/img/rewards/single-stars/shine_gold.png");
+  background-position: center;
+  background-size: initial;
+  background-repeat: no-repeat;
+}
+
+.silver-bg{
+  background: url("../../assets/img/rewards/single-stars/shine_silver.png");
+  background-position: center;
+  background-size: initial;
+  background-repeat: no-repeat;
+}
+
+.bronze-bg{
+  background: url("../../assets/img/rewards/single-stars/shine_bronze.png");
+  background-position: center;
+  background-size: initial;
+  background-repeat: no-repeat;
+}
+
+.cup-bg{
+  background: url("../../assets/img/rewards/single-stars/cup_bg.png");
+  background-position: center;
+  background-size: initial;
+  background-repeat: no-repeat;
+}

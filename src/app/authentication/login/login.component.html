@@ -16,250 +16,253 @@
 
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card-group mb-0">
-                <div class="card p-2">
-                    <h1 class="mt-2 px-3">{{'L2NewLines.dashHeadLine_hello' | translate}}</h1>
-                    <p class="text-muted px-3">{{'Login.Sign In to your account' | translate}}</p>
-                    <div class="card-block card-border">
-                        <form #loginForm="ngForm">
-                            <div class="form-group">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">
-                                            <i class="fa fa-phone" aria-hidden="true"></i>
-                                        </span>
-                                    </div>
-                                    <input type="text" id="userName" name="userName" class="form-control input_user" #userName="ngModel" [(ngModel)]="username"
-                                        placeholder="{{ 'Login.E-mail ID / Mobile' | translate }}" autocomplete="off" required>
-                                </div>
-                                <div class="input-group errorMessage alert alert-danger row loginInput ml-3" *ngIf="userName.errors && userName.dirty">
-                                    <div [hidden]="!userName.errors.required"> {{ 'Login.Email mobile required' | translate }}
-                                    </div>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">
-                                            <i class="fa fa-lock" aria-hidden="true"></i>
-                                        </span>
-                                    </div>
-                                    <input type="password" id="pass" name="passWord" class="form-control input_pass" #_password="ngModel" [(ngModel)]="password"
-                                        placeholder="{{ 'Login.password' | translate }}" (keyup.enter)="login();" autocomplete="off"
-                                        required>
-                                </div>
-
-                                <div class="input-group errorMessage alert alert-danger loginInput" *ngIf="_password.errors && _password.dirty">
-                                    <div [hidden]="!_password.errors.required"> {{ 'Login.Password required' | translate }} </div>
-                                </div>
-
-                                <div class="row">
-                                    <button class="btn password-link px-3" type="button" data-toggle="modal" (click)="emailVerifyClicked=false;mobileVerifyClicked=false;forgetPassword();">
-                                        {{'Login.Forget Password' | translate}} ?
-                                    </button>
-                                    <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" [config]="{backdrop: 'static'}" role="dialog" aria-labelledby="myModalLabel"
-                                        aria-hidden="true">
-                                        <div class="modal-dialog modal-primary" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title pass-title">{{ 'Login.Forget Password' | translate }}</h4>
-                                                    <button type="button" class="close" (click)="emailVerifyClicked=false;mobileVerifyClicked=false;confirmPaswwordTrue=false;closeMe()"
-                                                        aria-label="Close" id="btnCloseModal">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form class="form-horizontal" *ngIf="activeForgetPassword" #forgetPasswordForm="ngForm">
-                                                        <div class="form-group row">
-                                                            <label class="col-sm-3 form-control-label passform-labels" for="input-small">{{ 'Login.E-mail ID' | translate }}</label>
-                                                            <div class="input-group col-sm-9">
-                                                                <input class="form-control fogetInputMargin" id="emailId" name="emailId" placeholder="{{ 'Login.E-mail ID' | translate }}"
-                                                                    type="email" [(ngModel)]="loginModel.email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
-                                                                    required [disabled]="emailVerifyClicked" autocomplete="off"
-                                                                    #emailId="ngModel" (focusout)="spaceCheck();">
-                                                                <span class="input-group-btn">
-                                                                    <button class="btn btn-primary btn-otp" type="button" (click)="sendEmailOTP(1)" [disabled]="emailId.invalid || emailVerifyClicked">{{ 'Login.Send OTP' | translate }}</button>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="input-group  row loginInput errorMessage color_red ml-3" *ngIf="emailId.errors && emailId.dirty">
-                                                            <label class="col-sm-3 form-control-label" for="input-small"></label>
-                                                            <div [hidden]="!emailId.errors.required || trimFlag">{{'Login.Email required' | translate}}</div>
-                                                            <div [hidden]="!emailId.hasError('pattern')">{{'Login.Email Error' | translate}} </div>
-                                                        </div>
-                                                        <div *ngIf="otpEmailEnable">
-                                                            <div class="form-group row">
-                                                                <label class="col-sm-3 form-control-label passform-labels" for="input-small"></label>
-                                                                <div class="input-group col-sm-9">
-                                                                    <input class="form-control fogetInputMargin" id="emailOTP" name="emailOTP" placeholder="{{ 'Login.Email OTP' | translate }}"
-                                                                        type="text" [(ngModel)]="loginModel.emailOTP" #emailOTP="ngModel"
-                                                                        maxlength="6" autocomplete='off' required>
-                                                                    <span class="input-group-btn">
-                                                                        <button class="btn btn-primary verifyButtonWidth" type="button" (click)="verifyEmailOtp(1)" [disabled]="emailOTP.invalid">{{ 'Login.Verify' | translate }}</button>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="input-group row loginInput errorMessage" *ngIf="emailVerifyClicked">
-                                                                <!-- <label class="col-sm-3 form-control-label passform-labels" for="input-small"></label>
-                                                                <label class="col-sm-9 form-control-label passform-labels" for="input-small">जर ५ मिनिटात ओटीपी मिळाला नसेल तर
-                                                                    <button (click)="sendEmailOTP(1)" class="btn btn-info resend" [disabled]="timerFlag">परत पाठवा</button>
-                                                                </label> -->
-                                                                <div class="col-12 col-md-12">
-                                                                    <div class="col-sm-9 form-control-label passform-labels text-center" for="input-small">
-                                                                        <span id="countdown">
-                                                                            <i class="fa fa-stopwatch"></i>&nbsp;{{countDown | async | formatTime}}</span>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-12 col-md-12 text-right">
-                                                                    <div class="form-control-label passform-labels text-right" for="input-small">जर ५ मिनिटात ओटीपी मिळाला नसेल तर
-                                                                        <button (click)="sendEmailOTP(1)" class="btn btn-info resend" [disabled]="timerFlag">परत पाठवा</button>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-                                                            <div class="input-group  row loginInput errorMessage color_red ml-3" *ngIf="emailOTP.errors && emailOTP.dirty">
-                                                                <label class="col-sm-3 form-control-label passform-labels" for="input-small"></label>
-                                                                <div [hidden]="!emailOTP.hasError('required')">{{'Login.OTP required' | translate}}</div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row px-3">
-                                                            <div class="label-OR text-center passform-labels"> {{ 'Login.AND / OR' | translate }} </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label class="col-sm-3 form-control-label passform-labels" for="input-small">{{ 'Login.Mobile' | translate }}</label>
-                                                            <div class="input-group col-sm-9">
-                                                                <input class="form-control fogetInputMargin" id="mobile" name="mobile" placeholder="{{ 'Login.Mobile' | translate }}" type="text"
-                                                                    [(ngModel)]="loginModel.mobileNo" pattern="^[7-9]\d{9}$"
-                                                                    minlength="10" maxlength="10" #mobile="ngModel" [disabled]="mobileVerifyClicked"
-                                                                    autocomplete='off' (focusout)="spaceCheck1();" numbersOnly
-                                                                    required>
-                                                                <span class="input-group-btn">
-                                                                    <button class="btn btn-primary btn-otp" type="button" (click)="sendEmailOTP(2)" [disabled]="mobile.invalid || mobileVerifyClicked">{{ 'Login.Send OTP' | translate }}</button>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="input-group  row loginInput errorMessage color_red ml-3" *ngIf="mobile.errors && mobile.dirty">
-                                                            <label class="col-sm-3 form-control-label" for="input-small"></label>
-                                                            <div [hidden]="!mobile.errors.required || trimFlag1">{{'Login.Mobile required' |translate}}</div>
-                                                            <div [hidden]="!mobile.hasError('pattern')">{{'Login.Invalid Mobile' | translate}}</div>
-                                                        </div>
-                                                        <div *ngIf="otpMobileEnable">
-                                                            <div class="form-group row">
-                                                                <label class="col-sm-3 form-control-label passform-labels" for="input-small"></label>
-                                                                <div class="input-group col-sm-9">
-                                                                    <input class="form-control fogetInputMargin" id="mobileOTP" name="mobileOTP" placeholder="{{ 'Login.Mobile OTP' | translate }}"
-                                                                        type="text" [(ngModel)]="loginModel.mobileOTP" #mobileOTP="ngModel"
-                                                                        maxlength="6" autocomplete='off' numbersOnly required>
-                                                                    <span class="input-group-btn">
-                                                                        <button class="btn btn-primary verifyButtonWidth" type="button" (click)="verifyEmailOtp(2)" [disabled]="mobileOTP.invalid">{{ 'Login.Verify' | translate }}</button>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="input-group row loginInput errorMessage" *ngIf="mobileVerifyClicked">
-                                                                <div class="col-12 col-md-12">
-                                                                    <div class="col-sm-9 form-control-label passform-labels text-center" for="input-small">
-                                                                        <span id="countdown">
-                                                                            <i class="fa fa-stopwatch"></i>&nbsp;{{countDown | async | formatTime}}</span>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-12 col-md-12 text-right">
-                                                                    <div class="form-control-label passform-labels text-right" for="input-small">जर ५ मिनिटात ओटीपी मिळाला नसेल तर
-                                                                        <button (click)="sendEmailOTP(2)" class="btn btn-info resend" [disabled]="timerFlag">परत पाठवा </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="input-group row loginInput errorMessage color_red ml-3" *ngIf="mobileOTP.errors && mobileOTP.dirty">
-                                                                <label class="col-sm-3 form-control-label passform-labels" for="input-small"></label>
-                                                                <div [hidden]="!mobileOTP.hasError('required')">{{'Login.OTP required' | translate}}</div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                    <form class="form-horizontal" *ngIf="activeNewPassword">
-                                                        <p class="text-center">{{'Registration.instruction1' | translate}}</p>
-                                                        <p class="text-center">{{'Registration.instruction2' | translate}}</p>
-                                                        <div class="card-block">
-                                                            <div class="form-group row">
-                                                                <label class="col-md-4 form-control-label passform-labels" for="hf-email">{{ 'Login.New Password' | translate }}</label>
-                                                                <div class="col-md-8">
-                                                                    <div class="form-group">
-                                                                        <input class="form-control form-control-success" id="newPassword" name="newPassword" placeholder="{{ 'Login.New Password' | translate }}"
-                                                                            type="password" [(ngModel)]="loginModel.newPassword"
-                                                                            pattern="((?=.*\d)(?=.*[A-Z])(?=.*[a-z]).{8,80})"
-                                                                            #newPassword="ngModel" (ngModelChange)="checkPassword()"
-                                                                            autocomplete="off" required> </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="input-group  row loginInput errorMessage color_red ml-3" *ngIf="newPassword.errors && newPassword.dirty">
-                                                                <label class="col-sm-4 form-control-label passform-labels" for="input-small"></label>
-                                                                <div [hidden]="!newPassword.hasError('required')">{{'Login.Password required' | translate}}</div>
-                                                                <div [hidden]="!newPassword.hasError('pattern') ">{{'Login.Password should have minimum 8 letters' | translate}}</div>
-                                                            </div>
-                                                            <div class="form-group row marginBottonZero">
-                                                                <label class="col-md-4 form-control-label errorMessage passform-labels" for="hf-password">{{ 'Login.Confirm password' | translate }}</label>
-                                                                <span id="pass-status" class="fa eye" [class.fa-eye]="!show" [class.fa-eye-slash]="show" aria-hidden="true" (click)="passwordShow()"></span>
-                                                                <div class="col-md-8">
-                                                                    <div class="form-group has-feedback" [class.has-success]="confirmPaswwordTrue" [class.has-danger]="!confirmPaswwordTrue && confirmPassword.dirty">
-                                                                        <input class="form-control confirmPassword " id="confirmPassword" name="confirmPassword" placeholder="{{ 'Login.Confirm password' | translate }}"
-                                                                            type="password" [(ngModel)]="loginModel.confirmPassword"
-                                                                            #confirmPassword="ngModel" id="inputError2" (ngModelChange)="checkPassword()"
-                                                                            [class.form-control-danger]="!confirmPaswwordTrue"
-                                                                            [class.confirmPasswordError]="!confirmPaswwordTrue"
-                                                                            [class.form-control-success]="confirmPaswwordTrue"
-                                                                            [type]="show ? 'text' : 'password'" autocomplete="off"> </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row" *ngIf="confirmPassword.errors || confirmPassword.dirty">
-                                                                <label class="col-md-4 form-control-label passform-labels" for="hf-password"></label>
-                                                                <div class="col-md-8">
-                                                                    <div [class.greenText]="confirmPaswwordTrue" *ngIf="confirmPaswwordTrue">{{'Login.PasswordMatched' | translate}} </div>
-                                                                    <div [class.color_red]="!confirmPaswwordTrue" *ngIf="!confirmPaswwordTrue">{{'Login.PasswordMissmatch' | translate}} </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="input-group  row loginInput errorMessage color_red ml-3" *ngIf="confirmPassword.errors && confirmPassword.dirty">
-                                                                <label class="col-sm-4 form-control-label passform-labels" for="input-small"></label>
-                                                                <div [hidden]="!confirmPassword.hasError('required')">{{'Login.Password required' | translate}}</div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <div class="col-md-1">
-                                                                    <label for="checkbox1">
-                                                                        <input id="checkbox2" name="agree1" type="checkbox" [(ngModel)]="checkAgree" (change)="agree($event)"> </label>
-                                                                </div>
-                                                                <div class="col-md-11">
-                                                                    <label for="checkbox2">{{'Registration.terms' | translate}}</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-primary" *ngIf="activeNewPassword" (click)="setPassword()" [disabled]="newPassword.errors || !confirmPaswwordTrue || !checkAgree">{{ 'Login.Submit' | translate }}</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            <!-- /.modal-content -->
+            <div class="shadowMe">
+                <div class="card-group mb-0">
+                    <div class="card p-2">
+                        <h1 class="mt-2 px-3">{{'L2NewLines.dashHeadLine_hello' | translate}}</h1>
+                        <p class="text-muted px-3">{{'Login.Sign In to your account' | translate}}</p>
+                        <div class="card-block card-border">
+                            <form #loginForm="ngForm">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-phone" aria-hidden="true"></i>
+                                            </span>
                                         </div>
-                                        <!-- /.modal-dialog -->
+                                        <input type="text" id="userName" name="userName" class="form-control input_user" #userName="ngModel" [(ngModel)]="username"
+                                            placeholder="{{ 'Login.E-mail ID / Mobile' | translate }}" autocomplete="off" required>
+                                    </div>
+                                    <div class="input-group errorMessage alert alert-danger row loginInput ml-3" *ngIf="userName.errors && userName.dirty">
+                                        <div [hidden]="!userName.errors.required"> {{ 'Login.Email mobile required' | translate }}
+                                        </div>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-lock" aria-hidden="true"></i>
+                                            </span>
+                                        </div>
+                                        <input type="password" id="pass" name="passWord" class="form-control input_pass" #_password="ngModel" [(ngModel)]="password"
+                                            placeholder="{{ 'Login.password' | translate }}" (keyup.enter)="login();" autocomplete="off"
+                                            required>
+                                    </div>
+
+                                    <div class="input-group errorMessage alert alert-danger loginInput" *ngIf="_password.errors && _password.dirty">
+                                        <div [hidden]="!_password.errors.required"> {{ 'Login.Password required' | translate }} </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <button class="btn password-link px-3" type="button" data-toggle="modal" (click)="emailVerifyClicked=false;mobileVerifyClicked=false;forgetPassword();">
+                                            {{'Login.Forget Password' | translate}} ?
+                                        </button>
+                                        <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" [config]="{backdrop: 'static'}" role="dialog" aria-labelledby="myModalLabel"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-primary" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title pass-title">{{ 'Login.Forget Password' | translate }}</h4>
+                                                        <button type="button" class="close" (click)="emailVerifyClicked=false;mobileVerifyClicked=false;confirmPaswwordTrue=false;closeMe()"
+                                                            aria-label="Close" id="btnCloseModal">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form class="form-horizontal" *ngIf="activeForgetPassword" #forgetPasswordForm="ngForm">
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-3 form-control-label passform-labels" for="input-small">{{ 'Login.E-mail ID' | translate }}</label>
+                                                                <div class="input-group col-sm-9">
+                                                                    <input class="form-control fogetInputMargin" id="emailId" name="emailId" placeholder="{{ 'Login.E-mail ID' | translate }}"
+                                                                        type="email" [(ngModel)]="loginModel.email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                                                                        required [disabled]="emailVerifyClicked" autocomplete="off"
+                                                                        #emailId="ngModel" (focusout)="spaceCheck();">
+                                                                    <span class="input-group-btn">
+                                                                        <button class="btn btn-primary btn-otp" type="button" (click)="sendEmailOTP(1)" [disabled]="emailId.invalid || emailVerifyClicked">{{ 'Login.Send OTP' | translate }}</button>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="input-group  row loginInput errorMessage color_red ml-3" *ngIf="emailId.errors && emailId.dirty">
+                                                                <label class="col-sm-3 form-control-label" for="input-small"></label>
+                                                                <div [hidden]="!emailId.errors.required || trimFlag">{{'Login.Email required' | translate}}</div>
+                                                                <div [hidden]="!emailId.hasError('pattern')">{{'Login.Email Error' | translate}} </div>
+                                                            </div>
+                                                            <div *ngIf="otpEmailEnable">
+                                                                <div class="form-group row">
+                                                                    <label class="col-sm-3 form-control-label passform-labels" for="input-small"></label>
+                                                                    <div class="input-group col-sm-9">
+                                                                        <input class="form-control fogetInputMargin" id="emailOTP" name="emailOTP" placeholder="{{ 'Login.Email OTP' | translate }}"
+                                                                            type="text" [(ngModel)]="loginModel.emailOTP" #emailOTP="ngModel"
+                                                                            maxlength="6" autocomplete='off' required>
+                                                                        <span class="input-group-btn">
+                                                                            <button class="btn btn-primary verifyButtonWidth" type="button" (click)="verifyEmailOtp(1)" [disabled]="emailOTP.invalid">{{ 'Login.Verify' | translate }}</button>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="input-group row loginInput errorMessage" *ngIf="emailVerifyClicked">
+                                                                    <!-- <label class="col-sm-3 form-control-label passform-labels" for="input-small"></label>
+                                                                            <label class="col-sm-9 form-control-label passform-labels" for="input-small">जर ५ मिनिटात ओटीपी मिळाला नसेल तर
+                                                                                <button (click)="sendEmailOTP(1)" class="btn btn-info resend" [disabled]="timerFlag">परत पाठवा</button>
+                                                                            </label> -->
+                                                                    <div class="col-12 col-md-12">
+                                                                        <div class="col-sm-9 form-control-label passform-labels text-center" for="input-small">
+                                                                            <span id="countdown">
+                                                                                <i class="fa fa-stopwatch"></i>&nbsp;{{countDown | async | formatTime}}</span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-12 col-md-12 text-right">
+                                                                        <div class="form-control-label passform-labels text-right" for="input-small">जर ५ मिनिटात ओटीपी मिळाला नसेल तर
+                                                                            <button (click)="sendEmailOTP(1)" class="btn btn-info resend" [disabled]="timerFlag">परत पाठवा</button>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="input-group  row loginInput errorMessage color_red ml-3" *ngIf="emailOTP.errors && emailOTP.dirty">
+                                                                    <label class="col-sm-3 form-control-label passform-labels" for="input-small"></label>
+                                                                    <div [hidden]="!emailOTP.hasError('required')">{{'Login.OTP required' | translate}}</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row px-3">
+                                                                <div class="label-OR text-center passform-labels"> {{ 'Login.AND / OR' | translate }} </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-3 form-control-label passform-labels" for="input-small">{{ 'Login.Mobile' | translate }}</label>
+                                                                <div class="input-group col-sm-9">
+                                                                    <input class="form-control fogetInputMargin" id="mobile" name="mobile" placeholder="{{ 'Login.Mobile' | translate }}" type="text"
+                                                                        [(ngModel)]="loginModel.mobileNo" pattern="^[7-9]\d{9}$"
+                                                                        minlength="10" maxlength="10" #mobile="ngModel" [disabled]="mobileVerifyClicked"
+                                                                        autocomplete='off' (focusout)="spaceCheck1();" numbersOnly
+                                                                        required>
+                                                                    <span class="input-group-btn">
+                                                                        <button class="btn btn-primary btn-otp" type="button" (click)="sendEmailOTP(2)" [disabled]="mobile.invalid || mobileVerifyClicked">{{ 'Login.Send OTP' | translate }}</button>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="input-group  row loginInput errorMessage color_red ml-3" *ngIf="mobile.errors && mobile.dirty">
+                                                                <label class="col-sm-3 form-control-label" for="input-small"></label>
+                                                                <div [hidden]="!mobile.errors.required || trimFlag1">{{'Login.Mobile required' |translate}}</div>
+                                                                <div [hidden]="!mobile.hasError('pattern')">{{'Login.Invalid Mobile' | translate}}</div>
+                                                            </div>
+                                                            <div *ngIf="otpMobileEnable">
+                                                                <div class="form-group row">
+                                                                    <label class="col-sm-3 form-control-label passform-labels" for="input-small"></label>
+                                                                    <div class="input-group col-sm-9">
+                                                                        <input class="form-control fogetInputMargin" id="mobileOTP" name="mobileOTP" placeholder="{{ 'Login.Mobile OTP' | translate }}"
+                                                                            type="text" [(ngModel)]="loginModel.mobileOTP" #mobileOTP="ngModel"
+                                                                            maxlength="6" autocomplete='off' numbersOnly required>
+                                                                        <span class="input-group-btn">
+                                                                            <button class="btn btn-primary verifyButtonWidth" type="button" (click)="verifyEmailOtp(2)" [disabled]="mobileOTP.invalid">{{ 'Login.Verify' | translate }}</button>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="input-group row loginInput errorMessage" *ngIf="mobileVerifyClicked">
+                                                                    <div class="col-12 col-md-12">
+                                                                        <div class="col-sm-9 form-control-label passform-labels text-center" for="input-small">
+                                                                            <span id="countdown">
+                                                                                <i class="fa fa-stopwatch"></i>&nbsp;{{countDown | async | formatTime}}</span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-12 col-md-12 text-right">
+                                                                        <div class="form-control-label passform-labels text-right" for="input-small">जर ५ मिनिटात ओटीपी मिळाला नसेल तर
+                                                                            <button (click)="sendEmailOTP(2)" class="btn btn-info resend" [disabled]="timerFlag">परत पाठवा </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="input-group row loginInput errorMessage color_red ml-3" *ngIf="mobileOTP.errors && mobileOTP.dirty">
+                                                                    <label class="col-sm-3 form-control-label passform-labels" for="input-small"></label>
+                                                                    <div [hidden]="!mobileOTP.hasError('required')">{{'Login.OTP required' | translate}}</div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                        <form class="form-horizontal" *ngIf="activeNewPassword">
+                                                            <p class="text-center">{{'Registration.instruction1' | translate}}</p>
+                                                            <p class="text-center">{{'Registration.instruction2' | translate}}</p>
+                                                            <div class="card-block">
+                                                                <div class="form-group row">
+                                                                    <label class="col-md-4 form-control-label passform-labels" for="hf-email">{{ 'Login.New Password' | translate }}</label>
+                                                                    <div class="col-md-8">
+                                                                        <div class="form-group">
+                                                                            <input class="form-control form-control-success" id="newPassword" name="newPassword" placeholder="{{ 'Login.New Password' | translate }}"
+                                                                                type="password" [(ngModel)]="loginModel.newPassword"
+                                                                                pattern="((?=.*\d)(?=.*[A-Z])(?=.*[a-z]).{8,80})"
+                                                                                #newPassword="ngModel" (ngModelChange)="checkPassword()"
+                                                                                autocomplete="off" required> </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="input-group  row loginInput errorMessage color_red ml-3" *ngIf="newPassword.errors && newPassword.dirty">
+                                                                    <label class="col-sm-4 form-control-label passform-labels" for="input-small"></label>
+                                                                    <div [hidden]="!newPassword.hasError('required')">{{'Login.Password required' | translate}}</div>
+                                                                    <div [hidden]="!newPassword.hasError('pattern') ">{{'Login.Password should have minimum 8 letters' | translate}}</div>
+                                                                </div>
+                                                                <div class="form-group row marginBottonZero">
+                                                                    <label class="col-md-4 form-control-label errorMessage passform-labels" for="hf-password">{{ 'Login.Confirm password' | translate }}</label>
+                                                                    <span id="pass-status" class="fa eye" [class.fa-eye]="!show" [class.fa-eye-slash]="show" aria-hidden="true" (click)="passwordShow()"></span>
+                                                                    <div class="col-md-8">
+                                                                        <div class="form-group has-feedback" [class.has-success]="confirmPaswwordTrue" [class.has-danger]="!confirmPaswwordTrue && confirmPassword.dirty">
+                                                                            <input class="form-control confirmPassword " id="confirmPassword" name="confirmPassword" placeholder="{{ 'Login.Confirm password' | translate }}"
+                                                                                type="password" [(ngModel)]="loginModel.confirmPassword"
+                                                                                #confirmPassword="ngModel" id="inputError2" (ngModelChange)="checkPassword()"
+                                                                                [class.form-control-danger]="!confirmPaswwordTrue"
+                                                                                [class.confirmPasswordError]="!confirmPaswwordTrue"
+                                                                                [class.form-control-success]="confirmPaswwordTrue"
+                                                                                [type]="show ? 'text' : 'password'" autocomplete="off"> </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row" *ngIf="confirmPassword.errors || confirmPassword.dirty">
+                                                                    <label class="col-md-4 form-control-label passform-labels" for="hf-password"></label>
+                                                                    <div class="col-md-8">
+                                                                        <div [class.greenText]="confirmPaswwordTrue" *ngIf="confirmPaswwordTrue">{{'Login.PasswordMatched' | translate}} </div>
+                                                                        <div [class.color_red]="!confirmPaswwordTrue" *ngIf="!confirmPaswwordTrue">{{'Login.PasswordMissmatch' | translate}} </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="input-group  row loginInput errorMessage color_red ml-3" *ngIf="confirmPassword.errors && confirmPassword.dirty">
+                                                                    <label class="col-sm-4 form-control-label passform-labels" for="input-small"></label>
+                                                                    <div [hidden]="!confirmPassword.hasError('required')">{{'Login.Password required' | translate}}</div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <div class="col-md-1">
+                                                                        <label for="checkbox1">
+                                                                            <input id="checkbox2" name="agree1" type="checkbox" [(ngModel)]="checkAgree" (change)="agree($event)"> </label>
+                                                                    </div>
+                                                                    <div class="col-md-11">
+                                                                        <label for="checkbox2">{{'Registration.terms' | translate}}</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-primary" *ngIf="activeNewPassword" (click)="setPassword()" [disabled]="newPassword.errors || !confirmPaswwordTrue || !checkAgree">{{ 'Login.Submit' | translate }}</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="row px-3">
-                                    <button class="btn btn-primary btn-block btn-login px-3" type="button" [disabled]="!loginForm.valid || !disableLogin" (click)="login();">{{'Login.Log in' | translate}}</button>
+                                <div class="form-group">
+                                    <div class="row px-3">
+                                        <button class="btn btn-primary btn-block btn-login px-3" type="button" [disabled]="!loginForm.valid || !disableLogin" (click)="login();">{{'Login.Log in' | translate}}</button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
-                </div>
-                <div class="card card-inverse card-primary pt-3 col-12 col-sm-12 col-md-12">
-                    <div class="card-block">
-                        <div class="row appBox justify-content-center">
-                            <label class="text-white">{{'Login.appDownload' | translate}}</label>
-                            <a target="_blank" href="https://play.google.com/store/apps/details?id=com.cpd&hl=en">
-                                <img src="../assets/img/appcopy.png" class="img-fluid">
-                            </a>
+                    <div class="card card-inverse card-primary pt-3 col-12 col-sm-12 col-md-12">
+                        <div class="card-block">
+                            <div class="row appBox justify-content-center">
+                                <label class="text-white">{{'Login.appDownload' | translate}}</label>
+                                <a target="_blank" href="https://play.google.com/store/apps/details?id=com.cpd&hl=en">
+                                    <img src="../assets/img/appcopy.png" class="img-fluid">
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 
@@ -285,7 +288,7 @@
                         <li>
                             <strong>{{'Registration.Email' | translate}} </strong>:
                             <a class="text-white" href="mailto:aviratahelp@gmail.com">
-                            aviratahelp@gmail.com </a>
+                                aviratahelp@gmail.com </a>
                         </li>
                     </ul>
                 </div>
@@ -293,8 +296,7 @@
                     <ul>
                         <li>
                             <strong>{{'Dashboard.Helpline Number' | translate}}</strong>
-                            <a class="text-white" href="tel:8600245245"
-                                target="_blank"> (०२०) ६७६८६७८८</a>
+                            <a class="text-white" href="tel:8600245245" target="_blank"> (०२०) ६७६८६७८८</a>
                         </li>
                     </ul>
                 </div>
