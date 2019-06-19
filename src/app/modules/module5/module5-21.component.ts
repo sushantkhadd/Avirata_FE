@@ -421,10 +421,20 @@ export class Module521Component implements OnInit {
   }
 
   showPdf(){
-   
+    this.passValues["unlockView"] = "static";
     this.startPdf = true;
     this.passValues['url'] = "https://s3-ap-southeast-1.amazonaws.com/maacpd/Level2/Module1/1.10/RM-+1.pdf"
     this.pdfModal.show();
     this.LanguageService.toShow();
+  }
+
+ 
+    numberOnly(event): boolean {
+      const charCode = (event.which) ? event.which : event.keyCode;
+      if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+      }
+      return true;
+    
   }
 }

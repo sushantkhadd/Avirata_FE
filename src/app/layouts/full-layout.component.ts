@@ -127,7 +127,7 @@ export class FullLayoutComponent implements OnInit {
     a1: "fa-star gold_star",
     a2: "fa-star silver_star",
     a3: "fa-star bronze_star",
-    a4: "fa-frown sad_star",
+    a4: "",
     r1: "../../assets/img/rewards/gold_star.png",
     r2: "../../assets/img/rewards/silver_star.png",
     r3: "../../assets/img/rewards/bronze_star.png"

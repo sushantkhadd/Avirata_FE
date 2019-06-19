@@ -57,7 +57,7 @@
   <div *ngIf="subFlagModule5 == 2">
     <h6 class="questionHead lineHeight position-relative">{{'L2common.caution' | translate}}
       <span [innerHTML]="inst"> </span>&nbsp;&nbsp;
-      <span><a (click)="showPdf()">Click here to view pdf &nbsp; <em class="fas fa-pdf"></em></a> </span>
+      <span><a class="c-pointer" (click)="showPdf()">Click here to view pdf &nbsp; <em class="fas fa-pdf"></em></a> </span>
       <div class="badge badge-info ml-3 float-right mt-5 p-2 mr-2 counter pt-3">{{'Quiz.Question' | translate}}
         {{personId}}/5</div>
     </h6>
@@ -89,7 +89,7 @@
   
                 <label class="col-2 col-md-2 col-sm-2 form-control-label" [for]="queId4" [innerHTML]="que4"></label>
                 <div class="col-4 col-sm-4 col-md-4 controls">
-                  <textarea class="form-control" [id]="queId4" name="answer4" [(ngModel)]="answer4" rows="2" #addr="ngModel" maxlength="500"
+                  <textarea class="form-control" [id]="queId4" name="answer4" [(ngModel)]="answer4" pattern="^[0-9]*$" (keypress)="numberOnly($event)" rows="2" #addr="ngModel" maxlength="500"
                     required></textarea>
                 </div>
             </div>
@@ -138,29 +138,37 @@
 <div *ngIf="mainFlagModule5 > 21">
   <div class="card submoduleBox">
     <div class="card-block text-center greenText inst-text">
-      <span>{{'L2Module5Complete.sm_5_13' | translate}}</span>
+      <span>{{'L2Module5Complete.sm_5_21' | translate}}</span>
     </div>
   </div>
 </div>
 
-<div class="askMeModal">
+  <div class="videoFinishModal videoFinishedModel marks-modal">
     <div bsModal #confirmationModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
       aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-primary modal-sm" role="document">
+  
+      <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-          <div class="modal-body text-center">
-            <p>{{'L2Module5.inst5_21' | translate}}</p>
+          <img class="img-responsive img-rotate" src="assets/img/mitra.png">
+          <div class="modal-header">
           </div>
-          <div class="modal-footer justify-content-center">
-            <button (debounceClick)="confirmationModalHide()" appPreventDoubleClick class="btn btn-danger">{{'Cfu.no' | translate}}</button>
+          <div class="modal-body">
+            <p class="text-center font-weight-normal">
+              {{'L2Module5.inst5_21' | translate}}
+            </p>
+            <hr />
+          </div>
+          <div class="modal-footer justify-content-center p-3">
+            <button (debounceClick)="confirmationModalHide()" appPreventDoubleClick class="btn btn-danger">{{'L2Module5.cancelBtn' | translate}}</button>
             <button (debounceClick)="finish1()" appPreventDoubleClick
-              class="btn btn-success">{{'Cfu.yes' | translate}}</button>
+              class="btn btn-success">{{'L2Module5.yesBtn' | translate}}</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 
+  
   <div class="instructionModal">
     <div bsModal #pdfModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
       aria-labelledby="myModalLabel" aria-hidden="true">

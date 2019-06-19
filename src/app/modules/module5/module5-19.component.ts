@@ -82,9 +82,7 @@ export class Module519Component implements OnInit {
   }
 
   finishVideo(e) {
-    console.log("aaaaaaa");
     if (e) {
-      console.log(e);
       this.instructionModal.show();
       this.LanguageService.toShow();
     } else {
@@ -116,7 +114,7 @@ export class Module519Component implements OnInit {
             window.localStorage.setItem("currentJson5", JSON.stringify(current5));
             this.playVideo = true;
           } else if (fun == "finish") {
-            if (data['message'] == "submodule finish next uuid is")
+            if (data['message'] == "submodule finish next uuid is" || data['message'] == "submodule finish")
             {
               this.instructionModal.hide();
               this.LanguageService.toHide();
