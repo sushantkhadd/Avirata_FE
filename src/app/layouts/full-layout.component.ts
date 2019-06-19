@@ -250,7 +250,7 @@ export class FullLayoutComponent implements OnInit {
     }
     return new File([u8arr], filename, { type: mime });
   }
-
+  mainFlag;
   ngOnInit() {
     // if (this.moduleCompleteStatus["type"] == "submodule")
     // {
@@ -262,7 +262,9 @@ export class FullLayoutComponent implements OnInit {
     this.subscription = this.sharedService.getData().subscribe(data => {
       console.log("sharedServicedata", data);
       if (data) {
-        this.currentStatus(data);
+        this.mainFlag = data['currentstatusFlag']
+        console.log(data)
+        this.currentStatus(data['currentstatus']);
       }
     });
 

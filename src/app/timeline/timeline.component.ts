@@ -78,7 +78,10 @@ export class TimelineComponent implements OnInit {
         window.localStorage.getItem("currentstatus")
       );
     }
-    this.sharedService.sendData(this.currentstatus);
+    let obJ = {};
+    obJ['currentstatus'] = this.currentstatus;
+    obJ['currentstatusFlag'] = true;
+    this.sharedService.sendData(obJ);
 
     if (
       (window.localStorage.getItem("mainFlagModule0") != null &&
