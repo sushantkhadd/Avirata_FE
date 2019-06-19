@@ -72,10 +72,13 @@ export class StaticVideoComponent implements OnInit {
         }
         if (event.data === 0) {
           if (window.localStorage.getItem('mainFlagModule1') == '1' || window.localStorage.getItem('mainFlagModule1') == '5' || window.localStorage.getItem('mainFlagModule1') == '11' || window.localStorage.getItem('mainFlagModule2') == '1' || window.localStorage.getItem('mainFlagModule2') == '4' || window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule2') == '13' || window.localStorage.getItem('mainFlagModule2') == '15' || window.localStorage.getItem('mainFlagModule3') == '4' || window.localStorage.getItem('mainFlagModule3') == '13' || window.localStorage.getItem('mainFlagModule3') == '1' || window.localStorage.getItem('mainFlagModule3') == '16' || window.localStorage.getItem('mainFlagModule4') == '6' || window.localStorage.getItem('mainFlagModule4') == '13' || window.localStorage.getItem('mainFlagModule4') == '1' || window.localStorage.getItem('mainFlagModule5') == '1' ||
-          window.localStorage.getItem('mainFlagModule5') == '6' ||
+            window.localStorage.getItem('mainFlagModule5') == '6' ||
+            window.localStorage.getItem('mainFlagModule5') == '17' ||
           window.localStorage.getItem('mainFlagModule5') == '15') {
             this.finishCall.emit(true)
-          } if (window.localStorage.getItem('mainFlagModule0') == '1') {
+          }
+          if (window.localStorage.getItem('mainFlagModule0') == '1')
+          {
             this.finishCall.emit(true);
           }
           this.start = true;
@@ -134,12 +137,13 @@ export class StaticVideoComponent implements OnInit {
           window.localStorage.setItem('uuid', data['data'].nextuuid)
           this.receivedData.status = false;
           this.staticVideoFinishModal.hide();
-          //backdrop remove
-          var paras = document.getElementsByClassName("modal-backdrop")[0];
-          if (paras.classList.contains("fade")) {
-            console.log("true");
-            paras.classList.remove("show");
-          }
+          // this.LanguageService.toHide();
+          // //backdrop remove
+          // var paras = document.getElementsByClassName("modal-backdrop")[0];
+          // if (paras.classList.contains("fade")) {
+          //   console.log("true");
+          //   paras.classList.remove("show");
+          // }
           //backdrop remove
           this.finishCall.emit(true);
         }
@@ -211,6 +215,6 @@ export class StaticVideoComponent implements OnInit {
 
   fakeModalHide(){
     this.fakeModal.hide()
-    this.LanguageService.toHide()
+    // this.LanguageService.toHide()
   }
 }

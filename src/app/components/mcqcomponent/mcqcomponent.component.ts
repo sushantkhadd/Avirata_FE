@@ -390,7 +390,7 @@ export class McqcomponentComponent implements OnInit {
     else if(this.questionType == 'checkBoxOption'){
       if(window.localStorage.getItem('mainFlagModule5') == '11'){
         this.instructionModal.show()
-        this.ans1.lang.toShow()
+        this.lang.toShow()
         this.data.description = this.data.description
         console.log("data.sescr",this.data.description)
         //this.onlyPopUpAns = this.selectedTasks

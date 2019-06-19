@@ -107,7 +107,7 @@ export class PresentationComponent implements OnInit {
           } else if (event == "askme")
           {
             this.askMeModal.hide();
-            this.LanguageService.toHide();
+            // this.LanguageService.toHide();
             if (!this.fiftyFiftyFlag)
             {
               this.hideMe = true;
@@ -553,12 +553,12 @@ export class PresentationComponent implements OnInit {
 
           if (this.data.cfuOption[i].id == this.data.answer) {
             this.cfuModal.hide();
-            this.LanguageService.toHide();
+            // this.LanguageService.toHide();
             this.ansCorrect.emit(true);  //For interest Video 5.6 to send result success
             this.sendCfuAns.emit({ "question": this.question, "answer": this.selectedAnswer });
           } else {
             this.cfuModal.hide();
-            this.LanguageService.toHide();
+            // this.LanguageService.toHide();
             this.toastr.error(this.translate.instant('Errors.ansWrongGoBack'));
             this.eventRadioGroup.instance.option("value", '');
             this.shuffle(this.options);
@@ -688,7 +688,7 @@ export class PresentationComponent implements OnInit {
                 }
                 else{
                     this.cfuModal.hide();
-                    this.LanguageService.toHide();
+                    // this.LanguageService.toHide();
                   setTimeout(() => {
                     this.ansCorrect.emit(true);
                   }, 5000);
@@ -710,7 +710,7 @@ export class PresentationComponent implements OnInit {
                   this.showToasterPopup();
 
                   this.cfuModal.hide();
-                  this.LanguageService.toHide();
+                  // this.LanguageService.toHide();
                   this.eventRadioGroup.instance.option("value", '');
 
                   this.shuffle(this.options);
@@ -756,7 +756,7 @@ export class PresentationComponent implements OnInit {
               else if (data['message'] == 'submodule finish' || data['message'] == 'submodule finish next uuid is') {
                 window.localStorage.setItem('uuid', data['data'].nextuuid);
                 this.cfuModal.hide();
-                this.LanguageService.toHide();
+                // this.LanguageService.toHide();
                 var pass={}
                 pass['status']=true
                 if (window.localStorage.getItem('mainFlagModule3') == '14' || window.localStorage.getItem('mainFlagModule3') == '15' || window.localStorage.getItem('mainFlagModule4') == '7' )
@@ -807,21 +807,21 @@ export class PresentationComponent implements OnInit {
                 }
             },
             error => {
-              this.CommonService.handleError(error.json().message);
-              if (error.json().message == 'json Key Error' || error.json().message == 'source is required'  || error.json().message == 'unknown source' || error.json().message == 'required submoduleid key'
-                 || error.json().message == 'required useranswer key' || error.json().message == 'required event key'|| error.json().message == 'required review key') {
+              this.CommonService.handleError(error.error.message);
+              if (error.error.message == 'json Key Error' || error.error.message == 'source is required'  || error.error.message == 'unknown source' || error.error.message == 'required submoduleid key'
+                 || error.error.message == 'required useranswer key' || error.error.message == 'required event key'|| error.error.message == 'required review key') {
                 this.cfuModal.hide();
-                this.LanguageService.toHide();
+                // this.LanguageService.toHide();
                 this.toastr.error(this.translate.instant('Errors.goBackReadAns'));
                 this.eventRadioGroup.instance.option("value", '');
                 this.count = 1;
                 this.buttonShowFlag = false;
                 this.newUrl = this.imgUrl + this.count + ".jpg";
               }
-              else if (error.json().message == 'invalid option') {
+              else if (error.error.message == 'invalid option') {
                 //again start DOC from Start slide
                 this.cfuModal.hide();
-                this.LanguageService.toHide();
+                // this.LanguageService.toHide();
                 this.toastr.error(this.translate.instant('Errors.goBackReadAns'));
                 this.eventRadioGroup.instance.option("value", '');
                 this.count = 1;
@@ -832,7 +832,7 @@ export class PresentationComponent implements OnInit {
                 this.toastr.error(this.translate.instant('Errors.cannotProceed'));
               }
               this.cfuModal.hide();
-              this.LanguageService.toHide();
+              // this.LanguageService.toHide();
               this.eventRadioGroup.instance.option("value", '');
               this.submitDisabled = false;
             }//Catch Error if server is not Found
@@ -845,7 +845,7 @@ export class PresentationComponent implements OnInit {
       for (var i = 0; i < this.data.questions.options.length; i++) {
         if (this.selectedAnswer == this.data.questions.options[i].value) {
           this.cfuModal.hide();
-          this.LanguageService.toHide();
+          // this.LanguageService.toHide();
           this.showDoc.emit(this.data.questions.options[i].option);
         }
       }
@@ -859,7 +859,7 @@ export class PresentationComponent implements OnInit {
 
   cfuModalHide(){
     this.cfuModal.hide()
-    this.LanguageService.toHide()
+    // this.LanguageService.toHide()
   }
   finishPDF() {
     this.sendCfuAns.emit(true);
@@ -893,10 +893,10 @@ export class PresentationComponent implements OnInit {
 
   finishAudio(e) {
     console.log(e);
-    if (e == true)
+    if (e)
     {
       this.audioModal.hide();
-      this.LanguageService.toHide();
+      // this.LanguageService.toHide();
     }
   }
 
@@ -970,13 +970,13 @@ export class PresentationComponent implements OnInit {
     this.LanguageService.toShow();
     setTimeout(() => {
       this.toasterPopupModal.hide();
-      this.LanguageService.toHide();
+      // this.LanguageService.toHideChild();
     }, 5000);
   }
 
   closeToasterPopup() {
     this.toasterPopupModal.hide();
-    this.LanguageService.toHide();
+    // this.LanguageService.toHideChild();
   }
 
   askMeshow(){
@@ -986,6 +986,6 @@ export class PresentationComponent implements OnInit {
 
   askMeModalHide(){
     this.askMeModal.hide();
-    this.LanguageService.toHide();
+    // this.LanguageService.toHide();
   }
 }

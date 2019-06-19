@@ -75,22 +75,42 @@ export class Module520Component implements OnInit {
     }
   }
   finishPDF(e) {
-    this.finishJSONBody["submoduleid"] = window.localStorage.getItem("uuid");
-    this.finishJSONBody["event"] = "finish";
-    if (e == true) {
-      this.mainFlagModule5 = 13;
-      window.localStorage.setItem('mainFlagModule5', '21');
-      window.localStorage.setItem('subFlagModule5', '1');
-      window.localStorage.setItem('source', 'module 5.21.1');
-      var obj = {
-        "type": "submodule",
-        "route": true,
-        "current": this.translate.instant('L2Module5.subMenu5-20'),
-        "next": this.translate.instant('L2Module5.subMenu5-21'),
-        "nextRoute": "/modules/module5/Module5.21"
-      }
-      this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
-      this.Module5Service.setLocalStorage5(21);
+    if (e == true)
+    {
+      this.finishJSONBody["submoduleid"] = window.localStorage.getItem("uuid");
+      this.finishJSONBody["event"] = "finish";
+      this.Module5Service.apiCall(
+        this.finishJSONBody,
+        "modulefivesingleurl/"
+      ).subscribe(
+        data => {
+          if (
+            data["message"] == "submodule finish" ||
+            data["message"] == "submodule finish next uuid is"
+          ) {
+            this.mainFlagModule5 = 21;
+            window.localStorage.setItem("uuid", data["data"].nextuuid);
+            window.localStorage.setItem("mainFlagModule5", "21");
+            window.localStorage.setItem("subFlagModule5", "1");
+            window.localStorage.setItem("source", "module 5.21.1");
+            var obj = {
+              type: "submodule",
+              route: true,
+              current: this.translate.instant(
+                "L2Module5.subMenu5-20"
+              ),
+              next: this.translate.instant("L2Module5.subMenu5-21"),
+              nextRoute: "/modules/module5/Module5.21"
+            };
+            this.LocalstoragedetailsService.setModuleStatus(
+              JSON.stringify(obj)
+            );
+            this.Module5Service.setLocalStorage5(21);
+          }
+        },
+        error => {
+          this.LanguageService.handleError(error.error.message);
+        })
     }
   }
 

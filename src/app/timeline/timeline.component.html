@@ -1,4 +1,4 @@
-<div class="timeline pt-3 custom-timeline pb-0">
+<div class="timeline pt-1 custom-timeline pb-0">
   <!-- <div class="stepper-step " [ngClass]="{'stepper-step-isActive': LocalstoragedetailsService.timelineState>=1}" *ngIf="LocalstoragedetailsService.userType != 'trainee'"> -->
   <div class="stepper-step " [ngClass]="{'stepper-step-isActive': completedModule['module0'] == true}">
     <div class="stepper-stepContent" (click)="showAlert()">
@@ -101,7 +101,7 @@
             <span class="stepper-stepMarker ripple"><span class="hidden-sm-down">{{'Dashboard.Exam' | translate}}</span><span class="hidden-sm-up">8</span></span>
         </div>
     </div> -->
-  <div class="row m-0 pt-2 mb-2 justify-content-center">
+  <div class="row m-0 pt-2 mb-0 justify-content-center">
     <!-- <div class="col-2" [ngClass]="{
       'stepper-step-isActive': completedModule['module0'] == true,
       'isCurrentstatus': currentstatus == '0'
@@ -116,32 +116,39 @@
       </div>
       <span class="d-block d-md-none mob-counter">{{counterValue0}}</span>
     </div> -->
-    <div class="col-2" [ngClass]="{
-      'stepper-step-isActive': completedModule['module1'] == true,
-      'isCurrentstatus': currentstatus == '1'
-    }">
-      <span class="complete-circle"></span>
-      <span class="circle start">Start</span>
-      <div class="progress" [class.shine]="currentstatus == '1'">
-        <div class="progress-bar" [ngClass]="{
-              'w-100': completedModule['module1'] == true
-            }" [style.width]="barWidth1">
+    <div class="col-10 stepper-step-isActive">
+      <span class="complete-circle d-none"></span>
+      <!-- <span class="circle start d-none"></span> -->
+      <div class="progress shine">
+        <div class="progress-bar" [style.width]="totalPer + '%'">
           <!-- <span class="d-none d-md-block">{{counterValue1}}</span> -->
         </div>
       </div>
+      <div class="row text-center names-row">
+        <div class="col-2">
+          <span class="d-none d-md-block">{{'Dashboard.Module 1' | translate}}</span>
+          <span class="d-block d-md-none">{{'Dashboard.1' | translate}}</span>
+        </div>
+        <div class="col-2"><span class="d-none d-md-block">{{'Dashboard.Module 2' | translate}}</span>
+          <span class="d-block d-md-none">{{'Dashboard.2' | translate}}</span></div>
+        <div class="col-2"><span class="d-none d-md-block">{{'Dashboard.Module 3' | translate}}</span>
+          <span class="d-block d-md-none">{{'Dashboard.3' | translate}}</span></div>
+        <div class="col-2"><span class="d-none d-md-block">{{'Dashboard.Module 4' | translate}}</span>
+          <span class="d-block d-md-none">{{'Dashboard.4' | translate}}</span></div>
+        <div class="col-2"><span class="d-none d-md-block">{{'Dashboard.Module 5' | translate}}</span>
+          <span class="d-block d-md-none">{{'Dashboard.5' | translate}}</span></div>
+      </div>
       <!-- <span class="d-block d-md-none mob-counter">{{counterValue1}}</span> -->
     </div>
-    <div class="col-2"
+    <!-- <div class="col-2"
       [ngClass]="{'stepper-step-isActive': completedModule['module2'] == true,'isCurrentstatus': currentstatus == '2'}">
       <span class="complete-circle">1</span>
       <div class="progress" [class.shine]="currentstatus == '2'">
         <div class="progress-bar" [ngClass]="{
               'w-100': completedModule['module2'] == true
             }" [style.width]="barWidth2">
-          <!-- <span class="d-none d-md-block">{{counterValue2}}</span> -->
         </div>
       </div>
-      <!-- <span class="d-block d-md-none mob-counter">{{counterValue2}}</span> -->
     </div>
     <div class="col-2"
       [ngClass]="{'stepper-step-isActive': completedModule['module3'] == true,'isCurrentstatus': currentstatus == '3'}">
@@ -150,10 +157,8 @@
         <div class="progress-bar" [ngClass]="{
               'w-100': completedModule['module3'] == true
             }" [style.width]="barWidth3">
-             <!-- <span class="d-none d-md-block">{{counterValue3}}</span> -->
         </div>
       </div>
-      <!-- <span class="d-block d-md-none mob-counter">{{counterValue3}}</span> -->
     </div>
     <div class="col-2"
       [ngClass]="{'stepper-step-isActive': completedModule['module4'] == true,'isCurrentstatus': currentstatus == '4'}">
@@ -162,10 +167,8 @@
         <div class="progress-bar" [ngClass]="{
               'w-100': completedModule['module4'] == true
             }" [style.width]="barWidth4">
-             <!-- <span class="d-none d-md-block">{{counterValue4}}</span> -->
         </div>
       </div>
-      <!-- <span class="d-block d-md-none mob-counter">{{counterValue4}}</span> -->
     </div>
     <div class="col-2"
       [ngClass]="{'stepper-step-isActive': completedModule['module5'] == true,'isCurrentstatus': currentstatus == '5'}">
@@ -174,26 +177,24 @@
         <div class="progress-bar" [ngClass]="{
               'w-100': completedModule['module5'] == true
             }" [style.width]="barWidth5">
-            <!-- <span class="d-none d-md-block">{{counterValue5}}</span> -->
         </div>
       </div>
-      <!-- <span class="d-block d-md-none mob-counter">{{counterValue5}}</span> -->
-    </div>
+    </div> -->
     <div class="col-2"
-    [ngClass]="{'stepper-step-isActive': completedModule['module5'] == true,'isCurrentstatus': currentstatus == '5'}">
-    <span class="complete-circle"></span>
-    <span class="circle finish">Finish</span>
+      [ngClass]="{'stepper-step-isActive': completedModule['module5'] == true,'isCurrentstatus': currentstatus == '5'}">
+      <span class="complete-circle d-none"></span>
+      <!--<span class="circle finish">Finish</span> -->
 
-    <div class="float-right final-percent">{{totalPer}}%</div>
-    <!-- <div class="progress">
+      <div class="float-right final-percent">{{totalPer}}%</div>
+      <!-- <div class="progress">
       <div class="progress-bar progress-bar-striped progress-bar-animated" [ngClass]="{
             'w-100': completedModule['module5'] == true
           }" [style.width]="counterValue5 + '%'">
           <span class="d-none d-md-block">{{counterValue5}}</span>
       </div>
     </div> -->
-    <!-- <span class="d-block d-md-none mob-counter">{{counterValue5}}</span> -->
-  </div>
+      <!-- <span class="d-block d-md-none mob-counter">{{counterValue5}}</span> -->
+    </div>
     <!-- <div class="col-12 mt-4 text-center"></div> -->
   </div>
 </div>

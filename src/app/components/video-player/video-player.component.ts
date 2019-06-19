@@ -310,7 +310,7 @@ export class VideoPlayerComponent implements OnInit {
 
     this.callService(sendAnswer, 'answer');
     this.cfuModal.hide();
-    this.LanguageService.toHide();
+    // this.LanguageService.toHide();
   }
 
   callService(answer, event) {
@@ -353,7 +353,7 @@ export class VideoPlayerComponent implements OnInit {
           this.submitDisabled = false;
           setTimeout(() => {
             this.toasterPopupModal.hide();
-            this.LanguageService.toHide();
+            // this.LanguageService.toHide();
             setTimeout(() => {
               console.log("timeout")
               this.play();
@@ -376,7 +376,7 @@ export class VideoPlayerComponent implements OnInit {
             pass["url"] = data["data"].parenturl;
             setTimeout(() => {
               this.toasterPopupModal.hide()
-              this.LanguageService.toHide();
+              // this.LanguageService.toHide();
               // this.singleCFUCompleteStatus.emit(true);
               setTimeout(() => {
                 console.log("timeout")
@@ -439,7 +439,7 @@ export class VideoPlayerComponent implements OnInit {
 
             setTimeout(() => {
               this.toasterPopupModal.hide()
-              this.LanguageService.toHide();
+              // this.LanguageService.toHide();
               setTimeout(() => {
                 console.log("timeout")
                 this.singleCFUCompleteStatus.emit(true);
@@ -608,13 +608,13 @@ export class VideoPlayerComponent implements OnInit {
     this.LanguageService.toShow();
     setTimeout(() => {
       this.toasterPopupModal.hide();
-      this.LanguageService.toHide();
+      // this.LanguageService.toHide();
     }, 3000);
   }
 
   closeToasterPopup() {
     this.toasterPopupModal.hide();
-    this.LanguageService.toHide();
+    // this.LanguageService.toHide();
   }
 
   askMeshow(){
@@ -624,11 +624,11 @@ export class VideoPlayerComponent implements OnInit {
 
   askMeModalHide(){
     this.askMeModal.hide();
-    this.LanguageService.toHide();
+    // this.LanguageService.toHide();
   }
 
   cfuModalHide(){
     this.cfuModal.hide();
-    this.LanguageService.toHide();
+    // this.LanguageService.toHide();
   }
 }

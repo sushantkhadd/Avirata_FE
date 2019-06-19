@@ -108,8 +108,8 @@
               (click)="currentStatus(1);instruction()" [class.deactive-menu1]="!module1OnOffFlag">
               <span>{{'number.1' | translate}}.
               </span>{{'L2Module1.title' | translate}}
-              <span *ngIf="statusFlag">
-                <img class="rewardImg" [src]="rewardImgUrl1" alt="">
+              <span *ngIf="statusFlag" class="reward-icon">
+                <em class="fas" [ngClass]="rewardImgUrl1"></em>
               </span>
             </a>
           </span>
@@ -118,8 +118,8 @@
               [class.deactive-menu1]="!module1OnOffFlag">
               <span>{{'number.1' | translate}}.
               </span>{{'L2Module1.title' | translate}}
-              <span *ngIf="statusFlag">
-                <img class="rewardImg" [src]="rewardImgUrl1" alt="">
+              <span *ngIf="statusFlag" class="reward-icon">
+                <em class="fas" [ngClass]="rewardImgUrl1"></em>
               </span>
             </a>
           </span>
@@ -259,8 +259,8 @@
               (click)="currentStatus(2)" [class.deactive-menu1]="!module2OnOffFlag">
               <span>{{'number.2' | translate}}.</span>
               {{'L2Module2.title' | translate}}
-              <span *ngIf="statusFlag">
-                <img class="rewardImg" [src]="rewardImgUrl2" alt="">
+              <span *ngIf="statusFlag" class="reward-icon">
+                <em class="fas" [ngClass]="rewardImgUrl2"></em>
               </span>
             </a>
           </span>
@@ -269,8 +269,8 @@
               [class.deactive-menu1]="!module2OnOffFlag">
               <span>{{'number.2' | translate}}.</span>
               {{'L2Module2.title' | translate}}
-              <span *ngIf="statusFlag">
-                <img class="rewardImg" [src]="rewardImgUrl2" alt="">
+              <span *ngIf="statusFlag" class="reward-icon">
+                <em class="fas" [ngClass]="rewardImgUrl2"></em>
               </span>
             </a>
           </span>
@@ -466,8 +466,8 @@
               (click)="currentStatus(3)" [class.deactive-menu1]="!module3OnOffFlag">
               <span>{{'number.3' | translate}}.</span>
               {{'L2Module3.title' | translate}}
-              <span *ngIf="statusFlag">
-                <img class="rewardImg" [src]="rewardImgUrl3" alt="">
+              <span *ngIf="statusFlag" class="reward-icon">
+                <em class="fas" [ngClass]="rewardImgUrl3"></em>
               </span>
             </a>
           </span>
@@ -476,8 +476,8 @@
               [class.deactive-menu1]="!module3OnOffFlag">
               <span>{{'number.3' | translate}}.</span>
               {{'L2Module3.title' | translate}}
-              <span *ngIf="statusFlag">
-                <img class="rewardImg" [src]="rewardImgUrl3" alt="">
+              <span *ngIf="statusFlag" class="reward-icon">
+                <em class="fas" [ngClass]="rewardImgUrl3"></em>
               </span>
             </a>
           </span>
@@ -636,17 +636,17 @@
               [class.deactive-menu1]="!module4OnOffFlag">
               <span>{{'number.4' | translate}}.
               </span>{{'L2Module4.title' | translate}}
-              <span *ngIf="statusFlag">
-                <img class="rewardImg" [src]="rewardImgUrl4" alt="">
-              </span>
+             <span *ngIf="statusFlag" class="reward-icon">
+               <em class="fas" [ngClass]="rewardImgUrl4"></em>
+             </span>
             </a>
           </span>
           <span *ngIf="currentFlag4">
             <a href="#module4Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [class.deactive-menu1]="!module4OnOffFlag">
               <span>{{'number.4' | translate}}. </span>{{'L2Module4.title' | translate}}
-              <span *ngIf="statusFlag">
-                <img class="rewardImg" [src]="rewardImgUrl4" alt="">
-              </span>
+             <span *ngIf="statusFlag" class="reward-icon">
+               <em class="fas" [ngClass]="rewardImgUrl4"></em>
+             </span>
             </a>
           </span>
           <ul class="collapse list-unstyled" id="module4Submenu">
@@ -783,16 +783,16 @@
               (click)="currentStatus(5)">
               <span>{{'number.5' | translate}}.
               </span>{{'L2Module5.title' | translate}}
-              <span *ngIf="statusFlag">
-                <img class="rewardImg" [src]="rewardImgUrl5" alt="">
+              <span *ngIf="statusFlag" class="reward-icon">
+                <em class="fas" [ngClass]="rewardImgUrl5"></em>
               </span>
             </a>
           </span>
           <span *ngIf="currentFlag5">
             <a href="#module5Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [class.deactive-menu1]="!module5OnOffFlag">
               <span>{{'number.5' | translate}}. </span>{{'L2Module5.title' | translate}}
-              <span *ngIf="statusFlag">
-                <img class="rewardImg" [src]="rewardImgUrl5" alt="">
+              <span *ngIf="statusFlag" class="reward-icon">
+                <em class="fas" [ngClass]="rewardImgUrl5"></em>
               </span>
             </a>
           </span>
@@ -1533,7 +1533,7 @@
         <div class="modal-header">
           <span class="exp-img"></span>
           <!-- <img class="img-responsive" src="assets/img/expressions/complete_module.png"> -->
-          
+
           <!-- <img class="img-responsive img-rotate" src="assets/img/mitra.png"> -->
           <!-- <i class="fa fa-check-circle-o fa-3x ml-2 mt-1" aria-hidden="true"></i> -->
           <h5 *ngIf="moduleCompleteStatus['type'] == 'submodule'" class="modal-title text-white mb-3">
@@ -1569,7 +1569,7 @@
           <span class="icon-check"></span>
           <p class="congratulation" style="line-height: 24px;"> {{'layout.congrats' | translate}}
         </div> -->
-          
+
         </div>
         <div class="modal-footer justify-content-center">
           <span *ngIf="moduleCompleteStatus['type'] != 'allFinish'">

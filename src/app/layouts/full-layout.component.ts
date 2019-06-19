@@ -113,11 +113,21 @@ export class FullLayoutComponent implements OnInit {
   statusFlag;
   finishImgUrl;
   intVal;
+  // imageJson = {
+  //   a1: "../../assets/img/rewards/side_gold_star.png",
+  //   a2: "../../assets/img/rewards/side_silver_star.png",
+  //   a3: "../../assets/img/rewards/side_bronze_star.png",
+  //   a4: "",
+  //   r1: "../../assets/img/rewards/gold_star.png",
+  //   r2: "../../assets/img/rewards/silver_star.png",
+  //   r3: "../../assets/img/rewards/bronze_star.png"
+  // };
+
   imageJson = {
-    a1: "../../assets/img/rewards/side_gold_star.png",
-    a2: "../../assets/img/rewards/side_silver_star.png",
-    a3: "../../assets/img/rewards/side_bronze_star.png",
-    a4: "",
+    a1: "fa-star gold_star",
+    a2: "fa-star silver_star",
+    a3: "fa-star bronze_star",
+    a4: "fa-frown sad_star",
     r1: "../../assets/img/rewards/gold_star.png",
     r2: "../../assets/img/rewards/silver_star.png",
     r3: "../../assets/img/rewards/bronze_star.png"
@@ -383,20 +393,17 @@ export class FullLayoutComponent implements OnInit {
       this.confirmPassword1 != null &&
       this.confirmPassword1 != "" &&
       this.confirmPassword1 != undefined
-    )
-    {
-      if (this.newPasswordChange1 == this.confirmPassword1)
-      {
+    ) {
+      if (this.newPasswordChange1 == this.confirmPassword1) {
         this.confirmPaswwordTrue = true;
-      } else
-      {
+      } else {
         this.confirmPaswwordTrue = false;
       }
     }
   }
   clearFieldsResetPassword() {
     this.passwordChangeModal.show();
-    this.LanguageService.toShow()
+    this.LanguageService.toShow();
     this.newPasswordChange1 = "";
     this.passwordChange = "";
     this.confirmPassword1 = "";
@@ -2218,13 +2225,11 @@ export class FullLayoutComponent implements OnInit {
   }
 
   ngDoCheck() {
-
     if (
       localStorage.getItem("levelData") != null &&
       localStorage.getItem("levelData") != "" &&
       localStorage.getItem("levelData") != undefined
-    )
-    {
+    ) {
       this.levelData = JSON.parse(localStorage.getItem("levelData"));
 
       let percent0 = parseInt(this.levelData[0].percent);
@@ -2249,7 +2254,7 @@ export class FullLayoutComponent implements OnInit {
         } else if (percent0 >= 10 && percent0 <= 50) {
           this.rewardImgUrl0 = this.imageJson["a3"];
         } else if (percent0 >= 0 && percent0 < 10) {
-          this.rewardImgUrl0 = this.imageJson["a2"];
+          this.rewardImgUrl0 = this.imageJson["a4"];
         }
       }
       if (perval1 == false && this.levelData[1].status == true) {
@@ -2342,7 +2347,7 @@ export class FullLayoutComponent implements OnInit {
         });
       } else if (
         this.moduleFinishCount.percentage >= 10 &&
-        this.moduleFinishCount.percentage <= 50
+        this.moduleFinishCount.percentage < 50
       ) {
         this.finishImgUrl = this.imageJson["r3"];
         this.needEfforts = false;
@@ -2579,10 +2584,10 @@ export class FullLayoutComponent implements OnInit {
       this.moduleCompleteStatus = sumbmodulestatus;
       if (this.moduleCompleteStatus["type"] == "submodule") {
         this.submoduleStatusModal.show();
-        this.LanguageService.toShow()
+        this.LanguageService.toShow();
       } else {
         this.moduleStatusModal.show();
-        this.LanguageService.toShow()
+        this.LanguageService.toShow();
       }
     });
 
@@ -2805,7 +2810,7 @@ export class FullLayoutComponent implements OnInit {
   }
   instruction() {
     this.instructionModal.show();
-    this.LanguageService.toShow()
+    this.LanguageService.toShow();
   }
   closeInstruction() {
     this.instructionModal.hide();
@@ -2842,7 +2847,7 @@ export class FullLayoutComponent implements OnInit {
     window.localStorage.setItem("hidemenu", "true");
   }
 
-  passwordChangeModalHide(){
+  passwordChangeModalHide() {
     this.passwordChangeModal.hide();
     this.LanguageService.toHide();
   }
