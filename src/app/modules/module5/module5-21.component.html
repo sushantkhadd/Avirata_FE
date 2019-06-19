@@ -1,3 +1,181 @@
-<p>
-  module5-21 works!
-</p>
+<div *ngIf="mainFlagModule5 < 21">
+  <div class="card">
+    <div class="card-block">
+      <p>{{ "subModule4_1.4_8" | translate }}</p>
+      <p>
+        <strong>{{ "lock.note" | translate }}</strong
+        >{{ "lock.warn" | translate }}
+      </p>
+    </div>
+  </div>
+</div>
+<div *ngIf="mainFlagModule5 == 21">
+  <div *ngIf="subFlagModule5 == 1">
+    <div class="ins-block instruction-wrap" *ngIf="!startPdf">
+      <div class="borderBlue">
+        <div class="card">
+          <div class="card-header">
+            <span class="exp-img instructions-img"></span>
+            <h5>
+              {{ "Quiz.note" | translate }}
+            </h5>
+          </div>
+          <div class="card-block inst-text">
+            <p>
+              {{ "number.1" | translate }}.&nbsp;{{
+                "L2Instruction.inst_ppt1" | translate
+              }}
+            </p>
+          </div>
+          <div class="card-footer">
+            <div class="float-right hidden-xs-down">
+              <button
+                class="btn btn-primary"
+                appPreventDoubleClick
+                (debounceClick)="start()"
+              >
+                {{ "Module4.start" | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" *ngIf="startPdf">
+      <div class="card-footer">
+        <h6 class="text-center">{{ "L2Module5.subMenu5-21" | translate }}</h6>
+      </div>
+      <div>
+        <app-presentation
+          [data]="passValues"
+          (sendCfuAns)="finishPDF($event)"
+        ></app-presentation>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="subFlagModule5 == 2">
+    <h6 class="questionHead lineHeight position-relative">{{'L2common.caution' | translate}}
+      <span [innerHTML]="inst"> </span>&nbsp;&nbsp;
+      <span><a (click)="showPdf()">Click here to view pdf &nbsp; <em class="fas fa-pdf"></em></a> </span>
+      <div class="badge badge-info ml-3 float-right mt-5 p-2 mr-2 counter pt-3">{{'Quiz.Question' | translate}}
+        {{personId}}/5</div>
+    </h6>
+    
+    
+    <div class="card">
+      <div class="card-block pt-4">
+        <form #assignForm="ngForm" *ngIf="noHitFlag">
+          <div class="form-group row">
+            <label class="col-2 col-md-2 col-sm-2 form-control-label" [for]="queId1" [innerHTML]="que1"></label>
+            <div class="col-4 col-sm-4 col-md-4 controls">
+              <textarea class="form-control" [id]="queId1" name="answer1" [(ngModel)]="answer1" rows="2" #addr="ngModel" maxlength="500"
+                required></textarea>
+            </div>
+
+              <label class="col-2 col-md-2 col-sm-2 form-control-label" [for]="queId2" [innerHTML]="que2"></label>
+              <div class="col-4 col-sm-4 col-md-4 controls">
+                <textarea class="form-control" [id]="queId2" name="answer2" [(ngModel)]="answer2" rows="2" #addr="ngModel" maxlength="500"
+                  required></textarea>
+              </div>
+            </div>
+         
+            <div class="form-group row">
+              <label class="col-2 col-md-2 col-sm-2 form-control-label" [for]="queId3" [innerHTML]="que3"></label>
+              <div class="col-4 col-sm-4 col-md-4 controls">
+                <textarea class="form-control" [id]="queId3" name="answer3" [(ngModel)]="answer3" rows="2" #addr="ngModel" maxlength="500"
+                  required></textarea>
+              </div>
+  
+                <label class="col-2 col-md-2 col-sm-2 form-control-label" [for]="queId4" [innerHTML]="que4"></label>
+                <div class="col-4 col-sm-4 col-md-4 controls">
+                  <textarea class="form-control" [id]="queId4" name="answer4" [(ngModel)]="answer4" rows="2" #addr="ngModel" maxlength="500"
+                    required></textarea>
+                </div>
+            </div>
+            <hr>
+            <div class="form-group row">
+              <div class="col-12 col-md-12 col-sm-12 form-control-label"> 
+                  1. <label [for]="queId5" [innerHTML]="que5"></label>
+              </div>
+                <div class="col-12 col-sm-12 col-md-12 controls">
+                  <textarea class="form-control" [id]="queId5" name="answer5" [(ngModel)]="answer5" rows="2" #addr="ngModel" maxlength="500"
+                    required></textarea>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                  <div class="col-12 col-md-12 col-sm-12 form-control-label"> 
+                      2. <label [for]="queId6" [innerHTML]="que6"></label>
+                  </div>
+                  <div class="col-12 col-sm-12 col-md-12 controls">
+                    <textarea class="form-control" [id]="queId6" name="answer6" [(ngModel)]="answer6" rows="2" #addr="ngModel" maxlength="500"
+                      required></textarea>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12 col-md-12 col-sm-12 form-control-label"> 
+                        3. <label [for]="queId7" [innerHTML]="que7"></label>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 controls">
+                      <textarea class="form-control" [id]="queId7" name="answer7" [(ngModel)]="answer7" rows="2" #addr="ngModel" maxlength="500"
+                        required></textarea>
+                    </div>
+                  </div>
+
+      <div class="card-footer text-center bg-white border-0">
+          <button class="btn btn-primary mr-2" appPreventDoubleClick
+          (debounceClick)="back(assignForm)" [disabled]="personId == 1">{{'Stepper.Back' | translate}}</button>
+        <button class="btn btn-primary" appPreventDoubleClick
+        (debounceClick)="next(assignForm)" [disabled]="assignForm.invalid || !submitFlag">{{'Login.Close' | translate}}</button>
+      </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="mainFlagModule5 > 21">
+  <div class="card submoduleBox">
+    <div class="card-block text-center greenText inst-text">
+      <span>{{'L2Module5Complete.sm_5_13' | translate}}</span>
+    </div>
+  </div>
+</div>
+
+<div class="askMeModal">
+    <div bsModal #confirmationModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+      aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-primary modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-body text-center">
+            <p>{{'L2Module5.inst5_21' | translate}}</p>
+          </div>
+          <div class="modal-footer justify-content-center">
+            <button (debounceClick)="confirmationModalHide()" appPreventDoubleClick class="btn btn-danger">{{'Cfu.no' | translate}}</button>
+            <button (debounceClick)="finish1()" appPreventDoubleClick
+              class="btn btn-success">{{'Cfu.yes' | translate}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="instructionModal">
+    <div bsModal #pdfModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+      aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-primary modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-body text-center">
+            <h5>{{ "L2Module5.subMenu5-21" | translate }}</h5>
+          </div>
+          <div *ngIf="startPdf">
+            <app-presentation [data]='passValues'></app-presentation>
+          </div>
+          <div class="modal-footer justify-content-center">
+            <button (debounceClick)="pdfModalHide()" appPreventDoubleClick class="btn btn-danger">{{'Stepper.Back' | translate}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
