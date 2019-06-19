@@ -134,15 +134,15 @@ export class FullLayoutComponent implements OnInit {
   };
 
   animatedImageJson = {
-    a1: "../../assets/img/rewards/single-stars/gold_small.png",
-    a2: "../../assets/img/rewards/single-stars/gold.png",
-    a3: "../../assets/img/rewards/single-stars/gold_small.png",
-    b1: "../../assets/img/rewards/single-stars/silver_small.png",
-    b2: "../../assets/img/rewards/single-stars/silver.png",
-    b3: "../../assets/img/rewards/single-stars/silver_small.png",
-    c1: "../../assets/img/rewards/single-stars/bronze_small.png",
-    c2: "../../assets/img/rewards/single-stars/bronze.png",
-    c3: "../../assets/img/rewards/single-stars/bronze_small.png"
+    a1: "../../assets/img/rewards/single-stars/gold.png",
+    a2: "../../assets/img/rewards/single-stars/silver.png",
+    a3: "../../assets/img/rewards/single-stars/bronze.png",
+    // b1: "../../assets/img/rewards/single-stars/silver_small.png",
+    // b2: "../../assets/img/rewards/single-stars/silver.png",
+    // b3: "../../assets/img/rewards/single-stars/silver_small.png",
+    // c1: "../../assets/img/rewards/single-stars/bronze_small.png",
+    // c2: "../../assets/img/rewards/single-stars/bronze.png",
+    // c3: "../../assets/img/rewards/single-stars/bronze_small.png"
   };
   constructor(
     public LanguageService: LanguageService,
