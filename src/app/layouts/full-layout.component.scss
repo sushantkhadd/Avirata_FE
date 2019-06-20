@@ -438,46 +438,6 @@ nav#sidebar.active+#content {
 // }
 
 @include iMobile(){
-  // #content{
-  //   .navbar{
-  //     .container-fluid{
-  //       .btn.btn-dark{
-  //       visibility: hidden!important;
-  //         position: relative!important;
-  //       }
-
-  //       .navbar-collapse {
-  //         flex-basis: 100%;
-  //         flex-grow: 1;
-  //         align-items: center;
-  //         position: relative!important;
-  //     }
-  //     .navbar-nav {
-  //       display: flex;
-  //       flex-direction: column;
-  //       padding-left: 0;
-  //       margin-bottom: 0;
-  //       list-style: none;
-  //     }
-  //     .navbar-nav {
-  //     .dropdown-menu {
-  //       top: 15px!important;
-  //       position: absolute!important;
-  //       }
-  //       .dropdown-toggle::after {
-  //         display: block;
-  //         position: absolute;
-  //         top: -22px!important;
-  //         right: 20px;
-  //         -webkit-transform: translateY(-50%);
-  //         transform: translateY(-50%);
-  //         }
-  //     }
-      
-  //     }
-  //   }
-  // }
-
   #content{
     .navbar{
       .container-fluid{
@@ -494,6 +454,23 @@ nav#sidebar.active+#content {
           }
         } 
       }
+    }
+  }
+
+  .successModal{
+    .modal-content{
+      width: 100%;
+      margin-left: 0;
+     }
+    .img-mitra{
+      max-width: 100%!important;
+      float: none;
+    }
+    .congrats-text{
+      font-size: 1.5rem!important;
+    }
+    .img-logo{
+      max-width: 25%;
     }
   }
 }
@@ -548,3 +525,15 @@ nav#sidebar.active+#content {
   background-size: initial;
   background-repeat: no-repeat;
 }
+
+// @include iMobile(){
+//    .displayNone{
+//     display: block;
+//   }
+// }
+
+// @include tDesktop(){
+//   .displayNone{
+//     display: none;
+//   }
+// }

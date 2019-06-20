@@ -258,6 +258,7 @@ export class FullLayoutComponent implements OnInit {
 
     jQuery("#sidebarCollapse").on("click", function() {
       jQuery("#sidebar").toggleClass("active");
+      console.log('ewqewrr');
     });
 
     console.log("full");
@@ -370,12 +371,17 @@ export class FullLayoutComponent implements OnInit {
   //     document.querySelector(".app-header").classList.remove("scrollAnimation");
   //   }
   // }
-  // @HostListener("document:click", ["$event"]) clickedOutside() {
-  //   document.querySelector("body").classList.remove("sidebar-mobile-show");
-  // }
+  @HostListener("document:click", ["$event"]) clickedOutside() {
+    console.log('hello host')
+    if(jQuery('#sidebar').hasClass('active')){
+      jQuery('#sidebar').removeClass('active')
+    }
+    // document.querySelector("body").classList.remove("sidebar-mobile-show");
+  }
   clickedInside($event: Event) {
     $event.preventDefault();
     $event.stopPropagation();
+    console.log('hello...')
   }
 
   checkPassword() {

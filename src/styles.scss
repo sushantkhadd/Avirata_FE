@@ -1637,9 +1637,6 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  .col-md-3{
-    max-width: 22%;
-  }
   .card{
     border-radius: 30px;
     border: none;
@@ -2319,7 +2316,6 @@ h6.questionHead.lineHeight {
         }
       }
     }
-      
   }
 
   .instructionModal .rewards-content h4 {
@@ -2329,8 +2325,9 @@ h6.questionHead.lineHeight {
 
   .instructionModal{
     span.exp-img{
-      left: 12px !important;
-      top: -9% !important;
+      // left: 12px !important;
+      margin: 0px auto;
+      top: -5% !important;
       width: 73px !important;
     }
     .modal-body.ml-5{
@@ -2338,15 +2335,26 @@ h6.questionHead.lineHeight {
     }
   }
 
-  .newCFUPopup.instructionModal{
+  .instructionModal.newCFUPopup{
     span.exp-img{
       left: 12px !important;
-      top: -14% !important;
+      top: -10% !important;
       width: 73px !important;
     }
-    .modal-body.ml-5{
-      margin-left: 0 !important;
+    .modal-body{
+      .ml-5{
+        margin-left: 0 !important;
+      }
+      h5{
+        &.mt-3{
+          margin-top: 0.5rem!important;
+        } 
+        font-size: 0.9rem!important;
+        margin-bottom: 0;
+      }
+      
     }
+    
   }
 
   .instructionModal{
@@ -2463,7 +2471,6 @@ h6.questionHead.lineHeight {
       left: 11%!important;
     }
   } 
-
 }
 
 @include keyframes(breathing) {
@@ -2641,6 +2648,43 @@ table,
 }
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
+  .loginBg{
+      .card:not(:first-child) {
+        border-top-right-radius: 30px;
+        border-bottom-right-radius: 30px;
+        border-bottom-left-radius: 30px;
+      }
+      .card:not(:last-child) {
+        border-top-left-radius: 30px;
+        border-bottom-left-radius: 30px;
+        border-top-right-radius: 30px!important;
+      }
+  } 
+
+  .submoduleStatusModal{
+    .modal {
+      .modal-content{ 
+        .modal-header{
+          span.exp-img{
+            width: 80px;
+            height: 80px;
+            bottom: 28px;
+          }
+        } 
+      }
+    }
+  } 
+
+  .ansCheckModal{
+    .modal-header{
+      span.exp-img{
+        left: 18px;
+        width: 75px;
+        height: 75px;
+      }
+    }
+  }
+
   .app-footer {
     margin-left: 0;
     margin-right: 0;
@@ -2767,6 +2811,14 @@ table,
     }
   } 
   
+  .drag-container{
+    .draggable-items{
+      li{
+        margin-bottom: 1rem;
+      }
+    }
+  }
+
 }
 
 .dx-radiogroup .dx-radiobutton,
