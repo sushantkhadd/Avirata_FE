@@ -562,6 +562,9 @@ export class McqcomponentComponent implements OnInit {
       this.rankModal.hide()
       this.lang.toHide();
       this.queCount = this.queCount + 1;
+      if(this.queCount >= 3){
+        this.queCount = 3;
+      }
       if(Object.keys(this.userOptions).length == 3){
         this.sendAns.emit(this.userOptions)
        }

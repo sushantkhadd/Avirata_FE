@@ -52,27 +52,36 @@ export class Module4Service {
 
 
   apiCall(jsonBody, apiUrl) {
-    const headers = new HttpHeaders({
-      Authorization: window.localStorage.getItem("token"),
+    var headers = new HttpHeaders({
       "Content-Type": "application/json",
-      Source: "WEB"
+      'Authorization': window.localStorage.getItem('token'),
+     // "Source": "WEB"
     });
+    if (/Android/i.test(navigator.userAgent)) 
+    { 
+      headers= headers.append("Source",'MWEB')
+     }else
+     { 
+      headers= headers.append("Source",'WEB') 
+     }
     let options = { headers: headers };
     return this.httpClient.post(this.apiUrl + apiUrl, { body: jsonBody }, options)
   }
 
   finishSubmodule(jsonBody) {
-    const headers = new HttpHeaders({
+    var headers = new HttpHeaders({
+      "Content-Type": "application/json",
       'Authorization': window.localStorage.getItem('token'),
-      'Content-Type': 'application/json',
-      Source: "WEB"
+     // "Source": "WEB"
     });
-    // if (/Android/i.test(navigator.userAgent)) {
-    //   headers.append("Source", 'MWEB')
-    // } else {
-    //   headers.append("Source", 'WEB')
-    // }
-    let options = { headers: headers };
+    if (/Android/i.test(navigator.userAgent)) 
+    { 
+      headers= headers.append("Source",'MWEB')
+     }else
+     { 
+      headers= headers.append("Source",'WEB') 
+     }
+     let options = { headers: headers };
     return this.httpClient.post(this.apiUrl + 'modulefoursingleurl/', { body: jsonBody }, options)
   }
 

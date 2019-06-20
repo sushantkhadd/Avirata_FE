@@ -379,13 +379,13 @@ export class Module521Component implements OnInit {
   }
 
   sendAnswer(val){
-    this.userAnswer[this.queId1] = this.answer1;
-    this.userAnswer[this.queId2] = this.answer2;
-    this.userAnswer[this.queId3] = this.answer3;
-    this.userAnswer[this.queId4] = this.answer4;
-    this.userAnswer[this.queId5] = this.answer5;
-    this.userAnswer[this.queId6] = this.answer6;
-    this.userAnswer[this.queId7] = this.answer7;
+    this.userAnswer[this.queId1] = this.answer1.trim();
+    this.userAnswer[this.queId2] = this.answer2.trim();
+    this.userAnswer[this.queId3] = this.answer3.trim();
+    this.userAnswer[this.queId4] = this.answer4.trim();
+    this.userAnswer[this.queId5] = this.answer5.trim();
+    this.userAnswer[this.queId6] = this.answer6.trim();
+    this.userAnswer[this.queId7] = this.answer7.trim();
     console.log("userAnswer",this.userAnswer)
     var jsonData = {}
     jsonData['submoduleid'] = window.localStorage.getItem("uuid");

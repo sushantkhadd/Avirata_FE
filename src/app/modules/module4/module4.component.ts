@@ -41,7 +41,7 @@ export class Module4Component implements OnInit {
   public token;sumbitButton;answer;description;questionType; showAnswer;saveData;
   public playVideo = false;
   public apiEndStart; apiEndSendAns; apiEndFinish;
-  vedioCompleteUrl;
+  vedioCompleteUrl;loader;
   statVideoFlag;nextFlag;
   questionFlag;unlockVideoFlag;
   urlArray = {};
@@ -162,10 +162,14 @@ export class Module4Component implements OnInit {
 
 
   saveAnswer(e) {
-    console.log("ff ", e)
-    this.sumbitButton = true;
-    this.answer = e;
-    this.submit();
+    if(e){
+      this.loader = true;
+      console.log("ff ", e)
+      this.sumbitButton = true;
+      this.answer = e;
+      this.submit();
+    }
+    
   }
 
   apiCall(jsonBody, apiUrl, fun) {
@@ -217,8 +221,12 @@ export class Module4Component implements OnInit {
     this.Module4Service.apiCall(jsonBody, apiUrl)
       .subscribe(
         data => {
+          this.loader = false;
           if (data['message'] == "submodule finish")
           {
+            this.mainFlagModule4 = 2;
+            this.data="";
+            this.passFlags={};
             this.statVideoFlag = true;
             window.localStorage.setItem('uuid', data['data'].nextuuid);
             window.localStorage.setItem('mainFlagModule4', '2');

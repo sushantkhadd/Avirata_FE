@@ -43,8 +43,15 @@ export class CommonService {
 
     var headers = new HttpHeaders({
       "Content-Type": "application/json"
-      // "Source": "WEB"
+     // "Source": "WEB"
     });
+    if (/Android/i.test(navigator.userAgent)) 
+    { 
+      headers= headers.append("Source",'MWEB')
+     }else
+     { 
+      headers= headers.append("Source",'WEB') 
+     }
     let options = { headers: headers };
     return this.httpClient
       .post(this.apiUrl + "forgetpassword/", { body: body }, options)
@@ -59,9 +66,16 @@ export class CommonService {
   postCall(apiUrl, jsonBody) {
     var headers = new HttpHeaders({
       "Content-Type": "application/json",
-      Authorization: window.localStorage.getItem("token"),
-      Source: "WEB"
+      'Authorization': window.localStorage.getItem('token'),
+     // "Source": "WEB"
     });
+    if (/Android/i.test(navigator.userAgent)) 
+    { 
+      headers= headers.append("Source",'MWEB')
+     }else
+     { 
+      headers= headers.append("Source",'WEB') 
+     }
     let options = { headers: headers };
     return this.httpClient
       .post(this.apiUrl + apiUrl, { body: jsonBody }, options)
@@ -74,10 +88,18 @@ export class CommonService {
 
   // Get Request
   getCall(apiUrl) {
-    let headers = new HttpHeaders({
-      Authorization: window.localStorage.getItem("token"),
-      Source: "WEB"
+    var headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      'Authorization': window.localStorage.getItem('token'),
+     // "Source": "WEB"
     });
+    if (/Android/i.test(navigator.userAgent)) 
+    { 
+      headers= headers.append("Source",'MWEB')
+     }else
+     { 
+      headers= headers.append("Source",'WEB') 
+     }
     let options = { headers: headers };
     return this.httpClient.get(this.apiUrl + apiUrl, options).pipe(
       map(response => {

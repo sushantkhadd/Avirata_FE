@@ -97,20 +97,36 @@ export class FullLayoutService {
   }
 
   logoutService(token: any) {
-    const headers = new HttpHeaders({
-      Authorization: token
+    var headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      'Authorization': token,
+     // "Source": "WEB"
     });
+    if (/Android/i.test(navigator.userAgent)) 
+    { 
+      headers= headers.append("Source",'MWEB')
+     }else
+     { 
+      headers= headers.append("Source",'WEB') 
+     }
     return this.http
       .get(this.apiUrl1 + "logout/", { headers: headers })
      
   }
 
   moduleStatus(jsonBody) {
-    const headers = new HttpHeaders({
-      Authorization: window.localStorage.getItem("token"),
+    var headers = new HttpHeaders({
       "Content-Type": "application/json",
-      Source: "WEB"
+      'Authorization': window.localStorage.getItem('token'),
+     // "Source": "WEB"
     });
+    if (/Android/i.test(navigator.userAgent)) 
+    { 
+      headers= headers.append("Source",'MWEB')
+     }else
+     { 
+      headers= headers.append("Source",'WEB') 
+     }
     return this.http
       .post(
         this.apiUrl + "l3currentstatus/",
