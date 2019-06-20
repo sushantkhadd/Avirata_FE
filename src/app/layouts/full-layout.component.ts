@@ -44,7 +44,7 @@ export class FullLayoutComponent implements OnInit {
   public status: { isopen: boolean } = { isopen: false };
   private trainee = false;
   imgUrl;
-  rewardsFlag;
+  rewardsFlag; cupImg;
   needEfforts;
   subscription: Subscription;
 
@@ -2779,10 +2779,21 @@ export class FullLayoutComponent implements OnInit {
     ) {
       this.router.navigate([this.moduleCompleteStatus["nextRoute"]]);
     }
+    if (jQuery("bs-modal-backdrop").length > 1)
+    {
+      jQuery("bs-modal-backdrop").hide();
+      jQuery("body .modal-backdrop.show").css('opacity','0.5');
+    }
     this.moduleStatusModal.hide();
     this.LanguageService.toHide();
     this.submoduleStatusModal.hide();
     this.LanguageService.toHide();
+    // var paras = document.getElementsByClassName('modal-backdrop');
+    // while (paras[0])
+    // {
+    //   paras[0].parentNode.removeChild(paras[0]);
+    // }
+
     // var paras = document.getElementsByClassName("modal-backdrop")[0];
     // if (paras.classList.contains("fade")) {
     //   console.log("true");

@@ -104,7 +104,7 @@
         </li>
         <li>
           <span *ngIf="!currentFlag1">
-            <a href="#module1Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [ngClass]="{'dropdown-toggle': module1OnOffFlag }"
+            <a href="#module1Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
               (click)="currentStatus(1);" [class.deactive-menu1]="!module1OnOffFlag">
               <span>{{'number.1' | translate}}.
               </span>{{'L2Module1.title' | translate}}
@@ -114,7 +114,7 @@
             </a>
           </span>
           <span *ngIf="currentFlag1">
-            <a href="#module1Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [ngClass]="{'dropdown-toggle': module1OnOffFlag }"
+            <a href="#module1Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
               [class.deactive-menu1]="!module1OnOffFlag" (click)=" mainFlag == true ? instruction() : undefined;mainFlag = false">
               <span>{{'number.1' | translate}}.
               </span>{{'L2Module1.title' | translate}}
@@ -255,7 +255,7 @@
 
         <li>
           <span *ngIf="!currentFlag2">
-            <a href="#module2Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [ngClass]="{'dropdown-toggle': module2OnOffFlag }"
+            <a href="#module2Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
               (click)="currentStatus(2)" [class.deactive-menu1]="!module2OnOffFlag">
               <span>{{'number.2' | translate}}.</span>
               {{'L2Module2.title' | translate}}
@@ -265,7 +265,7 @@
             </a>
           </span>
           <span *ngIf="currentFlag2">
-            <a href="#module2Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [ngClass]="{'dropdown-toggle': module2OnOffFlag }"
+            <a href="#module2Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
               [class.deactive-menu1]="!module2OnOffFlag">
               <span>{{'number.2' | translate}}.</span>
               {{'L2Module2.title' | translate}}
@@ -462,7 +462,7 @@
 
         <li>
           <span *ngIf="!currentFlag3">
-            <a href="#module3Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [ngClass]="{'dropdown-toggle': module3OnOffFlag }"
+            <a href="#module3Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
               (click)="currentStatus(3)" [class.deactive-menu1]="!module3OnOffFlag">
               <span>{{'number.3' | translate}}.</span>
               {{'L2Module3.title' | translate}}
@@ -472,7 +472,7 @@
             </a>
           </span>
           <span *ngIf="currentFlag3">
-            <a href="#module3Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [ngClass]="{'dropdown-toggle': module3OnOffFlag }"
+            <a href="#module3Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
               [class.deactive-menu1]="!module3OnOffFlag">
               <span>{{'number.3' | translate}}.</span>
               {{'L2Module3.title' | translate}}
@@ -1533,7 +1533,8 @@
       </div>
       <div [ngClass]="needEfforts ? 'pt-3': 'pt-1'" class="modal-footer justify-content-center pt-1 pb-4" *ngIf="moduleCompleteStatus['type'] != 'allFinish'">
         <span>
-          <button class="btn btn-primary text-center" (click)="moduleComplete($event)">{{'Stepper.Next' | translate}}</button>
+          <button class="btn btn-primary text-center" appPreventDoubleClick
+            (debounceClick)="moduleComplete($event)">{{'Stepper.Next' | translate}}</button>
         </span>
       </div>
     </div>
@@ -1589,7 +1590,8 @@
         </div>
         <div class="modal-footer justify-content-center">
           <span *ngIf="moduleCompleteStatus['type'] != 'allFinish'">
-            <button class="btn btn-primary text-center" (click)="moduleComplete($event)">{{'Stepper.Next' | translate}}</button>
+            <button class="btn btn-primary text-center" appPreventDoubleClick
+              (debounceClick)="moduleComplete($event)">{{'Stepper.Next' | translate}}</button>
           </span>
         </div>
       </div>
