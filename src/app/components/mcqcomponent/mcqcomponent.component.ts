@@ -562,10 +562,9 @@ export class McqcomponentComponent implements OnInit {
     } else if(window.localStorage.getItem('mainFlagModule5') == '7'){
       this.rankModal.hide()
       this.lang.toHide();
-      this.queCount = this.queCount + 1;
-      if(this.queCount >= 3){
-        this.queCount = 3;
-      }
+      // this.queCount = this.queCount + 1;
+      // console.log("quecount",this.queCount)
+   
       if(Object.keys(this.userOptions).length == 3){
         this.sendAns.emit(this.userOptions)
        }
@@ -589,6 +588,10 @@ export class McqcomponentComponent implements OnInit {
       this.lang.toHide();
       this.submitFlag = false;
       this.queCount = this.queCount + 1;
+      console.log("quecount1",this.queCount)
+      if(this.queCount >= 3){
+        this.queCount = 3;
+      }
     }
     else {
       console.log("this.tasks",this.tasks,this.selectedAnswer)
