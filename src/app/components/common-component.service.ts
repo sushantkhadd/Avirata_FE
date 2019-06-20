@@ -71,11 +71,18 @@ export class CommonComponentService {
 
   //vedio and CFU (Start,Answer,Finish)
   submoduleFinish(jsonBody, apiUrl) {
-    const headers = new HttpHeaders({
+    var headers = new HttpHeaders({
+      "Content-Type": "application/json",
       'Authorization': window.localStorage.getItem('token'),
-      'Content-Type': 'application/json',
-      'Source': 'WEB'
+     // "Source": "WEB"
     });
+    if (/Android/i.test(navigator.userAgent)) 
+    { 
+      headers= headers.append("Source",'MWEB')
+     }else
+     { 
+      headers= headers.append("Source",'WEB') 
+     }
     return this.httpClient.post(this.apiUrl + apiUrl, { body: jsonBody }, { headers: headers })
 
   }

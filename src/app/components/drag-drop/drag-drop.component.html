@@ -191,7 +191,7 @@
                   <div droppable [dragOverClass]="'drag-target-border'" [dropScope]="['draggable']"
                     [dragHintClass]="'drag-hint'" [dropEnabled]="!check1"
                     (onDrop)="singleonAnyDrop1($event,statement[0])"
-                    title="Drop items here" [class.dashed-border]="!check1">
+                    [title]="!check1 ? 'Drop items here' : ''" [class.dashed-border]="!check1">
                     <div class="card-block scroll-list b1 " [class.p-0]="check1">
                       <span class="v-span">
                         <li *ngFor="let item of droppedItems1" class="list-group-item droppedItem">
@@ -219,7 +219,7 @@
                   <div droppable [dragOverClass]="'drag-target-border'" [dropScope]="['draggable']"
                     [dragHintClass]="'drag-hint'" [dropEnabled]="!check2"
                     (onDrop)="singleonAnyDrop2($event,statement[1])"
-                    title="Drop items here" [class.dashed-border]="!check2">
+                    [title]="!check2 ? 'Drop items here' : ''" [class.dashed-border]="!check2">
                     <div class="card-block scroll-list b1 " [class.p-0]="check2">
                       <span class="v-span">
                         <li *ngFor="let item of droppedItems2" class="list-group-item droppedItem">
@@ -247,7 +247,7 @@
                   <div droppable [dragOverClass]="'drag-target-border'" [dropScope]="['draggable']"
                     [dragHintClass]="'drag-hint'" [dropEnabled]="!check3"
                     (onDrop)="singleonAnyDrop3($event,statement[2])"
-                    title="Drop items here" [class.dashed-border]="!check3">
+                    [title]="!check3 ? 'Drop items here' : ''" [class.dashed-border]="!check3">
                     <div class="card-block scroll-list b1 " [class.p-0]="check3">
                       <span class="v-span">
                         <li *ngFor="let item of droppedItems3" class="list-group-item droppedItem">
@@ -275,7 +275,7 @@
                   <div droppable [dragOverClass]="'drag-target-border'" [dropScope]="['draggable']"
                     [dragHintClass]="'drag-hint'" [dropEnabled]="!check4"
                     (onDrop)="singleonAnyDrop4($event,statement[3])"
-                    title="Drop items here" [class.dashed-border]="!check4">
+                    [title]="!check4 ? 'Drop items here' : ''" [class.dashed-border]="!check4">
                     <div class="card-block scroll-list b1 " [class.p-0]="check4">
                       <span class="v-span">
                         <li *ngFor="let item of droppedItems4" class="list-group-item droppedItem">
@@ -401,7 +401,7 @@
                 <div class="col-md-11 mb-2">
                   <div droppable [dragOverClass]="'drag-target-border'" [dropScope]="['draggable']"
                     [dragHintClass]="'drag-hint'" [dropEnabled]="!check1"
-                    (onDrop)="singleonAnyDrop1($event,statement[0])" title="Drop items here"
+                    (onDrop)="singleonAnyDrop1($event,statement[0])" [title]="!check1 ? 'Drop items here' : ''"
                     [class.dashed-border]="!check1">
                     <div class="card-block scroll-list b1 " [class.p-0]="check1">
                       <span class="v-span">
@@ -433,7 +433,7 @@
                 <div class="col-md-11 mb-2">
                   <div droppable [dragOverClass]="'drag-target-border'" [dropScope]="['draggable']"
                     [dragHintClass]="'drag-hint'" [dropEnabled]="!check2"
-                    (onDrop)="singleonAnyDrop2($event,statement[1])" title="Drop items here"
+                    (onDrop)="singleonAnyDrop2($event,statement[1])" [title]="!check2 ? 'Drop items here' : ''"
                     [class.dashed-border]="!check2">
                     <div class="card-block scroll-list b1 " [class.p-0]="check2">
                       <span class="v-span">
@@ -465,7 +465,7 @@
                 <div class="col-md-11 mb-2">
                   <div droppable [dragOverClass]="'drag-target-border'" [dropScope]="['draggable']"
                     [dragHintClass]="'drag-hint'" [dropEnabled]="!check3"
-                    (onDrop)="singleonAnyDrop3($event,statement[2])" title="Drop items here"
+                    (onDrop)="singleonAnyDrop3($event,statement[2])" [title]="!check3 ? 'Drop items here' : ''"
                     [class.dashed-border]="!check3">
                     <div class="card-block scroll-list b1 " [class.p-0]="check3">
                       <span class="v-span">
@@ -497,7 +497,7 @@
                 <div class="col-md-11 mb-2">
                   <div droppable [dragOverClass]="'drag-target-border'" [dropScope]="['draggable']"
                     [dragHintClass]="'drag-hint'" [dropEnabled]="!check4"
-                    (onDrop)="singleonAnyDrop4($event,statement[3])" title="Drop items here"
+                    (onDrop)="singleonAnyDrop4($event,statement[3])" [title]="!check4 ? 'Drop items here' : ''"
                     [class.dashed-border]="!check4">
                     <div class="card-block scroll-list b1 " [class.p-0]="check4">
                       <span class="v-span">

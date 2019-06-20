@@ -10,11 +10,18 @@ export class QuizService {
   public answerSendingError: boolean;
   constructor(private httpClient: HttpClient) { }
   startExam(startExamJson: any, token: any, apiEndStart) {
-    const headers = new HttpHeaders({
+    var headers = new HttpHeaders({
+      "Content-Type": "application/json",
       'Authorization': window.localStorage.getItem('token'),
-      'Content-Type': 'application/json',
-      'Source': 'WEB'
+     // "Source": "WEB"
     });
+    if (/Android/i.test(navigator.userAgent)) 
+    { 
+      headers= headers.append("Source",'MWEB')
+     }else
+     { 
+      headers= headers.append("Source",'WEB') 
+     }
 
     return this.httpClient.post(this.apiUrl + apiEndStart, { body: startExamJson }, { headers: headers })
     
@@ -23,23 +30,36 @@ export class QuizService {
   //POST method for Send Answer for BaseLine Que
   sendAnswer(sendAnsJson: any, token: any, apiEndSendAns) {
     const body = sendAnsJson;
-    const headers = new HttpHeaders({
-      'Authorization': token,
-      'Content-Type': 'application/json',
-      'Source': 'WEB'
+    var headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      'Authorization': window.localStorage.getItem('token'),
+     // "Source": "WEB"
     });
-
+    if (/Android/i.test(navigator.userAgent)) 
+    { 
+      headers= headers.append("Source",'MWEB')
+     }else
+     { 
+      headers= headers.append("Source",'WEB') 
+     }
     return this.httpClient.post(this.apiUrl + apiEndSendAns, { body: body }, { headers: headers })
     
   }//End Send Answer
   //POST method for Finish BaseLine
   finishBaseline(sendAnsJson: any, token: any, apiEndFinish) {
     // const body = JSON.parse(sendAnsJson);
-    const headers = new HttpHeaders({
-      'Authorization': token,
-      'Content-Type': 'application/json',
-      'Source': 'WEB'
+    var headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      'Authorization': window.localStorage.getItem('token'),
+     // "Source": "WEB"
     });
+    if (/Android/i.test(navigator.userAgent)) 
+    { 
+      headers= headers.append("Source",'MWEB')
+     }else
+     { 
+      headers= headers.append("Source",'WEB') 
+     }
 
     return this.httpClient.post(this.apiUrl + apiEndFinish, { body: sendAnsJson }, { headers: headers })
    

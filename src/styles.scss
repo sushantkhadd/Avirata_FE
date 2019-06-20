@@ -175,11 +175,11 @@ ul.comments li,
   transition: all 0.3s ease-in 0s;
 }
 
-.onoffswitch-checkbox:checked+.onoffswitch-label .onoffswitch-inner {
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
   margin-left: 0;
 }
 
-.onoffswitch-checkbox:checked+.onoffswitch-label .onoffswitch-switch {
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
   right: 30px;
 }
 
@@ -232,8 +232,10 @@ body {
   // -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 
   .card {
-    @include box-shadow(0 1px 3px rgba(0, 0, 0, 0.12),
-      0 1px 2px rgba(0, 0, 0, 0.24));
+    @include box-shadow(
+      0 1px 3px rgba(0, 0, 0, 0.12),
+      0 1px 2px rgba(0, 0, 0, 0.24)
+    );
   }
 }
 
@@ -317,10 +319,10 @@ body {
   background-position: center;
   background-size: cover;
 
-  .shadowMe{
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.50), 0 5px 5px rgba(0, 0, 0, 0.50);
-    -ms-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.50), 0 5px 5px rgba(0, 0, 0, 0.50);
-    -o-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.50), 0 5px 5px rgba(0, 0, 0, 0.50);
+  .shadowMe {
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5), 0 5px 5px rgba(0, 0, 0, 0.5);
+    -ms-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5), 0 5px 5px rgba(0, 0, 0, 0.5);
+    -o-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5), 0 5px 5px rgba(0, 0, 0, 0.5);
     border-radius: 40px;
   }
   .card-group {
@@ -400,8 +402,10 @@ body {
     line-height: 28px;
     font-size: 0.8rem;
     cursor: pointer;
-    @include box-shadow(0 2px 5px 0 rgba(0, 0, 0, 0.16),
-      0 2px 10px 0 rgba(0, 0, 0, 0.12));
+    @include box-shadow(
+      0 2px 5px 0 rgba(0, 0, 0, 0.16),
+      0 2px 10px 0 rgba(0, 0, 0, 0.12)
+    );
   }
 
   .stepper-step::after {
@@ -415,7 +419,8 @@ body {
 
   .stepper-step-isValid .stepper-stepMarker {
     text-indent: -10000px;
-    background: url('data:image/svg+xml;charset=utf8,<svg fill="#FFFFFF" height="20" viewBox="0 0 24 24" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/> <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>') no-repeat #2196f3;
+    background: url('data:image/svg+xml;charset=utf8,<svg fill="#FFFFFF" height="20" viewBox="0 0 24 24" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/> <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>')
+      no-repeat #2196f3;
     background-position: 2px 1px;
     background-color: #2196f3;
   }
@@ -540,7 +545,8 @@ body {
 
 .stepper-step-isValid .stepper-stepMarker {
   text-indent: -10000px;
-  background: url('data:image/svg+xml;charset=utf8,<svg fill="#FFFFFF" height="20" viewBox="0 0 24 24" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/> <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>') no-repeat #2196f3;
+  background: url('data:image/svg+xml;charset=utf8,<svg fill="#FFFFFF" height="20" viewBox="0 0 24 24" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/> <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>')
+    no-repeat #2196f3;
   background-position: 2px 1px;
   background-color: #2196f3;
 }
@@ -866,8 +872,8 @@ span.control i {
   color: #f50b07;
 }
 
-.color_darkred{
-  color:#b82020;
+.color_darkred {
+  color: #b82020;
 }
 
 .errorMessage {
@@ -987,7 +993,6 @@ body {
 }
 
 .auto-height-div {
-
   .textLayer,
   .canvasWrapper,
   .pdfViewer .page {
@@ -1324,8 +1329,10 @@ body {
 .borderBlue {
   // border: 10px solid #3b97d2;
   // border: 2px solid #3b97d2;
-  @include box-shadow(0 2px 5px 0 rgba(0, 0, 0, 0.16),
-    0 2px 10px 0 rgba(0, 0, 0, 0.12));
+  @include box-shadow(
+    0 2px 5px 0 rgba(0, 0, 0, 0.16),
+    0 2px 10px 0 rgba(0, 0, 0, 0.12)
+  );
   background: #fff;
 }
 
@@ -1633,10 +1640,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  .col-md-3{
-    max-width: 22%;
-  }
-  .card{
+  .card {
     border-radius: 30px;
     border: none;
   }
@@ -1752,8 +1756,10 @@ body {
     border-top: 0;
     border-radius: 20px;
     border: none;
-    @include box-shadow(0 8px 8px 0 rgba(0, 0, 0, 0.16),
-      0 8px 8px 0 rgba(0, 0, 0, 0.16));
+    @include box-shadow(
+      0 8px 8px 0 rgba(0, 0, 0, 0.16),
+      0 8px 8px 0 rgba(0, 0, 0, 0.16)
+    );
 
     p {
       line-height: 20px;
@@ -1859,7 +1865,7 @@ body {
   // padding: 0.25rem;
   // border-bottom: 1px solid #ccc;
   padding: 0.85rem;
-  label{
+  label {
     font-size: 0.85rem;
   }
 }
@@ -1970,22 +1976,22 @@ body {
     font-size: 0.95rem;
   }
 
-  .mb-0>a {
+  .mb-0 > a {
     display: block;
     position: relative;
     text-decoration-style: none;
   }
 
-  .mb-0>a:after {
+  .mb-0 > a:after {
     content: "+";
     /* fa-chevron-down */
-    font-family: 'FontAwesome';
+    font-family: "FontAwesome";
     position: absolute;
     right: 0;
     font-size: 1.1rem;
   }
 
-  .mb-0>a[aria-expanded="true"]:after {
+  .mb-0 > a[aria-expanded="true"]:after {
     content: "-";
     /* fa-chevron-up */
     font-size: 1.1rem;
@@ -2029,8 +2035,10 @@ body {
       border-radius: 7px;
       text-align: center;
       font-weight: 700;
-      @include box-shadow(0 2px 5px 0 rgba(0, 0, 0, 0.16),
-        0 2px 10px 0 rgba(0, 0, 0, 0.12));
+      @include box-shadow(
+        0 2px 5px 0 rgba(0, 0, 0, 0.16),
+        0 2px 10px 0 rgba(0, 0, 0, 0.12)
+      );
       border-color: #5abd75;
       padding: 10px;
       @include text-shadow(1px 2px 2px #000);
@@ -2236,7 +2244,6 @@ body {
   .options {
     .option {
       label {
-
         //to align checkbox and label
         span {
           display: block;
@@ -2303,7 +2310,7 @@ h6.questionHead.lineHeight {
     .modal {
       .modal-content {
         .modal-body p {
-          font-size: 0.80rem;
+          font-size: 0.8rem;
         }
 
         .modal-header {
@@ -2320,7 +2327,6 @@ h6.questionHead.lineHeight {
         }
       }
     }
-
   }
 
   .instructionModal .rewards-content h4 {
@@ -2360,7 +2366,6 @@ h6.questionHead.lineHeight {
     }
 
     .card-block.mcqBlock {
-
       .dx-item-content {
         font-size: 0.85rem;
         line-height: 20px;
@@ -2450,7 +2455,7 @@ h6.questionHead.lineHeight {
       margin: 0 !important;
 
       .card-block {
-        padding: 0.80rem;
+        padding: 0.8rem;
       }
 
       .container-audio {
@@ -2470,7 +2475,6 @@ h6.questionHead.lineHeight {
       left: 11% !important;
     }
   }
-
 }
 
 @include keyframes(breathing) {
@@ -2648,6 +2652,18 @@ table,
 }
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
+  .loginBg {
+    .card:not(:first-child) {
+      border-top-right-radius: 30px;
+      border-bottom-right-radius: 30px;
+      border-bottom-left-radius: 30px;
+    }
+    .card:not(:last-child) {
+      border-top-left-radius: 30px;
+      border-bottom-left-radius: 30px;
+      border-top-right-radius: 30px !important;
+    }
+  }
   .app-footer {
     margin-left: 0;
     margin-right: 0;
@@ -2655,7 +2671,7 @@ table,
     line-height: 22px;
     padding: 2px 0px;
 
-    marquee{
+    marquee {
       margin-bottom: -10px;
     }
   }
@@ -2696,84 +2712,82 @@ table,
           width: 84%;
         }
       }
-
     }
   }
 
-  .card-header.mcq-title{
-    label{
+  .card-header.mcq-title {
+    label {
       margin-bottom: 0;
       font-size: 0.95rem;
-     }
+    }
   }
 
-  .card-block.mcqBlock{
+  .card-block.mcqBlock {
     padding: 0;
   }
 
-  .baseline-instructtion{
-    h6.questionHead.lineHeight{
+  .baseline-instructtion {
+    h6.questionHead.lineHeight {
       font-size: 0.8rem;
     }
   }
 
-    .container.position-relative{
-      h6.questionHead.lineHeight{
-        font-size: 0.8rem;
-      }
-
+  .container.position-relative {
+    h6.questionHead.lineHeight {
+      font-size: 0.8rem;
     }
+  }
 
-    .bunch-mcqs{
-      .card{
-        .card-header{
-          h6{
-            font-size: 0.9rem;
-            display: inline !important;
-          }
-        }
-      }
-      .card-block{
-        padding: 1rem;
-        .dx-fieldset{
-          margin: 15px 10px 0 10px;
-        }
-        .dx-radiogroup .dx-radiobutton, .dx-radiogroup {
+  .bunch-mcqs {
+    .card {
+      .card-header {
+        h6 {
           font-size: 0.9rem;
-          font-weight: 500;
-          line-height: 1.5;
-          padding-bottom: 10px;
-      }
-      }
-    }
-
-    .options{
-      .option{
-        label{
-          span{
-            font-size: 0.85rem;
-          }
+          display: inline !important;
         }
       }
     }
+    .card-block {
+      padding: 1rem;
+      .dx-fieldset {
+        margin: 15px 10px 0 10px;
+      }
+      .dx-radiogroup .dx-radiobutton,
+      .dx-radiogroup {
+        font-size: 0.9rem;
+        font-weight: 500;
+        line-height: 1.5;
+        padding-bottom: 10px;
+      }
+    }
+  }
 
-  .position-relative{
-    .badge.badge-info.float-right{
+  .options {
+    .option {
+      label {
+        span {
+          font-size: 0.85rem;
+        }
+      }
+    }
+  }
+
+  .position-relative {
+    .badge.badge-info.float-right {
       top: -14.7%;
       font-size: 70%;
     }
   }
 
-  .mcqBlock{
-    .btn.btn-info{
+  .mcqBlock {
+    .btn.btn-info {
       margin-bottom: 1rem;
     }
     label {
-      font-size: 0.80rem;
+      font-size: 0.8rem;
       display: inline;
     }
   }
-
 }
 
 .dx-radiogroup .dx-radiobutton,
@@ -2932,19 +2946,22 @@ body {
 .custom-timeline {
   .progress {
     .progress-bar-striped {
-      background-image: linear-gradient(135deg,
-          rgba(255, 255, 255, 0.15) 25%,
-          transparent 25%,
-          transparent 50%,
-          rgba(255, 255, 255, 0.15) 50%,
-          rgba(255, 255, 255, 0.15) 75%,
-          transparent 75%,
-          transparent);
+      background-image: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.15) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0.15) 75%,
+        transparent 75%,
+        transparent
+      );
     }
 
     .progress-bar-animated {
       -webkit-animation: progress-bar-stripes 1s linear infinite;
-      animation: progress-bar-stripes 1s cubic-bezier(0.39, 0.58, 0.57, 1) infinite;
+      animation: progress-bar-stripes 1s cubic-bezier(0.39, 0.58, 0.57, 1)
+        infinite;
     }
 
     height: 1.45rem !important;
@@ -2966,8 +2983,10 @@ body {
     text-align: center;
     padding: 3px;
     color: #fff;
-    @include box-shadow(0 2px 5px 0 rgba(0, 0, 0, 0.16),
-      0 2px 10px 0 rgba(0, 0, 0, 0.12));
+    @include box-shadow(
+      0 2px 5px 0 rgba(0, 0, 0, 0.16),
+      0 2px 10px 0 rgba(0, 0, 0, 0.12)
+    );
   }
 
   .stepper-step {
@@ -3032,17 +3051,21 @@ body {
     background: #3b97d2;
     color: #ffffff;
     // margin-top: -10px;
-    @include box-shadow(0 1px 3px rgba(0, 0, 0, 0.12),
-    0 1px 2px rgba(0, 0, 0, 0.24));
-    @include transition(all 0.3s cubic-bezier(.25, .8, .25, 1));
+    @include box-shadow(
+      0 1px 3px rgba(0, 0, 0, 0.12),
+      0 1px 2px rgba(0, 0, 0, 0.24)
+    );
+    @include transition(all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1));
     border-radius: 10px;
     font-weight: 600;
     margin-right: 35px;
     @extend .breathing;
 
     &:hover {
-     @include box-shadow(0 14px 28px rgba(0, 0, 0, 0.25),
-      0 10px 10px rgba(0, 0, 0, 0.22));
+      @include box-shadow(
+        0 14px 28px rgba(0, 0, 0, 0.25),
+        0 10px 10px rgba(0, 0, 0, 0.22)
+      );
     }
 
     @include iMobile() {
@@ -3055,7 +3078,7 @@ body {
     width: 100%;
     top: 2px;
     color: #fff;
-    font-size: 0.90rem;
+    font-size: 0.9rem;
     font-weight: 500;
     @include text-shadow(3px 3px 5px #212529);
     .col-2 {
@@ -3155,7 +3178,6 @@ body {
   }
 
   @media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation: portrait) {
-
     /* For portrait layouts only */
     // #container-audio.container-audio {
     //   .colum1 {
@@ -3200,7 +3222,6 @@ body {
             width: 84%;
           }
         }
-
       }
     }
   }
@@ -3223,8 +3244,8 @@ body {
   }
 }
 
-@media screen and (min-width: 768px) and (max-width: 1024px){
-  .app-footer{
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .app-footer {
     font-size: 8px;
   }
 
@@ -3232,15 +3253,15 @@ body {
     line-height: 20px;
   }
   #container-audio.container-audio {
-      .colum1 {
-        width: 15px;
-        height: 5em;
-        border-radius: 5px;
-        margin: 0 9px 0px 0px;
-        display: inline-block;
-        position: relative;
-      }
+    .colum1 {
+      width: 15px;
+      height: 5em;
+      border-radius: 5px;
+      margin: 0 9px 0px 0px;
+      display: inline-block;
+      position: relative;
     }
+  }
   .audio-container {
     .card {
       .card-block {
@@ -3266,7 +3287,6 @@ body {
     }
   }
 }
-
 
 @include dLDesk() {
   .card.dynamic-view {

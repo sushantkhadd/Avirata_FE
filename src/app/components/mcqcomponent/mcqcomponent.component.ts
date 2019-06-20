@@ -560,9 +560,13 @@ export class McqcomponentComponent implements OnInit {
         }
       }
     } else if(window.localStorage.getItem('mainFlagModule5') == '7'){
-      if (Object.keys(this.userOptions).length == 3)
-      {
-        console.log("emit", this.userOptions)
+      this.rankModal.hide()
+      this.lang.toHide();
+      this.queCount = this.queCount + 1;
+      if(this.queCount >= 3){
+        this.queCount = 3;
+      }
+      if(Object.keys(this.userOptions).length == 3){
         this.sendAns.emit(this.userOptions)
        }
        else{

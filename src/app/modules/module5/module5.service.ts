@@ -51,11 +51,18 @@ export class Module5Service {
 
 
   apiCall(jsonBody, apiUrl) {
-    const headers = new HttpHeaders({
-      Authorization: window.localStorage.getItem("token"),
+    var headers = new HttpHeaders({
       "Content-Type": "application/json",
-      Source: "WEB"
+      'Authorization': window.localStorage.getItem('token'),
+     // "Source": "WEB"
     });
+    if (/Android/i.test(navigator.userAgent)) 
+    { 
+      headers= headers.append("Source",'MWEB')
+     }else
+     { 
+      headers= headers.append("Source",'WEB') 
+     }
     let options = { headers: headers };
     return this.httpClient.post(this.apiUrl + apiUrl, { body: jsonBody }, options)
   }
