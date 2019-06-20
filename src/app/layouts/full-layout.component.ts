@@ -383,11 +383,16 @@ export class FullLayoutComponent implements OnInit {
   //   }
   // }
   // @HostListener("document:click", ["$event"]) clickedOutside() {
-  //   document.querySelector("body").classList.remove("sidebar-mobile-show");
+  //   console.log('hello host')
+  //   if(jQuery('#sidebar').hasClass('active')){
+  //     jQuery('#sidebar').removeClass('active')
+  //   }
+  //   // document.querySelector("body").classList.remove("sidebar-mobile-show");
   // }
   clickedInside($event: Event) {
     $event.preventDefault();
     $event.stopPropagation();
+    console.log('hello...')
   }
 
   checkPassword() {
