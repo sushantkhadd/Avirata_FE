@@ -307,7 +307,8 @@ export class McqcomponentComponent implements OnInit {
               }
 
              }
-        } else if(window.localStorage.getItem('mainFlagModule5') == '7'){
+        } else if (window.localStorage.getItem('mainFlagModule5') == '7')
+        {
           for(let j=0; j< this.bunchList[0].options.length;j++){
             if($event.value == this.bunchList[0].options[j].value){
               var optionId = this.bunchList[0].options[j].option
@@ -559,10 +560,9 @@ export class McqcomponentComponent implements OnInit {
         }
       }
     } else if(window.localStorage.getItem('mainFlagModule5') == '7'){
-      this.rankModal.hide()
-      this.lang.toHide();
-      this.queCount = this.queCount + 1;
-      if(Object.keys(this.userOptions).length == 3){
+      if (Object.keys(this.userOptions).length == 3)
+      {
+        console.log("emit", this.userOptions)
         this.sendAns.emit(this.userOptions)
        }
        else{
@@ -580,7 +580,11 @@ export class McqcomponentComponent implements OnInit {
           }
         }
        console.log("options",this.bunchList,this.userOptions)
-       }
+      }
+      this.rankModal.hide()
+      this.lang.toHide();
+      this.submitFlag = false;
+      this.queCount = this.queCount + 1;
     }
     else {
       console.log("this.tasks",this.tasks,this.selectedAnswer)

@@ -100,7 +100,6 @@ import { Module514Component } from './module5/module5-14.component';
 import { Module515Component } from './module5/module5-15.component';
 import { Module5Service } from "./module5/module5.service";
 import { AudioPlayerComponent } from "../components/audio-player/audio-player.component";
-import { PreventDoubleClickDirective } from "../shared/directives/prevent-double-click.directive";
 import { Module516Component } from './module5/module5-16.component';
 import { Module517Component } from './module5/module5-17.component';
 import { Module518Component } from './module5/module5-18.component';
@@ -110,6 +109,7 @@ import { Module521Component } from './module5/module5-21.component';
 import { Module522Component } from './module5/module5-22.component';
 import { Module523Component } from './module5/module5-23.component';
 import { Module524Component } from './module5/module5-24.component';
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
   imports: [
@@ -128,7 +128,8 @@ import { Module524Component } from './module5/module5-24.component';
     DxCheckBoxModule,
     DxListModule,
     DxPieChartModule,
-    Ng5SliderModule
+    Ng5SliderModule,
+    SharedModule
   ],
   declarations: [
     Module0Component,
@@ -216,7 +217,6 @@ import { Module524Component } from './module5/module5-24.component';
     Module513Component,
     Module514Component,
     Module515Component,
-    PreventDoubleClickDirective,
     Module516Component,
     Module517Component,
     Module518Component,
