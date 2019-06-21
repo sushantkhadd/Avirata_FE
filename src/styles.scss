@@ -869,7 +869,7 @@ span.control i {
 }
 
 .color_red {
-  color: #f50b07;
+  color: #f50b07 !important;
 }
 
 .color_darkred {
@@ -2786,6 +2786,21 @@ table,
     label {
       font-size: 0.8rem;
       display: inline;
+    }
+  }
+  .radio-opt-group{
+    label{
+      display: inline;
+      font-size: 0.80rem;
+    }
+  }
+
+  .instructionModal  {
+    .rewards-content{
+      h4{
+        padding-left: 2rem;
+        padding-top: 1rem;
+      }
     }
   }
 }

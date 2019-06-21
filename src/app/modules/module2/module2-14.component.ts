@@ -96,7 +96,7 @@ export class Module214Component implements OnInit {
                   "L2Module2.subMenu2-14"
                 ),
                 next: this.translate.instant(
-                  "L2Module2.subMenu2-15"
+                  "L2Module2Finish.subMenu2-15"
                 ),
                 nextRoute: "/modules/module2/Module2.15"
               };

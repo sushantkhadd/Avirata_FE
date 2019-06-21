@@ -99,7 +99,7 @@ export class Module520Component implements OnInit {
               current: this.translate.instant(
                 "L2Module5.subMenu5-20"
               ),
-              next: this.translate.instant("L2Module5.subMenu5-21"),
+              next: this.translate.instant("L2Module5Finish.subMenu5-21"),
               nextRoute: "/modules/module5/Module5.21"
             };
             this.LocalstoragedetailsService.setModuleStatus(

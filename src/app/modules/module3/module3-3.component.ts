@@ -175,7 +175,7 @@ export class Module33Component implements OnInit {
               type: "submodule",
               route: true,
               current: this.translate.instant("L2Module3.subMenu3-3"),
-              next: this.translate.instant("L2Module3.subMenu3-4"),
+              next: this.translate.instant("L2Module3Finish.subMenu3-4"),
               nextRoute: "/modules/module3/Module3.4"
             };
             this.LocalstoragedetailsService.setModuleStatus(

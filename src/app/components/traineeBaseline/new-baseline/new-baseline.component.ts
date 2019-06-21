@@ -544,7 +544,7 @@ export class NewBaselineComponent implements OnInit {
               "type": "submodule",
               "route": true,
               "current": this.translate.instant('L2Module2.subMenu2-1'),
-              "next": this.translate.instant('L2Module2.subMenu2-2'),
+              "next": this.translate.instant('L2Module2Finish.subMenu2-2'),
               "nextRoute": "/modules/module2/Module2.2"
             }
             this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
@@ -558,7 +558,7 @@ export class NewBaselineComponent implements OnInit {
               "type": "submodule",
               "route": true,
               "current": this.translate.instant('L2Module2.subMenu2-7'),
-              "next": this.translate.instant('L2Module2.subMenu2-8'),
+              "next": this.translate.instant('L2Module2Finish.subMenu2-8'),
               "nextRoute": "/modules/module2/Module2.8"
             }
             this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
@@ -574,7 +574,7 @@ export class NewBaselineComponent implements OnInit {
               "type": "submodule",
               "route": true,
               "current": this.translate.instant('L2Module3.subMenu3-7'),
-              "next": this.translate.instant('L2Module3.subMenu3-8'),
+              "next": this.translate.instant('L2Module3Finish.subMenu3-8'),
               "nextRoute": "/modules/module3/Module3.8"
             }
             this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
@@ -589,7 +589,7 @@ export class NewBaselineComponent implements OnInit {
               "type": "submodule",
               "route": true,
               "current": this.translate.instant('L2Module4.subMenu4-2'),
-              "next": this.translate.instant('L2Module4.subMenu4-3'),
+              "next": this.translate.instant('L2Module4Finish.subMenu4-3'),
               "nextRoute": "/modules/module4/Module4.3"
             }
             this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
@@ -604,7 +604,7 @@ export class NewBaselineComponent implements OnInit {
               "type": "submodule",
               "route": true,
               "current": this.translate.instant('L2Module4.subMenu4-11'),
-              "next": this.translate.instant('L2Module4.subMenu4-12'),
+              "next": this.translate.instant('L2Module4Finish.subMenu4-12'),
               "nextRoute": "/modules/module4/Module4.12"
             }
             this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
