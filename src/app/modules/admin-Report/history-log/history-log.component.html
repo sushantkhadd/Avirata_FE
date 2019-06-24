@@ -1,0 +1,441 @@
+<div class="container">
+  <div class="row">
+    <div class="col-6 pad-0" *ngIf="!showDetails">
+      <button class="btn btn-primary float-left backBtn or-section" (click)="goToAdminPanel()">
+        <i class="fa fa-reply"></i>&nbsp;&nbsp;Back</button>
+    </div>
+
+    <div class="card">
+      <div class="card-header text-center">
+        <h6 class="text-center">
+          <i class="fa fa-archive"></i> &nbsp;Search History by Mobile No</h6>
+      </div>
+      <div class="card-block">
+        <form #formSearch="ngForm" name="formSearch" class="text-center">
+          <div class="form-group row">
+            <label for="search" class="col-md-3 col-form-label font-weight-bold">Enter Mobile Number</label>
+            <div class="col-md-4">
+              <input type="text" class="form-control" id="mob" name="number" #numbers="ngModel" [(ngModel)]="mobnumber" placeholder="Enter mobile number / aadhar number"
+                minlength="10" maxlength="12" autocomplete="off" pattern="^[0-9]\d{9}$|^[0-9]\d{11}$" (keypress)="onKey($event)"
+                required>
+            </div>
+            <div class="col-md-3">
+              <select class="form-control" name="search" id="searchTxt" [(ngModel)]="searchTxt" (change)="searchHistory()">
+                <option value="" disabled>Change By</option>
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+              </select>
+            </div>
+            <div class="mr-2">
+              <button class="btn btn-primary" [disabled]="!formSearch.form.valid || btnValid" (click)="searchHistory()">
+                <i class="fa fa-search"></i>Search
+              </button>
+            </div>
+            <div class="m1-2">
+              <button class="btn btn-primary" [disabled]="!formSearch" (click)="reset()">
+                <i class="fa fa-refresh"></i>Reset
+              </button>
+            </div>
+          </div>
+        </form>
+        <hr>
+        <div class="row" *ngIf="showHistoryFlag">
+          <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+            <div class="margin-block">
+              <div class="card card-inst">
+                <!-- <div class="card-header" role="tab" id="headingOne">
+          <a>
+           Policies
+          </a>
+        </div> -->
+                <div>
+                  <ul class="list-group">
+                    <a data-toggle="tab" aria-controls="seite1" role="tab" class="list-group-item active" (click)="showDetails(1)">1. Address</a>
+                    <a data-toggle="tab" aria-controls="seite1" role="tab" class="list-group-item" (click)="showDetails(2)">2. Bank Name</a>
+                    <a data-toggle="tab" aria-controls="seite1" role="tab" class="list-group-item" (click)="showDetails(3)">3. Date Of Joining</a>
+                    <a data-toggle="tab" aria-controls="seite1" role="tab" class="list-group-item" (click)="showDetails(4)">4. Date Of Birth</a>
+                    <a data-toggle="tab" aria-controls="seite1" role="tab" class="list-group-item" (click)="showDetails(5)">5. Gender</a>
+                    <a data-toggle="tab" aria-controls="seite1" role="tab" class="list-group-item" (click)="showDetails(6)">6.grade</a>
+                    <a data-toggle="tab" aria-controls="seite1" role="tab" class="list-group-item" (click)="showDetails(7)">7.ifsccode</a>
+                    <a data-toggle="tab" aria-controls="seite1" role="tab" class="list-group-item" (click)="showDetails(8)">8. other</a>
+                    <a data-toggle="tab" aria-controls="seite1" role="tab" class="list-group-item" (click)="showDetails(9)">9.pgspecial</a>
+                    <a data-toggle="tab" aria-controls="seite1" role="tab" class="list-group-item" (click)="showDetails(10)">10.position</a>
+                    <a data-toggle="tab" aria-controls="seite1" role="tab" class="list-group-item" (click)="showDetails(11)">11.post_graduation</a>
+                    <a data-toggle="tab" aria-controls="seite1" role="tab" class="list-group-item" (click)="showDetails(12)">12.professional</a>
+                    <a data-toggle="tab" aria-controls="seite1" role="tab" class="list-group-item" (click)="showDetails(13)">13.subject</a>
+                    <a data-toggle="tab" aria-controls="seite1" role="tab" class="list-group-item" (click)="showDetails(14)">ugspecial</a>
+                    <a data-toggle="tab" aria-controls="seite1" role="tab" class="list-group-item" (click)="showDetails(15)">under_graduation</a>
+                    <!-- <a data-toggle="tab" aria-controls="seite1" role="tab" class="list-group-item" (click)="showDetails(16)">ugspecial</a> -->
+
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-12 col-md-9 col-lg-9 col-xl-9 pdf-area">
+            <div class='embed-responsive pdf-reader pdfView'>
+              <span *ngIf="show1 && !show2&& !show3&& !show4&& !show5&& !show6&& !show7&& !show8&& !show9&& !show10&& !show11&& !show12&& !show13&& !show14&& !show15&& !show16&& !show17&& !show18&& !show19&& !show20&& !show21&& !show22 ">
+
+                <div class="row">
+                  <div class="col-md-4">Date
+                  </div>
+                  <div class="col-md-4">Value
+                  </div>
+                  <div class="col-md-4">Updated By
+                  </div>
+                </div>
+                 <div *ngFor="let item of historyDate.profile['address']; let i=index">
+                 <div *ngIf="item.value != ''" class="row">
+                  <div class="col-md-4">
+                    {{item.date}}
+                  </div>
+                  <div class="col-md-4">{{item.value}}
+                  </div>
+                  <div class="col-md-4">{{item.updated_by}}
+                  </div>
+                 </div>
+                </div>
+
+              </span>
+
+              <span *ngIf="!show1 && show2&& !show3&& !show4&& !show5&& !show6&& !show7&& !show8&& !show9&& !show10&& !show11&& !show12&& !show13&& !show14&& !show15&& !show16&& !show17&& !show18&& !show19&& !show20&& !show21&& !show22">
+                 <div class="row">
+                  <div class="col-md-4">Date
+                  </div>
+                  <div class="col-md-4">Value
+                  </div>
+                  <div class="col-md-4">Updated By
+                  </div>
+                </div>
+                 <div *ngFor="let item of historyDate.profile['bankname']; let i=index">
+                 <div *ngIf="item.value != ''" class="row">
+                  <div class="col-md-4">
+                    {{item.date}}
+                  </div>
+                  <div class="col-md-4">{{item.value}}
+                  </div>
+                  <div class="col-md-4">{{item.updated_by}}
+                  </div>
+                 </div>
+                </div>
+               </span>
+
+
+              <span *ngIf="!show1 && !show2&& show3&& !show4&& !show5&& !show6&& !show7&& !show8&& !show9&& !show10&& !show11&& !show12&& !show13&& !show14&& !show15&& !show16&& !show17&& !show18&& !show19&& !show20&& !show21&& !show22">
+                 <div class="row">
+                  <div class="col-md-4">Date
+                  </div>
+                  <div class="col-md-4">Value
+                  </div>
+                  <div class="col-md-4">Updated By
+                  </div>
+                </div>
+                 <div *ngFor="let item of historyDate.profile['date_of_joining']; let i=index">
+                 <div *ngIf="item.value != ''" class="row">
+                  <div class="col-md-4">
+                    {{item.date}}
+                  </div>
+                  <div class="col-md-4">{{item.value}}
+                  </div>
+                  <div class="col-md-4">{{item.updated_by}}
+                  </div>
+                 </div>
+                </div>
+               </span>
+              <span *ngIf="!show1 && !show2&& !show3&& show4&& !show5&& !show6&& !show7&& !show8&& !show9&& !show10&& !show11&& !show12&& !show13&& !show14&& !show15&& !show16&& !show17&& !show18&& !show19&& !show20&& !show21&& !show22">
+                 <div class="row">
+                  <div class="col-md-4">Date
+                  </div>
+                  <div class="col-md-4">Value
+                  </div>
+                  <div class="col-md-4">Updated By
+                  </div>
+                </div>
+                 <div *ngFor="let item of historyDate.profile['dob']; let i=index">
+                 <div *ngIf="item.value != ''" class="row">
+                  <div class="col-md-4">
+                    {{item.date}}
+                  </div>
+                  <div class="col-md-4">{{item.value}}
+                  </div>
+                  <div class="col-md-4">{{item.updated_by}}
+                  </div>
+                 </div>
+                </div>
+               </span>
+              <span *ngIf="!show1 && !show2&& !show3&& !show4&& show5&& !show6&& !show7&& !show8&& !show9&& !show10&& !show11&& !show12&& !show13&& !show14&& !show15&& !show16&& !show17&& !show18&& !show19&& !show20&& !show21&& !show22">
+                 <div class="row">
+                  <div class="col-md-4">Date
+                  </div>
+                  <div class="col-md-4">Value
+                  </div>
+                  <div class="col-md-4">Updated By
+                  </div>
+                </div>
+                 <div *ngFor="let item of historyDate.profile['gender']; let i=index">
+                 <div *ngIf="item.value != ''" class="row">
+                  <div class="col-md-4">
+                    {{item.date}}
+                  </div>
+                  <div class="col-md-4">{{item.value}}
+                  </div>
+                  <div class="col-md-4">{{item.updated_by}}
+                  </div>
+                 </div>
+                </div>
+               </span>
+
+              <span *ngIf="!show1 && !show2&& !show3&& !show4&& !show5&& show6&& !show7&& !show8&& !show9&& !show10&& !show11&& !show12&& !show13&& !show14&& !show15&& !show16&& !show17&& !show18&& !show19&& !show20&& !show21&& !show22">
+                 <div class="row">
+                  <div class="col-md-4">Date
+                  </div>
+                  <div class="col-md-4">Value
+                  </div>
+                  <div class="col-md-4">Updated By
+                  </div>
+                </div>
+                 <div *ngFor="let item of historyDate.profile['grade']; let i=index">
+                 <div *ngIf="item.value != ''" class="row">
+                  <div class="col-md-4">
+                    {{item.date}}
+                  </div>
+                  <div class="col-md-4">{{item.value}}
+                  </div>
+                  <div class="col-md-4">{{item.updated_by}}
+                  </div>
+                 </div>
+                </div>
+               </span>
+
+              <span *ngIf="!show1 && !show2&& !show3&& !show4&& !show5&& !show6&& show7&& !show8&& !show9&& !show10&& !show11&& !show12&& !show13&& !show14&& !show15&& !show16&& !show17&& !show18&& !show19&& !show20&& !show21&& !show22">
+                 <div class="row">
+                  <div class="col-md-4">Date
+                  </div>
+                  <div class="col-md-4">Value
+                  </div>
+                  <div class="col-md-4">Updated By
+                  </div>
+                </div>
+                 <div *ngFor="let item of historyDate.profile['ifsccode']; let i=index">
+                 <div *ngIf="item.value != ''" class="row">
+                  <div class="col-md-4">
+                    {{item.date}}
+                  </div>
+                  <div class="col-md-4">{{item.value}}
+                  </div>
+                  <div class="col-md-4">{{item.updated_by}}
+                  </div>
+                 </div>
+                </div>
+               </span>
+
+              <span *ngIf="!show1 && !show2&& !show3&& !show4&& !show5&& !show6&& !show7&& show8&& !show9&& !show10&& !show11&& !show12&& !show13&& !show14&& !show15&& !show16&& !show17&& !show18&& !show19&& !show20&& !show21&& !show22">
+                 <div class="row">
+                  <div class="col-md-4">Date
+                  </div>
+                  <div class="col-md-4">Value
+                  </div>
+                  <div class="col-md-4">Updated By
+                  </div>
+                </div>
+                 <div *ngFor="let item of historyDate.profile['other']; let i=index">
+                 <div *ngIf="item.value != ''" class="row">
+                  <div class="col-md-4">
+                    {{item.date}}
+                  </div>
+                  <div class="col-md-4">{{item.value}}
+                  </div>
+                  <div class="col-md-4">{{item.updated_by}}
+                  </div>
+                 </div>
+                </div>
+               </span>
+
+              <span *ngIf="!show1 && !show2&& !show3&& !show4&& !show5&& !show6&& !show7&& !show8&& show9&& !show10&& !show11&& !show12&& !show13&& !show14&& !show15&& !show16&& !show17&& !show18&& !show19&& !show20&& !show21&& !show22">
+                 <div class="row">
+                  <div class="col-md-4">Date
+                  </div>
+                  <div class="col-md-4">Value
+                  </div>
+                  <div class="col-md-4">Updated By
+                  </div>
+                </div>
+                 <div *ngFor="let item of historyDate.profile['pgspecial']; let i=index">
+                 <div *ngIf="item.value != ''" class="row">
+                  <div class="col-md-4">
+                    {{item.date}}
+                  </div>
+                  <div class="col-md-4">{{item.value}}
+                  </div>
+                  <div class="col-md-4">{{item.updated_by}}
+                  </div>
+                 </div>
+                </div>
+               </span>
+
+              <span *ngIf="!show1 && !show2&& !show3&& !show4&& !show5&& !show6&& !show7&& !show8&& !show9&& show10&& !show11&& !show12&& !show13&& !show14&& !show15&& !show16&& !show17&& !show18&& !show19&& !show20&& !show21&& !show22">
+                 <div class="row">
+                  <div class="col-md-4">Date
+                  </div>
+                  <div class="col-md-4">Value
+                  </div>
+                  <div class="col-md-4">Updated By
+                  </div>
+                </div>
+                 <div *ngFor="let item of historyDate.profile['position']; let i=index">
+                 <div *ngIf="item.value != ''" class="row">
+                  <div class="col-md-4">
+                    {{item.date}}
+                  </div>
+                  <div class="col-md-4">{{item.value}}
+                  </div>
+                  <div class="col-md-4">{{item.updated_by}}
+                  </div>
+                 </div>
+                </div>
+               </span>
+
+              <span *ngIf="!show1 && !show2&& !show3&& !show4&& !show5&& !show6&& !show7&& !show8&& !show9&& !show10&& show11&& !show12&& !show13&& !show14&& !show15&& !show16&& !show17&& !show18&& !show19&& !show20&& !show21&& !show22">
+                 <div class="row">
+                  <div class="col-md-4">Date
+                  </div>
+                  <div class="col-md-4">Value
+                  </div>
+                  <div class="col-md-4">Updated By
+                  </div>
+                </div>
+                 <div *ngFor="let item of historyDate.profile['post_graduation']; let i=index">
+                 <div *ngIf="item.value != ''" class="row">
+                  <div class="col-md-4">
+                    {{item.date}}
+                  </div>
+                  <div class="col-md-4">{{item.value}}
+                  </div>
+                  <div class="col-md-4">{{item.updated_by}}
+                  </div>
+                 </div>
+                </div>
+               </span>
+
+              <span *ngIf="!show1 && !show2&& !show3&& !show4&& !show5&& !show6&& !show7&& !show8&& !show9&& !show10&& !show11&& show12&& !show13&& !show14&& !show15&& !show16&& !show17&& !show18&& !show19&& !show20&& !show21&& !show22">
+                 <div class="row">
+                  <div class="col-md-4">Date
+                  </div>
+                  <div class="col-md-4">Value
+                  </div>
+                  <div class="col-md-4">Updated By
+                  </div>
+                </div>
+                 <div *ngFor="let item of historyDate.profile['professional']; let i=index">
+                 <div *ngIf="item.value != ''" class="row">
+                  <div class="col-md-4">
+                    {{item.date}}
+                  </div>
+                  <div class="col-md-4">{{item.value}}
+                  </div>
+                  <div class="col-md-4">{{item.updated_by}}
+                  </div>
+                 </div>
+                </div>
+               </span>
+
+              <span *ngIf="!show1 && !show2&& !show3&& !show4&& !show5&& !show6&& !show7&& !show8&& !show9&& !show10&& !show11&& !show12&& show13&& !show14&& !show15&& !show16&& !show17&& !show18&& !show19&& !show20&& !show21&& !show22">
+                 <div class="row">
+                  <div class="col-md-4">Date
+                  </div>
+                  <div class="col-md-4">Value
+                  </div>
+                  <div class="col-md-4">Updated By
+                  </div>
+                </div>
+                 <div *ngFor="let item of historyDate.profile['profspecial']; let i=index">
+                 <div *ngIf="item.value != ''" class="row">
+                  <div class="col-md-4">
+                    {{item.date}}
+                  </div>
+                  <div class="col-md-4">{{item.value}}
+                  </div>
+                  <div class="col-md-4">{{item.updated_by}}
+                  </div>
+                 </div>
+                </div>
+               </span>
+
+              <span *ngIf="!show1 && !show2&& !show3&& !show4&& !show5&& !show6&& !show7&& !show8&& !show9&& !show10&& !show11&& !show12&& !show13&& show14&& !show15&& !show16&& !show17&& !show18&& !show19&& !show20&& !show21&& !show22">
+                 <div class="row">
+                  <div class="col-md-4">Date
+                  </div>
+                  <div class="col-md-4">Value
+                  </div>
+                  <div class="col-md-4">Updated By
+                  </div>
+                </div>
+                 <div *ngFor="let item of historyDate.profile['subject']; let i=index">
+                 <div *ngIf="item.value != ''" class="row">
+                  <div class="col-md-4">
+                    {{item.date}}
+                  </div>
+                  <div class="col-md-4">{{item.value}}
+                  </div>
+                  <div class="col-md-4">{{item.updated_by}}
+                  </div>
+                 </div>
+                </div>
+               </span>
+
+
+              <span *ngIf="!show1 && !show2&& !show3&& !show4&& !show5&& !show6&& !show7&& !show8&& !show9&& !show10&& !show11&& !show12&& !show13&& !show14&& show15&& !show16&& !show17&& !show18&& !show19&& !show20&& !show21&& !show22">
+                 <div class="row">
+                  <div class="col-md-4">Date
+                  </div>
+                  <div class="col-md-4">Value
+                  </div>
+                  <div class="col-md-4">Updated By
+                  </div>
+                </div>
+                 <div *ngFor="let item of historyDate.profile['ugspecial']; let i=index">
+                 <div *ngIf="item.value != ''" class="row">
+                  <div class="col-md-4">
+                    {{item.date}}
+                  </div>
+                  <div class="col-md-4">{{item.value}}
+                  </div>
+                  <div class="col-md-4">{{item.updated_by}}
+                  </div>
+                 </div>
+                </div>
+               </span>
+
+              <span *ngIf="!show1 && !show2&& !show3&& !show4&& !show5&& !show6&& !show7&& !show8&& !show9&& !show10&& !show11&& !show12&& !show13&& !show14&& !show15&& show16&& !show17&& !show18&& !show19&& !show20&& !show21&& !show22">
+                 <div class="row">
+                  <div class="col-md-4">Date
+                  </div>
+                  <div class="col-md-4">Value
+                  </div>
+                  <div class="col-md-4">Updated By
+                  </div>
+                </div>
+                 <div *ngFor="let item of historyDate.profile['under_graduation']; let i=index">
+                 <div *ngIf="item.value != ''" class="row">
+                  <div class="col-md-4">
+                    {{item.date}}
+                  </div>
+                  <div class="col-md-4">{{item.value}}
+                  </div>
+                  <div class="col-md-4">{{item.updated_by}}
+                  </div>
+                 </div>
+                </div>
+               </span>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

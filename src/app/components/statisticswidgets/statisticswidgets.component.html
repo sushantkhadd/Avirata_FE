@@ -1,0 +1,234 @@
+<div class="row">
+    <div *ngIf="LocalstoragedetailsService.userType == 'co_ordinator'" class="form-group col-sm-3 col-md-3">
+        <label for="district">
+                <span>{{'Stepper.District' | translate}}</span>
+                <span *ngIf="LocalstoragedetailsService.userType == 'admin' || LocalstoragedetailsService.userType == 'superadmin'">{{'Stepper.selectOption' | translate}}</span>
+            </label>
+        <select class="form-control" id="district" [(ngModel)]="districtId" (change)="getDistrictwiseCountForCoordinator($event);" [disabled]="LocalstoragedetailsService.userType == 'master_trainer' || LocalstoragedetailsService.userType == 'co_ordinator'">
+                <option value="">All</option>
+                <option [ngValue]="districtId">{{districtname}}</option>
+              </select>
+    </div>
+
+    <div *ngIf="LocalstoragedetailsService.userType == 'master_trainer'|| LocalstoragedetailsService.userType =='admin'|| LocalstoragedetailsService.userType =='superadmin'" class="form-group col-sm-3 col-md-3">
+        <label for="district">
+                <span>{{'Stepper.District' | translate}}</span>
+                <span *ngIf="LocalstoragedetailsService.userType == 'admin'|| LocalstoragedetailsService.userType =='superadmin'">{{'Stepper.selectOption' | translate}}</span>
+            </label>
+        <select class="form-control" id="district" [(ngModel)]="districtId" (change)="getDistrictwiseCountForCoordinator($event);" [disabled]="LocalstoragedetailsService.userType == 'master_trainer' || LocalstoragedetailsService.userType == 'co_ordinator'">
+                <option value="">All</option>
+                <option *ngFor="let item of districtArray | sort:'districtname'" [ngValue]="item.districtid">{{item.districtname}}</option>
+              </select>
+    </div>
+    <div class="form-group col-sm-3 col-md-3">
+        <label for="taluka">
+                <span>{{'Stepper.Taluka' | translate}}</span>
+                <span *ngIf="LocalstoragedetailsService.userType == 'admin'|| LocalstoragedetailsService.userType =='superadmin' || LocalstoragedetailsService.userType == 'co_ordinator'" >{{'Stepper.selectOption' | translate}}</span>
+            </label>
+
+        <select class="form-control" id="taluka" [(ngModel)]="talukaId" (change)="getTalukawiseCountForMT();getSchoolList();" [disabled]="LocalstoragedetailsService.userType == 'master_trainer'">
+                <option value="">All</option>
+                 <option *ngFor="let taluka of talukaArray | sort:'talukaname'" value={{taluka.talukaid}}>{{taluka.talukaname}}</option>
+            </select>
+    </div>
+    <div class="form-group col-sm-3 col-md-3">
+        <label for="schoolname">{{'Stepper.School Name' | translate}}</label>
+        <select class="form-control" id="school" [(ngModel)]="schoolName" (change)="getCount()" [disabled]="LocalstoragedetailsService.userType == 'master_trainer'">
+                <option value="">All</option>
+                <option *ngFor="let school of schoolModel | sort:'schoolname'" value={{school.school_name}} >{{school.school_name}} ({{school.index}})</option>
+            </select>
+    </div>
+</div>
+
+<hr>
+<div class="row">
+    <div class="form-group col-sm-6 col-md-6">
+        <label class="totalRecords">
+                <span ><b>{{'Report.Total' | translate}}  :  {{totalMember}}</b></span>
+            </label>
+        <label class="download">
+            <button class="btn btn-primary float-left backBtn or-section" (click)="export()">
+                <span>
+                    <i class="fa fa-download" aria-hidden="true"></i>
+                  </span>{{'Report.Download' | translate}}</button>
+            </label>
+    </div>
+    <!-- <div class="col-sm-2 col-md-2">
+             <span><a (click)="export()" ><i class="fa fa-download" aria-hidden="true"></i>  {{'Report.Download' | translate}}</a></span>
+        </div>  -->
+    <!-- <div *ngIf="schoolNameFlag"> -->
+    <div class="form-group col-sm-3 col-md-3 " *ngIf="schoolNameFlag">
+        <label for="name" class="right">{{'Report.searchBySchoolName' | translate}}</label>
+    </div>
+    <div class="form-group col-sm-3 col-md-3" *ngIf="schoolNameFlag">
+        <input class="form-control" [(ngModel)]="filterQuery" placeholder="{{'Stepper.School Name' | translate}}" (ngModelChange)="schooNameSetUpperCase();getCountasTextBox();" />
+    </div>
+</div>
+
+<div class="container">
+    <!-- Table for Admin to display District level summary -->
+    <div class="table-responsive reportTable" *ngIf="districtSelection">
+        <table class="table table-bordered table-hover table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage">
+            <thead>
+                <tr>
+                    <th>{{'Report.srNo' | translate}}</th>
+                    <th>
+                        <mfDefaultSorter by="districtname">{{'Stepper.District' | translate}} <i class="fa fa-sort" aria-hidden="true"></i></mfDefaultSorter>
+                    </th>
+                    <th>
+                        {{'Report.Total' | translate}}
+                    </th>
+                    <th>{{'Report.Action' | translate}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of mf.data;let i = index">
+                    <td>
+                        {{i+1}}
+                    </td>
+                    <td>{{item.districtname}}</td>
+                    <td>{{item.districttrainee + item.districtmaster }}</td>
+                    <td><button class="btn btn-primary" (click)="disrictSummery(item.districtid)">View</button></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5">
+                        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <!-- Table for Admin/Coordnator to display Taluka level summary -->
+    <div class="table-responsive reportTable" *ngIf="talukaSelection">
+        <table class="table table-bordered table-hover table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable">
+            <thead>
+                <tr>
+                    <th>{{'Report.srNo' | translate}}</th>
+                    <th>
+                        <mfDefaultSorter by="talukaname">{{'Stepper.Taluka' | translate}} <i class="fa fa-sort" aria-hidden="true"></i></mfDefaultSorter>
+                    </th>
+                    <th>
+                        {{'Report.Total' | translate}}
+                    </th>
+                    <th>{{'Report.Action' | translate}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of mf.data;let i = index">
+                    <td>
+                        {{i+1}}
+                    </td>
+                    <td>{{item.talukaname}}</td>
+                    <td>{{item.totalmaster + item.totaltrainee}}</td>
+                    <td>
+                        <button class="btn btn-primary" (click)="talukaSummery(item.talukaid);getSchoolList();">View</button>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5">
+                        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <!-- Table for Admin/Coordnator/MT to display Individual record -->
+    <div class="table-responsive reportTable" *ngIf="allSelection">
+        <table class="table table-bordered table-hover table-striped" [mfData]="data | dataFilter : (filterQuery || schoolName)" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage">
+            <thead>
+                <tr>
+                    <th>{{'Report.srNo' | translate}}</th>
+                    <th *ngIf="LocalstoragedetailsService.userType == 'co_ordinator' && apiUrlforCoordinator == 'coordinatorwisenotregistertrainees/'">{{'Report.Action' | translate}}</th>
+                    <th>
+                        <mfDefaultSorter by="dateofregistration">{{'Report.regDate' | translate}} <i class="fa fa-sort" aria-hidden="true"></i></mfDefaultSorter>
+                    </th>
+                    <th>
+                        <mfDefaultSorter by="districtname">{{'Stepper.District' | translate}} <i class="fa fa-sort" aria-hidden="true"></i></mfDefaultSorter>
+                    </th>
+                    <th>
+                        <mfDefaultSorter by="talukaname">{{'Stepper.Taluka' | translate}} <i class="fa fa-sort" aria-hidden="true"></i></mfDefaultSorter>
+                    </th>
+                    <th>
+                        <mfDefaultSorter by="fullname">{{'Stepper.Full Name' | translate}} <i class="fa fa-sort" aria-hidden="true"></i></mfDefaultSorter>
+                    </th>
+                    <th>
+                        <mfDefaultSorter by="schoolindex">{{'Stepper.School Index Number' | translate}} <i class="fa fa-sort" aria-hidden="true"></i></mfDefaultSorter>
+                    </th>
+                    <th>
+                        <mfDefaultSorter by="schoolname">{{'Stepper.School Name' | translate}} <i class="fa fa-sort" aria-hidden="true"></i></mfDefaultSorter>
+                    </th>
+                    <th>
+                        <mfDefaultSorter by="mobile">{{'Stepper.Mobile Number' | translate}} <i class="fa fa-sort" aria-hidden="true"></i></mfDefaultSorter>
+                    </th>
+                    <th>
+                        <mfDefaultSorter by="email">{{'Stepper.E-mail ID' | translate}} <i class="fa fa-sort" aria-hidden="true"></i></mfDefaultSorter>
+                    </th>
+                    <th>
+                        <mfDefaultSorter by="position">{{'Stepper.Designation' | translate}} <i class="fa fa-sort" aria-hidden="true"></i></mfDefaultSorter>
+                    </th>
+                    <th>
+                        <mfDefaultSorter by="profilestatus">{{'Report.profileStatus' | translate}} <i class="fa fa-sort" aria-hidden="true"></i></mfDefaultSorter>
+                    </th>
+                    <th>
+                        <mfDefaultSorter by="role">{{'Report.Role' | translate}} <i class="fa fa-sort" aria-hidden="true"></i></mfDefaultSorter>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of mf.data;let i = index">
+                    <td>
+                        {{i+1}}
+                    </td>
+                    <td *ngIf="LocalstoragedetailsService.userType == 'co_ordinator' && apiUrlforCoordinator == 'coordinatorwisenotregistertrainees/'"><button class="btn btn-success btn-sm" (click)="actionModal.show();setItem(item);">Present</button></td>
+                    <!-- <td *ngIf="LocalstoragedetailsService.userType == 'co_ordinator'"><button class="btn btn-danger">Reject</button></td> -->
+                    <td>{{item.dateofregistration | date:"dd/MM/yyyy"}}</td>
+                    <td>{{item.districtname}}</td>
+                    <td>{{item.talukaname}}</td>
+                    <td>{{item.fullname}}</td>
+                    <td>{{item.schoolindex}}</td>
+                    <td>{{item.schoolname}}</td>
+                    <td>{{item.mobile}}</td>
+                    <td>{{item.email}}</td>
+                    <td>{{item.position | uppercase }}</td>
+                    <td>{{item.profilestatus}}</td>
+                    <td>{{item.role}}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5">
+                        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+<div bsModal #actionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" style="margin-top:10%" [config]="{backdrop: ''}" tabindex="-2" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-primary" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{ 'Report.confirm' | translate }}</h4>
+                <button type="button" class="close" (click)="actionModal.hide()" aria-label="Close" id="btnCloseModal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <label>{{ 'Report.confirmMessage' | translate }}</label>
+                </div>
+            </div>
+            <div class="modal-footer floatRight">
+                <div>
+                    <button type="button" class="text-center btn btn-success" data-toggle="modal" (click)="actionModal.hide()">{{'Profile.cancel' | translate}}</button>
+                    <button type="button" class="text-center btn" data-toggle="modal" (click)="userApprove();">{{'Stepper.Next' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

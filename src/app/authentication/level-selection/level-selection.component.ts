@@ -76,7 +76,8 @@ export class LevelSelectionComponent implements OnInit {
       // this.toastr.error("क्षमस्व. आपण ‘योजलेल्या प्रशिक्षण कालावधीमध्ये’ नसल्यामुळे आपला प्रवेश नाकारण्यात आला आहे.")
     } else if (this.userType == 'superadmin' || this.userType == 'admin') {
       this.lvl1Complete = true
-      this.lvl2Current = true
+      this.lvl2Complete = true;
+      this.lvl3Current = true
       this.noAccessFlag = false
 
     }

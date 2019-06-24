@@ -6,6 +6,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ImageCropperModule } from 'ng2-img-cropper';
 import { TranslateModule } from '@ngx-translate/core';
 import { PreventDoubleClickDirective } from './directives/prevent-double-click.directive';
+import { SortPipe } from './pipes/sort.pipe';
 
 @NgModule({
   imports: [
@@ -14,7 +15,7 @@ import { PreventDoubleClickDirective } from './directives/prevent-double-click.d
     TranslateModule.forChild(),
     ImageCropperModule
   ],
-  declarations: [ImageUploadComponent, PreventDoubleClickDirective],
-  exports: [ImageUploadComponent, PreventDoubleClickDirective]
+  declarations: [ImageUploadComponent, PreventDoubleClickDirective, SortPipe],
+  exports: [ImageUploadComponent, PreventDoubleClickDirective,SortPipe]
 })
 export class SharedModule {}

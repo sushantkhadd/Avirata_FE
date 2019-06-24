@@ -18,31 +18,31 @@ export class SignupStepperService {
       'Authorization': token,
      // "Source": "WEB"
     });
-    if (/Android/i.test(navigator.userAgent)) 
-    { 
+    if (/Android/i.test(navigator.userAgent))
+    {
       headers= headers.append("Source",'MWEB')
      }else
-     { 
-      headers= headers.append("Source",'WEB') 
+     {
+      headers= headers.append("Source",'WEB')
      }
     return this.http.get(this.apiUrl + 'alldistrict/',{ headers: headers })
-     
+
   }//End of getTaluka
 
   //GET method for retrive Taluka List as per District
   getTaluka(district: any) {
     return this.http.get(this.apiUrl + 'districtwisetaluka/' + district)
-      
+
   }//End of getTaluka
   //GET method for retrive Trainer List as per Taluka
   getTrainer(taluka: any) {
     return this.http.get(this.apiUrl + `talukawisemt/` + taluka)
-     
+
   }//End of getTrainer
   //GET method for School Index and Name as per Taluka
   getSchool(taluka: any) {
     return this.http.get(this.apiUrl + `talukawiseschoolindexname/` + taluka)
-     
+
   }//End of getTrainer
 
   submitStepOne(stepOneJson: any,token:any) {
@@ -52,15 +52,15 @@ export class SignupStepperService {
       'Authorization': token,
      // "Source": "WEB"
     });
-    if (/Android/i.test(navigator.userAgent)) 
-    { 
+    if (/Android/i.test(navigator.userAgent))
+    {
       headers= headers.append("Source",'MWEB')
      }else
-     { 
-      headers= headers.append("Source",'WEB') 
+     {
+      headers= headers.append("Source",'WEB')
      }
     return this.http.post(this.apiUrl + 'userprofile1/', { body: body }, { headers: headers })
-      
+
   }//End of submitStepOne
 
   submitStepOneforMT(stepOneJson: any,token:any) {
@@ -70,15 +70,15 @@ export class SignupStepperService {
       'Authorization': token,
      // "Source": "WEB"
     });
-    if (/Android/i.test(navigator.userAgent)) 
-    { 
+    if (/Android/i.test(navigator.userAgent))
+    {
       headers= headers.append("Source",'MWEB')
      }else
-     { 
-      headers= headers.append("Source",'WEB') 
+     {
+      headers= headers.append("Source",'WEB')
      }
     return this.http.post(this.apiUrl + 'userprofilemt1/', { body: body }, { headers: headers })
-     
+
   }//End of submitStepOneFor Master Trainer
 
   submitStepTwo(stepTwoJson: any,token:any) {
@@ -88,15 +88,15 @@ export class SignupStepperService {
       'Authorization': token,
      // "Source": "WEB"
     });
-    if (/Android/i.test(navigator.userAgent)) 
-    { 
+    if (/Android/i.test(navigator.userAgent))
+    {
       headers= headers.append("Source",'MWEB')
      }else
-     { 
-      headers= headers.append("Source",'WEB') 
+     {
+      headers= headers.append("Source",'WEB')
      }
       return this.http.post(this.apiUrl + 'userprofile2/', { body: body }, { headers: headers })
-     
+
   }//End of submitStepTwo
 
   submitStepThree(stepThreeJson: any,token:any) {
@@ -106,15 +106,15 @@ export class SignupStepperService {
       'Authorization': token,
      // "Source": "WEB"
     });
-    if (/Android/i.test(navigator.userAgent)) 
-    { 
+    if (/Android/i.test(navigator.userAgent))
+    {
       headers= headers.append("Source",'MWEB')
      }else
-     { 
-      headers= headers.append("Source",'WEB') 
+     {
+      headers= headers.append("Source",'WEB')
      }
     return this.http.post(this.apiUrl + 'userprofile3/', { body: body }, { headers: headers })
-     
+
   }//End of submitStepTwo
 
   submitStepFour(stepFourJson: any,token:any) {
@@ -124,36 +124,36 @@ export class SignupStepperService {
       'Authorization':token,
      // "Source": "WEB"
     });
-    if (/Android/i.test(navigator.userAgent)) 
-    { 
+    if (/Android/i.test(navigator.userAgent))
+    {
       headers= headers.append("Source",'MWEB')
      }else
-     { 
-      headers= headers.append("Source",'WEB') 
+     {
+      headers= headers.append("Source",'WEB')
      }
     return this.http.post(this.apiUrl + 'userprofile4/', { body: body }, { headers: headers })
-      
+
   }//End of submitStepFour
 
   setProfilePic(profilePicJson: any) {
     const body = JSON.parse(profilePicJson);
     var headers = new HttpHeaders({
-     
+
      // "Source": "WEB"
     });
-    if (/Android/i.test(navigator.userAgent)) 
-    { 
+    if (/Android/i.test(navigator.userAgent))
+    {
       headers= headers.append("Source",'MWEB')
      }else
-     { 
-      headers= headers.append("Source",'WEB') 
+     {
+      headers= headers.append("Source",'WEB')
      }
-  
+
     headers.append('Content-Type', 'multipart/form-data; boundary=AaB03x');
     headers.append('Content-Type', 'application/json');
     // headers.append('Content-Type', 'application/octet-stream');
     // headers.set('Upload-Content-Type', image.type)
     return this.http.post(this.apiUrl + 'profilepic/', { body: body }, { headers: headers })
-     
+
   }//End of submitStepTwo
 }

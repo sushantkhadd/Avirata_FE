@@ -86,6 +86,9 @@ import { Module521Component } from "./module5/module5-21.component";
 import { Module522Component } from "./module5/module5-22.component";
 import { Module523Component } from "./module5/module5-23.component";
 import { Module524Component } from "./module5/module5-24.component";
+import { TalukaUserListComponent } from "../components/taluka-user-list/taluka-user-list.component";
+import { AdminPanelComponent } from "./admin-Report/admin-panel/admin-panel.component";
+import { DistrictTrainingReportComponent } from "./admin-Report/district-training-report/district-training-report.component";
 
 const routes: Routes = [
   {
@@ -361,7 +364,8 @@ const routes: Routes = [
       {
         path: "module5/Module5.5",
         component: Module55Component
-      },{
+      },
+      {
         path: "module5/Module5.6",
         component: Module56Component
       },
@@ -376,7 +380,8 @@ const routes: Routes = [
       {
         path: "module5/Module5.9",
         component: Module59Component
-      },{
+      },
+      {
         path: "module5/Module5.10",
         component: Module510Component
       },
@@ -391,7 +396,8 @@ const routes: Routes = [
       {
         path: "module5/Module5.13",
         component: Module513Component
-      },{
+      },
+      {
         path: "module5/Module5.14",
         component: Module514Component
       },
@@ -434,6 +440,36 @@ const routes: Routes = [
       {
         path: "module5/Module5.24",
         component: Module524Component
+      },
+      // {
+      //   path: "masterstat",
+      //   component: MasterstatComponent,
+      //   canActivate: [PermissionModelService]
+      // },
+      {
+        path: "user_list",
+        component: TalukaUserListComponent
+        // canActivate: [PermissionModelService]
+      },
+      // {
+      //   path: "presentTrainee",
+      //   component: PresentlistComponent,
+      //   canActivate: [PermissionModelService]
+      // },
+      // {
+      //   path: "studymaterialMT",
+      //   component: StudyMaterialMTComponent,
+      //   canActivate: [PermissionModelService]
+      // },
+      {
+        path: "admin_panel",
+        component: AdminPanelComponent,
+        // canActivate: [PermissionModelService]
+      },
+      {
+        path: "training_report",
+        component: DistrictTrainingReportComponent
+        // canActivate: ['CanAlwaysDeActivateGuard']
       }
     ]
   }
