@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <button class="btn btn-primary mb-2 backBtn float-left" (click)="goToAdminPanel()">
+        <i class="fa fa-reply"></i>&nbsp;&nbsp;Back</button>
+    </div>
+  </div>
+  <div class="card w-100">
+    <div class="card-header text-center">
+      <h6 class="text-center">
+        <i class="fa fa-bell"></i> &nbsp;Send Notification</h6>
+    </div>
+    <div class="card-block">
+      <form #formNotification="ngForm" name="formNotification">
+        <div class="form-group row justify-content-center">
+          <label for="category" class="col-md-3 col-form-label font-weight-bold">Select Category</label>
+          <div class="col-md-5">
+            <select class="form-control" name="category" id="category" [(ngModel)]="selectedCategory" (change)="getCategory()" required>
+              <option value="" disabled>{{select_ctg}}</option>
+              <option [value]="category.value" *ngFor="let category of categories">{{category.label}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row justify-content-center">
+          <label for="level" class="col-md-3 col-form-label font-weight-bold">Select Level</label>
+          <div class="col-md-5">
+            <select class="form-control" name="selectedLevel" id="selectedLevel" [(ngModel)]="selectedLevel">
+              <option value="" disabled>Select Level</option>
+              <option value="L1">Level 1</option>
+              <option value="L2">Level 2</option>
+              <option value="L3">Level 3</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row justify-content-center" *ngIf="districtList">
+          <label for="districtList" class="col-md-3 col-form-label font-weight-bold">Select District</label>
+          <div class="col-md-5">
+            <select class="form-control" name="district" id="districtList" [(ngModel)]="selectedDistrict" (change)="getDistrict($event)">
+              <option value="" disabled>Select District</option>
+              <option [value]="district.districtid" *ngFor="let district of allDistricts">
+                <span id="districtName">{{district.name}}</span>
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row justify-content-center" *ngIf="talukaList">
+          <label for="talukaList" class="col-md-3 col-form-label font-weight-bold">Select Taluka</label>
+          <div class="col-md-5">
+            <select class="form-control" name="taluka" id="talukaList" [(ngModel)]="selectedTaluka" [disabled]="!selectedDistrict">
+              <option value="" disabled>Select Taluka</option>
+              <option [value]="taluka.taluka_name" *ngFor="let taluka of allTalukas">{{taluka.taluka_name}}</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- <div class="form-group row justify-content-center" *ngIf="showUser">
+          <label for="individualUser" class="col-md-3 col-form-label font-weight-bold">Individual User</label>
+          <div class="col-md-5">
+            <input type="text" class="form-control" id="individualUser" name="individualUser" [(ngModel)]="individualUser" placeholder="Individual User">
+          </div>
+        </div> -->
+
+        <div class="form-group row justify-content-center">
+          <label for="Not_title" class="col-md-3 col-form-label font-weight-bold">Notification Title</label>
+          <div class="col-md-5">
+            <input type="text" class="form-control" id="Not_title" name="Not_title" [(ngModel)]="Not_title" placeholder="Enter notification title"
+              required autocomplete="off">
+          </div>
+        </div>
+        <div class="form-group row justify-content-center">
+          <label for="message" class="col-md-3 col-form-label font-weight-bold">Notification Message</label>
+          <div class="col-md-5">
+            <textarea class="form-control" placeholder="Write notification message here..." rows="5" name="message" [(ngModel)]="message"
+              id="message" required></textarea>
+          </div>
+        </div>
+        <div class="form-group row justify-content-center">
+          <div class="col-md-8">
+            <button class="btn btn-primary float-right" [disabled]="!formNotification.form.valid || sendDisable" (click)="sendNotification()">
+              <i class="fa fa-send-o"></i>&nbsp;&nbsp;Send
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

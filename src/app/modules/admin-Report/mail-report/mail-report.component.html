@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="row">
+    <div class="col-6 pad-0" *ngIf="showDetails">
+      <button class="btn btn-primary float-left backBtn or-section" (click)="showDetails=false">
+        <i class="fa fa-reply"></i>&nbsp;&nbsp;Back</button>
+    </div>
+    <div class="col-6 pad-0" *ngIf="!showDetails">
+      <button class="btn btn-primary float-left backBtn or-section" (click)="goToAdminPanel()">
+        <i class="fa fa-reply"></i>&nbsp;&nbsp;Back</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header text-center">
+      <h6 class="text-center">
+        <i class="fa fa-archive"></i> &nbsp;Send Reports</h6>
+    </div>
+    <div class="card-block" *ngIf="resetForm">
+      <form #formNotification="ngForm" name="formNotification" class="text-center">
+        <div class="form-group row">
+          <label for="districtList" class="col-md-4 col-form-label font-weight-bold">Select District</label>
+          <div class="col-md-6">
+            <select class="form-control" name="district" id="districtList" [(ngModel)]="selectedDistrict" (change)="getTaluka()" required
+              #district="ngModel">
+              <option value="" disabled>Select District</option>
+              <option [value]="district.districtid" *ngFor="let district of allDistricts">{{district.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="talukaList" class="col-md-4 col-form-label font-weight-bold">Select Taluka</label>
+          <div class="col-md-6">
+            <select class="form-control" name="taluka" id="talukaList" [(ngModel)]="selectedTaluka" (change)="getReport()" [disabled]="!selectedDistrict"
+              required #taluka="ngModel">
+              <option value="" disabled>Select Taluka</option>
+              <option [value]="taluka.taluka_id" *ngFor="let taluka of allTalukas">{{taluka.taluka_name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="reportList" class="col-md-4 col-form-label font-weight-bold">Select Report</label>
+          <div class="col-md-6">
+            <select class="form-control" name="report" id="reportList" [(ngModel)]="selectedReport" [disabled]="!selectedTaluka" required
+              #report="ngModel">
+              <option value="" disabled>Select Report Type</option>
+              <option [value]="report.reportid" *ngFor="let report of allReports">{{report.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-10 btn-top-m10">
+            <button class="btn btn-primary float-right" [disabled]="!formNotification.form.valid" (click)="sendRequest();formNotification.resetForm()">Send Report</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

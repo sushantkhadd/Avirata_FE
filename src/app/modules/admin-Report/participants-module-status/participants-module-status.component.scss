@@ -1,0 +1,56 @@
+
+
+span>i {
+  padding-right: 0.4rem;
+}
+
+tr>td,
+tr>th {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.fa-sort {
+  padding-left: 0.4rem;
+}
+
+.card {
+  border-top: 0;
+  width: 100%;
+}
+
+.pad-both-l-r {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.btn-link:focus,
+.btn-link:hover {
+  text-decoration: none;
+  box-shadow: none;
+}
+
+.pad-0 {
+  padding: 0;
+}
+
+.mar-btm-0 {
+  margin-bottom: 0px !important;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px #dadada;
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 12px;
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px #dadada;
+  background-color: #dadada;
+}

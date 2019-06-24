@@ -1,0 +1,412 @@
+<div class="admin-wrapper">
+  <div class="wrapper">
+    <!-- Sidebar Holder -->
+    <nav id="sidebar">
+      <div class="sidebar-header">
+        <h3>Admin Panel</h3>
+        <a class="btn btn-primary c-pointer" (click)="setMenu()">
+          <em class="fas fa-chevron-circle-left"></em>&nbsp;&nbsp;Go to Dashboard</a>
+      </div>
+      <ul class="nav-dropdown-items submenu list-unstyled components pt-0">
+        <p> <em class="fas fa-file" aria-hidden="true"></em> &nbsp; Reports</p>
+        <li *ngIf="userType == 'superadmin' ||userType == 'admin' ">
+          <a href="#module1Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"> <em
+              class="fas fa-book mr-2"></em>&nbsp;Progress
+            Report</a>
+          <ul class="collapse list-unstyled" id="module1Submenu">
+            <li>
+              <a [class.active]="showDistrictData" (click)="ShowDistrictData()">
+                &nbsp;All District Not Started Count</a>
+            </li>
+            <li>
+              <a [class.active]="showParticipantData" (click)="ShowParticipantData()">&nbsp;All Participant Module
+                Status
+                Count</a>
+            </li>
+          </ul>
+        </li>
+        <li *ngIf="userType == 'superadmin' ||userType == 'admin' ">
+          <a href="#module2Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><em
+              class="fas fa-wrench mr-2"></em>&nbsp;Utility</a>
+          <ul class="collapse list-unstyled" id="module2Submenu">
+            <li>
+              <a [class.active]="userTransferNReplace" (click)="userTransferAndReplace()">&nbsp;User Transfer And
+                Replacement</a>
+            </li>
+            <li>
+              <a [class.active]="coordinatorTransfer" (click)="coordinatorTransferAndCreate()">&nbsp;Co-ordinator
+                Transfer
+                And Create</a>
+            </li>
+            <li>
+              <a [class.active]="showNotification" (click)="ShowNotification()">&nbsp;Send Notification</a>
+            </li>
+            <li> <a [class.active]="showSearchData" (click)="searchData()"> Search by Aadhar or Mobile No</a> </li>
+          </ul>
+        </li>
+      </ul>
+      <!-- <ul class="list-unstyled components">
+        <p> <em class="fas fa-file" aria-hidden="true"></em> &nbsp; Reports</p>
+        <li *ngIf="userType == 'superadmin' ||userType == 'admin' " class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown">
+            <em class="fas fa-book"></em>&nbsp; Progress Report</a>
+          <ul class="dropdown-menu" id="Submenu1">
+            <li>
+              <a class="report-link dropdown-item" (click)="ShowDistrictData()">
+                &nbsp;All District Not Started Count</a>
+            </li>
+            <li>
+              <a class="report-link dropdown-item" (click)="ShowParticipantData()">&nbsp;All Participant Module Status
+                Count</a>
+            </li>
+          </ul>
+        </li>
+        <li *ngIf="userType == 'superadmin'" class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown"><em class="fas fa-wrench"></em>&nbsp; Utility</a>
+          <ul class="dropdown-menu" id="Submenu2">
+            <li>
+              <a class="report-link dropdown-item" (click)="userTransferAndReplace()">&nbsp;User Transfer And
+                Replacement</a>
+            </li>
+            <li>
+              <a class="report-link dropdown-item" (click)="coordinatorTransferAndCreate()">&nbsp;Co-ordinator Transfer
+                And Create</a>
+            </li>
+            <li>
+              <a class="report-link dropdown-item" (click)="ShowNotification()">&nbsp;Send Notification</a>
+            </li>
+            <li> <a class="report-link dropdown-item" (click)="searchData()"> Search by Aadhar or Mobile No</a> </li>
+            <li>
+                    <a class="report-link" (click)="showHistory()">&nbsp;User History Log</a>
+                    </li>
+          </ul>
+        </li>
+      </ul> -->
+    </nav>
+    <!-- Page Content Holder -->
+    <div id="admin-content" [class.w-100]="classFlag" [style.marginLeft]="!classFlag ? '260px' : '0px'">
+      <button type="button" [style.margin]="classFlag ? '-4px -3px' : '-4px -18px'" [class.active]="classFlag"
+        (click)="toggleSidebar()" id="sidebarCollapse" class="navbar-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="wrap">
+        <div class="content-wrapper"
+          *ngIf="!showDistrictData && !showParticipantData && !showSearchData && !distAggregate && !showBatchDetails && !showNotification && !showMailReport && !showBankDetails && !userTransferNReplace && !coordinatorTransfer && !historyLog">
+
+          <div class="mx-auto top-loader" *ngIf="refreshLoader">
+            <div class="mx-auto loader"></div>
+          </div>
+          <div class="pie-chart-block" *ngIf="piechartFlag">
+            <div class="row mx-auto text-white">
+              <div class="col-md-12 text-right mb-3">
+                <button class="btn btn-primary mb-1 mr-2" (click)="refresh()">Refresh &nbsp; <em
+                    class="fas fa-sync"></em></button>
+              </div>
+              <div class="col-md-12 left-content mb-4">
+                <div class="row bg-custom">
+                  <div class="col-12">
+                    <div class="card-header">
+                      <h6>Level 1</h6>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="card bg-primary mt-1">
+                      <div class="card-block">
+                        <div class="counter-wrap p-1">
+                          <div class="row">
+                            <div class="col-md-4">
+                              <p class="d-inline">
+                                <em class="fas fa-users fa-3x mb-2"></em>
+                                <span>{{inModuleCountL1}}</span>In Module
+                              </p>
+                            </div>
+                            <div class="col-md-4">
+                              <p class="d-inline">
+                                <em class="fas fa-calendar-check fa-3x mb-2"></em>
+                                <span>{{totalCountL1}}</span>Completed
+                              </p>
+                            </div>
+                            <div class="col-md-4">
+                              <p class="d-inline">
+                                <em class="fas fa-clock fa-3x mb-2"></em>
+                                <span>{{notStartedCountL1}}</span>Pending
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="card bg-danger mt-1">
+                      <div class="card-block">
+                        <div class="counter-wrap">
+                          <div class="lds-facebook abs" *ngIf="!loader">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                          </div>
+                          <p class="text-center" [class.mt-3]="!loader"><span
+                              class="fa-2x">{{l1TotalUsersCount}}</span>Active Users</p>
+                          <div class="row text-center mt-2">
+                            <div class="col-md-4">
+                              <div class="lds-facebook" *ngIf="!loader">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                              </div>
+                              <p class="count">{{l1DesktopCount}}</p>
+                              <em class="fas fa-tv pr-3"></em>
+                              <p class="d-inline">Desktop</p>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="lds-facebook" *ngIf="!loader">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                              </div>
+                              <p class="count m-0">{{l1MobCount}}</p>
+                              <em class="fas fa-mobile pr-3 fs-25"></em>
+                              <p class="d-inline">Moblie</p>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="lds-facebook" *ngIf="!loader">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                              </div>
+                              <p class="count">{{l1TabCount}}</p>
+                              <em class="fas fa-tablet pr-3"></em>
+                              <p class="d-inline">Tablet</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 text-center">
+                    <div class="arrow" [ngClass]="!mouseOvered1 ? 'bounce' : ''" (mouseover)="mouseOvered1=true"
+                      (mouseout)="mouseOvered1=false">
+                      <a class="c-pointer" (click)="L1_status =! L1_status">
+                        <em class="fa fa-arrow-down fa-2x"></em>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mx-auto justify-content-center" *ngIf="L1_status">
+                  <div class="col-md-6">
+                    <div class="card custom-minh">
+                      <div class="card-block">
+                        <dx-pie-chart id="pie" title="Level 1 Current Status" palette="bright"
+                          [dataSource]="alluserstatusreportL1">
+                          <dxo-legend orientation="horizontal" itemTextPosition="right" horizontalAlignment="center"
+                            verticalAlignment="bottom" [columnCount]="4"></dxo-legend>
+                          <dxo-export [enabled]="true"></dxo-export>
+                          <dxi-series argumentField="que" valueField="val">
+                            <dxo-label [visible]="true" position="columns" [customizeText]="customizeLabel">
+                              <dxo-font [size]="16"></dxo-font>
+                              <dxo-connector [visible]="true" [width]="0.5"></dxo-connector>
+                            </dxo-label>
+                          </dxi-series>
+                        </dx-pie-chart>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 left-content mb-4">
+                <div class="row bg-custom">
+                  <div class="col-12">
+                    <div class="card-header">
+                      <h6>Level 2</h6>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="card bg-primary mt-1">
+                      <div class="card-block">
+                        <div class="counter-wrap p-1">
+                          <div class="row">
+                            <div class="col-md-4">
+                              <p class="d-inline">
+                                <em class="fas fa-users fa-3x mb-2"></em>
+                                <span>{{inModuleCountL2}}</span>In Module
+                              </p>
+                            </div>
+                            <div class="col-md-4">
+                              <p class="d-inline">
+                                <em class="fas fa-calendar-check fa-3x mb-2"></em>
+                                <span>{{totalCountL2}}</span>Completed
+                              </p>
+                            </div>
+                            <div class="col-md-4">
+                              <p class="d-inline">
+                                <em class="fas fa-clock fa-3x mb-2"></em>
+                                <span>{{notStartedCountL2}}</span>Pending
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="card bg-danger mt-1">
+                      <div class="card-block">
+                        <div class="counter-wrap">
+                          <div class="lds-facebook abs" *ngIf="!loader">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                          </div>
+                          <p class="text-center" [class.mt-3]="!loader"><span
+                              class="fa-2x">{{l2TotalUsersCount}}</span>Active Users</p>
+                          <div class="row text-center mt-2">
+                            <div class="col-md-4">
+                              <div class="lds-facebook" *ngIf="!loader">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                              </div>
+                              <p class="count">{{l2DesktopCount}}</p>
+                              <em class="fas fa-tv pr-3"></em>
+                              <p class="d-inline">Desktop</p>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="lds-facebook" *ngIf="!loader">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                              </div>
+                              <p class="count m-0">{{l2MobCount}}</p>
+                              <em class="fas fa-mobile pr-3 fs-25"></em>
+                              <p class="d-inline">Moblie</p>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="lds-facebook" *ngIf="!loader">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                              </div>
+                              <p class="count">{{l2TabCount}}</p>
+                              <em class="fas fa-tablet pr-3"></em>
+                              <p class="d-inline">Tablet</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 text-center">
+                    <div class="arrow" [ngClass]="!mouseOvered2 ? 'bounce' : ''" (mouseover)="mouseOvered2=true"
+                      (mouseout)="mouseOvered2=false">
+                      <a class="c-pointer" (click)="L2_status =! L2_status">
+                        <em class="fa fa-arrow-down fa-2x"></em>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mx-auto justify-content-center" *ngIf="L2_status">
+                  <div class="col-md-6">
+                    <div class="card custom-minh">
+                      <div class="card-block">
+                        <dx-pie-chart id="pie" title="Level 2 Current Status" palette="bright"
+                          [dataSource]="alluserstatusreportL2">
+                          <dxo-legend orientation="horizontal" itemTextPosition="right" horizontalAlignment="center"
+                            verticalAlignment="bottom" [columnCount]="4"></dxo-legend>
+                          <dxo-export [enabled]="true"></dxo-export>
+                          <dxi-series argumentField="que" valueField="val">
+                            <dxo-label [visible]="true" position="columns" [customizeText]="customizeLabel">
+                              <dxo-font [size]="16"></dxo-font>
+                              <dxo-connector [visible]="true" [width]="0.5"></dxo-connector>
+                            </dxo-label>
+                          </dxi-series>
+                        </dx-pie-chart>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="row mx-auto">
+              <div class="col-md-6">
+                <div class="card custom-minh">
+                  <div class="card-block">
+                    <dx-pie-chart id="pie" title="Level 1 Current Status" palette="bright"
+                      [dataSource]="alluserstatusreportL1">
+                      <dxo-legend orientation="horizontal" itemTextPosition="right" horizontalAlignment="center"
+                        verticalAlignment="bottom" [columnCount]="4"></dxo-legend>
+                      <dxo-export [enabled]="true"></dxo-export>
+                      <dxi-series argumentField="que" valueField="val">
+                        <dxo-label [visible]="true" position="columns" [customizeText]="customizeLabel">
+                          <dxo-font [size]="16"></dxo-font>
+                          <dxo-connector [visible]="true" [width]="0.5"></dxo-connector>
+                        </dxo-label>
+                      </dxi-series>
+                    </dx-pie-chart>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card custom-minh">
+                  <div class="card-block">
+                    <dx-pie-chart id="pie" title="Level 2 Current Status" palette="bright"
+                      [dataSource]="alluserstatusreportL2">
+                      <dxo-legend orientation="horizontal" itemTextPosition="right" horizontalAlignment="center"
+                        verticalAlignment="bottom" [columnCount]="4"></dxo-legend>
+                      <dxo-export [enabled]="true"></dxo-export>
+                      <dxi-series argumentField="que" valueField="val">
+                        <dxo-label [visible]="true" position="columns" [customizeText]="customizeLabel">
+                          <dxo-font [size]="16"></dxo-font>
+                          <dxo-connector [visible]="true" [width]="0.5"></dxo-connector>
+                        </dxo-label>
+                      </dxi-series>
+                    </dx-pie-chart>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+        <div *ngIf="showDistrictData">
+          <app-district-training-report (finishCall)="backEvent($event)" [allDistricts]="allDistricts">
+          </app-district-training-report>
+        </div>
+        <div *ngIf="showParticipantData">
+          <app-participants-module-status (finishCall)="backEvent($event)" [allDistricts]="allDistricts">
+          </app-participants-module-status>
+        </div>
+        <div *ngIf="showBatchDetails">
+          <app-batch-details-for-admin (finishCall)="backEvent($event)"></app-batch-details-for-admin>
+        </div>
+        <div *ngIf="showSearchData">
+          <app-e-search (finishCall)="backEvent($event)"></app-e-search>
+        </div>
+        <div *ngIf="distAggregate">
+          <app-dist-aggregate-report (back)="backEvent($event)"></app-dist-aggregate-report>
+        </div>
+        <div *ngIf="showNotification">
+          <app-send-notification (finishCall)="backEvent($event)" [allDistricts]="allDistricts"></app-send-notification>
+        </div>
+        <div *ngIf="showMailReport">
+          <app-mail-report (finishCall)="backEvent($event)" [allDistricts]="allDistricts"></app-mail-report>
+        </div>
+        <div *ngIf="showBankDetails">
+          <app-user-bank-details (finishCall)="backEvent($event)" [distList]="allDistricts"></app-user-bank-details>
+        </div>
+        <div *ngIf="userTransferNReplace">
+          <app-user-transfer-replace (finishCall)="backEvent($event)" [allDistricts]="allDistricts">
+          </app-user-transfer-replace>
+        </div>
+        <div *ngIf="coordinatorTransfer">
+          <app-coordinator-transfer (finishCall)="backEvent($event)" [allDistricts]="allDistricts">
+          </app-coordinator-transfer>
+        </div>
+        <div *ngIf="historyLog">
+          <app-history-log (finishCall)="backEvent($event)"></app-history-log>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

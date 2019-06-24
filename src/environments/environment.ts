@@ -8,6 +8,7 @@ export const environment = {
   //  apiUrl: 'http://192.168.1.110:8000/api/',
   // l2apiUrl: 'http://192.168.1.110:8000/l2api/',
   apiUrl: 'http://192.168.1.223:5112/api/',
+  l2apiUrl: 'http://192.168.1.223:5112/l2api/',
   l3apiUrl: 'http://192.168.1.223:5112/l3api/',
 
   apiUrlNot: 'http://192.168.1.116:8002/api/',

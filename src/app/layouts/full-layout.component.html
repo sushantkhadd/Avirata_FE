@@ -7,7 +7,7 @@
 <div class="wrapper">
   <!-- Sidebar  -->
 
-  <nav id="sidebar" class="style-4">
+  <nav id="sidebar" class="style-4" *ngIf="!hideMenuFlag">
 
     <div class="sidebar-header">
       <!-- <a class="nav-link" routerLinkActive="active" [routerLink]="['/dashboard']"><i class="icon-speedometer"></i>
@@ -20,7 +20,7 @@
 
         </li>
         <li class="nav-item" *ngIf="userType=='superadmin'||userType=='admin'">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/admin_panel']" (click)="hideMenu()">
+          <a class="nav-link c-pointer" routerLinkActive="active" (click)="hideMenu()">
             <i class="icon-calculator"></i>&nbsp;&nbsp;Admin Panel</a>
         </li>
         <li class="nav-item" *ngIf="userType=='master_trainer' || userType=='co_ordinator'" routerLinkActive="activeMenu">
@@ -1085,14 +1085,17 @@
       </div>
     </ul>
   </nav>
-
+ <div class="inner-loader w-100" *ngIf="loaderFlag">
+          <img src="../../assets/img/logo_cpd_combine_web.png" alt="">
+          <div class="loader"></div>
+ </div>
   <!-- Page Content  -->
-  <div id="content">
+  <div id="content" [class.ml-0]="hideMenuFlag">
     <!-- <ng2-slim-loading-bar class="loading"></ng2-slim-loading-bar> -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
       <div class="container-fluid">
         <img src="../../assets/img/dash_logo.png" alt="">
-        <button type="button" id="sidebarCollapse" class="btn btn-default ml-5 mr-auto ripple">
+        <button [class.d-none]="hideMenuFlag" type="button" id="sidebarCollapse" class="btn btn-default ml-5 mr-auto ripple">
           <i class="fa fa-bars"></i>
         </button>
         <!-- <div class="onoffswitch">
@@ -1132,20 +1135,14 @@
       </div>
     </nav>
 
-
-
-    <main class="main mb-4">
-      <div class="d-flex">
+    <main class="main mb-4" [class.mb-4]="!hideMenuFlag">
+      <div class="d-flex" *ngIf="!hideMenuFlag">
         <div class="breadcrumb">
           <app-timeline class="w-100"></app-timeline>
         </div>
       </div>
 
-      <div class="container position-relative">
-        <!-- <div class="inner-loader" *ngIf="loaderFlag">
-          <img src="../../assets/img/logo_cpd_combine_web.png" alt="">
-          <div class="loader"></div>
-        </div> -->
+      <div class="position-relative" [ngClass]="!hideMenuFlag ? 'container' : 'container-fluid'">
         <router-outlet></router-outlet>
       </div>
     </main>
