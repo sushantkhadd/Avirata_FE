@@ -13,12 +13,14 @@ export class AudioPlayerComponent implements OnInit {
   @Output("finishAudio") public finishAudio = new EventEmitter<any>();
   nextFlag;
   playFlag;
-  player; secondUrlFlag;
+  player; secondUrlFlag; type;
   ngOnInit() {
     // this.pause();
     // this.ended();
    
     this.player = document.getElementById("audio") as HTMLAudioElement;
+    
+    console.log(this.player,this.src);
     this.nextFlag = true;
     this.player.onended = event => {
       console.log(
