@@ -2807,6 +2807,21 @@ table,
     }
   }
 
+  .container{
+    .baseline-instructtion{
+        h6.questionHead.lineHeight{
+            font-size: 0.68rem!important;
+        }
+        .position-relative{
+          .badge.badge-info.float-right{
+            top: -16%;
+            font-size: 70%;
+          }
+        }
+    }
+  }
+
+
   .mcqBlock{
     .btn.btn-info{
       margin-bottom: 1rem;
@@ -2824,6 +2839,22 @@ table,
       }
     }
   }
+
+  .radio-opt-group{
+    label{
+      display: inline;
+      font-size: 0.80rem;
+    }
+  }
+
+  .instructionModal  {
+    .rewards-content{
+      h4{
+        padding-left: 2rem;
+        padding-top: 1rem;
+      }
+    }
+  } 
 
 }
 
@@ -3190,6 +3221,7 @@ body {
         span.disable._play {
           position: absolute;
           top: 11%;
+          left: 15%;
           height: 30px;
           background: #192023 !important;
         }
@@ -3198,6 +3230,7 @@ body {
           position: absolute;
           right: 16%;
           width: 99px;
+          right: 15%;
           top: 11%;
           background: #192023 !important;
         }
