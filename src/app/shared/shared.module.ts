@@ -5,6 +5,8 @@ import { ImageUploadComponent } from 'src/app/components/image-upload/image-uplo
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ImageCropperModule } from 'ng2-img-cropper';
 import { TranslateModule } from '@ngx-translate/core';
+import { PreventDoubleClickDirective } from './directives/prevent-double-click.directive';
+import { SortPipe } from './pipes/sort.pipe';
 
 @NgModule({
   imports: [
@@ -13,7 +15,7 @@ import { TranslateModule } from '@ngx-translate/core';
     TranslateModule.forChild(),
     ImageCropperModule
   ],
-  declarations: [ImageUploadComponent],
-  exports: [ImageUploadComponent]
+  declarations: [ImageUploadComponent, PreventDoubleClickDirective, SortPipe],
+  exports: [ImageUploadComponent, PreventDoubleClickDirective,SortPipe]
 })
 export class SharedModule {}

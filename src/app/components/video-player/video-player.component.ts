@@ -142,7 +142,7 @@ export class VideoPlayerComponent implements OnInit {
           } else if (event == "askme")
           {
             this.askMeModal.hide();
-            this.LanguageService.toHide();
+            // this.LanguageService.toHide();
             if (!this.fiftyFiftyFlag)
             {
               this.hideMe = true;
@@ -443,8 +443,8 @@ export class VideoPlayerComponent implements OnInit {
               setTimeout(() => {
                 console.log("timeout")
                 this.singleCFUCompleteStatus.emit(true);
-              }, 2000);
-            }, 4000)
+              }, 3000);
+            }, 1300)
           }
           else if (data['message'] == 'your answer stored') {
             setTimeout(() => {

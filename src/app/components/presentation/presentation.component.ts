@@ -54,7 +54,7 @@ export class PresentationComponent implements OnInit {
     a2: "../../../assets/img/rewards/ask mitra - done.png"
   };
 
-  loaderSrc;
+  loaderSrc = "../../../assets/img/loader-fb.svg";
   rewardImgUrl1;
   rewardImgUrl2; selectedValue;
   rewardsOptions = []; hideMe;
@@ -243,7 +243,6 @@ export class PresentationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loaderSrc = "../../../assets/img/loader-fb.svg";
 
     this.isLoaded = true;
     this.selectedValue = "";

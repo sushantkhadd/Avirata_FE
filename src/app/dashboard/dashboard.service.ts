@@ -18,8 +18,18 @@ export class DashboardService {
   getMTList() {}
 
   getDietList(token) {
-    let headers = new HttpHeaders();
-    headers.append("Authorization", token);
+    var headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      'Authorization': window.localStorage.getItem('token'),
+     // "Source": "WEB"
+    });
+    if (/Android/i.test(navigator.userAgent)) 
+    { 
+      headers= headers.append("Source",'MWEB')
+     }else
+     { 
+      headers= headers.append("Source",'WEB') 
+     }
     return this.http
       .get(this.apiUrl + "districtcoordinator/", { headers: headers })
     

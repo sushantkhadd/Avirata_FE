@@ -113,7 +113,7 @@ export class Module1Component implements OnInit {
       window.localStorage.setItem('subFlagModule1', '1');
       window.localStorage.setItem('source', 'module 1.2');
       this.Module1Service.setLocalStorage1(2);
-      var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module1.subMenu1-1'), "next": this.translate.instant('L2Module1.subMenu1-2'), "nextRoute": "/modules/module1/Module1.2" }
+      var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module1.subMenu1-1'), "next": this.translate.instant('L2Module1Finish.subMenu1-2'), "nextRoute": "/modules/module1/Module1.2" }
       this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
     }
   }

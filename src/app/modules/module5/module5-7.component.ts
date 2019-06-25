@@ -79,10 +79,13 @@ export class Module57Component implements OnInit {
   }
 
   saveAnswer(e) {
-    console.log("ff ", e);
-    this.sumbitButton = true;
-    this.answer = e;
-    this.submit();
+    if(e){
+      console.log("ff ", e);
+      this.sumbitButton = true;
+      this.answer = e;
+      this.submit();
+    }
+   
   }
   submit() {
     var jsonBody = {};
@@ -101,6 +104,7 @@ export class Module57Component implements OnInit {
         )
         {
           this.startFlag = false;
+          this.data="";
           window.localStorage.setItem("uuid", data["data"].nextuuid);
           this.mainFlagModule5 = 8;
           window.localStorage.setItem("mainFlagModule5", "8");
@@ -110,7 +114,7 @@ export class Module57Component implements OnInit {
             "type": "submodule",
             "route": true,
             "current": this.translate.instant("L2Module5.subMenu5-7"),
-            "next": this.translate.instant("L2Module5.subMenu5-8"),
+            "next": this.translate.instant("L2Module5Finish.subMenu5-8"),
             "nextRoute": "/modules/module5/Module5.8"
           };
           this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));

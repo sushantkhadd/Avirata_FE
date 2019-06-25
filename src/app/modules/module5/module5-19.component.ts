@@ -51,7 +51,7 @@ export class Module519Component implements OnInit {
     }
 
     if (this.mainFlagModule5 == 19) {
-     
+
     } else if (this.mainFlagModule5 > 19) {
       this.statVideoFlag = false;
       var urlJson = {};
@@ -119,22 +119,31 @@ export class Module519Component implements OnInit {
               this.instructionModal.hide();
               this.LanguageService.toHide();
               this.statVideoFlag = true;
-              window.localStorage.setItem('uuid', data['data'].nextuuid);
-              window.localStorage.setItem('mainFlagModule5', '20');
-              window.localStorage.setItem('subFlagModule5', '1');
-              window.localStorage.setItem('source', 'module 5.20');
+              window.localStorage.setItem(
+                "uuid",
+                data["data"].nextuuid
+              );
+              window.localStorage.setItem("mainFlagModule5", "20");
+              window.localStorage.setItem("subFlagModule5", "1");
+              window.localStorage.setItem("source", "module 5.20");
               var obj = {
-                "type": "submodule",
-                "route": true,
-                "current": this.translate.instant('L2Module5.subMenu5-20'),
-                "next": this.translate.instant('L2Module5.subMenu5-20'),
-                "nextRoute": "/modules/module5/Module5.20"
-              }
-              this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+                type: "submodule",
+                route: true,
+                current: this.translate.instant(
+                  "L2Module5.subMenu5-20"
+                ),
+                next: this.translate.instant(
+                  "L2Module5Finish.subMenu5-20"
+                ),
+                nextRoute: "/modules/module5/Module5.20"
+              };
+              this.LocalstoragedetailsService.setModuleStatus(
+                JSON.stringify(obj)
+              );
               this.Module5Service.setLocalStorage5(20);
             }
-          
-            
+
+
           }
         }
       },

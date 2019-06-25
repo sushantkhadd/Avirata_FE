@@ -232,7 +232,7 @@ export class Module413Component implements OnInit {
           window.localStorage.setItem('source', 'module 2.14');
           window.localStorage.setItem('uuid', data['data'].nextuuid);
           this.Module4Service.setLocalStorage4(14);
-          var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module4.subMenu4-13'), "next": this.translate.instant('L2Module4.subMenu4-14'), "nextRoute": "/modules/module4/Module4.14" }
+          var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module4.subMenu4-13'), "next": this.translate.instant('L2Module4Finish.subMenu4-14'), "nextRoute": "/modules/module4/Module4.14" }
           this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
          }
          else{

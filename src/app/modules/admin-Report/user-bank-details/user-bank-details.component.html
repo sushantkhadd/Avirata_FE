@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="margin-block">
+    <div class="row mar-t-b-1">
+      <button class="btn btn-primary float-left backBtn or-section ml-1" (click)="goToAdminPanel()">
+        <i class="fa fa-reply"></i>&nbsp;&nbsp;Back</button>
+    </div>
+    <div class="card card-inst">
+      <div class="card-header text-center">
+        <h6 class="text-center">
+          <i class="fa fa-archive"></i> &nbsp;User Bank Details</h6>
+      </div>
+      <div class="card-block">
+        <div class="form-group row justify-content-center">
+          <div class="col-md-4 col-sm-4 col-xs-12 form-group d-inline-flex">
+            <label for="district" class="pad-top-3">District</label>
+            <select class="form-control mar-left-1" id="district" [(ngModel)]="district" (change)="getDistrictWiseTaluka()">
+              <option value="select" disabled>Select</option>
+              <option *ngFor="let dist of distList" [value]="dist.districtid">{{dist.name}}</option>
+            </select>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12 form-group d-inline-flex">
+            <label for="taluka" class="pad-top-3">Talula</label>
+            <select class="form-control mar-left-1" id="taluka" [(ngModel)]="taluka" [disabled]="!talukaEnable" (change)="getBankDetails()">
+              <option value="select" disabled>Select</option>
+              <option *ngFor="let tal of talukaList" [value]="tal.taluka_id">{{tal.taluka_name}}</option>
+            </select>
+          </div>
+        </div>
+
+        <hr *ngIf="showTableFlag">
+        <div *ngIf="showTableFlag && !dataNotFound">
+          <button class="btn btn-info float-right btn-mar" (click)="export()">
+            <span>
+              <i class="fa fa-download" aria-hidden="true"></i>
+            </span>&nbsp; Download</button>
+          <div class="table-responsive">
+            <table class="table table-hover" [mfData]="bankDetails" #mf="mfDataTable" [mfRowsOnPage]="10">
+              <thead>
+                <tr>
+                  <!-- <th>Sr.no</th> -->
+                  <th>
+                    <mfDefaultSorter by="fullname">Name
+                      <i class="fa fa-sort" aria-hidden="true"></i>
+                    </mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="MobileNo">Mobile Number
+                      <i class="fa fa-sort" aria-hidden="true"></i>
+                    </mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="aadharno">Adhar Number
+                      <i class="fa fa-sort" aria-hidden="true"></i>
+                    </mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="schoolname">School Name (Index No)
+                      <i class="fa fa-sort" aria-hidden="true"></i>
+                    </mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="Group">User Group
+                      <i class="fa fa-sort" aria-hidden="true"></i>
+                    </mfDefaultSorter>
+                  </th>
+
+                  <th>
+                    <mfDefaultSorter by="account_no">Account Number
+                      <i class="fa fa-sort" aria-hidden="true"></i>
+                    </mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="bankname">Bank Name
+                      <i class="fa fa-sort" aria-hidden="true"></i>
+                    </mfDefaultSorter>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of mf.data; let i=index">
+                  <td>{{item.fullname}}</td>
+                  <td>{{item.MobileNo}}</td>
+                  <td>{{item.aadharno}}</td>
+                  <td>{{item.schoolname}} ({{item.schoolindex}})</td>
+                  <td>{{item.Group}}</td>
+                  <td>{{item.account_no}}</td>
+                  <td>{{item.bankname}} ({{item.ifsccode}})</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="11">
+                    <mfBootstrapPaginator></mfBootstrapPaginator>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+
+        <div *ngIf="dataNotFound">
+          <p class="justify-content-center row notfound">
+            <b>Data Not Found</b>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

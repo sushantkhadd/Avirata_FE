@@ -10,9 +10,18 @@ export class ProfileService {
   public apiUrl = environment.apiUrl;
   constructor(private http: HttpClient) {}
   getProfileDetails(token) {
-    const headers = new HttpHeaders({
-      Authorization: token
+    var headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      'Authorization':token,
+     // "Source": "WEB"
     });
+    if (/Android/i.test(navigator.userAgent)) 
+    { 
+      headers= headers.append("Source",'MWEB')
+     }else
+     { 
+      headers= headers.append("Source",'WEB') 
+     }
     return this.http
       .get(this.apiUrl + "profile/", { headers: headers })
     // let headers = new HttpHeaders();
@@ -25,10 +34,18 @@ export class ProfileService {
   //POST method for forget Password
   sendOTPToNewEmail(newEmailJson: any, token) {
     const body = JSON.parse(newEmailJson);
-    const headers = new HttpHeaders({
-      "Content-Type": "application/json"
+    var headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      'Authorization': token,
+     // "Source": "WEB"
     });
-    headers.append("Authorization", token);
+    if (/Android/i.test(navigator.userAgent)) 
+    { 
+      headers= headers.append("Source",'MWEB')
+     }else
+     { 
+      headers= headers.append("Source",'WEB') 
+     }
     return this.http
       .post(this.apiUrl + "changeemail/", { body: body }, { headers: headers })
      
@@ -36,10 +53,18 @@ export class ProfileService {
 
   sendOTPToMobile(newMobileJson: any, token) {
     const body = JSON.parse(newMobileJson);
-    const headers = new HttpHeaders({
+    var headers = new HttpHeaders({
       "Content-Type": "application/json",
-      Authorization: token
+      'Authorization': token,
+     // "Source": "WEB"
     });
+    if (/Android/i.test(navigator.userAgent)) 
+    { 
+      headers= headers.append("Source",'MWEB')
+     }else
+     { 
+      headers= headers.append("Source",'WEB') 
+     }
     return this.http
       .post(this.apiUrl + "mobileupdate/", { body: body }, { headers: headers })
      
@@ -47,10 +72,18 @@ export class ProfileService {
 
   verifyOtpEmail(verifyEmailOtpJson: any, token) {
     const body = JSON.parse(verifyEmailOtpJson);
-    const headers = new HttpHeaders({
-      "Content-Type": "application/json"
+    var headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      'Authorization': token,
+     // "Source": "WEB"
     });
-    headers.append("Authorization", token);
+    if (/Android/i.test(navigator.userAgent)) 
+    { 
+      headers= headers.append("Source",'MWEB')
+     }else
+     { 
+      headers= headers.append("Source",'WEB') 
+     }
     return this.http
       .post(
         this.apiUrl + "newemailverification/",
@@ -62,10 +95,18 @@ export class ProfileService {
 
   verifyOtpMobile(verifyMobileOtpJson: any, token) {
     const body = JSON.parse(verifyMobileOtpJson);
-    const headers = new HttpHeaders({
+    var headers = new HttpHeaders({
       "Content-Type": "application/json",
-      Authorization: token
+      'Authorization': token,
+     // "Source": "WEB"
     });
+    if (/Android/i.test(navigator.userAgent)) 
+    { 
+      headers= headers.append("Source",'MWEB')
+     }else
+     { 
+      headers= headers.append("Source",'WEB') 
+     }
     return this.http
       .post(
         this.apiUrl + "updatedmobileverify/",
@@ -76,10 +117,18 @@ export class ProfileService {
 
   changePassword(changePasswordJson: any, token) {
     const body = JSON.parse(changePasswordJson);
-    const headers = new HttpHeaders({
+    var headers = new HttpHeaders({
       "Content-Type": "application/json",
-      Authorization: token
+      'Authorization': token,
+     // "Source": "WEB"
     });
+    if (/Android/i.test(navigator.userAgent)) 
+    { 
+      headers= headers.append("Source",'MWEB')
+     }else
+     { 
+      headers= headers.append("Source",'WEB') 
+     }
     return this.http
       .post(
         this.apiUrl + "changepassword/",

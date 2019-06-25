@@ -64,7 +64,7 @@ export class Module44Component implements OnInit {
       window.localStorage.setItem('subFlagModule4', '1');
       window.localStorage.setItem('source', 'module 4.5.1');
       this.Module4Service.setLocalStorage4(5);
-      var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module4.subMenu4-4'), "next": this.translate.instant('L2Module4.subMenu4-5'), "nextRoute": "/modules/module4/Module4.5" }
+      var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module4.subMenu4-4'), "next": this.translate.instant('L2Module4Finish.subMenu4-5'), "nextRoute": "/modules/module4/Module4.5" }
       this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
     }
     else {

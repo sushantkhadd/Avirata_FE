@@ -6,7 +6,7 @@ import {
   HostListener
 } from "@angular/core";
 import { FullLayoutService } from "./full-layout.service";
-import { Router, NavigationStart, NavigationEnd } from "@angular/router";
+import { Router, NavigationStart, NavigationEnd, ActivatedRoute } from "@angular/router";
 import { LanguageService } from "./../language.service";
 import { DashboardService } from "./../dashboard/dashboard.service";
 import { LocalstoragedetailsService } from "src/app/services/localstoragedetails.service";
@@ -45,6 +45,7 @@ export class FullLayoutComponent implements OnInit {
   private trainee = false;
   imgUrl;
   rewardsFlag;
+  cupImg;
   needEfforts;
   subscription: Subscription;
 
@@ -63,6 +64,7 @@ export class FullLayoutComponent implements OnInit {
   public moduleStatus = 5;
   public module5OnOffFlag = false;
   jsonBody = new Object();
+  loaderFlag;
 
   public currentData = new Object();
   temp;
@@ -112,7 +114,7 @@ export class FullLayoutComponent implements OnInit {
 
   statusFlag;
   finishImgUrl;
-  intVal;
+  intVal; sharedData;
   // imageJson = {
   //   a1: "../../assets/img/rewards/side_gold_star.png",
   //   a2: "../../assets/img/rewards/side_silver_star.png",
@@ -136,7 +138,7 @@ export class FullLayoutComponent implements OnInit {
   animatedImageJson = {
     a1: "../../assets/img/rewards/single-stars/gold.png",
     a2: "../../assets/img/rewards/single-stars/silver.png",
-    a3: "../../assets/img/rewards/single-stars/bronze.png",
+    a3: "../../assets/img/rewards/single-stars/bronze.png"
     // b1: "../../assets/img/rewards/single-stars/silver_small.png",
     // b2: "../../assets/img/rewards/single-stars/silver.png",
     // b3: "../../assets/img/rewards/single-stars/silver_small.png",
@@ -156,7 +158,8 @@ export class FullLayoutComponent implements OnInit {
     vcr: ViewContainerRef,
     private lBar: SlimLoadingBarService,
     private _sanitizer: DomSanitizer,
-    private sharedService: SharedDataService
+    private sharedService: SharedDataService,
+    private activatedRoute: ActivatedRoute
   ) {
     this.toastr.setRootViewContainerRef(vcr);
     this.router.events.subscribe((event: any) => {
@@ -205,9 +208,17 @@ export class FullLayoutComponent implements OnInit {
   private loadingBarInterceptor(event: Event) {
     if (event instanceof NavigationStart) {
       this.lBar.start();
+      // if (localStorage.getItem('hidemenu') == 'true')
+      // {
+      //   this.loaderFlag = true;
+      // }
     }
     if (event instanceof NavigationEnd) {
       this.lBar.complete();
+      // if (localStorage.getItem('hidemenu') == 'true')
+      // {
+      //   this.loaderFlag = false;
+      // }
     }
   }
 
@@ -252,6 +263,7 @@ export class FullLayoutComponent implements OnInit {
   }
   mainFlag;
   ngOnInit() {
+    // document.querySelector("#content").classList.remove("ml-0");
     // if (this.moduleCompleteStatus["type"] == "submodule")
     // {
     //   this.setInterval()
@@ -262,9 +274,24 @@ export class FullLayoutComponent implements OnInit {
     this.subscription = this.sharedService.getData().subscribe(data => {
       console.log("sharedServicedata", data);
       if (data) {
-        this.mainFlag = data['currentstatusFlag']
-        console.log(data)
-        this.currentStatus(data['currentstatus']);
+        this.mainFlag = data["currentstatusFlag"];
+        this.currentStatus(data["currentstatus"]);
+        this.sharedData = data;
+        console.log(data);
+        if (
+          this.sharedData["isAdmin"] != null &&
+          this.sharedData["isAdmin"] != "" &&
+          this.sharedData["isAdmin"] != undefined
+        )
+        {
+          if (this.sharedData["isAdmin"] == true)
+          {
+            this.loaderFlag = true;
+            setTimeout(() => {
+              this.loaderFlag = false;
+            }, 2000);
+          }
+        }
       }
     });
 
@@ -2784,10 +2811,20 @@ export class FullLayoutComponent implements OnInit {
     ) {
       this.router.navigate([this.moduleCompleteStatus["nextRoute"]]);
     }
+    if (jQuery("bs-modal-backdrop").length > 1) {
+      jQuery("bs-modal-backdrop").hide();
+      jQuery("body .modal-backdrop.show").css("opacity", "0.5");
+    }
     this.moduleStatusModal.hide();
     this.LanguageService.toHide();
     this.submoduleStatusModal.hide();
     this.LanguageService.toHide();
+    // var paras = document.getElementsByClassName('modal-backdrop');
+    // while (paras[0])
+    // {
+    //   paras[0].parentNode.removeChild(paras[0]);
+    // }
+
     // var paras = document.getElementsByClassName("modal-backdrop")[0];
     // if (paras.classList.contains("fade")) {
     //   console.log("true");
@@ -2851,6 +2888,10 @@ export class FullLayoutComponent implements OnInit {
   }
 
   hideMenu() {
+    this.router.navigate(["/modules/admin_panel"]);
+    let obJ = {};
+    obJ["isAdmin"] = true;
+    this.sharedService.sendData(obJ);
     window.localStorage.setItem("hidemenu", "true");
   }
 

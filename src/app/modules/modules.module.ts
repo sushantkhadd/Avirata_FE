@@ -100,7 +100,6 @@ import { Module514Component } from './module5/module5-14.component';
 import { Module515Component } from './module5/module5-15.component';
 import { Module5Service } from "./module5/module5.service";
 import { AudioPlayerComponent } from "../components/audio-player/audio-player.component";
-import { PreventDoubleClickDirective } from "../shared/directives/prevent-double-click.directive";
 import { Module516Component } from './module5/module5-16.component';
 import { Module517Component } from './module5/module5-17.component';
 import { Module518Component } from './module5/module5-18.component';
@@ -110,6 +109,31 @@ import { Module521Component } from './module5/module5-21.component';
 import { Module522Component } from './module5/module5-22.component';
 import { Module523Component } from './module5/module5-23.component';
 import { Module524Component } from './module5/module5-24.component';
+import { SharedModule } from "../shared/shared.module";
+import { AdminPanelComponent } from "./admin-Report/admin-panel/admin-panel.component";
+import { DistrictTrainingReportComponent } from "./admin-Report/district-training-report/district-training-report.component";
+import { ParticipantsModuleStatusComponent } from "./admin-Report/participants-module-status/participants-module-status.component";
+import { BatchDetailsForAdminComponent } from "./admin-Report/batch-details-for-admin/batch-details-for-admin.component";
+import { DistAggregateReportComponent } from "./admin-Report/dist-aggregate-report/dist-aggregate-report.component";
+import { ESearchComponent } from "./admin-Report/e-search/e-search.component";
+import { SendNotificationComponent } from "./admin-Report/send-notification/send-notification.component";
+import { MailReportComponent } from "./admin-Report/mail-report/mail-report.component";
+import { UserBankDetailsComponent } from "./admin-Report/user-bank-details/user-bank-details.component";
+import { UserTransferReplaceComponent } from "./admin-Report/user-transfer-replace/user-transfer-replace.component";
+import { HistoryLogComponent } from "./admin-Report/history-log/history-log.component";
+import { CoordinatorTransferComponent } from "./admin-Report/coordinator-transfer/coordinator-transfer.component";
+import { TalukaUserListComponent } from "../components/taluka-user-list/taluka-user-list.component";
+import { StatisticswidgetsComponent } from "../components/statisticswidgets/statisticswidgets.component";
+import { FormatTimePipe } from "./admin-Report/timeformat";
+import { SearchPipe } from "./admin-Report/SearchPipe";
+import { DataTableModule } from "ng2-data-table";
+import { ExportService } from "../components/statisticswidgets/export.service";
+import { DataFilterPipe } from "../components/statisticswidgets/data-filter.pipe";
+import { AdminReportService } from "./admin-Report/admin-report.service";
+import { LanguageService } from "../language.service";
+import { PermissionModelService } from "../permission-model.service";
+import { CsvService } from "angular2-json2csv";
+import { SortPipe } from "../shared/pipes/sort.pipe";
 
 @NgModule({
   imports: [
@@ -128,7 +152,9 @@ import { Module524Component } from './module5/module5-24.component';
     DxCheckBoxModule,
     DxListModule,
     DxPieChartModule,
-    Ng5SliderModule
+    Ng5SliderModule,
+    SharedModule,
+    DataTableModule
   ],
   declarations: [
     Module0Component,
@@ -216,7 +242,6 @@ import { Module524Component } from './module5/module5-24.component';
     Module513Component,
     Module514Component,
     Module515Component,
-    PreventDoubleClickDirective,
     Module516Component,
     Module517Component,
     Module518Component,
@@ -225,7 +250,24 @@ import { Module524Component } from './module5/module5-24.component';
     Module521Component,
     Module522Component,
     Module523Component,
-    Module524Component
+    Module524Component,
+    AdminPanelComponent,
+    DistrictTrainingReportComponent,
+    ParticipantsModuleStatusComponent,
+    BatchDetailsForAdminComponent,
+    DistAggregateReportComponent,
+    ESearchComponent,
+    SendNotificationComponent,
+    MailReportComponent,
+    UserBankDetailsComponent,
+    UserTransferReplaceComponent,
+    CoordinatorTransferComponent,
+    TalukaUserListComponent,
+    HistoryLogComponent,
+    StatisticswidgetsComponent,
+    FormatTimePipe,
+    SearchPipe,
+    DataFilterPipe
   ],
   providers: [
     Module0Service,
@@ -234,7 +276,13 @@ import { Module524Component } from './module5/module5-24.component';
     Module3Service,
     Module4Service,
     Module5Service,
-    QuizService
+    QuizService,
+    ExportService,
+    LanguageService,
+    PermissionModelService,
+    ExportService,
+    CsvService,
+    AdminReportService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
