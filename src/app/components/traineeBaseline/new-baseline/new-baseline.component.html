@@ -20,10 +20,10 @@
                     <p>{{'Quiz.instruction7' | translate}}</p>
                 </div> -->
                 </div>
-                <div class="card-footer" *ngIf="moduleNumber==2 || moduleNumber==3 || moduleNumber==4">
+                <div class="card-footer" *ngIf="mySubmodule2==1 || mySubmodule2==7 || mySubmodule3==7 || moduleNumber==3 || moduleNumber==4">
                     <div class="float-right hidden-xs-down">
                         <button class="btn btn-primary" appPreventDoubleClick
-                          (debounceClick)="startExam()">{{'Quiz.start exam' | translate}}</button>
+                          (debounceClick)="startExam()">{{'Module4.start' | translate}}</button>
                     </div>
                 </div>
                 <div class="card-footer" *ngIf="moduleNumber==6">

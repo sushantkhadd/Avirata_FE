@@ -18,9 +18,7 @@
          </div>
         <div class="card-block inst-text">
             <p>{{'number.1' | translate}}.&nbsp;{{'L2Instruction.inst_ppt1' | translate}}</p>
-            <!-- <p>{{'number.2' | translate}}.&nbsp;{{'L2Instruction.inst_ppt2' | translate}}</p>
-            <p>{{'number.3' | translate}}.&nbsp;{{'L2Instruction.inst_ppt3' | translate}}</p>
-            <p>{{'number.4' | translate}}.&nbsp;{{'L2Instruction.inst_ppt4' | translate}}</p> -->
+            <p>{{'number.2' | translate}}.&nbsp;{{'L2Instruction.inst_ppt5' | translate}}</p>
         </div>
         <div class="card-footer">
           <div class="float-right hidden-xs-down">
@@ -35,9 +33,14 @@
     </div>
   </div>
 
-  <div *ngIf="startPdf">
-    <app-presentation [data]='passValues' (sendCfuAns)="finishPDF($event)"></app-presentation>
-  </div>
+  <div class="card" *ngIf="startPdf">
+      <div class="card-footer">
+        <h6 class="lineHeight">
+          <div class="text-center">{{'L2Module1.subMenu1-9' | translate}}</div>
+        </h6>
+      </div>
+      <app-presentation [data]='passValues' (sendCfuAns)="finishPDF($event)"></app-presentation>
+    </div>
 </div>
 <!-- <div *ngIf="mainFlagModule1 > 9">
   <div class="card">

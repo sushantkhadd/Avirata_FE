@@ -41,8 +41,8 @@ export class Module111Component implements OnInit {
   public incomplete = false;
   passData = {};
   public playVideo = false;
-  vedioCompleteUrl;
-  statVideoFlag;
+  vedioCompleteUrl;showLimit={};
+  statVideoFlag;instFlag;postWordCount={};
 
   assignData;
   questionlist;
@@ -63,7 +63,7 @@ export class Module111Component implements OnInit {
   trimFlag;
   urlArray = {}; nextFlag; queFlag;
   public inst =
-    "दिलेल्या प्रसंगातील अविवेकी विचार शोधून त्यांच्याशी तिन्ही पद्धतीने प्रतिवाद कसा कराल ते लिहा.";
+    "खाली 1 प्रसंग दिला आहे. त्यातील घटना (A), दोन्ही पात्रांचे अविवेकी विचार (धारणा) (iB), दोन्ही पात्रांचे प्रतिसाद (C) , iB शी केलेला वाद, संवाद, प्रतिवाद (प्रश्न प्रतिप्रश्न या स्वरूपात) आणि त्यामुळे बदललेले विवेकी विचार (rB) आणि शेवटी दोन्ही पात्रांचा बदललेला प्रतिसाद (C) हा पायरी-पायरी ने लिहा.";
 
   ngOnInit() {
     this.vedioCompleteUrl = "79vHVVtmIoQ";
@@ -93,6 +93,13 @@ export class Module111Component implements OnInit {
     this.answer6 = "";
     this.queFlag = false;
 
+    this.postWordCount['1']=0;
+    this.postWordCount['2']=0;
+    this.postWordCount['3']=0;
+    this.postWordCount['4']=0;
+    this.postWordCount['5']=0;
+    this.postWordCount['6']=0;
+
     if (this.mainFlagModule1 == 11) {
       if (this.subFlagModule1 == 1) {
         this.passData["apiUrl"] = "moduleonesingleurl/";
@@ -101,7 +108,7 @@ export class Module111Component implements OnInit {
         this.passData["currentSubmodule"] = "Career - a process"; //static msg
         this.passData["nextSubmodule"] = "Career magic framework"; //static msg
       } else if (this.subFlagModule1 == 2) {
-        this.startEvent2();
+        this.instFlag = true;
       }
     } else if (this.mainFlagModule1 > 11) {
       // this.passData["apiUrl"] = "moduleonesingleurl/";
@@ -152,6 +159,27 @@ export class Module111Component implements OnInit {
   }
 
   ngDoCheck() {
+
+    if (this.answer1) {
+      this.postWordCount['1'] = this.answer1.trim().split(' ').length;
+    }
+    if (this.answer2) {
+      this.postWordCount['2'] = this.answer2.trim().split(' ').length;
+    }
+    if (this.answer3) {
+      this.postWordCount['3'] = this.answer3.trim().split(' ').length;
+    }
+    if (this.answer4) {
+      this.postWordCount['4'] = this.answer4.trim().split(' ').length;
+    }
+    if (this.answer5) {
+      this.postWordCount['5'] = this.answer5.trim().split(' ').length;
+    }
+    if (this.answer6) {
+      this.postWordCount['6'] = this.answer6.trim().split(' ').length;
+    }
+    
+
     if (this.questionFlag == true) {
       if (
         this.answer1.trim().length == 0 ||
@@ -161,6 +189,18 @@ export class Module111Component implements OnInit {
         this.answer5.trim().length == 0 ||
         this.answer6.trim().length == 0
       ) {
+        this.trimFlag = true;
+      } else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 5){
+        this.trimFlag = true;
+      } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 5){
+        this.trimFlag = true;
+      } else if (this.postWordCount['3'] > 150 || this.postWordCount['3'] < 5){
+        this.trimFlag = true;
+      } else if (this.postWordCount['4'] > 150 || this.postWordCount['4'] < 5){
+        this.trimFlag = true;
+      } else if (this.postWordCount['5'] > 150 || this.postWordCount['5'] < 5){
+        this.trimFlag = true;
+      } else if (this.postWordCount['6'] > 150 || this.postWordCount['6'] < 5){
         this.trimFlag = true;
       } else {
         this.trimFlag = false;
@@ -173,6 +213,16 @@ export class Module111Component implements OnInit {
         this.answer4.trim().length == 0 ||
         this.answer5.trim().length == 0
       ) {
+        this.trimFlag = true;
+      } else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 5){
+        this.trimFlag = true;
+      } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 5){
+        this.trimFlag = true;
+      } else if (this.postWordCount['3'] > 150 || this.postWordCount['3'] < 5){
+        this.trimFlag = true;
+      } else if (this.postWordCount['4'] > 150 || this.postWordCount['4'] < 5){
+        this.trimFlag = true;
+      } else if (this.postWordCount['5'] > 150 || this.postWordCount['5'] < 5){
         this.trimFlag = true;
       } else {
         this.trimFlag = false;
@@ -190,6 +240,8 @@ export class Module111Component implements OnInit {
   }
 
   startEvent2() {
+    this.instFlag = false;
+    this.nextFlag = false;
     var jsonBody = {};
     jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
     jsonBody["useranswer"] = "";
@@ -276,6 +328,7 @@ export class Module111Component implements OnInit {
             // );
             this.playVideo = true;
           } else if (fun == "finish1") {
+            this.instFlag = true;
             this.instructionModal.hide();
             this.LanguageService.toHide();
             // this.playVideo = false;
@@ -287,8 +340,8 @@ export class Module111Component implements OnInit {
             window.localStorage.setItem("subFlagModule1", "2");
             this.questionFlag = true;
             window.localStorage.setItem("questionFlag","true");
-            this.startEvent2();
-            this.nextFlag = false;
+            //this.startEvent2();
+            //this.nextFlag = false;
           } else if (fun == "start2") {
             // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 1.1', window.localStorage.getItem('username'), 10);
             this.assignData = data["data"].result;
@@ -311,6 +364,18 @@ export class Module111Component implements OnInit {
             console.log(data);
             console.log(this.question6, "this.question6");
           } else if (fun == "submit") {
+            this.showLimit['1'] = true;
+            this.showLimit['2'] = true;
+            this.showLimit['3'] = true;
+            this.showLimit['4'] = true;
+            this.showLimit['5'] = true;
+            this.showLimit['6'] = true;
+            this.postWordCount['1']=0;
+            this.postWordCount['2']=0;
+            this.postWordCount['3']=0;
+            this.postWordCount['4']=0;
+            this.postWordCount['5']=0;
+            this.postWordCount['6']=0;
             this.mainFlagModule1 = 11;
             window.localStorage.setItem("uuid", data["data"].nextuuid);
             console.log(data);
@@ -358,4 +423,5 @@ export class Module111Component implements OnInit {
       }
     );
   }
+
 }

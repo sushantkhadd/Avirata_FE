@@ -140,7 +140,7 @@
         <div class="card bs-none">
           <div class="card-footer bg-none border-0">
             <div class="text-right">
-              <button class="btn btn-primary mr-2" (click)="reset();">{{'newTranslate.reset' | translate}}</button>
+              <!-- <button class="btn btn-primary mr-2" (click)="reset();">{{'newTranslate.reset' | translate}}</button> -->
               <button class="btn btn-primary" [disabled]="!nextFlag"
                 (click)="next();">{{'Stepper.Next' | translate}}</button>
             </div>
@@ -159,6 +159,8 @@
   <!--<h6 class="questionHead lineHeight m-0"><b>{{'L2Instruction.inst2_4_5' | translate}}</b></h6> -->
 
   <!-- <div class="card" *ngIf="options"> -->
+  <span class="counter_10" *ngIf="mainFlagModule1==10">{{queCount}} / 5</span>
+  <!-- <span class="counter_10" *ngIf="mainFlagModule3==12">{{queCount}} / 3</span> -->
   <div class="card-header">
     <h5>
      {{queCount}}.&nbsp; {{question}}
@@ -167,6 +169,7 @@
   <div class="card-block">
     <div class="draggable-items">
       <div class="list-group">
+        <span class="inst" *ngIf="mainFlagModule3==12">{{'L2Module3.inst_3_12_1' | translate}} : </span>
         <div class="row">
           <div class="col-md-3" *ngFor="let item of optionArray">
             <li title="Drag item" class="list-group-item list-group-item-action list-group-item-success bg-success"
@@ -178,6 +181,7 @@
       </div>
     </div>
     <div class="droppable-items">
+        <span class="inst" *ngIf="mainFlagModule3==12">{{'L2Module3.inst_3_12_2' | translate}} : </span>
       <div class="row">
         <div class="col-md-12">
           <div class="card">
@@ -321,7 +325,7 @@
       <div class="card bs-none">
         <div class="card-footer bg-none border-0">
           <div class="text-right">
-            <button class="btn btn-primary mr-2" (click)="singlereset();">{{'newTranslate.reset' | translate}}</button>
+            <!-- <button class="btn btn-primary mr-2" (click)="singlereset();">{{'newTranslate.reset' | translate}}</button> -->
             <button class="btn btn-primary" appPreventDoubleClick [disabled]="!nextFlag"
               (debounceClick)="singlenext();">{{'Stepper.Next' | translate}}</button>
           </div>
@@ -345,6 +349,7 @@
   <h6 class="questionHead lineHeight m-0"><b>{{'L2Instruction.inst2_4_5' | translate}}</b></h6> -->
 
   <!-- <div class="card" *ngIf="options"> -->
+      <span class="counter" *ngIf="mainFlagModule1==8">{{queCount}} / 5</span>
   <div class="card-header">
     <h5>
      {{queCount}}.&nbsp; {{question}}
@@ -548,7 +553,7 @@
       <div class="card bs-none">
         <div class="card-footer bg-none border-0 pr-5">
           <div class="text-right">
-            <button class="btn btn-primary mr-2" [disabled]="!resetFlag" (click)="singlereset();">{{'newTranslate.reset' | translate}}</button>
+            <!-- <button class="btn btn-primary mr-2" [disabled]="!resetFlag" (click)="singlereset();">{{'newTranslate.reset' | translate}}</button> -->
             <button class="btn btn-primary" [disabled]="!nextFlag"
               (debounceClick)="singlenext();" appPreventDoubleClick>{{'Stepper.Next' | translate}}</button>
           </div>

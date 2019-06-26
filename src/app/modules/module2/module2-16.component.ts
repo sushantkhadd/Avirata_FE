@@ -42,12 +42,12 @@ export class Module216Component implements OnInit {
   questionid3;
   questionid4;
   startPdf;
-  passValues = {};
+  passValues = {};showLimit={};postWordCount={};
   nextFlag;
   trimFlag;
   public download; link; showCFU; apiUrl;finalCount;
   public inst =
-    "विद्यार्थ्यांच्या डाव्या मेंदू इतकीच चालना विद्यार्थ्यांच्या उजव्या मेंदूला देखील मिळावी  यासाठी तुम्ही कोणते उपक्रम घ्याल? कोणतीही एक संकल्पना निवडून त्याबाबत उजव्या मेंदूला चालना मिळण्याच्या दृष्टीने काय उपक्रम घ्याल ते लिहा. पुढे दोन उदाहरणे  दिली आहेत. त्या आधारे आपल्या स्वतःच्या विषयासंदर्भात विचार करून लिहा.";
+    "विद्यार्थ्यांच्या डाव्या मेंदू इतकीच चालना विद्यार्थ्यांच्या उजव्या मेंदूला देखील मिळावी यासाठी तुम्ही कोणते उपक्रम घ्याल? कोणतीही एक संकल्पना निवडून त्याबाबत उजव्या मेंदूला चालना मिळण्याच्या दृष्टीने काय उपक्रम घ्याल ते लिहा. या आधी जी दोन उदाहरणे तुम्ही पहिलीत, त्याआधारे आपल्या स्वतःच्या विषयासंदर्भात विचार करून लिहा.";
   ngOnInit() {
     this.answer1 = "";
     this.answer2 = "";
@@ -65,15 +65,42 @@ export class Module216Component implements OnInit {
     this.subFlagModule2 = parseInt(
       window.localStorage.getItem("subFlagModule2")
     );
+
+    this.postWordCount['1']=0;
+    this.postWordCount['2']=0;
+    this.postWordCount['3']=0;
+    this.postWordCount['4']=0;
   }
 
   ngDoCheck() {
+
+    if (this.answer1) {
+      this.postWordCount['1'] = this.answer1.trim().split(' ').length;
+    }
+    if (this.answer2) {
+      this.postWordCount['2'] = this.answer2.trim().split(' ').length;
+    }
+    if (this.answer3) {
+      this.postWordCount['3'] = this.answer3.trim().split(' ').length;
+    }
+    if (this.answer4) {
+      this.postWordCount['4'] = this.answer4.trim().split(' ').length;
+    }
+
     if (
       this.answer1.trim().length == 0 ||
       this.answer2.trim().length == 0 ||
       this.answer3.trim().length == 0 ||
       this.answer4.trim().length == 0
     ) {
+      this.trimFlag = true;
+    } else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 1){
+      this.trimFlag = true;
+    } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 1){
+      this.trimFlag = true;
+    } else if (this.postWordCount['3'] > 150 || this.postWordCount['3'] < 1){
+      this.trimFlag = true;
+    } else if (this.postWordCount['4'] > 150 || this.postWordCount['4'] < 1){
       this.trimFlag = true;
     } else {
       this.trimFlag = false;

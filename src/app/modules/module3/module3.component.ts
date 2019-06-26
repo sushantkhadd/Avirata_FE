@@ -138,6 +138,7 @@ export class Module3Component implements OnInit {
           this.dummy = this.deleteAdd
           this.data = this.dummy[this.queCount]
           console.log("quec",this.queCount)
+          this.queCount = 1;
           if(window.localStorage.getItem("source") == "module 3.1.2.1"){
             this.queCount = 1;
           }

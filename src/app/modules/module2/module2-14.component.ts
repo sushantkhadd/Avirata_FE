@@ -19,11 +19,11 @@ export class Module214Component implements OnInit {
   question;
   public mainFlagModule2;
   subFlagModule2;
-  questionid; trimFlag;
+  questionid; trimFlag;showLimit;postWordCount;
   ngOnInit() {
     this.answer = "";
     this.question = "";
-
+    this.postWordCount = 0;
     this.mainFlagModule2 = parseInt(
       window.localStorage.getItem("mainFlagModule2")
     );
@@ -37,8 +37,15 @@ export class Module214Component implements OnInit {
   }
 
   ngDoCheck() {
+
+    if (this.answer) {
+      this.postWordCount = this.answer.trim().split(' ').length;
+    }
+
     if (this.answer.trim().length == 0)
     {
+      this.trimFlag = true;
+    } else if (this.postWordCount > 150 || this.postWordCount < 5){
       this.trimFlag = true;
     } else
     {
