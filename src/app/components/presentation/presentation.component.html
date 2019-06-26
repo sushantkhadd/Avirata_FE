@@ -15,7 +15,7 @@
         <button class="control ripple" (click)="prevPage()" [disabled]="count === 1">
           <em class="fa fa-arrow-left" aria-hidden="true"></em>
         </button>
-        <span class="p-2">{{ count}} / {{ finalCount }}</span>
+        <span class="p-2">{{ count | numberConvertor : 'Devanagari'}} / {{ finalCount | numberConvertor : 'Devanagari'}}</span>
         <button class="control ripple" (click)="nextPage()" [disabled]="count === finalCount">
           <em class="fa fa-arrow-right" aria-hidden="true"></em>
         </button>
@@ -32,7 +32,7 @@
         <button class="control ripple" (click)="prevPage()" [disabled]="count === 1">
           <em class="fa fa-arrow-left" aria-hidden="true"></em>
         </button>
-        <span *ngIf="data['unlockView'] == 'static'" class="p-2">{{ count}} / {{ finalCount }}</span>
+        <span *ngIf="data['unlockView'] == 'static'" class="p-2">{{ count | numberConvertor : 'Devanagari'}} / {{ finalCount | numberConvertor : 'Devanagari'}}</span>
         <button *ngIf="data['unlockView'] == 'static'" class="control ripple" disabled>
           <em class="fa fa-arrow-right" aria-hidden="true"></em>
         </button>

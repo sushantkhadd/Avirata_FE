@@ -59,7 +59,7 @@
       <span [innerHTML]="inst"> </span>&nbsp;&nbsp;
       <span><a class="c-pointer" (click)="showPdf()">Click here to view pdf &nbsp; <em class="fas fa-pdf"></em></a> </span>
       <div class="badge badge-info ml-3 float-right mt-5 p-2 mr-2 counter pt-3">{{'Quiz.Question' | translate}}
-        {{personId}}/5</div>
+        {{personId | numberConvertor : 'Devanagari'}}/{{'number.5' | translate}}</div>
     </h6>
     
     
@@ -96,7 +96,7 @@
             <hr>
             <div class="form-group row">
               <div class="col-12 col-md-12 col-sm-12 form-control-label"> 
-                  1. <label [for]="queId5" [innerHTML]="que5"></label>
+                  {{'number.1' | translate}}. <label [for]="queId5" [innerHTML]="que5"></label>
               </div>
                 <div class="col-12 col-sm-12 col-md-12 controls">
                   <textarea class="form-control" [id]="queId5" name="answer5" [(ngModel)]="answer5" rows="2" #addr="ngModel" maxlength="500"
@@ -106,7 +106,7 @@
 
               <div class="form-group row">
                   <div class="col-12 col-md-12 col-sm-12 form-control-label"> 
-                      2. <label [for]="queId6" [innerHTML]="que6"></label>
+                      {{'number.2' | translate}}. <label [for]="queId6" [innerHTML]="que6"></label>
                   </div>
                   <div class="col-12 col-sm-12 col-md-12 controls">
                     <textarea class="form-control" [id]="queId6" name="answer6" [(ngModel)]="answer6" rows="2" #addr="ngModel" maxlength="500"
@@ -116,7 +116,7 @@
 
                 <div class="form-group row">
                     <div class="col-12 col-md-12 col-sm-12 form-control-label"> 
-                        3. <label [for]="queId7" [innerHTML]="que7"></label>
+                        {{'number.3' | translate}}. <label [for]="queId7" [innerHTML]="que7"></label>
                     </div>
                     <div class="col-12 col-sm-12 col-md-12 controls">
                       <textarea class="form-control" [id]="queId7" name="answer7" [(ngModel)]="answer7" rows="2" #addr="ngModel" maxlength="500"

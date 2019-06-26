@@ -5,11 +5,12 @@
 // @import './assets/scss/style';
 /* Scrollbar CSS */
 // @import '~ngx-bar-rating/themes/br-default-theme';
-@import url("https://fonts.googleapis.com/css?family=Hind:300,400,500,600,700");
+// @import url("https://fonts.googleapis.com/css?family=Hind:300,400,500,600,700");
+@import url('https://fonts.googleapis.com/css?family=Mukta&display=swap');
 
 html {
   body {
-    font-family: "Hind", sans-serif !important;
+    font-family: 'Mukta', sans-serif !important;
     font-size: 1rem;
     font-weight: normal;
     line-height: 1.5;
@@ -201,7 +202,7 @@ ul.comments li,
 }
 
 body {
-  font-family: "Hind", sans-serif;
+  font-family: 'Mukta', sans-serif;
   font-size: 0.875rem;
   font-weight: normal;
   line-height: 1.5;
@@ -266,8 +267,8 @@ body {
 
 .info-link ul li {
   list-style-type: none;
-  font-size: 0.85rem;
-  line-height: 25px;
+  font-size: 1rem;
+  line-height: 21px;
 }
 
 // .info-link ul{
@@ -291,13 +292,13 @@ body {
 }
 
 .password-link {
-  font-size: 0.85rem !important;
+  font-size: 0.95rem !important;
   color: #fff !important;
 }
 
 .card .text-muted {
   color: #fff !important;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
 }
 
 .card h1 {
@@ -612,7 +613,8 @@ body {
 
 .notify {
   width: 100%;
-  font-size: 0.85rem;
+  font-size: 1.1rem;
+  font-weight: 500;
 }
 
 //Footer section - full layout
@@ -928,8 +930,7 @@ body {
 
 .dx-radiogroup .dx-radiobutton,
 .dx-radiogroup {
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
+  font-family: 'Mukta', sans-serif;
   // font-size: 1.1rem;
   font-size: 1rem;
   font-weight: normal;
@@ -949,8 +950,7 @@ body {
 .dx-list-item-content,
 .dx-list .dx-empty-message {
   padding: 5px 5px;
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
+  font-family: 'Mukta', sans-serif;
   font-size: 0.875rem;
   font-weight: normal;
   line-height: 1.5;
@@ -1108,10 +1108,14 @@ body {
   .card {
     font-size: 0.85rem;
     border: none;
+    .card-block{
+    font-size: 1rem;     
+    }
   }
 
   .card-header {
     font-weight: 600;
+    font-size: 1rem;
   }
 
   .mb-2 {
@@ -1148,7 +1152,7 @@ body {
 
     span {
       color: #005e9a;
-      font-size: 0.9rem;
+      font-size: 1rem;
       line-height: 23px;
     }
 
@@ -1254,7 +1258,7 @@ body {
 
     h5 {
       margin-bottom: 1rem;
-      font-size: 1rem;
+      font-size: 1.1rem;
     }
   }
 
@@ -1894,7 +1898,7 @@ body {
   left: 0;
   bottom: 0;
   width: 100%;
-  z-index: 999;
+  z-index: 99;
 
   // .marquee-border {
   //   border-top: 1px solid #cfd8dc;
@@ -2002,8 +2006,9 @@ body {
 
 .drag-container {
   h5 {
-    font-size: 0.9rem;
+    font-size: 1rem;
     line-height: 24px;
+    font-weight: 600;
   }
 
   div.scroll-list {
@@ -2131,6 +2136,7 @@ body {
 
     h5 {
       margin-bottom: 0;
+      font-weight: 600;
     }
   }
 
@@ -2239,7 +2245,7 @@ body {
     padding: 1rem 0 0 1rem;
 
     span {
-      font-size: 0.9rem;
+      font-size: 1rem;
     }
   }
 
@@ -2883,15 +2889,16 @@ table,
 
 .dx-radiogroup .dx-radiobutton,
 .dx-radiogroup {
-  font-family: "Hind", sans-serif !important;
+  font-family: 'Mukta', sans-serif!important;
 }
 
 .card {
   .card-footer {
     h6 {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       padding: 0.2rem 0 0 0;
       margin-bottom: 0;
+      font-weight: 600;
     }
   }
 }

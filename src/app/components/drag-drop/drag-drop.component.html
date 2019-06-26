@@ -161,7 +161,7 @@
   <!-- <div class="card" *ngIf="options"> -->
   <div class="card-header">
     <h5>
-     {{queCount}}.&nbsp; {{question}}
+     {{queCount | numberConvertor : 'Devanagari'}}.&nbsp; {{question}}
     </h5>
   </div>
   <div class="card-block">
@@ -347,7 +347,7 @@
   <!-- <div class="card" *ngIf="options"> -->
   <div class="card-header">
     <h5>
-     {{queCount}}.&nbsp; {{question}}
+     {{queCount | numberConvertor : 'Devanagari'}}.&nbsp; {{question}}
     </h5>
   </div>
   <div class="card-block">
