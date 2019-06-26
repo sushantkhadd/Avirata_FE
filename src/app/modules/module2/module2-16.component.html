@@ -18,6 +18,7 @@
         </div>
         <div class="card-block inst-text">
           <p>{{'number.1' | translate}}.&nbsp;{{'L2Instruction.inst_ppt1' | translate}}</p>
+          <p>{{'number.2' | translate}}.&nbsp;{{'L2Instruction.inst_ppt5' | translate}}</p>
         </div>
         <div class="card-footer">
           <div class="float-right hidden-xs-down">
@@ -46,31 +47,47 @@
           <div class="form-group row">
             <label class="col-md-4 col-sm-12 form-control-label" [for]="questionid1" [innerHTML]="question1"></label>
             <div class="col-sm-12 col-md-8 controls">
-              <textarea class="form-control" [id]="questionid1" name="answer1" [(ngModel)]="answer1" rows="3" #addr="ngModel" maxlength="500"
+              <textarea class="form-control" [id]="questionid1" name="answer1" [(ngModel)]="answer1" rows="3" #addr="ngModel" (focus)="showLimit['1']=true" (focusout)="showLimit['1']=false"
                 required></textarea>
+                <div *ngIf="showLimit['1']==false && (postWordCount['1']>150 || postWordCount['1']<1)" class="offset-md-4 mt-2">
+                  <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
+              </div>
             </div>
           </div>
+          <p *ngIf="showLimit['1']" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount['1']}}/150</p>
           <div class="form-group row">
             <label class="col-md-4 col-sm-12 form-control-label" [for]="questionid2" [innerHTML]="question2"></label>
             <div class="col-sm-12 col-md-8 controls">
-              <textarea class="form-control" [id]="questionid2" name="answer2" [(ngModel)]="answer2" rows="3" #addr="ngModel" maxlength="500"
+              <textarea class="form-control" [id]="questionid2" name="answer2" [(ngModel)]="answer2" rows="3" #addr="ngModel" (focus)="showLimit['2']=true" (focusout)="showLimit['2']=false"
                 required></textarea>
+                <div *ngIf="showLimit['2']==false && (postWordCount['2']>150 || postWordCount['2']<1)" class="offset-md-4 mt-2">
+                  <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
+              </div>
             </div>
           </div>
+          <p *ngIf="showLimit['2']" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount['2']}}/150</p>
           <div class="form-group row">
             <label class="col-md-4 col-sm-12 form-control-label" [for]="questionid3" [innerHTML]="question3"></label>
             <div class="col-sm-12 col-md-8 controls">
-              <textarea class="form-control" [id]="questionid3" name="answer3" [(ngModel)]="answer3" rows="3" #addr="ngModel" maxlength="500"
+              <textarea class="form-control" [id]="questionid3" name="answer3" [(ngModel)]="answer3" rows="3" #addr="ngModel" (focus)="showLimit['3']=true" (focusout)="showLimit['3']=false"
                 required></textarea>
+                <div *ngIf="showLimit['3']==false && (postWordCount['3']>150 || postWordCount['3']<1)" class="offset-md-4 mt-2">
+                  <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
+              </div>
             </div>
           </div>
+          <p *ngIf="showLimit['3']" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount['3']}}/150</p>
           <div class="form-group row">
             <label class="col-md-4 col-sm-12 form-control-label" [for]="questionid4" [innerHTML]="question4"></label>
             <div class="col-sm-12 col-md-8 controls">
-              <textarea class="form-control" [id]="questionid4" name="answer4" [(ngModel)]="answer4" rows="3" #addr="ngModel" maxlength="500"
+              <textarea class="form-control" [id]="questionid4" name="answer4" [(ngModel)]="answer4" rows="3" #addr="ngModel" (focus)="showLimit['4']=true" (focusout)="showLimit['4']=false"
                 required></textarea>
+                <div *ngIf="showLimit['4']==false && (postWordCount['4']>150 || postWordCount['4']<1)" class="offset-md-4 mt-2">
+                  <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
+              </div>
             </div>
           </div>
+          <p *ngIf="showLimit['4']" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount['4']}}/150</p>
         </form>
       </div>
       <div class="card-footer text-center bg-white border-0">

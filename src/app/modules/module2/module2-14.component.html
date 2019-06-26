@@ -16,10 +16,13 @@
           <div class="form-group row">
             <label class="col-sm-12 form-control-label" [for]="questionid" [innerHTML]="question"></label>
             <div class="col-12 controls">
-              <textarea class="form-control" [id]="questionid" name="answer" [(ngModel)]="answer" rows="3" #addr="ngModel"
-                maxlength="500" required></textarea>
+              <textarea class="form-control" [id]="questionid" name="answer" [(ngModel)]="answer" rows="3" #addr="ngModel" (focus)="showLimit=true" (focusout)="showLimit=false" required></textarea>
             </div>
+            <div *ngIf="showLimit==false && (postWordCount>150 || postWordCount<5)" class="offset-md-4 mt-2">
+              <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
           </div>
+          </div>
+          <p *ngIf="showLimit" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount}}/150</p>
         </form>
       </div>
       <div class="card-footer text-center bg-white border-0">

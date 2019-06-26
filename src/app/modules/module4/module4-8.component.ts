@@ -22,7 +22,7 @@ export class Module48Component implements OnInit {
     window.localStorage.getItem("subFlagModule4")
   );
   public token;
-  startVideoEvent;
+  startVideoEvent;startFlag;
   public passData = {}; //used when CFU completed
   public videoData = {};
   passUrl;
@@ -92,7 +92,7 @@ export class Module48Component implements OnInit {
     }
 
     if (this.mainFlagModule4 == 8) {
-      this.startEvent();
+      this.startFlag = false;
     }
     if (this.mainFlagModule4 < 8) {
     } else if (this.mainFlagModule4 == 8) {
@@ -171,6 +171,7 @@ export class Module48Component implements OnInit {
       data => {
         if (data["status"] == true) {
           if (fun == "start") {
+            this.startFlag = true;
             // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 1.1', window.localStorage.getItem('username'), 10);
             this.assignData = data["data"];
             this.mainQuestion = this.assignData.question;

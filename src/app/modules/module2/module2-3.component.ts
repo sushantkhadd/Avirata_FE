@@ -20,7 +20,7 @@ export class Module23Component implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
   public data; questionType; passFlags = {}; showAnswer; saveData; answer; sumbitButton; startFlag;description;
-  public inst = "एखाद्या संकल्पनेबाबत उजव्या मेंदूमध्ये नवीन जोडण्या निर्माण होणे आणि त्या पक्क्या होणे यासाठी पुढे  दिलेले उदाहरणे बघा आणि त्यातील एक पर्याय निवडा."
+  public inst = "एखाद्या संकल्पनेबाबत उजव्या मेंदूमध्ये नवीन जोडण्या निर्माण होणे आणि त्या पक्क्या होणे यासाठी पुढे दिलेली उदाहरणे बघा आणि त्यातील एक पर्याय निवडा."
   ngOnInit() {
     this.startFlag = false;
     this.showAnswer = true;

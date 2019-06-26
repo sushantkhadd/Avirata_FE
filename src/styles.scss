@@ -3319,3 +3319,11 @@ body {
     overflow-y: auto;
   }
 }
+
+
+.custom_counter{
+  position: absolute;
+  z-index: 99;
+  top: 94px;
+  left: 37px;
+}

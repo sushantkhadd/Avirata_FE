@@ -34,6 +34,7 @@
           <b>{{'L2common.caution' | translate}}&nbsp;{{'L2Module3.que3_1' | translate}}</b>
            <span class="f-right">{{queCount}} / 8</span>
         </h6>
+        <span *ngIf="data" class="custom_counter">{{queCount}}. </span>
         <app-mcqcomponent [passFlags]='passFlags' [data]='data' (sendAns)="getAnswer($event)"></app-mcqcomponent>
       </div>
     </div>
