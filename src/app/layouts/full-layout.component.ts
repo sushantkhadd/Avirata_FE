@@ -352,7 +352,15 @@ export class FullLayoutComponent implements OnInit {
       this.admin = this.LocalstoragedetailsService.userName;
       this.userId = this.LocalstoragedetailsService.userId;
       this.token = this.LocalstoragedetailsService.token;
-      this.userType = this.LocalstoragedetailsService.userType;
+      if (
+        localStorage.getItem("group_name") != "" &&
+        localStorage.getItem("group_name") != null &&
+        localStorage.getItem("group_name") != undefined
+      )
+      {
+        this.userType = localStorage.getItem("group_name");
+      }
+        // this.userType = this.LocalstoragedetailsService.userType;
       this.modalDisplay = true;
       this.LocalstoragedetailsService.timelineState = this.moduleStatusCheck;
       this.DashboardService.getProfilePic(this.userId).subscribe(
@@ -704,7 +712,7 @@ export class FullLayoutComponent implements OnInit {
   //Set status for module5- to set mainFlagModule5,subFlagModule5
   setStatus(val) {
     if (val == true) {
-      this.mainFlagModule5 = 16;
+      this.mainFlagModule5 = 25;
       this.subFlagModule5 = 1;
     } else {
       var source = window.localStorage.getItem("source");

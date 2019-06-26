@@ -448,7 +448,7 @@ export class CoordinatorTransferComponent implements OnInit {
       );
   }
 
-  setDays(oMonthSel, oDaysSel, oYearSel) {
+  setDays() {
     this.dummyDate = [];
     var nDays, oDaysSelLgth, opt, i = 1;
     if (this.monthSelect != undefined) {

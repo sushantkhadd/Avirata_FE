@@ -71,7 +71,6 @@ export function createTranslateLoader(http: HttpClient) {
     LocalstoragedetailsService,
     CommonComponentService,
     CommonService,
-    LocalstoragedetailsService,
     PermissionModelService,
     SignupStepperService,
     AuthGuard,

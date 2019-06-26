@@ -4,6 +4,7 @@ import { AdminReportService } from "../admin-report.service";
 import { TranslateService } from "@ngx-translate/core";
 import { ToastsManager } from "ng6-toastr";
 import { SharedDataService } from "src/app/services/shared-data.service";
+import { environment } from "src/environments/environment";
 
 declare var jQuery: any;
 @Component({
@@ -30,7 +31,7 @@ export class AdminPanelComponent implements OnInit {
   classFlag; piechartFlag;
   l1TotalUsersCount; l1DesktopCount; l1MobCount; l1TabCount;
   l2TotalUsersCount; l2DesktopCount; l2MobCount; l2TabCount; loader; refreshLoader;
-  inModuleCountL1; inModuleCountL2; L1_status; L2_status; L3_status; mouseOvered1;mouseOvered2;mouseOvered3;
+  inModuleCountL1; inModuleCountL2; L1_status; L2_status; L3_status; mouseOvered1; mouseOvered2; mouseOvered3; reportUrl; isLoaded;
   constructor(
     public AdminReportService: AdminReportService,
     private router: Router,
@@ -75,6 +76,21 @@ export class AdminPanelComponent implements OnInit {
     this.getAllActiveUsers();
   }
 
+  getAllReport() {
+    this.isLoaded = true;
+    this.AdminReportService.getCalllvl1("alluserlevelstatusreport/", localStorage.getItem("token")).subscribe(data => {
+      this.isLoaded = false;
+      this.reportUrl = environment.downloadUrl + data["data"];
+      var link = document.createElement("a");
+      link.href = this.reportUrl;
+      link.download = "alluserlevelstatus.csv";
+      link.click();
+      console.log(data)
+    }, error => {
+        this.toastr.error(error.error.message)
+    })
+  }
+
   scrollUp(){
     window.scroll(0,0)
   }
@@ -98,7 +114,7 @@ export class AdminPanelComponent implements OnInit {
     setTimeout(() => {
       this.piechartFlag = true;
       this.refreshLoader = false;
-    }, 500);
+    }, 1000);
   }
 
   customizeLabel(arg) {

@@ -44,6 +44,17 @@
             <li> <a [class.active]="showSearchData" (click)="searchData()"> Search by Aadhar or Mobile No</a> </li>
           </ul>
         </li>
+        <li *ngIf="userType == 'superadmin' ">
+          <a href="#module3Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><em
+              class="fas fa-wrench mr-2"></em>&nbsp;All Users Report</a>
+          <ul class="collapse list-unstyled" id="module3Submenu">
+            <li>
+              <a (click)="getAllReport()">&nbsp;Download Report
+                <i *ngIf="isLoaded" class="fa fa-circle-o-notch fa-spin spinner-loader"></i>
+              </a>
+            </li>
+          </ul>
+        </li>
       </ul>
       <!-- <ul class="list-unstyled components">
         <p> <em class="fas fa-file" aria-hidden="true"></em> &nbsp; Reports</p>
@@ -92,12 +103,17 @@
         <span></span>
       </button>
       <div class="wrap">
-        <div class="content-wrapper"
+        <div class="content-wrapper position-relative"
           *ngIf="!showDistrictData && !showParticipantData && !showSearchData && !distAggregate && !showBatchDetails && !showNotification && !showMailReport && !showBankDetails && !userTransferNReplace && !coordinatorTransfer && !historyLog">
 
-          <div class="mx-auto top-loader" *ngIf="refreshLoader">
-            <div class="mx-auto loader"></div>
-          </div>
+          <!-- <div class="inner-loader w-100 bg-gray" *ngIf="!refreshLoader">
+            <div class="loader" style="top: 25%;"></div>
+          </div> -->
+          <!-- <div class="cell" *ngIf="!refreshLoader">
+            <div class="wrapper">
+              <div class="spinner spinner2"></div>
+            </div>
+          </div> -->
           <div class="pie-chart-block" *ngIf="piechartFlag">
             <div class="row mx-auto text-white">
               <div class="col-md-12 text-right mb-3">

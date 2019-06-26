@@ -1,3 +1,168 @@
-<p>
-  module5-22 works!
-</p>
+ <div class="forum-component">
+   <!-- <div *ngIf="mainFlagModule5 < 22">
+    <div class="card">
+      <div class="card-block">
+        <p>{{'subModule1_1.1_22' | translate}}</p>
+        <p><strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div *ngIf="mainFlagModule5 == 22">
+        <div class="ins-block instruction-wrap">
+          <div class="borderBlue">
+            <div class="card" *ngIf="startEvent">
+              <div class="card-header color_red">
+                <span class="exp-img instructions-img"></span>
+                <h5>
+                  {{ "Quiz.note" | translate }}
+                </h5>
+              </div>
+              <div class="card-block inst-text">
+                <p>{{'number.1' | translate}}. {{'L2Module1.forum1' | translate}}</p>
+                <p>{{'number.2' | translate}}. {{'L2Module1.forum2' | translate}}</p>
+                <p>{{'number.3' | translate}}. {{'L2Module1.forum3' | translate}}</p>
+                <p>{{'number.4' | translate}}. {{'L2Module1.forum4' | translate}}</p>
+                <div class="form-group row">
+                  <div class="col-md-12">
+                    <label for="checkbox1" class="btn-pad">
+                      <input id="checkbox2" class="multiCheckStyle" name="agree1" type="checkbox" id="check"
+                        [(ngModel)]="checkAgree" (change)="agree($event)">
+                    </label>
+                    <label class="color_red" for="check">{{'L2Module1.terms' | translate}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="text-center">
+                  <button class="btn btn-primary" (click)="startEvent=false"
+                    [disabled]="!checkAgree">{{'Module4.start' | translate}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="blog-comment" *ngIf="!startEvent">
+          <div class="mainCommentTextbox" *ngIf="mainFlagModule5>=22">
+            <h6 class="text-primary text-left lineHeight">
+              {{'otherMessages.teacherSpeciality' | translate}} </h6>
+            <hr />
+            <div class="post-comments-text form-group" *ngIf="mainFlagModule5==22">
+              <textarea class="form-control txtarea" id="exampleTextarea"
+                placeholder="{{'otherMessages.writePostHere' | translate}}" rows="10" #newHero [(ngModel)]="txtcomment"
+                (keypress)="handleInput($event)"></textarea>
+
+              <p class="text-right">{{'otherMessages.wordLimit' | translate}} {{postWordCount}}/150</p>
+              <button class="float-right btn btn-primary btn-pad" (click)="submitPost()"
+                [disabled]="submitPostDisable">{{'forum.post' | translate}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="mainFlagModule5 > 22">
+        <h6 class="text-primary text-left lineHeight" *ngIf="!missingPost">
+          {{'otherMessages.teacherSpeciality' | translate}} </h6>
+        <hr />
+        <div *ngIf="!missingPost">
+          <app-forum></app-forum>
+          <button class="btn btn-primary btn-pad right" (click)="nextRoute()">{{'Login.Close' | translate}}<i
+              class="fa fa-arrow-right btn-arrow" aria-hidden="true"></i></button>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <div *ngIf="missingPost">
+    <h6 class="text-primary text-left lineHeight">
+      {{'otherMessages.teacherSpeciality' | translate}} </h6>
+    <hr />
+    <div class="post-comments-text form-group">
+      <textarea class="form-control txtarea" id="exampleTextarea"
+        placeholder="{{'otherMessages.writePostHere' | translate}}" rows="10" #newHero [(ngModel)]="txtcomment"
+        (keypress)="handleInput($event)"></textarea>
+
+      <p class="text-right">{{'otherMessages.wordLimit' | translate}} {{postWordCount}}/150</p>
+      <button class="float-right btn btn-primary btn-pad" (click)="repost()"
+        [disabled]="submitPostDisable">{{'forum.post' | translate}}</button>
+    </div>
+  </div>-->
+
+   <div *ngIf="mainFlagModule5 < 22">
+     <div class="card">
+       <div class="card-block">
+         <p>{{'subModule4_1.4_3' | translate}}</p>
+         <p><strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
+       </div>
+     </div>
+   </div>
+   <div *ngIf="mainFlagModule5 == 22">
+     <div class="row">
+       <div class="col-sm-12 col-md-12">
+         <div class="ins-block instruction-wrap" *ngIf="!startEvent">
+           <div class="borderBlue">
+             <div class="card">
+               <div class="card-header color_red">
+                 <span class="exp-img instructions-img"></span>
+                 <h5>
+                   {{ "Quiz.note" | translate }}
+                 </h5>
+               </div>
+               <div class="card-block inst-text">
+                 <p>{{'number.1' | translate}}. {{'L2Module1.forum1' | translate}}</p>
+                 <p>{{'number.2' | translate}}. {{'L2Module1.forum2' | translate}}</p>
+                 <p>{{'number.3' | translate}}. {{'L2Module1.forum3' | translate}}</p>
+                 <p>{{'number.4' | translate}}. {{'L2Module1.forum4' | translate}}</p>
+                 <div class="form-group row">
+                   <div class="col-md-12">
+                     <label for="checkbox1" class="btn-pad">
+                       <input id="checkbox2" class="multiCheckStyle" name="agree1" type="checkbox" id="check"
+                         [(ngModel)]="checkAgree" (change)="agree($event)">
+                     </label>
+                     <label class="color_red ml-2" for="check">{{'L2Module1.terms' | translate}}</label>
+                   </div>
+                 </div>
+               </div>
+               <div class="card-footer">
+                 <div class="text-center">
+                   <button class="btn btn-primary" (click)="startEvent=true"
+                     [disabled]="!checkAgree">{{'Module4.start' | translate}}</button>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+         <form #assignment="ngForm" *ngIf="startEvent">
+           <div class="card">
+             <div class="card-header">
+               <label class="f-1x mb-0">
+                 <h6> {{'L2Module5.que5_22' | translate}}
+                 </h6>
+               </label>
+             </div>
+             <div class="card-block">
+               <textarea class="form-control marathi" id="txt1" name="txtaraea" [(ngModel)]="txtcomment"
+                 placeholder="{{'otherMessages.writePostHere' | translate}}" rows="3" autocomplete='off'
+                 required></textarea>
+               <p class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount}} / 150</p>
+             </div>
+             <div class="card-footer text-center">
+               <button class="btn btn-primary float-right" (click)="submitPost()"
+                 [disabled]="assignment.form.invalid || submitPostDisable">{{'Login.Submit'|
+              translate}}</button>
+             </div>
+           </div>
+         </form>
+       </div>
+     </div>
+   </div>
+   <div *ngIf="mainFlagModule5 > 22">
+     <app-completed-forum></app-completed-forum>
+     <div class="text-center">
+       <a class="btn btn-primary"
+         [routerLink]="['/modules/module5/Module5.23']">{{'Stepper.Next' | translate}}</a>
+     </div>
+   </div>
+ </div>
