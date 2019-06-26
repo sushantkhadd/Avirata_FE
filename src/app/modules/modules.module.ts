@@ -133,7 +133,7 @@ import { AdminReportService } from "./admin-Report/admin-report.service";
 import { LanguageService } from "../language.service";
 import { PermissionModelService } from "../permission-model.service";
 import { CsvService } from "angular2-json2csv";
-import { SortPipe } from "../shared/pipes/sort.pipe";
+import { CompletedForumComponent } from "../components/completed-forum/completed-forum.component";
 
 @NgModule({
   imports: [
@@ -265,6 +265,7 @@ import { SortPipe } from "../shared/pipes/sort.pipe";
     TalukaUserListComponent,
     HistoryLogComponent,
     StatisticswidgetsComponent,
+    CompletedForumComponent,
     FormatTimePipe,
     SearchPipe,
     DataFilterPipe

@@ -21,13 +21,18 @@ export class CommonComponentService {
   ) {}
 
   getCall(api) {
-    let headers = new HttpHeaders();
-    headers.append("Authorization", window.localStorage.getItem("token"));
-    if (/Android/i.test(navigator.userAgent)) {
-      headers.append("Source", "MWEB");
-    } else {
-      headers.append("Source", "WEB");
+    let source;
+    if (/Android/i.test(navigator.userAgent))
+    {
+      source= "MWEB";
+    } else
+    {
+      source= "WEB";
     }
+    let headers = new HttpHeaders({
+      "Authorization": window.localStorage.getItem("token"),
+       "Source": source
+    });
     return this.httpClient.get(this.l1ApiUrl + api, { headers: headers });
   }
 
@@ -76,18 +81,19 @@ export class CommonComponentService {
 
   //vedio and CFU (Start,Answer,Finish)
   submoduleFinish(jsonBody, apiUrl) {
-    var headers = new HttpHeaders({
-      "Content-Type": "application/json",
-      'Authorization': window.localStorage.getItem('token'),
-     // "Source": "WEB"
-    });
+    let source;
     if (/Android/i.test(navigator.userAgent))
     {
-      headers= headers.append("Source",'MWEB')
-     }else
-     {
-      headers= headers.append("Source",'WEB')
-     }
+      source = "MWEB";
+    } else
+    {
+      source = "WEB";
+    }
+    let headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: window.localStorage.getItem("token"),
+      Source: source
+    });
     return this.httpClient.post(this.apiUrl + apiUrl, { body: jsonBody }, { headers: headers })
 
   }
@@ -177,6 +183,48 @@ export class CommonComponentService {
   //         return Observable.throw(error);
   //       })
   //   }
+
+  //Get Forum Post
+  getForumPostDetails(apiUrl,call){
+    var url;
+    if(call == 1){
+      url=this.apiUrl + apiUrl
+    }else if(call == 2){
+      url =apiUrl
+    }
+    let source;
+    if (/Android/i.test(navigator.userAgent))
+    {
+      source= "MWEB";
+    } else
+    {
+      source= "WEB";
+    }
+    let headers = new HttpHeaders({
+      "Authorization": window.localStorage.getItem("token"),
+       "Source": source
+    });
+
+    return this.httpClient.get(url,{ headers: headers })
+  }//End
+
+  //Vie COmments
+   viewComment(jsonBody, apiUrl) {
+     let source;
+     if (/Android/i.test(navigator.userAgent))
+     {
+       source = "MWEB";
+     } else
+     {
+       source = "WEB";
+     }
+     let headers = new HttpHeaders({
+       "Content-Type": "application/json",
+       Authorization: window.localStorage.getItem("token"),
+       Source: source
+     });
+    return this.httpClient.post(this.apiUrl + apiUrl, { body: jsonBody }, { headers: headers })
+  }
 
   handleError(errorMsg) {
     if (

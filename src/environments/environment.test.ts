@@ -11,5 +11,6 @@ export const environment = {
   // apiUrl: 'https://maacpd.in/api/',
   //  pdfUrl: 'http://192.168.1.90:8080/pdf/'
   pdfUrl: "https://s3-ap-southeast-1.amazonaws.com/maacpd/static/pdf/",
-  redirectUrl: "http://192.168.1.223:7113/#/l1/"
+  redirectUrl: "http://192.168.1.223:7113/#/l1/",
+  downloadUrl: "http://192.168.1.223:5113"
 };
