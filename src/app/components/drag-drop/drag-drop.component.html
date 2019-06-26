@@ -163,7 +163,7 @@
   <!-- <span class="counter_10" *ngIf="mainFlagModule3==12">{{queCount}} / 3</span> -->
   <div class="card-header">
     <h5>
-     {{queCount}}.&nbsp; {{question}}
+     {{queCount | numberConvertor : 'Devanagari'}}.&nbsp; {{question}}
     </h5>
   </div>
   <div class="card-block">
@@ -352,7 +352,7 @@
       <span class="counter" *ngIf="mainFlagModule1==8">{{queCount}} / 5</span>
   <div class="card-header">
     <h5>
-     {{queCount}}.&nbsp; {{question}}
+     {{queCount | numberConvertor : 'Devanagari'}}.&nbsp; {{question}}
     </h5>
   </div>
   <div class="card-block">

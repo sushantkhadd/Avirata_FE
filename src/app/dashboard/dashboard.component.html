@@ -21,28 +21,28 @@
             <div class="card">
               <div class="card-block">
                 <p class="pos-color mar-bottom-0" *ngIf="userType == 'trainee'">
-                  <i class="fa fa-bell-o font-weight-bold" [class.color_red]="remainDays<0"></i>&nbsp;<span [class.color_red]="remainDays<0">{{ 'Dashboard.utype3' | translate }} {{ 'Dashboard.date'
-                  | translate }} {{startDate| date:'dd-MM-yyyy'}} {{ 'Dashboard.to' | translate }} {{endDate| date:'dd-MM-yyyy'}}.</span>
-                  <b><span *ngIf="remainDays>0">{{ 'L2common.remains' | translate }} {{remainDays}}</span>
+                  <i class="fa fa-bell font-weight-bold" [class.color_red]="remainDays<0"></i>&nbsp;<span [class.color_red]="remainDays<0">{{ 'Dashboard.utype3' | translate }} {{ 'Dashboard.date'
+                  | translate }} {{startDate| date:'dd-MM-yyyy' | numberConvertor : 'Devanagari'}} {{ 'Dashboard.to' | translate }} {{endDate| date:'dd-MM-yyyy' | numberConvertor : 'Devanagari'}}.</span>
+                  <b><span *ngIf="remainDays>0">{{ 'L2common.remains' | translate }} {{remainDays | numberConvertor : 'Devanagari'}}</span>
                   <span *ngIf="remainDays==0">{{ 'L2common.lastDay' | translate }}</span>
                   </b>
                 </p>
                 <p class="pos-color mar-bottom-0" *ngIf="userType == 'master_trainer'">
-                  <i class="fa fa-bell-o font-weight-bold" [class.color_red]="remainDays<0"></i>&nbsp; <span [class.color_red]="remainDays<0">{{ 'Dashboard.utype1' | translate }} {{ 'Dashboard.date'
-                  | translate }} {{startDate| date:'dd-MM-yyyy'}} {{ 'Dashboard.to' | translate }} {{endDate| date:'dd-MM-yyyy'}}.</span>
-                  <b><span *ngIf="remainDays>0">{{ 'L2common.remains' | translate }} {{remainDays}}</span>
+                  <i class="fa fa-bell font-weight-bold" [class.color_red]="remainDays<0"></i>&nbsp; <span [class.color_red]="remainDays<0">{{ 'Dashboard.utype1' | translate }} {{ 'Dashboard.date'
+                  | translate }} {{startDate| date:'dd-MM-yyyy' | numberConvertor : 'Devanagari'}} {{ 'Dashboard.to' | translate }} {{endDate| date:'dd-MM-yyyy' | numberConvertor : 'Devanagari'}}.</span>
+                  <b><span *ngIf="remainDays>0">{{ 'L2common.remains' | translate }} {{remainDays | numberConvertor : 'Devanagari'}}</span>
                   <span *ngIf="remainDays==0">{{ 'L2common.lastDay' | translate }}</span></b>
                 </p>
                 <p class="pos-color mar-bottom-0" *ngIf="userType == 'co_ordinator'">
-                  <i class="fa fa-bell-o font-weight-bold" [class.color_red]="remainDays<0"></i>&nbsp; <span [class.color_red]="remainDays<0">{{ 'Dashboard.utype2' | translate }} {{ 'Dashboard.date'
-                  | translate }} {{startDate| date:'dd-MM-yyyy'}} {{ 'Dashboard.to' | translate }} {{endDate| date:'dd-MM-yyyy'}}.</span>
-                  <b><span *ngIf="remainDays>0">{{ 'L2common.remains' | translate }} {{remainDays}}</span>
+                  <i class="fa fa-bell font-weight-bold" [class.color_red]="remainDays<0"></i>&nbsp; <span [class.color_red]="remainDays<0">{{ 'Dashboard.utype2' | translate }} {{ 'Dashboard.date'
+                  | translate }} {{startDate| date:'dd-MM-yyyy' | numberConvertor : 'Devanagari'}} {{ 'Dashboard.to' | translate }} {{endDate| date:'dd-MM-yyyy' | numberConvertor : 'Devanagari'}}.</span>
+                  <b><span *ngIf="remainDays>0">{{ 'L2common.remains' | translate }} {{remainDays | numberConvertor : 'Devanagari'}}</span>
                   <span *ngIf="remainDays==0">{{ 'L2common.lastDay' | translate }}</span></b>
                 </p>
                 <p class="pos-color mar-bottom-0" *ngIf="userType == 'admin' || userType == 'superadmin'">
-                  <i class="fa fa-bell-o font-weight-bold" [class.color_red]="remainDays<0"></i>&nbsp; <span [class.color_red]="remainDays<0">{{ 'Dashboard.admin' | translate }} {{ 'Dashboard.date' |
-                  translate }} {{startDate| date:'dd-MM-yyyy'}} {{ 'Dashboard.to' | translate }} {{endDate| date:'dd-MM-yyyy'}}.</span>
-                  <b><span *ngIf="remainDays>0">{{ 'L2common.remains' | translate }} {{remainDays}}</span>
+                  <i class="fa fa-bell font-weight-bold" [class.color_red]="remainDays<0"></i>&nbsp; <span [class.color_red]="remainDays<0">{{ 'Dashboard.admin' | translate }} {{ 'Dashboard.date' |
+                  translate }} {{startDate| date:'dd-MM-yyyy' | numberConvertor : 'Devanagari'}} {{ 'Dashboard.to' | translate }} {{endDate| date:'dd-MM-yyyy' | numberConvertor : 'Devanagari'}}.</span>
+                  <b><span *ngIf="remainDays>0">{{ 'L2common.remains' | translate }} {{remainDays | numberConvertor : 'Devanagari'}}</span>
                   <span *ngIf="remainDays==0">{{ 'L2common.lastDay' | translate }}</span></b>
                 </p>
               </div>

@@ -183,7 +183,7 @@ export class LanguageService {
       paras.hide();
       // console.log("true")
     }
-    else{
+    else {
       // console.log("false")
     }
   }
@@ -194,35 +194,31 @@ export class LanguageService {
       this.modalClass.classList.add("modal-open");
       // console.log("true")
     }
-    else{
+    else {
       // console.log("false")
     }
   }
 
   toHideChild() {
     this.modalClass = document.getElementsByTagName("body")[0];
-    if (this.modalClass.classList.contains("modal-open1"))
-    {
+    if (this.modalClass.classList.contains("modal-open1")) {
       this.modalClass.classList.remove("modal-open1");
       var paras = jQuery("bs-modal-backdrop");
       paras.hide();
       // console.log("true")
     }
-    else
-    {
+    else {
       // console.log("false")
     }
   }
 
   toShowChild() {
     this.modalClass = document.getElementsByTagName("body")[0];
-    if (!this.modalClass.classList.contains("modal-open1"))
-    {
+    if (!this.modalClass.classList.contains("modal-open1")) {
       this.modalClass.classList.add("modal-open1");
       // console.log("true")
     }
-    else
-    {
+    else {
       // console.log("false")
     }
   }

@@ -38,7 +38,7 @@ export class PresentationComponent implements OnInit {
   public mainFlagModule4 = parseInt(window.localStorage.getItem('mainFlagModule4'));
   public mainFlagModule5 = parseInt(window.localStorage.getItem('mainFlagModule5'));
   public mainFlagModule1 = parseInt(window.localStorage.getItem('mainFlagModule1'));
-  public count = 1; finalCount; page; pdfURL;totalPages;
+  public count:any = 1; finalCount; page; pdfURL;totalPages;
   public imgUrl; downloadLink; download; newUrl; nextParentUrl;
   public showCFU; buttonShowFlag; question; selectedAnswer; submitDisabled; apiUrl;
   public questionSet = {}; options = []; showFinish; optionsStateDyanamic;

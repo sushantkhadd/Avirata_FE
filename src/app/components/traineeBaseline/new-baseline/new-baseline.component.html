@@ -62,9 +62,10 @@
     <div *ngIf="mode=='quiz' && quiz">
         <div *ngFor="let question of filteredQuestions;" class="position-relative">
                 <div class="badge badge-info ml-3 float-right mt-3 p-2 mr-2 counter">{{'Quiz.Question' | translate}}
-                  {{pager.index + 1}} / {{pager.count}}</div>
+                  {{pager.index + 1 | numberConvertor : 'Devanagari'}} / {{pager.count | numberConvertor : 'Devanagari'}}
+            </div>
                 <div class="card p-2">
-                <h6>{{pager.index + 1}}.
+                <h6 class="font-weight-bold">{{pager.index + 1 | numberConvertor : 'Devanagari'}}.
                     <strong><span [innerHTML]="question.name"></span></strong>
                 </h6>
                 <div class="row options ml-3">
