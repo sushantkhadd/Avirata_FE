@@ -101,7 +101,7 @@ export class FullLayoutComponent implements OnInit {
   public module0OnOffFlag;
   currentFlag0;
   shareableImage;
-  mainFlagModule0;
+  mainFlagModule0 = 0;
   userName;
   moduleFinishCount;
   levelData;
@@ -2223,29 +2223,23 @@ export class FullLayoutComponent implements OnInit {
     } else {
       var source = window.localStorage.getItem("source");
 
-      if (source == "module 0.1" || source == "module 0.2") {
+      if (source == "module 0.1") {
         this.mainFlagModule0 = 1;
         if (source == "module 0.1") {
           this.subFlagModule0 = 1;
-        } else if (source == "module 0.2") {
-          this.subFlagModule0 = 2;
-        }
-      } else if (source == "module 0.3") {
+        } 
+      } else if (source == "module 0.2") {
         this.mainFlagModule0 = 2;
+        if (source == "module 0.2") {
+          this.subFlagModule0 = 1;
+        } 
       } else if (
-        source == "module 0.4" ||
-        source == "module 0.4.1" ||
-        source == "module 0.4.2" ||
-        source == "module 0.4.3"
+        source == "module 0.3"
       ) {
         this.mainFlagModule0 = 3;
-        if (source == "module 0.4.1") {
+        if (source == "module 0.3") {
           this.subFlagModule0 = 1;
-        } else if (source == "module 0.4.2") {
-          this.subFlagModule0 = 2;
-        } else if (source == "module 0.4.3") {
-          this.subFlagModule0 = 3;
-        }
+        } 
       }
       window.localStorage.setItem(
         "subFlagModule0",

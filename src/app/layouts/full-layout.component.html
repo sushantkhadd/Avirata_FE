@@ -71,12 +71,12 @@
           </span>
 
           <ul class="collapse list-unstyled" id="module0Submenu">
-            <li [class.activeMenu]="router.url==='/modules/baseline'">
+            <li [class.activeMenu]="router.url==='/modules/Module0'">
               <span *ngIf="mainFlagModule0 < 1">
                 <a class="deactive-menu" routerLinkActive="active">{{'L2Module0.subMenu1-1' | translate}}</a>
               </span>
               <span *ngIf="mainFlagModule0 >= 1">
-                <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/baseline']">{{'L2Module0.subMenu1-1' | translate}}</a>
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/Module0']">{{'L2Module0.subMenu1-1' | translate}}</a>
               </span>
             </li>
             <li routerLinkActive="activeMenu">
@@ -84,7 +84,7 @@
                 <a class="deactive-menu" routerLinkActive="active">{{'L2Module0.subMenu1-2' | translate}}</a>
               </span>
               <span *ngIf="mainFlagModule0 >= 2">
-                <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/baseline/baseline1']">{{'L2Module0.subMenu1-2' | translate}}</a>
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/module0/baseline1']">{{'L2Module0.subMenu1-2' | translate}}</a>
               </span>
             </li>
             <li routerLinkActive="activeMenu">
@@ -92,7 +92,7 @@
                 <a class="deactive-menu" routerLinkActive="active">{{'L2Module0.subMenu1-3' | translate}}</a>
               </span>
               <span *ngIf="mainFlagModule0 >= 3">
-                <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/baseline/baseline2']">{{'L2Module0.subMenu1-3' | translate}}</a>
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/module0/baseline2']">{{'L2Module0.subMenu1-3' | translate}}</a>
               </span>
             </li>
           </ul>

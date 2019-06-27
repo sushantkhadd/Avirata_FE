@@ -16,7 +16,7 @@ export class McqcomponentComponent implements OnInit {
   @Input() public passFlags;public queCount;
   @Output() public sendAns = new EventEmitter<Object>();
   @ViewChild("eventRadioGroup") eventRadioGroup: DxRadioGroupComponent;
-  public statement; tasks; priorities = []; questionType; showAnswer; selectedAnswer; description;
+  public statement; tasks; priorities = []; questionType; showAnswer; selectedAnswer; description;queDescription;
   public correctAns; rightFlag; submitFlag; imgUrlJson; ansTypeFlag; showCorrectAns;
   public bunchCounter;bunchList;bunchOptions;userOptions={};mcqBunchFlag = false;totalBunchCounter = 1;bunchSelectedAns=[];
   public ansSelectCount; counter; selectedTasks = []; ans1; ans2; showAns1; showAns2; queUrl;title;
@@ -185,12 +185,19 @@ export class McqcomponentComponent implements OnInit {
       }
 
       console.log("mcqbunch options",this.bunchList,this.totalBunchCounter,this.tasks.length,this.bunchSelectedAns,dummyObj,this.userOptions)
-    } else if (window.localStorage.getItem('mainFlagModule5') == '7') {
+    } else if (window.localStorage.getItem('mainFlagModule5') == '7' || window.localStorage.getItem('mainFlagModule0') == '2') {
       console.log("data",this.data)
       this.priorities= []
+      if( window.localStorage.getItem('mainFlagModule0') == '2'){
+        this.bunchList = this.data.splice(0,1)  
+      }
+      else{
+        this.bunchList = this.data.questionlist.splice(0,1)    
+      }
       // this.priorities = this.data.questionlist[0].question;
-      this.bunchList = this.data.questionlist.splice(0,1)
+     
       this.statement = this.bunchList[0].question;
+      this.queDescription = this.bunchList[0].description;
       this.tasks = this.bunchList[0].options;
       for (var i = 0; i < this.tasks.length; i++)
       {
@@ -279,11 +286,7 @@ export class McqcomponentComponent implements OnInit {
     this.submitFlag = true
     this.selectedAnswer = $event.value
     if (
-      this.passFlags["popuptype"] != "description" &&
-      this.mysubModule0 != 3 &&
-      this.mysubModule0 != 2 &&
-      this.mysubModule6 != 2 &&
-      this.mysubModule7 != 2
+      this.passFlags["popuptype"] != "description" 
     ) {
       if (this.showAnswer == true) {
         if (this.questionType == 'mcqTextOption' && (window.localStorage.getItem('mainFlagModule2') == '3' || window.localStorage.getItem('mainFlagModule4') == '5' || window.localStorage.getItem('mainFlagModule3') == '9' || window.localStorage.getItem('mainFlagModule3') == '11' || window.localStorage.getItem('mainFlagModule3') == '5' || window.localStorage.getItem('mainFlagModule4')== '7')){
@@ -307,8 +310,18 @@ export class McqcomponentComponent implements OnInit {
               }
 
              }
-        } else if (window.localStorage.getItem('mainFlagModule5') == '7')
+        } else if (window.localStorage.getItem('mainFlagModule5') == '7' || window.localStorage.getItem('mainFlagModule0') == '2')
         {
+          console.log("bunchList",this.bunchList)
+          if(window.localStorage.getItem('mainFlagModule0') == '2'){
+            let rightanswer ;
+            rightanswer = this.lang.get(
+              "aesEncryptionKey",
+              this.bunchList[0].rightanswer)
+              this.bunchList[0].rightanswer = rightanswer
+              console.log("rightans",rightanswer,this.bunchList)
+          }
+
           for(let j=0; j< this.bunchList[0].options.length;j++){
             if($event.value == this.bunchList[0].options[j].value){
               var optionId = this.bunchList[0].options[j].option
@@ -382,7 +395,7 @@ export class McqcomponentComponent implements OnInit {
       this.lang.toShow();
      this.data.description = this.data.description
      console.log("data.sescr",this.data.description)
-    }else if(window.localStorage.getItem('mainFlagModule5') == '7'){
+    }else if(window.localStorage.getItem('mainFlagModule5') == '7' || window.localStorage.getItem('mainFlagModule0') == '2'){
       this.rankModal.show()
       this.lang.toShow();
 
@@ -559,15 +572,15 @@ export class McqcomponentComponent implements OnInit {
           this.eventRadioGroup.instance.option("value", '');
         }
       }
-    } else if(window.localStorage.getItem('mainFlagModule5') == '7'){
+    } else if(window.localStorage.getItem('mainFlagModule5') == '7' || window.localStorage.getItem('mainFlagModule0') == '2'){
       this.rankModal.hide()
       this.lang.toHide();
       // this.queCount = this.queCount + 1;
       // console.log("quecount",this.queCount)
-   
+      if((window.localStorage.getItem('mainFlagModule5') == '7')){
       if(Object.keys(this.userOptions).length == 3){
         this.sendAns.emit(this.userOptions)
-       }
+      }
        else{
         this.priorities= []
         // this.priorities = this.data.questionlist[0].question;
@@ -584,14 +597,36 @@ export class McqcomponentComponent implements OnInit {
         }
        console.log("options",this.bunchList,this.userOptions)
       }
+
+      if(this.queCount >= 3){
+        this.queCount = 3;
+      }
+    }
+    else if((window.localStorage.getItem('mainFlagModule0') == '2')){
+      console.log("userOptions",this.userOptions)
+      this.sendAns.emit(this.userOptions)
+      this.priorities= []
+        // this.priorities = this.data.questionlist[0].question;
+        this.bunchList = this.data.splice(0,1)
+        this.statement = this.bunchList[0].question;
+        this.tasks = this.bunchList[0].options;
+        for (var i = 0; i < this.tasks.length; i++)
+        {
+          if (this.bunchList[0].options[i].value != "")
+          {
+            this.priorities.push(this.bunchList[0].options[i].value)
+            console.log("priorities",this.priorities)
+          }
+        }
+       console.log("options",this.bunchList,this.userOptions)
+       this.userOptions={};
+       this.queDescription="";
+    }
       this.rankModal.hide()
       this.lang.toHide();
       this.submitFlag = false;
       this.queCount = this.queCount + 1;
       console.log("quecount1",this.queCount)
-      if(this.queCount >= 3){
-        this.queCount = 3;
-      }
     }
     else {
       console.log("this.tasks",this.tasks,this.selectedAnswer)
