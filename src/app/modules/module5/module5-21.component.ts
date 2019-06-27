@@ -37,7 +37,7 @@ export class Module521Component implements OnInit {
   public startPdf;
   mainFlagModule5;
   subFlagModule5;
-  finishJSONBody = {};
+  finishJSONBody = {};urlArray = {};thumb_title;flag;
   private pdfUrl = environment.pdfUrl;submitFlag;
   pdf1;personId;userAnswer= {};
   public questionArray;que1;queId1;que2;queId2;que3;queId3;que4;queId4;que5;queId5;que6;queId6;que7;queId7;answer1;answer2;answer3;answer4;answer5;answer6;answer7;
@@ -81,7 +81,7 @@ export class Module521Component implements OnInit {
     this.answer7="";
 
     if(this.mainFlagModule5 == 21){
-      if(this.subFlagModule5 == 1){
+      if(this.subFlagModule5 == 1 || this.subFlagModule5 == 3){
         this.startPdf = false;
       }
       else if(this.subFlagModule5 == 2){
@@ -89,7 +89,31 @@ export class Module521Component implements OnInit {
       }
     }
     if (this.mainFlagModule5 > 21) {
-     
+      this.flag = 0;
+      this.showCFU = false;
+      this.download = false;
+      this.link = "";
+      this.apiUrl = "/assets/jsonfile/module4_6.json";
+      this.finalCount = 22;
+      this.passValues["download"] = this.download;
+      this.passValues["link"] = this.link;
+      this.passValues["finalcount"] = this.finalCount;
+      this.passValues["showcfu"] = this.showCFU;
+      this.passValues["apiurl"] = this.apiUrl;
+      this.passValues["unlockView"] = "static";
+      var unlockJson = {};
+      unlockJson = JSON.parse(window.localStorage.getItem("currentJson5"));
+      if (unlockJson["children"].length > 0) {
+        var index = unlockJson["children"].findIndex(
+          item => item.source == "module 5.21"
+        );
+        if (unlockJson["children"][index].url != null)
+        {
+          var mainJson = JSON.parse(unlockJson["children"][index].url);
+          this.urlArray["src1"] = mainJson["5.21.1"];
+          this.urlArray["src2"] = mainJson["5.21.3"];
+        }
+      }
     }
   }
   finishPDF(e) {
@@ -103,9 +127,38 @@ export class Module521Component implements OnInit {
         data => {
           if (data["message"] == "submodule finish" || data["message"] == "submodule finish next uuid is") {
            window.localStorage.setItem("uuid",data['data'].nextuuid)
-           this.subFlagModule5 = 2;
-           window.localStorage.setItem("subFlagModule5","2");
-           this.start1("");
+           if(this.subFlagModule5 == 3){
+            var parentUrl = JSON.parse(data['data'].parenturl)
+            var url ={}
+            url['5.21.1'] = parentUrl['5.21.1'];
+            url['5.21.3'] = parentUrl['5.21.3'];
+            console.log("urllll",url)
+            var current5 = [];
+            current5 = JSON.parse(window.localStorage.getItem("currentJson5")); 
+            var index = current5["children"].findIndex(
+              item => item.source == "module 5.21" );
+            current5["children"][index].url = JSON.stringify(url); 
+            window.localStorage.setItem("currentJson5", JSON.stringify(current5));
+
+              this.mainFlagModule5 = 22;
+              window.localStorage.setItem('mainFlagModule5', '22');
+              window.localStorage.setItem('subFlagModule5', '1');
+              window.localStorage.setItem('source', 'module 5.22.1');
+              var obj = {
+              "type": "submodule",
+              "route": true,
+              "current": this.translate.instant('L2Module5.subMenu5-21'),
+              "next": this.translate.instant('L2Module5Finish.subMenu5-22'),
+              "nextRoute": "/modules/module5/Module5.22"
+              }
+              this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+              this.Module5Service.setLocalStorage5(22);
+           }
+           else{
+            this.subFlagModule5 = 2;
+            window.localStorage.setItem("subFlagModule5","2");
+            this.start1("");
+           }
           }
         },
         error => {
@@ -129,12 +182,14 @@ export class Module521Component implements OnInit {
           this.passValues["url"] = data["data"].url;
           // this.passValues["url"] ="https://s3-ap-southeast-1.amazonaws.com/maacpd/Level2/Module1/1.10/RM-+1.pdf"
           this.startPdf = true;
+          var url ={}
+          url['5.21.1'] = data["data"].url;
+          console.log("urllll",url)
           var current5 = [];
-          current5 = JSON.parse(window.localStorage.getItem("currentJson5"));
+          current5 = JSON.parse(window.localStorage.getItem("currentJson5")); 
           var index = current5["children"].findIndex(
-            item => item.source == "module 5.21"
-          );
-          current5["children"][index].url = data["data"].url;
+            item => item.source == "module 5.21" );
+          current5["children"][index].url = JSON.stringify(url); 
           window.localStorage.setItem("currentJson5", JSON.stringify(current5));
         }
       },
@@ -309,19 +364,23 @@ export class Module521Component implements OnInit {
      ).subscribe(
        data => {
          if (data["message"] == "submodule finish") {
-        this.mainFlagModule5 = 22;
-        window.localStorage.setItem('mainFlagModule5', '22');
-        window.localStorage.setItem('subFlagModule5', '1');
-        window.localStorage.setItem('source', 'module 5.22.1');
-        var obj = {
-        "type": "submodule",
-        "route": true,
-        "current": this.translate.instant('L2Module5.subMenu5-21'),
-        "next": this.translate.instant('L2Module5Finish.subMenu5-22'),
-        "nextRoute": "/modules/module5/Module5.22"
-      }
-      this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
-      this.Module5Service.setLocalStorage5(22);
+        this.subFlagModule5 = 3;
+        window.localStorage.setItem('subFlagModule5', '3');
+        window.localStorage.setItem("uuid",data['data'].nextuuid)
+        this.start();
+      //   this.mainFlagModule5 = 22;
+      //   window.localStorage.setItem('mainFlagModule5', '22');
+      //   window.localStorage.setItem('subFlagModule5', '1');
+      //   window.localStorage.setItem('source', 'module 5.22.1');
+      //   var obj = {
+      //   "type": "submodule",
+      //   "route": true,
+      //   "current": this.translate.instant('L2Module5.subMenu5-21'),
+      //   "next": this.translate.instant('L2Module5Finish.subMenu5-22'),
+      //   "nextRoute": "/modules/module5/Module5.22"
+      // }
+      // this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+      // this.Module5Service.setLocalStorage5(22);
          }
        },
        error => {
@@ -423,18 +482,47 @@ export class Module521Component implements OnInit {
   showPdf(){
     this.passValues["unlockView"] = "static";
     this.startPdf = true;
-    this.passValues['url'] = "https://s3-ap-southeast-1.amazonaws.com/maacpd/Level2/Module1/1.10/RM-+1.pdf"
+    var unlockJson = {};
+    unlockJson = JSON.parse(window.localStorage.getItem("currentJson5"));
+    if (unlockJson["children"].length > 0) {
+      var index = unlockJson["children"].findIndex(
+        item => item.source == "module 5.21"
+      );
+      if (unlockJson["children"][index].url != null)
+      {
+        var mainJson = JSON.parse(unlockJson["children"][index].url);
+        this.urlArray["src1"] = mainJson["5.21.1"];
+      }
+    }
+    this.passValues['url'] = this.urlArray["src1"]
     this.pdfModal.show();
     this.LanguageService.toShow();
   }
 
  
-    numberOnly(event): boolean {
+    numberOnly(event) {
       const charCode = (event.which) ? event.which : event.keyCode;
+      console.log(event)
       if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-        return false;
+        event.preventDefault(); 
       }
-      return true;
-    
+  }
+
+  showVideo(src, title,value) {
+    // this.staticImageModal.show();
+    // this.statVideoFlag = true;
+    // this.statImageFlag = false;
+    if (value == 1)
+    {
+      this.passValues['url'] = src;
+      this.thumb_title = title;
+      this.flag = value;
+    } else if (value == 2)
+    {
+      this.passValues['url'] = src;
+      this.thumb_title = title;
+      this.flag = value;
+    }
+
   }
 }

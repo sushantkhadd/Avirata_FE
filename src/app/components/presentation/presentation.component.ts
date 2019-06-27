@@ -39,7 +39,7 @@ export class PresentationComponent implements OnInit {
   public mainFlagModule5 = parseInt(window.localStorage.getItem('mainFlagModule5'));
   public mainFlagModule1 = parseInt(window.localStorage.getItem('mainFlagModule1'));
   public count:any = 1; finalCount; page; pdfURL;totalPages;
-  public imgUrl; downloadLink; download; newUrl; nextParentUrl;
+  public imgUrl; downloadLink; download; newUrl; nextParentUrl;helplineFlag;
   public showCFU; buttonShowFlag; question; selectedAnswer; submitDisabled; apiUrl;
   public questionSet = {}; options = []; showFinish; optionsStateDyanamic;
   @Output() public ansCorrect = new EventEmitter();  //For interest Video 5.6 to send result success
@@ -75,6 +75,7 @@ export class PresentationComponent implements OnInit {
         {
           if (event == "fifty_fifty")
           {
+            this.askMeModal.hide();
             this.reset();
             this.rewardImgUrl1 = this.imageJson["f2"];
             this.options = [];
@@ -978,10 +979,12 @@ export class PresentationComponent implements OnInit {
     // this.LanguageService.toHideChild();
   }
 
-  askMeshow(){
+  askMeshow(value){
+    this.helplineFlag = value
     this.askMeModal.show();
     this.LanguageService.toShow();
   }
+
 
   askMeModalHide(){
     this.askMeModal.hide();

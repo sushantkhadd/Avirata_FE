@@ -22,7 +22,7 @@ export class VideoPlayerComponent implements OnInit {
   public options = [];
   public question;
   public ismuted = false; selectedAnswer; submitDisabled;
-  public optionsArray; rightanswer;
+  public optionsArray; rightanswer;helplineFlag;
   @Input() public inputData;
   @Output() public finishCall = new EventEmitter<any>();
   @Output() public module5Emit = new EventEmitter<any>();
@@ -78,6 +78,7 @@ export class VideoPlayerComponent implements OnInit {
       data => {
         if (data["message"] == "event is done") {
           if (event == "fifty_fifty") {
+            this.askMeModal.hide();
             this.resetRadio();
             this.rewardImgUrl1 = this.imageJson["f2"];
             this.options = [];
@@ -614,10 +615,11 @@ export class VideoPlayerComponent implements OnInit {
 
   closeToasterPopup() {
     this.toasterPopupModal.hide();
-    // this.LanguageService.toHide();
+    // this.La"nguageService.toHide();
   }
 
-  askMeshow(){
+  askMeshow(value){
+    this.helplineFlag = value
     this.askMeModal.show();
     this.LanguageService.toShow();
   }
