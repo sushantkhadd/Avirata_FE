@@ -6,6 +6,7 @@ import { LocalstoragedetailsService } from "src/app/services/localstoragedetails
 import { LanguageService } from "./../language.service";
 import { ModalDirective } from "ngx-bootstrap";
 import { Router } from '@angular/router';
+import { SharedDataService } from '../services/shared-data.service';
 
 @Component({
   selector: "app-dashboard",
@@ -16,7 +17,7 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
   public missingPost: EventEmitter<any> = new EventEmitter();
 
-  constructor(private DashboardService: DashboardService, public translate: TranslateService, public toastr: ToastsManager, private router: Router, public lang: LanguageService, vcr: ViewContainerRef, public LocalstoragedetailsService: LocalstoragedetailsService, ) {
+  constructor(private DashboardService: DashboardService, public translate: TranslateService, public toastr: ToastsManager, private router: Router, public lang: LanguageService, vcr: ViewContainerRef, public LocalstoragedetailsService: LocalstoragedetailsService, private sharedService: SharedDataService ) {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
@@ -123,6 +124,16 @@ export class DashboardComponent implements OnInit {
     else if (this.userType == "admin") {
     }
   }
+
+  ngOnDestroy() {
+    if (localStorage.getItem("hidemenu") == 'false') {
+      this.router.navigate(["/modules/admin_panel"]);
+      let obJ = {};
+      obJ["isAdmin"] = true;
+      this.sharedService.sendData(obJ);
+      window.localStorage.setItem("hidemenu", "true");
+    }
+  }
   rankModalHide(){
     this.rankModal.hide();
     this.lang.toHide();
@@ -133,6 +144,6 @@ export class DashboardComponent implements OnInit {
   //   );
   // }
   rankConfirmNext(){
-    
+
   }
 }

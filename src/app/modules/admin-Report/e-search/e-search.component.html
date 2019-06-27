@@ -55,10 +55,154 @@
         </div>
       </div>
     </div>
-
-    <div class="card" *ngIf="result">
+    <div class="card l1 mt-3" *ngIf="result">
       <div class="card-header">
-        <strong>Module Status</strong>
+        <strong>Level 1 Module Status</strong>
+      </div>
+      <div class="card-block pad-b-t-0 pad-l-r-0">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="text-center"></th>
+                <th class="text-center">Module 1</th>
+                <th class="text-center">Module 2</th>
+                <th class="text-center">Module 3</th>
+                <th class="text-center">Module 4</th>
+                <th class="text-center">Module 5</th>
+                <th class="text-center">Module 6</th>
+                <th class="text-center">Module 7</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="text-center">
+                <td class="text-left font-weight-bold">
+                  Status:
+                </td>
+                <td>
+                  <span *ngIf="data.module1">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.module1">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.module2">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.module2">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.module3">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.module3">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.module4">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.module4">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.module5">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.module5">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.module6">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.module6">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.module7">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.module7">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+              </tr>
+              <tr class="text-center">
+                <td class="text-left font-weight-bold"> Module start date: </td>
+                <td>
+                  <span *ngIf="data.module1_start == '0/0/0' || data.module1_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.module1_start !== '0/0/0' && data.module1_start !== 'null'">
+                    {{ data.module1_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.module2_start == '0/0/0' || data.module1_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.module2_start !== '0/0/0' && data.module2_start !== 'null'">
+                    {{ data.module2_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.module3_start == '0/0/0' || data.module3_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.module3_start !== '0/0/0' && data.module3_start !== 'null'">
+                    {{ data.module3_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.module4_start == '0/0/0'|| data.module4_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.module4_start !== '0/0/0' && data.module4_start !== 'null'">
+                    {{ data.module4_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.module5_start == '0/0/0'|| data.module5_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.module5_start !== '0/0/0' && data.module5_start !== 'null'">
+                    {{ data.module5_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.module6_start === '0/0/0'|| data.module6_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.module6_start !== '0/0/0' && data.module6_start !== 'null'">
+                    {{ data.module6_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.module7_start === '0/0/0' || data.module7_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.module7_start !== '0/0/0' && data.module7_start !== 'null'">
+                    {{ data.module7_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card l2 mt-3" *ngIf="result">
+      <div class="card-header">
+        <strong>Level 2 Module Status</strong>
       </div>
       <div class="card-block pad-b-t-0 pad-l-r-0">
         <div class="table-responsive">
@@ -218,8 +362,170 @@
         </div>
       </div>
     </div>
+    <div class="card l3 mt-3" *ngIf="result">
+      <div class="card-header">
+        <strong>Level 3 Module Status</strong>
+      </div>
+      <div class="card-block pad-b-t-0 pad-l-r-0">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="text-center"></th>
+                <th class="text-center">Baseline</th>
+                <th class="text-center">Module 1</th>
+                <th class="text-center">Module 2</th>
+                <th class="text-center">Module 3</th>
+                <th class="text-center">Module 4</th>
+                <th class="text-center">Module 5</th>
+                <!-- <th class="text-center">Endline</th>
+                <th class="text-center">Project</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="text-center">
+                <td class="text-left font-weight-bold">
+                  Status:
+                </td>
+                <td>
+                  <span *ngIf="data.l3module0">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.l3module0">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l3module1">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.l3module1">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l3module2">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.l3module2">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l3module3">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.l3module3">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l3module4">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.l3module4">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l3module5">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.l3module5">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <!-- <td>
+                  <span *ngIf="data.l3module6">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.l3module6">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l3module7">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.l3module7">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td> -->
+              </tr>
+              <tr class="text-center">
+                <td class="text-left font-weight-bold"> Module start date: </td>
+                <td>
+                  <span *ngIf="data.l3module0_start == '0/0/0' || data.l3module0_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.l3module0_start !== '0/0/0' && data.l3module0_start !== 'null'">
+                    {{ data.l3module0_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l3module1_start == '0/0/0' || data.l3module1_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.l3module1_start !== '0/0/0' && data.l3module1_start !== 'null'">
+                    {{ data.l3module1_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l3module2_start == '0/0/0' || data.l3module1_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.l3module2_start !== '0/0/0' && data.l3module2_start !== 'null'">
+                    {{ data.l3module2_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l3module3_start == '0/0/0' || data.l3module3_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.l3module3_start !== '0/0/0' && data.l3module3_start !== 'null'">
+                    {{ data.l3module3_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l3module4_start == '0/0/0'|| data.l3module4_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.l3module4_start !== '0/0/0' && data.l3module4_start !== 'null'">
+                    {{ data.l3module4_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l3module5_start == '0/0/0'|| data.l3module5_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.l3module5_start !== '0/0/0' && data.l3module5_start !== 'null'">
+                    {{ data.l3module5_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <!-- <td>
+                  <span *ngIf="data.l3module6_start === '0/0/0'|| data.l3module6_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.l3module6_start !== '0/0/0' && data.l3module6_start !== 'null'">
+                    {{ data.l2module6_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l3module7_start === '0/0/0' || data.l3module7_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.l3module7_start !== '0/0/0' && data.l3module7_start !== 'null'">
+                    {{ data.l2module7_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="row" *ngIf="result">
+  <div class="row mt-3" *ngIf="result">
     <div class="col-md-6 pl-0">
       <div class="card">
         <div class="card-header">
@@ -354,14 +660,14 @@
                 <p *ngIf="InitialPosition" class="mar-btm-0">{{data.position}}</p>
                 <p *ngIf="UpdatedPosition" class="mar-btm-0">{{position}}</p>
               </div>
-              <div class="col-sm-4 col-xs-8 col-md-2">
+              <div class="">
                 <button class="btn btn-primary btn-sm" (click)="positionChangeModal.show();PositionModal()"><i class="fa fa-edit"></i>&nbsp;Edit</button>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-md-12 pr-0 xs">
+      <div class="col-md-12 pr-0 xs mt-3">
 
         <div class="card">
           <div class="card-header">
@@ -509,7 +815,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header bg-danger">
-        <h5>Edit Designation</h5>
+        <h5 class="text-white">Edit Designation</h5>
         <button type="button" class="close" (click)="positionChangeModal.hide();" aria-label="Close" id="btnCloseModal">
           <span aria-hidden="true" class="text-white">&times;</span>
         </button>

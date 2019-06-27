@@ -71,6 +71,7 @@ export class ParticipantsModuleStatusComponent implements OnInit {
 
   getAllParticipantsData(level) {
     // this.total = 0;
+    this.loader = false;
     this.jsonBody = {};
     this.jsonBody['activity'] = "allparticipant";
     this.jsonBody['role'] = this.searchTxt;
@@ -92,11 +93,7 @@ export class ParticipantsModuleStatusComponent implements OnInit {
         if (data['message'] == "ok") {
           this.allParticipantsData = data['data'].result;
           localStorage.setItem("selectedLevel", level)
-          if (this.allParticipantsData) {
-            this.loader = false;
-          } else {
-            this.loader = true;
-          }
+          this.loader = true;
           this.allParticipantsData.sort(function (a, b) {
             var A = a.district_name.toLowerCase();
             var B = b.district_name.toLowerCase();
@@ -141,6 +138,7 @@ export class ParticipantsModuleStatusComponent implements OnInit {
           this.total=0
            this.allParticipantsData = []
           this.exportData = []
+          this.loader = true;
         } else {
           this.toastr.error(this.translate.instant("errors.tryAgain"));
         }
@@ -156,7 +154,7 @@ export class ParticipantsModuleStatusComponent implements OnInit {
         tempDist=element['districtid']
       }
     });
-
+    this.loader = false;
     this.showDetails = true
     this.selectedDist = tempDist
     this.selectedModuleNo = moduleNo
@@ -180,6 +178,7 @@ export class ParticipantsModuleStatusComponent implements OnInit {
       data => {
         if (data['message'] == "ok") {
           this.detailsData = data['data'].results
+          this.loader = true;
           this.detailsData.sort(function (a, b) {
             var A = a.name.toLowerCase();
             var B = b.name.toLowerCase();
@@ -236,6 +235,7 @@ export class ParticipantsModuleStatusComponent implements OnInit {
           this.button2 = false;
           this.button3 = false;
           this.button4 = false;
+          this.loader = true;
         } else {
           this.toastr.error(this.translate.instant("errors.tryAgain"));
         }

@@ -186,7 +186,7 @@
             </div>
 
 
-            <div class="form-group row">
+            <!-- <div class="form-group row">
               <label for="aadharNumber" class="col-md-3 col-form-label font-weight-bold">Aadhar Number</label>
               <div class="col-md-6">
                 <input type="text" class="form-control" id="aadharNumber" name="aadharNumber" [(ngModel)]="aadharNumber"
@@ -199,11 +199,10 @@
               <div class="col-md-6 offset-md-3">
                 <div [hidden]="adhar.valid || adhar.pristine" class="alert alert-danger errorMessage">
                   <div [hidden]="!adhar.hasError('minlength')">Aadhar number should be 12 digits</div>
-                  <!-- <div [hidden]="!adhar.hasError('required')">Please Enter correct Aadhar number</div> -->
                   <div [hidden]="!adhar.hasError('pattern') ">Invalid Aadhar number</div>
                 </div>
               </div>
-            </div>
+            </div>-->
 
             <div class="form-group row">
               <label for="selectedDistrict" class="col-md-3 col-form-label font-weight-bold">Select District <span class="color_red">*</span></label>
@@ -246,13 +245,13 @@
               <div class="col-sm-1 col-md-6 controls">
                 <select class="form-control" id="dateofJoin" [(ngModel)]="dateofJoin" [ngModelOptions]="{standalone: true}" name="dateofJoin"
                   (change)="onDojChange()">
-                  <option disabled>Select</option>
+                  <option value="" disabled>Select</option>
                   <option *ngFor="let item of dojJson" [value]="item">{{item}}</option>
                 </select>
               </div>
             </div>
 
-            <div class="form-group row">
+            <!-- <div class="form-group row">
               <label class="col-md-3 form-control-label font-weight-bold" for="bankname">Bank Name</label>
               <div class="col-sm-8 col-xs-12 col-md-6 controls">
                 <div class="input-prepend input-group">
@@ -260,35 +259,37 @@
                     maxlength="70" pattern="^([a-zA-Z]+)[ A-Za-z0-9_@./#&+\-,]*$" autocomplete="off">
                 </div>
               </div>
-            </div>
+            </div> -->
 
-            <div class="form-group row">
+            <!-- <div class="form-group row">
               <label class="col-md-3  form-control-label font-weight-bold" for="accountno">Bank Account
                 Number</label>
               <div class="col-sm-8 col-xs-12 col-md-6 controls">
                 <div class="input-prepend input-group">
-                  <input class="form-control" id="accountno" name="accountno" [(ngModel)]="accountNo" maxlength="20"
-                    pattern="^[0-9]+$" #accountno="ngModel" autocomplete="off">
+                  <input class="form-control" id="accountno" name="accountno" [(ngModel)]="accountNo" maxlength="18" minlength="9"
+                    pattern="[0-9]{9,18}" #accountno="ngModel" autocomplete="off">
                 </div>
               </div>
-            </div>
+            </div> -->
 
-            <div class="form-group row">
+            <!-- <div class="form-group row">
               <label class="col-md-3 form-control-label font-weight-bold" for="ifsccode">IFSC Code</label>
               <div class="col-sm-8 col-xs-12 col-md-6 controls">
                 <div class="input-prepend input-group">
-                  <input class="form-control" id="ifsccode" name="ifsccode" [(ngModel)]="ifscCode"
+                  <input class="form-control" pattern="^[A-Za-z]{4}0[A-Z0-9a-z]{6}$" id="ifsccode" name="ifsccode"
+                    placeholder="For example : SBIN0123456"
+                    maxlength="11" [(ngModel)]="ifscCode"
                     #ifsccode="ngModel" autocomplete="off">
                 </div>
               </div>
-            </div>
+            </div> -->
 
-            <div class="form-group row">
+            <!-- <div class="form-group row">
               <label class="col-md-3  form-control-label font-weight-bold" for="underGraduate">Undergraduation</label>
               <div class="col-sm-4 col-xs-12 col-md-6">
                 <select id="underGraduate" class="form-control" name="underGraduate" [(ngModel)]="underGraduate" [ngModelOptions]="{standalone: true}"
                   autofocus>
-                  <option value="">Select</option>
+                  <option value="" disabled>Select</option>
                   <option value="B.A.">B.A.</option>
                   <option value="B.Com.">B.Com.</option>
                   <option value="B.Sc.">B.Sc.</option>
@@ -299,28 +300,24 @@
                 <input class="form-control input-sm" id="otherUgSpecial" (focus)="otherUgFlag=true" (focusout)="otherUgFlag=false"
                   [(ngModel)]="otherUgSpecial" [ngModelOptions]="{standalone: true}" maxlength="50" name="otherUgSpecial"
                   placeholder="Other Degree" type="text" #other="ngModel" autocomplete='off' >
-                <!-- <span class="help-block right" *ngIf="otherUgFlag">{{'Common.maxLetterLimit' | translate}}
-                  {{otherUgCount}}/50</span> -->
               </div>
-            </div>
+            </div> -->
 
-            <div class="form-group row">
+            <!-- <div class="form-group row">
               <label class="col-md-3 form-control-label font-weight-bold" for="ugSpecialisation">Under Graduate
                 Specialisation </label>
               <div class="col-sm-4 col-xs-12 col-md-6">
                 <input class="form-control input-sm" id="ugSpecialisation" (focus)="ugSpecialisationFlag=true" (focusout)="ugSpecialisationFlag=false"
                   name="ugSpecialisation" [(ngModel)]="ugSpecialisation" maxlength="50" type="text" autocomplete='off'
                   >
-                <!-- <span class="help-block right" *ngIf="ugSpecialisationFlag">{{'Common.maxLetterLimit' | translate}}
-                  {{ugSpecialisationCount}}/50</span> -->
               </div>
-            </div>
+            </div> -->
 
-            <div class="form-group row">
+            <!-- <div class="form-group row">
               <label class="col-md-3  form-control-label font-weight-bold" for="postGraduate">Post Graduate</label>
               <div class="col-sm-4 col-xs-12 col-md-6">
                 <select class="form-control" id="postGraduate" name="postGraduate" [(ngModel)]="postGraduate" [ngModelOptions]="{standalone: true}">
-                  <option value="">Select</option>
+                  <option value="" disabled>Select</option>
                   <option value="M.A.">M.A.</option>
                   <option value="M.Com.">M.Com.</option>
                   <option value="M.Sc.">M.Sc.</option>
@@ -331,23 +328,19 @@
                 <input type="text" id="otherPgSpecial" (focus)="otherPgSpecialFlag=true" (focusout)="otherPgSpecialFlag=false"
                   [(ngModel)]="otherPgSpecial" [ngModelOptions]="{standalone: true}" maxlength="50" class="form-control"
                   placeholder="Other Degree" autocomplete='off' autofocus>
-                <!-- <span class="help-block right" *ngIf="otherPgSpecialFlag">{{'Common.maxLetterLimit' | translate}}
-                  {{otherPgSpecialCount}}/50</span> -->
               </div>
-            </div>
-            <div class="form-group row">
+            </div> -->
+            <!-- <div class="form-group row">
               <label class="col-md-3  form-control-label font-weight-bold" for="pgSpecialisation">Post Graduate
                 Specialisation</label>
               <div class="col-sm-4 col-md-6 col-xs-12">
                 <input class="form-control input-sm" id="pgSpecialisation" (focus)="pgSpecialisationFlag=true" (focusout)="pgSpecialisationFlag=false"
                   name="pgSpecialisation" [(ngModel)]="pgSpecialisation" [ngModelOptions]="{standalone: true}" maxlength="50"
                   type="text" autocomplete='off'>
-                <!-- <span class="help-block right" *ngIf="pgSpecialisationFlag">{{'Common.maxLetterLimit' | translate}}
-                  {{pgSpecialisationCount}}/50</span> -->
               </div>
-            </div>
+            </div> -->
 
-            <div class="form-group row">
+            <!-- <div class="form-group row">
               <label class="col-md-3  form-control-label font-weight-bold" for="professional">Professional</label>
               <div class="col-sm-4 col-xs-12 col-md-6">
                 <select id="professional" class="form-control" [(ngModel)]="professional" [ngModelOptions]="{standalone: true}"
@@ -361,33 +354,29 @@
                   <option value="A.T.D.">A.T.D.</option>
                 </select>
               </div>
-            </div>
-            <div class="form-group row">
+            </div> -->
+            <!-- <div class="form-group row">
               <label class="col-md-3  form-control-label font-weight-bold" for="professionalSpecialization">Professional
                 Specialisation</label>
               <div class="col-sm-4 col-xs-12 col-md-6">
                 <input class="form-control input-sm" id="professionalSpecialization" (focus)="professionalSpecializationFlag=true"
                   (focusout)="professionalSpecializationFlag=false" name="professionalSpecialization" [(ngModel)]="professionalSpecialization"
                   [ngModelOptions]="{standalone: true}" maxlength="80" type="text" autocomplete='off'>
-                <!-- <span class="help-block right" *ngIf="professionalSpecializationFlag">{{'Common.maxLetterLimit' |
-                  translate}} {{professionalSpecializationCount}}/80</span> -->
               </div>
-            </div>
+            </div> -->
 
-            <div class="form-group row">
+            <!-- <div class="form-group row">
               <label class="col-md-3  form-control-label font-weight-bold" for="othersQualification">Other</label>
               <div class="col-sm-4 col-xs-12 col-md-6">
                 <input class="form-control input-sm" id="othersQualification" (focus)="othersQualificationFlag=true" (focusout)="othersQualificationFlag=false"
                   name="othersQualification" [(ngModel)]="othersQualification" [ngModelOptions]="{standalone: true}" maxlength="200"
                   type="text" autocomplete='off'>
-                <!-- <span class="help-block right" *ngIf="othersQualificationFlag">{{'Common.maxLetterLimit' | translate}}
-                  {{othersQualificationCount}}/200</span> -->
               </div>
-            </div>
+            </div> -->
 
             <div class="form-group row">
-              <div class="col-md-10 btn-top-m10">
-                <button class="btn btn-primary float-right"
+              <div class="col-md-10 btn-top-m10 pr-1">
+                <button class="btn btn-primary float-right mr-5"
                   (click)="createNewUser()" [disabled]="formNewuser.form.invalid">
                   <i class="fa fa-plus-square"></i> &nbsp;Add Co-ordinator</button>
               </div>

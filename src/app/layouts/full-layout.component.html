@@ -13,7 +13,7 @@
       <!-- <a class="nav-link" routerLinkActive="active" [routerLink]="['/dashboard']"><i class="icon-speedometer"></i>
         {{'Dashboard.Dashboard' | translate}}</a> -->
       <ul class="nav d-block">
-        <li class="nav-item" [class.activeMenu]="router.url==='/dashboard'">
+        <li class="nav-item" [class.activeMenu]="router['url']==='/dashboard'">
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/dashboard']">
             <i class="icon-speedometer"></i>&nbsp;&nbsp; {{'Dashboard.Dashboard' | translate}}</a>
           <!-- <button (click)="successModal.show()">successModal</button> -->
@@ -45,10 +45,10 @@
                 routerLinkActive="active">
                 <i class="icon-calculator"></i>{{'Dashboard.statistics' | translate}}</a>
               <ul class="collapse list-unstyled" id="authSubmenu1">
-                <li class="nav-item" [class.activeMenu]="router.url==='/modules/masterstat'">
+                <li class="nav-item" [class.activeMenu]="router['url']==='/modules/masterstat'">
                   <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/masterstat']">{{'Quiz.registered' | translate}}</a>
                 </li>
-                <li class="nav-item" [class.activeMenu]="router.url==='/modules/presentTrainee'">
+                <li class="nav-item" [class.activeMenu]="router['url']==='/modules/presentTrainee'">
                   <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/presentTrainee']">{{'Quiz.not accepted' | translate}}</a>
                 </li>
               </ul>
@@ -71,7 +71,7 @@
           </span>
 
           <ul class="collapse list-unstyled" id="module0Submenu">
-            <li [class.activeMenu]="router.url==='/modules/Module0'">
+            <li [class.activeMenu]="router['url']==='/modules/Module0'">
               <span *ngIf="mainFlagModule0 < 1">
                 <a class="deactive-menu" routerLinkActive="active">{{'L2Module0.subMenu1-1' | translate}}</a>
               </span>
@@ -124,7 +124,7 @@
             </a>
           </span>
           <ul class="collapse list-unstyled" id="module1Submenu">
-            <li class="nav-item" [class.activeMenu]="router.url==='/modules/module1'">
+            <li class="nav-item" [class.activeMenu]="router['url']==='/modules/module1'">
               <span *ngIf="mainFlagModule1 < 1">
                 <a class="deactive-menu" routerLinkActive="active">{{'number.1' | translate}}.{{'number.1' | translate}} {{'L2Module1.subMenu1-1' | translate}}</a>
               </span>
@@ -274,7 +274,7 @@
             </a>
           </span>
           <ul class="collapse list-unstyled" id="module2Submenu">
-            <li class="nav-item" [class.activeMenu]="router.url==='/modules/module2'">
+            <li class="nav-item" [class.activeMenu]="router['url']==='/modules/module2'">
               <span *ngIf="mainFlagModule2 < 1">
                 <a class="deactive-menu" routerLinkActive="active">{{'number.2' | translate}}.{{'number.1' | translate}} {{'L2Module2.subMenu2-1' | translate}}</a>
               </span>
@@ -481,7 +481,7 @@
           </span>
 
           <ul class="collapse list-unstyled" id="module3Submenu">
-            <li class="nav-item" [class.activeMenu]="router.url==='/modules/module3'">
+            <li class="nav-item" [class.activeMenu]="router['url']==='/modules/module3'">
               <span *ngIf="mainFlagModule3 < 1">
                 <a class="deactive-menu" routerLinkActive="active">{{'number.3' | translate}}.{{'number.1' | translate}} {{'L2Module3.subMenu3-1' | translate}}</a>
               </span>
@@ -648,7 +648,7 @@
             </a>
           </span>
           <ul class="collapse list-unstyled" id="module4Submenu">
-            <li class="nav-item" [class.activeMenu]="router.url==='/modules/module4'">
+            <li class="nav-item" [class.activeMenu]="router['url']==='/modules/module4'">
               <span *ngIf="mainFlagModule4 < 1">
                 <a class="deactive-menu" routerLinkActive="active">{{'number.4' | translate}}.{{'number.1' | translate}} {{'L2Module4.subMenu4-1' | translate}}</a>
               </span>
@@ -796,7 +796,7 @@
           </span>
 
           <ul class="collapse list-unstyled" id="module5Submenu">
-            <li class="nav-item" [class.activeMenu]="router.url==='/modules/module5'">
+            <li class="nav-item" [class.activeMenu]="router['url']==='/modules/module5'">
               <span *ngIf="mainFlagModule5 < 1">
                 <a class="deactive-menu submenu-label" routerLinkActive="active">{{'number.5' | translate}}.{{'number.1' | translate}} {{'L2Module5.subMenu5-1' | translate}}</a>
               </span>
@@ -1009,7 +1009,7 @@
         </span>
 
         <ul class="collapse list-unstyled" id="module6Submenu">
-          <li class="nav-item" [class.activeMenu]="router.url==='/modules/module6/endline1'">
+          <li class="nav-item" [class.activeMenu]="router['url']==='/modules/module6/endline1'">
             <span *ngIf="mainFlagModule6 < 1">
               <a class="deactive-menu submenu-label">{{'number.6' | translate}}.{{'number.1' | translate}} {{'L2Module6.subMenu6-1' | translate}}</a>
             </span>
@@ -1046,7 +1046,7 @@
         </span>
         <ul class="collapse list-unstyled" id="module7Submenu">
 
-          <li class="nav-item" [class.activeMenu]="router.url==='/modules/module7/Module7.1'">
+          <li class="nav-item" [class.activeMenu]="router['url']==='/modules/module7/Module7.1'">
             <span *ngIf="mainFlagModule7 < 1">
               <a class="deactive-menu submenu-label">{{'number.7' | translate}}.{{'number.1' | translate}} {{'L2Module7.subMenu7-1' | translate}}</a>
             </span>
@@ -1076,7 +1076,7 @@
 
       <hr class="bottom_hr">
       <div>
-        <li class="nav-item" [class.activeMenu]="router.url==='/dashboard/faq'">
+        <li class="nav-item" [class.activeMenu]="router['url']==='/dashboard/faq'">
           <a class="nav-link" [routerLink]="['/dashboard/faq']">
             <i class="fa fa-pencil" aria-hidden="true"></i>{{'Dashboard.FAQ' | translate}}</a>
         </li>
@@ -1110,6 +1110,12 @@
         </button>
         <div class="" id="navbarSupportedContent">
           <div class="nav navbar-nav ml-auto">
+            <span>
+              <img [src]="imgUrl" alt="" class="rounded-circle mr-2" height="35" *ngIf="imgUrl">
+              <i class="icon-user px-2" *ngIf="!imgUrl"></i>
+            <span class="hidden-md-down pr-2">{{userName}}</span>
+            </span>
+
             <span class="dropdown-toggle p-2 c-pointer" data-toggle="dropdown">
               <div class="dropdown">
                 <!-- <i class="icon-user px-2"></i><span class="hidden-md-down pr-2">Admin</span> -->
@@ -1516,7 +1522,7 @@
             </a>
           </li>
           <li>
-            <a *ngIf="!getImage" id="getImage" class="c-pointer" 
+            <a *ngIf="!getImage" id="getImage" class="c-pointer"
             (click)="downloadReward()">
               <img class="img-responsive" src="../../assets/img/whatsapp.png">
             </a>

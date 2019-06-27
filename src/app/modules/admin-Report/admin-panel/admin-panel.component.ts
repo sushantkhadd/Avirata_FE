@@ -76,6 +76,11 @@ export class AdminPanelComponent implements OnInit {
     this.getAllActiveUsers();
   }
 
+
+  ngOnDestroy() {
+    this.setMenu()
+  }
+
   getAllReport() {
     this.isLoaded = true;
     this.AdminReportService.getCalllvl1("alluserlevelstatusreport/", localStorage.getItem("token")).subscribe(data => {

@@ -109,6 +109,7 @@ export class UserTransferReplaceComponent implements OnInit {
   //if searchType 2 => for check HM & Teachers in school for transfer the user
 
   searchRecord(searchType) {
+    console.log(searchType)
     this.tactiveUsers = {}
     this.tdeactiveUsers = {}
     this.activeUsers = {}
@@ -120,25 +121,31 @@ export class UserTransferReplaceComponent implements OnInit {
       jsonBody['schoolindex'] = this.indexNumber;
     } else if (searchType == 2) {
       jsonBody['schoolindex'] = this.transferSchoolIndex;
+    } else if (searchType == 3)
+    {
+      jsonBody['schoolindex'] = localStorage.getItem('indexNumber');
     }
 
     this.AdminReportService.postCalllvl1(jsonBody, apiUrl).subscribe(
       data => {
-        if (data['message'] == "ok") {
-          if (searchType == 1) {
-            this.activeUsers = data['data'].activate;
-            this.deactiveUsers = data['data'].deactivate;
-            this.userDetails = data['data'];
+        if (data['message'] == "ok")
+        {
+          console.log(data)
+          if (searchType == 1 || searchType == 3) {
+            this.activeUsers = data["data"].activate;
+            this.deactiveUsers = data["data"].deactivate;
+            this.userDetails = data["data"];
             // this.activeUsers = data['data'].activate;
             // this.deactiveUsers = data['data'].deactivate;
-            this.schoolName = data['data'].schoolname;
+            this.schoolName = data["data"].schoolname;
             this.showDetails = true;
-            this.schoolIndex = this.indexNumber
+            this.schoolIndex = this.indexNumber;
             this.oldSearchIndex = this.indexNumber;
+            localStorage.setItem("indexNumber", this.indexNumber);
           } else if (searchType == 2) {
-            this.tactiveUsers = data['data'].activate;
-            this.tdeactiveUsers = data['data'].deactivate;
-            this.transferSchoolName = data['data'].schoolname;
+            this.tactiveUsers = data["data"].activate;
+            this.tdeactiveUsers = data["data"].deactivate;
+            this.transferSchoolName = data["data"].schoolname;
           }
         }
       },
@@ -259,11 +266,12 @@ export class UserTransferReplaceComponent implements OnInit {
         if (data['message'] == "user added successfully") {
           this.toastr.success("User Created Successfully");
           setTimeout(() => {
-            var appendJson = {}
-            appendJson['username'] = this.mobNumber;
-            appendJson['name'] = this.fullName.trim();
-            appendJson['position'] = this.positionJson[this.position];
-            this.userDetails.activate.push(appendJson)
+            // var appendJson = {}
+            // appendJson['username'] = this.mobNumber;
+            // appendJson['name'] = this.fullName.trim();
+            // appendJson['position'] = this.positionJson[this.position];
+            // this.userDetails.activate.push(appendJson)
+            this.searchRecord(3);
             this.showDetails = true;
             this.clearField();
             this.teacherModal.hide();
@@ -271,11 +279,12 @@ export class UserTransferReplaceComponent implements OnInit {
         } else if (data['message'] == "user updated successfully") {
           this.toastr.success("User Updated Successfully");
           setTimeout(() => {
-            var appendJson = {}
-            appendJson['username'] = this.mobNumber;
-            appendJson['name'] = this.fullName.trim();
-            appendJson['position'] = this.positionJson[this.position];
-            this.userDetails.activate.push(appendJson)
+            // var appendJson = {}
+            // appendJson['username'] = this.mobNumber;
+            // appendJson['name'] = this.fullName.trim();
+            // appendJson['position'] = this.positionJson[this.position];
+            // this.userDetails.activate.push(appendJson)
+            this.searchRecord(3);
             this.showDetails = true;
             this.clearField();
             this.teacherModal.hide();

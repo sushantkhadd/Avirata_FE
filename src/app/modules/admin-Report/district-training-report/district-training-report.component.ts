@@ -63,7 +63,8 @@ export class DistrictTrainingReportComponent implements OnInit {
     localStorage.removeItem("selectedLevel");
   }
 
-  getCount(level:any) {
+  getCount(level: any) {
+    this.loader = false;
     this.apiUrl = 'report/'
     var jsonBody = {};
     jsonBody['activity'] = 'notstartedcount';
@@ -85,11 +86,11 @@ export class DistrictTrainingReportComponent implements OnInit {
           localStorage.setItem("selectedLevel",level)
           this.showCount = true;
           this.data = data['data'].result;
-          if (this.data) {
-            this.loader = false;
-          } else {
+          // if (this.data) {
+          //   this.loader = false;
+          // } else {
             this.loader = true;
-          }
+          // }
           this.data.sort(function (a, b) {
             var A = a.distict_name.toLowerCase();
             var B = b.distict_name.toLowerCase();
@@ -131,6 +132,7 @@ export class DistrictTrainingReportComponent implements OnInit {
           this.data = []
           this.exportData = []
           this.total = 0;
+          this.loader = true;
         } else {
           this.toastr.error(this.translate.instant('Errors.cannotProceed'))
         }
@@ -145,7 +147,7 @@ export class DistrictTrainingReportComponent implements OnInit {
         this.selectedDist = element['districtid']
       }
     });
-
+    this.loader = false;
     var jsonBody = {};
     jsonBody['activity'] = "notstarteduser";
     jsonBody['district'] = this.selectedDist;
@@ -166,7 +168,9 @@ export class DistrictTrainingReportComponent implements OnInit {
     apiService
       .subscribe(
       data => {
-        if (data['message'] == "ok") {
+          if (data['message'] == "ok")
+          {
+          this.loader = true;
           if (data['count'] == 0) {
             this.toastr.error("No Records Found.")
             this.total=0
@@ -232,6 +236,7 @@ export class DistrictTrainingReportComponent implements OnInit {
           this.button2 = false;
           this.button3 = false;
           this.button4 = false;
+          this.loader = true;
         } else {
         }
       });
