@@ -89,6 +89,8 @@ import { Module524Component } from "./module5/module5-24.component";
 import { TalukaUserListComponent } from "../components/taluka-user-list/taluka-user-list.component";
 import { AdminPanelComponent } from "./admin-Report/admin-panel/admin-panel.component";
 import { DistrictTrainingReportComponent } from "./admin-Report/district-training-report/district-training-report.component";
+import { Module02Component } from "./module0/module0-2.component";
+import { Module03Component } from "./module0/module0-3.component";
 
 const routes: Routes = [
   {
@@ -98,8 +100,16 @@ const routes: Routes = [
     },
     children: [
       {
-        path: "baseline",
+        path: "Module0",
         component: Module0Component
+      },
+      {
+        path: "module0/baseline1",
+        component: Module02Component
+      },
+      {
+        path: "module0/baseline2",
+        component: Module03Component
       },
       {
         path: "Module1",

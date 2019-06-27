@@ -134,6 +134,9 @@ import { LanguageService } from "../language.service";
 import { PermissionModelService } from "../permission-model.service";
 import { CsvService } from "angular2-json2csv";
 import { CompletedForumComponent } from "../components/completed-forum/completed-forum.component";
+import { SortPipe } from "../shared/pipes/sort.pipe";
+import { Module02Component } from './module0/module0-2.component';
+import { Module03Component } from './module0/module0-3.component';
 
 @NgModule({
   imports: [
@@ -268,7 +271,9 @@ import { CompletedForumComponent } from "../components/completed-forum/completed
     CompletedForumComponent,
     FormatTimePipe,
     SearchPipe,
-    DataFilterPipe
+    DataFilterPipe,
+    Module02Component,
+    Module03Component
   ],
   providers: [
     Module0Service,

@@ -1,8 +1,9 @@
 <div *ngIf="questionType == 'mcqTextOption'">
-    <span class="counter" *ngIf="mysubModule1==2 || mysubModule2==3 || mysubModule3==5 || mysubModule3==9 || mysubModule3==11 || mysubModule4==5 || mysubModule4==7">{{queCount}} / 5</span>
-    <span class="counter" *ngIf="mysubModule1==4">{{queCount}} / 12</span>
-    <span class="counter" *ngIf="mysubModule1==6">{{queCount}} / 7</span>
-    <span class="counter" *ngIf="mysubModule5==7">{{queCount}} / 3</span>
+    <span class="counter" *ngIf="mysubModule1==2 || mysubModule2==3 || mysubModule3==5 || mysubModule3==9 || mysubModule3==11 || mysubModule4==5 || mysubModule4==7">{{queCount | numberConvertor : 'Devanagari'}} / 5</span>
+    <span class="counter" *ngIf="mysubModule1==4">{{queCount | numberConvertor : 'Devanagari'}} / १२</span>
+    <span class="counter" *ngIf="mysubModule1==6">{{queCount | numberConvertor : 'Devanagari'}} / ७</span>
+    <span class="counter" *ngIf="mysubModule5==7">{{queCount | numberConvertor : 'Devanagari'}} / ३</span>
+    <span class="counter" *ngIf="mysubModule0==2">{{queCount | numberConvertor : 'Devanagari'}} / २०</span>
     <div class="row">
         <div class="col-sm-12 col-md-12">
             <div class="card">
@@ -15,6 +16,8 @@
                     <div *ngIf="!queUrl" class="card-header mcq-title">
                         <span class="inst-text" *ngIf="title"><strong>{{title}} :<br/> </strong></span>
                         <label class="f-1x p-2"><span *ngIf="queCount">{{queCount | numberConvertor : 'Devanagari'}}. </span><span [innerHTML]="statement"></span>
+                    </label>
+                    <label *ngIf="mysubModule0==2 && queDescription !=''" class="f-1x p-2"><span [innerHTML]="queDescription"></span>
                     </label>
                     </div>
                     <!-- <h6 *ngIf="!queUrl" class="lineHeight" [innerHTML]="statement"></h6> -->
@@ -40,7 +43,7 @@
     </div>
 
     <div class="text-center mt-4"
-      *ngIf="mysubModule == 3 || mysubModule0 == 3 || mysubModule0 == 2|| mysubModule6 == 2|| mysubModule7 == 2|| mysubModule7 == 3 || mysubModule2 == 3 || mysubModule3 == 1 || mysubModule3 == 5 || mysubModule3 == 9 || mysubModule3 == 11 || mysubModule4 == 5 || mysubModule4 == 7 || mysubModule5 == 7 ">
+      *ngIf="mysubModule == 3 || mysubModule0 == 3 || mysubModule6 == 2|| mysubModule7 == 2|| mysubModule7 == 3 || mysubModule2 == 3 || mysubModule3 == 1 || mysubModule3 == 5 || mysubModule3 == 9 || mysubModule3 == 11 || mysubModule4 == 5 || mysubModule4 == 7 || mysubModule5 == 7 || mysubModule0 == 2">
         <div class="">
             <button class="btn btn-primary" appPreventDoubleClick [disabled]="!submitFlag"
               (debounceClick)="goNext5_3()">{{'Cfu.submit' | translate}}</button>
@@ -260,9 +263,9 @@
             </div>
             <div class="modal-body" *ngIf="questionType != 'checkBoxOption'">
                 <span *ngIf="mysubModule3!=9 && mysubModule4 != 9 && mysubModule4 != 11 && mysubModule4 != 13">
-                <p *ngIf="rightFlag==false && !mysubModule5"><b>{{'subModule1_9.correctAns' | translate }} :</b></p>
-                <p *ngIf="rightFlag==false && !mysubModule5">{{showCorrectAns}}</p>
-                <p *ngIf="mysubModule5==7"><b>{{'subModule1_9.correctAns' | translate }} :</b> {{showCorrectAns}}</p>
+                <p *ngIf="rightFlag==false && (!mysubModule5 && mysubModule0!=2)"><b>{{'subModule1_9.correctAns' | translate }} :</b></p>
+                <p *ngIf="rightFlag==false && (!mysubModule5 && mysubModule0!=2)">{{showCorrectAns}}</p>
+                <p *ngIf="mysubModule5==7 || mysubModule0==2"><b>{{'subModule1_9.correctAns' | translate }} :</b> {{showCorrectAns}}</p>
                 </span>
                 <p *ngIf="description"><b>{{'newTranslate.description' | translate }}</b></p>
                 <p *ngIf="description">
