@@ -22,7 +22,7 @@
               <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
           </div>
           </div>
-          <p *ngIf="showLimit" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount}}/150</p>
+          <p *ngIf="showLimit" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}</p>
         </form>
       </div>
       <div class="card-footer text-center bg-white border-0">

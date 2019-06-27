@@ -104,8 +104,8 @@
         </li>
         <li>
           <span *ngIf="!currentFlag1">
-            <a href="#module1Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
-              (click)="currentStatus(1);" [class.deactive-menu1]="!module1OnOffFlag">
+            <a href="#module1Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" (click)="currentStatus(1);"
+              [class.deactive-menu1]="!module1OnOffFlag">
               <span>{{'number.1' | translate}}.
               </span>{{'L2Module1.title' | translate}}
               <span *ngIf="statusFlag" class="reward-icon">
@@ -114,8 +114,8 @@
             </a>
           </span>
           <span *ngIf="currentFlag1">
-            <a href="#module1Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
-              [class.deactive-menu1]="!module1OnOffFlag" (click)=" mainFlag == true ? instruction() : undefined;mainFlag = false">
+            <a href="#module1Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [class.deactive-menu1]="!module1OnOffFlag"
+              (click)=" mainFlag == true ? instruction() : undefined;mainFlag = false">
               <span>{{'number.1' | translate}}.
               </span>{{'L2Module1.title' | translate}}
               <span *ngIf="statusFlag" class="reward-icon">
@@ -255,8 +255,8 @@
 
         <li>
           <span *ngIf="!currentFlag2">
-            <a href="#module2Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
-              (click)="currentStatus(2)" [class.deactive-menu1]="!module2OnOffFlag">
+            <a href="#module2Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" (click)="currentStatus(2)"
+              [class.deactive-menu1]="!module2OnOffFlag">
               <span>{{'number.2' | translate}}.</span>
               {{'L2Module2.title' | translate}}
               <span *ngIf="statusFlag" class="reward-icon">
@@ -265,8 +265,7 @@
             </a>
           </span>
           <span *ngIf="currentFlag2">
-            <a href="#module2Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
-              [class.deactive-menu1]="!module2OnOffFlag">
+            <a href="#module2Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [class.deactive-menu1]="!module2OnOffFlag">
               <span>{{'number.2' | translate}}.</span>
               {{'L2Module2.title' | translate}}
               <span *ngIf="statusFlag" class="reward-icon">
@@ -462,8 +461,8 @@
 
         <li>
           <span *ngIf="!currentFlag3">
-            <a href="#module3Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
-              (click)="currentStatus(3)" [class.deactive-menu1]="!module3OnOffFlag">
+            <a href="#module3Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" (click)="currentStatus(3)"
+              [class.deactive-menu1]="!module3OnOffFlag">
               <span>{{'number.3' | translate}}.</span>
               {{'L2Module3.title' | translate}}
               <span *ngIf="statusFlag" class="reward-icon">
@@ -472,8 +471,7 @@
             </a>
           </span>
           <span *ngIf="currentFlag3">
-            <a href="#module3Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
-              [class.deactive-menu1]="!module3OnOffFlag">
+            <a href="#module3Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [class.deactive-menu1]="!module3OnOffFlag">
               <span>{{'number.3' | translate}}.</span>
               {{'L2Module3.title' | translate}}
               <span *ngIf="statusFlag" class="reward-icon">
@@ -636,17 +634,17 @@
               [class.deactive-menu1]="!module4OnOffFlag">
               <span>{{'number.4' | translate}}.
               </span>{{'L2Module4.title' | translate}}
-             <span *ngIf="statusFlag" class="reward-icon">
-               <em class="fas" [ngClass]="rewardImgUrl4"></em>
-             </span>
+              <span *ngIf="statusFlag" class="reward-icon">
+                <em class="fas" [ngClass]="rewardImgUrl4"></em>
+              </span>
             </a>
           </span>
           <span *ngIf="currentFlag4">
             <a href="#module4Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [class.deactive-menu1]="!module4OnOffFlag">
               <span>{{'number.4' | translate}}. </span>{{'L2Module4.title' | translate}}
-             <span *ngIf="statusFlag" class="reward-icon">
-               <em class="fas" [ngClass]="rewardImgUrl4"></em>
-             </span>
+              <span *ngIf="statusFlag" class="reward-icon">
+                <em class="fas" [ngClass]="rewardImgUrl4"></em>
+              </span>
             </a>
           </span>
           <ul class="collapse list-unstyled" id="module4Submenu">
@@ -1085,10 +1083,10 @@
       </div>
     </ul>
   </nav>
- <div class="inner-loader w-100" *ngIf="loaderFlag">
-          <img src="../../assets/img/logo_cpd_combine_web.png" alt="">
-          <div class="loader"></div>
- </div>
+  <div class="inner-loader w-100" *ngIf="loaderFlag">
+    <img src="../../assets/img/logo_cpd_combine_web.png" alt="">
+    <div class="loader"></div>
+  </div>
   <!-- Page Content  -->
   <div id="content" [class.ml-0]="hideMenuFlag">
     <!-- <ng2-slim-loading-bar class="loading"></ng2-slim-loading-bar> -->
@@ -1152,12 +1150,15 @@
         <div class="col-md-12 col-xs-12 col-sm-12">
           <div class="col-md-8 col-xs-12 col-sm-12 float-left">
             <div class="contact-bottom">
-                <marquee scrollamount="5" onmouseover="this.stop();" onmouseout="this.start();" class="marquee-border">Copyright © 2019, Maharashtra State Council of Educational Reserch and Traning (MSCERT), Shyamchi Aai Foundation (SAF).
-                    <span class="color_red">All rights reserved. Unauthorized copy, use, reproduction or distribution of any / all the content or part of the content from this website through any medium is prohibited. </span>
-                    कॉपीराईट @ २०१९, महाराष्ट्र राज्य शैक्षणिक संशोधन आणि प्रशिक्षण परिषद(MSCERT), श्यामची आई फाऊंडेशन(SAF).
-                    <span class="color_red">सर्व हक्क सुरक्षित. कोणत्याही माध्यमाद्वारे या वेबसाइटवरील कोणतीही सामग्री/साहित्य किंवा सामग्रीचा / साहित्याचा भाग अनधिकृतरित्या कॉपी, वापर, पुनरुत्पादन किंवा वितरण करणे प्रतिबंधित आहे.</span>
-                  </marquee>
-    
+              <marquee scrollamount="5" onmouseover="this.stop();" onmouseout="this.start();" class="marquee-border">Copyright © 2019, Maharashtra State Council of Educational Reserch and Traning (MSCERT), Shyamchi Aai Foundation
+                (SAF).
+                <span class="color_red">All rights reserved. Unauthorized copy, use, reproduction or distribution of any / all the content or part
+                  of the content from this website through any medium is prohibited. </span>
+                कॉपीराईट @ २०१९, महाराष्ट्र राज्य शैक्षणिक संशोधन आणि प्रशिक्षण परिषद(MSCERT), श्यामची आई फाऊंडेशन(SAF).
+                <span class="color_red">सर्व हक्क सुरक्षित. कोणत्याही माध्यमाद्वारे या वेबसाइटवरील कोणतीही सामग्री/साहित्य किंवा सामग्रीचा / साहित्याचा
+                  भाग अनधिकृतरित्या कॉपी, वापर, पुनरुत्पादन किंवा वितरण करणे प्रतिबंधित आहे.</span>
+              </marquee>
+
             </div>
           </div>
           <div class="col-md-4 col-xs-12 col-sm-12 float-right">
@@ -1223,8 +1224,8 @@
             <span> ६. </span>{{'newTranslate.noteRule6' | translate}}</p>
           <p class="questionHead">
             <span> ७. </span>{{'newTranslate.noteRule7' | translate}} </p>
-            <p class="questionHead color_red">
-              <span> ८. </span>{{'newTranslate.noteRule14' | translate}}</p>
+          <p class="questionHead color_red">
+            <span> ८. </span>{{'newTranslate.noteRule14' | translate}}</p>
           <!-- <p class="questionHead"> <span> ८. </span>{{'newTranslate.noteRule8' | translate}} </p>
                     <p class="questionHead"> <span> ९. </span>{{'newTranslate.noteRule9' | translate}} </p>
                     <p class="questionHead"> <span> १०.</span>{{'newTranslate.noteRule10' | translate}} </p>
@@ -1472,7 +1473,7 @@
           }
           ">
             <!-- <img *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' && !needEfforts" class="img-responsive img-goldcup" [src]="finishImgUrl"> -->
-            <div *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' && !needEfforts" class="rewards-animate">
+            <div *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' && !needEfforts" class="">
               <div *ngIf="rewardsFlag == 1">
                 <img [src]="animatedImageJson['a1']" alt="" class="img-fluid">
                 <!-- <img [src]="animatedImageJson['a2']" alt="" class="img2">
@@ -1515,7 +1516,8 @@
             </a>
           </li>
           <li>
-            <a *ngIf="!getImage" id="getImage" class="c-pointer" (click)="shareReward()">
+            <a *ngIf="!getImage" id="getImage" class="c-pointer" 
+            (click)="downloadReward()">
               <img class="img-responsive" src="../../assets/img/whatsapp.png">
             </a>
             <a *ngIf="getImage" class="c-pointer" data-action="share/whatsapp/share" [href]="getImage">
@@ -1527,12 +1529,16 @@
               <img class="img-responsive" src="../../assets/img/download.png">
             </a>
           </li>
+          <li *ngIf="isloaded" class="spin-loader">
+            <span>
+              <em class="fas fa-spinner fa-spin"></em>
+            </span>
+          </li>
         </ul>
       </div>
       <div [ngClass]="needEfforts ? 'pt-3': 'pt-1'" class="modal-footer justify-content-center pt-1 pb-4" *ngIf="moduleCompleteStatus['type'] != 'allFinish'">
         <span>
-          <button class="btn btn-primary text-center" appPreventDoubleClick
-            (debounceClick)="moduleComplete($event)">{{'Stepper.Next' | translate}}</button>
+          <button class="btn btn-primary text-center" appPreventDoubleClick (debounceClick)="moduleComplete($event)">{{'Stepper.Next' | translate}}</button>
         </span>
       </div>
     </div>
@@ -1588,8 +1594,7 @@
         </div>
         <div class="modal-footer justify-content-center">
           <span *ngIf="moduleCompleteStatus['type'] != 'allFinish'">
-            <button class="btn btn-primary text-center" appPreventDoubleClick
-              (debounceClick)="moduleComplete($event)">{{'Stepper.Next' | translate}}</button>
+            <button class="btn btn-primary text-center" appPreventDoubleClick (debounceClick)="moduleComplete($event)">{{'Stepper.Next' | translate}}</button>
           </span>
         </div>
       </div>

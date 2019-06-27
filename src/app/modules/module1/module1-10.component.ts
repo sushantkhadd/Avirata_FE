@@ -20,7 +20,7 @@ export class Module110Component implements OnInit {
   public mainJson = {}; passData6 = {}; showInst; queCount;
   startFlag;audioSrc ={};startAudio;
   public inst =
-    "दिलेल्या प्रसंगातील घटना (A) - अविवेकी धारणा (B) - प्रतिसाद (C) - वाद,संवाद, प्रतिवाद(D) हे ओळखा. प्रत्येक प्रसंगाचा ऑडिओ देखील तुम्ही ऐकला आहे. (त्या त्या चौकटीत योग्य मुद्दा नेऊन (Drag-drop) ठेवा.";
+    "दिलेल्या प्रसंगातील घटना (A) - अविवेकी धारणा (B) - प्रतिसाद (C) - वाद,संवाद, प्रतिवाद(D) हे ओळखा. प्रत्येक प्रसंगाचा ऑडिओ देखील तुम्ही ऐकला आहे. (त्या त्या चौकटीत योग्य मुद्दा नेऊन (Drag-drop) ठेवा.)";
   ngOnInit() {
     this.queCount = 0
 

@@ -54,7 +54,8 @@
               </div>
             </div>
           </div>
-          <p *ngIf="showLimit['1']" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount['1']}}/150</p>
+          <p *ngIf="showLimit['1']" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} 
+            {{postWordCount['1'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}</p>
           <div class="form-group row">
             <label class="col-md-4 col-sm-12 form-control-label" [for]="questionid2" [innerHTML]="question2"></label>
             <div class="col-sm-12 col-md-8 controls">
@@ -65,7 +66,9 @@
               </div>
             </div>
           </div>
-          <p *ngIf="showLimit['2']" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount['2']}}/150</p>
+          <p *ngIf="showLimit['2']" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} 
+            {{postWordCount['2'] | numberConvertor : 'Devanagari'
+          }}/{{'number.150' | translate}}</p>
           <div class="form-group row">
             <label class="col-md-4 col-sm-12 form-control-label" [for]="questionid3" [innerHTML]="question3"></label>
             <div class="col-sm-12 col-md-8 controls">
@@ -76,7 +79,7 @@
               </div>
             </div>
           </div>
-          <p *ngIf="showLimit['3']" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount['3']}}/150</p>
+          <p *ngIf="showLimit['3']" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount['3'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}</p>
           <div class="form-group row">
             <label class="col-md-4 col-sm-12 form-control-label" [for]="questionid4" [innerHTML]="question4"></label>
             <div class="col-sm-12 col-md-8 controls">
@@ -87,7 +90,9 @@
               </div>
             </div>
           </div>
-          <p *ngIf="showLimit['4']" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount['4']}}/150</p>
+          <p *ngIf="showLimit['4']" class="text-right pt-1">
+            {{'otherMessages.wordLimit' | translate}} {{postWordCount['4'] | numberConvertor : 'Devanagari'
+          }}/{{'number.150' | translate}}</p>
         </form>
       </div>
       <div class="card-footer text-center bg-white border-0">

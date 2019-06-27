@@ -32,7 +32,7 @@ export class Module33Component implements OnInit {
   subFlagModule3;
   questionid1;
   questionid2;
-  trimFlag;
+  trimFlag; showLimit={};postWordCount={};
   ngOnInit() {
     this.answer1 = "";
     this.answer2 = "";
@@ -45,6 +45,9 @@ export class Module33Component implements OnInit {
     this.subFlagModule3 = parseInt(
       window.localStorage.getItem("subFlagModule3")
     );
+
+    this.postWordCount['1']=0;
+    this.postWordCount['2']=0;
 
     if (this.mainFlagModule3 == 3)
     {
@@ -59,9 +62,20 @@ export class Module33Component implements OnInit {
   }
 
   ngDoCheck() {
+    if (this.answer1) {
+      this.postWordCount['1'] = this.answer1.trim().split(' ').length;
+    }
+    if (this.answer2) {
+      this.postWordCount['2'] = this.answer2.trim().split(' ').length;
+    }
+
     if (this.answer1.trim().length == 0 || this.answer2.trim().length == 0) {
       this.trimFlag = true;
-    } else {
+    } else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 1){
+      this.trimFlag = true;
+    } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 1){
+      this.trimFlag = true;
+    }else {
       this.trimFlag = false;
     }
   }
