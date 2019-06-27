@@ -35,7 +35,7 @@ export class Module02Component implements OnInit {
   showAnswer;count;
   saveData;
   useranswer={};
-  answer;
+  answer;loader;
   queId;
   sumbitButton;questionlist;
   startFlag;
@@ -68,15 +68,18 @@ export class Module02Component implements OnInit {
         if (data["status"] == true)
         {
           // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 1.3', window.localStorage.getItem('username'), 10);
-          console.log("data ", data["data"].questionlist);
+          console.log("data111111111", data["data"].questionlist);
           this.questionlist =data["data"].questionlist
+          this.shuffle(this.questionlist);
           for(let i=0; i< this.questionlist.length; i++){
             if(this.questionlist[i].answer == ""){
               this.data.push(this.questionlist[i])
             }
           }
+          var baselineCounter = 20-(this.data.length-1);
+          window.localStorage.setItem("baselineCounter",JSON.stringify(baselineCounter))
           //this.data = data["data"];
-           console.log('mcq data', this.data);
+           console.log('mcq data', this.data,baselineCounter);
          
           this.startFlag = true;
         }
@@ -89,6 +92,7 @@ export class Module02Component implements OnInit {
 
   saveAnswer(e) {
     if(e){
+      this.loader = true;
       console.log("ff ", e);
       this.sumbitButton = true;
       this.useranswer = e;
@@ -129,7 +133,7 @@ export class Module02Component implements OnInit {
     }
     this.Module0Service.apiCall(jsonBody, apiUrl).subscribe(
       data => {
-        
+        this.loader = false;
         if(data["message"] == "your answer stored"){
           console.log("data",this.data)
         }
@@ -161,4 +165,19 @@ export class Module02Component implements OnInit {
     );
   }
 
+  shuffle(arra1) {
+    var ctr = arra1.length, temp, index;
+    // While there are elements in the array
+    while (ctr > 0) {
+      // Pick a random index
+      index = Math.floor(Math.random() * ctr);
+      // Decrease ctr by 1
+      ctr--;
+      // And swap the last element with it
+      temp = arra1[ctr];
+      arra1[ctr] = arra1[index];
+      arra1[index] = temp;
+    }
+    return arra1;
+  }
 }

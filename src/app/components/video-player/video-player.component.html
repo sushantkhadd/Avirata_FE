@@ -42,18 +42,18 @@
             <div class="col-md-2 col-sm-6 col-5 text-right">
               <img class="img-fluid" [class.d-none]="hideMe" [ngClass]="!fiftyFiftyFlag ? 'c-pointer' : 'c-not-allowed'"
                 [class.breathing]="!fiftyFiftyFlag"
-                (click)="!fiftyFiftyFlag ? getRewards('fifty_fifty') : undefined" [src]="rewardImgUrl1" alt="">
+                (click)="!fiftyFiftyFlag ? askMeshow('fiftyFiftyFlag') : undefined" [src]="rewardImgUrl1" alt="">
             </div>
             <div class="col-md-2 col-sm-6 col-5">
               <img class="img-fluid" [ngClass]="!askMeFlag ? 'c-pointer' : 'c-not-allowed'"
               [class.breathing]="!askMeFlag"
-                (click)="!askMeFlag ? askMeshow() : undefined" [src]="rewardImgUrl2" alt="">
+                (click)="!askMeFlag ? askMeshow('askMeFlag') : undefined" [src]="rewardImgUrl2" alt="">
             </div>
           </span>
-          <button type="button" class="close m-0 p-0" (click)="cfuModalHide();play();resetRadio();" aria-label="Close"
+          <!-- <button type="button" class="close m-0 p-0" (click)="cfuModalHide();play();resetRadio();" aria-label="Close"
             id="btnCloseModal">
             <span aria-hidden="true">&times;</span>
-          </button>
+          </button> -->
         </div>
         <div class="modal-body ml-5">
           <h5 class="mt-3" style="font-size: 1.1rem; font-weight:600; color:#144375;"><span
@@ -127,12 +127,13 @@
     <div class="modal-dialog modal-primary modal-sm" role="document">
       <div class="modal-content">
         <div class="modal-body text-center">
-          <h5>{{'Cfu.giveAns' | translate}}</h5>
+          <h5 *ngIf="helplineFlag == 'askMeFlag'">{{'Cfu.giveAns' | translate}}</h5>
+          <h5 *ngIf="helplineFlag == 'fiftyFiftyFlag'">{{'Cfu.giveAns50' | translate}}</h5>
           <p>{{'Cfu.useCaution' | translate}}</p>
         </div>
         <div class="modal-footer justify-content-center">
           <button (click)="askMeModalHide()" class="btn btn-danger">{{'Cfu.no' | translate}}</button>
-          <button (debounceClick)="getRewards('askme')" appPreventDoubleClick
+          <button (debounceClick)="helplineFlag == 'askMeFlag' ? getRewards('askme') : getRewards('fifty_fifty')" appPreventDoubleClick
             class="btn btn-success">{{'Cfu.yes' | translate}}</button>
         </div>
       </div>

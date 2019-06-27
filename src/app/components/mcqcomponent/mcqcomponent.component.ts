@@ -190,9 +190,11 @@ export class McqcomponentComponent implements OnInit {
       this.priorities= []
       if( window.localStorage.getItem('mainFlagModule0') == '2'){
         this.bunchList = this.data.splice(0,1)  
+        this.queCount = parseInt( window.localStorage.getItem("baselineCounter"))
       }
       else{
         this.bunchList = this.data.questionlist.splice(0,1)    
+        this.queCount = 1;
       }
       // this.priorities = this.data.questionlist[0].question;
      
@@ -208,7 +210,7 @@ export class McqcomponentComponent implements OnInit {
         }
       }
      console.log("options",this.bunchList)
-     this.queCount = 1;
+     
   } else if (this.questionType == 'checkBoxOption') {
     console.log("data",this.data)
     this.tasks = this.data.statementlist

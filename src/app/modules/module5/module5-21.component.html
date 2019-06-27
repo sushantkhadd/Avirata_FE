@@ -10,7 +10,7 @@
   </div>
 </div>
 <div *ngIf="mainFlagModule5 == 21">
-  <div *ngIf="subFlagModule5 == 1">
+  <div *ngIf="subFlagModule5 == 1 || subFlagModule5 == 3">
     <div class="ins-block instruction-wrap" *ngIf="!startPdf">
       <div class="borderBlue">
         <div class="card">
@@ -104,7 +104,7 @@
   
                 <label class="col-2 col-md-2 col-sm-2 form-control-label" [for]="queId4" [innerHTML]="que4"></label>
                 <div class="col-4 col-sm-4 col-md-4 controls">
-                  <textarea class="form-control" [id]="queId4" name="answer4" [(ngModel)]="answer4" pattern="^[0-9]*$" (keypress)="numberOnly($event)" rows="2" #addr="ngModel" maxlength="500"
+                  <textarea class="form-control" [id]="queId4" name="answer4" [(ngModel)]="answer4" pattern="^[0-9]*$" onpaste="return false;" (keypress)="numberOnly($event)" rows="2" #addr="ngModel" maxlength="500"
                     required></textarea>
                 </div>
             </div>
@@ -162,13 +162,57 @@
     </div>
   </div>
 </div>
+
 <div *ngIf="mainFlagModule5 > 21">
-  <div class="card submoduleBox">
-    <div class="card-block text-center greenText inst-text">
-      <span>{{'L2Module5Complete.sm_5_21' | translate}}</span>
+  <div class="card unlock-view">
+    <div class="card-block cc">
+      <div class="row static-content" *ngIf="flag == 0">
+        <div class="col-md-4">
+          <p class="title">{{'number.1' | translate}}. {{'L2Module5.subMenu5-21' | translate}}</p>
+          <div class="img-wrap">
+            <a (click)="showVideo(urlArray['src1'],'L2Module5.subMenu5-21',1)" class="c-pointer">
+              <img class="img-fluid v_thumb" src="./../../assets/img/pdf_thumb.png" alt="">
+            </a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <p class="title">{{'number.2' | translate}}. {{'L2Module5.subMenu5-21' | translate}}</p>
+          <div class="img-wrap">
+            <a (click)="showVideo(urlArray['src2'],'L2Module5.subMenu5-21',2)" class="c-pointer">
+              <img class="img-fluid v_thumb" src="./../../assets/img/pdf_thumb.png" alt="">
+              <div class="hover-opaque">
+                <i class="fa fa-play-circle-o fa-3x"></i>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="flag == 1">
+        <div class="card-header text-center bg-white border-0">
+          <h5>
+            {{thumb_title | translate}}
+          </h5>
+        </div>
+        <app-presentation [data]='passValues'></app-presentation>
+        <div class="card-footer bg-white border-0 mt-3 text-center">
+          <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>
+        </div>
+      </div>
+      <div *ngIf="flag == 2">
+        <div class="card-header text-center bg-white border-0">
+          <h5>
+            {{thumb_title | translate}}
+          </h5>
+        </div>
+        <app-presentation [data]='passValues'></app-presentation>
+        <div class="card-footer bg-white border-0 mt-3 text-center">
+          <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
 
   <div class="videoFinishModal videoFinishedModel marks-modal">
     <div bsModal #confirmationModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
