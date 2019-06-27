@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, Output, EventEmitter } from '@angular/core';
 import { Router } from "@angular/router";
 import { CommonComponentService } from '../common-component.service';
 import { ToastsManager } from 'ng6-toastr';
@@ -18,12 +18,14 @@ public replyBox = false; token;showCoomentArea=false
   public counter: Number;
   public subcomments = false; allPosts = {};
   public comments = []; userName;
-  public disableCommentSubmit;
+  public disableCommentSubmit; mainPosts;
   public commentFlag = false; viewCommentFlag = false;
   constructor(public CommonComponentService: CommonComponentService, public router: Router, public toastr: ToastsManager, vcr: ViewContainerRef,  public translate: TranslateService) {
     this.toastr.setRootViewContainerRef(vcr);
     this.replyBox = false;
   }
+  @Output() public sendData = new EventEmitter<any>();
+
   posts = [{ 'comment': 'first comment', 'show': false, 'type': 'comment', 'viewComments': false }];
 
   ngOnInit() {
@@ -89,6 +91,7 @@ public replyBox = false; token;showCoomentArea=false
       data => {
         if (data['message'] == "ok") {
           this.allPosts = data;
+          this.mainPosts = data["data"].posts;
           this.posts.push.apply(this.posts, data['data'].posts);
           this.posts.forEach(element => {
             element.show = false;
@@ -97,7 +100,9 @@ public replyBox = false; token;showCoomentArea=false
           });
 
         }
-        else if (data['message'] == 'no post') {
+        else if (data['message'] == 'posts not found')
+        {
+          this.sendData.emit(true)
           this.toastr.error(this.translate.instant('Errors.noPost'));
         }
       },
@@ -207,7 +212,7 @@ public replyBox = false; token;showCoomentArea=false
             element.type = "comment";
             element.viewComments = false;
           });
-          this.posts[index]['commentCount'] = this.comments.length;
+          this.posts[index]["comment_count"] = this.comments.length;
 
           var temp1 = []
           temp1 = this.posts.slice(0, index + 1);

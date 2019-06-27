@@ -464,7 +464,7 @@ const routes: Routes = [
       {
         path: "admin_panel",
         component: AdminPanelComponent,
-        // canActivate: [PermissionModelService]
+        // canDeactivate: [CanDeactivateGuard]
       },
       {
         path: "training_report",

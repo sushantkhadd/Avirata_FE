@@ -127,7 +127,7 @@
                </div>
                <div class="card-footer">
                  <div class="text-center">
-                   <button class="btn btn-primary" (click)="startEvent=true"
+                   <button class="btn btn-primary" appPreventDoubleClick (debounceClick)="startEvent=true"
                      [disabled]="!checkAgree">{{'Module4.start' | translate}}</button>
                  </div>
                </div>
@@ -149,7 +149,7 @@
                <p class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount}} / 150</p>
              </div>
              <div class="card-footer text-center">
-               <button class="btn btn-primary float-right" (click)="submitPost()"
+               <button class="btn btn-primary float-right" appPreventDoubleClick (debounceClick)="submitPost()"
                  [disabled]="assignment.form.invalid || submitPostDisable">{{'Login.Submit'|
               translate}}</button>
              </div>
@@ -159,10 +159,16 @@
      </div>
    </div>
    <div *ngIf="mainFlagModule5 > 22">
-     <app-completed-forum></app-completed-forum>
-     <div class="text-center">
-       <a class="btn btn-primary"
-         [routerLink]="['/modules/module5/Module5.23']">{{'Stepper.Next' | translate}}</a>
+     <app-completed-forum (sendData)="getData($event)"></app-completed-forum>
+     <div class="card submoduleBox" *ngIf="noPost">
+       <div class="card-block text-center greenText inst-text">
+         <span>{{'Errors.noPost' | translate}}</span>
+       </div>
      </div>
+      <div [class.card-footer]="noPost">
+        <div class="text-center">
+          <a class="btn btn-primary" [routerLink]="['/modules/module5/Module5.23']">{{'Stepper.Next' | translate}}</a>
+        </div>
+      </div>
    </div>
  </div>

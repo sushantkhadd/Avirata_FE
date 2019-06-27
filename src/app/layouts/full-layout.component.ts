@@ -367,9 +367,8 @@ export class FullLayoutComponent implements OnInit {
         data => {
           if (data["results"].length != 0) {
             this.imgUrl = data["results"][0].file;
-          } else {
-            this.imgUrl = "/assets/img/Profile_pic.png";
           }
+          console.log(data)
         },
         error =>
           this.toastr.error(
@@ -386,6 +385,10 @@ export class FullLayoutComponent implements OnInit {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    if (this.router.url == 'admin_panel')
+    {
+      // this.hideMenu();
+    }
   }
 
   setInterval() {

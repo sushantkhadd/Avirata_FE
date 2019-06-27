@@ -9,7 +9,13 @@
         <i class="fa fa-reply"></i>&nbsp;&nbsp;Back</button>
     </div>
     <div class="col-6 pad-0 ">
-      <button class="btn btn-primary float-right or-section" [disabled]="!showCount" (click)="export()">
+      <button class="btn btn-primary float-right or-section" *ngIf="!showDetails" [disabled]="!showCount"
+        (click)="export()">
+        <span>
+          <i class="fa fa-download" aria-hidden="true"></i>
+        </span>Download</button>
+      <button class="btn btn-primary float-right or-section" *ngIf="showDetails" [disabled]="total==0"
+        (click)="export()">
         <span>
           <i class="fa fa-download" aria-hidden="true"></i>
         </span>Download</button>
@@ -22,9 +28,10 @@
       <div class="card-body">
         <div class="row">
           <div class="col-md-6">
-            <p class="time-counter" *ngIf="showCount || showDetails"> Updated result will available after : <b> {{countDown | async | formatTime}} </b><br>
+            <p class="time-counter" *ngIf="showCount || showDetails"> Updated result will available after : <b>
+                {{countDown | async | formatTime}} </b><br>
               <span>(Interval Time between updated status is 4 hrs)
-                </span>
+              </span>
             </p>
           </div>
           <div class="col-md-6">
@@ -33,25 +40,26 @@
               <label class="col-md-3 text-right font-weight-bold p-30-xs">Search</label>
               <div class="col-md-4 p-30-xs">
                 <select class="form-control" name="search" id="searchTxt" [(ngModel)]="searchTxt" (change)="getRole()">
-              <option value="" disabled>Select Role</option>
-              <option value="trainee">Trainee</option>
-              <option value="master_trainer">Master Trainer</option>
-          </select>
+                  <option value="" disabled>Select Role</option>
+                  <option value="trainee">Trainee</option>
+                  <option value="master_trainer">Master Trainer</option>
+                </select>
               </div>
-               <div class="col-md-4 p-30-xs">
-                 <select class="form-control" name="selectedLevel" id="selectedLevel" [(ngModel)]="selectedLevel"
-                   [disabled]="!searchTxt" (change)="getLevel()">
-                   <option value="" disabled>Select Level</option>
-                   <option value="L1">Level 1</option>
-                   <option value="L2">Level 2</option>
-                   <option value="L3">Level 3</option>
-                 </select>
-               </div>
+              <div class="col-md-4 p-30-xs">
+                <select class="form-control" name="selectedLevel" id="selectedLevel" [(ngModel)]="selectedLevel"
+                  [disabled]="!searchTxt" (change)="getLevel()">
+                  <option value="" disabled>Select Level</option>
+                  <option value="L1">Level 1</option>
+                  <option value="L2">Level 2</option>
+                  <option value="L3">Level 3</option>
+                </select>
+              </div>
             </div>
           </div>
         </div>
         <div class="table-responsive custom-table" [class.padbottom]="loader==true" *ngIf="showCount">
-          <table class="table table-hover mar-btm-0" [mfData]="allParticipantsData" #mf="mfDataTable" [mfRowsOnPage]="10">
+          <table class="table table-hover mar-btm-0" [mfData]="allParticipantsData" #mf="mfDataTable"
+            [mfRowsOnPage]="10">
             <thead>
               <tr>
                 <th>
@@ -111,8 +119,16 @@
                 </th>
               </tr>
             </thead>
-            <div class="mx-auto loader content-loader" *ngIf="loader"></div>
             <tbody>
+              <tr *ngIf="!loader" class="data-loader">
+                <td colspan="6" class="text-center">
+                  <div class="lds-facebook">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
+                </td>
+              </tr>
               <tr *ngFor="let item of mf.data; let i=index">
                 <td>{{item.district_name}}</td>
                 <td>{{item.module0}}
@@ -194,9 +210,10 @@
         <div class="card-body">
           <div class="row">
             <div class="col-md-6">
-              <p class="time-counter"> Updated result will available after : <b> {{countDown | async | formatTime}} </b><br>
+              <p class="time-counter"> Updated result will available after : <b> {{countDown | async | formatTime}}
+                </b><br>
                 <span>(Interval Time between updated status is 4 hrs)
-                  </span>
+                </span>
               </p>
             </div>
             <div class="col-md-6">
@@ -205,10 +222,10 @@
                 <label class="col-md-3 text-right font-weight-bold p-30-xs">Search</label>
                 <div class="col-md-8 p-30-xs">
                   <select class="form-control" name="search" id="searchTxt" [(ngModel)]="searchTxt" (change)="first()">
-                <option value="" disabled>Select Role</option>
-                <option value="trainee">Trainee</option>
-                <option value="master_trainer">Master Trainer</option>
-            </select>
+                    <option value="" disabled>Select Role</option>
+                    <option value="trainee">Trainee</option>
+                    <option value="master_trainer">Master Trainer</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -246,6 +263,15 @@
                 </tr>
               </thead>
               <tbody>
+                <tr *ngIf="loader" class="data-loader">
+                  <td colspan="6" class="text-center">
+                    <div class="lds-facebook">
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                    </div>
+                  </td>
+                </tr>
                 <tr *ngFor="let item of mf.data; let i=index">
                   <td>{{item.userid}}</td>
                   <td>{{item.name}}</td>

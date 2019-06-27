@@ -17,7 +17,7 @@ export class Module522Component implements OnInit {
   public txtcomment: string
 
   public submitPostDisable = true; startEvent;
-  public checkAgree = false; missingPost = false;
+  public checkAgree = false; missingPost = false; noPost;
   constructor(public translate: TranslateService, public LanguageService: LanguageService, public router: Router, public Module5Service: Module5Service, public toastr: ToastsManager, vcr: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vcr);
   }
@@ -45,6 +45,16 @@ export class Module522Component implements OnInit {
       // this.startEvent = false;
 
 
+    }
+  }
+
+  getData(e) {
+    if (e)
+    {
+      this.noPost = true;
+    } else
+    {
+      this.noPost = false;
     }
   }
   ngDoCheck() {

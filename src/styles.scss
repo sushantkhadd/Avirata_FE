@@ -1144,8 +1144,9 @@ body {
   .card {
     font-size: 0.85rem;
     border: none;
-    .card-block{
-    font-size: 1rem;
+
+    .card-block {
+      font-size: 1rem;
     }
   }
 
@@ -2375,8 +2376,8 @@ h6.questionHead.lineHeight {
     padding-top: 1rem;
   }
 
-  .instructionModal{
-    span.exp-img{
+  .instructionModal {
+    span.exp-img {
       // left: 12px !important;
       margin: 0px auto;
       top: -5% !important;
@@ -2388,21 +2389,24 @@ h6.questionHead.lineHeight {
     }
   }
 
-  .instructionModal.newCFUPopup{
-    span.exp-img{
+  .instructionModal.newCFUPopup {
+    span.exp-img {
       left: 12px !important;
       top: -10% !important;
       width: 73px !important;
     }
-    .modal-body{
-      .ml-5{
+
+    .modal-body {
+      .ml-5 {
         margin-left: 0 !important;
       }
-      h5{
-        &.mt-3{
-          margin-top: 0.5rem!important;
+
+      h5 {
+        &.mt-3 {
+          margin-top: 0.5rem !important;
         }
-        font-size: 0.9rem!important;
+
+        font-size: 0.9rem !important;
         margin-bottom: 0;
       }
 
@@ -2633,6 +2637,7 @@ h6.questionHead.lineHeight {
 
 .rewards-animate {
   padding: 1rem;
+
   img {
     animation: fadeInAnimate 1.5s ease-in both;
     opacity: 0;
@@ -2705,24 +2710,25 @@ table,
 }
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
-  .loginBg{
-      .card:not(:first-child) {
-        border-top-right-radius: 30px;
-        border-bottom-right-radius: 30px;
-        border-bottom-left-radius: 30px;
-      }
-      .card:not(:last-child) {
-        border-top-left-radius: 30px;
-        border-bottom-left-radius: 30px;
-        border-top-right-radius: 30px!important;
-      }
+  .loginBg {
+    .card:not(:first-child) {
+      border-top-right-radius: 30px;
+      border-bottom-right-radius: 30px;
+      border-bottom-left-radius: 30px;
+    }
+
+    .card:not(:last-child) {
+      border-top-left-radius: 30px;
+      border-bottom-left-radius: 30px;
+      border-top-right-radius: 30px !important;
+    }
   }
 
-  .submoduleStatusModal{
+  .submoduleStatusModal {
     .modal {
-      .modal-content{
-        .modal-header{
-          span.exp-img{
+      .modal-content {
+        .modal-header {
+          span.exp-img {
             width: 80px;
             height: 80px;
             bottom: 28px;
@@ -2732,9 +2738,9 @@ table,
     }
   }
 
-  .ansCheckModal{
-    .modal-header{
-      span.exp-img{
+  .ansCheckModal {
+    .modal-header {
+      span.exp-img {
         left: 18px;
         width: 75px;
         height: 75px;
@@ -2862,23 +2868,24 @@ table,
     }
   }
 
-  .container{
-    .baseline-instructtion{
-        h6.questionHead.lineHeight{
-            font-size: 0.68rem!important;
+  .container {
+    .baseline-instructtion {
+      h6.questionHead.lineHeight {
+        font-size: 0.68rem !important;
+      }
+
+      .position-relative {
+        .badge.badge-info.float-right {
+          top: -16%;
+          font-size: 70%;
         }
-        .position-relative{
-          .badge.badge-info.float-right{
-            top: -16%;
-            font-size: 70%;
-          }
-        }
+      }
     }
   }
 
 
-  .mcqBlock{
-    .btn.btn-info{
+  .mcqBlock {
+    .btn.btn-info {
       margin-bottom: 1rem;
     }
 
@@ -2895,16 +2902,16 @@ table,
     }
   }
 
-  .drag-container{
-    .draggable-items{
-      li{
+  .drag-container {
+    .draggable-items {
+      li {
         margin-bottom: 1rem;
       }
     }
   }
 
-  .radio-opt-group{
-    label{
+  .radio-opt-group {
+    label {
       display: inline;
       font-size: 0.80rem;
     }
@@ -2923,7 +2930,7 @@ table,
 
 .dx-radiogroup .dx-radiobutton,
 .dx-radiogroup {
-  font-family: 'Mukta', sans-serif!important;
+  font-family: 'Mukta', sans-serif !important;
 }
 
 .card {
@@ -4182,12 +4189,13 @@ body {
   }
 }
 
-.custom_counter{
+.custom_counter {
   position: absolute;
   z-index: 99;
   top: 67px;
   left: 37px;
 }
+
 .forum-component {
 
   .blog-comment::before,
@@ -4321,13 +4329,67 @@ body {
 }
 
 .spinner-loader {
-  &::before{
-        content: "\f1ce";
+  &::before {
+    content: "\f1ce";
   }
+
   animation-duration: 0.3s;
   float: right;
   margin-right: 10px;
   margin-top: 0px;
   font-size: 1.2rem;
 
+}
+
+mfBootstrapPaginator {
+
+  nav {
+    &.pagination {
+      li {
+        &:first-child {
+          a {
+            margin-left: 0;
+            border-top-left-radius: .25rem;
+            border-bottom-left-radius: .25rem;
+          }
+        }
+
+        a {
+          position: relative;
+          display: block;
+          padding: .5rem .75rem;
+          margin-left: -1px;
+          line-height: 1.25;
+          color: #007bff;
+          background-color: #fff;
+          border: 1px solid #dee2e6;
+        }
+
+        &.active {
+          a {
+            background: #007bff !important;
+            color: #fff !important;
+          }
+        }
+
+        &.disabled {
+          a {
+            color: #6c757d;
+            pointer-events: none;
+            cursor: auto;
+            background-color: #fff;
+            border-color: #dee2e6;
+          }
+        }
+      }
+    }
+  }
+}
+
+.data-loader {
+  .lds-facebook {
+    div {
+      @extend .bg-blue-gradiant;
+    }
+  }
 }
