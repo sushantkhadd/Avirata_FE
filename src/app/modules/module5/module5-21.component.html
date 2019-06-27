@@ -70,22 +70,36 @@
           <div class="form-group row">
             <label class="col-2 col-md-2 col-sm-2 form-control-label" [for]="queId1" [innerHTML]="que1"></label>
             <div class="col-4 col-sm-4 col-md-4 controls">
-              <textarea class="form-control" [id]="queId1" name="answer1" [(ngModel)]="answer1" rows="2" #addr="ngModel" maxlength="500"
+              <textarea class="form-control" [id]="queId1" name="answer1" [(ngModel)]="answer1" rows="2" #addr="ngModel" (focus)="showLimit['1']=true" (focusout)="showLimit['1']=false"
                 required></textarea>
+                <div *ngIf="showLimit['1']==false && (postWordCount['1']>150 || postWordCount['1']<5)" class="offset-md-4 mt-2">
+                  <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
+                </div> 
+                <p *ngIf="showLimit['1'] && postWordCount['1']>0" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount['1'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}</p> 
             </div>
+            
 
               <label class="col-2 col-md-2 col-sm-2 form-control-label" [for]="queId2" [innerHTML]="que2"></label>
               <div class="col-4 col-sm-4 col-md-4 controls">
-                <textarea class="form-control" [id]="queId2" name="answer2" [(ngModel)]="answer2" rows="2" #addr="ngModel" maxlength="500"
+                <textarea class="form-control" [id]="queId2" name="answer2" [(ngModel)]="answer2" rows="2" #addr="ngModel" (focus)="showLimit['2']=true" (focusout)="showLimit['2']=false"
                   required></textarea>
+                  <div *ngIf="showLimit['2']==false && (postWordCount['2']>150 || postWordCount['2']<5)" class="offset-md-4 mt-2">
+                      <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
+                    </div> 
+                    <p *ngIf="showLimit['2'] && postWordCount['2']>0" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount['2'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}</p>
               </div>
             </div>
          
             <div class="form-group row">
               <label class="col-2 col-md-2 col-sm-2 form-control-label" [for]="queId3" [innerHTML]="que3"></label>
               <div class="col-4 col-sm-4 col-md-4 controls">
-                <textarea class="form-control" [id]="queId3" name="answer3" [(ngModel)]="answer3" rows="2" #addr="ngModel" maxlength="500"
+                <textarea class="form-control" [id]="queId3" name="answer3" [(ngModel)]="answer3" rows="2" #addr="ngModel" (focus)="showLimit['3']=true" (focusout)="showLimit['3']=false"
                   required></textarea>
+                  <div *ngIf="showLimit['3']==false && (postWordCount['3']>150 || postWordCount['3']<5)" class="offset-md-4 mt-2">
+                      <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
+                    </div> 
+                    <p *ngIf="showLimit['3'] && postWordCount['3']>0" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} 
+                      {{postWordCount['3'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}</p>
               </div>
   
                 <label class="col-2 col-md-2 col-sm-2 form-control-label" [for]="queId4" [innerHTML]="que4"></label>
@@ -100,8 +114,12 @@
                   {{'number.1' | translate}}. <label [for]="queId5" [innerHTML]="que5"></label>
               </div>
                 <div class="col-12 col-sm-12 col-md-12 controls">
-                  <textarea class="form-control" [id]="queId5" name="answer5" [(ngModel)]="answer5" rows="2" #addr="ngModel" maxlength="500"
+                  <textarea class="form-control" [id]="queId5" name="answer5" [(ngModel)]="answer5" rows="2" #addr="ngModel" (focus)="showLimit['5']=true" (focusout)="showLimit['5']=false"
                     required></textarea>
+                    <div *ngIf="showLimit['5']==false && (postWordCount['5']>150 || postWordCount['5']<5)" class="offset-md-4 mt-2">
+                        <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
+                      </div> 
+                      <p *ngIf="showLimit['5'] && postWordCount['5']>0" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount['5'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}</p>
                 </div>
               </div>
 
@@ -110,8 +128,12 @@
                       {{'number.2' | translate}}. <label [for]="queId6" [innerHTML]="que6"></label>
                   </div>
                   <div class="col-12 col-sm-12 col-md-12 controls">
-                    <textarea class="form-control" [id]="queId6" name="answer6" [(ngModel)]="answer6" rows="2" #addr="ngModel" maxlength="500"
+                    <textarea class="form-control" [id]="queId6" name="answer6" [(ngModel)]="answer6" rows="2" #addr="ngModel" (focus)="showLimit['6']=true" (focusout)="showLimit['6']=false"
                       required></textarea>
+                      <div *ngIf="showLimit['6']==false && (postWordCount['6']>150 || postWordCount['6']<5)" class="offset-md-4 mt-2">
+                          <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
+                        </div> 
+                        <p *ngIf="showLimit['6'] && postWordCount['6']>0" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount['6'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}</p>
                   </div>
                 </div>
 
@@ -120,8 +142,12 @@
                         {{'number.3' | translate}}. <label [for]="queId7" [innerHTML]="que7"></label>
                     </div>
                     <div class="col-12 col-sm-12 col-md-12 controls">
-                      <textarea class="form-control" [id]="queId7" name="answer7" [(ngModel)]="answer7" rows="2" #addr="ngModel" maxlength="500"
+                      <textarea class="form-control" [id]="queId7" name="answer7" [(ngModel)]="answer7" rows="2" #addr="ngModel" (focus)="showLimit['7']=true" (focusout)="showLimit['7']=false"
                         required></textarea>
+                        <div *ngIf="showLimit['7']==false && (postWordCount['7']>150 || postWordCount['7']<5)" class="offset-md-4 mt-2">
+                            <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
+                          </div> 
+                          <p *ngIf="showLimit['7'] && postWordCount['7']>0" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount['7'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}</p>
                     </div>
                   </div>
 

@@ -636,3 +636,13 @@ nav#sidebar.active+#content {
   background-size: initial;
   background-repeat: no-repeat;
 }
+
+#capture{
+  height: 100%;
+}
+
+.spin-loader{
+  em{
+    animation-duration: 0.5s;
+  }
+}

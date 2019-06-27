@@ -47,7 +47,7 @@ export class FullLayoutComponent implements OnInit {
   rewardsFlag;
   cupImg;
   needEfforts;
-  subscription: Subscription;
+  subscription: Subscription; isloaded;
 
   @ViewChild("passwordChangeModal") public passwordChangeModal: ModalDirective;
   @ViewChild("moduleStatusModal") public moduleStatusModal: ModalDirective;
@@ -223,14 +223,19 @@ export class FullLayoutComponent implements OnInit {
   }
 
   downloadReward() {
+    this.isloaded = true;
     html2canvas(document.querySelector("#capture")).then(canvas => {
       this.shareableImage = canvas.toDataURL();
       console.log(canvas, this.shareableImage);
       if (this.shareableImage) {
+    this.isloaded = false;
+        
+        setTimeout(() => {
         var link = document.createElement("a");
         link.href = this.shareableImage;
         link.download = "my-reward.png";
         link.click();
+        }, 1000);
       }
     });
   }

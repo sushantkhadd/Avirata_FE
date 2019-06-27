@@ -1227,14 +1227,14 @@ body {
       .btn.btn-info {
         background: #a7d2f4;
         color: #545e62;
-        font-weight: 500;
+        font-weight: 600;
         border: 1px solid #a7d2f4;
       }
 
       .btn.btn-primary {
         background: #a7d2f4;
         color: #545e62;
-        font-weight: 500;
+        font-weight: 600;
         border: 1px solid #a7d2f4;
       }
     }
@@ -1634,7 +1634,7 @@ body {
       .btn.btn-primary {
         background: #aad4f5;
         color: #545e62;
-        font-weight: 500;
+        font-weight: 600;
         border-color: #aad4f5;
       }
     }
@@ -1738,7 +1738,7 @@ body {
         .btn.btn-primary {
           background: #a7d2f4;
           color: #545e62;
-          font-weight: 500;
+          font-weight: 600;
           border: 1px solid #a7d2f4;
         }
       }
@@ -1831,7 +1831,7 @@ body {
       .btn.btn-primary {
         background: #a7d2f4;
         color: #545e62;
-        font-weight: 500;
+        font-weight: 600;
         border: 1px solid #a7d2f4;
       }
 
@@ -2227,7 +2227,7 @@ body {
     .btn.btn-primary {
       background: #a7d2f4;
       color: #545e62;
-      font-weight: 500;
+      font-weight: 600;
       border: 1px solid #a7d2f4;
     }
   }
@@ -2289,12 +2289,12 @@ h6.questionHead.lineHeight {
   &.instructionModal {
     span.exp-img {
       left: 23px !important;
-      top: -17% !important;
+      top: -15% !important;
     }
 
     .modal-body {
       background: none !important;
-      padding: 1rem 4.5rem;
+      padding: 1rem 3rem;
     }
   }
 }
@@ -3022,7 +3022,7 @@ body {
 
 .card.dynamic-view span.disable._play {
   top: 13%;
-  left: 16%;
+  left: 15%;
   width: 25px;
   height: 25px;
 }
@@ -4141,6 +4141,6 @@ body {
 .custom_counter{
   position: absolute;
   z-index: 99;
-  top: 67px;
-  left: 37px;
+  top: 68px;
+  left: 43px;
 }
