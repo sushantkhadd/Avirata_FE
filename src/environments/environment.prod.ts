@@ -9,6 +9,8 @@ export const environment = {
   l3apiUrl: "https://maacpd.in/l3api/",
   // apiUrl: 'http://192.168.1.223:9255/'
   // apiUrl: "https://maacpd.in/api/",
-  redirectUrl: "http://l1.maacpd.in/#/l1/",
+  redirectUrl1: "http://l1.maacpd.in/#/l1/",
+  redirectUrl2: "http://l1.maacpd.in/#/l2/",
+
   downloadUrl: "https://maacpd.in"
 };

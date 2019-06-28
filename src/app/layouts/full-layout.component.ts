@@ -229,7 +229,7 @@ export class FullLayoutComponent implements OnInit {
       console.log(canvas, this.shareableImage);
       if (this.shareableImage) {
     this.isloaded = false;
-        
+
         setTimeout(() => {
         var link = document.createElement("a");
         link.href = this.shareableImage;
@@ -952,8 +952,36 @@ export class FullLayoutComponent implements OnInit {
           "subFlagModule5",
           this.subFlagModule5.toString()
         );
-      } else if (source == "module 5.23") {
+      } else if (
+        source == "module 5.23" ||
+        source == "module 5.23.1" ||
+        source == "module 5.23.2" ||
+        source == "module 5.23.3" ||
+        source == "module 5.23.4" ||
+        source == "module 5.23.5" ||
+        source == "module 5.23.6"
+      )
+      {
         this.mainFlagModule5 = 23;
+        if (source == "module 5.23.1")
+        {
+          this.subFlagModule5 = 1;
+        } else if (source == "module 5.23.2")
+        {
+          this.subFlagModule5 = 2;
+        } else if (source == "module 5.23.3")
+        {
+          this.subFlagModule5 = 3;
+        } else if (source == "module 5.23.4")
+        {
+          this.subFlagModule5 = 4;
+        } else if (source == "module 5.23.5")
+        {
+          this.subFlagModule5 = 5;
+        } else if (source == "module 5.23.6")
+        {
+          this.subFlagModule5 = 6;
+        }
         window.localStorage.setItem(
           "subFlagModule5",
           this.subFlagModule5.toString()
@@ -2243,19 +2271,19 @@ export class FullLayoutComponent implements OnInit {
         this.mainFlagModule0 = 1;
         if (source == "module 0.1") {
           this.subFlagModule0 = 1;
-        } 
+        }
       } else if (source == "module 0.2") {
         this.mainFlagModule0 = 2;
         if (source == "module 0.2") {
           this.subFlagModule0 = 1;
-        } 
+        }
       } else if (
         source == "module 0.3"
       ) {
         this.mainFlagModule0 = 3;
         if (source == "module 0.3") {
           this.subFlagModule0 = 1;
-        } 
+        }
       }
       window.localStorage.setItem(
         "subFlagModule0",

@@ -25,13 +25,14 @@ export class LevelSelectionComponent implements OnInit {
   start2 = "दुसरा टप्पा सुरू करण्यासाठी येथे क्लिक करा.";
   noAccessFlag = false; startDate; endDate; group_name;certificate;userID;pdfUrl;district;cLink;
 
- public setUrl;
+  public setUrl1; setUrl2;
   ngOnInit() {
-    // var encrypted = this.LanguageService.set('aesEncryptionKey', window.localStorage.getItem('setData'))
+    var encrypted = this.LanguageService.set('aesEncryptionKey', window.localStorage.getItem('setData'))
 
-    // var a = encrypted.replace(new RegExp('/', 'g'), '~');
+    var a = encrypted.replace(new RegExp('/', 'g'), '~');
     // this.setUrl='http://192.168.1.110:4200/#/l1/'+a
-    this.setUrl=environment.redirectUrl
+    this.setUrl1 = environment.redirectUrl1 + a
+    this.setUrl2 = environment.redirectUrl2 + a
 
     this.district=window.localStorage.getItem('districtid')
     this.pdfUrl='https://s3-ap-southeast-1.amazonaws.com/maacpd/e-certificate/'

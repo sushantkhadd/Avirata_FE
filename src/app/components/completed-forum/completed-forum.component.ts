@@ -212,7 +212,7 @@ public replyBox = false; token;showCoomentArea=false
             element.type = "comment";
             element.viewComments = false;
           });
-          this.posts[index]["comment_count"] = this.comments.length;
+          this.posts[index]["commentcount"] = this.comments.length;
 
           var temp1 = []
           temp1 = this.posts.slice(0, index + 1);

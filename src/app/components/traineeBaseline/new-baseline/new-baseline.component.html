@@ -20,7 +20,8 @@
                     <p>{{'Quiz.instruction7' | translate}}</p>
                 </div> -->
                 </div>
-                <div class="card-footer" *ngIf="mySubmodule2==1 || mySubmodule2==7 || mySubmodule3==7 || moduleNumber==3 || moduleNumber==4">
+                <div class="card-footer"
+                  *ngIf="mySubmodule2==1 || mySubmodule2==7 || mySubmodule3==7 || moduleNumber==3 || moduleNumber==4 || moduleNumber==5">
                     <div class="float-right hidden-xs-down">
                         <button class="btn btn-primary" appPreventDoubleClick
                           (debounceClick)="startExam()">{{'Module4.start' | translate}}</button>
@@ -56,6 +57,7 @@
        <strong *ngIf="mySubmodule3 == 7">{{'Quiz.traineebaselineQue2' | translate}}</strong>
        <strong *ngIf="mySubmodule4 == 2">{{'Quiz.traineebaselineQue3' | translate}}</strong>
        <strong *ngIf="mySubmodule4 == 11">{{'Quiz.traineebaselineQue4' | translate}}</strong>
+        <strong *ngIf="mySubmodule5 == 23">{{'Quiz.traineebaselineQue4' | translate}}</strong>
     </h6>
     <!-- <hr /> -->
 
@@ -77,6 +79,15 @@
                                 <!-- span added to align checkbox and label -->
                             </label>
                         </div>
+                    </div>
+                    <div class="col-12" *ngIf="freeText">
+                      <textarea class="form-control" [id]="questionid1" name="answer1" [(ngModel)]="answer1" rows="3"
+                        #addr="ngModel" (focus)="showLimit['1']=true" (focusout)="showLimit['1']=false"
+                        required></textarea>
+                      <div *ngIf="showLimit['1']==false && (postWordCount['1']>150 || postWordCount['1']<1)"
+                        class="offset-md-4 mt-2">
+                        <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
+                      </div>
                     </div>
                 </div>
                 <hr />

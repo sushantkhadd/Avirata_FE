@@ -25,7 +25,7 @@
             </li>
           </ul>
         </li>
-        <li *ngIf="userType == 'superadmin' ||userType == 'admin' ">
+        <li *ngIf="userType == 'superadmin'">
           <a href="#module2Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><em
               class="fas fa-wrench mr-2"></em>&nbsp;Utility</a>
           <ul class="collapse list-unstyled" id="module2Submenu">
@@ -44,7 +44,7 @@
             <li> <a [class.active]="showSearchData" (click)="searchData()"> Search by Aadhar or Mobile No</a> </li>
           </ul>
         </li>
-        <li *ngIf="userType == 'superadmin' ">
+        <li *ngIf="userType == 'superadmin'">
           <a href="#module3Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><em
               class="fas fa-wrench mr-2"></em>&nbsp;All Users Report</a>
           <ul class="collapse list-unstyled" id="module3Submenu">

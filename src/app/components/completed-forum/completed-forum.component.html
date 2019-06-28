@@ -16,10 +16,10 @@
               (debounceClick)="viewCommentFlag=!viewCommentFlag;viewComments(post['postid'],i)">
               <span *ngIf="!post.viewComments"><i class="fa fa-plus count-label"
                   aria-hidden="true"></i>&nbsp;&nbsp;{{'forum.comments' | translate}}
-                &nbsp;{{'L2Module2.see' | translate}}({{post['comment_count'] | numberConvertor : 'Devanagari'}})</span><span
+                &nbsp;{{'L2Module2.see' | translate}}({{post['commentcount'] | numberConvertor : 'Devanagari'}})</span><span
                   *ngIf="post.viewComments"><i
                   class="fa fa-minus count-label" aria-hidden="true"></i>&nbsp;&nbsp;{{'forum.comments' | translate}}
-                &nbsp;{{'L2Module2.see' | translate}}({{post['comment_count'] | numberConvertor : 'Devanagari'}})</span></a>
+                &nbsp;{{'L2Module2.see' | translate}}({{post['commentcount'] | numberConvertor : 'Devanagari'}})</span></a>
           </div>
           <!-- <p class="meta-footer"><a (click)="subcomments=!subcomments;reply.show = !reply.show"><i class="pull-right fa " [class.fa-plus]="subcomments==false" [class.fa-minus]="subcomments==true" aria-hidden="true"></i></a></p> -->
         </div>

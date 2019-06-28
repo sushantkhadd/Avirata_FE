@@ -13,6 +13,7 @@ import { ToastsManager } from "ng6-toastr";
 import { Module2Service } from "../../../modules/module2/module2.service";
 import { TranslateService } from '@ngx-translate/core';
 import {LanguageService} from '../../../language.service'
+import { Module5Service } from 'src/app/modules/module5/module5.service';
 
 @Component({
   selector: 'app-new-baseline',
@@ -20,7 +21,7 @@ import {LanguageService} from '../../../language.service'
 })
 export class NewBaselineComponent implements OnInit {
   private selectedQuestionId; selectedAnswer; finishExamCard;userOption={};dummyAnsJson={};
-  public moduleNumber; mySubmodule2;lastAns;mySubmodule4;
+  public moduleNumber; mySubmodule2; lastAns; mySubmodule4; mySubmodule5;
   // public nextButtonFlag;answerJSON;
   // oldSelectedAns;endApiAnsHit;
   @Input() public passData;
@@ -51,8 +52,8 @@ export class NewBaselineComponent implements OnInit {
   showQuize = false; token; alreadyDone; finishExamCardonRun;
   public baselineSelectedAns; baselineSelectedQuestion; mySubmodule3;
   public apiEndStart; apiEndSendAns; apiEndFinish; startJson = {};
-  lastQueId;
-  constructor(private router: Router, private quizService: QuizService,public LocalstoragedetailsService: LocalstoragedetailsService, public Module1Service: Module1Service, public toastr: ToastsManager, vcr: ViewContainerRef, public Module2Service: Module2Service, public translate: TranslateService,public LanguageService:LanguageService) {
+  lastQueId; showLimit = {}; postWordCount = {}; answer1 = ""; freeText;
+  constructor(private router: Router, private quizService: QuizService, public LocalstoragedetailsService: LocalstoragedetailsService, public Module1Service: Module1Service, public toastr: ToastsManager, vcr: ViewContainerRef, public Module2Service: Module2Service, public translate: TranslateService, public LanguageService: LanguageService, public Module5Service: Module5Service) {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
@@ -61,6 +62,13 @@ export class NewBaselineComponent implements OnInit {
     this.apiEndSendAns = this.passData.answer;
     this.apiEndFinish = this.passData.finish;
     this.startJson = this.passData.jsonData;
+  }
+
+  ngDoCheck() {
+    if (this.answer1)
+    {
+      this.postWordCount['1'] = this.answer1.trim().split(' ').length;
+    }
   }
 
   startExam() {
@@ -190,12 +198,15 @@ export class NewBaselineComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.postWordCount['1'] = 0;
     // this.oldSelectedAns=""
     // this.nextButtonFlag=false
     // this.endApiAnsHit=false
     this.mySubmodule2 = parseInt(window.localStorage.getItem('mainFlagModule2'));
     this.mySubmodule3 = parseInt(window.localStorage.getItem('mainFlagModule3'));
     this.mySubmodule4 = parseInt(window.localStorage.getItem('mainFlagModule4'));
+    this.mySubmodule5 = parseInt(window.localStorage.getItem('mainFlagModule5'));
+
     this.moduleNumber = window.localStorage.getItem('currentstatus');
     if (window.localStorage.getItem('token') == null) {
       this.router.navigate(['/']);
@@ -213,6 +224,28 @@ export class NewBaselineComponent implements OnInit {
   }
 
   get filteredQuestions() {
+    // var mainArray1: any = []
+    // var mainArray2: any = []
+
+    // for (let index = 0; index < this.quiz.questions.length; index++)
+    // {
+    //   const element = this.quiz.questions[index];
+    //   if (element.options != null)
+    //   {
+    //     if (element.options.length == 0)
+    //     {
+    //       mainArray1.push(element);
+    //     } else
+    //     {
+    //       console.log("element", element);
+    //       mainArray2.push(element);
+    //       console.log("mainArray2", this.quiz.questions, mainArray2);
+    //       // this.quiz.questions = mainArray2
+    //     }
+    //     console.log(this.quiz.questions, mainArray1, mainArray2, 'mainArray', element);
+    //   }
+    // }
+    // this.quiz.questions.push(mainArray2)
     return (this.quiz.questions) ?
       this.quiz.questions.slice(this.pager.index, this.pager.index + this.pager.size) : [];
   }
@@ -224,7 +257,17 @@ export class NewBaselineComponent implements OnInit {
     //  question.id = parseInt(this.LanguageService.get('aesEncryptionKey', question.id))
       console.log("question.id",this.filteredQuestions,this.pager.index,this.pager.index + this.pager.size,this.quiz.questions,question.id)
       this.lastAns='';
-      this.lastQueId='';
+      this.lastQueId = '';
+      if (localStorage.getItem('mainFlagModule5') == '23')
+      {
+        if (option.name != "अजिबात नाही")
+        {
+          this.freeText = false;
+        } else
+        {
+          this.freeText = true;
+        }
+      }
     //   question.options.forEach((x) => { if (x.id !== option.id) x.selected = false; });
     // this.baselineSelectedAns = option.id;
     // this.baselineSelectedQuestion = question.id;
@@ -247,6 +290,10 @@ export class NewBaselineComponent implements OnInit {
     else {
       question.answered = false;
       console.log("not checked")
+      if (localStorage.getItem('mainFlagModule5') == '23')
+      {
+        this.freeText = false;
+      }
       // this.endApiAnsHit=false
     }
     question.options.forEach((x) => {
@@ -305,7 +352,10 @@ export class NewBaselineComponent implements OnInit {
               if(this.quiz.questions[index+1].ans == this.baselineSelectedAns){
                 console.log("SAME no hit")
               }else{
-                if (window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '2' || window.localStorage.getItem('mainFlagModule4') == '11'){
+                if (window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '2' ||
+                  window.localStorage.getItem('mainFlagModule5') == '23' ||
+                  window.localStorage.getItem('mainFlagModule4') == '11')
+                {
                   console.log("1")
                   this.sendAnswer(this.baselineSelectedAns, this.baselineSelectedQuestion, this.apiEndSendAns);
                 }else if (window.localStorage.getItem('currentstatus') == '6') {
@@ -341,7 +391,9 @@ export class NewBaselineComponent implements OnInit {
         this.toastr.error(this.translate.instant('Errors.chooseOptions'));
       }
     }
-    else if(opearation == 2){
+    else if (opearation == 2)
+    {
+      console.log(this.filteredQuestions, "filteredQuestions");
       console.log("index",index,opearation,this.quiz.questions[index - 1].answered,this.pager.count)
       if (this.quiz.questions[index - 1].answered == true && index >= 0 && index < this.pager.count) {
         if (this.quizService.answerSendingError === false) {
@@ -369,7 +421,10 @@ export class NewBaselineComponent implements OnInit {
               if(this.quiz.questions[index - 1].ans == this.baselineSelectedAns){
                 console.log("SAME no hit")
               }else{
-                if (window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '2' || window.localStorage.getItem('mainFlagModule4') == '11'){
+                if (window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '2' ||
+                  window.localStorage.getItem('mainFlagModule5') == '23' ||
+                  window.localStorage.getItem('mainFlagModule4') == '11')
+                {
                   console.log("1")
                   this.sendAnswer(this.baselineSelectedAns, this.baselineSelectedQuestion, this.apiEndSendAns);
                 }else if (window.localStorage.getItem('currentstatus') == '6') {
@@ -419,7 +474,10 @@ export class NewBaselineComponent implements OnInit {
               this.quiz.questions[index].ans=this.baselineSelectedAns
               this.userOption[this.quiz.questions[index].id] = this.quiz.questions[index].ans;
               console.log("useroptionj",this.userOption)
-              if (window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '2' || window.localStorage.getItem('mainFlagModule4') == '11'){
+              if (window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '2' ||
+                window.localStorage.getItem('mainFlagModule5') == '23' ||
+                window.localStorage.getItem('mainFlagModule4') == '11')
+              {
                 console.log("1")
                 this.sendAnswer(this.baselineSelectedAns, this.baselineSelectedQuestion, this.apiEndSendAns);
               }else if (window.localStorage.getItem('currentstatus') == '6') {
@@ -430,7 +488,10 @@ export class NewBaselineComponent implements OnInit {
               if(this.quiz.questions[index].ans == this.baselineSelectedAns){
                 console.log("SAME no hit")
               }else{
-                if (window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '2' || window.localStorage.getItem('mainFlagModule4') == '11'){
+                if (window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '2' ||
+                  window.localStorage.getItem('mainFlagModule5') == '23' ||
+                  window.localStorage.getItem('mainFlagModule4') == '11')
+                {
                   console.log("1")
                   this.sendAnswer(this.baselineSelectedAns, this.baselineSelectedQuestion, this.apiEndSendAns);
                 }else if (window.localStorage.getItem('currentstatus') == '6') {
@@ -496,7 +557,13 @@ export class NewBaselineComponent implements OnInit {
   sendAnswer(baselineAns, baselineQueId, apiEndSendAns) {
     this.selectedQuestionId = baselineQueId;
     this.selectedAnswer = baselineAns;
-    if(window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '2' || window.localStorage.getItem('mainFlagModule4') == '11'){
+    if (
+      window.localStorage.getItem('mainFlagModule2') == '7' ||
+      window.localStorage.getItem('mainFlagModule3') == '7' ||
+      window.localStorage.getItem('mainFlagModule4') == '2' ||
+      window.localStorage.getItem('mainFlagModule5') == '23' ||
+      window.localStorage.getItem('mainFlagModule4') == '11')
+    {
       if((this.lastAns != "" && this.lastAns != null && this.lastAns != undefined) && (this.lastQueId != "" && this.lastQueId != null && this.lastQueId != undefined))
       {
         console.log("lastans",this.lastAns,this.dummyAnsJson,this.lastQueId)
@@ -518,7 +585,14 @@ export class NewBaselineComponent implements OnInit {
     var mainAns = {};
     mainAns['submoduleid'] = window.localStorage.getItem('uuid');
     console.log("lastqu",this.pager.index,this.pager.count)
-    if(((this.pager.index + 1)==(this.pager.count)) && (window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '2' || window.localStorage.getItem('mainFlagModule4') == '11')  && Object.keys(this.dummyAnsJson).length == this.pager.count){
+    if (((this.pager.index + 1) == (this.pager.count)) && (
+      window.localStorage.getItem('mainFlagModule2') == '7' ||
+      window.localStorage.getItem('mainFlagModule3') == '7' ||
+      window.localStorage.getItem('mainFlagModule4') == '2' ||
+      window.localStorage.getItem('mainFlagModule5') == '23' ||
+      window.localStorage.getItem('mainFlagModule4') == '11')
+      && Object.keys(this.dummyAnsJson).length == this.pager.count)
+    {
       mainAns['event'] = "finish";
     }
    else{
@@ -527,7 +601,13 @@ export class NewBaselineComponent implements OnInit {
     if(window.localStorage.getItem('mainFlagModule2') == '1'){
       mainAns['useranswer'] = JSON.parse(dummyAns);
     }
-    else if(window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '2' || window.localStorage.getItem('mainFlagModule4') == '11'){
+    else if (
+      window.localStorage.getItem('mainFlagModule2') == '7' ||
+      window.localStorage.getItem('mainFlagModule3') == '7' ||
+      window.localStorage.getItem('mainFlagModule4') == '2' ||
+      window.localStorage.getItem('mainFlagModule5') == '23' ||
+      window.localStorage.getItem('mainFlagModule4') == '11')
+    {
       mainAns['useranswer'] = this.lastAns;
       mainAns['questionid'] = this.lastQueId;
     }
@@ -598,6 +678,21 @@ export class NewBaselineComponent implements OnInit {
 
             window.localStorage.setItem('mainFlagModule4', '3')
             window.localStorage.setItem('subFlagModule4', '1')
+          }
+          else if (window.localStorage.getItem('mainFlagModule5') == '23')
+          {
+            // var obj = {
+            //   "type": "submodule",
+            //   "route": true,
+            //   "current": this.translate.instant('L2Module5.subMenu5-23'),
+            //   "next": this.translate.instant('L2Module5Finish.subMenu5-23'),
+            //   "nextRoute": "/modules/module5/Module5.23"
+            // }
+            // this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+            // this.Module5Service.setLocalStorage5(3);
+            window.localStorage.setItem('uuid', data['data'].nextuuid)
+            window.localStorage.setItem('mainFlagModule5', '23')
+            window.localStorage.setItem('subFlagModule5', '2')
           }
           else if(window.localStorage.getItem('mainFlagModule4') == '11'){
             var obj = {

@@ -12,6 +12,7 @@ import { RegistrationService } from "./registration/registration.service";
 import { NumberDirective } from "src/app/shared/directives/number.directive";
 import { FormatTimePipe } from "../shared/pipes/format-time.pipe";
 import { AngularMultiSelectModule } from "angular2-multiselect-dropdown";
+import { RedirectComponent } from "./redirect/redirect.component";
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { AngularMultiSelectModule } from "angular2-multiselect-dropdown";
     LoginComponent,
     AuthenticationComponent,
     LevelSelectionComponent,
+    RedirectComponent,
     NumberDirective,
     FormatTimePipe
   ],
