@@ -33,7 +33,8 @@
       </div>
     </div>
     <div *ngIf="startFlag">
-      <h6 class="questionHead lineHeight">{{'L2common.caution' | translate}} <span [innerHTML]="inst"> </span></h6>
+      <h6 class="questionHead lineHeight font-weight-bold">{{'L2common.caution' | translate}} 
+        <span [innerHTML]="inst"> </span></h6>
       <div class="borderBlue">
       <span *ngIf="data">
         <app-mcqcomponent [passFlags]='passFlags' [data]='data' (sendAns)="saveAnswer($event)"></app-mcqcomponent>

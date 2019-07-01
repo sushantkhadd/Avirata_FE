@@ -1295,6 +1295,7 @@ body {
     h5 {
       margin-bottom: 1rem;
       font-size: 1.1rem;
+      text-align: left;
     }
   }
 
@@ -1341,6 +1342,7 @@ body {
     h4 {
       padding-left: 3.5rem;
       padding-top: 2rem;
+      text-align: left;
     }
 
     img {
@@ -2810,6 +2812,11 @@ table,
     h6.questionHead.lineHeight {
       font-size: 0.8rem;
     }
+    h6{
+      span {
+        font-size: 0.9rem;
+      }
+    }
   }
 
   .container.position-relative {
@@ -2866,6 +2873,7 @@ table,
     .baseline-instructtion{
         h6.questionHead.lineHeight{
             font-size: 0.68rem!important;
+            line-height: 20px;
         }
         .position-relative{
           .badge.badge-info.float-right{
@@ -2917,6 +2925,10 @@ table,
         padding-top: 1rem;
       }
     }
+  }
+
+  .custom_counter{
+    top: 105px!important;
   }
 
 }
@@ -3301,6 +3313,30 @@ body {
         }
       }
     }
+  }
+
+  @include iMobile{
+    .card-header.mcq-title label {
+      font-size: 0.90rem;
+    }
+    .dx-radiogroup .dx-radiobutton, .dx-radiogroup {
+      font-family: 'Mukta', sans-serif;
+      font-size: 0.9rem;
+      font-weight: normal;
+      line-height: 1.5;
+  }
+
+  .baseline-instructtion{
+    .options{
+      .option{
+        label{
+          span{
+            margin-left: 18px;
+          }
+        }
+      }
+    } 
+  }
   }
 
   @media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation: portrait) {
@@ -4186,7 +4222,7 @@ body {
   position: absolute;
   z-index: 99;
   top: 68px;
-  left: 37px;
+  left: 43px;
 }
 .forum-component {
 
@@ -4329,5 +4365,13 @@ body {
   margin-right: 10px;
   margin-top: 0px;
   font-size: 1.2rem;
+}
 
+.ratingList{
+    padding-top: 1rem;
+    li{
+      list-style-type: none;
+      display: block;
+      line-height: 30px;
+    }
 }

@@ -484,13 +484,17 @@ export class Module521Component implements OnInit {
     this.LanguageService.toShow();
   }
 
-
   numberOnly(event): boolean {
     const charCode = (event.which) ? event.which : event.keyCode;
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
       return false;
     }
     return true;
+  }
 
+  handleInput(e) {
+    if (e.keyCode == 13) {
+       e.preventDefault(); 
+      }
   }
 }
