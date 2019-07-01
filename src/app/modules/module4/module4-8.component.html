@@ -36,7 +36,8 @@
   <div *ngIf="startFlag" class="assignForm">
     <div class="card">
       <div class="card-header p-0">
-        <h6 class="questionHead lineHeight p-3" [innerHTML]="mainQuestion">
+        <h6 class="questionHead lineHeight p-3 font-weight-bold">
+          <span [innerHTML]="mainQuestion"></span>
         </h6>
       </div>
       <div class="card-block pt-2 mr-2">
@@ -115,9 +116,18 @@
         </div>
         <div class="modal-body">
           <h5 class="text-center mt-3">
-            {{'Stepper.totalCount' | translate}} <span class="badge badge-info ml-2">{{overallRating}}</span>
+            {{'Stepper.totalCount' | translate}} <span class="badge badge-info ml-2">{{overallRating | numberConvertor : 'Devanagari'}}/{{'number.50' | translate}}</span>
           </h5>
-          <p class="px-5 text-center font-weight-normal">
+          <hr/>
+          <ul class="ratingList font-weight-normal">
+            <li>{{'number.1' | translate}}. {{question1}} - {{answer1 | numberConvertor : 'Devanagari'}}/{{'number.10' | translate}}</li>
+            <li>{{'number.2' | translate}}. {{question2}} - {{answer2 | numberConvertor : 'Devanagari'}}/{{'number.10' | translate}}</li>
+            <li>{{'number.3' | translate}}. {{question3}} - {{answer3 | numberConvertor : 'Devanagari'}}/{{'number.10' | translate}}</li>
+            <li>{{'number.4' | translate}}. {{question4}} - {{answer4 | numberConvertor : 'Devanagari'}}/{{'number.10' | translate}}</li>
+            <li>{{'number.5' | translate}}. {{question5}} - {{answer5 | numberConvertor : 'Devanagari'}}/{{'number.10' | translate}}</li>
+          </ul>
+          <hr/>
+          <p class="p-3 text-center font-weight-normal">
             {{description}}
           </p>
           <hr />

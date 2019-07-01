@@ -36,9 +36,8 @@ export class Module37Component implements OnInit {
     {
       this.start();
     }
-
-
   }
+  
   start() {
     var jsonData = {}
     jsonData['submoduleid'] = window.localStorage.getItem('uuid')

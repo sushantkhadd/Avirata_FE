@@ -578,6 +578,11 @@ export class Module521Component implements OnInit {
       this.thumb_title = title;
       this.flag = value;
     }
-
+  }
+  
+  handleInput(e) {
+    if (e.keyCode == 13) {
+       e.preventDefault(); 
+      }
   }
 }

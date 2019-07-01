@@ -203,4 +203,10 @@ export class Module33Component implements OnInit {
       }
     );
   }
+
+  handleInput(e) {
+    if (e.keyCode == 13) {
+       e.preventDefault(); 
+      }
+  }
 }
