@@ -16,7 +16,8 @@
           <h5>&nbsp;{{'Quiz.note' | translate}}</h5>
         </div>
         <div class="card-block inst-text">
-          <p class="">{{'subModule5_1.1' | translate}}</p>
+          <!-- <p class="">{{'subModule5_1.1' | translate}}</p> -->
+           <p class="">{{'L2Instruction.inst_image' | translate}}</p>
         </div>
         <div class="card-footer">
           <div class="float-right hidden-xs-down">
@@ -53,6 +54,9 @@
       <div *ngIf="subFlagModule2 == 2 || subFlagModule2 == 3 || subFlagModule2 == 5 || subFlagModule2 == 6">
         <div *ngIf="playVideo">
           <div class="card">
+              <h6 *ngIf="subFlagModule2 == 2">{{'L2Instruction.inst_2_15_2' | translate}}</h6>
+              <h6 *ngIf="subFlagModule2 == 3">{{'L2Instruction.inst_2_15_3' | translate}}</h6>
+              <h6 *ngIf="subFlagModule2 == 5">{{'L2Instruction.inst_2_15_5' | translate}}</h6>
             <div class="moduleOne card-block">
               <app-static-video [receivedData]='passData' (finishCall)="finishVideo($event)"></app-static-video>
             </div>
