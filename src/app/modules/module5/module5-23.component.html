@@ -1,21 +1,241 @@
 <div *ngIf="mainFlagModule5 < 23">
   <div class="card">
     <div class="card-block">
-      <p>{{'subModule5_3.5_3' | translate}}</p>
+      <p>{{'module7.7_2' | translate}}</p>
       <p><strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
     </div>
   </div>
 </div>
 <div *ngIf="mainFlagModule5 == 23">
-  <div *ngIf="subFlagModule5 == 1">
-    <div *ngIf="showPart1Flag">
-      <div>
-        <app-new-baseline [passData]='passData'></app-new-baseline>
+  <div *ngIf="!startFlag">
+    <div class="instruction-wrap">
+      <div class="card">
+        <div class="card-header text-white">
+          <span class="exp-img instructions-img"></span>
+          <h4>{{'Quiz.note' | translate}}</h4>
+        </div>
+        <div class="card-block inst-text">
+          <p>{{'number.1' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_6' | translate}}</p>
+          <p>{{'number.2' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_7' | translate}}</p>
+          <p>{{'number.3' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_8' | translate}}</p>
+          <p>{{'number.4' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_9' | translate}}</p>
+
+        </div>
+        <div class="card-footer">
+          <div class="float-right">
+            <button class="btn btn-primary" appPreventDoubleClick
+              (debounceClick)="start1();">{{'Module4.start' | translate}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="startFlag && subFlagModule5 == 1">
+    <div>
+      <app-new-baseline [passData]='passData'></app-new-baseline>
+    </div>
+  </div>
+
+  <div *ngIf="startFlag && subFlagModule5 == 2">
+    <h6 class="questionHead lineHeight">{{'L2common.caution' | translate}} <span [innerHTML]="inst"> </span></h6>
+    <div>
+      <span *ngIf="data">
+        <app-mcqcomponent [passFlags]='passFlags' [data]='data' (sendAns)="saveAnswer($event)"></app-mcqcomponent>
+      </span>
+    </div>
+  </div>
+
+  <div *ngIf="startFlag && subFlagModule5 == 3">
+      <div class="row">
+          <div class="col-sm-12 col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <!-- <label><span [innerHTML]="statement"></span>
+                  </label> -->
+                    <h6 [innerHTML]="question3"></h6>
+                </div>
+                <div class="card-block pt-0">
+                  <div class="form float-left">
+                    <div class="radio-opt-group">
+                      <div *ngFor="let item of tasks;let i=index" class="col-md-12">
+                        <div class="col-md-12">
+                          <div class="radio">
+                          <label class="radio-answer">
+                            <input id={{item.option}} name="radios" type="radio" value={{item.option}} (click)="onValueChanged(item.option)"><span class="radio-label p-2">{{item.value}}</span>
+                          </label>
+                          </div>
+                        </div>
+                      </div>
+                      </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+      </div>
+  
+      <div class="text-center" *ngIf="!section3Mcq">
+          <div class="">
+              <button class="btn btn-primary mt-4" appPreventDoubleClick [disabled]="!finishDisable"
+                (debounceClick)="finish3()">{{'Cfu.submit' | translate}}</button>
+          </div><br>
+      </div>
+      <span *ngIf="section3Mcq">
+          <ul class="list-group list-checklist verticleScroll">               
+            <li class="list-group-item justify-content-between list-group-item1" *ngFor="let data of selectedTasks;let i=index">
+              <span class="row">             
+                <span class="col-xs-12 col-sm-12 col-md-12">
+                  <input type="checkbox" id={{i}} (change)="taskSelect($event,i,data.statementid)" class="multiCheckStyle">
+                    <label class="p-2" for={{i}} [class.text-success]="data.answer">{{data.statement}}</label>
+                </span>
+        </span>
+        </li>
+        <li class="list-group-item justify-content-between list-group-item1" *ngIf="showText">
+          <label for="checked" class="w-100">
+                <span class="row">
+                  <span class="col-xs-12 col-sm-12 col-md-12">
+                    <span class="row">
+                        <div class="col-md-1">
+                          <input type="checkbox" id="checked" disabled checked="checked" class="multiCheckStyle">
+                        </div>
+                        <div class="col-md-11">
+                          <input type="text" class="form-control" id="otherText1" name="otherText1" placeholder="{{'Stepper.Other' | translate}}"
+                          [(ngModel)]="otherText1" autocomplete='off' required>
+                        </div>
+                    </span>
+                  </span>
+                </span>
+              </label>
+        </li>
+        </ul>
+        <div class="text-center">
+          <div class="">
+            <button class="btn btn-primary text-center mt-2" [disabled]="counter==0 || !finishPar3Flag" (click)="finish3();">{{'Cfu.submit' | translate}}</button>
+          </div><br>
+      </div>
+       
+        </span>
+  </div>
+
+  <div *ngIf="startFlag && subFlagModule5 == 4">
+    <div>
+      <div class="card">
+        <div>
+          <h6 [innerHTML]="question3"></h6>
+        </div>
+        <div class="card-block">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <th class="text-center">{{'otherMessages.sr' | translate}}</th>
+              <th class="text-center">{{'otherMessages.statement' | translate}}</th>
+              <th class="text-center">{{'otherMessages.up' | translate}}</th>
+              <th class="text-center">{{'otherMessages.down' | translate}}</th>
+            </thead>
+            <tr *ngFor="let game of tasks; let i = index">
+              <td class="text-center">{{i + 1}}</td>
+              <td class="inst-text">{{game.statement}}</td>
+              <td class="text-center">
+                <i class="fa fa-arrow-up changePosition" aria-hidden="true" (click)="up(i)"></i>
+              </td>
+              <td class="text-center">
+                <i class="fa fa-arrow-down changePosition" aria-hidden="true" (click)="down(i)"></i>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-primary right" (click)="mcqTasks()">{{'Stepper.Finish' |
+            translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="startFlag && subFlagModule5 == 5">
+    <!-- <h6 class="questionHead lineHeight">{{'L2common.caution' | translate}} <span [innerHTML]="inst"> </span></h6> -->
+    <div>
+      <span *ngIf="data">
+        <app-mcqcomponent [passFlags]='passFlags' [data]='data' (sendAns)="saveAnswer($event)"></app-mcqcomponent>
+      </span>
+    </div>
+  </div>
+  
+  <div *ngIf="startFlag && subFlagModule5 == 6">
+    <div class="assignForm" *ngIf="section6Flag">
+      <div class="card">
+        <div class="card-block pt-2">
+          <form #assignForm="ngForm" >
+            <div class="form-group row">
+              <label class="col-sm-12 form-control-label" [for]="questionid" [innerHTML]="question"></label>
+              <div class="col-12 controls">
+                <textarea class="form-control" [id]="questionid" name="answer" [(ngModel)]="textanswer1" rows="3" #addr="ngModel" (focus)="showLimit['1']=true" (focusout)="showLimit['1']=false" required></textarea>
+              </div>
+              <div *ngIf="showLimit['1']==false && (postWordCount['1']>150 || postWordCount['1']<5)" class="offset-md-4 mt-2">
+                <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
+            </div>
+            </div>
+            <p *ngIf="showLimit['1'] && postWordCount['1']>=1" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount['1'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}</p>
+            <div *ngIf="section6Counter==3">
+            <div class="form-group row">
+              <div class="col-12 controls">
+                <textarea class="form-control" [id]="questionid" name="answer" [(ngModel)]="textanswer2" rows="3" #addr="ngModel" (focus)="showLimit['2']=true" (focusout)="showLimit['2']=false" required></textarea>
+              </div>
+              <div *ngIf="showLimit['2']==false && (postWordCount['2']>150 || postWordCount['2']<5)" class="offset-md-4 mt-2">
+                <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
+            </div>
+            </div>
+            <p *ngIf="showLimit['2'] && postWordCount['2']>=2" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount['2'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}</p>
+            <div class="form-group row">
+              <div class="col-12 controls">
+                <textarea class="form-control" [id]="questionid" name="answer" [(ngModel)]="textanswer3" rows="3" #addr="ngModel" (focus)="showLimit['3']=true" (focusout)="showLimit['3']=false" required></textarea>
+              </div>
+              <div *ngIf="showLimit['3']==false && (postWordCount['3']>150 || postWordCount['3']<5)" class="offset-md-4 mt-2">
+                <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
+            </div>
+            </div>
+            <p *ngIf="showLimit['3'] && postWordCount['3']>=3" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount['3'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}</p>
+          </div>
+          </form>
+        </div>
+        <div class="card-footer text-center bg-white border-0">
+          <button class="btn btn-primary" [disabled]="assignForm.invalid || trimFlag"
+           appPreventDoubleClick (debounceClick)="finish6();">{{'Login.Close' | translate}}</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
 <div *ngIf="mainFlagModule5 > 23">
+  <div class="card submoduleBox">
+    <div class="card-block text-center greenText inst-text">
+      <span>{{'L2Module5Complete.sm_5_23' | translate}}</span>
+    </div>
+  </div>
+</div>
 
+<div class="videoFinishModal videoFinishedModel marks-modal">
+  <div bsModal #ratingModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <img class="img-responsive img-rotate" src="assets/img/mitra.png">
+        <div class="modal-header">
+        </div>
+        <div class="modal-body">
+          
+          <p class="px-5 text-center font-weight-normal">
+            {{'L2Module5.inst_5_23' | translate}}
+          </p>
+          <hr />
+        </div>
+       <div class="modal-footer justify-content-center p-2">
+          <button (click)="ratingModalHide()" class="btn btn-danger">{{'Cfu.no' | translate}}</button>
+          <button (debounceClick)="finish4()" appPreventDoubleClick
+            class="btn btn-success">{{'Cfu.yes' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
