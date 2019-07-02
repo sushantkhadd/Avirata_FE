@@ -16,9 +16,9 @@ export class McqcomponentComponent implements OnInit {
   @Input() public passFlags;public queCount;
   @Output() public sendAns = new EventEmitter<Object>();
   @ViewChild("eventRadioGroup") eventRadioGroup: DxRadioGroupComponent;
-  public statement; tasks; priorities = []; questionType; showAnswer; selectedAnswer; description;queDescription;
+  public statement; tasks; priorities = []; questionType;  showAnswer; selectedAnswer; description;queDescription;
   public correctAns; rightFlag; submitFlag; imgUrlJson; ansTypeFlag; showCorrectAns;
-  public bunchCounter;bunchList;bunchOptions;userOptions={};mcqBunchFlag = false;totalBunchCounter = 1;bunchSelectedAns=[];
+  public bunchCounter;bunchList;bunchOptions;userOptions={};mcqBunchFlag = false;totalBunchCounter = 1;bunchSelectedAns=[];mcqOption:any = []; priorities1=[];priorities2=[]
   public ansSelectCount; counter; selectedTasks = []; ans1; ans2; showAns1; showAns2; queUrl;title;
   public nextQueFlag; subPriorities; sendYesNoType; mysubModule3; mysubModule4; mysubModule1;
   public onlyPopUpAns; mysubModule; submitFlagMCQ; mysubModule0; mysubModule6; mysubModule7;mysubModule2;mysubModule5;totalQueCount;
@@ -131,60 +131,115 @@ export class McqcomponentComponent implements OnInit {
       console.log("options",this.priorities)
 
     } else if(this.questionType == 'mcqInBunch'){
-      this.tasks = this.data.statementlist;
-      console.log("bunchmcq",this.tasks);
-      this.bunchOptions = [{"option":"a","value":"अस्वास्थ्याशी निगडित"},
-                          {"option":"b","value":"आजाराशी निगडित"},
-                          {"option":"c","value":"निगडित नाहीत"}];
-        for(var i=0; i<this.bunchOptions.length;i++){
-          this.priorities.push(this.bunchOptions[i].value)
-
+      console.log("mcqbunchdata",this.data)
+      if(window.localStorage.getItem("mainFlagModule5")=="23"){
+       
+        this.tasks = this.data.questionlist;
+        this.bunchList = this.tasks;
+        console.log("this.tasks",this.tasks)
+        for(let i=0; i<this.tasks.length;i++){
+          this.statement = this.tasks[i].question;
+          this.mcqOption.push(this.tasks[i].options)
+          //this.priorities=[];
+          console.log("option",this.mcqOption)
+            
         }
-      console.log("mcqbunch options",this.priorities)
-      for(var i=0; i<this.tasks.length;i++){
-        this.statement = this.tasks[i].statement;
+        console.log("option111",this.mcqOption)
+        for(let j=0; j<=this.mcqOption.length; j++){
+         // this.priorities=[] 
+            if (this.mcqOption[0][j].value != "")
+            {
+              this.priorities.push(this.mcqOption[0][j].value)
+              console.log("priorities",this.priorities)
+            }
+        }
+        //var priorities1=[] 
+        for(let j=0; j<=this.mcqOption.length; j++){
+          //this.priorities=[] 
+         
+          if (this.mcqOption[1][j].value != "")
+          {
+            this.priorities1.push(this.mcqOption[1][j].value)
+            console.log("priorities",this.priorities1)
+          }
+        
       }
-
-      this.bunchCounter = 5;
-      this.totalBunchCounter = 25 - this.tasks.length;
-      this.bunchList = this.tasks.splice(0,this.bunchCounter)
-      if(window.localStorage.getItem('mainFlagModule4') == "12"){
-         console.log("ansss",this.bunchList[0].answer,this.bunchOptions[0].option)
-         var dummyObj={}
-         for(let i=0;i<this.bunchOptions.length;i++){
-
-            if(this.bunchList[0].answer == this.bunchOptions[i].option){
-              dummyObj['1']=this.bunchOptions[i].value;
-            }
-           if(this.bunchList[1].answer == this.bunchOptions[i].option){
-              dummyObj['2']=this.bunchOptions[i].value;
-            }
-           if(this.bunchList[2].answer == this.bunchOptions[i].option){
-              dummyObj['3']=this.bunchOptions[i].value;
-            }
-           if(this.bunchList[3].answer == this.bunchOptions[i].option){
-              dummyObj['4']=this.bunchOptions[i].value;
-            }
-           if(this.bunchList[4].answer == this.bunchOptions[i].option){
-              dummyObj['5']=this.bunchOptions[i].value;
-            }
-            console.log("final", dummyObj)
+      //this.priorities=[] 
+      for(let j=0; j<=this.mcqOption.length; j++){
+        //var priorities2=[] 
+        if (this.mcqOption[2][j].value != "")
+        {
+          this.priorities2.push(this.mcqOption[2][j].value)
+          console.log("priorities",this.priorities2)
         }
-        this.bunchSelectedAns.push(dummyObj['1'])
-        this.bunchSelectedAns.push(dummyObj['2'])
-        this.bunchSelectedAns.push(dummyObj['3'])
-        this.bunchSelectedAns.push(dummyObj['4'])
-        this.bunchSelectedAns.push(dummyObj['5'])
-
-        for(let j=0; j< this.bunchList.length;j++){
-          this.userOptions[this.bunchList[j].statementid] = this.bunchList[j].answer
-        }
-        if(Object.keys(this.userOptions).length == 5){
-          this.mcqBunchFlag = true;
-         }
+    }
+        // for(let j=0; j<this.mcqOption.length; j++){
+        //  // this.priorities=[]
+        //   if (this.mcqOption[j].value != "")
+        //     {
+        //       this.priorities.push(this.mcqOption[j].value)
+        //       console.log("priorities",this.priorities)
+        //     }
+        // }
+        console.log("priorities11",this.priorities,this.statement,this.mcqOption[0][0])
       }
-
-      console.log("mcqbunch options",this.bunchList,this.totalBunchCounter,this.tasks.length,this.bunchSelectedAns,dummyObj,this.userOptions)
+      else {
+        this.tasks = this.data.statementlist;
+        console.log("bunchmcq",this.tasks);
+        this.bunchOptions = [{"option":"a","value":"अस्वास्थ्याशी निगडित"},
+                            {"option":"b","value":"आजाराशी निगडित"},
+                            {"option":"c","value":"निगडित नाहीत"}];
+          for(var i=0; i<this.bunchOptions.length;i++){
+            this.priorities.push(this.bunchOptions[i].value)
+  
+          }
+        console.log("mcqbunch options",this.priorities)
+        for(var i=0; i<this.tasks.length;i++){
+          this.statement = this.tasks[i].statement;
+        }
+  
+        this.bunchCounter = 5;
+        this.totalBunchCounter = 25 - this.tasks.length;
+        this.bunchList = this.tasks.splice(0,this.bunchCounter)
+        if(window.localStorage.getItem('mainFlagModule4') == "12"){
+           console.log("ansss",this.bunchList[0].answer,this.bunchOptions[0].option)
+           var dummyObj={}
+           for(let i=0;i<this.bunchOptions.length;i++){
+  
+              if(this.bunchList[0].answer == this.bunchOptions[i].option){
+                dummyObj['1']=this.bunchOptions[i].value;
+              }
+             if(this.bunchList[1].answer == this.bunchOptions[i].option){
+                dummyObj['2']=this.bunchOptions[i].value;
+              }
+             if(this.bunchList[2].answer == this.bunchOptions[i].option){
+                dummyObj['3']=this.bunchOptions[i].value;
+              }
+             if(this.bunchList[3].answer == this.bunchOptions[i].option){
+                dummyObj['4']=this.bunchOptions[i].value;
+              }
+             if(this.bunchList[4].answer == this.bunchOptions[i].option){
+                dummyObj['5']=this.bunchOptions[i].value;
+              }
+              console.log("final", dummyObj)
+          }
+          this.bunchSelectedAns.push(dummyObj['1'])
+          this.bunchSelectedAns.push(dummyObj['2'])
+          this.bunchSelectedAns.push(dummyObj['3'])
+          this.bunchSelectedAns.push(dummyObj['4'])
+          this.bunchSelectedAns.push(dummyObj['5'])
+  
+          for(let j=0; j< this.bunchList.length;j++){
+            this.userOptions[this.bunchList[j].statementid] = this.bunchList[j].answer
+          }
+          if(Object.keys(this.userOptions).length == 5){
+            this.mcqBunchFlag = true;
+           }
+        }
+  
+        console.log("mcqbunch options",this.bunchList,this.totalBunchCounter,this.tasks.length,this.bunchSelectedAns,dummyObj,this.userOptions)
+      }
+     
     } else if (window.localStorage.getItem('mainFlagModule5') == '7' || window.localStorage.getItem('mainFlagModule0') == '2') {
       console.log("data",this.data)
       this.priorities= []
@@ -461,19 +516,35 @@ export class McqcomponentComponent implements OnInit {
 
   }
   onValueChangedMcqBunch($event,id,i){
-    console.log("onvalue",$event.value,id)
-    for(let j=0; j< this.bunchOptions.length;j++){
-      if($event.value == this.bunchOptions[j].value){
-        var optionId = this.bunchOptions[j].option
+    if(window.localStorage.getItem('mainFlagModule5') == "23"){
+      console.log("onvalue",$event.value,id,i)
+      for(let j=0; j< this.mcqOption.length;j++){
+        if($event.value == this.mcqOption[i][j].value){
+          var optionId = this.mcqOption[i][j].option
+        }
       }
-    }
-
       this.userOptions[id]=optionId
-
       console.log("useroption",this.userOptions,Object.keys(this.userOptions).length)
-      if(Object.keys(this.userOptions).length == 5){
-        this.mcqBunchFlag = true;
-       }
+        if(Object.keys(this.userOptions).length == 3){
+          this.mcqBunchFlag = true;
+         }
+    }
+    else{
+      console.log("onvalue",$event.value,id)
+      for(let j=0; j< this.bunchOptions.length;j++){
+        if($event.value == this.bunchOptions[j].value){
+          var optionId = this.bunchOptions[j].option
+        }
+      }
+  
+        this.userOptions[id]=optionId
+  
+        console.log("useroption",this.userOptions,Object.keys(this.userOptions).length)
+        if(Object.keys(this.userOptions).length == 5){
+          this.mcqBunchFlag = true;
+         }
+    }
+    
   }
   submitYesNo() {
 
@@ -661,7 +732,6 @@ export class McqcomponentComponent implements OnInit {
   taskSelect(e, i, statementId) {
     // var temp =[];
     console.log("Select", statementId, this.counter, this.ansSelectCount, i)
-
     if (e.target.checked) {
       this.counter++;
 
@@ -692,6 +762,11 @@ export class McqcomponentComponent implements OnInit {
       // });
     }
     console.log("Select", this.selectedTasks, this.counter)
+    if(window.localStorage.getItem("mainFlagModule5")=="23"){
+      if(this.selectedTasks.length >= 1){
+        this.submitFlag = true;
+      }
+    }
 
   }
 

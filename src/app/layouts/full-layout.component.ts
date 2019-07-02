@@ -952,8 +952,32 @@ export class FullLayoutComponent implements OnInit {
           "subFlagModule5",
           this.subFlagModule5.toString()
         );
-      } else if (source == "module 5.23") {
+      } else if (
+        source == "module 5.23" ||
+        source == "module 5.23.1" ||
+        source == "module 5.23.2" ||
+        source == "module 5.23.3" ||
+        source == "module 5.23.4" ||
+        source == "module 5.23.5" ||
+        source == "module 5.23.6" ||
+        source == "module 5.23.6.1" ||
+        source == "module 5.23.6.2" ||
+        source == "module 5.23.6.3" 
+        ) {
         this.mainFlagModule5 = 23;
+        if (source == "module 5.23.1") {
+          this.subFlagModule5 = 1;
+        } else if (source == "module 5.23.2") {
+          this.subFlagModule5 = 2;
+        } else if (source == "module 5.23.3") {
+          this.subFlagModule5 = 3;
+        } else if (source == "module 5.23.4") {
+          this.subFlagModule5 = 4;
+        } else if (source == "module 5.23.5") {
+          this.subFlagModule5 = 5;
+        } else if (source == "module 5.23.6" || source == "module 5.23.6.1" || source == "module 5.23.6.2" || source == "module 5.23.6.3") {
+          this.subFlagModule5 = 6;
+        }
         window.localStorage.setItem(
           "subFlagModule5",
           this.subFlagModule5.toString()
