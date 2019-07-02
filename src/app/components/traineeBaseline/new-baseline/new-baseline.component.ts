@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { QuizService } from '../services/quiz.service';
 //import { HelperService } from '../services/helper.service';
 import { Option, Question, Quiz, QuizConfig } from './../models/index';
@@ -21,10 +21,11 @@ import { Module5Service } from 'src/app/modules/module5/module5.service';
 })
 export class NewBaselineComponent implements OnInit {
   private selectedQuestionId; selectedAnswer; finishExamCard;userOption={};dummyAnsJson={};
-  public moduleNumber; mySubmodule2; lastAns; mySubmodule4; mySubmodule5;
+  public moduleNumber; mySubmodule2; lastAns; mySubmodule4; mySubmodule5;mySubmodule0;mySubFlagmodule0;
   // public nextButtonFlag;answerJSON;
   // oldSelectedAns;endApiAnsHit;
   @Input() public passData;
+  @Output() public sendAns = new EventEmitter<Object>();
   quizes: any[];
   mode = 'quiz';
   quizName: string;
@@ -206,7 +207,8 @@ export class NewBaselineComponent implements OnInit {
     this.mySubmodule3 = parseInt(window.localStorage.getItem('mainFlagModule3'));
     this.mySubmodule4 = parseInt(window.localStorage.getItem('mainFlagModule4'));
     this.mySubmodule5 = parseInt(window.localStorage.getItem('mainFlagModule5'));
-
+    this.mySubmodule0 = parseInt(window.localStorage.getItem('mainFlagModule0'));
+    this.mySubFlagmodule0 = parseInt(window.localStorage.getItem('subFlagModule0'));
     this.moduleNumber = window.localStorage.getItem('currentstatus');
     if (window.localStorage.getItem('token') == null) {
       this.router.navigate(['/']);
@@ -336,7 +338,8 @@ export class NewBaselineComponent implements OnInit {
             if(this.quiz.questions[index+1].ans == null){
               console.log("NULLhit",this.baselineSelectedAns,this.baselineSelectedQuestion)
               console.log("NULLhit1",this.quiz.questions[index+1].ans,this.quiz.questions[index+1].id)
-              if(window.localStorage.getItem('mainFlagModule2') == '1'){
+              console.log("useroption",this.userOption)
+              if(window.localStorage.getItem('mainFlagModule2') == '1' || (window.localStorage.getItem('mainFlagModule0') == '3' && (window.localStorage.getItem('subFlagModule0') == '1' || window.localStorage.getItem('subFlagModule0') == '2'))){
                 this.quiz.questions[index+1].ans=this.baselineSelectedAns
                 this.userOption[this.quiz.questions[index + 1].id] = this.quiz.questions[index + 1].ans;
                 console.log("useroption",this.userOption)
@@ -354,7 +357,8 @@ export class NewBaselineComponent implements OnInit {
               }else{
                 if (window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '2' ||
                   window.localStorage.getItem('mainFlagModule5') == '23' ||
-                  window.localStorage.getItem('mainFlagModule4') == '11')
+                  window.localStorage.getItem('mainFlagModule4') == '11' ||
+                  (window.localStorage.getItem('mainFlagModule0') == '3' && window.localStorage.getItem('subFlagModule0') == '3'))
                 {
                   console.log("1")
                   this.sendAnswer(this.baselineSelectedAns, this.baselineSelectedQuestion, this.apiEndSendAns);
@@ -364,7 +368,8 @@ export class NewBaselineComponent implements OnInit {
                 }
                 console.log("NOTSAME hit2",this.baselineSelectedAns,this.baselineSelectedQuestion)
                 console.log("NOTSAME hit1.2",this.quiz.questions[index+1].ans,this.quiz.questions[index+1].id)
-                if(window.localStorage.getItem('mainFlagModule2') == '1'){
+                if(window.localStorage.getItem('mainFlagModule2') == '1' ||
+                (window.localStorage.getItem('mainFlagModule0') == '3' && (window.localStorage.getItem('subFlagModule0') == '1' || window.localStorage.getItem('subFlagModule0') == '2'))){
                   this.quiz.questions[index+1].ans=this.baselineSelectedAns
                   this.userOption[this.quiz.questions[index + 1].id] = this.quiz.questions[index + 1].ans;
                   console.log("useroption",this.userOption)
@@ -423,7 +428,8 @@ export class NewBaselineComponent implements OnInit {
               }else{
                 if (window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '2' ||
                   window.localStorage.getItem('mainFlagModule5') == '23' ||
-                  window.localStorage.getItem('mainFlagModule4') == '11')
+                  window.localStorage.getItem('mainFlagModule4') == '11' ||
+                  (window.localStorage.getItem('mainFlagModule0') == '3' && window.localStorage.getItem('subFlagModule0') == '3'))
                 {
                   console.log("1")
                   this.sendAnswer(this.baselineSelectedAns, this.baselineSelectedQuestion, this.apiEndSendAns);
@@ -433,7 +439,8 @@ export class NewBaselineComponent implements OnInit {
                 }
                 console.log("NOTSAME hit2",this.baselineSelectedAns,this.baselineSelectedQuestion)
                 console.log("NOTSAME hit1.2",this.quiz.questions[index - 1].ans,this.quiz.questions[index - 1].id)
-                if(window.localStorage.getItem('mainFlagModule2') == '1'){
+                if(window.localStorage.getItem('mainFlagModule2') == '1' ||
+                (window.localStorage.getItem('mainFlagModule0') == '3' && (window.localStorage.getItem('subFlagModule0') == '1' || window.localStorage.getItem('subFlagModule0') == '2'))){
                   this.quiz.questions[index - 1].ans=this.baselineSelectedAns
                 this.userOption[this.quiz.questions[index - 1].id] = this.quiz.questions[index - 1].ans;
                 console.log("useroption",this.userOption)
@@ -476,7 +483,8 @@ export class NewBaselineComponent implements OnInit {
               console.log("useroptionj",this.userOption)
               if (window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '2' ||
                 window.localStorage.getItem('mainFlagModule5') == '23' ||
-                window.localStorage.getItem('mainFlagModule4') == '11')
+                window.localStorage.getItem('mainFlagModule4') == '11' ||
+                (window.localStorage.getItem('mainFlagModule0') == '3' && window.localStorage.getItem('subFlagModule0') == '3'))
               {
                 console.log("1")
                 this.sendAnswer(this.baselineSelectedAns, this.baselineSelectedQuestion, this.apiEndSendAns);
@@ -490,7 +498,8 @@ export class NewBaselineComponent implements OnInit {
               }else{
                 if (window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '2' ||
                   window.localStorage.getItem('mainFlagModule5') == '23' ||
-                  window.localStorage.getItem('mainFlagModule4') == '11')
+                  window.localStorage.getItem('mainFlagModule4') == '11' ||
+                  (window.localStorage.getItem('mainFlagModule0') == '3' && window.localStorage.getItem('subFlagModule0') == '3'))
                 {
                   console.log("1")
                   this.sendAnswer(this.baselineSelectedAns, this.baselineSelectedQuestion, this.apiEndSendAns);
@@ -540,7 +549,7 @@ export class NewBaselineComponent implements OnInit {
     if (answers.length < this.pager.count) {
       // this.toastr.error(this.translate.instant('Errors.giveAllAns'));
     } else if (answers.length == this.pager.count) {
-      if (window.localStorage.getItem('currentstatus') == '2' || window.localStorage.getItem('currentstatus') == '3' || window.localStorage.getItem('currentstatus') == '4'){
+      if (window.localStorage.getItem('currentstatus') == '2' || window.localStorage.getItem('currentstatus') == '3' || window.localStorage.getItem('currentstatus') == '4' || window.localStorage.getItem('mainFlagModule0') == '3'){
         this.sendAnswer(this.baselineSelectedAns, this.baselineSelectedQuestion, this.apiEndSendAns);
       }
       else {
@@ -562,7 +571,8 @@ export class NewBaselineComponent implements OnInit {
       window.localStorage.getItem('mainFlagModule3') == '7' ||
       window.localStorage.getItem('mainFlagModule4') == '2' ||
       window.localStorage.getItem('mainFlagModule5') == '23' ||
-      window.localStorage.getItem('mainFlagModule4') == '11')
+      window.localStorage.getItem('mainFlagModule4') == '11' ||
+      (window.localStorage.getItem('mainFlagModule0') == '3' && window.localStorage.getItem('subFlagModule0') == '3'))
     {
       if((this.lastAns != "" && this.lastAns != null && this.lastAns != undefined) && (this.lastQueId != "" && this.lastQueId != null && this.lastQueId != undefined))
       {
@@ -590,7 +600,8 @@ export class NewBaselineComponent implements OnInit {
       window.localStorage.getItem('mainFlagModule3') == '7' ||
       window.localStorage.getItem('mainFlagModule4') == '2' ||
       window.localStorage.getItem('mainFlagModule5') == '23' ||
-      window.localStorage.getItem('mainFlagModule4') == '11')
+      window.localStorage.getItem('mainFlagModule4') == '11' ||
+      (window.localStorage.getItem('mainFlagModule0') == '3' && window.localStorage.getItem('subFlagModule0') == '3'))
       && Object.keys(this.dummyAnsJson).length == this.pager.count)
     {
       mainAns['event'] = "finish";
@@ -598,7 +609,7 @@ export class NewBaselineComponent implements OnInit {
    else{
     mainAns['event'] = "answer";
    }
-    if(window.localStorage.getItem('mainFlagModule2') == '1'){
+    if(window.localStorage.getItem('mainFlagModule2') == '1' || (window.localStorage.getItem('mainFlagModule0') == '3' && (window.localStorage.getItem('subFlagModule0') == '1' || window.localStorage.getItem('subFlagModule0') == '2'))){
       mainAns['useranswer'] = JSON.parse(dummyAns);
     }
     else if (
@@ -606,7 +617,8 @@ export class NewBaselineComponent implements OnInit {
       window.localStorage.getItem('mainFlagModule3') == '7' ||
       window.localStorage.getItem('mainFlagModule4') == '2' ||
       window.localStorage.getItem('mainFlagModule5') == '23' ||
-      window.localStorage.getItem('mainFlagModule4') == '11')
+      window.localStorage.getItem('mainFlagModule4') == '11' ||
+      (window.localStorage.getItem('mainFlagModule0') == '3' && window.localStorage.getItem('subFlagModule0') == '3'))
     {
       mainAns['useranswer'] = this.lastAns;
       mainAns['questionid'] = this.lastQueId;
@@ -708,6 +720,24 @@ export class NewBaselineComponent implements OnInit {
 
             window.localStorage.setItem('mainFlagModule4', '12')
             window.localStorage.setItem('subFlagModule4', '1')
+          } else if(window.localStorage.getItem('mainFlagModule0') == '3'){
+            if(window.localStorage.getItem('subFlagModule0') == '1'){
+              window.localStorage.setItem('uuid', data['data'].nextuuid)
+              window.localStorage.setItem('subFlagModule0', '2')
+              this.sendAns.emit("finish")
+            }
+            else if(window.localStorage.getItem('subFlagModule0') == '2'){
+              window.localStorage.setItem('uuid', data['data'].nextuuid)
+              window.localStorage.setItem('subFlagModule0', '3')
+              this.sendAns.emit("finish1")
+            }
+            else if(window.localStorage.getItem('subFlagModule0') == '3'){
+              window.localStorage.setItem("currentstatus", "1");
+              window.localStorage.setItem('mainFlagModule1', '1');
+              this.Module2Service.setLocalStorage2(4);
+               var obj1 = { "type": "moduleFinish", "route": true, "current": this.translate.instant('L2Module0.subMenu1-3'), "next": this.translate.instant('L2Module1.title'), "nextRoute": "/dashboard", "finishHead": this.translate.instant('L2Module0.title') }
+               this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj1));
+            }
           }
 
         }

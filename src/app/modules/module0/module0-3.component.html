@@ -1,3 +1,48 @@
-<p>
-  sample works!
-</p>
+<div *ngIf="mainFlagModule0 < 3">
+  <div class="card">
+    <div class="card-block">
+      <p>{{ "subModule5_1.5_1" | translate }}</p>
+      <p>
+        <strong>{{ "lock.note" | translate }}</strong
+        >{{ "lock.warn" | translate }}
+      </p>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="mainFlagModule0 == 3">
+  <div *ngIf="subFlagModule0 == 1">
+    <div *ngIf="showPart1Flag">
+      <div>
+        <app-new-baseline
+          [passData]="passData"
+          (sendAns)="saveAnswer($event)"
+        ></app-new-baseline>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="subFlagModule0 == 2">
+    <div *ngIf="showPart1Flag">
+      <div>
+        <app-new-baseline [passData]="passData" (sendAns)="saveAnswer($event)"></app-new-baseline>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="subFlagModule0 == 3">
+    <div *ngIf="showPart1Flag">
+      <div>
+        <app-new-baseline [passData]="passData"></app-new-baseline>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="mainFlagModule0 > 3">
+  <div class="card submoduleBox">
+    <div class="card-block text-center greenText inst-text">
+      <span>{{ "L2Module4Complete.sm_0_3" | translate }}</span>
+    </div>
+  </div>
+</div>

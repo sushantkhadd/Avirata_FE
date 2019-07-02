@@ -2274,11 +2274,20 @@ export class FullLayoutComponent implements OnInit {
           this.subFlagModule0 = 1;
         }
       } else if (
-        source == "module 0.3"
+        source == "module 0.3" ||
+        source == "module 0.3.1" ||
+        source == "module 0.3.2" ||
+        source == "module 0.3.3"
       ) {
         this.mainFlagModule0 = 3;
-        if (source == "module 0.3") {
+        if (source == "module 0.3" || source == "module 0.3.1") {
           this.subFlagModule0 = 1;
+        }
+        else if(source == "module 0.3.2"){
+          this.subFlagModule0 = 2;
+        }
+        else if(source == "module 0.3.3"){
+          this.subFlagModule0 = 3;
         }
       }
       window.localStorage.setItem(

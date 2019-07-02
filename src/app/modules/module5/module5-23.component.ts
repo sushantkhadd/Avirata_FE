@@ -71,8 +71,8 @@ export class Module523Component implements OnInit {
     if (this.mainFlagModule5 == 23)
     {
       if (this.subFlagModule5 == 1) {
-        this.startFlag = false;
-        //this.start1()
+        //this.startFlag = false;
+        this.start1()
       } else if (this.subFlagModule5 == 2) {
         this.start2()
       } else if (this.subFlagModule5 == 3) {
