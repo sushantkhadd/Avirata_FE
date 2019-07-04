@@ -32,7 +32,7 @@ export class Module33Component implements OnInit {
   subFlagModule3;
   questionid1;
   questionid2;
-  trimFlag; showLimit={};postWordCount={};
+  trimFlag; showLimit = {}; postWordCount = {};
   ngOnInit() {
     this.answer1 = "";
     this.answer2 = "";
@@ -46,11 +46,10 @@ export class Module33Component implements OnInit {
       window.localStorage.getItem("subFlagModule3")
     );
 
-    this.postWordCount['1']=0;
-    this.postWordCount['2']=0;
+    this.postWordCount['1'] = 0;
+    this.postWordCount['2'] = 0;
 
-    if (this.mainFlagModule3 == 3)
-    {
+    if (this.mainFlagModule3 == 3) {
       if (
         this.subFlagModule3 == 1 ||
         this.subFlagModule3 == 2 ||
@@ -69,14 +68,25 @@ export class Module33Component implements OnInit {
       this.postWordCount['2'] = this.answer2.trim().split(' ').length;
     }
 
-    if (this.answer1.trim().length == 0 || this.answer2.trim().length == 0) {
-      this.trimFlag = true;
-    } else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 1){
-      this.trimFlag = true;
-    } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 1){
-      this.trimFlag = true;
-    }else {
-      this.trimFlag = false;
+    if (this.answer1 != null && this.answer1 != "" && this.answer1 != undefined ||
+      this.answer2 != null && this.answer2 != "" && this.answer2 != undefined) {
+      if (this.answer1.trim().length == 0 || this.answer2.trim().length == 0) {
+        this.trimFlag = true;
+      } else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 1) {
+        this.trimFlag = true;
+      } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 1) {
+        this.trimFlag = true;
+      } else {
+        this.trimFlag = false;
+      }
+    }
+    else {
+      if (this.answer1 == "" || this.answer1 == null || this.answer1 == undefined) {
+        this.postWordCount['1'] = 0;
+      }
+      if (this.answer2 == "" || this.answer2 == null || this.answer2 == undefined) {
+        this.postWordCount['2'] = 0;
+      }
     }
   }
 
@@ -138,8 +148,7 @@ export class Module33Component implements OnInit {
             this.questionid1 = data["data"]["questionlist"][0].questionid;
             this.questionid2 = data["data"]["questionlist"][1].questionid;
             console.log(data);
-          } else if (fun == "finish1")
-          {
+          } else if (fun == "finish1") {
             this.mainFlagModule3 = 3;
             window.localStorage.setItem(
               "uuid",
@@ -155,8 +164,7 @@ export class Module33Component implements OnInit {
             this.questionid2 = data["data"]["questionlist"][1].questionid;
             // this.startEvent();
           }
-          else if (fun == "finish2")
-          {
+          else if (fun == "finish2") {
             this.mainFlagModule3 = 3;
             window.localStorage.setItem(
               "uuid",
@@ -172,8 +180,7 @@ export class Module33Component implements OnInit {
             this.questionid2 = data["data"]["questionlist"][1].questionid;
             // this.startEvent();
           }
-          else if (fun == "finish3")
-          {
+          else if (fun == "finish3") {
             window.localStorage.setItem(
               "uuid",
               data["data"].nextuuid
@@ -206,7 +213,8 @@ export class Module33Component implements OnInit {
 
   handleInput(e) {
     if (e.keyCode == 13) {
-       e.preventDefault(); 
-      }
+      e.preventDefault();
+    }
   }
+  
 }

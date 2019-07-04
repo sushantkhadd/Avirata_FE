@@ -5,7 +5,7 @@ import { LanguageService } from './../../language.service';
 import { Router } from '@angular/router';
 import { ToastsManager } from 'ng6-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import {Module2Service} from './module2.service'
+import { Module2Service } from './module2.service'
 import { FullLayoutService } from '../../layouts/full-layout.service';
 
 @Component({
@@ -42,10 +42,10 @@ export class Module216Component implements OnInit {
   questionid3;
   questionid4;
   startPdf;
-  passValues = {};showLimit={};postWordCount={};
+  passValues = {}; showLimit = {}; postWordCount = {};
   nextFlag;
   trimFlag;
-  public download; link; showCFU; apiUrl;finalCount;
+  public download; link; showCFU; apiUrl; finalCount;
   public inst =
     "विद्यार्थ्यांच्या डाव्या मेंदू इतकीच चालना विद्यार्थ्यांच्या उजव्या मेंदूला देखील मिळावी यासाठी तुम्ही कोणते उपक्रम घ्याल? कोणतीही एक संकल्पना निवडून त्याबाबत उजव्या मेंदूला चालना मिळण्याच्या दृष्टीने काय उपक्रम घ्याल ते लिहा. या आधी जी दोन उदाहरणे तुम्ही पहिलीत, त्याआधारे आपल्या स्वतःच्या विषयासंदर्भात विचार करून लिहा.";
   ngOnInit() {
@@ -66,10 +66,10 @@ export class Module216Component implements OnInit {
       window.localStorage.getItem("subFlagModule2")
     );
 
-    this.postWordCount['1']=0;
-    this.postWordCount['2']=0;
-    this.postWordCount['3']=0;
-    this.postWordCount['4']=0;
+    this.postWordCount['1'] = 0;
+    this.postWordCount['2'] = 0;
+    this.postWordCount['3'] = 0;
+    this.postWordCount['4'] = 0;
   }
 
   ngDoCheck() {
@@ -87,24 +87,46 @@ export class Module216Component implements OnInit {
       this.postWordCount['4'] = this.answer4.trim().split(' ').length;
     }
 
-    if (
-      this.answer1.trim().length == 0 ||
-      this.answer2.trim().length == 0 ||
-      this.answer3.trim().length == 0 ||
-      this.answer4.trim().length == 0
-    ) {
-      this.trimFlag = true;
-    } else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 1){
-      this.trimFlag = true;
-    } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 1){
-      this.trimFlag = true;
-    } else if (this.postWordCount['3'] > 150 || this.postWordCount['3'] < 1){
-      this.trimFlag = true;
-    } else if (this.postWordCount['4'] > 150 || this.postWordCount['4'] < 1){
-      this.trimFlag = true;
-    } else {
-      this.trimFlag = false;
+    if (this.answer1 != "" && this.answer1 != undefined && this.answer1 != null ||
+      this.answer2 != "" && this.answer2 != undefined && this.answer2 != null ||
+      this.answer3 != "" && this.answer3 != undefined && this.answer3 != null ||
+      this.answer4 != "" && this.answer4 != undefined && this.answer4 != null) {
+      if (
+        this.answer1.trim().length == 0 ||
+        this.answer2.trim().length == 0 ||
+        this.answer3.trim().length == 0 ||
+        this.answer4.trim().length == 0
+      ) {
+        this.trimFlag = true;
+      } else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 1) {
+        this.trimFlag = true;
+      } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 1) {
+        this.trimFlag = true;
+      } else if (this.postWordCount['3'] > 150 || this.postWordCount['3'] < 1) {
+        this.trimFlag = true;
+      } else if (this.postWordCount['4'] > 150 || this.postWordCount['4'] < 1) {
+        this.trimFlag = true;
+      } else {
+        this.trimFlag = false;
+      }
     }
+    else {
+      if (this.answer1 == "" || this.answer1 == null || this.answer1 == undefined){
+        this.postWordCount['1'] = 0;
+      }
+      if(this.answer2 == "" || this.answer2 == null || this.answer2 == undefined){
+        this.postWordCount['2'] = 0;
+      }
+      if(this.answer3 == "" || this.answer3 == null || this.answer3 == undefined){
+        this.postWordCount['3'] = 0;
+      }
+      if(this.answer4 == "" || this.answer4 == null || this.answer4 == undefined){
+        this.postWordCount['4'] = 0;
+      }
+    }
+
+
+
   }
 
   startEvent() {
@@ -156,7 +178,7 @@ export class Module216Component implements OnInit {
             this.passValues["url"] = data["data"].url;
             this.startPdf = true;
             console.log(this.passValues["url"], data);
-          
+
           } else if (fun == "finish") {
             this.mainFlagModule2 = 17;
             window.localStorage.setItem("subFlagModule1", "1");
@@ -186,7 +208,7 @@ export class Module216Component implements OnInit {
 
   handleInput(e) {
     if (e.keyCode == 13) {
-       e.preventDefault(); 
-      }
+      e.preventDefault();
+    }
   }
 }

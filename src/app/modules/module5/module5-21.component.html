@@ -3,8 +3,7 @@
     <div class="card-block">
       <p>{{ "subModule4_1.4_8" | translate }}</p>
       <p>
-        <strong>{{ "lock.note" | translate }}</strong
-        >{{ "lock.warn" | translate }}
+        <strong>{{ "lock.note" | translate }}</strong>{{ "lock.warn" | translate }}
       </p>
     </div>
   </div>
@@ -22,19 +21,13 @@
           </div>
           <div class="card-block inst-text">
             <p>
-              {{ "number.1" | translate }}.&nbsp;{{
-                "L2Instruction.inst_ppt1" | translate
-              }}
+              {{ "number.1" | translate }}.&nbsp;{{ "L2Instruction.inst_ppt1" | translate }}
             </p>
             <p>{{'number.2' | translate}}.&nbsp;{{'L2Instruction.inst_ppt5' | translate}}</p>
           </div>
           <div class="card-footer">
             <div class="float-right hidden-xs-down">
-              <button
-                class="btn btn-primary"
-                appPreventDoubleClick
-                (debounceClick)="start()"
-              >
+              <button class="btn btn-primary" appPreventDoubleClick (debounceClick)="start()">
                 {{ "Module4.start" | translate }}
               </button>
             </div>
@@ -47,10 +40,7 @@
         <h6 class="text-center">{{ "L2Module5.subMenu5-21" | translate }}</h6>
       </div>
       <div>
-        <app-presentation
-          [data]="passValues"
-          (sendCfuAns)="finishPDF($event)"
-        ></app-presentation>
+        <app-presentation [data]="passValues" (sendCfuAns)="finishPDF($event)"></app-presentation>
       </div>
     </div>
   </div>
@@ -58,105 +48,133 @@
   <div *ngIf="subFlagModule5 == 2">
     <h6 class="questionHead lineHeight position-relative">{{'L2common.caution' | translate}}
       <span [innerHTML]="inst"> </span>&nbsp;&nbsp;
-      <span><a class="c-pointer" (click)="showPdf()">Click here to view pdf &nbsp; <em class="fas fa-pdf"></em></a> </span>
-      <div class="badge badge-info ml-3 float-right mt-5 p-2 mr-2 counter pt-3">{{'Quiz.Question' | translate}}
-        {{personId | numberConvertor : 'Devanagari'}}/{{'number.5' | translate}}</div>
+      <span>
+        <a class="c-pointer" (click)="showPdf()">Click here to view pdf &nbsp;
+          <em class="fas fa-pdf"></em>
+        </a>
+      </span>
+      <div class="badge badge-info ml-3 float-right mt-5 p-2 mr-2 counter pt-3">{{'Quiz.Question' | translate}} {{personId | numberConvertor : 'Devanagari'}}/{{'number.5' | translate}}</div>
     </h6>
-    
-    
+
+
     <div class="card">
       <div class="card-block pt-4">
         <form #assignForm="ngForm" *ngIf="noHitFlag">
           <div class="form-group row">
             <label class="col-2 col-md-2 col-sm-2 form-control-label" [for]="queId1" [innerHTML]="que1"></label>
             <div class="col-4 col-sm-4 col-md-4 controls">
-              <textarea class="form-control" [id]="queId1" name="answer1" [(ngModel)]="answer1" rows="2" #addr="ngModel" (focus)="showLimit['1']=true" (focusout)="showLimit['1']=false"
-              (keypress)="handleInput($event)" required></textarea>
-                <div *ngIf="showLimit['1']==false && (postWordCount['1']>150 || postWordCount['1']<5)" class="offset-md-4 mt-2">
-                  <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
-                </div> 
-                <p *ngIf="showLimit['1'] && postWordCount['1']>0" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount['1'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}</p> 
+              <textarea class="form-control" [id]="queId1" name="answer1" [(ngModel)]="answer1" rows="2" #addr="ngModel" (focus)="showLimit['1']=true"
+                (focusout)="showLimit['1']=false" (keypress)="handleInput($event)" required></textarea>
+              <div *ngIf="showLimit['1']==false && (postWordCount['1']>150 || postWordCount['1']<5)" class="offset-md-4 mt-2">
+                <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
+              </div>
+              <p *ngIf="showLimit['1']" class="text-right pt-1">
+                <span *ngIf="postWordCount['1']!=0">{{'otherMessages.wordLimit' | translate}} {{postWordCount['1'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}
+                </span>
+                <span *ngIf="postWordCount['1']==0">{{'number.0' | translate}}/{{'number.150' | translate}}</span>
+              </p>
             </div>
-            
 
-              <label class="col-2 col-md-2 col-sm-2 form-control-label" [for]="queId2" [innerHTML]="que2"></label>
-              <div class="col-4 col-sm-4 col-md-4 controls">
-                <textarea class="form-control" [id]="queId2" name="answer2" [(ngModel)]="answer2" rows="2" #addr="ngModel" (focus)="showLimit['2']=true" (focusout)="showLimit['2']=false"
-                (keypress)="handleInput($event)" required></textarea>
-                  <div *ngIf="showLimit['2']==false && (postWordCount['2']>150 || postWordCount['2']<5)" class="offset-md-4 mt-2">
-                      <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
-                    </div> 
-                    <p *ngIf="showLimit['2'] && postWordCount['2']>0" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount['2'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}</p>
+
+            <label class="col-2 col-md-2 col-sm-2 form-control-label" [for]="queId2" [innerHTML]="que2"></label>
+            <div class="col-4 col-sm-4 col-md-4 controls">
+              <textarea class="form-control" [id]="queId2" name="answer2" [(ngModel)]="answer2" rows="2" #addr="ngModel" (focus)="showLimit['2']=true"
+                (focusout)="showLimit['2']=false" (keypress)="handleInput($event)" required></textarea>
+              <div *ngIf="showLimit['2']==false && (postWordCount['2']>150 || postWordCount['2']<5)" class="offset-md-4 mt-2">
+                <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
               </div>
+              <p *ngIf="showLimit['2']" class="text-right pt-1">
+                <span *ngIf="postWordCount['2']!=0">{{'otherMessages.wordLimit' | translate}} {{postWordCount['2'] | numberConvertor : 'Devanagari'}}/{{'number.150'
+                  | translate}}</span>
+                <span *ngIf="postWordCount['2']==0">{{'number.0' | translate}}/{{'number.150' | translate}}</span>
+              </p>
             </div>
-         
-            <div class="form-group row">
-              <label class="col-2 col-md-2 col-sm-2 form-control-label" [for]="queId3" [innerHTML]="que3"></label>
-              <div class="col-4 col-sm-4 col-md-4 controls">
-                <textarea class="form-control" [id]="queId3" name="answer3" [(ngModel)]="answer3" rows="2" #addr="ngModel" (focus)="showLimit['3']=true" (focusout)="showLimit['3']=false"
-                (keypress)="handleInput($event)" required></textarea>
-                  <div *ngIf="showLimit['3']==false && (postWordCount['3']>150 || postWordCount['3']<5)" class="offset-md-4 mt-2">
-                      <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
-                    </div> 
-                    <p *ngIf="showLimit['3'] && postWordCount['3']>0" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} 
-                      {{postWordCount['3'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}</p>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-2 col-md-2 col-sm-2 form-control-label" [for]="queId3" [innerHTML]="que3"></label>
+            <div class="col-4 col-sm-4 col-md-4 controls">
+              <textarea class="form-control" [id]="queId3" name="answer3" [(ngModel)]="answer3" rows="2" #addr="ngModel" (focus)="showLimit['3']=true"
+                (focusout)="showLimit['3']=false" (keypress)="handleInput($event)" required></textarea>
+              <div *ngIf="showLimit['3']==false && (postWordCount['3']>150 || postWordCount['3']<5)" class="offset-md-4 mt-2">
+                <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
               </div>
-  
-                <label class="col-2 col-md-2 col-sm-2 form-control-label" [for]="queId4" [innerHTML]="que4"></label>
-                <div class="col-4 col-sm-4 col-md-4 controls">
-                  <textarea class="form-control" [id]="queId4" name="answer4" [(ngModel)]="answer4" pattern="^[0-9]*$" onpaste="return false;" (keypress)="numberOnly($event);handleInput($event)" rows="2" #addr="ngModel" maxlength="500"
-                    required></textarea>
-                </div>
+              <p *ngIf="showLimit['3']" class="text-right pt-1">
+                <span *ngIf="postWordCount['3']!=0">
+                  {{'otherMessages.wordLimit' | translate}} {{postWordCount['3'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}
+                </span>
+                <span *ngIf="postWordCount['3']==0">{{'number.0' | translate}}/{{'number.150' | translate}}</span>
+              </p>
             </div>
-            <hr>
-            <div class="form-group row">
-              <div class="col-12 col-md-12 col-sm-12 form-control-label"> 
-                  {{'number.1' | translate}}. <label [for]="queId5" [innerHTML]="que5"></label>
+            <label class="col-2 col-md-2 col-sm-2 form-control-label" [for]="queId4" [innerHTML]="que4"></label>
+            <div class="col-4 col-sm-4 col-md-4 controls">
+              <textarea class="form-control" [id]="queId4" name="answer4" [(ngModel)]="answer4" pattern="^[0-9]*$" onpaste="return false;"
+                (keypress)="numberOnly($event);handleInput($event)" rows="2" #addr="ngModel" maxlength="500" required></textarea>
+            </div>
+          </div>
+
+          <hr>
+          <div class="form-group row">
+            <div class="col-12 col-md-12 col-sm-12 form-control-label">
+              {{'number.1' | translate}}.
+              <label [for]="queId5" [innerHTML]="que5"></label>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 controls">
+              <textarea class="form-control" [id]="queId5" name="answer5" [(ngModel)]="answer5" rows="2" #addr="ngModel" (focus)="showLimit['5']=true"
+                (focusout)="showLimit['5']=false" (keypress)="handleInput($event)" required></textarea>
+              <div *ngIf="showLimit['5']==false && (postWordCount['5']>150 || postWordCount['5']<5)" class="offset-md-4 mt-2">
+                <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
               </div>
-                <div class="col-12 col-sm-12 col-md-12 controls">
-                  <textarea class="form-control" [id]="queId5" name="answer5" [(ngModel)]="answer5" rows="2" #addr="ngModel" (focus)="showLimit['5']=true" (focusout)="showLimit['5']=false"
-                  (keypress)="handleInput($event)" required></textarea>
-                    <div *ngIf="showLimit['5']==false && (postWordCount['5']>150 || postWordCount['5']<5)" class="offset-md-4 mt-2">
-                        <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
-                      </div> 
-                      <p *ngIf="showLimit['5'] && postWordCount['5']>0" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount['5'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}</p>
-                </div>
+              <p *ngIf="showLimit['5']" class="text-right pt-1">
+                <span *ngIf="postWordCount['5']!=0">{{'otherMessages.wordLimit' | translate}} {{postWordCount['5'] | numberConvertor : 'Devanagari'}}/{{'number.150'
+                  | translate}}</span>
+                <span *ngIf="postWordCount['5']==0">{{'number.0' | translate}}/{{'number.150' | translate}}</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-12 col-md-12 col-sm-12 form-control-label">
+              {{'number.2' | translate}}.
+              <label [for]="queId6" [innerHTML]="que6"></label>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 controls">
+              <textarea class="form-control" [id]="queId6" name="answer6" [(ngModel)]="answer6" rows="2" #addr="ngModel" (focus)="showLimit['6']=true"
+                (focusout)="showLimit['6']=false" (keypress)="handleInput($event)" required></textarea>
+              <div *ngIf="showLimit['6']==false && (postWordCount['6']>150 || postWordCount['6']<5)" class="offset-md-4 mt-2">
+                <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
               </div>
+              <p *ngIf="showLimit['6']" class="text-right pt-1">
+                <span *ngIf="postWordCount['6']!=0">{{'otherMessages.wordLimit' | translate}} {{postWordCount['6'] | numberConvertor : 'Devanagari'}}/{{'number.150'
+                  | translate}}</span>
+                <span *ngIf="postWordCount['6']==0">{{'number.0' | translate}}/{{'number.150' | translate}}</span>
+              </p>
+            </div>
+          </div>
 
-              <div class="form-group row">
-                  <div class="col-12 col-md-12 col-sm-12 form-control-label"> 
-                      {{'number.2' | translate}}. <label [for]="queId6" [innerHTML]="que6"></label>
-                  </div>
-                  <div class="col-12 col-sm-12 col-md-12 controls">
-                    <textarea class="form-control" [id]="queId6" name="answer6" [(ngModel)]="answer6" rows="2" #addr="ngModel" (focus)="showLimit['6']=true" (focusout)="showLimit['6']=false"
-                    (keypress)="handleInput($event)" required></textarea>
-                      <div *ngIf="showLimit['6']==false && (postWordCount['6']>150 || postWordCount['6']<5)" class="offset-md-4 mt-2">
-                          <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
-                        </div> 
-                        <p *ngIf="showLimit['6'] && postWordCount['6']>0" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount['6'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}</p>
-                  </div>
-                </div>
+          <div class="form-group row">
+            <div class="col-12 col-md-12 col-sm-12 form-control-label">
+              {{'number.3' | translate}}.
+              <label [for]="queId7" [innerHTML]="que7"></label>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 controls">
+              <textarea class="form-control" [id]="queId7" name="answer7" [(ngModel)]="answer7" rows="2" #addr="ngModel" (focus)="showLimit['7']=true"
+                (focusout)="showLimit['7']=false" (keypress)="handleInput($event)" required></textarea>
+              <div *ngIf="showLimit['7']==false && (postWordCount['7']>150 || postWordCount['7']<5)" class="offset-md-4 mt-2">
+                <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
+              </div>
+              <p *ngIf="showLimit['7']" class="text-right pt-1">
+                <span *ngIf="postWordCount['7']!=0">{{'otherMessages.wordLimit' | translate}} {{postWordCount['7'] | numberConvertor : 'Devanagari'}}/{{'number.150'
+                  | translate}}</span>
+                <span *ngIf="postWordCount['7']==0">{{'number.0' | translate}}/{{'number.150' | translate}}</span>
+              </p>
+            </div>
+          </div>
 
-                <div class="form-group row">
-                    <div class="col-12 col-md-12 col-sm-12 form-control-label"> 
-                        {{'number.3' | translate}}. <label [for]="queId7" [innerHTML]="que7"></label>
-                    </div>
-                    <div class="col-12 col-sm-12 col-md-12 controls">
-                      <textarea class="form-control" [id]="queId7" name="answer7" [(ngModel)]="answer7" rows="2" #addr="ngModel" (focus)="showLimit['7']=true" (focusout)="showLimit['7']=false"
-                      (keypress)="handleInput($event)" required></textarea>
-                        <div *ngIf="showLimit['7']==false && (postWordCount['7']>150 || postWordCount['7']<5)" class="offset-md-4 mt-2">
-                            <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
-                          </div> 
-                          <p *ngIf="showLimit['7'] && postWordCount['7']>0" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount['7'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}</p>
-                    </div>
-                  </div>
-
-      <div class="card-footer text-center bg-white border-0">
-          <button class="btn btn-primary mr-2" appPreventDoubleClick
-          (debounceClick)="back(assignForm)" [disabled]="personId == 1">{{'Stepper.Back' | translate}}</button>
-        <button class="btn btn-primary" appPreventDoubleClick
-        (debounceClick)="next(assignForm)" [disabled]="assignForm.invalid || !submitFlag">{{'Login.Close' | translate}}</button>
-      </div>
+          <div class="card-footer text-center bg-white border-0">
+            <button class="btn btn-primary mr-2" appPreventDoubleClick (debounceClick)="back(assignForm)" [disabled]="personId == 1">{{'Stepper.Back' | translate}}</button>
+            <button class="btn btn-primary" appPreventDoubleClick (debounceClick)="next(assignForm)" [disabled]="assignForm.invalid || !submitFlag">{{'Login.Close' | translate}}</button>
+          </div>
         </form>
       </div>
     </div>
@@ -214,47 +232,46 @@
 </div>
 
 
-  <div class="videoFinishModal videoFinishedModel marks-modal">
-    <div bsModal #confirmationModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
-      aria-labelledby="myModalLabel" aria-hidden="true">
-  
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <img class="img-responsive img-rotate" src="assets/img/mitra.png">
-          <div class="modal-header">
-          </div>
-          <div class="modal-body">
-            <p class="text-center font-weight-normal">
-              {{'L2Module5.inst5_21' | translate}}
-            </p>
-            <hr />
-          </div>
-          <div class="modal-footer justify-content-center p-3">
-            <button (debounceClick)="confirmationModalHide()" appPreventDoubleClick class="btn btn-danger">{{'L2Module5.cancelBtn' | translate}}</button>
-            <button (debounceClick)="finish1()" appPreventDoubleClick
-              class="btn btn-success">{{'L2Module5.yesBtn' | translate}}</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="videoFinishModal videoFinishedModel marks-modal">
+  <div bsModal #confirmationModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel" aria-hidden="true">
 
-  
-  <div class="instructionModal">
-    <div bsModal #pdfModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
-      aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-primary modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-body text-center">
-            <h5>{{ "L2Module5.subMenu5-21" | translate }}</h5>
-          </div>
-          <div *ngIf="startPdf">
-            <app-presentation [data]='passValues'></app-presentation>
-          </div>
-          <div class="modal-footer justify-content-center">
-            <button (debounceClick)="pdfModalHide()" appPreventDoubleClick class="btn btn-danger">{{'Stepper.Back' | translate}}</button>
-          </div>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <img class="img-responsive img-rotate" src="assets/img/mitra.png">
+        <div class="modal-header">
+        </div>
+        <div class="modal-body">
+          <p class="text-center font-weight-normal">
+            {{'L2Module5.inst5_21' | translate}}
+          </p>
+          <hr />
+        </div>
+        <div class="modal-footer justify-content-center p-3">
+          <button (debounceClick)="confirmationModalHide()" appPreventDoubleClick class="btn btn-danger">{{'L2Module5.cancelBtn' | translate}}</button>
+          <button (debounceClick)="finish1()" appPreventDoubleClick class="btn btn-success">{{'L2Module5.yesBtn' | translate}}</button>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+
+<div class="instructionModal">
+  <div bsModal #pdfModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-primary modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-body text-center">
+          <h5>{{ "L2Module5.subMenu5-21" | translate }}</h5>
+        </div>
+        <div *ngIf="startPdf">
+          <app-presentation [data]='passValues'></app-presentation>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button (debounceClick)="pdfModalHide()" appPreventDoubleClick class="btn btn-danger">{{'Stepper.Back' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

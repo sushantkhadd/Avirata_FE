@@ -134,7 +134,7 @@
         </div>
         <div class="modal-footer p-3">
           <div class="col-md-12 text-center">
-            <button class="btn btn-primary text-center" (click)="next()">{{'Stepper.Next' | translate}}</button>
+            <button class="btn btn-primary text-center" appPreventDoubleClick (debounceClick)="next()">{{'Stepper.Next' | translate}}</button>
           </div>
         </div>
       </div>
