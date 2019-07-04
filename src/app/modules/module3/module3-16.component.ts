@@ -213,7 +213,14 @@ export class Module316Component implements OnInit {
           window.localStorage.setItem('subFlagModule3', JSON.stringify(this.subFlagModule3));
           this.instructionModal.hide()
           this.LanguageService.toHide();
-          this.start();
+          // this.start();
+          if(window.localStorage.getItem("subFlagModule3")=="4"){
+            this.startPdf = false;
+            this.startEvent=false
+          }
+          else{
+            this.start();
+          }
         }
        else if (data['message'] == "submodule finish") {
         this.instructionModal.hide()
@@ -227,6 +234,7 @@ export class Module316Component implements OnInit {
           window.localStorage.setItem("currentJson3", JSON.stringify(current3));
 
          if(window.localStorage.getItem("subFlagModule3")== "6"){
+          window.localStorage.setItem('uuid', data['data'].nextuuid);
           window.localStorage.setItem('mainFlagModule3', '17');
           window.localStorage.setItem('subFlagModule3', '1');
           window.localStorage.setItem('source', 'module 3.17');

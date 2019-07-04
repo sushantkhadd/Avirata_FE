@@ -349,7 +349,7 @@
   <h6 class="questionHead lineHeight m-0"><b>{{'L2Instruction.inst2_4_5' | translate}}</b></h6> -->
 
   <!-- <div class="card" *ngIf="options"> -->
-      <span class="counter" *ngIf="mainFlagModule1==8">{{queCount}} / {{'number.5' | translate}}</span>
+      <span class="counter" *ngIf="mainFlagModule1==8">{{queCount | numberConvertor : 'Devanagari'}} / {{'number.5' | translate}}</span>
   <div class="card-header">
     <h5>
      {{queCount | numberConvertor : 'Devanagari'}}.&nbsp; {{question}}

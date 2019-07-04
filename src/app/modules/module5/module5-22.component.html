@@ -146,7 +146,12 @@
                <textarea class="form-control marathi" id="txt1" name="txtaraea" [(ngModel)]="txtcomment"
                  placeholder="{{'otherMessages.writePostHere' | translate}}" rows="3" autocomplete='off'
                  required></textarea>
-               <p class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount}} / 150</p>
+                <p class="text-right pt-1">
+                  <span *ngIf="postWordCount!=0">
+                    {{'otherMessages.wordLimit' | translate}} {{postWordCount | numberConvertor : 'Devanagari'}} / {{'number.150' | translate}}
+                  </span>
+                  <span *ngIf="postWordCount==0">{{'number.0' | translate}}/{{'number.150' | translate}}</span>
+                </p>
              </div>
              <div class="card-footer text-center">
                <button class="btn btn-primary float-right" appPreventDoubleClick (debounceClick)="submitPost()"

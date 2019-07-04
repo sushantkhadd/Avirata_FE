@@ -5,7 +5,7 @@ import { Module2Service } from './module2.service';
 import { ToastsManager } from 'ng6-toastr';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import {FullLayoutService} from '../../layouts/full-layout.service';
+import { FullLayoutService } from '../../layouts/full-layout.service';
 
 @Component({
   selector: 'app-module2-14',
@@ -19,11 +19,12 @@ export class Module214Component implements OnInit {
   question;
   public mainFlagModule2;
   subFlagModule2;
-  questionid; trimFlag;showLimit;postWordCount;
+  questionid; trimFlag; showLimit; postWordCount;
   ngOnInit() {
     this.answer = "";
     this.question = "";
     this.postWordCount = 0;
+    console.log('count', this.postWordCount)
     this.mainFlagModule2 = parseInt(
       window.localStorage.getItem("mainFlagModule2")
     );
@@ -42,14 +43,14 @@ export class Module214Component implements OnInit {
       this.postWordCount = this.answer.trim().split(' ').length;
     }
 
-    if (this.answer.trim().length == 0)
-    {
-      this.trimFlag = true;
-    } else if (this.postWordCount > 150 || this.postWordCount < 5){
-      this.trimFlag = true;
-    } else
-    {
-      this.trimFlag = false;
+    if (this.answer != null && this.answer != "" && this.answer != undefined) {
+      if (this.answer.trim().length == 0) {
+        this.trimFlag = true;
+      } else if (this.postWordCount > 150 || this.postWordCount < 5) {
+        this.trimFlag = true;
+      } else {
+        this.trimFlag = false;
+      }
     }
   }
 
@@ -76,46 +77,43 @@ export class Module214Component implements OnInit {
   apiCall(jsonBody, apiUrl, fun) {
     this.Module2Service.apiCall(jsonBody, apiUrl)
       .subscribe(
-        data => {
-          if (data['status'] == true)
-          {
-            if (fun == 'start')
-            {
-              this.question = data["data"]["questionlist"][0].question;
-              this.questionid = data["data"]["questionlist"][0].questionid;
-            }
-            else if (fun == "finish")
-            {
-              this.mainFlagModule2 = 15;
-              window.localStorage.setItem("subFlagModule2", "1");
-              window.localStorage.setItem(
-                "uuid",
-                data["data"].nextuuid
-              );
-              window.localStorage.setItem("mainFlagModule2", "15");
-              window.localStorage.setItem("subFlagModule2", "1");
-              window.localStorage.setItem("source", "module 2.15.1");
-              this.Module2Service.setLocalStorage2(15);
-              var obj = {
-                type: "submodule",
-                route: true,
-                current: this.translate.instant(
-                  "L2Module2.subMenu2-14"
-                ),
-                next: this.translate.instant(
-                  "L2Module2Finish.subMenu2-15"
-                ),
-                nextRoute: "/modules/module2/Module2.15"
-              };
-              this.LocalstoragedetailsService.setModuleStatus(
-                JSON.stringify(obj)
-              );
-            }
+      data => {
+        if (data['status'] == true) {
+          if (fun == 'start') {
+            this.question = data["data"]["questionlist"][0].question;
+            this.questionid = data["data"]["questionlist"][0].questionid;
           }
-        },
-        error => {
-          this.LanguageService.handleError(error.error.message);
+          else if (fun == "finish") {
+            this.mainFlagModule2 = 15;
+            window.localStorage.setItem("subFlagModule2", "1");
+            window.localStorage.setItem(
+              "uuid",
+              data["data"].nextuuid
+            );
+            window.localStorage.setItem("mainFlagModule2", "15");
+            window.localStorage.setItem("subFlagModule2", "1");
+            window.localStorage.setItem("source", "module 2.15.1");
+            this.Module2Service.setLocalStorage2(15);
+            var obj = {
+              type: "submodule",
+              route: true,
+              current: this.translate.instant(
+                "L2Module2.subMenu2-14"
+              ),
+              next: this.translate.instant(
+                "L2Module2Finish.subMenu2-15"
+              ),
+              nextRoute: "/modules/module2/Module2.15"
+            };
+            this.LocalstoragedetailsService.setModuleStatus(
+              JSON.stringify(obj)
+            );
+          }
         }
+      },
+      error => {
+        this.LanguageService.handleError(error.error.message);
+      }
       );
   }
 }

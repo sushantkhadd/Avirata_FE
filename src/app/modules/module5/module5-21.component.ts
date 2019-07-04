@@ -37,12 +37,12 @@ export class Module521Component implements OnInit {
   public startPdf;
   mainFlagModule5;
   subFlagModule5;
-  finishJSONBody = {};urlArray = {};thumb_title;flag;
-  private pdfUrl = environment.pdfUrl;submitFlag;
-  pdf1;personId;userAnswer= {};showLimit = {}; postWordCount = {};
-  public questionArray;que1;queId1;que2;queId2;que3;queId3;que4;queId4;que5;queId5;que6;queId6;que7;queId7;answer1;answer2;answer3;answer4;answer5;answer6;answer7;
-  @ViewChild('assignForm') assignForm:NgForm;noHitFlag;
-  public inst ="एक समुपदेशक म्हणून सातत्याने अपडेटेड राहण्यासाठी इथे एक प्रकल्प तुम्हांला करावयास देण्यात आला आहे. जो तुम्हांला वेगवेगळ्या करिअर संधी, त्यात येणारी आव्हाने, लागणारी कौशल्ये याविषयी अपडेट राहण्यासाठी नक्कीच मदतीचा ठरू शकतो."
+  finishJSONBody = {}; urlArray = {}; thumb_title; flag;
+  private pdfUrl = environment.pdfUrl; submitFlag;
+  pdf1; personId; userAnswer = {}; showLimit = {}; postWordCount = {};
+  public questionArray; que1; queId1; que2; queId2; que3; queId3; que4; queId4; que5; queId5; que6; queId6; que7; queId7; answer1; answer2; answer3; answer4; answer5; answer6; answer7;
+  @ViewChild('assignForm') assignForm: NgForm; noHitFlag;
+  public inst = "एक समुपदेशक म्हणून सातत्याने अपडेटेड राहण्यासाठी इथे एक प्रकल्प तुम्हांला करावयास देण्यात आला आहे. जो तुम्हांला वेगवेगळ्या करिअर संधी, त्यात येणारी आव्हाने, लागणारी कौशल्ये याविषयी अपडेट राहण्यासाठी नक्कीच मदतीचा ठरू शकतो."
 
   ngOnInit() {
     this.pdf1 =
@@ -56,32 +56,32 @@ export class Module521Component implements OnInit {
       window.localStorage.getItem("subFlagModule5")
     );
     this.submitFlag = false;
-    this.que1="";
-    this.que2="";
-    this.que3="";
-    this.que4="";
-    this.que5="";
-    this.que6="";
-    this.que7="";
+    this.que1 = "";
+    this.que2 = "";
+    this.que3 = "";
+    this.que4 = "";
+    this.que5 = "";
+    this.que6 = "";
+    this.que7 = "";
 
-    this.queId1="";
-    this.queId2="";
-    this.queId3="";
-    this.queId4="";
-    this.queId5="";
-    this.queId6="";
-    this.queId7="";
+    this.queId1 = "";
+    this.queId2 = "";
+    this.queId3 = "";
+    this.queId4 = "";
+    this.queId5 = "";
+    this.queId6 = "";
+    this.queId7 = "";
 
-    this.answer1="";
-    this.answer2="";
-    this.answer3="";
-    this.answer4="";
-    this.answer5="";
-    this.answer6="";
-    this.answer7="";
+    this.answer1 = "";
+    this.answer2 = "";
+    this.answer3 = "";
+    this.answer4 = "";
+    this.answer5 = "";
+    this.answer6 = "";
+    this.answer7 = "";
 
-    if(this.mainFlagModule5 == 21){
-      if(this.subFlagModule5 == 1 || this.subFlagModule5 == 3){
+    if (this.mainFlagModule5 == 21) {
+      if (this.subFlagModule5 == 1 || this.subFlagModule5 == 3) {
         this.startPdf = false;
       }
       else if (this.subFlagModule5 == 2) {
@@ -107,8 +107,7 @@ export class Module521Component implements OnInit {
         var index = unlockJson["children"].findIndex(
           item => item.source == "module 5.21"
         );
-        if (unlockJson["children"][index].url != null)
-        {
+        if (unlockJson["children"][index].url != null) {
           var mainJson = JSON.parse(unlockJson["children"][index].url);
           this.urlArray["src1"] = mainJson["5.21.1"];
           this.urlArray["src2"] = mainJson["5.21.3"];
@@ -136,39 +135,39 @@ export class Module521Component implements OnInit {
       ).subscribe(
         data => {
           if (data["message"] == "submodule finish" || data["message"] == "submodule finish next uuid is") {
-           window.localStorage.setItem("uuid",data['data'].nextuuid)
-           if(this.subFlagModule5 == 3){
-            var parentUrl = JSON.parse(data['data'].parenturl)
-            var url ={}
-            url['5.21.1'] = parentUrl['5.21.1'];
-            url['5.21.3'] = parentUrl['5.21.3'];
-            console.log("urllll",url)
-            var current5 = [];
-            current5 = JSON.parse(window.localStorage.getItem("currentJson5")); 
-            var index = current5["children"].findIndex(
-              item => item.source == "module 5.21" );
-            current5["children"][index].url = JSON.stringify(url); 
-            window.localStorage.setItem("currentJson5", JSON.stringify(current5));
+            window.localStorage.setItem("uuid", data['data'].nextuuid)
+            if (this.subFlagModule5 == 3) {
+              var parentUrl = JSON.parse(data['data'].parenturl)
+              var url = {}
+              url['5.21.1'] = parentUrl['5.21.1'];
+              url['5.21.3'] = parentUrl['5.21.3'];
+              console.log("urllll", url)
+              var current5 = [];
+              current5 = JSON.parse(window.localStorage.getItem("currentJson5"));
+              var index = current5["children"].findIndex(
+                item => item.source == "module 5.21");
+              current5["children"][index].url = JSON.stringify(url);
+              window.localStorage.setItem("currentJson5", JSON.stringify(current5));
 
               this.mainFlagModule5 = 22;
               window.localStorage.setItem('mainFlagModule5', '22');
               window.localStorage.setItem('subFlagModule5', '1');
               window.localStorage.setItem('source', 'module 5.22.1');
               var obj = {
-              "type": "submodule",
-              "route": true,
-              "current": this.translate.instant('L2Module5.subMenu5-21'),
-              "next": this.translate.instant('L2Module5Finish.subMenu5-22'),
-              "nextRoute": "/modules/module5/Module5.22"
+                "type": "submodule",
+                "route": true,
+                "current": this.translate.instant('L2Module5.subMenu5-21'),
+                "next": this.translate.instant('L2Module5Finish.subMenu5-22'),
+                "nextRoute": "/modules/module5/Module5.22"
               }
               this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
               this.Module5Service.setLocalStorage5(22);
-           }
-           else{
-            this.subFlagModule5 = 2;
-            window.localStorage.setItem("subFlagModule5","2");
-            this.start1("");
-           }
+            }
+            else {
+              this.subFlagModule5 = 2;
+              window.localStorage.setItem("subFlagModule5", "2");
+              this.start1("");
+            }
           }
         },
         error => {
@@ -192,14 +191,14 @@ export class Module521Component implements OnInit {
           this.passValues["url"] = data["data"].url;
           // this.passValues["url"] ="https://s3-ap-southeast-1.amazonaws.com/maacpd/Level2/Module1/1.10/RM-+1.pdf"
           this.startPdf = true;
-          var url ={}
+          var url = {}
           url['5.21.1'] = data["data"].url;
-          console.log("urllll",url)
+          console.log("urllll", url)
           var current5 = [];
-          current5 = JSON.parse(window.localStorage.getItem("currentJson5")); 
+          current5 = JSON.parse(window.localStorage.getItem("currentJson5"));
           var index = current5["children"].findIndex(
-            item => item.source == "module 5.21" );
-          current5["children"][index].url = JSON.stringify(url); 
+            item => item.source == "module 5.21");
+          current5["children"][index].url = JSON.stringify(url);
           window.localStorage.setItem("currentJson5", JSON.stringify(current5));
         }
       },
@@ -366,33 +365,33 @@ export class Module521Component implements OnInit {
     jsonData['useranswer'] = ""
     this.Module5Service.apiCall(
       jsonData,
-       "modulefivepersonsinfo/"
-     ).subscribe(
-       data => {
-         if (data["message"] == "submodule finish") {
-        this.subFlagModule5 = 3;
-        window.localStorage.setItem('subFlagModule5', '3');
-        window.localStorage.setItem("uuid",data['data'].nextuuid)
-        this.start();
-      //   this.mainFlagModule5 = 22;
-      //   window.localStorage.setItem('mainFlagModule5', '22');
-      //   window.localStorage.setItem('subFlagModule5', '1');
-      //   window.localStorage.setItem('source', 'module 5.22.1');
-      //   var obj = {
-      //   "type": "submodule",
-      //   "route": true,
-      //   "current": this.translate.instant('L2Module5.subMenu5-21'),
-      //   "next": this.translate.instant('L2Module5Finish.subMenu5-22'),
-      //   "nextRoute": "/modules/module5/Module5.22"
-      // }
-      // this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
-      // this.Module5Service.setLocalStorage5(22);
-         }
-       },
-       error => {
-         this.LanguageService.handleError(error.error.message);
-       }
-     );
+      "modulefivepersonsinfo/"
+    ).subscribe(
+      data => {
+        if (data["message"] == "submodule finish") {
+          this.subFlagModule5 = 3;
+          window.localStorage.setItem('subFlagModule5', '3');
+          window.localStorage.setItem("uuid", data['data'].nextuuid)
+          this.start();
+          //   this.mainFlagModule5 = 22;
+          //   window.localStorage.setItem('mainFlagModule5', '22');
+          //   window.localStorage.setItem('subFlagModule5', '1');
+          //   window.localStorage.setItem('source', 'module 5.22.1');
+          //   var obj = {
+          //   "type": "submodule",
+          //   "route": true,
+          //   "current": this.translate.instant('L2Module5.subMenu5-21'),
+          //   "next": this.translate.instant('L2Module5Finish.subMenu5-22'),
+          //   "nextRoute": "/modules/module5/Module5.22"
+          // }
+          // this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+          // this.Module5Service.setLocalStorage5(22);
+        }
+      },
+      error => {
+        this.LanguageService.handleError(error.error.message);
+      }
+      );
   }
 
   clearField() {
@@ -403,18 +402,18 @@ export class Module521Component implements OnInit {
     this.answer5 = "";
     this.answer6 = "";
     this.answer7 = "";
-    this.showLimit['1'] = true;
-    this.showLimit['2'] = true;
-    this.showLimit['3'] = true;
-    this.showLimit['5'] = true;
-    this.showLimit['6'] = true;
-    this.showLimit['7'] = true;
-    this.postWordCount['1'] = 0;
-    this.postWordCount['2'] = 0;
-    this.postWordCount['3'] = 0;
-    this.postWordCount['5'] = 0;
-    this.postWordCount['6'] = 0;
-    this.postWordCount['7'] = 0;
+    // this.showLimit['1'] = true;
+    // this.showLimit['2'] = true;
+    // this.showLimit['3'] = true;
+    // this.showLimit['5'] = true;
+    // this.showLimit['6'] = true;
+    // this.showLimit['7'] = true;
+    // this.postWordCount['1'] = 0;
+    // this.postWordCount['2'] = 0;
+    // this.postWordCount['3'] = 0;
+    // this.postWordCount['5'] = 0;
+    // this.postWordCount['6'] = 0;
+    // this.postWordCount['7'] = 0;
   }
 
   back(assignForm: NgForm) {
@@ -466,30 +465,62 @@ export class Module521Component implements OnInit {
       this.postWordCount['7'] = this.answer7.trim().split(' ').length;
     }
 
-    if (this.answer1.trim().length == 0 ||
-      this.answer2.trim().length == 0 ||
-      this.answer3.trim().length == 0 ||
-      this.answer4.trim().length == 0 ||
-      this.answer5.trim().length == 0 ||
-      this.answer6.trim().length == 0 ||
-      this.answer7.trim().length == 0) {
-      this.submitFlag = false;
-    } else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 5) {
-      this.submitFlag = true;
-    } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 5) {
-      this.submitFlag = true;
-    } else if (this.postWordCount['3'] > 150 || this.postWordCount['3'] < 5) {
-      this.submitFlag = true;
-    } else if (this.postWordCount['5'] > 150 || this.postWordCount['5'] < 5) {
-      this.submitFlag = true;
-    } else if (this.postWordCount['6'] > 150 || this.postWordCount['6'] < 5) {
-      this.submitFlag = true;
-    } else if (this.postWordCount['7'] > 150 || this.postWordCount['7'] < 5) {
-      this.submitFlag = true;
+    if (this.answer1 != "" && this.answer1 != undefined && this.answer1 != null ||
+      this.answer2 != "" && this.answer2 != undefined && this.answer2 != null ||
+      this.answer3 != "" && this.answer3 != undefined && this.answer3 != null ||
+      this.answer4 != "" && this.answer4 != undefined && this.answer4 != null ||
+      this.answer5 != "" && this.answer5 != undefined && this.answer5 != null ||
+      this.answer6 != "" && this.answer6 != undefined && this.answer6 != null ||
+      this.answer7 != "" && this.answer7 != undefined && this.answer7 != null) {
+      if (this.answer1.trim().length == 0 ||
+        this.answer2.trim().length == 0 ||
+        this.answer3.trim().length == 0 ||
+        this.answer4.trim().length == 0 ||
+        this.answer5.trim().length == 0 ||
+        this.answer6.trim().length == 0 ||
+        this.answer7.trim().length == 0) {
+        this.submitFlag = false;
+      } else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 5) {
+        this.submitFlag = true;
+      } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 5) {
+        this.submitFlag = true;
+      } else if (this.postWordCount['3'] > 150 || this.postWordCount['3'] < 5) {
+        this.submitFlag = true;
+      } else if (this.postWordCount['5'] > 150 || this.postWordCount['5'] < 5) {
+        this.submitFlag = true;
+      } else if (this.postWordCount['6'] > 150 || this.postWordCount['6'] < 5) {
+        this.submitFlag = true;
+      } else if (this.postWordCount['7'] > 150 || this.postWordCount['7'] < 5) {
+        this.submitFlag = true;
+      } else {
+        this.submitFlag = true;
+      }
     }
-    else {
-      this.submitFlag = true;
+    else{
+      if (this.answer1 == "" || this.answer1 == null || this.answer1 == undefined) {
+        this.postWordCount['1'] = 0;
+      }
+      if (this.answer2 == "" || this.answer2 == null || this.answer2 == undefined) {
+        this.postWordCount['2'] = 0;
+      }
+      if (this.answer3 == "" || this.answer3 == null || this.answer3 == undefined) {
+        this.postWordCount['3'] = 0;
+      }
+      if (this.answer4 == "" || this.answer4 == null || this.answer4 == undefined) {
+        this.postWordCount['4'] = 0;
+      }
+      if (this.answer5 == "" || this.answer5 == null || this.answer5 == undefined) {
+        this.postWordCount['5'] = 0;
+      }
+      if (this.answer6 == "" || this.answer6 == null || this.answer6 == undefined) {
+        this.postWordCount['6'] = 0;
+      }
+      if (this.answer7 == "" || this.answer7 == null || this.answer7 == undefined) {
+        this.postWordCount['7'] = 0;
+      }
     }
+
+
   }
 
   sendAnswer(val) {
@@ -543,8 +574,7 @@ export class Module521Component implements OnInit {
       var index = unlockJson["children"].findIndex(
         item => item.source == "module 5.21"
       );
-      if (unlockJson["children"][index].url != null)
-      {
+      if (unlockJson["children"][index].url != null) {
         var mainJson = JSON.parse(unlockJson["children"][index].url);
         this.urlArray["src1"] = mainJson["5.21.1"];
       }
@@ -554,35 +584,33 @@ export class Module521Component implements OnInit {
     this.LanguageService.toShow();
   }
 
- 
-    numberOnly(event) {
-      const charCode = (event.which) ? event.which : event.keyCode;
-      console.log(event)
-      if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-        event.preventDefault(); 
-      }
+
+  numberOnly(event) {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    console.log(event)
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      event.preventDefault();
+    }
   }
 
-  showVideo(src, title,value) {
+  showVideo(src, title, value) {
     // this.staticImageModal.show();
     // this.statVideoFlag = true;
     // this.statImageFlag = false;
-    if (value == 1)
-    {
+    if (value == 1) {
       this.passValues['url'] = src;
       this.thumb_title = title;
       this.flag = value;
-    } else if (value == 2)
-    {
+    } else if (value == 2) {
       this.passValues['url'] = src;
       this.thumb_title = title;
       this.flag = value;
     }
   }
-  
+
   handleInput(e) {
     if (e.keyCode == 13) {
-       e.preventDefault(); 
-      }
+      e.preventDefault();
+    }
   }
 }

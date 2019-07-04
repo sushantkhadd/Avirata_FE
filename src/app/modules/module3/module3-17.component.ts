@@ -54,11 +54,11 @@ export class Module317Component implements OnInit {
     this.postWordCount['5'] = 0;
 
     if (this.mainFlagModule3 == 17) {
-      if (
-        this.subFlagModule3 == 1
-      ) {
+      // if (
+      //   this.subFlagModule3 == 1
+      // ) {
         this.startEvent();
-      }
+      // }
     }
   }
 
@@ -88,30 +88,38 @@ export class Module317Component implements OnInit {
         this.answer_3.trim().length == 0 || this.answer_4.trim().length == 0 || this.answer_5.trim().length == 0) {
         this.trimFlag = true;
       }
-      else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 1) {
+      else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 5) {
         this.trimFlag = true;
-      } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 1) {
+      } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 5) {
         this.trimFlag = true;
-      } else if (this.postWordCount['3'] > 150 || this.postWordCount['3'] < 1) {
+      } else if (this.postWordCount['3'] > 150 || this.postWordCount['3'] < 5) {
         this.trimFlag = true;
-      } else if (this.postWordCount['4'] > 150 || this.postWordCount['4'] < 1) {
+      } else if (this.postWordCount['4'] > 150 || this.postWordCount['4'] < 5) {
         this.trimFlag = true;
-      } else if (this.postWordCount['5'] > 150 || this.postWordCount['5'] < 1) {
+      } else if (this.postWordCount['5'] > 150 || this.postWordCount['5'] < 5) {
         this.trimFlag = true;
       } else {
         this.trimFlag = false;
       }
+    } else{
+      if (this.answer_1 == "" || this.answer_1 == null || this.answer_1 == undefined) {
+        this.postWordCount['1'] = 0;
+      }
+      if (this.answer_2 == "" || this.answer_2 == null || this.answer_2 == undefined) {
+        this.postWordCount['2'] = 0;
+      }
+      if (this.answer_3 == "" || this.answer_3 == null || this.answer_3 == undefined) {
+        this.postWordCount['3'] = 0;
+      }
+      if (this.answer_4 == "" || this.answer_4 == null || this.answer_4 == undefined) {
+        this.postWordCount['4'] = 0;
+      }
+      if (this.answer_5 == "" || this.answer_5 == null || this.answer_5 == undefined) {
+        this.postWordCount['5'] = 0;
+      }
     }
 
 
-  }
-
-  reset() {
-    this.answer_1 = "";
-    this.answer_2 = "";
-    this.answer_3 = "";
-    this.answer_4 = "";
-    this.answer_5 = "";
   }
 
   startEvent() {
@@ -226,6 +234,24 @@ export class Module317Component implements OnInit {
       this.studTwoFlag = true;
       this.studOneFlag = true;
     }
+  }
+
+  clear(){
+    this.answer_1 = "";
+    this.answer_2 = "";
+    this.answer_3 = "";
+    this.answer_4 = "";
+    this.answer_5 = "";
+    this.studDetails = "";
+    this.selectedId = "";
+  }
+
+  goBack(){
+    this.clear();
+    this.studOneFlag = false;
+    this.studTwoFlag = false;
+    this.studThreeFlag = false;
+    this.displayFormFlag = false;
   }
 
   handleInput(e) {

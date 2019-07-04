@@ -37,16 +37,24 @@ export class Module215Component implements OnInit {
 
     }
     else if (this.mainFlagModule2 == 15) {
-      this.startEvent = false;
+      
       if (this.subFlagModule2 == 1 ) {
         // this.start()
+        this.startEvent = false;
       }
-      if (this.subFlagModule2 == 2) {
+      if (this.subFlagModule2 == 2 || this.subFlagModule2 == 3 || this.subFlagModule2 == 5 || this.subFlagModule2 == 6) {
+        this.startEvent = true;
+        this.start();
         this.passData['apiUrl'] = "moduletwosingleurl/";
         this.passData['videoUrl'] = "";
         this.passData['status'] = true;  //first time call
         this.passData['currentSubmodule'] = 'Career - a process' //static msg
         this.passData['nextSubmodule'] = 'Career magic framework' //static msg
+      }
+      if (this.subFlagModule2 == 4 ) {
+        // this.start()
+        this.startEvent = false;
+        this.startPdf = false;
       }
     }
     else if (this.mainFlagModule2 > 15) {
@@ -214,7 +222,16 @@ export class Module215Component implements OnInit {
           window.localStorage.setItem('subFlagModule2', JSON.stringify(this.subFlagModule2));
           this.instructionModal.hide()
           this.LanguageService.toHide();
-          this.start();
+          
+          if(window.localStorage.getItem("subFlagModule2")=="4")
+          {
+            this.startPdf = false;
+            this.startEvent=false
+            this.subFlagModule2 = 4;
+          }
+          else{
+            this.start();
+          }
         }
        else if (data['message'] == "submodule finish") {
         this.instructionModal.hide()

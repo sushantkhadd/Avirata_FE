@@ -19,7 +19,7 @@
           </div>
           <div class="card-footer text-right">
             <button class="btn btn-primary" appPreventDoubleClick
-              (click)="startEvent()">{{'Login.Close' | translate}}</button>
+              (debounceClick)="startEvent()">{{'Login.Close' | translate}}</button>
           </div>
         </div>
       </div>
@@ -61,7 +61,7 @@
           <p class="px-5 text-center">तुमचा व्हिडिओ पूर्ण झाला.</p>
           <hr />
           <div class="col-md-12 text-right">
-            <button class="btn btn-primary text-center" (click)="next()">{{'Stepper.Next' | translate}}</button>
+            <button class="btn btn-primary text-center" appPreventDoubleClick (debounceClick)="next()">{{'Stepper.Next' | translate}}</button>
           </div>
         </div>
       </div>
