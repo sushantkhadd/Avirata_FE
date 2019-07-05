@@ -90,7 +90,7 @@
             <tbody>
               <tr *ngFor="let item of mf.data; let i=index">
                 <td>
-                  <a class="btn viewdetails" title="View Details" (click)="viewTalukaDetails(item.district_name);">
+                  <a class="btn viewdetails" title="View Details" appPreventDoubleClick (debounceClick)="viewTalukaDetails(item.district_name);">
                     <!-- <i class="fa fa-eye" aria-hidden="true"></i>
                   </a> -->
                     <b>{{item.district_name}}</b>

@@ -25,7 +25,7 @@
       </div>
       <div class="card-footer">
         <div class="float-right hidden-xs-down">
-          <button class="btn btn-primary" (click)="startEvent=true;start();">{{'Login.Close' | translate}}</button>
+          <button class="btn btn-primary" appPreventDoubleClick (debounceClick)="startEvent=true;start();">{{'Login.Close' | translate}}</button>
         </div>
         <!-- <div class="hidden-sm-up text-center">
                     <button class="btn btn-primary" (click)="startEvent=true;start();">{{'Module2.see' | translate}}</button>

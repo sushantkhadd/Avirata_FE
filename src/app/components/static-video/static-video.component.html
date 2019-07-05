@@ -70,7 +70,7 @@
                   <strong>'{{receivedData.nextSubmodule}}'</strong> {{'newTranslate.startIt' | translate}}
               </p>
               <hr>
-              <button class="btn btn-primary" (click)="videoFinish()">{{'Module4.start' | translate}}</button>
+              <button class="btn btn-primary" appPreventDoubleClick (debounceClick)="videoFinish()">{{'Module4.start' | translate}}</button>
           </div>
       </div>
   </div>

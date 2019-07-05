@@ -708,7 +708,7 @@
                 <div class="col-md-6 col-sm-6 col-xs-3 form-control-label"></div>
                 <div class="col-md-6 col-sm-6 col-xs-3">
                   <div class="form-group">
-                    <button type="button" class="text-center btn btn-block btn-success" [disabled]="!checkAgree" (click)="confirmGenerateEmailOTP()">{{'Registration.Send OTP' | translate}}</button>
+                    <button type="button" class="text-center btn btn-block btn-success" [disabled]="!checkAgree" appPreventDoubleClick (debounceClick)="confirmGenerateEmailOTP()">{{'Registration.Send OTP' | translate}}</button>
                   </div>
                 </div>
               </div>
@@ -741,7 +741,7 @@
               <div class="form-group row">
                 <label class="col-sm-3 form-control-label" for="input-small"></label>
                 <p class="input-group col-sm-9 color_red">{{'Registration.if not' | translate}}
-                  <a (click)="confirmGenerateEmailOTP()" class="resend"> &nbsp; {{'Registration.resend' | translate}}</a>
+                  <a appPreventDoubleClick (debounceClick)="confirmGenerateEmailOTP()" class="resend"> &nbsp; {{'Registration.resend' | translate}}</a>
                 </p>
               </div>
             </form>
@@ -857,7 +857,7 @@
                       [(ngModel)]="oldEmailVerify" name="emailId" pattern="^[_A-Za-z0-9-\+]+(\.[._A-Za-z0-9-]+)*@(gmail|yahoo|hotmail|rediffmail|outlook|live)+(\.(com|in|org|edu|net|co.in|edu.in|org.in)+)$"
                       #emailId1="ngModel" [readonly]="!click_here_email" maxlength="254" autocomplete='off' required>
                     <span class="input-group-btn">
-                      <button class="btn btn-primary verifyButtonWidth" type="button" (click)="sendEmail=true;click_here_email=false;sendOTPForVerify();"
+                      <button class="btn btn-primary verifyButtonWidth" type="button" appPreventDoubleClick (debounceClick)="sendEmail=true;click_here_email=false;sendOTPForVerify();"
                         [disabled]="emailId1.invalid">{{'Registration.Send OTP' | translate}}</button>
                     </span>
                   </div>
@@ -882,14 +882,14 @@
                       [(ngModel)]="emailOtp" [ngModelOptions]="{standalone: true}" type="text" maxlength="6" autocomplete='off'
                       required>
                     <span class="input-group-btn">
-                      <button class="btn btn-primary verifyButtonWidth" type="button" [disabled]="emailOTP1.invalid" (click)="verifyEmailOtpPending()">{{'Registration.Verify' | translate}}</button>
+                      <button class="btn btn-primary verifyButtonWidth" type="button" [disabled]="emailOTP1.invalid" appPreventDoubleClick (debounceClick)="verifyEmailOtpPending()">{{'Registration.Verify' | translate}}</button>
                     </span>
                   </div>
                 </div>
                 <div class="form-group row loginInput">
                   <label class="col-sm-3 form-control-label" for="input-small"></label>
                   <p class="input-group col-sm-9 color_red">{{'Registration.if not' | translate}}
-                    <a (click)="regenerateOPT()" class="resend">&nbsp; {{'Registration.resend' | translate}}</a>
+                    <a appPreventDoubleClick (debounceClick)="regenerateOPT()" class="resend">&nbsp; {{'Registration.resend' | translate}}</a>
                   </p>
                 </div>
                 <div class="input-group  row loginInput color_red" *ngIf="emailOTP1.errors && emailOTP1.dirty">

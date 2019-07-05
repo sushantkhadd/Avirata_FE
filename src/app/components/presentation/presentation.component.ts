@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Input, ViewChild, Output, EventEmitter, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ElementRef, Input, ViewChild, Output, EventEmitter, ViewContainerRef, HostListener } from '@angular/core';
 import { ModalDirective } from "ngx-bootstrap";
 import { CommonComponentService } from "../common-component.service";
 import { CommonService } from "../../services/common.service";
@@ -38,8 +38,8 @@ export class PresentationComponent implements OnInit {
   public mainFlagModule4 = parseInt(window.localStorage.getItem('mainFlagModule4'));
   public mainFlagModule5 = parseInt(window.localStorage.getItem('mainFlagModule5'));
   public mainFlagModule1 = parseInt(window.localStorage.getItem('mainFlagModule1'));
-  public count:any = 1; finalCount; page; pdfURL;totalPages;
-  public imgUrl; downloadLink; download; newUrl; nextParentUrl;helplineFlag;
+  public count: any = 1; finalCount; page; pdfURL; totalPages;
+  public imgUrl; downloadLink; download; newUrl; nextParentUrl; helplineFlag;
   public showCFU; buttonShowFlag; question; selectedAnswer; submitDisabled; apiUrl;
   public questionSet = {}; options = []; showFinish; optionsStateDyanamic;
   @Output() public ansCorrect = new EventEmitter();  //For interest Video 5.6 to send result success
@@ -71,80 +71,68 @@ export class PresentationComponent implements OnInit {
     jsonBody["event"] = event;
     this.CommonComponentService.submoduleFinish(jsonBody, apiUrl).subscribe(
       data => {
-        if (data["message"] == "event is done")
-        {
-          if (event == "fifty_fifty")
-          {
+        if (data["message"] == "event is done") {
+          if (event == "fifty_fifty") {
             this.askMeModal.hide();
             this.reset();
             this.rewardImgUrl1 = this.imageJson["f2"];
             this.options = [];
-            for (let i = 0; i < this.optionsStateDyanamic.length; i++)
-            {
-              if (this.optionsStateDyanamic[i].option != this.rightanswer)
-              {
+            for (let i = 0; i < this.optionsStateDyanamic.length; i++) {
+              if (this.optionsStateDyanamic[i].option != this.rightanswer) {
                 var randomOption = this.optionsStateDyanamic[i].value;
               }
-              if (this.optionsStateDyanamic[i].option == this.rightanswer)
-              {
+              if (this.optionsStateDyanamic[i].option == this.rightanswer) {
                 this.options.push(this.optionsStateDyanamic[i].value)
               }
             }
             this.options.push(randomOption);
             console.log(this.optionsStateDyanamic, this.options, this.rightanswer, randomOption)
             this.levelData = localStorage.getItem("levelData");
-            for (let index = 0; index < this.levelData.length; index++)
-            {
-              if(parseInt(window.localStorage.getItem("currentstatus")) == index){
-              let current1 = [];
-              current1 = JSON.parse(window.localStorage.getItem("levelData"));
-              let index1 = current1.findIndex(
-                item => item.module == index);
+            for (let index = 0; index < this.levelData.length; index++) {
+              if (parseInt(window.localStorage.getItem("currentstatus")) == index) {
+                let current1 = [];
+                current1 = JSON.parse(window.localStorage.getItem("levelData"));
+                let index1 = current1.findIndex(
+                  item => item.module == index);
                 current1[index1].fifty_fifty = true;
-              window.localStorage.setItem("levelData", JSON.stringify(current1));
-              console.log(current1, "fifirty")
+                window.localStorage.setItem("levelData", JSON.stringify(current1));
+                console.log(current1, "fifirty")
+              }
             }
-          }
-          } else if (event == "askme")
-          {
+          } else if (event == "askme") {
             this.askMeModal.hide();
             // this.LanguageService.toHide();
-            if (!this.fiftyFiftyFlag)
-            {
+            if (!this.fiftyFiftyFlag) {
               this.hideMe = true;
-            } else
-            {
+            } else {
               this.hideMe = false;
             }
             this.rewardImgUrl2 = this.imageJson["a2"];
             this.options = [];
-            for (let i = 0; i < this.optionsStateDyanamic.length; i++)
-            {
-              if (this.optionsStateDyanamic[i].option == this.rightanswer)
-              {
+            for (let i = 0; i < this.optionsStateDyanamic.length; i++) {
+              if (this.optionsStateDyanamic[i].option == this.rightanswer) {
                 this.options.push(this.optionsStateDyanamic[i].value);
                 this.selectedValue = this.optionsStateDyanamic[i].value;
               }
             }
             console.log(this.optionsStateDyanamic, this.options, this.rightanswer)
             this.levelData = localStorage.getItem("levelData");
-            for (let index = 0; index < this.levelData.length; index++)
-            {
-              if(parseInt(window.localStorage.getItem("currentstatus")) == index){
-              let current1 = [];
-              current1 = JSON.parse(window.localStorage.getItem("levelData"));
-              let index1 = current1.findIndex(
-                item => item.module == index);
+            for (let index = 0; index < this.levelData.length; index++) {
+              if (parseInt(window.localStorage.getItem("currentstatus")) == index) {
+                let current1 = [];
+                current1 = JSON.parse(window.localStorage.getItem("levelData"));
+                let index1 = current1.findIndex(
+                  item => item.module == index);
                 current1[index1].askme = true;
-              window.localStorage.setItem("levelData", JSON.stringify(current1));
-              console.log(current1, "askme")
+                window.localStorage.setItem("levelData", JSON.stringify(current1));
+                console.log(current1, "askme")
+              }
             }
-          }
           }
         }
       },
       error => {
-          this.LanguageService.handleError(error.error.message);
+        this.LanguageService.handleError(error.error.message);
       }
     );
   }
@@ -152,15 +140,14 @@ export class PresentationComponent implements OnInit {
   showCfuModal() {
     this.cfuModal.show();
     this.LanguageService.toShow();
-    if (this.options.length == 1)
-    {
+    if (this.options.length == 1) {
       for (let i = 0; i < this.options.length; i++) {
         if (this.options[i].option == this.rightanswer) {
           this.selectedValue = this.options[i].value;
         }
       }
     }
-    console.log(this.options.length,this.options)
+    console.log(this.options.length, this.options)
   }
 
 
@@ -169,11 +156,9 @@ export class PresentationComponent implements OnInit {
       localStorage.getItem("levelData") != null &&
       localStorage.getItem("levelData") != "" &&
       localStorage.getItem("levelData") != undefined
-    )
-    {
+    ) {
       this.levelData = JSON.parse(localStorage.getItem("levelData"));
-      for (let index = 0; index < this.levelData.length; index++)
-      {
+      for (let index = 0; index < this.levelData.length; index++) {
         const element = this.levelData[index];
         if (
           (this.levelData[index].module == "0" && this.levelData[index].status == true) ||
@@ -182,23 +167,18 @@ export class PresentationComponent implements OnInit {
           (this.levelData[index].module == "3" && this.levelData[index].status == true) ||
           (this.levelData[index].module == "4" && this.levelData[index].status == true) ||
           (this.levelData[index].module == "5" && this.levelData[index].status == true)
-        )
-        {
+        ) {
           this.askMeFlag = this.levelData[index].askme;
           this.fiftyFiftyFlag = this.levelData[index].fifty_fifty;
-          if (this.askMeFlag == true)
-          {
+          if (this.askMeFlag == true) {
             this.rewardImgUrl2 = this.imageJson["a2"];
-          } else
-          {
+          } else {
             this.rewardImgUrl2 = this.imageJson["a1"];
           }
 
-          if (this.fiftyFiftyFlag == true)
-          {
+          if (this.fiftyFiftyFlag == true) {
             this.rewardImgUrl1 = this.imageJson["f2"];
-          } else
-          {
+          } else {
             this.rewardImgUrl1 = this.imageJson["f1"];
           }
         }
@@ -217,11 +197,9 @@ export class PresentationComponent implements OnInit {
       }
       else if (this.finalCount == 1) {
 
-        if ((window.localStorage.getItem('mainFlagModule5')) == '4')
-        {
+        if ((window.localStorage.getItem('mainFlagModule5')) == '4') {
           this.showFinish = true;
-        } else
-        {
+        } else {
           this.showFinish = false;
           this.buttonShowFlag = false;
         }
@@ -237,20 +215,19 @@ export class PresentationComponent implements OnInit {
   }
   chaneSlide(e) {
     if (e.keyCode == 37) {
-      this.back();
+      // this.back();
     } else if (e.keyCode == 39) {
-      this.next();
+      // this.next();
     }
   }
 
   ngOnInit() {
-
     this.isLoaded = true;
     this.selectedValue = "";
     setTimeout(() => {
       this.isLoaded = false;
     }, 4000);
-    console.log("data",this.data,'count init',this.count)
+    console.log("data", this.data, 'count init', this.count)
     this.count = 1;
     this.showFinish = false;
     this.submitDisabled = false;
@@ -299,7 +276,7 @@ export class PresentationComponent implements OnInit {
       }
       else if (this.data.state == 'dyanamic') {
         var jsonBody = {};
-        console.log("mailnflag",window.localStorage.getItem('mainFlagModule4'))
+        console.log("mailnflag", window.localStorage.getItem('mainFlagModule4'))
         if (
           window.localStorage.getItem("mainFlagModule2") == "15" ||
           window.localStorage.getItem("mainFlagModule3") == "14" ||
@@ -396,23 +373,23 @@ export class PresentationComponent implements OnInit {
                 } else {
                   if (
                     window.localStorage.getItem("mainFlagModule2") ==
-                      "15" ||
+                    "15" ||
                     window.localStorage.getItem("mainFlagModule3") ==
-                      "14" ||
+                    "14" ||
                     window.localStorage.getItem("mainFlagModule3") ==
-                      "15" ||
+                    "15" ||
                     window.localStorage.getItem("mainFlagModule3") ==
-                      "16" ||
+                    "16" ||
                     window.localStorage.getItem("mainFlagModule4") ==
-                      "13" ||
+                    "13" ||
                     window.localStorage.getItem("mainFlagModule5") ==
                     "2" ||
                     window.localStorage.getItem("mainFlagModule5") ==
                     "3" ||
                     window.localStorage.getItem("mainFlagModule5") ==
-                      "4" ||
+                    "4" ||
                     window.localStorage.getItem("mainFlagModule5") ==
-                      "5"
+                    "5"
                   ) {
                     if (
                       this.mainFlagModule5 == 2 ||
@@ -445,7 +422,7 @@ export class PresentationComponent implements OnInit {
             error => {
               this.CommonService.handleError(error.error.message);
             } //Catch Error if server is not Found
-          );
+            );
         }
       }
       else if (this.data.state == 'review') {
@@ -526,7 +503,7 @@ export class PresentationComponent implements OnInit {
       if (this.count == this.finalCount) {
         this.buttonShowFlag = true;
         if (this.showCFU == true) {
-          console.log('next show cout',this.count,this.finalCount)
+          console.log('next show cout', this.count, this.finalCount)
           this.buttonShowFlag = true;
         } else if (this.showCFU == false && (this.mainFlagModule4 == 8 || this.mainFlagModule1 == 11 || this.mainFlagModule3 == 3 || this.mainFlagModule3 == 5 || this.mainFlagModule5 == 15)) {
           this.showFinish = true;
@@ -575,7 +552,7 @@ export class PresentationComponent implements OnInit {
     else if (this.data.state == 'dyanamic') {
       for (var i = 0; i < this.optionsStateDyanamic.length; i++) {
         if (this.selectedAnswer == this.optionsStateDyanamic[i].value) {
-           var jsonBody = {};
+          var jsonBody = {};
           this.apiUrl = this.data.apiurlResult;
           if (
             window.localStorage.getItem("mainFlagModule2") == "15" ||
@@ -631,37 +608,34 @@ export class PresentationComponent implements OnInit {
 
           this.CommonComponentService.submoduleFinish(jsonBody, this.apiUrl)     //check apiurl
             .subscribe(
-              data => {
-                if (data["data"].rightanswer != null && data["data"].rightanswer != "" && data["data"].rightanswer != undefined)
-                {
-                  this.rightanswer = this.LanguageService.get('aesEncryptionKey', data["data"].rightanswer)
-                  console.log("rightanswer", this.rightanswer);
-                }
-                if (data['message'] == 'your answer correct' || data['message'] == 'your answer is correct')
-                {
+            data => {
+              if (data["data"].rightanswer != null && data["data"].rightanswer != "" && data["data"].rightanswer != undefined) {
+                this.rightanswer = this.LanguageService.get('aesEncryptionKey', data["data"].rightanswer)
+                console.log("rightanswer", this.rightanswer);
+              }
+              if (data['message'] == 'your answer correct' || data['message'] == 'your answer is correct') {
 
-                  this.msgFlag = true;
-                  if (
-                    this.mainFlagModule5 == 2 ||
-                    this.mainFlagModule5 == 3 ||
-                    this.mainFlagModule5 == 4 ||
-                    this.mainFlagModule5 == 5
-                  ) {
-                    let url = JSON.parse(
-                      data["data"].nexturl
-                    );
-                    this.pdfURL = url["1"];
-                    // this.audioSrc = {};
-                    // this.audioSrc['url'] = url["2"];
-                  } else {
-                    this.pdfURL = data["data"].nexturl;
-                  }
+                this.msgFlag = true;
+                if (
+                  this.mainFlagModule5 == 2 ||
+                  this.mainFlagModule5 == 3 ||
+                  this.mainFlagModule5 == 4 ||
+                  this.mainFlagModule5 == 5
+                ) {
+                  let url = JSON.parse(
+                    data["data"].nexturl
+                  );
+                  this.pdfURL = url["1"];
+                  // this.audioSrc = {};
+                  // this.audioSrc['url'] = url["2"];
+                } else {
+                  this.pdfURL = data["data"].nexturl;
+                }
                 //  this.pdfURL=data['data'].nexturl
                 this.showToasterPopup();
                 window.localStorage.setItem('uuid', data['data'].nextuuid);
-                  if (window.localStorage.getItem('mainFlagModule2') == '15' || window.localStorage.getItem('mainFlagModule3') == '14' || window.localStorage.getItem('mainFlagModule3') == '15' || window.localStorage.getItem('mainFlagModule3') == '16' || window.localStorage.getItem('mainFlagModule4') == '13' || window.localStorage.getItem('mainFlagModule5') == '10' || window.localStorage.getItem('mainFlagModule5') == '11' || window.localStorage.getItem('mainFlagModule5') == '12' || window.localStorage.getItem('mainFlagModule5') == '2' ||
-                    window.localStorage.getItem('mainFlagModule5') == '3' ||  window.localStorage.getItem('mainFlagModule5') == '4' || window.localStorage.getItem('mainFlagModule5') == '5')
-                {
+                if (window.localStorage.getItem('mainFlagModule2') == '15' || window.localStorage.getItem('mainFlagModule3') == '14' || window.localStorage.getItem('mainFlagModule3') == '15' || window.localStorage.getItem('mainFlagModule3') == '16' || window.localStorage.getItem('mainFlagModule4') == '13' || window.localStorage.getItem('mainFlagModule5') == '10' || window.localStorage.getItem('mainFlagModule5') == '11' || window.localStorage.getItem('mainFlagModule5') == '12' || window.localStorage.getItem('mainFlagModule5') == '2' ||
+                  window.localStorage.getItem('mainFlagModule5') == '3' || window.localStorage.getItem('mainFlagModule5') == '4' || window.localStorage.getItem('mainFlagModule5') == '5') {
                   this.options = []
 
                   this.eventRadioGroup.instance.option("value", '');
@@ -670,42 +644,38 @@ export class PresentationComponent implements OnInit {
                   data['data'].options.forEach(element => {
                     this.options.push(element.value);
                   });
-                    window.scrollTo(0, 0);
-                    if (window.localStorage.getItem('mainFlagModule2') == '15')
-                    {
-                      window.localStorage.setItem('subFlagModule2', "4");
-                   }
-                    if (
-                      window.localStorage.getItem('mainFlagModule5') == '2' ||
-                      window.localStorage.getItem('mainFlagModule5') == '3' ||
-                      window.localStorage.getItem('mainFlagModule5') == '4' ||
-                      window.localStorage.getItem('mainFlagModule5') == '5'
-                    )
-                  {
+                  window.scrollTo(0, 0);
+                  if (window.localStorage.getItem('mainFlagModule2') == '15') {
+                    window.localStorage.setItem('subFlagModule2', "4");
+                  }
+                  if (
+                    window.localStorage.getItem('mainFlagModule5') == '2' ||
+                    window.localStorage.getItem('mainFlagModule5') == '3' ||
+                    window.localStorage.getItem('mainFlagModule5') == '4' ||
+                    window.localStorage.getItem('mainFlagModule5') == '5'
+                  ) {
                     this.subFlagModule5++;
                     window.localStorage.setItem('subFlagModule5', JSON.stringify(this.subFlagModule5));
                   }
                 }
-                else{
-                    this.cfuModal.hide();
-                    // this.LanguageService.toHide();
+                else {
+                  this.cfuModal.hide();
+                  // this.LanguageService.toHide();
                   setTimeout(() => {
                     this.ansCorrect.emit(true);
                   }, 5000);
                 }
 
               }
-              else if (data['message'] == 'wrong answer read pdf again' || data['message'] == 'wrong answer')
-              {
-                if(window.localStorage.getItem('mainFlagModule5') == '6' || window.localStorage.getItem('mainFlagModule5') == '7' || window.localStorage.getItem('mainFlagModule5') == '8' || window.localStorage.getItem('mainFlagModule5') == '9' || window.localStorage.getItem('mainFlagModule5') == '10' || window.localStorage.getItem('mainFlagModule5') == '11' || window.localStorage.getItem('mainFlagModule5') == '12')
-                {
+              else if (data['message'] == 'wrong answer read pdf again' || data['message'] == 'wrong answer') {
+                if (window.localStorage.getItem('mainFlagModule5') == '6' || window.localStorage.getItem('mainFlagModule5') == '7' || window.localStorage.getItem('mainFlagModule5') == '8' || window.localStorage.getItem('mainFlagModule5') == '9' || window.localStorage.getItem('mainFlagModule5') == '10' || window.localStorage.getItem('mainFlagModule5') == '11' || window.localStorage.getItem('mainFlagModule5') == '12') {
                   this.msgFlag = false;
                   this.showToasterPopup();
                   this.eventRadioGroup.instance.option("value", '');
                   this.shuffle(this.options);
 
                 }
-                else{
+                else {
                   this.msgFlag = false;
                   this.showToasterPopup();
 
@@ -721,8 +691,7 @@ export class PresentationComponent implements OnInit {
                 }
               }
               //this response is for Module2.1
-              else if (data['message'] == 'your answer stored next question and uuid is')
-              {
+              else if (data['message'] == 'your answer stored next question and uuid is') {
 
 
                 this.cfuModal.hide();
@@ -744,10 +713,10 @@ export class PresentationComponent implements OnInit {
                   this.countForModule2++;
                   window.scrollTo(0, 0);
                   window.localStorage.setItem('subFlagModule2', (this.countForModule2 + 1).toString());
-                  this.pdfURL=data['data'].url
+                  this.pdfURL = data['data'].url
                   this.newUrl = this.data.url + this.countForModule2.toString() + this.count + ".jpg";
                 } else {
-                  this.pdfURL=data['data'].url
+                  this.pdfURL = data['data'].url
                   this.newUrl = this.data.url + this.count + ".jpg";
                 }
 
@@ -757,21 +726,19 @@ export class PresentationComponent implements OnInit {
                 window.localStorage.setItem('uuid', data['data'].nextuuid);
                 this.cfuModal.hide();
                 // this.LanguageService.toHide();
-                var pass={}
-                pass['status']=true
-                if (window.localStorage.getItem('mainFlagModule3') == '14' || window.localStorage.getItem('mainFlagModule3') == '15' || window.localStorage.getItem('mainFlagModule4') == '7' )
-                {
-                  pass['url']=this.pdfURL;
-                  console.log("url",pass['url'])
+                var pass = {}
+                pass['status'] = true
+                if (window.localStorage.getItem('mainFlagModule3') == '14' || window.localStorage.getItem('mainFlagModule3') == '15' || window.localStorage.getItem('mainFlagModule4') == '7') {
+                  pass['url'] = this.pdfURL;
+                  console.log("url", pass['url'])
                   this.ansCorrect.emit(pass);
-                } else if (window.localStorage.getItem('mainFlagModule1') == '9')
-                {
+                } else if (window.localStorage.getItem('mainFlagModule1') == '9') {
                   var url = JSON.parse(data["data"].parenturl);
                   pass["url"] = url["1"];
                   console.log('passs', pass)
                   this.ansCorrect.emit(pass);
                 }
-                else if(window.localStorage.getItem('mainFlagModule2') == '15' || window.localStorage.getItem('mainFlagModule3') == '16' || window.localStorage.getItem('mainFlagModule4') == '13'){
+                else if (window.localStorage.getItem('mainFlagModule2') == '15' || window.localStorage.getItem('mainFlagModule3') == '16' || window.localStorage.getItem('mainFlagModule4') == '13') {
                   console.log('enter')
                   this.msgFlag = true;
                   this.showToasterPopup();
@@ -779,37 +746,34 @@ export class PresentationComponent implements OnInit {
                   setTimeout(() => {
                     console.log("finishhhhhh")
                     this.ansCorrect.emit(pass);
-                    }, 3000);
+                  }, 3000);
                 }
-                else{
+                else {
                   pass['url'] = data['data'].parenturl;
                   this.ansCorrect.emit(pass);
                 }
 
-                  if (
-                    window.localStorage.getItem('mainFlagModule1') == '11' || window.localStorage.getItem('mainFlagModule3') == '5' || window.localStorage.getItem('mainFlagModule5') == '2' ||
-                    window.localStorage.getItem('mainFlagModule1') == '11' || window.localStorage.getItem('mainFlagModule3') == '5' || window.localStorage.getItem('mainFlagModule5') == '3' ||
-                    window.localStorage.getItem('mainFlagModule5') == '4' ||
-                    window.localStorage.getItem('mainFlagModule5') == '5'
-                  )
-                  {
-                    this.sendCfuAns.emit(true);
-                  }
+                if (
+                  window.localStorage.getItem('mainFlagModule1') == '11' || window.localStorage.getItem('mainFlagModule3') == '5' || window.localStorage.getItem('mainFlagModule5') == '2' ||
+                  window.localStorage.getItem('mainFlagModule1') == '11' || window.localStorage.getItem('mainFlagModule3') == '5' || window.localStorage.getItem('mainFlagModule5') == '3' ||
+                  window.localStorage.getItem('mainFlagModule5') == '4' ||
+                  window.localStorage.getItem('mainFlagModule5') == '5'
+                ) {
+                  this.sendCfuAns.emit(true);
+                }
               }
               this.eventRadioGroup.instance.option("value", '');
-                this.submitDisabled = false;
-                if (this.options.length == 1 && !this.fiftyFiftyFlag)
-                {
-                  this.hideMe = true;
-                } else
-                {
-                  this.hideMe = false;
-                }
+              this.submitDisabled = false;
+              if (this.options.length == 1 && !this.fiftyFiftyFlag) {
+                this.hideMe = true;
+              } else {
+                this.hideMe = false;
+              }
             },
             error => {
               this.CommonService.handleError(error.error.message);
-              if (error.error.message == 'json Key Error' || error.error.message == 'source is required'  || error.error.message == 'unknown source' || error.error.message == 'required submoduleid key'
-                 || error.error.message == 'required useranswer key' || error.error.message == 'required event key'|| error.error.message == 'required review key') {
+              if (error.error.message == 'json Key Error' || error.error.message == 'source is required' || error.error.message == 'unknown source' || error.error.message == 'required submoduleid key'
+                || error.error.message == 'required useranswer key' || error.error.message == 'required event key' || error.error.message == 'required review key') {
                 this.cfuModal.hide();
                 // this.LanguageService.toHide();
                 this.toastr.error(this.translate.instant('Errors.goBackReadAns'));
@@ -857,17 +821,15 @@ export class PresentationComponent implements OnInit {
     this.submitDisabled = false;
   }
 
-  cfuModalHide(){
+  cfuModalHide() {
     this.cfuModal.hide()
     // this.LanguageService.toHide()
   }
   finishPDF() {
     this.sendCfuAns.emit(true);
-    if (this.options.length == 1)
-    {
+    if (this.options.length == 1) {
       this.hideMe = true;
-    } else
-    {
+    } else {
       this.hideMe = false;
     }
   }
@@ -888,13 +850,12 @@ export class PresentationComponent implements OnInit {
   }
 
   afterLoadComplete(pdfData: any) {
-    this.finalCount =  pdfData.numPages;
+    this.finalCount = pdfData.numPages;
   }
 
   finishAudio(e) {
     console.log(e);
-    if (e)
-    {
+    if (e) {
       this.audioModal.hide();
       // this.LanguageService.toHide();
     }
@@ -902,67 +863,63 @@ export class PresentationComponent implements OnInit {
 
   nextPage() {
 
-              console.log('next page', this.count)
-              if(this.count == this.finalCount && this.showCFU == true){
-              console.log('next page count1',this.count,this.finalCount)
-              console.log('this.buttonshowflag',this.buttonShowFlag)
-              this.buttonShowFlag=true
-              console.log('this.buttonshowflag 1',this.buttonShowFlag)
-      }
-      else{
+    console.log('next page', this.count)
+    if (this.count == this.finalCount && this.showCFU == true) {
+      console.log('next page count1', this.count, this.finalCount)
+      console.log('this.buttonshowflag', this.buttonShowFlag)
+      this.buttonShowFlag = true
+      console.log('this.buttonshowflag 1', this.buttonShowFlag)
+    }
+    else {
       console.log('else next11')
       this.count++;
-                console.log(' this.count++', this.count);
-                if(this.data.unlockView != "static"){
-                if (this.count == 13 && this.mainFlagModule5 == 2)
-                {
-                  this.audioModal.show();
-                  this.LanguageService.toShow()
-                  this.audioSrc = {};
-                  this.audioSrc['url'] = this.nextParentUrl["2"];
-                  this.audioSrc["state"] = "dynamic";
-                  console.log(' mainFlagModule5.count++', this.count, this.audioSrc['url']);
-                }
-                else if (this.count == 10 && this.mainFlagModule5 == 3)
-                {
-                  this.audioModal.show();
-                  this.LanguageService.toShow()
-                  this.audioSrc = {};
-                  this.audioSrc['url1'] = this.nextParentUrl["2"];
-                  this.audioSrc['url2'] = this.nextParentUrl["3"];
-                  this.audioSrc["state"] = "dynamic";
-                  console.log(' mainFlagModule5.count++', this.count, this.audioSrc['url']);
-                }else if (this.count == 4 && this.mainFlagModule5 == 4)
-                {
-                  this.audioModal.show();
-                  this.LanguageService.toShow()
-                  this.audioSrc = {};
-                  this.audioSrc['url'] = this.nextParentUrl["2"];
-                  this.audioSrc["state"] = "dynamic";
-                  console.log(' mainFlagModule5.count++', this.count, this.audioSrc['url']);
-                } else if (this.count == 7 && this.mainFlagModule5 == 5)
-                {
-                  this.audioModal.show();
-                  this.LanguageService.toShow();
-                  this.audioSrc = {};
-                  this.audioSrc['url'] = this.nextParentUrl["2"];
-                  this.audioSrc["state"] = "dynamic";
-                  console.log(' mainFlagModule5.count++', this.count, this.audioSrc['url']);
-                }
-              }
-      if(this.count == this.finalCount && this.showCFU == true){
-        console.log('else count1',this.count,this.finalCount)
-       console.log('this.buttonshowflag 11',this.buttonShowFlag)
-       this.buttonShowFlag=true
-       console.log('this.buttonshowflag 11',this.buttonShowFlag)
+      console.log(' this.count++', this.count);
+      if (this.data.unlockView != "static") {
+        if (this.count == 13 && this.mainFlagModule5 == 2) {
+          this.audioModal.show();
+          this.LanguageService.toShow()
+          this.audioSrc = {};
+          this.audioSrc['url'] = this.nextParentUrl["2"];
+          this.audioSrc["state"] = "dynamic";
+          console.log(' mainFlagModule5.count++', this.count, this.audioSrc['url']);
+        }
+        else if (this.count == 10 && this.mainFlagModule5 == 3) {
+          this.audioModal.show();
+          this.LanguageService.toShow()
+          this.audioSrc = {};
+          this.audioSrc['url1'] = this.nextParentUrl["2"];
+          this.audioSrc['url2'] = this.nextParentUrl["3"];
+          this.audioSrc["state"] = "dynamic";
+          console.log(' mainFlagModule5.count++', this.count, this.audioSrc['url']);
+        } else if (this.count == 4 && this.mainFlagModule5 == 4) {
+          this.audioModal.show();
+          this.LanguageService.toShow()
+          this.audioSrc = {};
+          this.audioSrc['url'] = this.nextParentUrl["2"];
+          this.audioSrc["state"] = "dynamic";
+          console.log(' mainFlagModule5.count++', this.count, this.audioSrc['url']);
+        } else if (this.count == 7 && this.mainFlagModule5 == 5) {
+          this.audioModal.show();
+          this.LanguageService.toShow();
+          this.audioSrc = {};
+          this.audioSrc['url'] = this.nextParentUrl["2"];
+          this.audioSrc["state"] = "dynamic";
+          console.log(' mainFlagModule5.count++', this.count, this.audioSrc['url']);
+        }
+      }
+      if (this.count == this.finalCount && this.showCFU == true) {
+        console.log('else count1', this.count, this.finalCount)
+        console.log('this.buttonshowflag 11', this.buttonShowFlag)
+        this.buttonShowFlag = true
+        console.log('this.buttonshowflag 11', this.buttonShowFlag)
       }
 
-      }
     }
+  }
 
   prevPage() {
     this.count--;
-    this.buttonShowFlag=false
+    this.buttonShowFlag = false
   }
 
   showToasterPopup() {
@@ -979,14 +936,14 @@ export class PresentationComponent implements OnInit {
     // this.LanguageService.toHideChild();
   }
 
-  askMeshow(value){
+  askMeshow(value) {
     this.helplineFlag = value
     this.askMeModal.show();
     this.LanguageService.toShow();
   }
 
 
-  askMeModalHide(){
+  askMeModalHide() {
     this.askMeModal.hide();
     // this.LanguageService.toHide();
   }

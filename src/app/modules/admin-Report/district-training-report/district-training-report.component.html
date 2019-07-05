@@ -98,7 +98,7 @@
                 <td>{{item.not_started}}</td>
                 <td>{{item.total_user}}</td>
                 <td>
-                  <button class="btn btn-primary" (click)="viewdetails(item.distict_name)">View</button>
+                  <button class="btn btn-primary" appPreventDoubleClick (debounceClick)="viewdetails(item.distict_name)">View</button>
                 </td>
               </tr>
             </tbody>

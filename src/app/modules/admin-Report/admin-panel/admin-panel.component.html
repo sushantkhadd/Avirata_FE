@@ -49,7 +49,7 @@
               class="fas fa-wrench mr-2"></em>&nbsp;All Users Report</a>
           <ul class="collapse list-unstyled" id="module3Submenu">
             <li>
-              <a (click)="getAllReport()">&nbsp;Download Report
+              <a appPreventDoubleClick (debounceClick)="getAllReport()">&nbsp;Download Report
                 <i *ngIf="isLoaded" class="fa fa-circle-o-notch fa-spin spinner-loader"></i>
               </a>
             </li>

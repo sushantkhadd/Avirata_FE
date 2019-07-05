@@ -77,7 +77,7 @@
                                                                         required [disabled]="emailVerifyClicked" autocomplete="off"
                                                                         #emailId="ngModel" (focusout)="spaceCheck();">
                                                                     <span class="input-group-btn">
-                                                                        <button class="btn btn-primary btn-otp" type="button" (click)="sendEmailOTP(1)" [disabled]="emailId.invalid || emailVerifyClicked">{{ 'Login.Send OTP' | translate }}</button>
+                                                                        <button class="btn btn-primary btn-otp" type="button" appPreventDoubleClick (debounceClick)="sendEmailOTP(1)" [disabled]="emailId.invalid || emailVerifyClicked">{{ 'Login.Send OTP' | translate }}</button>
                                                                     </span>
                                                                 </div>
                                                             </div>
@@ -94,7 +94,7 @@
                                                                             type="text" [(ngModel)]="loginModel.emailOTP" #emailOTP="ngModel"
                                                                             maxlength="6" autocomplete='off' required>
                                                                         <span class="input-group-btn">
-                                                                            <button class="btn btn-primary verifyButtonWidth" type="button" (click)="verifyEmailOtp(1)" [disabled]="emailOTP.invalid">{{ 'Login.Verify' | translate }}</button>
+                                                                            <button class="btn btn-primary verifyButtonWidth" type="button" appPreventDoubleClick (debounceClick)="verifyEmailOtp(1)" [disabled]="emailOTP.invalid">{{ 'Login.Verify' | translate }}</button>
                                                                         </span>
                                                                     </div>
                                                                 </div>
@@ -112,7 +112,7 @@
 
                                                                     <div class="col-12 col-md-12 text-right">
                                                                         <div class="form-control-label passform-labels text-right" for="input-small">जर ५ मिनिटात ओटीपी मिळाला नसेल तर
-                                                                            <button (click)="sendEmailOTP(1)" class="btn btn-info resend" [disabled]="timerFlag">परत पाठवा</button>
+                                                                            <button appPreventDoubleClick (debounceClick)="sendEmailOTP(1)" class="btn btn-info resend" [disabled]="timerFlag">परत पाठवा</button>
                                                                         </div>
                                                                     </div>
 
@@ -134,7 +134,7 @@
                                                                         autocomplete='off' (focusout)="spaceCheck1();" numbersOnly
                                                                         required>
                                                                     <span class="input-group-btn">
-                                                                        <button class="btn btn-primary btn-otp" type="button" (click)="sendEmailOTP(2)" [disabled]="mobile.invalid || mobileVerifyClicked">{{ 'Login.Send OTP' | translate }}</button>
+                                                                        <button class="btn btn-primary btn-otp" type="button" appPreventDoubleClick (debounceClick)="sendEmailOTP(2)" [disabled]="mobile.invalid || mobileVerifyClicked">{{ 'Login.Send OTP' | translate }}</button>
                                                                     </span>
                                                                 </div>
                                                             </div>
@@ -151,7 +151,7 @@
                                                                             type="text" [(ngModel)]="loginModel.mobileOTP" #mobileOTP="ngModel"
                                                                             maxlength="6" autocomplete='off' numbersOnly required>
                                                                         <span class="input-group-btn">
-                                                                            <button class="btn btn-primary verifyButtonWidth" type="button" (click)="verifyEmailOtp(2)" [disabled]="mobileOTP.invalid">{{ 'Login.Verify' | translate }}</button>
+                                                                            <button class="btn btn-primary verifyButtonWidth" type="button" appPreventDoubleClick (debounceClick)="verifyEmailOtp(2)" [disabled]="mobileOTP.invalid">{{ 'Login.Verify' | translate }}</button>
                                                                         </span>
                                                                     </div>
                                                                 </div>
@@ -165,7 +165,7 @@
 
                                                                     <div class="col-12 col-md-12 text-right">
                                                                         <div class="form-control-label passform-labels text-right" for="input-small">जर ५ मिनिटात ओटीपी मिळाला नसेल तर
-                                                                            <button (click)="sendEmailOTP(2)" class="btn btn-info resend" [disabled]="timerFlag">परत पाठवा </button>
+                                                                            <button appPreventDoubleClick (debounceClick)="sendEmailOTP(2)" class="btn btn-info resend" [disabled]="timerFlag">परत पाठवा </button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -231,7 +231,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-primary" *ngIf="activeNewPassword" (click)="setPassword()" [disabled]="newPassword.errors || !confirmPaswwordTrue || !checkAgree">{{ 'Login.Submit' | translate }}</button>
+                                                                <button type="button" class="btn btn-primary" *ngIf="activeNewPassword" appPreventDoubleClick (debounceClick)="setPassword()" [disabled]="newPassword.errors || !confirmPaswwordTrue || !checkAgree">{{ 'Login.Submit' | translate }}</button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -244,7 +244,7 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="row px-3">
-                                        <button class="btn btn-primary btn-block btn-login px-3" type="button" [disabled]="!loginForm.valid || !disableLogin" (click)="login();">{{'Login.Log in' | translate}}</button>
+                                        <button class="btn btn-primary btn-block btn-login px-3" type="button" [disabled]="!loginForm.valid || !disableLogin" appPreventDoubleClick (debounceClick)="login();">{{'Login.Log in' | translate}}</button>
                                     </div>
                                 </div>
                             </form>

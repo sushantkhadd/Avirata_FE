@@ -20,7 +20,7 @@
               <span>(Interval Time between updated status is 4 hrs)
               </span>
             </p>
-            <button class="btn btn-primary" *ngIf="showReset" (click)="updatedResult()">
+            <button class="btn btn-primary" *ngIf="showReset" appPreventDoubleClick (debounceClick)="updatedResult()">
               Get updated result
             </button>
           </div>
@@ -127,7 +127,7 @@
         <div class="form-group row col-md-4">
           <label for="talukaList" class="col-md-5 col-form-label font-weight-bold">Select Taluka</label>
           <div class="col-md-7">
-            <select class="form-control" name="taluka" id="talukaList" [(ngModel)]="selectedTaluka" (change)="talukaOverallReport(selectedTaluka,selectedRole)"
+            <select class="form-control" name="taluka" id="talukaList" [(ngModel)]="selectedTaluka" appPreventDoubleClick (debounceClick)="talukaOverallReport(selectedTaluka,selectedRole)"
               [disabled]="!selectedDistrict" required #taluka="ngModel">
               <option value="all">All</option>
               <option [value]="taluka.taluka_id" *ngFor="let taluka of allTalukas">{{taluka.taluka_name}}</option>
@@ -154,7 +154,7 @@
               <span>(Interval Time between updated status is 4 hrs)
                   </span>
             </p>
-            <button class="btn btn-primary" *ngIf="showReset2" (click)="talukaOverallReport(selectedTaluka,selectedRole);showReset2=false">
+            <button class="btn btn-primary" *ngIf="showReset2" appPreventDoubleClick (debounceClick)="talukaOverallReport(selectedTaluka,selectedRole);showReset2=false">
                 Get updated result
               </button>
           </div>

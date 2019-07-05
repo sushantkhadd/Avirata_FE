@@ -79,7 +79,7 @@
         </div>
         <div class="form-group row justify-content-center">
           <div class="col-md-8">
-            <button class="btn btn-primary float-right" [disabled]="!formNotification.form.valid || sendDisable" (click)="sendNotification()">
+            <button class="btn btn-primary float-right" [disabled]="!formNotification.form.valid || sendDisable" appPreventDoubleClick (debounceClick)="sendNotification()">
               <i class="fa fa-send-o"></i>&nbsp;&nbsp;Send
             </button>
           </div>

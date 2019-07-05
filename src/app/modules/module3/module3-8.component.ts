@@ -47,7 +47,7 @@ export class Module38Component implements OnInit {
 
       if (this.FullLayoutService.currentJson3.length > 0) {
         var index = this.FullLayoutService.currentJson3.findIndex(item =>
-          item.source == "module 3.9");
+          item.source == "module 3.8");
         if (this.FullLayoutService.currentJson3[index].url != null) {
           this.passData['videoUrl'] = this.FullLayoutService.currentJson3[index].url
         } else {

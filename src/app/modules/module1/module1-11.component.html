@@ -137,7 +137,7 @@
         </div>
         <div class="card-footer text-right bg-white border-0">
           <button class="btn btn-primary" [disabled]="assignForm.invalid || trimFlag"
-            (click)="queFlag ? submit() : finish2();">{{'Login.Close' | translate}}</button>
+          appPreventDoubleClick (debounceClick)="queFlag ? submit() : finish2();">{{'Login.Close' | translate}}</button>
         </div>
       </div>
 

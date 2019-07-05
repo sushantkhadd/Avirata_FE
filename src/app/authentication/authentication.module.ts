@@ -13,6 +13,7 @@ import { NumberDirective } from "src/app/shared/directives/number.directive";
 import { FormatTimePipe } from "../shared/pipes/format-time.pipe";
 import { AngularMultiSelectModule } from "angular2-multiselect-dropdown";
 import { RedirectComponent } from "./redirect/redirect.component";
+import { SharedModule } from "src/app/shared/shared.module";
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { RedirectComponent } from "./redirect/redirect.component";
     TranslateModule.forChild(),
     ModalModule.forRoot(),
     AuthenticationRoutingModule,
-    AngularMultiSelectModule
+    AngularMultiSelectModule,
+    SharedModule
   ],
   declarations: [
     LoginComponent,

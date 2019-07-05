@@ -7,7 +7,7 @@
         </a>
       </div>
       <div class="col-6">
-        <a class="btn btn-primary float-right logoutBtn" (click)="logout()">
+        <a class="btn btn-primary float-right logoutBtn" appPreventDoubleClick (debounceClick)="logout()">
           <i class="fa fa-power-off" aria-hidden="true"></i> &nbsp;लॉग-आऊट
         </a>
       </div>
@@ -162,7 +162,7 @@
               </div>
 
               <div class="col-md-3 text-center" *ngIf="lvl3Current">
-                <a class="custom-tooltip tooltip--triangle" (click)="levelStatus(3)">
+                <a class="custom-tooltip tooltip--triangle" appPreventDoubleClick (debounceClick)="levelStatus(3)">
                   <div class="card" [class.card-success]='lvl3Current' [class.card-secondary]='!lvl3Current && !lvl3Complete'>
                     <div class="card-block text-center text-white custom-block">
                       <div *ngIf="lvl3Complete" class="icon">

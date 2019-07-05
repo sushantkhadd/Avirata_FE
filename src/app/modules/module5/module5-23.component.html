@@ -110,7 +110,7 @@
         </ul>
         <div class="text-center">
           <div class="">
-            <button class="btn btn-primary text-center mt-2" [disabled]="counter==0 || !finishPar3Flag" (click)="finish3();">{{'Cfu.submit' | translate}}</button>
+            <button class="btn btn-primary text-center mt-2" [disabled]="counter==0 || !finishPar3Flag" appPreventDoubleClick (debounceClick)="finish3();">{{'Cfu.submit' | translate}}</button>
           </div><br>
       </div>
        

@@ -377,7 +377,7 @@
             <div class="form-group row">
               <div class="col-md-10 btn-top-m10 pr-1">
                 <button class="btn btn-primary float-right mr-5"
-                  (click)="createNewUser()" [disabled]="formNewuser.form.invalid">
+                appPreventDoubleClick (debounceClick)="createNewUser()" [disabled]="formNewuser.form.invalid">
                   <i class="fa fa-plus-square"></i> &nbsp;Add Co-ordinator</button>
               </div>
             </div>
@@ -453,7 +453,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" [disabled]="!selectedDistrict || !transferReason" (click)="transfer()">
+        <button type="button" class="btn btn-success" [disabled]="!selectedDistrict || !transferReason" appPreventDoubleClick (debounceClick)="transfer()">
           <i class="fa fa-check-circle text-white"></i>&nbsp;&nbsp;Transfer
         </button>
       </div>

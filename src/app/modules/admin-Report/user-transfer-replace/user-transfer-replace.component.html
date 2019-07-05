@@ -20,7 +20,7 @@
                   autocomplete="off" required>
               </div>
               <div class="mr-2">
-                <button class="btn btn-primary" [disabled]="!formSearch.form.valid || disableSearch" (click)="searchRecord(1)">
+                <button class="btn btn-primary" [disabled]="!formSearch.form.valid || disableSearch" appPreventDoubleClick (debounceClick)="searchRecord(1)">
                 <i class="fa fa-search pr-1"></i>Search
               </button>
               </div>
@@ -72,7 +72,7 @@
                     <a class="btn btn-primary actionBtn mr-1" (click)="blockUserpopup(item);">
                       <i class="fa fa-ban" aria-hidden="true"></i>Block
                     </a>
-                    <a class="btn btn-primary actionBtn" (click)="transferUser(item)">
+                    <a class="btn btn-primary actionBtn" appPreventDoubleClick (debounceClick)="transferUser(item)">
                       <i class="fa fa-exchange" aria-hidden="true"></i>Transfer
                     </a>
                   </td>
@@ -243,7 +243,7 @@
             </div>
             <div class="form-group row">
               <div class="col-md-10 btn-top-m10">
-                <button class="btn btn-primary float-right" [disabled]="!formNewuser.form.valid || createDisable" (click)="createNewUser()">
+                <button class="btn btn-primary float-right" [disabled]="!formNewuser.form.valid || createDisable" appPreventDoubleClick (debounceClick)="createNewUser()">
                   <i class="fa fa-plus-square"></i> &nbsp;Create User</button>
               </div>
             </div>
@@ -361,7 +361,7 @@
             </div>
             <div class="form-group row">
               <div class="col-md-10 btn-top-m10">
-                <button class="btn btn-primary float-right" [disabled]="!formTransferuser.form.valid || transferDisable" (click)="transferUserCheck()">
+                <button class="btn btn-primary float-right" [disabled]="!formTransferuser.form.valid || transferDisable" appPreventDoubleClick (debounceClick)="transferUserCheck()">
                   <i class="fa fa-exchange"></i> &nbsp;Transfer User</button>
               </div>
             </div>
@@ -409,7 +409,7 @@
           </div>
           <div class="form-group row">
             <div class="col-md-11">
-              <button class="btn btn-primary float-right" [disabled]="!formBlock.form.valid || blockDisable" (click)="blockUser();">
+              <button class="btn btn-primary float-right" [disabled]="!formBlock.form.valid || blockDisable" appPreventDoubleClick (debounceClick)="blockUser();">
                 <i class="fa fa-ban"></i> &nbsp;Block</button>
             </div>
           </div>
@@ -461,7 +461,7 @@
           </div>
           <div class="form-group row">
             <div class="col-md-11">
-              <button class="btn btn-primary float-right" [disabled]="!formUnBlock.form.valid ||unblockDisable" (click)="unblockUser()">
+              <button class="btn btn-primary float-right" [disabled]="!formUnBlock.form.valid ||unblockDisable" appPreventDoubleClick (debounceClick)="unblockUser()">
                 <i class="fa fa-ban"></i> &nbsp;Unblock</button>
             </div>
           </div>
@@ -499,12 +499,12 @@
           <i class="fa fa-times-circle text-white"></i>&nbsp;&nbsp;No
         </button>
         <span *ngIf="newUserFlag">
-          <button type="button" class="btn btn-primary" (click)="addNewUserHit()">
+          <button type="button" class="btn btn-primary" appPreventDoubleClick (debounceClick)="addNewUserHit()">
             <i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes
           </button>
         </span>
         <span *ngIf="!newUserFlag">
-          <button type="button" class="btn btn-primary" (click)="transferAPICall()">
+          <button type="button" class="btn btn-primary" appPreventDoubleClick (debounceClick)="transferAPICall()">
             <i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes
           </button>
         </span>

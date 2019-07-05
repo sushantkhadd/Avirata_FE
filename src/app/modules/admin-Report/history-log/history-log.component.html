@@ -27,7 +27,7 @@
               </select>
             </div>
             <div class="mr-2">
-              <button class="btn btn-primary" [disabled]="!formSearch.form.valid || btnValid" (click)="searchHistory()">
+              <button class="btn btn-primary" [disabled]="!formSearch.form.valid || btnValid" appPreventDoubleClick (debounceClick)="searchHistory()">
                 <i class="fa fa-search"></i>Search
               </button>
             </div>

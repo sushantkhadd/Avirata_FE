@@ -52,6 +52,11 @@ export class Module214Component implements OnInit {
         this.trimFlag = false;
       }
     }
+    else{
+      if (this.answer == "" || this.answer == null || this.answer == undefined){
+        this.postWordCount = 0;
+      }
+    }
   }
 
   startEvent() {
