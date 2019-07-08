@@ -354,8 +354,20 @@ export class McqcomponentComponent implements OnInit {
                this.onlyPopUpAns = this.data.questionlist[0].options[i].option;
                 console.log("dfdgfdgfdff" , this.onlyPopUpAns)
               }
-
+              this.description = this.data.description;
+              if(this.data.questionlist[0].options[i].value !="" && this.data.questionlist[0].options[i].value !=null){
+                if(this.data.questionlist[0].rightanswer==this.onlyPopUpAns){
+                  this.rightFlag = true
+                }
+                else{
+                  if(this.data.questionlist[0].rightanswer == this.data.questionlist[0].options[i].option){
+                    this.rightFlag=false
+                    this.showCorrectAns =this.data.questionlist[0].options[i].value;
+                  }
+                }
+              }
              }
+             
         }else if (window.localStorage.getItem('mainFlagModule3') == '1' || window.localStorage.getItem('mainFlagModule3') == '9' || window.localStorage.getItem('mainFlagModule3') == '11'){
           console.log("sadfffffffff",this.data)
           for(var i=0; i< this.data.options.length ; i++){
@@ -448,9 +460,9 @@ export class McqcomponentComponent implements OnInit {
     console.log("qsaDDDDDD",this.onlyPopUpAns)
     this.submitFlagMCQ = false
     if (window.localStorage.getItem('mainFlagModule2') == '3' || window.localStorage.getItem('mainFlagModule3') == '9' || window.localStorage.getItem('mainFlagModule3') == '11' || window.localStorage.getItem('mainFlagModule3') == '5'){
-      this.instructionModal.show()
+      this.rankModal.show()
       this.lang.toShow();
-     this.data.description = this.data.description
+     //this.data.description = this.data.description
      console.log("data.sescr",this.data.description)
     }else if(window.localStorage.getItem('mainFlagModule5') == '7' || window.localStorage.getItem('mainFlagModule0') == '2'){
       this.rankModal.show()
@@ -612,18 +624,19 @@ export class McqcomponentComponent implements OnInit {
 
 
   rankConfirmNext() {
-    if (window.localStorage.getItem('mainFlagModule2') == '3' && window.localStorage.getItem('subFlagModule2') == '4') {
-      this.sendAns.emit(this.selectedAnswer)
-      this.rankModal.hide()
-      this.lang.toHide();
-      if (this.eventRadioGroup != undefined && this.eventRadioGroup != null) {
-        this.eventRadioGroup.instance.option("value", '');
-      }
-    } else if (window.localStorage.getItem('mainFlagModule2') == '3' && window.localStorage.getItem('subFlagModule2') == '10') {
-      this.sendAns.emit(this.selectedTasks)
-      this.rankModal.hide()
-      this.lang.toHide();
-    }else if (window.localStorage.getItem('mainFlagModule1') == '2' || window.localStorage.getItem('mainFlagModule1') == '6') {
+    // if (window.localStorage.getItem('mainFlagModule2') == '3' && window.localStorage.getItem('subFlagModule2') == '4') {
+    //   this.sendAns.emit(this.selectedAnswer)
+    //   this.rankModal.hide()
+    //   this.lang.toHide();
+    //   if (this.eventRadioGroup != undefined && this.eventRadioGroup != null) {
+    //     this.eventRadioGroup.instance.option("value", '');
+    //   }
+    // } else if (window.localStorage.getItem('mainFlagModule2') == '3' && window.localStorage.getItem('subFlagModule2') == '10') {
+    //   this.sendAns.emit(this.selectedTasks)
+    //   this.rankModal.hide()
+    //   this.lang.toHide();
+    // }else 
+    if (window.localStorage.getItem('mainFlagModule1') == '2' || window.localStorage.getItem('mainFlagModule1') == '6') {
       var dummy=this.tasks;
       var obj=[];
       for (var i = 0; i < dummy.length; i++)
@@ -704,6 +717,7 @@ export class McqcomponentComponent implements OnInit {
     else {
       console.log("this.tasks",this.tasks,this.selectedAnswer)
       for (var item of this.tasks) {
+        if(item.value !=""){
         if (item.value == this.selectedAnswer) {
           console.log("emit even6t")
           this.sendAns.emit(item.option)
@@ -712,6 +726,7 @@ export class McqcomponentComponent implements OnInit {
           this.eventRadioGroup.instance.option("value", '');
         }
       }
+    }
     }
   }
 
