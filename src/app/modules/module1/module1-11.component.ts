@@ -41,8 +41,8 @@ export class Module111Component implements OnInit {
   public incomplete = false;
   passData = {};
   public playVideo = false;
-  vedioCompleteUrl;showLimit={};
-  statVideoFlag;instFlag;postWordCount={};
+  vedioCompleteUrl; showLimit = {};
+  statVideoFlag; instFlag; postWordCount = {}; zeroFlag;
 
   assignData;
   questionlist;
@@ -61,11 +61,18 @@ export class Module111Component implements OnInit {
   description;
   questionFlag;
   trimFlag;
-  urlArray = {}; nextFlag; queFlag;
+  urlArray = {}; nextFlag; queFlag; zeroMsgFlag = {};
   public inst =
     "खाली १ प्रसंग दिला आहे. त्यातील घटना (A), दोन्ही पात्रांचे अविवेकी विचार (धारणा) (iB), दोन्ही पात्रांचे प्रतिसाद (C) , iB शी केलेला वाद, संवाद, प्रतिवाद (प्रश्न प्रतिप्रश्न या स्वरूपात) आणि त्यामुळे बदललेले विवेकी विचार (rB) आणि शेवटी दोन्ही पात्रांचा बदललेला प्रतिसाद (C) हा पायरी-पायरी ने लिहा.";
 
   ngOnInit() {
+    this.zeroMsgFlag['1'] = false;
+    this.zeroMsgFlag['2'] = false;
+    this.zeroMsgFlag['3'] = false;
+    this.zeroMsgFlag['4'] = false;
+    this.zeroMsgFlag['5'] = false;
+    this.zeroMsgFlag['6'] = false;
+
     this.vedioCompleteUrl = "79vHVVtmIoQ";
     this.mainFlagModule1 = parseInt(
       window.localStorage.getItem("mainFlagModule1")
@@ -78,11 +85,14 @@ export class Module111Component implements OnInit {
       this.router.navigate(["/"]);
     }
 
-    if (localStorage.getItem("questionFlag") != undefined && localStorage.getItem("questionFlag") != null && localStorage.getItem("questionFlag") != ""){
+    if ((localStorage.getItem("questionFlag") != undefined && localStorage.getItem("questionFlag") != null && localStorage.getItem("questionFlag") != "") ||
+      this.subFlagModule1 == 2) {
       this.questionFlag = true;
-    } else
-    {
+      console.log('qweqweqew')
+
+    } else {
       this.questionFlag = false;
+      console.log('qqqq')
     }
 
     this.answer1 = "";
@@ -93,12 +103,12 @@ export class Module111Component implements OnInit {
     this.answer6 = "";
     this.queFlag = false;
 
-    this.postWordCount['1']=0;
-    this.postWordCount['2']=0;
-    this.postWordCount['3']=0;
-    this.postWordCount['4']=0;
-    this.postWordCount['5']=0;
-    this.postWordCount['6']=0;
+    this.postWordCount['1'] = 0;
+    this.postWordCount['2'] = 0;
+    this.postWordCount['3'] = 0;
+    this.postWordCount['4'] = 0;
+    this.postWordCount['5'] = 0;
+    this.postWordCount['6'] = 0;
 
     if (this.mainFlagModule1 == 11) {
       if (this.subFlagModule1 == 1) {
@@ -178,55 +188,97 @@ export class Module111Component implements OnInit {
     if (this.answer6) {
       this.postWordCount['6'] = this.answer6.trim().split(' ').length;
     }
-    
+
+    if (this.answer1 == "" || this.answer1 == null || this.answer1 == undefined) {
+      this.postWordCount['1'] = 0;
+      // this.zeroMsgFlag['1']=true
+    }
+    if (this.answer2 == "" || this.answer2 == null || this.answer2 == undefined) {
+      this.postWordCount['2'] = 0;
+      // this.zeroMsgFlag['2']=true
+    }
+    if (this.answer3 == "" || this.answer3 == null || this.answer3 == undefined) {
+      this.postWordCount['3'] = 0;
+      // this.zeroMsgFlag['3']=true
+    }
+    if (this.answer4 == "" || this.answer4 == null || this.answer4 == undefined) {
+      this.postWordCount['4'] = 0;
+      // this.zeroMsgFlag['4']=true
+    }
+    if (this.answer5 == "" || this.answer5 == null || this.answer5 == undefined) {
+      this.postWordCount['5'] = 0;
+      // this.zeroMsgFlag['5']=true
+    }
+    if (this.answer6 == "" || this.answer6 == null || this.answer6 == undefined) {
+      this.postWordCount['6'] = 0;
+      // this.zeroMsgFlag['6']=true
+    }
 
     if (this.questionFlag == true) {
-      if (
-        this.answer1.trim().length == 0 ||
-        this.answer2.trim().length == 0 ||
-        this.answer3.trim().length == 0 ||
-        this.answer4.trim().length == 0 ||
-        this.answer5.trim().length == 0 ||
-        this.answer6.trim().length == 0
-      ) {
-        this.trimFlag = true;
-      } else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 5){
-        this.trimFlag = true;
-      } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 5){
-        this.trimFlag = true;
-      } else if (this.postWordCount['3'] > 150 || this.postWordCount['3'] < 5){
-        this.trimFlag = true;
-      } else if (this.postWordCount['4'] > 150 || this.postWordCount['4'] < 5){
-        this.trimFlag = true;
-      } else if (this.postWordCount['5'] > 150 || this.postWordCount['5'] < 5){
-        this.trimFlag = true;
-      } else if (this.postWordCount['6'] > 150 || this.postWordCount['6'] < 5){
-        this.trimFlag = true;
-      } else {
-        this.trimFlag = false;
+      if (this.answer1 != null && this.answer1 != "" && this.answer1 != undefined ||
+        this.answer2 != null && this.answer2 != "" && this.answer2 != undefined ||
+        this.answer3 != null && this.answer3 != "" && this.answer3 != undefined ||
+        this.answer4 != null && this.answer4 != "" && this.answer4 != undefined ||
+        this.answer5 != null && this.answer5 != "" && this.answer5 != undefined ||
+        this.answer6 != null && this.answer6 != "" && this.answer6 != undefined) {
+        if (
+          this.answer1.trim().length == 0 ||
+          this.answer2.trim().length == 0 ||
+          this.answer3.trim().length == 0 ||
+          this.answer4.trim().length == 0 ||
+          this.answer5.trim().length == 0 ||
+          this.answer6.trim().length == 0
+        ) {
+          this.trimFlag = true;
+        } else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 5) {
+          this.trimFlag = true;
+        } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 5) {
+          this.trimFlag = true;
+        } else if (this.postWordCount['3'] > 150 || this.postWordCount['3'] < 5) {
+          this.trimFlag = true;
+        } else if (this.postWordCount['4'] > 150 || this.postWordCount['4'] < 5) {
+          this.trimFlag = true;
+        } else if (this.postWordCount['5'] > 150 || this.postWordCount['5'] < 5) {
+          this.trimFlag = true;
+        } else if (this.postWordCount['6'] > 150 || this.postWordCount['6'] < 5) {
+          this.trimFlag = true;
+        } else {
+          this.trimFlag = false;
+        }
       }
-    } else {
-      if (
-        this.answer1.trim().length == 0 ||
-        this.answer2.trim().length == 0 ||
-        this.answer3.trim().length == 0 ||
-        this.answer4.trim().length == 0 ||
-        this.answer5.trim().length == 0
+
+    }
+
+    else {
+      if (this.answer1 != null && this.answer1 != "" && this.answer1 != undefined ||
+        this.answer2 != null && this.answer2 != "" && this.answer2 != undefined ||
+        this.answer3 != null && this.answer3 != "" && this.answer3 != undefined ||
+        this.answer4 != null && this.answer4 != "" && this.answer4 != undefined ||
+        this.answer5 != null && this.answer5 != "" && this.answer5 != undefined
       ) {
-        this.trimFlag = true;
-      } else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 5){
-        this.trimFlag = true;
-      } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 5){
-        this.trimFlag = true;
-      } else if (this.postWordCount['3'] > 150 || this.postWordCount['3'] < 5){
-        this.trimFlag = true;
-      } else if (this.postWordCount['4'] > 150 || this.postWordCount['4'] < 5){
-        this.trimFlag = true;
-      } else if (this.postWordCount['5'] > 150 || this.postWordCount['5'] < 5){
-        this.trimFlag = true;
-      } else {
-        this.trimFlag = false;
+        if (
+          this.answer1.trim().length == 0 ||
+          this.answer2.trim().length == 0 ||
+          this.answer3.trim().length == 0 ||
+          this.answer4.trim().length == 0 ||
+          this.answer5.trim().length == 0
+        ) {
+          this.trimFlag = true;
+        } else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 5) {
+          this.trimFlag = true;
+        } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 5) {
+          this.trimFlag = true;
+        } else if (this.postWordCount['3'] > 150 || this.postWordCount['3'] < 5) {
+          this.trimFlag = true;
+        } else if (this.postWordCount['4'] > 150 || this.postWordCount['4'] < 5) {
+          this.trimFlag = true;
+        } else if (this.postWordCount['5'] > 150 || this.postWordCount['5'] < 5) {
+          this.trimFlag = true;
+        } else {
+          this.trimFlag = false;
+        }
       }
+
     }
   }
 
@@ -339,7 +391,7 @@ export class Module111Component implements OnInit {
             this.subFlagModule1 = 2;
             window.localStorage.setItem("subFlagModule1", "2");
             this.questionFlag = true;
-            window.localStorage.setItem("questionFlag","true");
+            window.localStorage.setItem("questionFlag", "true");
             //this.startEvent2();
             //this.nextFlag = false;
           } else if (fun == "start2") {
@@ -352,30 +404,38 @@ export class Module111Component implements OnInit {
             this.question3 = this.questionlist[2].question;
             this.question4 = this.questionlist[3].question;
             this.question5 = this.questionlist[4].question;
-            if (this.questionlist.length == 6)
-            {
+            if (this.questionlist.length == 6) {
               this.queFlag = true;
+              // this.showLimit['6']=true
               console.log(this.subFlagModule1, "subFlagModule1");
               this.question6 = this.questionlist[5].question;
-            } else
-            {
+            } else {
               this.queFlag = false;
+              // this.showLimit['6']=false;
             }
             console.log(data);
             console.log(this.question6, "this.question6");
+
           } else if (fun == "submit") {
+            // this.queFlag = false;
+            // this.zeroMsgFlag= false;
+            this.zeroMsgFlag['1'] = false;
+            this.zeroMsgFlag['2'] = false;
+            this.zeroMsgFlag['3'] = false;
+            this.zeroMsgFlag['4'] = false;
+            this.zeroMsgFlag['5'] = false;
+            this.zeroMsgFlag['6'] = false;
             this.showLimit['1'] = true;
             this.showLimit['2'] = true;
             this.showLimit['3'] = true;
             this.showLimit['4'] = true;
             this.showLimit['5'] = true;
-            this.showLimit['6'] = true;
-            this.postWordCount['1']=0;
-            this.postWordCount['2']=0;
-            this.postWordCount['3']=0;
-            this.postWordCount['4']=0;
-            this.postWordCount['5']=0;
-            this.postWordCount['6']=0;
+            this.showLimit['6'] = false;
+            this.postWordCount['1'] = 0;
+            this.postWordCount['2'] = 0;
+            this.postWordCount['3'] = 0;
+            this.postWordCount['4'] = 0;
+            this.postWordCount['5'] = 0;
             this.mainFlagModule1 = 11;
             window.localStorage.setItem("uuid", data["data"].nextuuid);
             console.log(data);
@@ -426,7 +486,13 @@ export class Module111Component implements OnInit {
 
   handleInput(e) {
     if (e.keyCode == 13) {
-       e.preventDefault(); 
-      }
+      e.preventDefault();
+    }
+  }
+
+  zeroTrue() {
+    this.showLimit['1'] = true;
+    this.zeroMsgFlag['1'] = true;
+    console.log('eqwewr', this.showLimit['1'], this.zeroMsgFlag['1'])
   }
 }
