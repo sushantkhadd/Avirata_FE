@@ -61,6 +61,7 @@
         <strong *ngIf="mySubmodule0 == 3 && mySubFlagmodule0==1">{{'Quiz.traineebaselineQue5' | translate}}</strong>
         <strong *ngIf="mySubmodule0 == 3 && mySubFlagmodule0==2">{{'Quiz.traineebaselineQue6' | translate}}</strong>
         <strong *ngIf="mySubmodule0 == 3 && mySubFlagmodule0==3">{{'Quiz.traineebaselineQue7' | translate}}</strong>
+        <strong *ngIf="mySubmodule5 == 18">{{'Quiz.traineebaselineQue7' | translate}}</strong>
     </h6>
     <!-- <hr /> -->
 
@@ -73,6 +74,8 @@
                 <h6 class="font-weight-bold">{{pager.index + 1 | numberConvertor : 'Devanagari'}}.
                     <strong><span [innerHTML]="question.name"></span></strong>
                 </h6>
+                <p *ngIf="question.description" class="ml-4">{{question.description}}</p>
+                <span *ngIf="question.queUrl" class="text-center"><img src={{question.queUrl}} class="imgOption center-block w-25"></span>
                 <div class="row options ml-3">
                     <div class="col-md-12" *ngFor="let option of question.options">
                         <div class="option">
@@ -82,15 +85,6 @@
                                 <!-- span added to align checkbox and label -->
                             </label>
                         </div>
-                    </div>
-                    <div class="col-12" *ngIf="freeText">
-                      <textarea class="form-control" [id]="questionid1" name="answer1" [(ngModel)]="answer1" rows="3"
-                        #addr="ngModel" (focus)="showLimit['1']=true" (focusout)="showLimit['1']=false"
-                        required></textarea>
-                      <div *ngIf="showLimit['1']==false && (postWordCount['1']>150 || postWordCount['1']<1)"
-                        class="offset-md-4 mt-2">
-                        <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
-                      </div>
                     </div>
                 </div>
                 <hr />

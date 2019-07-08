@@ -7,6 +7,8 @@ export class Question {
     answered: boolean;
     ans: any;
   questionType: any;
+    queUrl : any;
+    description: any;
 
     constructor(data: any) {
         data = data || {};
@@ -15,6 +17,8 @@ export class Question {
         this.name = data.question;
       this.ans = data.answer;
       this.questionType = data.question_type;
+        this.queUrl = data.question_url;
+        this.description = data.description
 
         if (this.ans == null || this.ans == "" || this.ans == undefined)
             this.answered = false;

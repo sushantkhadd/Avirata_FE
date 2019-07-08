@@ -910,8 +910,21 @@ export class FullLayoutComponent implements OnInit {
           "subFlagModule5",
           this.subFlagModule5.toString()
         );
-      } else if (source == "module 5.18") {
+      } else if (source == "module 5.18" ||
+      source == "module 5.18.1" ||
+      source == "module 5.18.2" ||
+      source == "module 5.18.3" ||
+      source == "module 5.18.4") {
         this.mainFlagModule5 = 18;
+        if (source == "module 5.18.1") {
+          this.subFlagModule5 = 1;
+        } else if (source == "module 5.18.2") {
+          this.subFlagModule5 = 2;
+        } else if (source == "module 5.18.3") {
+          this.subFlagModule5 = 3;
+        } else if (source == "module 5.18.4") {
+          this.subFlagModule5 = 4;
+        }
         window.localStorage.setItem(
           "subFlagModule5",
           this.subFlagModule5.toString()

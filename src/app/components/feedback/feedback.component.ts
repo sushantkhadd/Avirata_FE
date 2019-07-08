@@ -204,8 +204,10 @@ export class FeedbackComponent implements OnInit {
 
     this.apiCall(jsonBody, this.apiurl, "back");
 
-    this.apiCall(jsonBody1, this.apiurl, "back1");
-
+    setTimeout(() => {
+      this.apiCall(jsonBody1, this.apiurl, "back1");
+    }, 200);
+    
     console.log("jsonbody",this.activeItem1,this.ansJson)
   }
 
@@ -286,7 +288,10 @@ export class FeedbackComponent implements OnInit {
     
     this.apiCall(jsonBody, this.apiurl, "next");
 
-    this.apiCall(jsonBody1, this.apiurl, "next1");
+    setTimeout(() => {
+      this.apiCall(jsonBody1, this.apiurl, "next1");
+    }, 200);
+   
 
     console.log("jsonbody",this.activeItem1,this.ansJson)
   }
@@ -327,8 +332,10 @@ export class FeedbackComponent implements OnInit {
       console.log("finishhh",jsonBody1)
       this.apiCall(jsonBody, this.apiurl, "answer");
 
+      setTimeout(() => {
+        this.apiCall(jsonBody1, this.apiurl, "finish");
+      }, 200);
       
-      this.apiCall(jsonBody1, this.apiurl, "finish");
     }
   }
 

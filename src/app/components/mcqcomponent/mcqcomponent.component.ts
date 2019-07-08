@@ -132,7 +132,7 @@ export class McqcomponentComponent implements OnInit {
 
     } else if(this.questionType == 'mcqInBunch'){
       console.log("mcqbunchdata",this.data)
-      if(window.localStorage.getItem("mainFlagModule5")=="23"){
+      if(window.localStorage.getItem("mainFlagModule5")=="23" || window.localStorage.getItem("mainFlagModule5")=="18"){
        
         this.tasks = this.data.questionlist;
         this.bunchList = this.tasks;
@@ -528,7 +528,7 @@ export class McqcomponentComponent implements OnInit {
 
   }
   onValueChangedMcqBunch($event,id,i){
-    if(window.localStorage.getItem('mainFlagModule5') == "23"){
+    if(window.localStorage.getItem('mainFlagModule5') == "23" || window.localStorage.getItem("mainFlagModule5")=="18"){
       console.log("onvalue",$event.value,id,i)
       for(let j=0; j< this.mcqOption.length;j++){
         if($event.value == this.mcqOption[i][j].value){
@@ -777,7 +777,7 @@ export class McqcomponentComponent implements OnInit {
       // });
     }
     console.log("Select", this.selectedTasks, this.counter)
-    if(window.localStorage.getItem("mainFlagModule5")=="23"){
+    if(window.localStorage.getItem("mainFlagModule5")=="23" || window.localStorage.getItem("mainFlagModule5")=="18"){
       if(this.selectedTasks.length >= 1){
         this.submitFlag = true;
       }
