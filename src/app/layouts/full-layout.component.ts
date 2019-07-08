@@ -166,7 +166,7 @@ export class FullLayoutComponent implements OnInit {
       this.loadingBarInterceptor(event);
     });
   }
-  public toggled(open: boolean): void {}
+  public toggled(open: boolean): void { }
   public toggleDropdown($event: MouseEvent): void {
     $event.preventDefault();
     $event.stopPropagation();
@@ -228,13 +228,12 @@ export class FullLayoutComponent implements OnInit {
       this.shareableImage = canvas.toDataURL();
       console.log(canvas, this.shareableImage);
       if (this.shareableImage) {
-    this.isloaded = false;
-
-        setTimeout(() => {
         var link = document.createElement("a");
-        link.href = this.shareableImage;
-        link.download = "my-reward.png";
-        link.click();
+        this.isloaded = false;
+        setTimeout(() => {
+          link.href = this.shareableImage;
+          link.download = "my-reward.png";
+          link.click();
         }, 1000);
       }
     });
@@ -287,10 +286,8 @@ export class FullLayoutComponent implements OnInit {
           this.sharedData["isAdmin"] != null &&
           this.sharedData["isAdmin"] != "" &&
           this.sharedData["isAdmin"] != undefined
-        )
-        {
-          if (this.sharedData["isAdmin"] == true)
-          {
+        ) {
+          if (this.sharedData["isAdmin"] == true) {
             this.loaderFlag = true;
             setTimeout(() => {
               this.loaderFlag = false;
@@ -300,7 +297,7 @@ export class FullLayoutComponent implements OnInit {
       }
     });
 
-    jQuery("#sidebarCollapse").on("click", function() {
+    jQuery("#sidebarCollapse").on("click", function () {
       jQuery("#sidebar").toggleClass("active");
     });
 
@@ -361,11 +358,10 @@ export class FullLayoutComponent implements OnInit {
         localStorage.getItem("group_name") != "" &&
         localStorage.getItem("group_name") != null &&
         localStorage.getItem("group_name") != undefined
-      )
-      {
+      ) {
         this.userType = localStorage.getItem("group_name");
       }
-        // this.userType = this.LocalstoragedetailsService.userType;
+      // this.userType = this.LocalstoragedetailsService.userType;
       this.modalDisplay = true;
       this.LocalstoragedetailsService.timelineState = this.moduleStatusCheck;
       this.DashboardService.getProfilePic(this.userId).subscribe(
@@ -390,8 +386,7 @@ export class FullLayoutComponent implements OnInit {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
-    if (this.router.url == 'admin_panel')
-    {
+    if (this.router.url == 'admin_panel') {
       // this.hideMenu();
     }
   }
@@ -504,7 +499,7 @@ export class FullLayoutComponent implements OnInit {
         error => {
           this.LanguageService.handleError(error.error.message);
         } //Catch Error if server is not Found
-      );
+        );
     }
   }
 
@@ -962,8 +957,8 @@ export class FullLayoutComponent implements OnInit {
         source == "module 5.23.6" ||
         source == "module 5.23.6.1" ||
         source == "module 5.23.6.2" ||
-        source == "module 5.23.6.3" 
-        ) {
+        source == "module 5.23.6.3"
+      ) {
         this.mainFlagModule5 = 23;
         if (source == "module 5.23.1") {
           this.subFlagModule5 = 1;
@@ -2283,10 +2278,10 @@ export class FullLayoutComponent implements OnInit {
         if (source == "module 0.3" || source == "module 0.3.1") {
           this.subFlagModule0 = 1;
         }
-        else if(source == "module 0.3.2"){
+        else if (source == "module 0.3.2") {
           this.subFlagModule0 = 2;
         }
-        else if(source == "module 0.3.3"){
+        else if (source == "module 0.3.3") {
           this.subFlagModule0 = 3;
         }
       }
@@ -2405,7 +2400,7 @@ export class FullLayoutComponent implements OnInit {
         this.finishImgUrl = this.imageJson["r1"];
         this.needEfforts = false;
         this.rewardsFlag = 1;
-        jQuery(".animate-reward img").each(function(i) {
+        jQuery(".animate-reward img").each(function (i) {
           jQuery(this)
             .delay(100 * i)
             .fadeIn(1500);
@@ -2417,7 +2412,7 @@ export class FullLayoutComponent implements OnInit {
         this.finishImgUrl = this.imageJson["r2"];
         this.needEfforts = false;
         this.rewardsFlag = 2;
-        jQuery(".animate-reward img").each(function(i) {
+        jQuery(".animate-reward img").each(function (i) {
           jQuery(this)
             .delay(100 * i)
             .fadeIn(1500);
@@ -2429,7 +2424,7 @@ export class FullLayoutComponent implements OnInit {
         this.finishImgUrl = this.imageJson["r3"];
         this.needEfforts = false;
         this.rewardsFlag = 3;
-        jQuery(".animate-reward img").each(function(i) {
+        jQuery(".animate-reward img").each(function (i) {
           jQuery(this)
             .delay(100 * i)
             .fadeIn(1500);
