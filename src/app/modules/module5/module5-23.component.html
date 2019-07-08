@@ -30,10 +30,10 @@
       </div>
     </div>
   </div>
-
+ 
   <div *ngIf="startFlag && subFlagModule5 == 1">
     <div>
-      <app-new-baseline [passData]='passData'></app-new-baseline>
+      <app-feedback [passData]='passData' (sendAns)="finish1($event)"></app-feedback>
     </div>
   </div>
 

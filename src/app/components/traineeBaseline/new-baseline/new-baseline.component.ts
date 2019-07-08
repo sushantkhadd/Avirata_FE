@@ -228,7 +228,7 @@ export class NewBaselineComponent implements OnInit {
   get filteredQuestions() {
     // var mainArray1: any = []
     // var mainArray2: any = []
-
+    console.log("filterrrr",this.quiz)
     // for (let index = 0; index < this.quiz.questions.length; index++)
     // {
     //   const element = this.quiz.questions[index];
@@ -262,13 +262,34 @@ export class NewBaselineComponent implements OnInit {
       this.lastQueId = '';
       if (localStorage.getItem('mainFlagModule5') == '23')
       {
-        if (option.name != "अजिबात नाही")
-        {
-          this.freeText = false;
-        } else
-        {
-          this.freeText = true;
-        }
+         if(question.questionType <= 4){
+          if (option.name == "अजिबात नाही")
+          {
+            this.freeText = true;
+          } else
+          {
+            this.freeText = false;
+          }
+         }
+         else if(question.questionType == 5){
+          if (option.name == "पूर्णत: असमाधानी")
+          {
+            this.freeText = true;
+          } else
+          {
+            this.freeText = false;
+          }
+         }
+         else if(question.questionType >= 6){
+          if (option.name == "नाही")
+          {
+            this.freeText = true;
+          } else
+          {
+            this.freeText = false;
+          }
+         }
+        console.log("wqddddddddddd",this.quiz.questions[0].questionType,question.questionType,option.id)
       }
     //   question.options.forEach((x) => { if (x.id !== option.id) x.selected = false; });
     // this.baselineSelectedAns = option.id;

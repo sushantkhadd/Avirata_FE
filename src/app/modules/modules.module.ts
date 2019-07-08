@@ -137,6 +137,7 @@ import { CompletedForumComponent } from "../components/completed-forum/completed
 import { SortPipe } from "../shared/pipes/sort.pipe";
 import { Module02Component } from './module0/module0-2.component';
 import { Module03Component } from './module0/module0-3.component';
+import { FeedbackComponent } from '../components/feedback/feedback.component';
 
 @NgModule({
   imports: [
@@ -273,7 +274,8 @@ import { Module03Component } from './module0/module0-3.component';
     SearchPipe,
     DataFilterPipe,
     Module02Component,
-    Module03Component
+    Module03Component,
+    FeedbackComponent
   ],
   providers: [
     Module0Service,

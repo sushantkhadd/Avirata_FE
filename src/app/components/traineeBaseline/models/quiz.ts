@@ -10,8 +10,10 @@ export class Quiz {
         var data = res;
         this.config = new QuizConfig(config);
         this.questions = [];
+        console.log("quiz ts que",Question)
         res.forEach(q => {
             this.questions.push(new Question(q));
         });
+        console.log("quiz ts",res)
     }
 }

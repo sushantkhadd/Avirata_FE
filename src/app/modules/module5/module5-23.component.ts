@@ -38,9 +38,8 @@ export class Module523Component implements OnInit {
   answer;section3Mcq;selectedTasks;section6Counter;senAns={};
   sumbitButton;finishDisable;showLimit={};textanswer1;section6Flag;textanswer2;textanswer3;
   startFlag;tasks=[];counter;question;questionid;postWordCount={};trimFlag;
-  public apiEndStart;
-  apiEndSendAns;
-  apiEndFinish; passData = {};
+  public apiUrl;
+ passData = {};
   public inst =
     "खालील विधान पूर्ण करा.";
   ngOnInit() {
@@ -71,8 +70,8 @@ export class Module523Component implements OnInit {
     if (this.mainFlagModule5 == 23)
     {
       if (this.subFlagModule5 == 1) {
-        //this.startFlag = false;
-        this.start1()
+        this.startFlag = false;
+        //this.start1()
       } else if (this.subFlagModule5 == 2) {
         this.start2()
       } else if (this.subFlagModule5 == 3) {
@@ -171,17 +170,21 @@ export class Module523Component implements OnInit {
     jsonData['event'] = "start"
     jsonData["useranswer"] = "";
 
-    this.apiEndStart = "modulefivefeedbacksec1/";
-    this.apiEndSendAns = "modulefivefeedbacksec1/";
-    this.apiEndFinish = "modulefivefeedbacksec1/";
-    // this.startJson['examtype'] = window.localStorage.getItem('uuid');
-    this.passData['start'] = this.apiEndStart;
-    this.passData['answer'] = this.apiEndSendAns;
-    this.passData['finish'] = this.apiEndFinish;
+    this.apiUrl = "modulefive_return_answer/";
+
+    this.passData['url'] = this.apiUrl;
     this.passData['jsonData'] = jsonData;
     console.log("start1")
   }
 
+  finish1(e){
+    if(e=="finish"){
+      //this.startFlag = true;
+      this.subFlagModule5=2;
+      console.log("dsffffffffffAWQEW",this.startFlag)
+      this.start2();
+    }
+  }
 
   start3() {
     var jsonBody = {}
