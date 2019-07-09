@@ -2697,9 +2697,9 @@ table,
 .badge {
   &.counter {
     position: absolute;
-    z-index: 99;
+    z-index: 999;
     right: 0;
-    top: -16%;
+    top: 0;
     font-size: 80%;
     background: none;
   }
@@ -4438,4 +4438,29 @@ mfBootstrapPaginator {
 
 .mt5{
   margin-top: -5px;
+}
+
+.videoFinishModal{
+  &.correctAnsModal{
+  .modal-content{
+    img.sun-img{
+      transform: none;
+      max-width: 23%;
+      position: absolute;
+      top: -35px;
+      left: -35px;
+      z-index: 999;
+    }
+    .modal-header{
+      background-color: #259d58;
+      h5.correctAns{
+        margin-bottom: 0px;
+        margin: 0 auto;
+      }
+    }
+    .correctfooter{
+      background-color: #e7fff1;
+    } 
+    }
+  }
 }

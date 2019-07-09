@@ -28,7 +28,7 @@ export class Module26Component implements OnInit {
   questionStatement;
   answerData = [];
   sendYesNoType;
-  description;
+  description;rightAns=[];
   ansSelectCount;
 
   public currentSource = window.localStorage.getItem("source");
@@ -74,7 +74,12 @@ export class Module26Component implements OnInit {
           this.questionStatement = data["data"].question;
 
           this.options = data["data"].statementlist;
-          // console.log('list',this.options)
+           console.log('list',this.options)
+          for(let i=0;i< this.options.length;i++){
+            if(this.options[i].rightanswer == true){
+              this.rightAns.push(this.options[i].statement)
+            }
+          }
         }
       },
       error => {

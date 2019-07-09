@@ -16,10 +16,10 @@ export class McqcomponentComponent implements OnInit {
   @Input() public passFlags;public queCount;
   @Output() public sendAns = new EventEmitter<Object>();
   @ViewChild("eventRadioGroup") eventRadioGroup: DxRadioGroupComponent;
-  public statement; tasks; priorities = []; questionType;  showAnswer; selectedAnswer; description;queDescription;
+  public statement; tasks; priorities = []; questionType;  showAnswer; selectedAnswer; description;queDescription;alreadyAns;alreadyAns1;
   public correctAns; rightFlag; submitFlag; imgUrlJson; ansTypeFlag; showCorrectAns;
   public bunchCounter;bunchList;bunchOptions;userOptions={};mcqBunchFlag = false;totalBunchCounter = 1;bunchSelectedAns=[];mcqOption:any = []; priorities1=[];priorities2=[]
-  public ansSelectCount; counter; selectedTasks = []; ans1; ans2; showAns1; showAns2; queUrl;title;
+  public ansSelectCount; counter; selectedTasks = []; ans1; ans2; showAns1; showAns2; queUrl;title;rightAnsId;rightAnsArray=[];
   public nextQueFlag; subPriorities; sendYesNoType; mysubModule3; mysubModule4; mysubModule1;
   public onlyPopUpAns; mysubModule; submitFlagMCQ; mysubModule0; mysubModule6; mysubModule7;mysubModule2;mysubModule5;totalQueCount;
   constructor(public lang: LanguageService) { }
@@ -114,7 +114,12 @@ export class McqcomponentComponent implements OnInit {
         this.priorities= []
         for(var i=0; i< this.data.statementlist.length ; i++){
           this.priorities.push(this.data.statementlist[i].statement)
+          if(this.data.statementlist[i].rightanswer==true){
+            this.showCorrectAns = this.data.statementlist[i].statement;
+            this.rightAnsId = this.data.statementlist[i].statementid;
+          }
         }
+
     } else if (this.questionType == 'mcqTextOption' && (window.localStorage.getItem('mainFlagModule2') == '3' || window.localStorage.getItem('mainFlagModule4') == '5' || window.localStorage.getItem('mainFlagModule3') == '9' || window.localStorage.getItem('mainFlagModule3') == '11' || window.localStorage.getItem('mainFlagModule3') == '5' || window.localStorage.getItem('mainFlagModule4')== '7')) {
         console.log("data",this.data.questionlist[0].question,this.data.questionlist[0].options)
         this.priorities= []
@@ -240,16 +245,18 @@ export class McqcomponentComponent implements OnInit {
         console.log("mcqbunch options",this.bunchList,this.totalBunchCounter,this.tasks.length,this.bunchSelectedAns,dummyObj,this.userOptions)
       }
      
-    } else if (window.localStorage.getItem('mainFlagModule5') == '7' || window.localStorage.getItem('mainFlagModule0') == '2') {
+    } else if (window.localStorage.getItem('mainFlagModule5') == '7' || window.localStorage.getItem('mainFlagModule0') == '2' || window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '11') {
       console.log("data",this.data)
       this.priorities= []
-      if( window.localStorage.getItem('mainFlagModule0') == '2'){
+      if( window.localStorage.getItem('mainFlagModule0') == '2' || window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '11'){
         this.bunchList = this.data.splice(0,1)  
         this.queCount = parseInt( window.localStorage.getItem("baselineCounter"))
+        this.alreadyAns = this.bunchList[0].answer
       }
       else{
         this.bunchList = this.data.questionlist.splice(0,1)    
         this.queCount = 1;
+        
       }
       // this.priorities = this.data.questionlist[0].question;
      
@@ -262,14 +269,49 @@ export class McqcomponentComponent implements OnInit {
         {
           this.priorities.push(this.bunchList[0].options[i].value)
           console.log("priorities",this.priorities)
+          if(window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '11'){
+            if(this.alreadyAns !="" && this.alreadyAns != null && this.alreadyAns!=undefined){
+              if(this.alreadyAns == this.bunchList[0].options[i].option){
+                this.alreadyAns1 = this.bunchList[0].options[i].value
+                this.submitFlag = true;
+                let rightanswer ;
+                rightanswer = this.lang.get(
+                  "aesEncryptionKey",
+                  this.bunchList[0].rightanswer)
+                  this.bunchList[0].rightanswer = rightanswer
+                  console.log("rightans",rightanswer,this.bunchList)
+                  for(let j=0; j< this.bunchList[0].options.length;j++){
+                    if(this.bunchList[0].rightanswer == this.bunchList[0].options[j].option){
+                     this.showCorrectAns = this.bunchList[0].options[j].value
+                     if(this.alreadyAns1 == this.showCorrectAns){
+                       this.rightFlag = true;
+                     }
+                     else{
+                       this.rightFlag = false;
+                     }
+                    }
+                  }
+                  this.userOptions[this.bunchList[0].questionid]=this.bunchList[0].answer
+                  console.log("userans",this.userOptions)
+            }
+          }
         }
+        }
+       
       }
-     console.log("options",this.bunchList)
+     console.log("options",this.bunchList,this.alreadyAns)
      
   } else if (this.questionType == 'checkBoxOption') {
     console.log("data",this.data)
     this.tasks = this.data.statementlist
     this.ansSelectCount = this.tasks.length + 1;
+    for(let i=0; i<this.tasks.length; i++){
+      if(this.tasks[i].rightanswer == true){
+        this.rightAnsArray.push(this.tasks[i].statement)
+        this.rightFlag=true;
+      }
+    }
+    console.log("rightans",this.rightAnsArray)
     // this.priorities= []
     // // this.priorities = this.data.questionlist[0].question;
     // this.bunchList = this.data.questionlist.splice(0,1)
@@ -379,10 +421,10 @@ export class McqcomponentComponent implements OnInit {
               }
 
              }
-        } else if (window.localStorage.getItem('mainFlagModule5') == '7' || window.localStorage.getItem('mainFlagModule0') == '2')
+        } else if (window.localStorage.getItem('mainFlagModule5') == '7' || window.localStorage.getItem('mainFlagModule0') == '2' || window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '11')
         {
           console.log("bunchList",this.bunchList)
-          if(window.localStorage.getItem('mainFlagModule0') == '2'){
+          if(window.localStorage.getItem('mainFlagModule0') == '2' || window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '11'){
             let rightanswer ;
             rightanswer = this.lang.get(
               "aesEncryptionKey",
@@ -407,7 +449,7 @@ export class McqcomponentComponent implements OnInit {
           }
 
              this.userOptions[this.bunchList[0].questionid]=optionId
-          console.log("val",$event.value,optionId,this.userOptions)
+          console.log("val",$event.value,optionId,this.userOptions,this.showCorrectAns)
 
         } else{
           for (var item1 of this.tasks) {
@@ -459,22 +501,22 @@ export class McqcomponentComponent implements OnInit {
   goNext5_3() {
     console.log("qsaDDDDDD",this.onlyPopUpAns)
     this.submitFlagMCQ = false
-    if (window.localStorage.getItem('mainFlagModule2') == '3' || window.localStorage.getItem('mainFlagModule3') == '9' || window.localStorage.getItem('mainFlagModule3') == '11' || window.localStorage.getItem('mainFlagModule3') == '5'){
+    if (window.localStorage.getItem('mainFlagModule2') == '3' || window.localStorage.getItem('mainFlagModule3') == '9' || window.localStorage.getItem('mainFlagModule3') == '11' || window.localStorage.getItem('mainFlagModule3') == '5' || window.localStorage.getItem('mainFlagModule4') == '5' || window.localStorage.getItem('mainFlagModule4') == '7'){
       this.rankModal.show()
       this.lang.toShow();
      //this.data.description = this.data.description
      console.log("data.sescr",this.data.description)
-    }else if(window.localStorage.getItem('mainFlagModule5') == '7' || window.localStorage.getItem('mainFlagModule0') == '2'){
+    }else if(window.localStorage.getItem('mainFlagModule5') == '7' || window.localStorage.getItem('mainFlagModule0') == '2' || window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '11'){
       this.rankModal.show()
       this.lang.toShow();
 
       // this.userOptions[this.bunchList[0].questionid] =
     }
     else if(this.questionType == 'checkBoxOption'){
-      if(window.localStorage.getItem('mainFlagModule5') == '11'){
-        this.instructionModal.show()
-        this.lang.toShow()
-        this.data.description = this.data.description
+      if(window.localStorage.getItem('mainFlagModule5') == '11' || window.localStorage.getItem('mainFlagModule5') == '9' || window.localStorage.getItem('mainFlagModule5') == '13'){
+        this.rankModal.show();
+        this.lang.toShow();
+        this.description = this.data.description
         console.log("data.sescr",this.data.description)
         //this.onlyPopUpAns = this.selectedTasks
       }
@@ -514,7 +556,12 @@ export class McqcomponentComponent implements OnInit {
          this.sendYesNoType = this.data.statementlist[i].statementid;
           console.log("dfdgfdgfdff" , this.sendYesNoType)
         }
-
+        if(this.rightAnsId == this.sendYesNoType){
+          this.rightFlag = true;
+        }
+        else{
+          this.rightFlag = false;
+        }
        }
     }
   }
@@ -608,7 +655,9 @@ export class McqcomponentComponent implements OnInit {
       window.scroll(0, 0)
     }
     else{
-      this.sendAns.emit(this.sendYesNoType)
+      this.rankModal.show()
+      this.lang.toShow()
+      // this.rightFlag = true;
     }
 
   }
@@ -658,7 +707,7 @@ export class McqcomponentComponent implements OnInit {
           this.eventRadioGroup.instance.option("value", '');
         }
       }
-    } else if(window.localStorage.getItem('mainFlagModule5') == '7' || window.localStorage.getItem('mainFlagModule0') == '2'){
+    } else if(window.localStorage.getItem('mainFlagModule5') == '7' || window.localStorage.getItem('mainFlagModule0') == '2' || window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '11'){
       this.rankModal.hide()
       this.lang.toHide();
       // this.queCount = this.queCount + 1;
@@ -688,31 +737,74 @@ export class McqcomponentComponent implements OnInit {
         this.queCount = 3;
       }
     }
-    else if((window.localStorage.getItem('mainFlagModule0') == '2')){
+    else if((window.localStorage.getItem('mainFlagModule0') == '2') || window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '11'){
       console.log("userOptions",this.userOptions)
       this.sendAns.emit(this.userOptions)
       this.priorities= []
         // this.priorities = this.data.questionlist[0].question;
-        this.bunchList = this.data.splice(0,1)
+        console.log("options12222222222",this.data)
+          this.bunchList = this.data.splice(0,1)
+          console.log("options11111111111",this.bunchList,this.userOptions)
+            this.alreadyAns = this.bunchList[0].answer
+          
+        
+        
         this.statement = this.bunchList[0].question;
         this.tasks = this.bunchList[0].options;
+        console.log("options",this.bunchList,this.userOptions,this.alreadyAns)
+       this.userOptions={};
+       this.queDescription="";
         for (var i = 0; i < this.tasks.length; i++)
         {
           if (this.bunchList[0].options[i].value != "")
           {
             this.priorities.push(this.bunchList[0].options[i].value)
-            console.log("priorities",this.priorities)
+            console.log("priorities",this.priorities,this.bunchList)
+            if(window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '11'){
+              if(this.alreadyAns !="" && this.alreadyAns != null && this.alreadyAns!=undefined){
+                if(this.alreadyAns == this.bunchList[0].options[i].option){
+                  this.alreadyAns1 = this.bunchList[0].options[i].value
+                  this.submitFlag = true;
+                  // let rightanswer ;
+                  // rightanswer = this.lang.get(
+                  //   "aesEncryptionKey",
+                  //   this.bunchList[0].rightanswer)
+                  //   this.bunchList[0].rightanswer = rightanswer
+                     console.log("rightans",this.alreadyAns1,this.bunchList)
+                    for(let j=0; j< this.bunchList[0].options.length;j++){
+                      if(this.bunchList[0].rightanswer == this.bunchList[0].options[j].option){
+                       this.showCorrectAns = this.bunchList[0].options[j].value
+                       if(this.alreadyAns1 == this.showCorrectAns){
+                         this.rightFlag = true;
+                       }
+                       else{
+                         this.rightFlag = false;
+                       }
+                      }
+                    }
+                    this.userOptions[this.bunchList[0].questionid]=this.bunchList[0].answer
+                    console.log("userans",this.userOptions)
+              }
+            }
+          }
           }
         }
-       console.log("options",this.bunchList,this.userOptions)
-       this.userOptions={};
-       this.queDescription="";
+       
+       
     }
       this.rankModal.hide()
       this.lang.toHide();
       this.submitFlag = false;
       this.queCount = this.queCount + 1;
       console.log("quecount1",this.queCount)
+    } else if(this.questionType == 'mcqWithTwoStatements'){
+      this.rankModal.hide()
+      this.lang.toHide();
+      this.sendAns.emit(this.sendYesNoType)
+    } else if(this.questionType == 'checkBoxOption'){
+      this.rankModal.hide()
+      this.lang.toHide();
+      this.sendAns.emit(this.selectedTasks)
     }
     else {
       console.log("this.tasks",this.tasks,this.selectedAnswer)

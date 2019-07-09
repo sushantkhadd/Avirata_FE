@@ -35,7 +35,7 @@ export class Module57Component implements OnInit {
   showAnswer;count;
   saveData;
   answer;
-  sumbitButton;
+  sumbitButton;loader;
   startFlag;
   public inst =
     "खालील विधान पूर्ण करा.";
@@ -80,6 +80,7 @@ export class Module57Component implements OnInit {
 
   saveAnswer(e) {
     if(e){
+      this.loader = true;
       console.log("ff ", e);
       this.sumbitButton = true;
       this.answer = e;
@@ -98,6 +99,7 @@ export class Module57Component implements OnInit {
 
     this.Module5Service.apiCall(jsonBody, apiUrl).subscribe(
       data => {
+        this.loader = false;
         if (
           data["status"] == true &&
           data["message"] == "submodule finish"

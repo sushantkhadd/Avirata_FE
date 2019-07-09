@@ -50,7 +50,7 @@
     </div>
 </div>
 
-<div id="quiz" *ngIf="showQuize" class="baseline-instructtion">
+<div id="quiz" *ngIf="showQuize" class="baseline-instructtion" class="position-relative">
     <h6 class="questionHead lineHeight p-2">
        <strong *ngIf="mySubmodule2 == 1">{{'Quiz.traineebaselineQue' | translate}}</strong>
        <strong *ngIf="mySubmodule2 == 7">{{'Quiz.traineebaselineQue1' | translate}}</strong>
@@ -66,7 +66,7 @@
     <!-- <hr /> -->
 
     <div *ngIf="mode=='quiz' && quiz">
-        <div *ngFor="let question of filteredQuestions;" class="position-relative">
+        <div *ngFor="let question of filteredQuestions;">
                 <div class="badge badge-info ml-3 float-right mt-3 p-2 mr-2 counter">{{'Quiz.Question' | translate}}
                   {{pager.index + 1 | numberConvertor : 'Devanagari'}} / {{pager.count | numberConvertor : 'Devanagari'}}
             </div>
