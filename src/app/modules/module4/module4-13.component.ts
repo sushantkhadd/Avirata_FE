@@ -37,16 +37,25 @@ export class Module413Component implements OnInit {
 
     }
     else if (this.mainFlagModule4 == 13) {
-      this.startEvent = false;
+      // this.startEvent = false;
       if (this.subFlagModule4 == 1 ) {
         // this.start()
+        this.startEvent = false;
       }
-      if (this.subFlagModule4 == 2) {
+      if (this.subFlagModule4 == 2 || this.subFlagModule4 == 3 || this.subFlagModule4 == 5 || this.subFlagModule4 == 6) {
+        this.startEvent = true;
+        console.log('ioooioi')
+        this.start();
         this.passData['apiUrl'] = "modulefoursingleurl/";
         this.passData['videoUrl'] = "";
         this.passData['status'] = true;  //first time call
         this.passData['currentSubmodule'] = 'Career - a process' //static msg
         this.passData['nextSubmodule'] = 'Career magic framework' //static msg
+      }
+      if (this.subFlagModule4 == 4 ) {
+        // this.start()
+        this.startEvent = false;
+        this.startPdf = false;
       }
     }
     else if (this.mainFlagModule4 > 13) {
@@ -213,7 +222,16 @@ export class Module413Component implements OnInit {
           window.localStorage.setItem('subFlagModule4', JSON.stringify(this.subFlagModule4));
           this.instructionModal.hide()
           this.LanguageService.toHide();
-          this.start();
+          // this.start();
+          if(window.localStorage.getItem("subFlagModule4")=="4")
+          {
+            this.startPdf = false;
+            this.startEvent=false
+            this.subFlagModule4 = 4;
+          }
+          else{
+            this.start();
+          }
         }
        else if (data['message'] == "submodule finish") {
         this.instructionModal.hide()

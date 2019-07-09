@@ -43,7 +43,8 @@
           <h6 *ngIf="subFlagModule2 == 6">{{'L2Module2.sm2_15_6' | translate}}</h6>
         </div>
         <div class="card-block text-center" *ngIf="subFlagModule2 == 1">
-          <img alt="" [src]="imgUrl" class="mx-auto img-fluid w-35">
+          <!-- <img alt="" [src]="imgUrl" class="mx-auto img-fluid w-35"> -->
+          <img alt="Image" *ngIf="imgUrl" [src]="imgUrl" class="mx-auto img-fluid w-35">
           <hr>
           <div class="text-center" *ngIf="mainFlagModule2 ==15">
             <button class="btn btn-primary btn-pad " appPreventDoubleClick (debounceClick)="finish()">{{'Stepper.Finish' | translate}}</button>
@@ -67,7 +68,7 @@
         
       </div>
       <div *ngIf="subFlagModule2 == 4">
-          <div class="instruction-wrap ins-block goback" *ngIf="!startPdf">
+          <div class="instruction-wrap ins-block" *ngIf="!startPdf">
               <div>
                 <div class="card">
                   <div class="card-header text-white">
@@ -81,9 +82,6 @@
                     <div class="float-right hidden-xs-down">
                       <button class="btn btn-primary" appPreventDoubleClick (debounceClick)="start();">{{'Login.Close' | translate}}</button>
                     </div>
-                    <!-- <div class="hidden-sm-up text-center">
-                              <button class="btn btn-primary" (click)="startEvent=true;start();">{{'Module2.see' | translate}}</button>
-                          </div> -->
                   </div>
                 </div>
               </div>
