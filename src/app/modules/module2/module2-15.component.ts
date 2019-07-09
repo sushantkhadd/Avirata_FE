@@ -44,7 +44,8 @@ export class Module215Component implements OnInit {
       }
       if (this.subFlagModule2 == 2 || this.subFlagModule2 == 3 || this.subFlagModule2 == 5 || this.subFlagModule2 == 6) {
         this.startEvent = true;
-        this.start();
+        console.log('eqwqwe')
+         this.start();
         this.passData['apiUrl'] = "moduletwosingleurl/";
         this.passData['videoUrl'] = "";
         this.passData['status'] = true;  //first time call

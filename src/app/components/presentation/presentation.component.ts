@@ -663,7 +663,7 @@ export class PresentationComponent implements OnInit {
                   // this.LanguageService.toHide();
                   setTimeout(() => {
                     this.ansCorrect.emit(true);
-                  }, 5000);
+                  }, 3000);
                 }
 
               }
