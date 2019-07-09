@@ -13,59 +13,124 @@ import {Module4Service} from './module4.service'
 })
 export class Module411Component implements OnInit {
 
-  public mainFlagModule4 = parseInt(
-    window.localStorage.getItem("mainFlagModule4")
-  );
-  public subFlagModule4 = parseInt(
-    window.localStorage.getItem("subFlagModule4")
-  )
-  constructor(
-    public LanguageService: LanguageService,
-    private LocalstoragedetailsService: LocalstoragedetailsService,
-    private router: Router,
-    public Module4Service: Module4Service,
-    public toastr: ToastsManager,
-    vcr: ViewContainerRef,
-    public translate: TranslateService
-  ) {
+  public mainFlagModule4 = parseInt(window.localStorage.getItem('mainFlagModule4'));
+  public subFlagModule4 = parseInt(window.localStorage.getItem('subFlagModule4'));
+  constructor(public LanguageService: LanguageService, public LocalstoragedetailsService: LocalstoragedetailsService, public Module4Service: Module4Service, public toastr: ToastsManager, vcr: ViewContainerRef, public router: Router, public translate: TranslateService) {
     this.toastr.setRootViewContainerRef(vcr);
   }
-  public startTest; passData = {}; showPart1Flag = false;
-  public passFlags = {}; data; myjsondata; dummy; deleteAdd = []; questionCount;
-  questionlist; optionArray; counter; disableIt; questionId; mainCounter;
-  dummyArray = []; jsonObject = {}; ansJsonLength;
-  public apiEndStart; apiEndSendAns; apiEndFinish;
-
+  public data; questionType; passFlags = {}; showAnswer; saveData; useranswer={}; sumbitButton; startFlag;description;answer;queId;loader;
+  public inst = "खाली दिलेली तंत्रे मानसिक स्वास्थ्य संवर्धनात मोडतात का ते लिहा "
   ngOnInit() {
-    this.questionlist = [];
-    this.dummyArray = [];
-    this.questionId = "";
-    this.disableIt = true;
-    this.startTest = false
-    this.ansJsonLength = 0;
+    this.startFlag = false;
+    this.showAnswer = true;
+    this.saveData = true;
+    this.passFlags['saveData'] = this.saveData;
+    this.passFlags['showAnswer'] = this.showAnswer;
+    this.questionType = "mcqTextOption";
+    this.passFlags['questionType'] = this.questionType;
 
     if (this.mainFlagModule4 == 11)
     {
-      this.start();
+      // this.start()
     }
-
-
   }
+
   start() {
-    var jsonData = {}
-    jsonData['submoduleid'] = window.localStorage.getItem('uuid')
-    jsonData['event'] = "start"
-    jsonData["useranswer"] = "";
+    var jsonBody = {};
+    jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
+    jsonBody['useranswer'] = "";
+    jsonBody['event'] = 'start';
+    var apiUrl = "l3module4_ans_return_mcq/";
 
-    this.showPart1Flag = true;
-    this.apiEndStart = 'l3module4_ans_return_mcq/';
-      this.apiEndSendAns = 'l3module4_ans_return_mcq/';
-      this.apiEndFinish = 'l3module4_ans_return_mcq/';
-      // this.startJson['examtype'] = window.localStorage.getItem('uuid');
-
-      this.passData['start'] = this.apiEndStart;
-      this.passData['answer'] = this.apiEndSendAns;
-      this.passData['finish'] = this.apiEndFinish;
-      this.passData['jsonData'] = jsonData;
+    this.Module4Service.apiCall(jsonBody, apiUrl)
+      .subscribe(
+        data => {
+          if (data['status'] == true)
+          {
+            // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 1.3', window.localStorage.getItem('username'), 10);
+            console.log("data ", data['data'])
+            this.data = data['data'].questionlist
+            this.startFlag = true;
+            console.log("datttaaaa",this.data)
+            var baselineCounter = 1;
+            window.localStorage.setItem("baselineCounter",JSON.stringify(baselineCounter))
+          }
+        },
+        error => {
+          this.LanguageService.handleError(error.error.message);
+        });
   }
+
+  saveAnswer(e) {
+    if(e){
+    this.loader = true;
+    console.log("ff ", e)
+    this.sumbitButton = true;
+    this.useranswer = e;
+    this.queId = Object.keys(this.useranswer)
+    this.answer = this.useranswer[this.queId]
+    console.log("dataevent",this.data)
+    if(this.data == [] || this.data.length == 0){
+      this.submit("finish")
+    }
+    else{
+      this.submit("answer");
+    }
+  }
+  }
+  submit(val) {
+
+    if(val == "answer"){
+      var jsonBody = {};
+  
+      jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
+      jsonBody["questionid"] = this.queId[0];
+      jsonBody["useranswer"] = this.answer;
+      jsonBody["event"] = "answer";
+      var apiUrl = "l3module4_ans_return_mcq/";
+      console.log("dasd ", jsonBody);
+      }
+      else if(val == "finish"){
+        var jsonBody = {};
+  
+        jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
+        jsonBody["questionid"] = this.queId[0];
+        jsonBody["useranswer"] = this.answer;
+        jsonBody["event"] = "finish";
+        var apiUrl = "l3module4_ans_return_mcq/";
+        console.log("dasdqddddddddddddd ", jsonBody);
+      }
+      this.Module4Service.apiCall(jsonBody, apiUrl).subscribe(
+        data => {
+          this.loader = false;
+          if(data["message"] == "your answer stored"){
+            console.log("data",this.data)
+          }
+         else if (
+            data["message"] == "submodule finish"
+          )
+          {
+            this.startFlag = false;
+            this.data=[];
+            window.localStorage.setItem("uuid", data["data"].nextuuid);
+            this.mainFlagModule4 = 12;
+            window.localStorage.setItem("mainFlagModule4", "12");
+            window.localStorage.setItem("subFlagModule4", "1");
+            window.localStorage.setItem('source', 'module 4.12.1');
+            var obj = {
+              "type": "submodule",
+              "route": true,
+              "current": this.translate.instant("L2Module4.subMenu4-11"),
+              "next": this.translate.instant("L2Module4Finish.subMenu4-12"),
+              "nextRoute": "/modules/module4/Module4.12"
+            };
+            this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+            this.Module4Service.setLocalStorage4(12);
+          }
+        },
+        error => {
+          this.LanguageService.handleError(error.error.message);
+        }
+      );
+  }4
 }

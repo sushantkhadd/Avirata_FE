@@ -38,7 +38,7 @@ export class Module518Component implements OnInit {
   sumbitButton;
   startFlag;
   public inst =
-    "खालील विधान पूर्ण करा.";
+    "तुमच्या मते मानसिक आरोग्य म्हणजे काय?";
   ngOnInit() {
     this.startFlag = false;
     this.showAnswer = true;

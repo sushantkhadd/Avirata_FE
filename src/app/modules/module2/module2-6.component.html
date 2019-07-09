@@ -72,22 +72,26 @@
   </div>
 </div>
 
-<div class="videoFinishModal videoFinishedModel">
+<div class="videoFinishModal videoFinishedModel correctAnsModal">
   <div bsModal #instructionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
     aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
-        <img class="img-responsive img-rotate" src="assets/img/mitra.png">
+        <img class="img-responsive sun-img" src="../../../assets/img/expressions/correct_ans.png">
         <div class="modal-header">
           <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button> -->
+            <h5 class="text-white correctAns">{{'L2common.rightanswer' | translate }}</h5>
         </div>
         <div class="modal-body">
-          <p class="px-5 text-center font-weight-normal" [innerHTML]="description"></p>
+          <div *ngFor="let item of rightAns;let i=index">
+            <span class="ml-2 font-weight-normal">{{i+1}}.{{item}}</span>
+          </div>
+          <p class="font-weight-normal" [innerHTML]="description"></p>
           <hr />
-          <div class="col-md-12 text-right">
-            <button class="btn btn-primary text-center" (click)="finish()">{{'Stepper.Next' | translate}}</button>
+          <div class="col-md-12 text-right correctfooter">
+            <button class="btn btn-success text-center" (click)="finish()">{{'Stepper.Next' | translate}}</button>
           </div>
         </div>
       </div>
