@@ -39,7 +39,7 @@ export class Module521Component implements OnInit {
   subFlagModule5;
   finishJSONBody = {}; urlArray = {}; thumb_title; flag;
   private pdfUrl = environment.pdfUrl; submitFlag;
-  pdf1; personId; userAnswer = {}; showLimit = {}; postWordCount = {};
+  pdf1; personId; userAnswer = {}; showLimit = {}; postWordCount = {}; zeroMsgFlag = {}
   public questionArray; que1; queId1; que2; queId2; que3; queId3; que4; queId4; que5; queId5; que6; queId6; que7; queId7; answer1; answer2; answer3; answer4; answer5; answer6; answer7;
   @ViewChild('assignForm') assignForm: NgForm; noHitFlag;
   public inst = "एक समुपदेशक म्हणून सातत्याने अपडेटेड राहण्यासाठी इथे एक प्रकल्प तुम्हांला करावयास देण्यात आला आहे. जो तुम्हांला वेगवेगळ्या करिअर संधी, त्यात येणारी आव्हाने, लागणारी कौशल्ये याविषयी अपडेट राहण्यासाठी नक्कीच मदतीचा ठरू शकतो."
@@ -79,6 +79,14 @@ export class Module521Component implements OnInit {
     this.answer5 = "";
     this.answer6 = "";
     this.answer7 = "";
+
+    this.zeroMsgFlag['1'] = false;
+    this.zeroMsgFlag['2'] = false;
+    this.zeroMsgFlag['3'] = false;
+    this.zeroMsgFlag['4'] = false;
+    this.zeroMsgFlag['5'] = false;
+    this.zeroMsgFlag['6'] = false;
+    this.zeroMsgFlag['7'] = false;
 
     if (this.mainFlagModule5 == 21) {
       if (this.subFlagModule5 == 1 || this.subFlagModule5 == 3) {
@@ -323,6 +331,22 @@ export class Module521Component implements OnInit {
   }
 
   next(assignForm: NgForm) {
+    this.zeroMsgFlag['1'] = true;
+    this.zeroMsgFlag['2'] = true;
+    this.zeroMsgFlag['3'] = true;
+    this.zeroMsgFlag['4'] = true;
+    this.zeroMsgFlag['5'] = true;
+    this.zeroMsgFlag['6'] = true;
+    this.zeroMsgFlag['7'] = true;
+
+    // this.showLimit['1']=true;
+    // this.showLimit['2']=true;
+    // this.showLimit['3']=true;
+    // this.showLimit['4']=true;
+    // this.showLimit['5']=true;
+    // this.showLimit['6']=true;
+    // this.showLimit['7']=true;
+
     this.noHitFlag = false;
 
     if (window.localStorage.getItem("personId") == "5") {
@@ -402,28 +426,34 @@ export class Module521Component implements OnInit {
     this.answer5 = "";
     this.answer6 = "";
     this.answer7 = "";
-    // this.showLimit['1'] = true;
-    // this.showLimit['2'] = true;
-    // this.showLimit['3'] = true;
-    // this.showLimit['5'] = true;
-    // this.showLimit['6'] = true;
-    // this.showLimit['7'] = true;
-    // this.postWordCount['1'] = 0;
-    // this.postWordCount['2'] = 0;
-    // this.postWordCount['3'] = 0;
-    // this.postWordCount['5'] = 0;
-    // this.postWordCount['6'] = 0;
-    // this.postWordCount['7'] = 0;
   }
 
   back(assignForm: NgForm) {
+    this.zeroMsgFlag['1'] = false;
+    this.zeroMsgFlag['2'] = false;
+    this.zeroMsgFlag['3'] = false;
+    this.zeroMsgFlag['4'] = false;
+    this.zeroMsgFlag['5'] = false;
+    this.zeroMsgFlag['6'] = false;
+    this.zeroMsgFlag['7'] = false;
+    
+    // if(this.noHitFlag == false){
+    //   this.showLimit['1']=true;
+    //   this.showLimit['2']=true;
+    //   this.showLimit['3']=true;
+    //   this.showLimit['4']=true;
+    //   this.showLimit['5']=true;
+    //   this.showLimit['6']=true;
+    //   this.showLimit['7']=true;
+    // }
+    
     this.noHitFlag = false;
 
     if (assignForm.dirty == false) {
       console.log("No hit")
       this.personId = parseInt(window.localStorage.getItem("personId"))
       window.localStorage.setItem("personId", JSON.stringify(this.personId - 1))
-      this.start1(this.personId)
+      this.start1(this.personId);
     }
     else {
       console.log("hit")
@@ -446,6 +476,7 @@ export class Module521Component implements OnInit {
 
   ngDoCheck() {
     this.personId = window.localStorage.getItem("personId")
+
     if (this.answer1) {
       this.postWordCount['1'] = this.answer1.trim().split(' ').length;
     }
@@ -479,7 +510,8 @@ export class Module521Component implements OnInit {
         this.answer5.trim().length == 0 ||
         this.answer6.trim().length == 0 ||
         this.answer7.trim().length == 0) {
-        this.submitFlag = false;
+        this.submitFlag = true;
+        console.log('true')
       } else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 5) {
         this.submitFlag = true;
       } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 5) {
@@ -493,33 +525,31 @@ export class Module521Component implements OnInit {
       } else if (this.postWordCount['7'] > 150 || this.postWordCount['7'] < 5) {
         this.submitFlag = true;
       } else {
-        this.submitFlag = true;
-      }
-    }
-    else{
-      if (this.answer1 == "" || this.answer1 == null || this.answer1 == undefined) {
-        this.postWordCount['1'] = 0;
-      }
-      if (this.answer2 == "" || this.answer2 == null || this.answer2 == undefined) {
-        this.postWordCount['2'] = 0;
-      }
-      if (this.answer3 == "" || this.answer3 == null || this.answer3 == undefined) {
-        this.postWordCount['3'] = 0;
-      }
-      if (this.answer4 == "" || this.answer4 == null || this.answer4 == undefined) {
-        this.postWordCount['4'] = 0;
-      }
-      if (this.answer5 == "" || this.answer5 == null || this.answer5 == undefined) {
-        this.postWordCount['5'] = 0;
-      }
-      if (this.answer6 == "" || this.answer6 == null || this.answer6 == undefined) {
-        this.postWordCount['6'] = 0;
-      }
-      if (this.answer7 == "" || this.answer7 == null || this.answer7 == undefined) {
-        this.postWordCount['7'] = 0;
+        this.submitFlag = false;
       }
     }
 
+    if (this.answer1 == "" || this.answer1 == null || this.answer1 == undefined) {
+      this.postWordCount['1'] = 0;
+    }
+    if (this.answer2 == "" || this.answer2 == null || this.answer2 == undefined) {
+      this.postWordCount['2'] = 0;
+    }
+    if (this.answer3 == "" || this.answer3 == null || this.answer3 == undefined) {
+      this.postWordCount['3'] = 0;
+    }
+    if (this.answer4 == "" || this.answer4 == null || this.answer4 == undefined) {
+      this.postWordCount['4'] = 0;
+    }
+    if (this.answer5 == "" || this.answer5 == null || this.answer5 == undefined) {
+      this.postWordCount['5'] = 0;
+    }
+    if (this.answer6 == "" || this.answer6 == null || this.answer6 == undefined) {
+      this.postWordCount['6'] = 0;
+    }
+    if (this.answer7 == "" || this.answer7 == null || this.answer7 == undefined) {
+      this.postWordCount['7'] = 0;
+    }
 
   }
 
