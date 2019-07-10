@@ -41,7 +41,7 @@ export class Module523Component implements OnInit {
   public apiUrl;
  passData = {};
   public inst =
-    "खालील विधान पूर्ण करा.";
+    "अविरत 3 बद्दल तुमचा अभिप्राय सविस्तर नोंदवा.";
   ngOnInit() {
     this.startFlag = false;
     this.showAnswer = true;
@@ -73,14 +73,19 @@ export class Module523Component implements OnInit {
         this.startFlag = false;
         //this.start1()
       } else if (this.subFlagModule5 == 2) {
+        this.startFlag = true;
         this.start2()
       } else if (this.subFlagModule5 == 3) {
+        this.startFlag = true;
         this.start3()
       } else if (this.subFlagModule5 == 4) {
+        this.startFlag = true;
         this.start4()
       } else if (this.subFlagModule5 == 5) {
+        this.startFlag = true;
         this.start5()
       } else if (this.subFlagModule5 == 6) {
+        this.startFlag = true;
         this.start6()
         // this.startFlag= true;
       }
@@ -94,21 +99,19 @@ export class Module523Component implements OnInit {
       this.finishPar3Flag = true
     }
 
-    if (this.textanswer1) {
-      this.postWordCount['1'] = this.textanswer1.trim().split(' ').length;
-    }
-    if (this.textanswer2) {
-      this.postWordCount['2'] = this.textanswer2.trim().split(' ').length;
-    }
-    if (this.textanswer3) {
-      this.postWordCount['3'] = this.textanswer3.trim().split(' ').length;
-    }
+    // if (this.textanswer1) {
+    //   this.postWordCount['1'] = this.textanswer1.trim().split(' ').length;
+    // }
+    // if (this.textanswer2) {
+    //   this.postWordCount['2'] = this.textanswer2.trim().split(' ').length;
+    // }
+    // if (this.textanswer3) {
+    //   this.postWordCount['3'] = this.textanswer3.trim().split(' ').length;
+    // }
 
     if(this.textanswer1!= "" && this.textanswer1 !=null && this.textanswer1 != undefined){
       if (this.textanswer1.trim().length == 0)
       {
-        this.trimFlag = true;
-      } else if (this.postWordCount > 150 || this.postWordCount < 5){
         this.trimFlag = true;
       } else
       {
@@ -121,13 +124,18 @@ export class Module523Component implements OnInit {
       this.textanswer2.trim().length == 0 ||
       this.textanswer3.trim().length == 0){
         this.trimFlag = true;
-      } else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 5){
-        this.trimFlag = true;
-      } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 5){
-        this.trimFlag = true;
-      } else if (this.postWordCount['3'] > 150 || this.postWordCount['3'] < 5){
-        this.trimFlag = true;
       }
+      else
+      {
+        this.trimFlag = false;
+      }
+      //  else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 5){
+      //   this.trimFlag = true;
+      // } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 5){
+      //   this.trimFlag = true;
+      // } else if (this.postWordCount['3'] > 150 || this.postWordCount['3'] < 5){
+      //   this.trimFlag = true;
+      // }
     }
     
   }
@@ -282,6 +290,17 @@ export class Module523Component implements OnInit {
             this.questionid = data["data"]["questionlist"][0].questionid;
             this.startFlag= true;
             this.section6Flag = true;
+            if(this.questionid == "OB6xg0jN4n"){
+              this.section6Counter=1;
+            }
+            else  if(this.questionid == "YzDaqBZxp1"){
+              this.section6Counter=2;
+            }
+            else  if(this.questionid == "9K5xM5AxRk"){
+              this.section6Counter=3;
+            }
+
+            window.localStorage.setItem("section6Counter",this.section6Counter)
           }
           if(fun == "finish6"){
             this.section6Counter = this.section6Counter + 1;
@@ -326,14 +345,20 @@ export class Module523Component implements OnInit {
   onValueChanged(option) {
     this.counter=0;
     this.finishDisable = true;
-    this.answer.push(option)
+    this.answer=[];
+   
     if (option == 'a') {
       console.log("aaa")
+      this.answer.push(option)
       this.section3Mcq = false
     } else if (option == 'b') {
       console.log("bbb")
+      this.answer.push(option)
       this.section3Mcq = true
+      this.showText=false;
     }
+
+    console.log("answerarray",this.answer)
   }
 
   finish3(){
@@ -430,18 +455,18 @@ export class Module523Component implements OnInit {
     //   this.section6Counter = window.localStorage.getItem("section6Counter")
     // }
     // else{
-    if(window.localStorage.getItem("source")=="module 5.23.6.1"){
-      this.section6Counter = 1;
-    } else if(window.localStorage.getItem("source")=="module 5.23.6.2"){
-      this.section6Counter = 2;
-    } else if(window.localStorage.getItem("source")=="module 5.23.6.3"){
-      this.section6Counter = 3;
-    }
-    else{
-      this.section6Counter = 1
+    // if(window.localStorage.getItem("source")=="module 5.23.6.1"){
+    //   this.section6Counter = 1;
+    // } else if(window.localStorage.getItem("source")=="module 5.23.6.2"){
+    //   this.section6Counter = 2;
+    // } else if(window.localStorage.getItem("source")=="module 5.23.6.3"){
+    //   this.section6Counter = 3;
     // }
-  }
-    window.localStorage.setItem("section6Counter",this.section6Counter)
+  //   else{
+  //     this.section6Counter = 1
+  //   // }
+  // }
+   
   }
 
   finish6(){
