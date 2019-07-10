@@ -49,13 +49,13 @@
               <textarea class="form-control" [id]="questionid1" name="answer1" [(ngModel)]="answer1" rows="3" #addr="ngModel" (focus)="showLimit['1']=true"
                 (focusout)="showLimit['1']=false" (keypress)="handleInput($event)" required></textarea>
               <div *ngIf="showLimit['1']==false && (postWordCount['1']>150 || postWordCount['1']<1)" class="offset-md-4 mt-2">
-                <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
+                <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn1_150' | translate}}</p>
               </div>
             </div>
           </div>
-          <p *ngIf="showLimit['1']" class="text-right pt-1">
+          <p *ngIf="showLimit['1']" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} 
             <span *ngIf="postWordCount['1']!=0">
-              {{'otherMessages.wordLimit' | translate}} {{postWordCount['1'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}
+              {{postWordCount['1'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}
             </span>
             <span *ngIf="postWordCount['1']==0">{{'number.0' | translate}}/{{'number.150' | translate}}</span>
           </p>
@@ -66,12 +66,12 @@
               <textarea class="form-control" [id]="questionid2" name="answer2" [(ngModel)]="answer2" rows="3" #addr="ngModel" (focus)="showLimit['2']=true"
                 (focusout)="showLimit['2']=false" (keypress)="handleInput($event)" required></textarea>
               <div *ngIf="showLimit['2']==false && (postWordCount['2']>150 || postWordCount['2']<1)" class="offset-md-4 mt-2">
-                <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
+                <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn1_150' | translate}}</p>
               </div>
             </div>
           </div>
-          <p *ngIf="showLimit['2']" class="text-right pt-1">
-            <span *ngIf="postWordCount['2']!=0">{{'otherMessages.wordLimit' | translate}} {{postWordCount['2'] | numberConvertor : 'Devanagari' }}/{{'number.150'
+          <p *ngIf="showLimit['2']" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} 
+            <span *ngIf="postWordCount['2']!=0"> {{postWordCount['2'] | numberConvertor : 'Devanagari' }}/{{'number.150'
               | translate}}</span>
             <span *ngIf="postWordCount['2']==0">{{'number.0' | translate}}/{{'number.150' | translate}}</span>
           </p>
@@ -82,12 +82,12 @@
               <textarea class="form-control" [id]="questionid3" name="answer3" [(ngModel)]="answer3" rows="3" #addr="ngModel" (focus)="showLimit['3']=true"
                 (focusout)="showLimit['3']=false" (keypress)="handleInput($event)" required></textarea>
               <div *ngIf="showLimit['3']==false && (postWordCount['3']>150 || postWordCount['3']<1)" class="offset-md-4 mt-2">
-                <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
+                <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn1_150' | translate}}</p>
               </div>
             </div>
           </div>
-          <p *ngIf="showLimit['3']" class="text-right pt-1">
-            <span *ngIf="postWordCount['3']!=0">{{'otherMessages.wordLimit' | translate}} 
+          <p *ngIf="showLimit['3']" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} 
+            <span *ngIf="postWordCount['3']!=0"> 
                 {{postWordCount['3'] | numberConvertor : 'Devanagari'}}/{{'number.150'| translate}}</span>
             <span *ngIf="postWordCount['3']==0">{{'number.0' | translate}}/{{'number.150' | translate}}</span>  
           </p>
@@ -98,18 +98,23 @@
               <textarea class="form-control" [id]="questionid4" name="answer4" [(ngModel)]="answer4" rows="3" #addr="ngModel" (focus)="showLimit['4']=true"
                 (focusout)="showLimit['4']=false" (keypress)="handleInput($event)" required></textarea>
               <div *ngIf="showLimit['4']==false && (postWordCount['3']>150 || postWordCount['4']<1)" class="offset-md-4 mt-2">
-                <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
+                <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn1_150' | translate}}</p>
               </div>
             </div>
           </div>
-          <p *ngIf="showLimit['4']" class="text-right pt-1">
+          <p *ngIf="showLimit['4']" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} 
             <span *ngIf="postWordCount['4']!=0">
-                {{'otherMessages.wordLimit' | translate}} {{postWordCount['4'] | numberConvertor : 'Devanagari' }}/{{'number.150' | translate}}
+                {{postWordCount['4'] | numberConvertor : 'Devanagari' }}/{{'number.150' | translate}}
             </span>
             <span *ngIf="postWordCount['4']==0">{{'number.0' | translate}}/{{'number.150' | translate}}</span>
           </p>
         </form>
       </div>
+      <!-- {{postWordCount['1']}}
+      {{postWordCount['2']}}
+      {{postWordCount['3']}}
+      {{postWordCount['4']}} -->
+      
       <div class="card-footer text-center bg-white border-0">
         <button class="btn btn-primary" [disabled]="assignForm.invalid || trimFlag" appPreventDoubleClick (debounceClick)="finish();">{{'Login.Close' | translate}}</button>
       </div>

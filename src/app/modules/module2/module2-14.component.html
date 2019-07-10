@@ -19,7 +19,7 @@
               <textarea class="form-control" [id]="questionid" name="answer" [(ngModel)]="answer" rows="3" #addr="ngModel" (focus)="showLimit=true" (focusout)="showLimit=false" required></textarea>
             </div>
             <div *ngIf="showLimit==false && (postWordCount>150 || postWordCount<5)" class="offset-md-4 mt-2">
-              <p class="color_red pt-1 mb-0">{{'otherMessages.150Words' | translate}}</p>
+              <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn5_150' | translate}}</p>
           </div>
           </div>
           <p *ngIf="showLimit" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} 

@@ -32,12 +32,14 @@ export class Module33Component implements OnInit {
   subFlagModule3;
   questionid1;
   questionid2;
-  trimFlag; showLimit = {}; postWordCount = {};
+  trimFlag; showLimit = {}; postWordCount = {}; zeroMsgFlag = {};
   ngOnInit() {
     this.answer1 = "";
     this.answer2 = "";
     this.question1 = "";
     this.question2 = "";
+    this.zeroMsgFlag['1'] = false;
+    this.zeroMsgFlag['2'] = false;
 
     this.mainFlagModule3 = parseInt(
       window.localStorage.getItem("mainFlagModule3")
@@ -68,6 +70,13 @@ export class Module33Component implements OnInit {
       this.postWordCount['2'] = this.answer2.trim().split(' ').length;
     }
 
+    if (this.answer1 == "" || this.answer1 == null || this.answer1 == undefined) {
+      this.postWordCount['1'] = 0;
+    }
+    if (this.answer2 == "" || this.answer2 == null || this.answer2 == undefined) {
+      this.postWordCount['2'] = 0;
+    }
+
     if (this.answer1 != null && this.answer1 != "" && this.answer1 != undefined ||
       this.answer2 != null && this.answer2 != "" && this.answer2 != undefined) {
       if (this.answer1.trim().length == 0 || this.answer2.trim().length == 0) {
@@ -78,14 +87,6 @@ export class Module33Component implements OnInit {
         this.trimFlag = true;
       } else {
         this.trimFlag = false;
-      }
-    }
-    else {
-      if (this.answer1 == "" || this.answer1 == null || this.answer1 == undefined) {
-        this.postWordCount['1'] = 0;
-      }
-      if (this.answer2 == "" || this.answer2 == null || this.answer2 == undefined) {
-        this.postWordCount['2'] = 0;
       }
     }
   }
@@ -163,6 +164,10 @@ export class Module33Component implements OnInit {
             this.questionid1 = data["data"]["questionlist"][0].questionid;
             this.questionid2 = data["data"]["questionlist"][1].questionid;
             // this.startEvent();
+            this.showLimit['1'] = true;
+            this.showLimit['2'] = true;
+            this.zeroMsgFlag['1'] = false;
+    this.zeroMsgFlag['2'] = false;
           }
           else if (fun == "finish2") {
             this.mainFlagModule3 = 3;
@@ -179,6 +184,10 @@ export class Module33Component implements OnInit {
             this.questionid1 = data["data"]["questionlist"][0].questionid;
             this.questionid2 = data["data"]["questionlist"][1].questionid;
             // this.startEvent();
+            this.showLimit['1'] = true;
+            this.showLimit['2'] = true;
+            this.zeroMsgFlag['1'] = false;
+    this.zeroMsgFlag['2'] = false;
           }
           else if (fun == "finish3") {
             window.localStorage.setItem(
