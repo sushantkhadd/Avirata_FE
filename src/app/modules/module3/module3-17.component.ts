@@ -30,7 +30,7 @@ export class Module317Component implements OnInit {
   public trimFlag; showLimit = {}; postWordCount = {}; zeroMsgFlag = {};
 
   ngOnInit() {
-    this.displayFormFlag = false;
+    // this.displayFormFlag = false;
     this.studOneFlag = false;
     this.studThreeFlag = false;
     this.studTwoFlag = false;
@@ -130,7 +130,7 @@ export class Module317Component implements OnInit {
     if (this.answer_5 == "" || this.answer_5 == null || this.answer_5 == undefined) {
       this.postWordCount['5'] = 0;
     }
-
+    
   }
 
   startEvent() {
@@ -231,61 +231,35 @@ export class Module317Component implements OnInit {
 
   onValueChanged($event, id) {
     this.displayFormFlag = true;
-    this.selectedId = id;
+    // this.selectedId = id;
+
     console.log('selected id', this.selectedId);
-    
+   
     this.zeroMsgFlag['1'] = false;
     this.zeroMsgFlag['2'] = false;
     this.zeroMsgFlag['3'] = false;
     this.zeroMsgFlag['4'] = false;
     this.zeroMsgFlag['5'] = false;
-      
-
+       
     if (this.studDetails == 1) {
       console.log("ewrewret");
       this.studTwoFlag = true;
       this.studThreeFlag = true;
-      this.showLimit['1'] = true;
-      this.showLimit['2'] = true;
-      this.showLimit['3'] = true;
-      this.showLimit['4'] = true;
-      this.showLimit['5'] = true;
-      this.zeroMsgFlag['1'] = false;
-    this.zeroMsgFlag['2'] = false;
-    this.zeroMsgFlag['3'] = false;
-    this.zeroMsgFlag['4'] = false;
-    this.zeroMsgFlag['5'] = false;
     } else if (this.studDetails == 2) {
       this.studOneFlag = true;
       this.studThreeFlag = true;
-      this.showLimit['1'] = true;
-      this.showLimit['2'] = true;
-      this.showLimit['3'] = true;
-      this.showLimit['4'] = true;
-      this.showLimit['5'] = true;
-      this.zeroMsgFlag['1'] = false;
-    this.zeroMsgFlag['2'] = false;
-    this.zeroMsgFlag['3'] = false;
-    this.zeroMsgFlag['4'] = false;
-    this.zeroMsgFlag['5'] = false;
-      
     } else if (this.studDetails == 3) {
       this.studTwoFlag = true;
       this.studOneFlag = true;
-      this.showLimit['1'] = true;
-      this.showLimit['2'] = true;
-      this.showLimit['3'] = true;
-      this.showLimit['4'] = true;
-      this.showLimit['5'] = true;
-      this.zeroMsgFlag['1'] = false;
-      this.zeroMsgFlag['2'] = false;
-      this.zeroMsgFlag['3'] = false;
-      this.zeroMsgFlag['4'] = false;
-      this.zeroMsgFlag['5'] = false;
-    }
+    } 
   }
 
   clear() {
+   
+   
+  }
+
+  goBack() {
     this.answer_1 = "";
     this.answer_2 = "";
     this.answer_3 = "";
@@ -293,31 +267,25 @@ export class Module317Component implements OnInit {
     this.answer_5 = "";
     this.studDetails = "";
     this.selectedId = "";
-  }
-
-  goBack() {
-    this.clear();
     this.studOneFlag = false;
     this.studTwoFlag = false;
     this.studThreeFlag = false;
     this.displayFormFlag = false;
-    // this.showLimit['1'] = true;
-    //   this.showLimit['2'] = true;
-    //   this.showLimit['3'] = true;
-    //   this.showLimit['4'] = true;
-    //   this.showLimit['5'] = true;
-  
-      this.zeroMsgFlag['1'] = false;
-      this.zeroMsgFlag['2'] = false;
-      this.zeroMsgFlag['3'] = false;
-      this.zeroMsgFlag['4'] = false;
-      this.zeroMsgFlag['5'] = false;
+    
+    this.postWordCount['1'] = 0;
+    this.postWordCount['2'] = 0;
+    this.postWordCount['3'] = 0;
+    this.postWordCount['4'] = 0;
+    this.postWordCount['5'] = 0;
   }
 
   handleInput(e) {
     if (e.keyCode == 13) {
       e.preventDefault();
     }
+    // if(this.postWordCount['1']>=150){
+    //   e.preventDefault();
+    // }
   }
 
 }
