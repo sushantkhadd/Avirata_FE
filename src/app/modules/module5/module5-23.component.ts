@@ -324,6 +324,7 @@ export class Module523Component implements OnInit {
   }
 
   onValueChanged(option) {
+    this.counter=0;
     this.finishDisable = true;
     this.answer.push(option)
     if (option == 'a') {
@@ -364,24 +365,30 @@ export class Module523Component implements OnInit {
         if (i == 10) {
           this.showText = true
         }
-        console.log("answer",this.answer)
+        console.log("answer",this.answer,i)
       }
       else {
         this.counter--;
         var t = <HTMLInputElement>document.getElementById(i);
         t.checked = false;
+        console.log("t",t)
       }
 
     } else {
       this.finishPar3Flag = false
       console.log("else", this.selectedTasks.indexOf(statementId))
       this.counter--;
-      this.selectedTasks.splice(this.selectedTasks.indexOf(statementId), 1)
+      this.answer.splice(this.answer.indexOf(statementId), 1)
+      if(i==10){
+        this.showText = false;
+        this.otherText1="";
+      }
       // this.selectedTasks.forEach((item, index) => {
       //   if (index == i) {
       //     item.answer = false;
       //   }
       // });
+      console.log("i",i,this.answer)
     }
     console.log("Select", this.selectedTasks, this.counter)
   }

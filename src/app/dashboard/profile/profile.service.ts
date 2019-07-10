@@ -115,11 +115,11 @@ export class ProfileService {
       )
   }
 
-  changePassword(changePasswordJson: any, token) {
+  changePassword(changePasswordJson: any) {
     const body = JSON.parse(changePasswordJson);
     var headers = new HttpHeaders({
       "Content-Type": "application/json",
-      'Authorization': token,
+      'Authorization': window.localStorage.getItem("token")
      // "Source": "WEB"
     });
     if (/Android/i.test(navigator.userAgent)) 

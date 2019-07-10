@@ -116,24 +116,26 @@ export class Module524Component implements OnInit {
             window.localStorage.setItem("currentJson5", JSON.stringify(current5));
             this.playVideo = true;
           } else if (fun == "finish") {
-            if (data['message'] == "submodule finish")
+            if (data['message'] == "module5 finish")
             {
               this.instructionModal.hide();
               this.LanguageService.toHide();
               this.statVideoFlag = true;
-              window.localStorage.setItem('uuid', data['data'].nextuuid);
+              window.localStorage.setItem('overAllPercent', data['data'].percentage);
+              this.subFlagModule5 = 1
+              window.localStorage.setItem('subFlagModule5', this.subFlagModule5.toString())
               window.localStorage.setItem('mainFlagModule5', '25');
-              window.localStorage.setItem('subFlagModule5', '1');
-              window.localStorage.setItem('source', 'module 5.25.1');
+              this.mainFlagModule5 = 25;
+              this.Module5Service.setLocalStorage5(25);
+              window.localStorage.setItem('currentstatus', '6');
               var obj = {
-                "type": "submodule",
+                "type": "moduleFinish",
                 "route": true,
-                "current": this.translate.instant('L2Module5.subMenu5-1'),
-                "next": this.translate.instant('L2Module5.subMenu5-2'),
-                "nextRoute": "/dashboard"
+                "current": this.translate.instant('L2Module5.subMenu5-24'),
+                "next": this.translate.instant('otherMessages.7-Next'),
+                "nextRoute": "/dashboard", "finishHead": this.translate.instant('L2Module5.title')
               }
               this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
-              this.Module5Service.setLocalStorage5(24);
             }
           
             
