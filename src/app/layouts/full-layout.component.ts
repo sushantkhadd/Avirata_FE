@@ -468,8 +468,7 @@ export class FullLayoutComponent implements OnInit {
         '"}';
 
       this.ProfileService.changePassword(
-        changePasswordJson,
-        this.token
+        changePasswordJson
       ).subscribe(
         data => {
           if (data["Response"] == "Password Changed Successfully") {
