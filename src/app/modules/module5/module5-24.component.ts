@@ -34,7 +34,7 @@ export class Module524Component implements OnInit {
   }
 
   public vedioCompleteUrl;token;
-  public passData = {};
+  public passData = {};levelData;
   public playVideo = false;statVideoFlag = false;
 
   ngOnInit() {
@@ -121,13 +121,30 @@ export class Module524Component implements OnInit {
               this.instructionModal.hide();
               this.LanguageService.toHide();
               this.statVideoFlag = true;
-              window.localStorage.setItem('overAllPercent', data['data'].percentage);
+              window.localStorage.setItem('moduleFinishCount', JSON.stringify(data['data']));
+              console.log("perc",data['data'].percentage)
+              this.levelData =localStorage.getItem("levelData");
+              for (let index = 0; index < this.levelData.length; index++)
+              {
+                if (parseInt(window.localStorage.getItem("currentstatus")) == index)
+                {
+                  let current5 = [];
+                  current5 = JSON.parse(window.localStorage.getItem("levelData"));
+                  let index1 = current5.findIndex(
+                    item => item.module == index);
+                    console.log("index",index,index1)
+                  current5[index1].percent = JSON.stringify(data['data'].percentage);
+                  window.localStorage.setItem("levelData", JSON.stringify(current5));
+                  console.log(current5, "fifirty")
+                }
+              }
               this.subFlagModule5 = 1
               window.localStorage.setItem('subFlagModule5', this.subFlagModule5.toString())
               window.localStorage.setItem('mainFlagModule5', '25');
               this.mainFlagModule5 = 25;
               this.Module5Service.setLocalStorage5(25);
-              window.localStorage.setItem('currentstatus', '6');
+              // window.localStorage.setItem('currentstatus', '6');
+              
               var obj = {
                 "type": "allFinish",
                 "route": true,
@@ -136,6 +153,7 @@ export class Module524Component implements OnInit {
                 "nextRoute": "/dashboard", "finishHead": this.translate.instant('L2Module5.title')
               }
               this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+              // window.localStorage.setItem('currentstatus', '6');
             }
           
             

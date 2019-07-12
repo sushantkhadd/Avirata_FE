@@ -2334,8 +2334,8 @@ export class FullLayoutComponent implements OnInit {
       var perval5 = isNaN(percent5);
 
       this.grandPercent = (percent1 + percent2 + percent3 + percent4 + percent5) / 5;
-      // console.log('grand %', this.grandPercent)
-
+      // console.log('grand %', this.grandPercent,percent1,percent2,percent3,percent4,percent5)
+      window.localStorage.setItem("grand%",this.grandPercent.toString())
       if (this.grandPercent > 80) {
         this.cupImg = 1;
         // console.log('gold');

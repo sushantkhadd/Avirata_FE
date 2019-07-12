@@ -1415,13 +1415,13 @@
 <div bsModal #moduleStatusModal="bs-modal" class="modal successModal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
   aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-header" *ngIf="moduleCompleteStatus['type'] == 'allFinish'">
+    <!-- <div class="modal-header" *ngIf="moduleCompleteStatus['type'] == 'allFinish'">
       <span>
         <button type="button" class="close" (click)="moduleComplete($event)" aria-label="Close" id="btnCloseModal">
           <span aria-hidden="true">×</span>
         </button>
       </span>
-    </div>
+    </div> -->
     <div class="modal-content">
       <div class="modal-body pb-0">
         <div id="capture">
@@ -1452,12 +1452,12 @@
           <div class="row mt-2 justify-content-center">
             <div id="main">
               <h5 class="success-title">
-                <span *ngIf="moduleCompleteStatus['type'] == 'moduleFinish'">
+                <span *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' || moduleCompleteStatus['type'] == 'allFinish'">
                   {{'layout.module' | translate}} {{moduleCompleteStatus['finishHead']}}
                 </span>
-                <span *ngIf="moduleCompleteStatus['type'] == 'allFinish'">
+                <!-- <span *ngIf="moduleCompleteStatus['type'] == 'allFinish'">
                   {{'layout.course' | translate}}
-                </span>
+                </span> -->
               </h5>
             </div>
           </div>
@@ -1468,19 +1468,19 @@
             <h5 id="demo1" class="success-line" *ngIf="moduleCompleteStatus['type'] == 'allFinish' && !needEfforts">
               {{'layout.congrats' | translate}}
             </h5> -->
-            <div *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' && !needEfforts" class="">
+            <div *ngIf="(moduleCompleteStatus['type'] == 'moduleFinish' || moduleCompleteStatus['type'] == 'allFinish') && !needEfforts" class="">
               <div *ngIf="rewardsFlag == 1">
-                <h5 id="demo1" class="success-line font-weight-normal" *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' && !needEfforts">
+                <h5 id="demo1" class="success-line font-weight-normal" *ngIf="(moduleCompleteStatus['type'] == 'moduleFinish' || moduleCompleteStatus['type'] == 'allFinish') && !needEfforts">
                   <span [innerHTML]="'layout.goldMedalMsg' | translate"></span>
                 </h5>
               </div>
               <div *ngIf="rewardsFlag == 2">
-                  <h5 id="demo1" class="success-line font-weight-normal" *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' && !needEfforts">
+                  <h5 id="demo1" class="success-line font-weight-normal" *ngIf="(moduleCompleteStatus['type'] == 'moduleFinish' || moduleCompleteStatus['type'] == 'allFinish') && !needEfforts">
                     <span [innerHTML]="'layout.silverMedalMsg' | translate"></span>
                   </h5>
                 </div>
                 <div *ngIf="rewardsFlag == 3">
-                    <h5 id="demo1" class="success-line font-weight-normal" *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' && !needEfforts">
+                    <h5 id="demo1" class="success-line font-weight-normal" *ngIf="(moduleCompleteStatus['type'] == 'moduleFinish' || moduleCompleteStatus['type'] == 'allFinish') && !needEfforts">
                       <span [innerHTML]="'layout.bronzeMedalMsg' | translate"></span>
                     </h5>
                   </div>
@@ -1501,7 +1501,7 @@
           }
           ">
             <!-- <img *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' && !needEfforts" class="img-responsive img-goldcup" [src]="finishImgUrl"> -->
-            <div *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' && !needEfforts" class="">
+            <div *ngIf="(moduleCompleteStatus['type'] == 'moduleFinish' || moduleCompleteStatus['type'] == 'allFinish') && !needEfforts" class="">
               <div *ngIf="rewardsFlag == 1">
                 <img [src]="animatedImageJson['a1']" alt="" class="img-fluid">
                 <!-- <img [src]="animatedImageJson['a2']" alt="" class="img2">
@@ -1518,10 +1518,10 @@
                 <img [src]="animatedImageJson['c3']" alt="" class="img3 mt-5 pt-3"> -->
               </div>
             </div>
-            <span *ngIf="needEfforts && moduleCompleteStatus['type'] == 'moduleFinish'">
+            <span *ngIf="needEfforts && (moduleCompleteStatus['type'] == 'moduleFinish')">
               {{'layout.needEfforts' | translate}}
             </span>
-            <div *ngIf="moduleCompleteStatus['type'] == 'allFinish'">
+            <!-- <div *ngIf="moduleCompleteStatus['type'] == 'allFinish'">
               <div *ngIf="cupImg == 1">
                 <img class="img-responsive img-goldcup" src="../../assets/img/rewards/single-stars/gold_cup.png">
               </div>
@@ -1531,7 +1531,7 @@
               <div *ngIf="cupImg == 3">
                 <img class="img-responsive img-goldcup" src="../../assets/img/rewards/single-stars/bronze_cup.png">
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -1585,13 +1585,13 @@
 <div bsModal #moduleStatusCupModal="bs-modal" class="modal successModal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
   aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-header">
+    <!-- <div class="modal-header"> -->
       <!-- <span>
         <button type="button" class="close" aria-label="Close" id="btnCloseModal">
           <span aria-hidden="true">×</span>
         </button>
       </span> -->
-    </div>
+    <!-- </div> -->
     <div class="modal-content">
       <div class="modal-body pb-0">
         <div>
