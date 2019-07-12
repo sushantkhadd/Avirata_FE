@@ -277,11 +277,11 @@
                 <h5 class="text-white mb-1" *ngIf="rightFlag==true">{{'L2common.rightanswer' | translate }}</h5>
                 <h5 class="text-white mb-1" *ngIf="rightFlag==false">{{'L2common.wronganswer' | translate }}</h5>
             </div>
-            <div class="modal-body" *ngIf="questionType != 'checkBoxOption'" [class.d-none]="(mysubModule4==5 || mysubModule4==7 || mysubModule5==7 ||mysubModule3==7|| mysubModule4==11 || mysubModule2==9 || mysubModule2==11) && rightFlag">
+            <div class="modal-body" *ngIf="questionType != 'checkBoxOption'" [class.d-none]="(mysubModule4==5 || mysubModule4==7 || mysubModule5==7 ||mysubModule3==7|| mysubModule4==11 || mysubModule2==9 || mysubModule2==11 || mysubModule0==2) && rightFlag">
                 <span *ngIf="mysubModule4 != 9 && mysubModule4 != 13">
-                <p *ngIf="rightFlag==false && (mysubModule0!=2)"><b>{{'subModule1_9.correctAns' | translate }} :</b></p>
-                <p *ngIf="rightFlag==false && (mysubModule0!=2)">{{showCorrectAns}}</p>
-                <p *ngIf="mysubModule0==2"><b>{{'subModule1_9.correctAns' | translate }} :</b> {{showCorrectAns}}</p>
+                <p *ngIf="rightFlag==false"><b>{{'subModule1_9.correctAns' | translate }} :</b></p>
+                <p *ngIf="rightFlag==false">{{showCorrectAns}}</p>
+                <!-- <p *ngIf="mysubModule0==2"><b>{{'subModule1_9.correctAns' | translate }} :</b> {{showCorrectAns}}</p> -->
                 </span>
                 <p *ngIf="description"><b>{{'newTranslate.description' | translate }}</b></p>
                 <p *ngIf="description">

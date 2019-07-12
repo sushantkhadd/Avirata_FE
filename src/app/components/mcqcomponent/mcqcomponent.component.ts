@@ -16,7 +16,7 @@ export class McqcomponentComponent implements OnInit {
   @Input() public passFlags;public queCount;
   @Output() public sendAns = new EventEmitter<Object>();
   @ViewChild("eventRadioGroup") eventRadioGroup: DxRadioGroupComponent;
-  public statement; tasks; priorities = []; questionType;  showAnswer; selectedAnswer; description;queDescription;alreadyAns;alreadyAns1;
+  public statement; tasks; priorities = []; questionType;  showAnswer; selectedAnswer; description;queDescription;alreadyAns;alreadyAns1;mcqTextOption=[]
   public correctAns; rightFlag; submitFlag; imgUrlJson; ansTypeFlag; showCorrectAns;
   public bunchCounter;bunchList;bunchOptions;userOptions={};mcqBunchFlag = false;totalBunchCounter = 1;bunchSelectedAns=[];mcqOption:any = []; priorities1=[];priorities2=[]
   public ansSelectCount; counter; selectedTasks = []; ans1; ans2; showAns1; showAns2; queUrl;title;rightAnsId;rightAnsArray=[];
@@ -124,7 +124,13 @@ export class McqcomponentComponent implements OnInit {
         console.log("data",this.data.questionlist[0].question,this.data.questionlist[0].options)
         this.priorities= []
        // this.priorities = this.data.questionlist[0].question;
-        this.tasks = this.data.questionlist[0].options;
+       for(let i=0; i< this.data.questionlist[0].options.length; i++){
+         if(this.data.questionlist[0].options[i].value != "" && this.data.questionlist[0].options[i].value != null && this.data.questionlist[0].options[i].value != undefined){
+           this.mcqTextOption.push(this.data.questionlist[0].options[i])
+         }
+       }
+       console.log("this.taskssss",this.mcqTextOption)
+       this.tasks = this.data.questionlist[0].options;
         this.statement = this.data.questionlist[0].question;
       for (var i = 0; i < this.tasks.length; i++)
       {
@@ -252,6 +258,12 @@ export class McqcomponentComponent implements OnInit {
         this.bunchList = this.data.splice(0,1)  
         this.queCount = parseInt( window.localStorage.getItem("baselineCounter"))
         this.alreadyAns = this.bunchList[0].answer
+        for(let i=0; i< this.bunchList[0].options.length; i++){
+          if(this.bunchList[0].options[i].value !="" && this.bunchList[0].options[i].value !=null && this.bunchList[0].options[i].value !=undefined){
+            this.mcqTextOption.push(this.bunchList[0].options[i])
+          }
+        }
+        console.log("mcqtextoptionarr",this.mcqTextOption)
       }
       else{
         this.bunchList = this.data.questionlist.splice(0,1)    
@@ -274,24 +286,26 @@ export class McqcomponentComponent implements OnInit {
               if(this.alreadyAns == this.bunchList[0].options[i].option){
                 this.alreadyAns1 = this.bunchList[0].options[i].value
                 this.submitFlag = true;
-                let rightanswer ;
-                rightanswer = this.lang.get(
-                  "aesEncryptionKey",
-                  this.bunchList[0].rightanswer)
-                  this.bunchList[0].rightanswer = rightanswer
-                  console.log("rightans",rightanswer,this.bunchList)
-                  for(let j=0; j< this.bunchList[0].options.length;j++){
-                    if(this.bunchList[0].rightanswer == this.bunchList[0].options[j].option){
-                     this.showCorrectAns = this.bunchList[0].options[j].value
-                     if(this.alreadyAns1 == this.showCorrectAns){
-                       this.rightFlag = true;
-                     }
-                     else{
-                       this.rightFlag = false;
-                     }
-                    }
-                  }
-                  this.userOptions[this.bunchList[0].questionid]=this.bunchList[0].answer
+                
+                // let rightanswer ;
+                // rightanswer = this.lang.get(
+                //   "aesEncryptionKey",
+                //   this.bunchList[0].rightanswer)
+                //   this.bunchList[0].rightanswer = rightanswer
+                //   console.log("rightans",rightanswer,this.bunchList)
+                //   for(let j=0; j< this.bunchList[0].options.length;j++){
+                //     if(this.bunchList[0].rightanswer == this.bunchList[0].options[j].option){
+                //      this.showCorrectAns = this.bunchList[0].options[j].value
+                //      if(this.alreadyAns1 == this.showCorrectAns){
+                //        this.rightFlag = true;
+                //      }
+                //      else{
+                //        this.rightFlag = false;
+                //      }
+                //     }
+                //   }
+                  this.userOptions[this.bunchList[0].questionid]=this.bunchList[0].answer;
+                  this.onlyPopUpAns = this.bunchList[0].answer;
                   console.log("userans",this.userOptions)
             }
           }
@@ -389,24 +403,45 @@ export class McqcomponentComponent implements OnInit {
     ) {
       if (this.showAnswer == true) {
         if (this.questionType == 'mcqTextOption' && (window.localStorage.getItem('mainFlagModule2') == '3' || window.localStorage.getItem('mainFlagModule4') == '5' || window.localStorage.getItem('mainFlagModule3') == '9' || window.localStorage.getItem('mainFlagModule3') == '11' || window.localStorage.getItem('mainFlagModule3') == '5' || window.localStorage.getItem('mainFlagModule4')== '7')){
-          for(var i=0; i< this.data.questionlist[0].options.length ; i++){
+          for(let i=0; i< this.data.questionlist[0].options.length ; i++){
             // console.log("optionsadddddd",$event.value,this.data.questionlist[0].options)
-
+              if(this.data.questionlist[0].options[i].value !="" && this.data.questionlist[0].options[i].value !=null){
+                console.log("iiiiiiii",i)
               if($event.value == this.data.questionlist[0].options[i].value){
                this.onlyPopUpAns = this.data.questionlist[0].options[i].option;
                 console.log("dfdgfdgfdff" , this.onlyPopUpAns)
               }
+            }
               this.description = this.data.description;
-              if(this.data.questionlist[0].options[i].value !="" && this.data.questionlist[0].options[i].value !=null){
-                if(this.data.questionlist[0].rightanswer==this.onlyPopUpAns){
-                  this.rightFlag = true
+              // if(this.data.questionlist[0].options[i].value !="" && this.data.questionlist[0].options[i].value !=null){
+              //   if(this.onlyPopUpAns==this.data.questionlist[0].rightanswer){
+              //     this.rightFlag = true
+              //   }
+              //   else{
+                  
+              //     if(this.data.questionlist[0].rightanswer == this.data.questionlist[0].options[i].option){
+              //       this.showCorrectAns =this.data.questionlist[0].options[i].value;
+              //       console.log("correctans" , this.showCorrectAns)
+              //     }
+              //     this.rightFlag=false
+              //     console.log("correctans" ,this.data.questionlist[0].rightanswer,this.data.questionlist[0].options[i].option)
+              //   }
+              // }
+           
+             }
+
+             for(let j=0;j<this.mcqTextOption.length;j++){
+              if(this.onlyPopUpAns==this.data.questionlist[0].rightanswer){
+                this.rightFlag = true
+                console.log("rightflag")
+              }
+              else{ 
+                if(this.data.questionlist[0].rightanswer == this.mcqTextOption[j].option){
+                  this.showCorrectAns =this.mcqTextOption[j].value;
+                  // console.log("correctans" , this.showCorrectAns)
                 }
-                else{
-                  if(this.data.questionlist[0].rightanswer == this.data.questionlist[0].options[i].option){
-                    this.rightFlag=false
-                    this.showCorrectAns =this.data.questionlist[0].options[i].value;
-                  }
-                }
+                this.rightFlag=false
+                // console.log("correctans" ,this.data.questionlist[0].rightanswer,this.mcqTextOption[j].option)
               }
              }
              
@@ -421,17 +456,9 @@ export class McqcomponentComponent implements OnInit {
               }
 
              }
-        } else if (window.localStorage.getItem('mainFlagModule5') == '7' || window.localStorage.getItem('mainFlagModule0') == '2' || window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '11')
+        } else if (window.localStorage.getItem('mainFlagModule5') == '7')
         {
           console.log("bunchList",this.bunchList)
-          if(window.localStorage.getItem('mainFlagModule0') == '2' || window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '11'){
-            let rightanswer ;
-            rightanswer = this.lang.get(
-              "aesEncryptionKey",
-              this.bunchList[0].rightanswer)
-              this.bunchList[0].rightanswer = rightanswer
-              console.log("rightans",rightanswer,this.bunchList)
-          }
 
           for(let j=0; j< this.bunchList[0].options.length;j++){
             if($event.value == this.bunchList[0].options[j].value){
@@ -449,6 +476,52 @@ export class McqcomponentComponent implements OnInit {
           }
 
              this.userOptions[this.bunchList[0].questionid]=optionId
+          console.log("val",$event.value,optionId,this.userOptions,this.showCorrectAns)
+
+        }  else if (window.localStorage.getItem('mainFlagModule0') == '2' || window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '11')
+        {
+          console.log("bunchList",this.bunchList,$event.value)
+        
+            // let rightanswer ;
+            // rightanswer = this.lang.get(
+            //   "aesEncryptionKey",
+            //   this.bunchList[0].rightanswer)
+            //   console.log("encryptans",rightanswer)
+            //   this.bunchList[0].rightanswer = rightanswer
+            //   console.log("rightans",rightanswer,this.bunchList)
+          
+
+          for(let j=0; j< this.bunchList[0].options.length;j++){
+            if($event.value == this.bunchList[0].options[j].value){
+              this.onlyPopUpAns = this.bunchList[0].options[j].option
+            }
+            // if(this.bunchList[0].rightanswer == this.bunchList[0].options[j].option){
+            //  this.showCorrectAns = this.bunchList[0].options[j].value
+            //  if($event.value == this.showCorrectAns){
+            //    this.rightFlag = true;
+            //  }
+            //  else{
+            //    this.rightFlag = false;
+            //  }
+            // }
+          }
+
+          // for(let i=0;i<this.mcqTextOption.length;i++){
+          //   console.log("optionId",this.onlyPopUpAns)
+          //   if(optionId==this.bunchList[0].rightanswer){
+          //     this.rightFlag = true
+          //     console.log("rightflag")
+          //   }
+          //   else{ 
+          //     if(this.bunchList[0].rightanswer == this.mcqTextOption[i].option){
+          //       this.showCorrectAns =this.mcqTextOption[i].value;
+          //       console.log("correctans" , this.showCorrectAns)
+          //     }
+          //     this.rightFlag=false
+          //     console.log("correctans" ,this.bunchList[0].rightanswer,this.mcqTextOption[i].option,this.showCorrectAns)
+          //   }
+          //  }
+             this.userOptions[this.bunchList[0].questionid]=this.onlyPopUpAns
           console.log("val",$event.value,optionId,this.userOptions,this.showCorrectAns)
 
         } else{
@@ -506,9 +579,41 @@ export class McqcomponentComponent implements OnInit {
       this.lang.toShow();
      //this.data.description = this.data.description
      console.log("data.sescr",this.data.description)
-    }else if(window.localStorage.getItem('mainFlagModule5') == '7' || window.localStorage.getItem('mainFlagModule0') == '2' || window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '11'){
+    }else if(window.localStorage.getItem('mainFlagModule5') == '7'){
       this.rankModal.show()
       this.lang.toShow();
+
+      // this.userOptions[this.bunchList[0].questionid] =
+    }else if(window.localStorage.getItem('mainFlagModule0') == '2' || window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '11'){
+      console.log("rightans",this.bunchList[0].rightanswer,this.bunchList,this.mcqTextOption)
+      let rightanswer ;
+      rightanswer = this.lang.get(
+        "aesEncryptionKey",
+        this.bunchList[0].rightanswer)
+        console.log("encryptans",rightanswer)
+        this.bunchList[0].rightanswer = rightanswer
+        console.log("rightans",rightanswer,this.bunchList)
+
+        for(let i=0;i<this.mcqTextOption.length;i++){
+          console.log("optionId",this.onlyPopUpAns)
+          if(this.onlyPopUpAns==this.bunchList[0].rightanswer){
+            this.rightFlag = true
+            console.log("rightflag")
+          }
+          else{ 
+            if(this.bunchList[0].rightanswer == this.mcqTextOption[i].option){
+              this.showCorrectAns =this.mcqTextOption[i].value;
+              console.log("correctans" , this.showCorrectAns)
+            }
+            this.rightFlag=false
+            console.log("correctans" ,this.bunchList[0].rightanswer,this.mcqTextOption[i].option,this.showCorrectAns)
+          }
+         }
+         setTimeout(() => {
+          this.rankModal.show()
+          this.lang.toShow();
+         }, 200);
+     
 
       // this.userOptions[this.bunchList[0].questionid] =
     }
@@ -743,13 +848,18 @@ export class McqcomponentComponent implements OnInit {
       console.log("userOptions",this.userOptions)
       this.sendAns.emit(this.userOptions)
       this.priorities= []
+      this.mcqTextOption=[]
         // this.priorities = this.data.questionlist[0].question;
         console.log("options12222222222",this.data)
           this.bunchList = this.data.splice(0,1)
           console.log("options11111111111",this.bunchList,this.userOptions)
             this.alreadyAns = this.bunchList[0].answer
           
-        
+            for(let i=0; i< this.bunchList[0].options.length; i++){
+              if(this.bunchList[0].options[i].value !="" && this.bunchList[0].options[i].value !=null && this.bunchList[0].options[i].value !=undefined){
+                this.mcqTextOption.push(this.bunchList[0].options[i])
+              }
+            }
         
         this.statement = this.bunchList[0].question;
         this.tasks = this.bunchList[0].options;

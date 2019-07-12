@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="startTest">
     <!-- <app-new-baseline [passData]='passFlags' (exam2finish)="sendAnswer($event)"></app-new-baseline> -->
     <form #mcqForm="ngForm">
       <div class="card">
@@ -47,9 +47,9 @@
       </div>
       
       <div class="card-footer text-center">
-        <button class="btn btn-primary mr-3" [disabled]="onlyCnt == 1 || submitFlag || mcqForm.invalid" appPreventDoubleClick (debounceClick)="previous()">Previous</button>
-        <button class="btn btn-primary" [disabled]="submitFlag || mcqForm.invalid" *ngIf="counter < 7" appPreventDoubleClick (debounceClick)="next();">Next</button>
-        <button class="btn btn-success" [disabled]="submitFlag || mcqForm.invalid" *ngIf="counter === 7" appPreventDoubleClick (debounceClick)="finish2()">Finish</button>
+        <button class="btn btn-primary mr-3" [disabled]="onlyCnt==1 || submitFlag || mcqForm.invalid" appPreventDoubleClick (debounceClick)="previous()">{{'Quiz.back' | translate}}</button>
+        <button class="btn btn-primary" [disabled]="submitFlag || mcqForm.invalid" *ngIf="counter < 7" appPreventDoubleClick (debounceClick)="next();">{{'Quiz.next' | translate}}</button>
+        <button class="btn btn-success" [disabled]="submitFlag || mcqForm.invalid" *ngIf="counter === 7" appPreventDoubleClick (debounceClick)="finish2()">{{'Quiz.finish' | translate}}</button>
       </div>
     </div>  
   </form> 

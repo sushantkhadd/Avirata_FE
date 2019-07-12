@@ -73,20 +73,20 @@ export class Module523Component implements OnInit {
         this.startFlag = false;
         //this.start1()
       } else if (this.subFlagModule5 == 2) {
-        this.startFlag = true;
-        this.start2()
+        this.startFlag = false;
+        // this.start2()
       } else if (this.subFlagModule5 == 3) {
-        this.startFlag = true;
-        this.start3()
+        this.startFlag = false;
+        // this.start3()
       } else if (this.subFlagModule5 == 4) {
-        this.startFlag = true;
-        this.start4()
+        this.startFlag = false;
+        // this.start4()
       } else if (this.subFlagModule5 == 5) {
-        this.startFlag = true;
-        this.start5()
+        this.startFlag = false;
+        // this.start5()
       } else if (this.subFlagModule5 == 6) {
-        this.startFlag = true;
-        this.start6()
+        this.startFlag = false;
+        // this.start6()
         // this.startFlag= true;
       }
     }
@@ -351,11 +351,13 @@ export class Module523Component implements OnInit {
       console.log("aaa")
       this.answer.push(option)
       this.section3Mcq = false
+      this.otherText1="";
     } else if (option == 'b') {
       console.log("bbb")
       this.answer.push(option)
       this.section3Mcq = true
       this.showText=false;
+      this.otherText1="";
     }
 
     console.log("answerarray",this.answer)

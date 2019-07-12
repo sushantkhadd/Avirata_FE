@@ -716,6 +716,7 @@ export class NewBaselineComponent implements OnInit {
               this.sendAns.emit("finish1")
             }
             else if(window.localStorage.getItem('subFlagModule0') == '3'){
+              window.localStorage.setItem('mainFlagModule0', '4');
               window.localStorage.setItem('uuid', data['data'].nextuuid)
               window.localStorage.setItem("currentstatus", "1");
               window.localStorage.setItem('mainFlagModule1', '1');

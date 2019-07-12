@@ -52,6 +52,7 @@ export class FeedbackComponent implements OnInit {
     this.startJson = this.passData.jsonData;
     this.apiurl = this.passData.url;
     console.log("EQRERSDDA",this.apiurl,this.startJson)
+    this.startTest=false;
     this.apiCall(this.startJson, this.apiurl, 'start');
   }
 
@@ -298,12 +299,7 @@ export class FeedbackComponent implements OnInit {
     var jsonBody = {}
     this.jsonBody1 = {}
     this.userAnswer["answer"]=this.textanswer1.trim();
-    if (Object.keys(this.ansJson).length != 8)
-    {
-      this.toastr.error("You must give all answers");
-      console.log("no hit", Object.keys(this.ansJson).length);
-    } else
-    {
+    
       if(this.queArray1[7].answer != ""){
         jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
         jsonBody["event"] = "answer";
@@ -314,7 +310,7 @@ export class FeedbackComponent implements OnInit {
         this.jsonBody1["event"] = "finish";
         this.jsonBody1["useranswer"] = this.queArray2[7].answer;
         this.jsonBody1["questionid"] = this.queArray2[7].questionid;
-      
+        console.log("finishhh111111111",this.jsonBody1)
       }
      else{
       jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
@@ -322,6 +318,11 @@ export class FeedbackComponent implements OnInit {
       jsonBody["useranswer"] = this.jsonObject["useranswer"];
       jsonBody["questionid"] = this.jsonObject["questionid"];
 
+      this.jsonBody1['submoduleid'] = window.localStorage.getItem('uuid')
+      this.jsonBody1["event"] = "finish";
+      this.jsonBody1["useranswer"] =  this.userAnswer["answer"];
+      this.jsonBody1["questionid"] = this.activeItem1.questionid;
+      console.log("finishhh22222222222222",this.jsonBody1)
      }
       console.log("finishhh",this.jsonBody1)
       this.apiCall(jsonBody, this.apiurl, "answer");
@@ -330,7 +331,7 @@ export class FeedbackComponent implements OnInit {
       //   this.apiCall(jsonBody1, this.apiurl, "finish");
       // }, 200);
       
-    }
+    
   }
 
   apiCall(jsonBody, apiUrl, fun) {
@@ -342,7 +343,7 @@ export class FeedbackComponent implements OnInit {
             console.log("queslist",this.questionlist)
                this.counter = 1;
                this.questionCount = 1;
-               this.onlyCnt = 1
+              
               for(let i=0;i< this.questionlist.length;i++)
               {
                 var str = this.questionlist[i].question_type
@@ -365,13 +366,13 @@ export class FeedbackComponent implements OnInit {
                 console.log("statement",this.activeItem,this.optionArray)
                 console.log("cnttttttttttttttt",this.counter)
               if(this.activeItem.answer !=""){
+                this.submitFlag = false;
                 for(let i=0; i< this.optionArray.length ; i++){
                   if(this.activeItem.answer == this.optionArray[i].option){
                     this.type1Ans = this.optionArray[i].value
                     console.log("ghgqfgdh")
                     this.jsonObject["useranswer"] = this.activeItem.answer;
                     this.jsonObject["questionid"] = this.activeItem.questionid;
-                    this.submitFlag = false;
                   }
                 }
                 if(this.activeItem.question_type <=4 && this.activeItem.answer == "c"){
@@ -391,6 +392,8 @@ export class FeedbackComponent implements OnInit {
                   this.textanswer1="";
                 }
               }
+              this.onlyCnt = 1
+              this.startTest=true;
           } else if(fun == "next"){
             // var jsonBody1={}
             // jsonBody1['submoduleid'] = window.localStorage.getItem('uuid')
@@ -411,6 +414,12 @@ export class FeedbackComponent implements OnInit {
             this.questionCount  = this.questionCount + 1;
             //this.freeTextFlag = false;
             //this.textanswer1 ="";
+            if(this.activeItem.answer !=""){
+              this.submitFlag = false;
+            }
+            else{
+              this.submitFlag = true;
+            }
             this.optionArray=[];
             this.priorities=[];
             //this.eventRadioGroup.instance.option("value", '');
@@ -427,7 +436,7 @@ export class FeedbackComponent implements OnInit {
             // jsonBody1["event"] = "finish";
             // jsonBody1["useranswer"] = this.userAnswer["answer"];
             // jsonBody1["questionid"] = this.activeItem1.questionid;
-           
+           console.log("finishans",this.jsonBody1)
             this.apiCall(this.jsonBody1, this.apiurl, "finish");
           
           } else if(fun == "back"){
@@ -446,6 +455,12 @@ export class FeedbackComponent implements OnInit {
             this.questionCount  = this.questionCount - 1;
             //this.freeTextFlag = false;
             //this.textanswer1 ="";
+            if(this.activeItem.answer !=""){
+              this.submitFlag = false;
+            }
+            else{
+              this.submitFlag = true;
+            }
             this.optionArray=[];
             this.priorities=[];
             //this.eventRadioGroup.instance.option("value", '');
