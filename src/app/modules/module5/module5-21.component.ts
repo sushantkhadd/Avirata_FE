@@ -477,15 +477,15 @@ export class Module521Component implements OnInit {
   ngDoCheck() {
     this.personId = window.localStorage.getItem("personId")
 
-    if (this.answer1) {
-      this.postWordCount['1'] = this.answer1.trim().split(' ').length;
-    }
-    if (this.answer2) {
-      this.postWordCount['2'] = this.answer2.trim().split(' ').length;
-    }
-    if (this.answer3) {
-      this.postWordCount['3'] = this.answer3.trim().split(' ').length;
-    }
+    // if (this.answer1) {
+    //   this.postWordCount['1'] = this.answer1.trim().split(' ').length;
+    // }
+    // if (this.answer2) {
+    //   this.postWordCount['2'] = this.answer2.trim().split(' ').length;
+    // }
+    // if (this.answer3) {
+    //   this.postWordCount['3'] = this.answer3.trim().split(' ').length;
+    // }
     if (this.answer5) {
       this.postWordCount['5'] = this.answer5.trim().split(' ').length;
     }
@@ -512,13 +512,15 @@ export class Module521Component implements OnInit {
         this.answer7.trim().length == 0) {
         this.submitFlag = true;
         console.log('true')
-      } else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 5) {
-        this.submitFlag = true;
-      } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 5) {
-        this.submitFlag = true;
-      } else if (this.postWordCount['3'] > 150 || this.postWordCount['3'] < 5) {
-        this.submitFlag = true;
-      } else if (this.postWordCount['5'] > 150 || this.postWordCount['5'] < 5) {
+      } 
+      // else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 5) {
+      //   this.submitFlag = true;
+      // } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 5) {
+      //   this.submitFlag = true;
+      // } else if (this.postWordCount['3'] > 150 || this.postWordCount['3'] < 5) {
+      //   this.submitFlag = true;
+      // } 
+      else if (this.postWordCount['5'] > 150 || this.postWordCount['5'] < 5) {
         this.submitFlag = true;
       } else if (this.postWordCount['6'] > 150 || this.postWordCount['6'] < 5) {
         this.submitFlag = true;
@@ -529,18 +531,18 @@ export class Module521Component implements OnInit {
       }
     }
 
-    if (this.answer1 == "" || this.answer1 == null || this.answer1 == undefined) {
-      this.postWordCount['1'] = 0;
-    }
-    if (this.answer2 == "" || this.answer2 == null || this.answer2 == undefined) {
-      this.postWordCount['2'] = 0;
-    }
-    if (this.answer3 == "" || this.answer3 == null || this.answer3 == undefined) {
-      this.postWordCount['3'] = 0;
-    }
-    if (this.answer4 == "" || this.answer4 == null || this.answer4 == undefined) {
-      this.postWordCount['4'] = 0;
-    }
+    // if (this.answer1 == "" || this.answer1 == null || this.answer1 == undefined) {
+    //   this.postWordCount['1'] = 0;
+    // }
+    // if (this.answer2 == "" || this.answer2 == null || this.answer2 == undefined) {
+    //   this.postWordCount['2'] = 0;
+    // }
+    // if (this.answer3 == "" || this.answer3 == null || this.answer3 == undefined) {
+    //   this.postWordCount['3'] = 0;
+    // }
+    // if (this.answer4 == "" || this.answer4 == null || this.answer4 == undefined) {
+    //   this.postWordCount['4'] = 0;
+    // }
     if (this.answer5 == "" || this.answer5 == null || this.answer5 == undefined) {
       this.postWordCount['5'] = 0;
     }
