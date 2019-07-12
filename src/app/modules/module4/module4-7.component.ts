@@ -79,10 +79,11 @@ export class Module47Component implements OnInit {
         data => {
           if (data['status'] == true && data['message'] == "your answer stored next question and uuid is")
           {
+            console.log("subflag",this.subFlagModule4)
             window.localStorage.setItem('uuid', data['data'].nextuuid);
             this.subFlagModule4 = this.subFlagModule4 + 1
             window.localStorage.setItem('subFlagModule4', this.subFlagModule4.toString())
-            console.log("data ", data['data'])
+            console.log("data ", data['data'],this.subFlagModule4)
             this.data = data['data']
             this.sumbitButton = false;
             this.description = data['data'].description;

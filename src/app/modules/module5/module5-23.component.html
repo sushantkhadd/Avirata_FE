@@ -23,8 +23,18 @@
         </div>
         <div class="card-footer">
           <div class="float-right">
-            <button class="btn btn-primary" appPreventDoubleClick
+            <button *ngIf="subFlagModule5==1" class="btn btn-primary" appPreventDoubleClick
               (debounceClick)="start1();">{{'Module4.start' | translate}}</button>
+              <button *ngIf="subFlagModule5==2" class="btn btn-primary" appPreventDoubleClick
+              (debounceClick)="start2();">{{'Module4.start' | translate}}</button>
+              <button *ngIf="subFlagModule5==3" class="btn btn-primary" appPreventDoubleClick
+              (debounceClick)="start3();">{{'Module4.start' | translate}}</button>
+              <button *ngIf="subFlagModule5==4" class="btn btn-primary" appPreventDoubleClick
+              (debounceClick)="start4();">{{'Module4.start' | translate}}</button>
+              <button *ngIf="subFlagModule5==5" class="btn btn-primary" appPreventDoubleClick
+              (debounceClick)="start5();">{{'Module4.start' | translate}}</button>
+              <button *ngIf="subFlagModule5==6" class="btn btn-primary" appPreventDoubleClick
+              (debounceClick)="start6();">{{'Module4.start' | translate}}</button>
           </div>
         </div>
       </div>
