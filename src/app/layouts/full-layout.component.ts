@@ -47,12 +47,15 @@ export class FullLayoutComponent implements OnInit {
   rewardsFlag;
   cupImg;
   needEfforts;
-  subscription: Subscription; isloaded;
+  subscription: Subscription; isloaded; grandPercent;
 
   @ViewChild("passwordChangeModal") public passwordChangeModal: ModalDirective;
   @ViewChild("moduleStatusModal") public moduleStatusModal: ModalDirective;
   @ViewChild("submoduleStatusModal")
   public submoduleStatusModal: ModalDirective;
+
+  @ViewChild("moduleStatusCupModal")
+  public moduleStatusCupModal: ModalDirective;
 
   @ViewChild("instructionModal") public instructionModal: ModalDirective;
 
@@ -114,7 +117,7 @@ export class FullLayoutComponent implements OnInit {
 
   statusFlag;
   finishImgUrl;
-  intVal; sharedData;
+  intVal; sharedData; module5FinishFlag;
   // imageJson = {
   //   a1: "../../assets/img/rewards/side_gold_star.png",
   //   a2: "../../assets/img/rewards/side_silver_star.png",
@@ -905,10 +908,10 @@ export class FullLayoutComponent implements OnInit {
           this.subFlagModule5.toString()
         );
       } else if (source == "module 5.18" ||
-      source == "module 5.18.1" ||
-      source == "module 5.18.2" ||
-      source == "module 5.18.3" ||
-      source == "module 5.18.4") {
+        source == "module 5.18.1" ||
+        source == "module 5.18.2" ||
+        source == "module 5.18.3" ||
+        source == "module 5.18.4") {
         this.mainFlagModule5 = 18;
         if (source == "module 5.18.1") {
           this.subFlagModule5 = 1;
@@ -2330,6 +2333,23 @@ export class FullLayoutComponent implements OnInit {
       var perval4 = isNaN(percent4);
       var perval5 = isNaN(percent5);
 
+      this.grandPercent = (percent1 + percent2 + percent3 + percent4 + percent5) / 5;
+      // console.log('grand %', this.grandPercent)
+
+      if (this.grandPercent > 80) {
+        this.cupImg = 1;
+        // console.log('gold');
+      } else if (this.grandPercent <= 80 && this.grandPercent > 50) {
+        this.cupImg = 2
+        // console.log('silver');
+      } else if(this.grandPercent >= 10 && this.grandPercent <= 50){
+        this.cupImg = 3
+        // console.log('bronze');
+      } else if(this.grandPercent >= 0 &&
+        this.grandPercent < 10){
+        this.needEfforts = true;
+      }
+
       if (perval0 == false && this.levelData[0].status == true) {
         if (percent0 > 80) {
           this.rewardImgUrl0 = this.imageJson["a1"];
@@ -2601,6 +2621,8 @@ export class FullLayoutComponent implements OnInit {
           window.localStorage.getItem("completeModule")
         );
         completedModuleStatus["module5"] = true;
+        this.module5FinishFlag = true;
+        console.log('5 finish', completedModuleStatus["module5"], this.module5FinishFlag)
       }
       window.localStorage.setItem(
         "completeModule",
@@ -2869,6 +2891,13 @@ export class FullLayoutComponent implements OnInit {
     this.LanguageService.toHide();
     this.submoduleStatusModal.hide();
     this.LanguageService.toHide();
+
+    if (this.moduleCompleteStatus["type"] == "allFinish") {
+      this.moduleStatusModal.hide();
+      this.moduleStatusCupModal.show();
+      console.log('all finish');
+    }
+
     // var paras = document.getElementsByClassName('modal-backdrop');
     // while (paras[0])
     // {
@@ -2948,5 +2977,16 @@ export class FullLayoutComponent implements OnInit {
   passwordChangeModalHide() {
     this.passwordChangeModal.hide();
     this.LanguageService.toHide();
+  }
+
+  cupModelShow() {
+    this.moduleStatusModal.hide();
+    this.moduleStatusCupModal.show();
+    console.log('cup model');
+  }
+
+  closeMe(){
+    this.moduleStatusCupModal.hide();
+    this.router.navigate(["/dashboard"]);
   }
 }

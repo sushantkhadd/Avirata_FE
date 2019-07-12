@@ -1113,7 +1113,7 @@
             <span class="d-none d-md-block">
               <img [src]="imgUrl" alt="" class="rounded-circle mr-2" height="35" *ngIf="imgUrl">
               <i class="icon-user px-2" *ngIf="!imgUrl"></i>
-            <span class="pr-2">{{userName}}</span>
+              <span class="pr-2">{{userName}}</span>
             </span>
 
             <span class="dropdown-toggle p-2 c-pointer" data-toggle="dropdown">
@@ -1268,16 +1268,16 @@
           <!-- <hr> -->
           <p class="questionHead">
             <span> १. </span>{{'L2Module0.pop1' | translate}}</p>
+          <!-- <p class="questionHead">
+            <span> २. </span>{{'L2Module0.pop4' | translate}} </p> -->
+          <!-- <p class="questionHead">
+            <span> ३. </span>{{'L2Module0.pop5' | translate}} </p> -->
           <p class="questionHead">
-            <span> २. </span>{{'L2Module0.pop4' | translate}} </p>
+            <span> २. </span>{{'L2Module0.pop6' | translate}}</p>
           <p class="questionHead">
-            <span> ३. </span>{{'L2Module0.pop5' | translate}} </p>
+            <span> ३. </span>{{'L2Module0.pop10' | translate}} </p>
           <p class="questionHead">
-            <span> ४. </span>{{'L2Module0.pop6' | translate}}</p>
-          <p class="questionHead">
-            <span> ५. </span>{{'L2Module0.pop7' | translate}} </p>
-          <p class="questionHead">
-            <span> ६. </span>{{'L2Module0.pop8' | translate}}</p>
+            <span> ४. </span>{{'L2Module0.pop8' | translate}}</p>
           <!-- <p class="questionHead"> <span> ७. </span>{{'L2Module0.pop7' | translate}} </p>
                     <p class="questionHead"> <span> ८. </span>{{'L2Module0.pop8' | translate}} </p> -->
           <p class="questionHead">
@@ -1423,8 +1423,8 @@
       </span>
     </div>
     <div class="modal-content">
-        <div class="modal-body pb-0">
-            <div id="capture">
+      <div class="modal-body pb-0">
+        <div id="capture">
           <div class="row">
             <div class="col-md-12 col-xs-12 col-sm-12">
               <div class="text-center">
@@ -1462,15 +1462,37 @@
             </div>
           </div>
           <div class="row mt-2 justify-content-center">
-            <h5 id="demo1" class="success-line" *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' && !needEfforts">
+            <!-- <h5 id="demo1" class="success-line" *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' && !needEfforts">
               {{'layout.moduleFinish' | translate}}
             </h5>
             <h5 id="demo1" class="success-line" *ngIf="moduleCompleteStatus['type'] == 'allFinish' && !needEfforts">
               {{'layout.congrats' | translate}}
-            </h5>
+            </h5> -->
+            <div *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' && !needEfforts" class="">
+              <div *ngIf="rewardsFlag == 1">
+                <h5 id="demo1" class="success-line font-weight-normal" *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' && !needEfforts">
+                  <span [innerHTML]="'layout.goldMedalMsg' | translate"></span>
+                </h5>
+              </div>
+              <div *ngIf="rewardsFlag == 2">
+                  <h5 id="demo1" class="success-line font-weight-normal" *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' && !needEfforts">
+                    <span [innerHTML]="'layout.silverMedalMsg' | translate"></span>
+                  </h5>
+                </div>
+                <div *ngIf="rewardsFlag == 3">
+                    <h5 id="demo1" class="success-line font-weight-normal" *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' && !needEfforts">
+                      <span [innerHTML]="'layout.bronzeMedalMsg' | translate"></span>
+                    </h5>
+                  </div>
+              <div class="text-center font-weight-normal p-3">
+                <span [innerHTML]="'layout.allMedalMsg1' | translate"></span>
+                <span class="color_red" [innerHTML]="'layout.allMedalMsg2' | translate"></span>
+              </div>
+            </div>
           </div>
           <div>
           </div>
+
           <div class="row mt-2 justify-content-center" [ngClass]="{
           'gold-bg': rewardsFlag == 1,
           'silver-bg': rewardsFlag == 2,
@@ -1522,8 +1544,7 @@
             </a>
           </li>
           <li>
-            <a *ngIf="!getImage" id="getImage" class="c-pointer"
-            (click)="downloadReward()">
+            <a *ngIf="!getImage" id="getImage" class="c-pointer" (click)="downloadReward()">
               <img class="img-responsive" src="../../assets/img/whatsapp.png">
             </a>
             <a *ngIf="getImage" class="c-pointer" data-action="share/whatsapp/share" [href]="getImage">
@@ -1547,8 +1568,131 @@
           <button class="btn btn-primary text-center" appPreventDoubleClick (debounceClick)="moduleComplete($event)">{{'Stepper.Next' | translate}}</button>
         </span>
       </div>
+      <div class="row justify-content-center">
+        <span class="text-center mb-3" *ngIf="module5FinishFlag">
+          <button class="btn btn-primary text-center" appPreventDoubleClick (debounceClick)="moduleComplete($event)">{{'Stepper.Next' | translate}}</button>
+        </span>
+      </div>
+
     </div>
 
+  </div>
+</div>
+
+
+
+<!-- cup popup -->
+<div bsModal #moduleStatusCupModal="bs-modal" class="modal successModal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-header">
+      <!-- <span>
+        <button type="button" class="close" aria-label="Close" id="btnCloseModal">
+          <span aria-hidden="true">×</span>
+        </button>
+      </span> -->
+    </div>
+    <div class="modal-content">
+      <div class="modal-body pb-0">
+        <div>
+          <div class="row">
+            <div class="col-md-12 col-xs-12 col-sm-12">
+              <div class="text-center">
+                <img class="img-responsive img-logo" src="../../assets/img/Avirata_Round_Logo.png">
+              </div>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-10 col-xs-12 col-sm-12">
+              <div id="main">
+                <div>
+                  <img class="img-responsive img-mitra" src="../../assets/img/expressions/clapping.png">
+                  <img *ngIf="needEfforts" class="img-responsive img-mitra" src="../../assets/img/expressions/wrong_ans.png">
+                </div>
+                <div [class.pl-4]="needEfforts">
+                  <h1 class="congrats-text">{{'layout.congo' | translate}} </h1>
+                  <h5 class="congrats-text" *ngIf="needEfforts">
+                    {{'layout.workHard' | translate}}
+                  </h5>
+                  <h5>{{userName}}</h5>
+                  <!-- {{grandPercent}} -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="row mt-2 justify-content-center">
+            <div id="main">
+              <h5 class="success-title">
+                <span *ngIf="moduleCompleteStatus['type'] == 'moduleFinish'">
+                  {{'layout.module' | translate}} {{moduleCompleteStatus['finishHead']}}
+                </span>
+                <span *ngIf="moduleCompleteStatus['type'] == 'allFinish'">
+                  {{'layout.course' | translate}}
+                </span>
+              </h5>
+            </div>
+          </div> -->
+          <div class="row mt-2 justify-content-center">
+            <!-- <h5 id="demo1" class="success-line" *ngIf="moduleCompleteStatus['type'] == 'moduleFinish'">
+              {{'layout.cupMessage' | translate}}
+            </h5> -->
+            <h5 id="demo1" class="success-line p-3" *ngIf="moduleCompleteStatus['type'] == 'allFinish' && !needEfforts">
+              {{'layout.cupMessage' | translate}}
+            </h5>
+          </div>
+          <div>
+          </div>
+          <div class="row mt-2 justify-content-center">
+            <!-- {{cupImg}} -->
+            <div *ngIf="moduleCompleteStatus['type'] == 'allFinish'" class="cup-bg">
+              <!-- 1{{cupImg}} -->
+              <div class="text-center" *ngIf="cupImg == 1">
+                <img class="img-responsive w-25" src="../../assets/img/rewards/single-stars/gold_cup.png">
+              </div>
+              <div class="text-center" *ngIf="cupImg == 2">
+                <img class="img-responsive w-25" src="../../assets/img/rewards/single-stars/silver_cup.png">
+              </div>
+              <div class="text-center" *ngIf="cupImg == 3">
+                <img class="img-responsive w-25" src="../../assets/img/rewards/single-stars/bronze_cup.png">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-2 justify-content-center social-icons" *ngIf="!needEfforts">
+        <ul class="social-logo">
+          <li>
+            <a class="c-pointer" (click)="downloadReward()">
+              <img class="img-responsive" src="../../assets/img/fb.png">
+            </a>
+          </li>
+          <li>
+            <a *ngIf="!getImage" id="getImage" class="c-pointer" (click)="downloadReward()">
+              <img class="img-responsive" src="../../assets/img/whatsapp.png">
+            </a>
+            <a *ngIf="getImage" class="c-pointer" data-action="share/whatsapp/share" [href]="getImage">
+              <img class="img-responsive" src="../../assets/img/whatsapp.png">
+            </a>
+          </li>
+          <li>
+            <a class="c-pointer" (click)="downloadReward()">
+              <img class="img-responsive" src="../../assets/img/download.png">
+            </a>
+          </li>
+          <li *ngIf="isloaded" class="spin-loader">
+            <span>
+              <em class="fas fa-spinner fa-spin"></em>
+            </span>
+          </li>
+        </ul>
+      </div>
+      <div [ngClass]="needEfforts ? 'pt-3': 'pt-1'" class="modal-footer justify-content-center pt-1 pb-4">
+        <span>
+          <button class="btn btn-primary text-center" appPreventDoubleClick (debounceClick)="closeMe()">{{'Stepper.Next' | translate}}</button>
+        </span>
+      </div>
+    </div>
   </div>
 </div>
 
