@@ -32,7 +32,7 @@ export class FeedbackComponent implements OnInit {
   public passFlags = {}; data; myjsondata; dummy; deleteAdd = []; questionCount;
   questionlist; optionArray=[]; counter; disableIt; questionId; mainCounter;type1Ans;type2Ans;
   dummyArray = []; jsonObject = {}; ansJsonLength;statement=[];priorities=[];queType;userAnswer={};submitFlag;
-  public token;startJson={};apiurl;queArray1=[];queArray2=[];freeTextFlag;textanswer1;freetextId;onlyCnt;
+  public token;startJson={};apiurl;queArray1=[];queArray2=[];freeTextFlag;textanswer1;freetextId;onlyCnt;jsonBody1={};
  
 
   activeItem;activeItem1;
@@ -130,7 +130,7 @@ export class FeedbackComponent implements OnInit {
 
   previous() {
     var jsonBody = {};
-    var jsonBody1 = {};
+    this.jsonBody1={};
     this.submitFlag = true;
     this.onlyCnt = this.onlyCnt-1;
     this.userAnswer["answer"]=this.textanswer1.trim();
@@ -179,10 +179,10 @@ export class FeedbackComponent implements OnInit {
           jsonBody["useranswer"] = this.queArray1[this.questionCount-1].answer;
           jsonBody["questionid"] = this.queArray1[this.questionCount-1].questionid;
         
-          jsonBody1['submoduleid'] = window.localStorage.getItem('uuid')
-          jsonBody1["event"] = "answer";
-          jsonBody1["useranswer"] = this.queArray2[this.questionCount-1].answer;
-          jsonBody1["questionid"] = this.queArray2[this.questionCount-1].questionid;
+          this.jsonBody1['submoduleid'] = window.localStorage.getItem('uuid')
+          this.jsonBody1["event"] = "answer";
+          this.jsonBody1["useranswer"] = this.queArray2[this.questionCount-1].answer;
+          this.jsonBody1["questionid"] = this.queArray2[this.questionCount-1].questionid;
 
       console.log("UUUUUUUUUUU",this.queArray1[this.questionCount-2].question_type,this.queArray1[this.questionCount-2].answer)
     }
@@ -195,25 +195,23 @@ export class FeedbackComponent implements OnInit {
       jsonBody["useranswer"] = this.jsonObject["useranswer"];
       jsonBody["questionid"] = this.jsonObject["questionid"];
 
-      jsonBody1['submoduleid'] = window.localStorage.getItem('uuid')
-      jsonBody1["event"] = "answer";
-      jsonBody1["useranswer"] =  this.userAnswer["answer"];
-      jsonBody1["questionid"] = this.activeItem1.questionid;
+      this.jsonBody1['submoduleid'] = window.localStorage.getItem('uuid')
+      this.jsonBody1["event"] = "answer";
+      this.jsonBody1["useranswer"] =  this.userAnswer["answer"];
+      this.jsonBody1["questionid"] = this.activeItem1.questionid;
     }
     console.log("typeans",this.type1Ans,this.queArray1[this.questionCount-2].answer,this.optionArray,this.optionArray[0].value)
 
     this.apiCall(jsonBody, this.apiurl, "back");
 
-    setTimeout(() => {
-      this.apiCall(jsonBody1, this.apiurl, "back1");
-    }, 200);
+   
     
     console.log("jsonbody",this.activeItem1,this.ansJson)
   }
 
   next() {
     var jsonBody = {};
-    var jsonBody1 = {};
+    this.jsonBody1 = {};
     this.submitFlag = true;
     this.onlyCnt = this.onlyCnt+1;
     this.userAnswer["answer"]=this.textanswer1.trim();
@@ -264,10 +262,10 @@ export class FeedbackComponent implements OnInit {
         jsonBody["useranswer"] = this.queArray1[this.questionCount-1].answer;
         jsonBody["questionid"] = this.queArray1[this.questionCount-1].questionid;
 
-        jsonBody1['submoduleid'] = window.localStorage.getItem('uuid')
-        jsonBody1["event"] = "answer";
-        jsonBody1["useranswer"] = this.queArray2[this.questionCount-1].answer;
-        jsonBody1["questionid"] = this.queArray2[this.questionCount-1].questionid;
+        this.jsonBody1['submoduleid'] = window.localStorage.getItem('uuid')
+        this.jsonBody1["event"] = "answer";
+        this.jsonBody1["useranswer"] = this.queArray2[this.questionCount-1].answer;
+        this.jsonBody1["questionid"] = this.queArray2[this.questionCount-1].questionid;
       console.log("UUUUUUUUUUU",this.queArray1[this.questionCount].question_type,this.queArray1[this.questionCount].answer,this.type1Ans)
     }
 
@@ -279,18 +277,18 @@ export class FeedbackComponent implements OnInit {
       jsonBody["useranswer"] = this.jsonObject["useranswer"];
       jsonBody["questionid"] = this.jsonObject["questionid"];
 
-      jsonBody1['submoduleid'] = window.localStorage.getItem('uuid')
-      jsonBody1["event"] = "answer";
-      jsonBody1["useranswer"] =  this.userAnswer["answer"];
-      jsonBody1["questionid"] = this.activeItem1.questionid;
+      this.jsonBody1['submoduleid'] = window.localStorage.getItem('uuid')
+      this.jsonBody1["event"] = "answer";
+      this.jsonBody1["useranswer"] =  this.userAnswer["answer"];
+      this.jsonBody1["questionid"] = this.activeItem1.questionid;
     
     }
     
     this.apiCall(jsonBody, this.apiurl, "next");
 
-    setTimeout(() => {
-      this.apiCall(jsonBody1, this.apiurl, "next1");
-    }, 200);
+    // setTimeout(() => {
+    //   this.apiCall(jsonBody1, this.apiurl, "next1");
+    // }, 200);
    
 
     console.log("jsonbody",this.activeItem1,this.ansJson)
@@ -298,7 +296,7 @@ export class FeedbackComponent implements OnInit {
 
   finish2() {
     var jsonBody = {}
-    var jsonBody1 = {}
+    this.jsonBody1 = {}
     this.userAnswer["answer"]=this.textanswer1.trim();
     if (Object.keys(this.ansJson).length != 8)
     {
@@ -312,10 +310,10 @@ export class FeedbackComponent implements OnInit {
         jsonBody["useranswer"] = this.queArray1[7].answer;
         jsonBody["questionid"] = this.queArray1[7].questionid;
 
-        jsonBody1['submoduleid'] = window.localStorage.getItem('uuid')
-        jsonBody1["event"] = "finish";
-        jsonBody1["useranswer"] = this.queArray2[7].answer;
-        jsonBody1["questionid"] = this.queArray2[7].questionid;
+        this.jsonBody1['submoduleid'] = window.localStorage.getItem('uuid')
+        this.jsonBody1["event"] = "finish";
+        this.jsonBody1["useranswer"] = this.queArray2[7].answer;
+        this.jsonBody1["questionid"] = this.queArray2[7].questionid;
       
       }
      else{
@@ -324,17 +322,13 @@ export class FeedbackComponent implements OnInit {
       jsonBody["useranswer"] = this.jsonObject["useranswer"];
       jsonBody["questionid"] = this.jsonObject["questionid"];
 
-      jsonBody1['submoduleid'] = window.localStorage.getItem('uuid')
-      jsonBody1["event"] = "finish";
-      jsonBody1["useranswer"] = this.userAnswer["answer"];
-      jsonBody1["questionid"] = this.activeItem1.questionid;
      }
-      console.log("finishhh",jsonBody1)
+      console.log("finishhh",this.jsonBody1)
       this.apiCall(jsonBody, this.apiurl, "answer");
 
-      setTimeout(() => {
-        this.apiCall(jsonBody1, this.apiurl, "finish");
-      }, 200);
+      // setTimeout(() => {
+      //   this.apiCall(jsonBody1, this.apiurl, "finish");
+      // }, 200);
       
     }
   }
@@ -397,6 +391,15 @@ export class FeedbackComponent implements OnInit {
                   this.textanswer1="";
                 }
               }
+          } else if(fun == "next"){
+            // var jsonBody1={}
+            // jsonBody1['submoduleid'] = window.localStorage.getItem('uuid')
+            // jsonBody1["event"] = "answer";
+            // jsonBody1["useranswer"] =  this.userAnswer["answer"];
+            // jsonBody1["questionid"] = this.activeItem1.questionid;
+           
+            this.apiCall(this.jsonBody1, this.apiurl, "next1");
+          
           } else if (fun == "next1") {
             
             this.counter = this.queArray1.indexOf(this.activeItem);
@@ -417,7 +420,22 @@ export class FeedbackComponent implements OnInit {
                 this.priorities.push(this.activeItem.options[i].value)
               }
             }
-          } else if (fun == "back1") {
+          }
+          else if(fun == "answer"){
+            // var jsonBody1={}
+            // jsonBody1['submoduleid'] = window.localStorage.getItem('uuid')
+            // jsonBody1["event"] = "finish";
+            // jsonBody1["useranswer"] = this.userAnswer["answer"];
+            // jsonBody1["questionid"] = this.activeItem1.questionid;
+           
+            this.apiCall(this.jsonBody1, this.apiurl, "finish");
+          
+          } else if(fun == "back"){
+           
+            this.apiCall(this.jsonBody1, this.apiurl, "back1");
+          
+          }
+           else if (fun == "back1") {
             
             this.counter = this.queArray1.indexOf(this.activeItem);
             const newIndex = this.counter === 0 ? this.queArray1.length - 1 : this.counter - 1;

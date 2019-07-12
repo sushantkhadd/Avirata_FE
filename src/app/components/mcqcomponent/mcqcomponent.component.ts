@@ -653,6 +653,8 @@ export class McqcomponentComponent implements OnInit {
      }
       console.log("anssss", this.bunchSelectedAns)
       window.scroll(0, 0)
+    } else if(window.localStorage.getItem('mainFlagModule5') == "18"){
+      this.sendAns.emit(this.sendYesNoType)
     }
     else{
       this.rankModal.show()

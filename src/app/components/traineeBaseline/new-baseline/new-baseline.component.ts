@@ -604,7 +604,7 @@ export class NewBaselineComponent implements OnInit {
       .subscribe(
       data => {
 
-        if (data['message'] == "submodule finish") {
+        if (data['message'] == "submodule finish" || data['message'] == "module0 finish") {
           console.log("adsaffffffffffff")
           if(window.localStorage.getItem('mainFlagModule2') == '1'){
             var obj = {
@@ -716,6 +716,7 @@ export class NewBaselineComponent implements OnInit {
               this.sendAns.emit("finish1")
             }
             else if(window.localStorage.getItem('subFlagModule0') == '3'){
+              window.localStorage.setItem('uuid', data['data'].nextuuid)
               window.localStorage.setItem("currentstatus", "1");
               window.localStorage.setItem('mainFlagModule1', '1');
               this.Module2Service.setLocalStorage2(4);
