@@ -37,7 +37,7 @@ export class Module12Component implements OnInit {
   sumbitButton;
   startFlag;
   public inst =
-    "खाली दिलेले स्वगत हे विवेकी विचारांमधून निर्माण झाले आहे की अविवेकी? कारण?";
+    "खालील स्वगतांमागे असणारा विचार / धारणा ओळखा. ती विवेकी आहे की अविवेकी?";
   ngOnInit() {
     this.startFlag = false;
     this.showAnswer = true;

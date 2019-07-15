@@ -51,6 +51,13 @@
           <em class="fa fa-arrows-alt text-right" aria-hidden="true"></em>
         </span>
       </div>
+      <div class="float-right download-pdf" *ngIf="mySubModule2 == 16">
+        <span class="control ripple" id="download" *ngIf="downloadLink">
+          <a href={{downloadLink}} class="c-pointer text-white" target="_blank" [download]="downloadLink">
+            <em class="fa fa-download" aria-hidden="true"></em>
+          </a>
+        </span>
+      </div>
     </div>
   </div>
 </div>
@@ -140,7 +147,7 @@
             {{'McqTest.popupTitle2' | translate}}</h5>
         </div>
         <!-- <div class="modal-body text-center" [style.border]="msgFlag ? '5px solid #4dbd74' : '5px solid #f86c6b'"> -->
-        <div class="modal-body text-center">
+        <div class="modal-body text-center" [class.d-none]="(mainFlagModule5==2 || mainFlagModule5==3 || mainFlagModule5==4 || mainFlagModule5==5) && msgFlag">
           <div *ngIf="msgFlag==true">
             <h6 class="congratulation inst-text mb-3 mt-2">{{'Errors.rightAns' | translate}}</h6>
           </div>
