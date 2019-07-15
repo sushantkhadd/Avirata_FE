@@ -53,8 +53,8 @@ a:focus {
 }
 
 #sidebar {
-  min-width: 250px;
-  max-width: 250px;
+  min-width: 270px;
+  max-width: 270px;
   background: #212529;
   color: #fff;
   transition: all 0.3s;
@@ -62,7 +62,7 @@ a:focus {
 }
 
 #sidebar.active {
-  margin-left: -250px;
+  margin-left: -270px;
 }
 
 #sidebar .sidebar-header {
@@ -116,7 +116,7 @@ a[data-toggle="collapse"] {
 
 ul ul a {
   font-size: 0.95em !important;
-  padding-left: 30px !important;
+  padding-left: 27px !important;
   background: #212529;
 }
 
