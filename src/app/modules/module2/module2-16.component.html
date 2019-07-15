@@ -97,7 +97,7 @@
             <div class="col-sm-12 col-md-8 controls">
               <textarea class="form-control" [id]="questionid4" name="answer4" [(ngModel)]="answer4" rows="3" #addr="ngModel" (focus)="showLimit['4']=true"
                 (focusout)="showLimit['4']=false" (keypress)="handleInput($event)" required></textarea>
-              <div *ngIf="showLimit['4']==false && (postWordCount['3']>150 || postWordCount['4']<1)" class="offset-md-4 mt-2">
+              <div *ngIf="showLimit['4']==false && (postWordCount['4']>150 || postWordCount['4']<1)" class="offset-md-4 mt-2">
                 <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn1_150' | translate}}</p>
               </div>
             </div>

@@ -108,7 +108,7 @@
             <label class="col-2 col-md-2 col-sm-2 form-control-label" [for]="queId4" [innerHTML]="que4"></label>
             <div class="col-4 col-sm-4 col-md-4 controls">
               <textarea class="form-control" [id]="queId4" name="answer4" [(ngModel)]="answer4" pattern="^[0-9]*$" onpaste="return false;"
-                (keypress)="numberOnly($event);handleInput($event)" rows="2" #addr="ngModel" maxlength="500" required></textarea>
+                (keypress)="numberOnly($event);handleInput($event)" rows="2" #addr="ngModel" minlength="2" maxlength="2" required></textarea>
             </div>
           </div>
 

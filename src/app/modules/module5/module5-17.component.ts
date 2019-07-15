@@ -176,7 +176,7 @@ export class Module517Component implements OnInit {
             this.instructionModal.hide();
             this.LanguageService.toHide();
             this.mainFlagModule5 = 18;
-            window.localStorage.setItem("uuid", data["data"].uuid);
+            window.localStorage.setItem("uuid", data["data"].nextuuid);
             window.localStorage.setItem("mainFlagModule5", "18");
             window.localStorage.setItem("subFlagModule5", "1");
             window.localStorage.setItem("source", "module 5.18.1");

@@ -448,7 +448,7 @@ export class Module521Component implements OnInit {
     // }
     
     this.noHitFlag = false;
-
+    console.log("postWord",this.postWordCount['5'],this.showLimit['5'],this.postWordCount['6'],this.showLimit['6'],this.postWordCount['7'],this.showLimit['7'])
     if (assignForm.dirty == false) {
       console.log("No hit")
       this.personId = parseInt(window.localStorage.getItem("personId"))
@@ -456,12 +456,19 @@ export class Module521Component implements OnInit {
       this.start1(this.personId);
     }
     else {
+      if((this.postWordCount['5']<5 || this.postWordCount['5']>150) || (this.postWordCount['6']<5 || this.postWordCount['6']>150) || (this.postWordCount['7']<5 || this.postWordCount['7']>150)){
+        console.log("No hit11111111111111")
+        this.personId = parseInt(window.localStorage.getItem("personId"))
+        window.localStorage.setItem("personId", JSON.stringify(this.personId - 1))
+        this.start1(this.personId);
+      }
+      else{
       console.log("hit")
       this.sendAnswer("back")
       setTimeout(() => {
         this.start1(this.personId)
       }, 300);
-
+    }
     }
 
   }
@@ -511,7 +518,6 @@ export class Module521Component implements OnInit {
         this.answer6.trim().length == 0 ||
         this.answer7.trim().length == 0) {
         this.submitFlag = true;
-        console.log('true')
       } 
       // else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 5) {
       //   this.submitFlag = true;

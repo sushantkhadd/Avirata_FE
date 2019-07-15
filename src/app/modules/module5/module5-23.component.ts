@@ -320,6 +320,7 @@ export class Module523Component implements OnInit {
             this.section6Flag = true;
             }
             else{
+              window.localStorage.setItem("uuid", data["data"].nextuuid);
               this.mainFlagModule5 = 24;
               window.localStorage.setItem('mainFlagModule5', '24');
               window.localStorage.setItem('subFlagModule5', '1');
