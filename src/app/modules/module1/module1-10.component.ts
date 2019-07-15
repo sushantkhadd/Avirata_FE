@@ -62,6 +62,7 @@ export class Module110Component implements OnInit {
           {
             if (data['message'] == "submodule finish next uuid is")
             {
+              this.toastr.success(this.translate.instant("L2common.rightanswer"));
               window.localStorage.setItem('uuid', data['data'].nextuuid)
               this.subFlagModule1++;
               window.localStorage.setItem("subFlagModule1", JSON.stringify(this.subFlagModule1));

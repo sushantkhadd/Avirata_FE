@@ -47,7 +47,7 @@ export class Module216Component implements OnInit {
   trimFlag;
   public download; link; showCFU; apiUrl; finalCount;
   public inst =
-    "विद्यार्थ्यांच्या डाव्या मेंदू इतकीच चालना विद्यार्थ्यांच्या उजव्या मेंदूला देखील मिळावी यासाठी तुम्ही कोणते उपक्रम घ्याल? कोणतीही एक संकल्पना निवडून त्याबाबत उजव्या मेंदूला चालना मिळण्याच्या दृष्टीने काय उपक्रम घ्याल ते लिहा. या आधी जी दोन उदाहरणे तुम्ही पहिलीत, त्याआधारे आपल्या स्वतःच्या विषयासंदर्भात विचार करून लिहा.";
+    "सूचना - विद्यार्थ्यांच्या डाव्या मेंदू इतकीच चालना विद्यार्थ्यांच्या उजव्या मेंदूला देखील मिळावी यासाठी तुम्ही कोणते उपक्रम घ्याल? कोणतीही एक संकल्पना निवडून त्याबाबत उजव्या मेंदूला चालना मिळण्याच्या दृष्टीने काय उपक्रम घ्याल ते लिहा. या आधी जी दोन उदाहरणे तुम्ही पाहिलीत, त्याआधारे आपल्या स्वतःच्या विषयासंदर्भात विचार करून लिहा.";
   ngOnInit() {
     this.answer1 = "";
     this.answer2 = "";
@@ -177,6 +177,7 @@ export class Module216Component implements OnInit {
             this.questionid4 = data["data"]["questionlist"][3].questionid;
 
             this.passValues["url"] = data["data"].url;
+            // this.passValues["unlockView"] = "static";
             this.startPdf = true;
             console.log(this.passValues["url"], data);
 

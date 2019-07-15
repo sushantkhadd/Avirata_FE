@@ -274,8 +274,10 @@
             <!-- <button type="button" class="close" (click)="rankModal.hide()" aria-label="Close" id="btnCloseModal">
             <span aria-hidden="true">&times;</span>
             </button> -->
-                <h5 class="text-white mb-1" *ngIf="rightFlag==true">{{'L2common.rightanswer' | translate }}</h5>
+                <h5 class="text-white mb-1" *ngIf="rightFlag==true && questionType != 'checkBoxOption'">{{'L2common.rightanswer' | translate }}</h5>
                 <h5 class="text-white mb-1" *ngIf="rightFlag==false">{{'L2common.wronganswer' | translate }}</h5>
+
+                <h5 class="text-white mb-1" *ngIf="rightFlag==true && questionType == 'checkBoxOption'">{{'subModule1_9.correctAns' | translate }}</h5>
             </div>
             <div class="modal-body" *ngIf="questionType != 'checkBoxOption'" [class.d-none]="(mysubModule4==5 || mysubModule4==7 || mysubModule5==7 ||mysubModule3==7|| mysubModule4==11 || mysubModule2==9 || mysubModule2==11 || mysubModule0==2) && rightFlag">
                 <span *ngIf="mysubModule4 != 9 && mysubModule4 != 13">
@@ -291,6 +293,8 @@
                 <p><b>{{'McqTest.correctAnswer' | translate }} :</b></p>
                 <p> {{showAns1}}<br> {{showAns2}}</p>
             </div> -->
+            
+
             <div class="modal-body" *ngIf="questionType =='checkBoxOption'">
                 <div *ngFor="let item of rightAnsArray;let i=index">
                     <p>{{i+1}}. {{item}}</p>
