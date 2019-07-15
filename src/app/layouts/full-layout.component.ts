@@ -2885,7 +2885,8 @@ export class FullLayoutComponent implements OnInit {
     }
     if (jQuery("bs-modal-backdrop").length > 1) {
       jQuery("bs-modal-backdrop").hide();
-      jQuery("body .modal-backdrop.show").css("opacity", "0.5");
+      jQuery("body .modal-backdrop.show").css("opacity", "0.5 !important");
+      console.log('backdrop....')
     }
     this.moduleStatusModal.hide();
     this.LanguageService.toHide();

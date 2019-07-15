@@ -36,6 +36,7 @@ export class PresentationComponent implements OnInit {
   public mainFlagModule3 = parseInt(window.localStorage.getItem('mainFlagModule3'));
   @Output() public showDoc = new EventEmitter<string>();
   public mainFlagModule4 = parseInt(window.localStorage.getItem('mainFlagModule4'));
+  public mainFlagModule2 = parseInt(window.localStorage.getItem('mainFlagModule2'));
   public mainFlagModule5 = parseInt(window.localStorage.getItem('mainFlagModule5'));
   public mainFlagModule1 = parseInt(window.localStorage.getItem('mainFlagModule1'));
   public count: any = 1; finalCount; page; pdfURL; totalPages;
@@ -230,10 +231,18 @@ export class PresentationComponent implements OnInit {
     }, 4000);
     console.log("data", this.data, 'count init', this.count)
     this.count = 1;
-    this.showFinish = false;
+   
     this.submitDisabled = false;
-    this.buttonShowFlag = false;
+   
     this.imgUrl = this.data.url;
+    if (window.localStorage.getItem('mainFlagModule2') == '17') {
+    this.showFinish = true;
+    this.buttonShowFlag = true;
+    }
+    else{
+      this.showFinish = false;
+      this.buttonShowFlag = false;
+    }
     this.subFlagModule5 = parseInt(window.localStorage.getItem('subFlagModule5'));
 
     if (window.localStorage.getItem('mainFlagModule2') == '1') {
@@ -828,7 +837,7 @@ export class PresentationComponent implements OnInit {
   }
   finishPDF() {
     this.sendCfuAns.emit(true);
-    if (this.options.length == 1) {
+    if (this.options.length < 1) {
       this.hideMe = true;
     } else {
       this.hideMe = false;
