@@ -2894,7 +2894,9 @@ export class FullLayoutComponent implements OnInit {
 
     if (this.moduleCompleteStatus["type"] == "allFinish") {
       this.moduleStatusModal.hide();
+      this.LanguageService.toHide();
       this.moduleStatusCupModal.show();
+      this.LanguageService.toShow();
       console.log('all finish');
     }
 
@@ -2981,12 +2983,15 @@ export class FullLayoutComponent implements OnInit {
 
   cupModelShow() {
     this.moduleStatusModal.hide();
+    this.LanguageService.toHide();
     this.moduleStatusCupModal.show();
+    this.LanguageService.toShow();
     console.log('cup model');
   }
 
   closeMe(){
     this.moduleStatusCupModal.hide();
+    this.LanguageService.toHide();
     this.router.navigate(["/dashboard"]);
   }
 }

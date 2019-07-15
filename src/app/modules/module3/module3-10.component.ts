@@ -42,14 +42,18 @@ export class Module310Component implements OnInit {
       this.videoData['apiUrl'] = 'modulethreecfustart/';
     }
     else if (this.mainFlagModule3 > 10) {
-      this.passData['apiUrl'] = "";
-      this.passData['status'] = false;  //first time call
-
-      if (this.FullLayoutService.currentJson3.length > 0) {
-        var index = this.FullLayoutService.currentJson3.findIndex(item =>
-          item.source == "module 3.10");
-        if (this.FullLayoutService.currentJson3[index].url != null) {
-          this.passData['videoUrl'] = this.FullLayoutService.currentJson3[index].url
+      var urlJson = {};
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson3"));
+      console.log("vcxxxx",urlJson)
+      if (urlJson["children"].length > 0) {
+        var index = urlJson["children"].findIndex(
+          item => item.source == "module 3.10"
+        );
+        console.log("qWSS",index)
+        if (urlJson["children"][index].url != null)
+        {
+          console.log("qWSS",index,urlJson["children"][index].url)
+          this.passData['videoUrl'] = urlJson["children"][index].url
         } else {
           this.passData['videoUrl'] = this.passUrl
         }
@@ -60,6 +64,13 @@ export class Module310Component implements OnInit {
   }
   finishCFU(result) {
     if (result["status"] == true) {
+      console.log("event",result)
+      var current3 = [];
+      current3 = JSON.parse(window.localStorage.getItem("currentJson3")); 
+      var index = current3["children"].findIndex(
+      item => item.source == "module 3.10" );
+      current3["children"][index].url = result["urls"]; 
+      window.localStorage.setItem("currentJson3", JSON.stringify(current3))
       window.localStorage.setItem('mainFlagModule3', '11');
       window.localStorage.setItem('subFlagModule3', '1');
       window.localStorage.setItem('source', 'module 3.11');
