@@ -139,7 +139,7 @@ export class Module3Component implements OnInit {
           this.data = this.dummy[this.queCount]
           console.log("quec",this.queCount)
           this.queCount = 1;
-          if(window.localStorage.getItem("source") == "module 3.1.2.1"){
+          if(window.localStorage.getItem("source") == "module 3.1.2.1" || window.localStorage.getItem("source") == "module 3.1.2" || window.localStorage.getItem("source") == "module 3.1.2"){
             this.queCount = 1;
           }
           else if(window.localStorage.getItem("source") == "module 3.1.2.2"){
@@ -200,6 +200,27 @@ export class Module3Component implements OnInit {
             this.jsonData = data['data'].questionlist[0]
             this.data = this.jsonData;
             console.log("MY DATA ", this.data,this.queCount)
+            if(this.queCount==2){
+              window.localStorage.setItem('source', "module 3.1.2.2")
+            }
+            else if(this.queCount==3){
+              window.localStorage.setItem('source', "module 3.1.2.3")
+            }
+            else if(this.queCount==4){
+              window.localStorage.setItem('source', "module 3.1.2.4")
+            }
+            else if(this.queCount==5){
+              window.localStorage.setItem('source', "module 3.1.2.5")
+            }
+            else if(this.queCount==6){
+              window.localStorage.setItem('source', "module 3.1.2.6")
+            }
+            else if(this.queCount==7){
+              window.localStorage.setItem('source', "module 3.1.2.7")
+            }
+            else if(this.queCount==8){
+              window.localStorage.setItem('source', "module 3.1.2.8")
+            }
           } else if (data['message'] == 'exam finish' || data['message'] == 'submodule finish')
           {
             this.showVideoFlag = false;
