@@ -142,6 +142,11 @@ export class UserTransferReplaceComponent implements OnInit {
             this.schoolIndex = this.indexNumber;
             this.oldSearchIndex = this.indexNumber;
             localStorage.setItem("indexNumber", this.indexNumber);
+            this.selectedDistrict = this.indexNumber.substring(0, 4);
+            this.getDistrictWiseTaluka(this.selectedDistrict)
+            this.selectedTaluka = this.indexNumber.substring(2, 6);
+            console.log("res",this.selectedDistrict,this.selectedTaluka)
+            
           } else if (searchType == 2) {
             this.tactiveUsers = data["data"].activate;
             this.tdeactiveUsers = data["data"].deactivate;
@@ -200,7 +205,7 @@ export class UserTransferReplaceComponent implements OnInit {
     this.AdminReportService.getCalllvl1(apiUrl + taluka, window.localStorage.getItem("token"))
       .subscribe(
       data => {
-        this.selectedTaluka = ""
+        // this.selectedTaluka = ""
         this.allTalukas = data['results'];
         this.talukaEnable = true
       },

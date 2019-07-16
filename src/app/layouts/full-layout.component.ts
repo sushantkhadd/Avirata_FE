@@ -2622,7 +2622,7 @@ export class FullLayoutComponent implements OnInit {
         );
         completedModuleStatus["module5"] = true;
         this.module5FinishFlag = true;
-        console.log('5 finish', completedModuleStatus["module5"], this.module5FinishFlag)
+        // console.log('5 finish', completedModuleStatus["module5"], this.module5FinishFlag)
       }
       window.localStorage.setItem(
         "completeModule",

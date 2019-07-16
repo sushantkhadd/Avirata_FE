@@ -228,7 +228,7 @@
             <div class="form-group row">
               <label for="talukaList" class="col-md-4 col-form-label font-weight-bold">Select Taluka</label>
               <div class="col-md-6">
-                <select class="form-control" name="taluka" id="talukaList" [(ngModel)]="selectedTaluka" [disabled]="!talukaEnable" required
+                <select class="form-control" name="taluka" id="talukaList" [(ngModel)]="selectedTaluka" required
                   #taluka="ngModel">
                   <option value="" disabled>Select Taluka</option>
                   <option [value]="taluka.taluka_id" *ngFor="let taluka of allTalukas">{{taluka.taluka_name}}</option>
