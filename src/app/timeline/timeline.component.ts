@@ -239,7 +239,9 @@ export class TimelineComponent implements OnInit {
     //     console.log("0",this.counterValue0)
     //   } else
       this.width = 4;
-
+      if(window.localStorage.getItem("mainFlagModule5")=="25"){
+        document.getElementById("progress-bar").style.width = "100%";
+      }
       if (this.mainFlagModule1 && this.currentstatus  == 1)
       {
         this.counterValue1 = Math.round((this.mainFlagModule1 - 1) * this.calPercentage(12));
@@ -270,6 +272,7 @@ export class TimelineComponent implements OnInit {
         this.counterValue5 = Math.round((this.mainFlagModule5 - 1) * this.calPercentage(24));
         this.totalPer = 80 + this.counterValue5;
         this.barWidth5 = this.counterValue5 * this.width + '%';
+        
       }else if (this.currentstatus  == 6)
       {
         this.totalPer =100 + '%'
