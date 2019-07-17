@@ -23,6 +23,10 @@
                     </div>
                     <!-- <h6 *ngIf="!queUrl" class="lineHeight" [innerHTML]="statement"></h6> -->
                 </div>
+                <div *ngIf="mysubModule0 == 2 && questionImg!=null" class="customimg text-center">
+                    <br>
+                    <img [src]=questionImg class="imgOption center-block">
+                </div>
                 <div *ngIf="mysubModule3 == 1" class="customimg text-center">
                     <br>
                     <img src={{data.url}} class="imgOption center-block">
@@ -285,6 +289,10 @@
                 <p *ngIf="rightFlag==false">{{showCorrectAns}}</p>
                 <!-- <p *ngIf="mysubModule0==2"><b>{{'subModule1_9.correctAns' | translate }} :</b> {{showCorrectAns}}</p> -->
                 </span>
+                <div *ngIf="mysubModule0 == 2 && answerImg !=null" class="customimg text-center">
+                    <br>
+                    <img src={{answerImg}} class="imgOption center-block">
+                </div>
                 <p *ngIf="description"><b>{{'newTranslate.description' | translate }}</b></p>
                 <p *ngIf="description">
                     <span [innerHTML]="description"></span></p>
