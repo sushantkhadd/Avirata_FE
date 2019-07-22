@@ -16,7 +16,7 @@ export class McqcomponentComponent implements OnInit {
   @Input() public passFlags;public queCount;
   @Output() public sendAns = new EventEmitter<Object>();
   @ViewChild("eventRadioGroup") eventRadioGroup: DxRadioGroupComponent;
-  public statement; tasks; priorities = []; questionType;  showAnswer; selectedAnswer; description;queDescription;alreadyAns;alreadyAns1;mcqTextOption=[]
+  public statement; tasks; priorities = []; questionType;  showAnswer; selectedAnswer; description;queDescription;alreadyAns;alreadyAns1;mcqTextOption=[];questionImg;answerImg;
   public correctAns; rightFlag; submitFlag; imgUrlJson; ansTypeFlag; showCorrectAns;
   public bunchCounter;bunchList;bunchOptions;userOptions={};mcqBunchFlag = false;totalBunchCounter = 1;bunchSelectedAns=[];mcqOption:any = []; priorities1=[];priorities2=[]
   public ansSelectCount; counter; selectedTasks = []; ans1; ans2; showAns1; showAns2; queUrl;title;rightAnsId;rightAnsArray=[];
@@ -25,7 +25,6 @@ export class McqcomponentComponent implements OnInit {
   constructor(public lang: LanguageService) { }
 
   ngOnInit() {
-
     this.submitFlagMCQ = false
     this.mysubModule = parseInt(window.localStorage.getItem('mainFlagModule5'))
     this.mysubModule3 = parseInt(window.localStorage.getItem('mainFlagModule3'))
@@ -263,7 +262,11 @@ export class McqcomponentComponent implements OnInit {
             this.mcqTextOption.push(this.bunchList[0].options[i])
           }
         }
-        console.log("mcqtextoptionarr",this.mcqTextOption)
+        if(this.bunchList[0].question_url !=null){
+          this.questionImg = this.bunchList[0].question_url;
+          this.answerImg = this.bunchList[0].answer_url;
+        }
+        console.log("mcqtextoptionarr",this.mcqTextOption,this.bunchList,this.questionImg,this.answerImg)
       }
       else{
         this.bunchList = this.data.questionlist.splice(0,1)    
@@ -274,6 +277,7 @@ export class McqcomponentComponent implements OnInit {
      
       this.statement = this.bunchList[0].question;
       this.queDescription = this.bunchList[0].description;
+      this.description = this.bunchList[0].description;
       this.tasks = this.bunchList[0].options;
       for (var i = 0; i < this.tasks.length; i++)
       {
@@ -829,6 +833,7 @@ export class McqcomponentComponent implements OnInit {
         this.bunchList = this.data.questionlist.splice(0,1)
         this.statement = this.bunchList[0].question;
         this.tasks = this.bunchList[0].options;
+        this.description = this.bunchList[0].description;
         for (var i = 0; i < this.tasks.length; i++)
         {
           if (this.bunchList[0].options[i].value != "")
@@ -849,10 +854,18 @@ export class McqcomponentComponent implements OnInit {
       this.sendAns.emit(this.userOptions)
       this.priorities= []
       this.mcqTextOption=[]
+      this.queDescription="";
+      this.questionImg=null;
+      this.answerImg=null;
         // this.priorities = this.data.questionlist[0].question;
         console.log("options12222222222",this.data)
           this.bunchList = this.data.splice(0,1)
-          console.log("options11111111111",this.bunchList,this.userOptions)
+          if(this.bunchList[0].question_url !=null){
+            this.questionImg = this.bunchList[0].question_url;
+            this.answerImg = this.bunchList[0].answer_url;
+          }
+          this.queDescription = this.bunchList[0].description;
+          console.log("options11111111111",this.bunchList,this.userOptions,this.questionImg,this.answerImg)
             this.alreadyAns = this.bunchList[0].answer
           
             for(let i=0; i< this.bunchList[0].options.length; i++){
@@ -865,7 +878,7 @@ export class McqcomponentComponent implements OnInit {
         this.tasks = this.bunchList[0].options;
         console.log("options",this.bunchList,this.userOptions,this.alreadyAns)
        this.userOptions={};
-       this.queDescription="";
+      
         for (var i = 0; i < this.tasks.length; i++)
         {
           if (this.bunchList[0].options[i].value != "")

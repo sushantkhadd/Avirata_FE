@@ -15,6 +15,7 @@ export class DragDropComponent implements OnInit {
   public mainFlagModule3 = parseInt(window.localStorage.getItem('mainFlagModule3'));
 
   public subFlagModule1 = parseInt(window.localStorage.getItem('subFlagModule1'));
+  public subFlagModule3 = parseInt(window.localStorage.getItem('subFlagModule3'));
   @Input() public data;
   question;
   ansJson = {};
