@@ -108,6 +108,7 @@ export class Module19Component implements OnInit {
         if (data["message"] == "ok" || data["message"] == "submodule started") {
           this.passValues["url"] = data["data"].url;
           this.startPdf = true;
+          console.log("dtrgdgfdd")
         }
       },
       error => {
@@ -127,9 +128,9 @@ export class Module19Component implements OnInit {
         if (data["message"] == "submodule finish next uuid is") {
           window.localStorage.setItem("uuid", data["data"].nextuuid);
           this.startPdf = false;
-          setTimeout(() => {
+          // setTimeout(() => {
             this.start();
-          }, 300);
+          // }, 300);
         } else if (data["message"] == "submodule finish") {
           var id = (submoduleId + 1).toString();
           window.localStorage.setItem("mainFlagModule1", id);
@@ -164,45 +165,12 @@ export class Module19Component implements OnInit {
       },
       error => {
         this.LanguageService.handleError(error.error.message);
-        
-        // if (error.error.message == "complete previous module first") {
-        //   window.localStorage.setItem("mainFlagModule4", submoduleId);
-        //   this.router.navigate([routeNavigate]);
-        // } else if (error.error.message == "required currentsubmoduleid key") {
-        //   window.localStorage.setItem("mainFlagModule4", submoduleId);
-        //   this.router.navigate([routeNavigate]);
-        // } else if (error.error.message == "required currentsubmoduleid field") {
-        //   window.localStorage.setItem("mainFlagModule4", submoduleId);
-        //   this.router.navigate([routeNavigate]);
-        // } else if (error.error.message == "required event key") {
-        //   window.localStorage.setItem("mainFlagModule4", submoduleId);
-        //   this.router.navigate([routeNavigate]);
-        // } else if (error.error.message == "invalid event") {
-        //   window.localStorage.setItem("mainFlagModule4", submoduleId);
-        //   this.router.navigate([routeNavigate]);
-        // } else if (error.error.message == "access denied") {
-        //   window.localStorage.setItem("mainFlagModule4", submoduleId);
-        //   this.toastr.error(
-        //     this.translate.instant("otherMessages.accessDenied")
-        //   );
-        //   setTimeout(() => {
-        //     this.router.navigate([routeNavigate]);
-        //   }, 4000);
-        // } else if (error.error.message == "invalid uuid") {
-        //   window.localStorage.setItem("mainFlagModule4", submoduleId);
-        //   this.router.navigate([routeNavigate]);
-        // } else {
-        //   this.LanguageService.handleError(error.error.message);
-        // }
       }
     );
   }
 
 
   showVideo(src, title,value) {
-    // this.staticImageModal.show();
-    // this.statVideoFlag = true;
-    // this.statImageFlag = false;
     if (value == 1)
     {
       this.passValues['url'] = src;

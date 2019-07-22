@@ -494,13 +494,13 @@ export class Module521Component implements OnInit {
     //   this.postWordCount['3'] = this.answer3.trim().split(' ').length;
     // }
     if (this.answer5) {
-      this.postWordCount['5'] = this.answer5.trim().split(' ').length;
+      this.postWordCount['5'] = this.answer5.trim().split(/\s+/).length;
     }
     if (this.answer6) {
-      this.postWordCount['6'] = this.answer6.trim().split(' ').length;
+      this.postWordCount['6'] = this.answer6.trim().split(/\s+/).length;
     }
     if (this.answer7) {
-      this.postWordCount['7'] = this.answer7.trim().split(' ').length;
+      this.postWordCount['7'] = this.answer7.trim().split(/\s+/).length;
     }
 
     if (this.answer1 != "" && this.answer1 != undefined && this.answer1 != null ||

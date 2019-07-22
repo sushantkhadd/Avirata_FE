@@ -76,19 +76,19 @@ export class Module317Component implements OnInit {
 
   ngDoCheck() {
     if (this.answer_1) {
-      this.postWordCount['1'] = this.answer_1.trim().split(' ').length;
+      this.postWordCount['1'] = this.answer_1.trim().split(/\s+/).length;
     }
     if (this.answer_2) {
-      this.postWordCount['2'] = this.answer_2.trim().split(' ').length;
+      this.postWordCount['2'] = this.answer_2.trim().split(/\s+/).length;
     }
     if (this.answer_3) {
-      this.postWordCount['3'] = this.answer_3.trim().split(' ').length;
+      this.postWordCount['3'] = this.answer_3.trim().split(/\s+/).length;
     }
     if (this.answer_4) {
-      this.postWordCount['4'] = this.answer_4.trim().split(' ').length;
+      this.postWordCount['4'] = this.answer_4.trim().split(/\s+/).length;
     }
     if (this.answer_5) {
-      this.postWordCount['5'] = this.answer_5.trim().split(' ').length;
+      this.postWordCount['5'] = this.answer_5.trim().split(/\s+/).length;
     }
 
     if (this.answer_1 != "" && this.answer_1 != undefined && this.answer_1 != null

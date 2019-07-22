@@ -64,10 +64,10 @@ export class Module33Component implements OnInit {
 
   ngDoCheck() {
     if (this.answer1) {
-      this.postWordCount['1'] = this.answer1.trim().split(' ').length;
+      this.postWordCount['1'] = this.answer1.trim().split(/\s+/).length;
     }
     if (this.answer2) {
-      this.postWordCount['2'] = this.answer2.trim().split(' ').length;
+      this.postWordCount['2'] = this.answer2.trim().split(/\s+/).length;
     }
 
     if (this.answer1 == "" || this.answer1 == null || this.answer1 == undefined) {

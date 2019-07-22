@@ -18,7 +18,7 @@ export class Module411Component implements OnInit {
   constructor(public LanguageService: LanguageService, public LocalstoragedetailsService: LocalstoragedetailsService, public Module4Service: Module4Service, public toastr: ToastsManager, vcr: ViewContainerRef, public router: Router, public translate: TranslateService) {
     this.toastr.setRootViewContainerRef(vcr);
   }
-  public data; questionType; passFlags = {}; showAnswer; saveData; useranswer={}; sumbitButton; startFlag;description;answer;queId;loader;
+  public data=[]; questionType; passFlags = {}; showAnswer; saveData; useranswer={}; sumbitButton; startFlag;description;answer;queId;loader;questionlist=[];
   public inst = "खाली दिलेली तंत्रे मानसिक स्वास्थ्य संवर्धनात मोडतात का ते लिहा "
   ngOnInit() {
     this.startFlag = false;
@@ -49,10 +49,15 @@ export class Module411Component implements OnInit {
           {
             // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 1.3', window.localStorage.getItem('username'), 10);
             console.log("data ", data['data'])
-            this.data = data['data'].questionlist
+            this.questionlist =data["data"].questionlist
+            for(let i=0; i< this.questionlist.length; i++){
+              if(this.questionlist[i].answer == ""){
+                this.data.push(this.questionlist[i])
+              }
+            }
             this.startFlag = true;
             console.log("datttaaaa",this.data)
-            var baselineCounter = 1;
+            var baselineCounter = 5-(this.data.length-1);
             window.localStorage.setItem("baselineCounter",JSON.stringify(baselineCounter))
           }
         },

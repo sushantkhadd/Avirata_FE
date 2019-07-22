@@ -18,14 +18,15 @@ export class ESearchComponent implements OnInit {
   public data ;
   public result;
   public tempNum;
-  public remark;
-  public position;
+  public remark;fname;mobNo;
+  public position;endDate;rangeFlag;
   public btnValid;exportData=[];
   InitialPosition : any;
   UpdatedPosition : any;
 
   @Output() public finishCall = new EventEmitter<any>();
   @ViewChild('positionChangeModal') public positionChangeModal: ModalDirective;
+  @ViewChild('dateChangeModal') public dateChangeModal: ModalDirective;
 
   constructor(private csvService: CsvService, public _service: AdminReportService, public translate: TranslateService, public toastr: ToastsManager, vcr: ViewContainerRef, private router: Router) {
     this.toastr.setRootViewContainerRef(vcr);
@@ -33,11 +34,13 @@ export class ESearchComponent implements OnInit {
 
   ngOnInit() {
     this.number = '';
+    this.endDate="";
     this.showDetails = false;
     this.result = false;
     this.btnValid = false;
     this.InitialPosition = true;
     this.UpdatedPosition=false;
+    this.rangeFlag = false;
   }
 
   onKey(evt){
@@ -61,11 +64,11 @@ export class ESearchComponent implements OnInit {
             this.tempNum = this.number;
             this.btnValid = true;
             this.data = data['data'].hits.hits[0]._source;
-
+            this.fname = this.data.name;
+            this.mobNo = this.data.mobile;
             this.result = true;
             this.exportData.push(data['data'].hits.hits[0]._source)
             localStorage.setItem("esearch-id",data['data'].hits.hits[0]._id)
-
           } else {
             console.log('something went wrong')
           }
@@ -164,5 +167,84 @@ export class ESearchComponent implements OnInit {
         }
       }
     );
+  }
+
+  addSlash() {
+
+    this.endDate = this.endDate
+  
+    .replace(/^(\d\d)(\d)$/g, '$1/$2')
+  
+    .replace(/^(\d\d\/\d\d)(\d+)$/g, '$1/$2').replace(/[^\d\/]/g, '');
+  
+    }
+
+  getDate(e) {
+
+    if (this.endDate.trim().length == 10)
+    {
+      var lastFourChars = this.endDate.substr(-4);
+    
+      console.log('lastFourChars', lastFourChars)
+    
+      if (lastFourChars != undefined)
+      {
+        if (lastFourChars > 2018 && lastFourChars <= 2019)
+        {
+          this.rangeFlag = false;
+          console.log('true')
+        } else
+        {
+          this.rangeFlag = true;
+          console.log('false')
+        }
+      }
+    }
+  }
+
+  numberOnly(event) {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    console.log(event)
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      event.preventDefault();
+    }
+  }
+
+  changeDate(){
+    this.apiUrl = 'userdatechange/';
+    var jsonBody = {};
+    jsonBody['mobile']=this.mobNo;
+    jsonBody['startdate'] = "";
+    jsonBody['enddate'] =this.endDate
+    jsonBody['event'] = "enddate";
+
+    this._service.postCalllvl1(jsonBody, this.apiUrl)
+    .subscribe(
+       data => {
+        if (data['message'] == "date change") {
+          this.toastr.success(this.translate.instant('Date changed successfully!!'));
+          this.dateChangeModal.hide();
+          this.endDate="";
+        }
+      },
+      error => {
+        if (error.error.message == 'access denied') {
+          console.log(error.error.message);
+        } else if(error.error.message == 'token not found'){
+          console.log(error.error.message);
+        } else if(error.error.message == 'token not matches'){
+          console.log(error.error.message);
+        } else if(error.error.message == 'source required'){
+          console.log(error.error.message);
+        } else {
+          this.toastr.error(this.translate.instant('Errors.cannotProceed'))
+        }
+      }
+    );
+  }
+
+  clearField(){
+    this.endDate="";
+    this.rangeFlag=false;
   }
 }

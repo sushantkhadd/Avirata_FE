@@ -198,7 +198,7 @@ export class PresentationComponent implements OnInit {
       }
       else if (this.finalCount == 1) {
 
-        if ((window.localStorage.getItem('mainFlagModule5')) == '4') {
+        if ((window.localStorage.getItem('mainFlagModule5')) == '4' || (window.localStorage.getItem('mainFlagModule4')) == '14') {
           this.showFinish = true;
         } else {
           this.showFinish = false;
@@ -229,7 +229,7 @@ export class PresentationComponent implements OnInit {
     setTimeout(() => {
       this.isLoaded = false;
     }, 4000);
-    console.log("data", this.data, 'count init', this.count)
+    console.log("data", this.data, 'count init', this.count,this.finalCount)
     this.count = 1;
    
     this.submitDisabled = false;
