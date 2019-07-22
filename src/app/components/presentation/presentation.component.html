@@ -1,5 +1,5 @@
 <div class="row imageArea mt-2 mb-4" [class.bg-white]="isLoaded">
-  <div class="mx-auto" style="position:relative;">
+  <div class="mx-auto w-100" style="position:relative;">
     <pdf-viewer *ngIf="!isLoaded" [autoresize]="true" [original-size]="false" [fit-to-page]="true"
       style="display: block" [render-text]="true" class="embed-responsive-item pdfViewer" [src]="pdfURL"
       [show-all]="false"
@@ -147,7 +147,7 @@
             {{'McqTest.popupTitle2' | translate}}</h5>
         </div>
         <!-- <div class="modal-body text-center" [style.border]="msgFlag ? '5px solid #4dbd74' : '5px solid #f86c6b'"> -->
-        <div class="modal-body text-center" [class.d-none]="(mainFlagModule2==15 || mainFlagModule5==2 || mainFlagModule5==3 || mainFlagModule5==4 || mainFlagModule5==5) && msgFlag">
+        <div class="modal-body text-center" [class.d-none]="(mainFlagModule4==13 || mainFlagModule2==15 || mainFlagModule5==2 || mainFlagModule5==3 || mainFlagModule5==4 || mainFlagModule5==5) && msgFlag">
           <div *ngIf="msgFlag==true">
             <h6 class="congratulation inst-text mb-3 mt-2">{{'Errors.rightAns' | translate}}</h6>
           </div>

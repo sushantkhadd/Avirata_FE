@@ -74,7 +74,7 @@
                   {{pager.index + 1 | numberConvertor : 'Devanagari'}} / {{pager.count | numberConvertor : 'Devanagari'}}
             </div>
                 <div class="card p-2">
-                <h6 class="font-weight-bold">{{pager.index + 1 | numberConvertor : 'Devanagari'}}.
+                <h6 class="font-weight-bold p-2">{{pager.index + 1 | numberConvertor : 'Devanagari'}}.
                     <strong><span [innerHTML]="question.name"></span></strong>
                 </h6>
                 <p *ngIf="question.description" class="ml-4">{{question.description}}</p>
@@ -84,7 +84,7 @@
                         <div class="option">
                             <label class="" [attr.for]="option.id">
                                 <input id="{{option.id}}" type="checkbox" [(ngModel)]="option.selected" (change)="onSelect(question,question.id, option,$event);"
-                                /> <span>{{option.name}}</span>
+                                /> <span class="ml-2">{{option.name}}</span>
                                 <!-- span added to align checkbox and label -->
                             </label>
                         </div>

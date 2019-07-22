@@ -225,5 +225,13 @@ export class Module33Component implements OnInit {
       e.preventDefault();
     }
   }
+
+  textAreaAdjust(e) {
+    let textArea = document.getElementById("questionid1") 
+    textArea.style.overflow = 'hidden'; 
+    textArea.style.height = 'auto'; 
+    textArea.style.height = textArea.scrollHeight + 'px';
+    console.log('text id', textArea) 
+  }
   
 }

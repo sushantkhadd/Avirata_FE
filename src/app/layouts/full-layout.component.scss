@@ -253,7 +253,7 @@ nav#sidebar.active+#content {
     flex-direction: column;
     width: 100%;
     pointer-events: auto;
-    background-color: #fff;
+    // background-image: url("../../assets/img/rewards/single-stars/popup_bg.png");
     background-clip: padding-box;
     border-radius: 0.5rem;
     outline: 0;
@@ -301,7 +301,7 @@ nav#sidebar.active+#content {
     font-weight: 600;
     font-size: 1.2rem;
     padding: 0 43px;
-    line-height: 26px;
+    line-height: 0;
   }
 
   .img-goldcup {
@@ -613,21 +613,21 @@ nav#sidebar.active+#content {
 .gold-bg{
   background: url("../../assets/img/rewards/single-stars/shine_gold.png");
   background-position: center;
-  background-size: initial;
+  background-size: contain;
   background-repeat: no-repeat;
 }
 
 .silver-bg{
   background: url("../../assets/img/rewards/single-stars/shine_silver.png");
   background-position: center;
-  background-size: initial;
+  background-size: contain;
   background-repeat: no-repeat;
 }
 
 .bronze-bg{
   background: url("../../assets/img/rewards/single-stars/shine_bronze.png");
   background-position: center;
-  background-size: initial;
+  background-size: contain;
   background-repeat: no-repeat;
 }
 
@@ -635,6 +635,13 @@ nav#sidebar.active+#content {
   background: url("../../assets/img/rewards/single-stars/cup_bg.png");
   background-position: center;
   background-size: initial;
+  background-repeat: no-repeat;
+}
+
+.popup-bg{
+  background: url("../../assets/img/rewards/single-stars/popup_bg.png");
+  background-position: center;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 

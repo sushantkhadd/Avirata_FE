@@ -331,22 +331,9 @@ export class Module521Component implements OnInit {
   }
 
   next(assignForm: NgForm) {
-    this.zeroMsgFlag['1'] = true;
-    this.zeroMsgFlag['2'] = true;
-    this.zeroMsgFlag['3'] = true;
-    this.zeroMsgFlag['4'] = true;
-    this.zeroMsgFlag['5'] = true;
-    this.zeroMsgFlag['6'] = true;
-    this.zeroMsgFlag['7'] = true;
-
-    // this.showLimit['1']=true;
-    // this.showLimit['2']=true;
-    // this.showLimit['3']=true;
-    // this.showLimit['4']=true;
-    // this.showLimit['5']=true;
-    // this.showLimit['6']=true;
-    // this.showLimit['7']=true;
-
+    this.zeroMsgFlag['5'] = false;
+    this.zeroMsgFlag['6'] = false;
+    this.zeroMsgFlag['7'] = false;
     this.noHitFlag = false;
 
     if (window.localStorage.getItem("personId") == "5") {
@@ -355,7 +342,7 @@ export class Module521Component implements OnInit {
     }
 
     if (!assignForm.dirty) {
-      console.log("No hit")
+      console.log("No hit.....")
       this.personId = parseInt(window.localStorage.getItem("personId"))
       window.localStorage.setItem("personId", JSON.stringify(this.personId + 1))
       this.start1(this.personId)
@@ -367,9 +354,6 @@ export class Module521Component implements OnInit {
         this.start1(this.personId)
       }, 300);
     }
-
-
-
   }
 
   confirmationModalHide() {

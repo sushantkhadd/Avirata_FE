@@ -18,7 +18,7 @@ export class Module37Component implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
   public data; questionType; passFlags = {}; showAnswer; saveData; useranswer={}; sumbitButton; startFlag;description;answer;queId;loader;
-  public inst = "शिक्षकांनी सांगितलेल्या सूचनेच्या बरोबर उलट कृती मनीष करतो. मनीषबाबत (सत्ता मिळवणाऱ्या विद्यार्थ्याबाबत) शिक्षकांनी केलेल्या खालील कृतींमुळे काय होईल असे तुम्हांला वाटते?"
+  public inst = "शिक्षकांनी सांगितलेल्या सूचनेच्या बरोबर उलट कृती मनीष करतो. मनीषबाबत (सत्ता मिळवणाऱ्या विद्यार्थ्याबाबत) शिक्षकांनी केलेल्या खालील कृतींमुळे काय होईल <br/>असे तुम्हांला वाटते?"
   ngOnInit() {
     this.startFlag = false;
     this.showAnswer = true;

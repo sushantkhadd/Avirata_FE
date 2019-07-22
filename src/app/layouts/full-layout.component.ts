@@ -21,8 +21,9 @@ import { map, filter, take } from "rxjs/operators";
 import { interval, pipe, Subscription } from "rxjs";
 import { SignupStepperService } from "../signup-stepper/signup-stepper.service";
 import { SharedDataService } from "../services/shared-data.service";
-
+import * as fileSaver from 'file-saver';
 declare var jQuery: any;
+
 
 @Component({
   selector: "app-dashboard",
@@ -48,7 +49,6 @@ export class FullLayoutComponent implements OnInit {
   cupImg;
   needEfforts;
   subscription: Subscription; isloaded; grandPercent;
-
   @ViewChild("passwordChangeModal") public passwordChangeModal: ModalDirective;
   @ViewChild("moduleStatusModal") public moduleStatusModal: ModalDirective;
   @ViewChild("submoduleStatusModal")
@@ -226,35 +226,76 @@ export class FullLayoutComponent implements OnInit {
   }
 
   downloadReward() {
-    this.isloaded = true;
-    html2canvas(document.querySelector("#capture")).then(canvas => {
-      this.shareableImage = canvas.toDataURL();
-      console.log(canvas, this.shareableImage);
-      if (this.shareableImage) {
-        var link = document.createElement("a");
-        this.isloaded = false;
+    document.getElementById("popup").style.backgroundColor = '#ffffff'
+    html2canvas(document.body).then(     
+      canvas => {
+      // Export canvas as a blob  
+      this.shareableImage = canvas;
+      canvas.toBlob(function (blob) {
+        console.log(blob);
         setTimeout(() => {
-          link.href = this.shareableImage;
-          link.download = "my-reward.png";
-          link.click();
+          fileSaver.saveAs(blob, "My-Reward.png")
         }, 1000);
-      }
+      });
     });
+    jQuery("#popup").css({ 'background-color' : '', 'opacity' : '' });
+    // document.getElementById("popup").style.zIndex = '1050';
+    // document.getElementById("popup").style.backgroundColor = '#000000';
+    // document.getElementById("popup").style.opacity = '0.6';
   }
 
-  shareReward() {
-    html2canvas(document.querySelector("#capture")).then(canvas => {
-      this.shareableImage = canvas.toDataURL();
-      console.log(canvas, this.shareableImage);
-      var link = document.createElement("a");
-      link.href = this.shareableImage; //function blocks CORS
-      link.download = "my-reward.png";
-      link.click();
-      var file = this.dataURLtoFile(this.shareableImage, "a.png");
-      var shareUrl = "whatsapp://send?text=" + file.name;
-      this.getImage = this._sanitizer.bypassSecurityTrustResourceUrl(shareUrl);
-      console.log(file, file.name, this.getImage);
+  downloadCupReward() {
+    document.getElementById("cupPopup").style.backgroundColor = '#ffffff';
+    html2canvas(document.body).then(     
+      canvas => {
+      // Export canvas as a blob  
+      this.shareableImage = canvas;
+      jQuery("#cupPopup").css({ 'width' : '100%' });
+      canvas.toBlob(blob => {
+        console.log(blob);
+        setTimeout(() => {
+          fileSaver.saveAs(blob, "Cup-Reward.png")
+        }, 1000);
+      });
     });
+    jQuery("#cupPopup").css({ 'background-color' : '', 'opacity' : '' });
+    // document.getElementById("popup").style.zIndex = '1050';
+    // document.getElementById("popup").style.backgroundColor = '#000000';
+    // document.getElementById("popup").style.opacity = '0.6';
+  }
+
+
+ 
+  shareReward() {
+    document.getElementById("popup").style.backgroundColor = '#ffffff'
+    html2canvas(document.body).then(     
+      canvas => {
+      // Export canvas as a blob  
+      this.shareableImage = canvas;
+      canvas.toBlob(function (blob) {
+        console.log(blob);
+        setTimeout(() => {
+          //fileSaver.saveAs(blob, "My-Reward.png")
+          var file = this.dataURLtoFile(blob, "My-Reward.png");
+          var shareUrl = "whatsapp://send?text=" + file.name;
+          this.getImage = this._sanitizer.bypassSecurityTrustResourceUrl(shareUrl);
+          console.log(file,file.name,this.getImage)
+        }, 1000);
+      });
+    });
+    jQuery("#popup").css({ 'background-color' : '', 'opacity' : '' });
+    // html2canvas(document.querySelector("#capture")).then(canvas => {
+    //   this.shareableImage = canvas.toDataURL();
+    //   console.log(canvas, this.shareableImage);
+    //   var link = document.createElement("a");
+    //   link.href = this.shareableImage; //function blocks CORS
+    //   link.download = "my-reward.png";
+    //   link.click();
+    //   var file = this.dataURLtoFile(this.shareableImage, "a.png");
+    //   var shareUrl = "whatsapp://send?text=" + file.name;
+    //   this.getImage = this._sanitizer.bypassSecurityTrustResourceUrl(shareUrl);
+    //   console.log(file, file.name, this.getImage);
+    // });
   }
 
   dataURLtoFile(dataurl, filename) {
@@ -268,7 +309,9 @@ export class FullLayoutComponent implements OnInit {
     }
     return new File([u8arr], filename, { type: mime });
   }
+
   mainFlag;
+
   ngOnInit() {
     // document.querySelector("#content").classList.remove("ml-0");
     // if (this.moduleCompleteStatus["type"] == "submodule")
@@ -2335,18 +2378,18 @@ export class FullLayoutComponent implements OnInit {
 
       this.grandPercent = (percent1 + percent2 + percent3 + percent4 + percent5) / 5;
       // console.log('grand %', this.grandPercent,percent1,percent2,percent3,percent4,percent5)
-      window.localStorage.setItem("grand%",this.grandPercent.toString())
+      window.localStorage.setItem("grand%", this.grandPercent.toString())
       if (this.grandPercent > 80) {
         this.cupImg = 1;
         // console.log('gold');
       } else if (this.grandPercent <= 80 && this.grandPercent > 50) {
         this.cupImg = 2
         // console.log('silver');
-      } else if(this.grandPercent >= 10 && this.grandPercent <= 50){
+      } else if (this.grandPercent >= 10 && this.grandPercent <= 50) {
         this.cupImg = 3
         // console.log('bronze');
-      } else if(this.grandPercent >= 0 &&
-        this.grandPercent < 10){
+      } else if (this.grandPercent >= 0 &&
+        this.grandPercent < 10) {
         this.needEfforts = true;
       }
 
@@ -2622,7 +2665,7 @@ export class FullLayoutComponent implements OnInit {
         );
         completedModuleStatus["module5"] = true;
         this.module5FinishFlag = true;
-        console.log('5 finish', completedModuleStatus["module5"], this.module5FinishFlag)
+        // console.log('5 finish', completedModuleStatus["module5"], this.module5FinishFlag)
       }
       window.localStorage.setItem(
         "completeModule",
@@ -2885,7 +2928,7 @@ export class FullLayoutComponent implements OnInit {
     }
     if (jQuery("bs-modal-backdrop").length > 1) {
       jQuery("bs-modal-backdrop").hide();
-      jQuery("body .modal-backdrop.show").css("opacity", "0.5 !important");
+      jQuery("body .modal-backdrop.show").css("opacity", "0.3 !important");
       console.log('backdrop....')
     }
     this.moduleStatusModal.hide();
@@ -2990,7 +3033,7 @@ export class FullLayoutComponent implements OnInit {
     console.log('cup model');
   }
 
-  closeMe(){
+  closeMe() {
     this.moduleStatusCupModal.hide();
     this.LanguageService.toHide();
     this.router.navigate(["/dashboard"]);

@@ -38,5 +38,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 9. npm i youtube-player@5.4.0
 10. npm install devextreme devextreme-angular --save --save-exact
 11. npm i ng2-pdf-viewer --save
+12. npm install ngx-autosize
 <!-- for error of stream in jszip lib after adding dx libraries -->
 Readme

@@ -75,9 +75,9 @@ export class Module317Component implements OnInit {
   }
 
   ngDoCheck() {
-    if (this.answer_1) {
-      this.postWordCount['1'] = this.answer_1.trim().split(' ').length;
-    }
+    // if (this.answer_1) {
+    //   this.postWordCount['1'] = this.answer_1.trim().split(' ').length;
+    // }
     if (this.answer_2) {
       this.postWordCount['2'] = this.answer_2.trim().split(' ').length;
     }
@@ -96,13 +96,14 @@ export class Module317Component implements OnInit {
       || this.answer_3 != "" && this.answer_3 != undefined && this.answer_3 != null
       || this.answer_4 != "" && this.answer_4 != undefined && this.answer_4 != null
       || this.answer_5 != "" && this.answer_5 != undefined && this.answer_5 != null) {
-      if (this.answer_1.trim().length == 0 || this.answer_2.trim().length == 0 ||
+      if (this.answer_2.trim().length == 0 ||
         this.answer_3.trim().length == 0 || this.answer_4.trim().length == 0 || this.answer_5.trim().length == 0) {
         this.trimFlag = true;
       }
-      else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 5) {
-        this.trimFlag = true;
-      } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 5) {
+      // else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 5) {
+      //   this.trimFlag = true;
+      // } 
+      else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 5) {
         this.trimFlag = true;
       } else if (this.postWordCount['3'] > 150 || this.postWordCount['3'] < 5) {
         this.trimFlag = true;
@@ -115,9 +116,9 @@ export class Module317Component implements OnInit {
       }
     }
 
-    if (this.answer_1 == "" || this.answer_1 == null || this.answer_1 == undefined) {
-      this.postWordCount['1'] = 0;
-    }
+    // if (this.answer_1 == "" || this.answer_1 == null || this.answer_1 == undefined) {
+    //   this.postWordCount['1'] = 0;
+    // }
     if (this.answer_2 == "" || this.answer_2 == null || this.answer_2 == undefined) {
       this.postWordCount['2'] = 0;
     }
@@ -272,7 +273,7 @@ export class Module317Component implements OnInit {
     this.studThreeFlag = false;
     this.displayFormFlag = false;
     
-    this.postWordCount['1'] = 0;
+    // this.postWordCount['1'] = 0;
     this.postWordCount['2'] = 0;
     this.postWordCount['3'] = 0;
     this.postWordCount['4'] = 0;

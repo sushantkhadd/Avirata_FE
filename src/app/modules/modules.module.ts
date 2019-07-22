@@ -138,6 +138,7 @@ import { SortPipe } from "../shared/pipes/sort.pipe";
 import { Module02Component } from './module0/module0-2.component';
 import { Module03Component } from './module0/module0-3.component';
 import { FeedbackComponent } from '../components/feedback/feedback.component';
+import {AutosizeModule} from 'ngx-autosize';
 
 @NgModule({
   imports: [
@@ -158,7 +159,8 @@ import { FeedbackComponent } from '../components/feedback/feedback.component';
     DxPieChartModule,
     Ng5SliderModule,
     SharedModule,
-    DataTableModule
+    DataTableModule,
+    AutosizeModule
   ],
   declarations: [
     Module0Component,
@@ -275,7 +277,7 @@ import { FeedbackComponent } from '../components/feedback/feedback.component';
     DataFilterPipe,
     Module02Component,
     Module03Component,
-    FeedbackComponent
+    FeedbackComponent,
   ],
   providers: [
     Module0Service,
