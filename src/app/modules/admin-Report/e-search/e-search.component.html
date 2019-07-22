@@ -52,6 +52,12 @@
             <p class="mar-btm-0">
               <strong>E-mail ID: </strong>&nbsp;{{data.email}}</p>
           </div>
+          <div class="col-md-2">
+            <p class="mar-btm-0">
+              <button class="btn btn-primary" (click)="dateChangeModal.show();clearField()">
+                 Change Date
+              </button></p>
+          </div>
         </div>
       </div>
     </div>
@@ -848,6 +854,74 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-success btn-sm" (click)="positionChangeModal.hide();UpdateDesignation()" [disabled]= "f.invalid" novalidate>
+          <i class="fa fa-check-circle text-white"></i>&nbsp;Okay
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div bsModal #dateChangeModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="dateChangeModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-danger">
+        <h5 class="text-white">Extend User Date</h5>
+        <button type="button" class="close" (click)="dateChangeModal.hide();" aria-label="Close" id="btnCloseModal">
+          <span aria-hidden="true" class="text-white">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #dateForm="ngForm">
+          <div class="row">
+            <div class="col-md-5">
+              <p>
+                <strong>Full Name : </strong></p>
+            </div>
+            <div class="col-md-5">
+              <p>
+                {{fname}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-5">
+              <p>
+                <strong>Mobile Number : </strong></p>
+            </div>
+            <div class="col-md-5">
+              <p> 
+                {{mobNo}}</p>
+            </div>
+          </div>
+            
+          <div class="row form-group">
+              <div class="col-md-5">
+                  <p>
+                    <strong>End Date : </strong></p>
+                </div>
+            <div class="col-md-5">
+              <div class="input-group">
+                <input type="text" id="DOB" class="date-form-control" placeholder="DD/MM/YYYY" [(ngModel)]="endDate "
+                  name="DOB" #DOB="ngModel" autocomplete='off' (keyup)="getDate(DOB)" pattern="(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)"
+                  (keypress)="addSlash();numberOnly($event)" maxlength="10" required>
+                            
+              </div>
+              <div class="mt-1" *ngIf="rangeFlag">
+                <div class="alert alert-danger errorMessage">
+                  Invalid date range
+                </div>
+              </div>
+              <div class="alert alert-danger errorMessage mt-1" *ngIf="DOB.errors && DOB.dirty">
+                <div [hidden]="!DOB.hasError('pattern') ">Invalid date</div>
+            </div>
+
+        </div>
+
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success btn-sm" (click)="changeDate()" [disabled]= "dateForm.invalid || rangeFlag" novalidate>
           <i class="fa fa-check-circle text-white"></i>&nbsp;Okay
         </button>
       </div>

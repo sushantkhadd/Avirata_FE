@@ -261,18 +261,21 @@ export class NewBaselineComponent implements OnInit {
       console.log("question.id",this.filteredQuestions,this.pager.index,this.pager.index + this.pager.size,this.quiz.questions,question.id)
       this.lastAns='';
       this.lastQueId = '';
+      question.options.forEach((x) => {
+        if (x.id !== option.id) x.selected = false;
+      });
+      this.baselineSelectedAns = option.id;
     }
     else {
       question.answered = false;
       console.log("not checked")
-     
+      this.baselineSelectedAns=null
+      // this.baselineSelectedQuestion = "";
       // this.endApiAnsHit=false
     }
-    question.options.forEach((x) => {
-      if (x.id !== option.id) x.selected = false;
-    });
-    this.baselineSelectedAns = option.id;
+   
     this.baselineSelectedQuestion = question.id;
+    console.log("checkbox event",option.id,question.id,this.baselineSelectedAns,this.baselineSelectedQuestion)
     if (window.localStorage.getItem('currentstatus') == '2')
       console.log("1",this.baselineSelectedAns,this.baselineSelectedQuestion)
       // this.sendAnswer(this.baselineSelectedAns, this.baselineSelectedQuestion, this.apiEndSendAns);
@@ -302,7 +305,7 @@ export class NewBaselineComponent implements OnInit {
           this.mode = 'quiz';
           // this.nextButtonFlag=true
           console.log("selected",this.quiz.questions[index+1])
-          console.log("selected1",this.baselineSelectedQuestion,this.baselineSelectedAns,this.quiz.questions[index+1].id)
+          console.log("selected1",this.baselineSelectedQuestion,this.baselineSelectedAns,this.quiz.questions[index+1].id,this.quiz.questions[index+1].ans)
 
           if(this.baselineSelectedQuestion == this.quiz.questions[index+1].id){
             if(this.quiz.questions[index+1].ans == null){
@@ -322,7 +325,7 @@ export class NewBaselineComponent implements OnInit {
                 this.sendAnswerEndline(this.baselineSelectedAns, this.baselineSelectedQuestion);
               }
             }else if(this.quiz.questions[index+1].ans != null){
-              if(this.quiz.questions[index+1].ans == this.baselineSelectedAns){
+              if(this.quiz.questions[index+1].ans == this.baselineSelectedAns || this.baselineSelectedAns == null){
                 console.log("SAME no hit")
               }else{
                 if (window.localStorage.getItem('mainFlagModule2') == '7' || window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '2' ||

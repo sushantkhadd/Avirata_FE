@@ -17,7 +17,7 @@ export class Module37Component implements OnInit {
   constructor(public LanguageService: LanguageService, public LocalstoragedetailsService: LocalstoragedetailsService, public Module3Service: Module3Service, public toastr: ToastsManager, vcr: ViewContainerRef, public router: Router, public translate: TranslateService) {
     this.toastr.setRootViewContainerRef(vcr);
   }
-  public data; questionType; passFlags = {}; showAnswer; saveData; useranswer={}; sumbitButton; startFlag;description;answer;queId;loader;
+  public data=[]; questionType; passFlags = {}; showAnswer; saveData; useranswer={}; sumbitButton; startFlag;description;answer;queId;loader;questionlist=[];
   public inst = "शिक्षकांनी सांगितलेल्या सूचनेच्या बरोबर उलट कृती मनीष करतो. मनीषबाबत (सत्ता मिळवणाऱ्या विद्यार्थ्याबाबत) शिक्षकांनी केलेल्या खालील कृतींमुळे काय होईल <br/>असे तुम्हांला वाटते?"
   ngOnInit() {
     this.startFlag = false;
@@ -48,10 +48,16 @@ export class Module37Component implements OnInit {
           {
             // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 1.3', window.localStorage.getItem('username'), 10);
             console.log("data ", data['data'])
-            this.data = data['data'].questionlist
+            this.questionlist =data["data"].questionlist
+            for(let i=0; i< this.questionlist.length; i++){
+              if(this.questionlist[i].answer == ""){
+                this.data.push(this.questionlist[i])
+              }
+            }
+            // this.data = data['data'].questionlist
             this.startFlag = true;
             console.log("datttaaaa",this.data)
-            var baselineCounter = 1;
+            var baselineCounter = 5-(this.data.length-1);
             window.localStorage.setItem("baselineCounter",JSON.stringify(baselineCounter))
           }
         },

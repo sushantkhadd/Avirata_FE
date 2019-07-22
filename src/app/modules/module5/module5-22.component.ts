@@ -66,7 +66,7 @@ export class Module522Component implements OnInit {
     {
       if (Object.keys(this.txtcomment.trim()).length == 0)
         this.submitPostDisable = true;
-      else if (this.txtcomment.trim().split(' ').length > 150 || this.txtcomment.trim().split(' ').length < 5)
+      else if (this.txtcomment.trim().split(/\s+/).length > 150 || this.txtcomment.trim().split(/\s+/).length < 5)
       {
         this.submitPostDisable = true;
       } else
@@ -77,7 +77,7 @@ export class Module522Component implements OnInit {
 
     if (this.txtcomment)
     {
-      this.postWordCount = this.txtcomment.trim().split(' ').length;
+      this.postWordCount = this.txtcomment.trim().split(/\s+/).length;
     }
   }
   nextRoute() {
@@ -86,7 +86,7 @@ export class Module522Component implements OnInit {
   handleInput(e) {
     if (this.txtcomment != undefined)
     {
-      if (this.txtcomment.trim().split(' ').length > 150)
+      if (this.txtcomment.trim().split(/\s+/).length > 150)
       {
         this.toastr.error(this.translate.instant('otherMessages.150Words'));
       }

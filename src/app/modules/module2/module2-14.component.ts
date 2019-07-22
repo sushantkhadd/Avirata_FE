@@ -40,7 +40,7 @@ export class Module214Component implements OnInit {
   ngDoCheck() {
 
     if (this.answer) {
-      this.postWordCount = this.answer.trim().split(' ').length;
+      this.postWordCount = this.answer.trim().split(/\s+/).length;
     }
 
     if (this.answer != null && this.answer != "" && this.answer != undefined) {

@@ -95,6 +95,11 @@ export class Module111Component implements OnInit {
       console.log('qqqq')
     }
 
+    if(window.localStorage.getItem("source")=="module 1.11.2.2"){
+      this.questionFlag = false;
+      console.log("btn scenario")
+    }
+
     this.answer1 = "";
     this.answer2 = "";
     this.answer3 = "";
@@ -171,22 +176,22 @@ export class Module111Component implements OnInit {
   ngDoCheck() {
 
     if (this.answer1) {
-      this.postWordCount['1'] = this.answer1.trim().split(' ').length;
+      this.postWordCount['1'] = this.answer1.trim().split(/\s+/).length;
     }
     if (this.answer2) {
-      this.postWordCount['2'] = this.answer2.trim().split(' ').length;
+      this.postWordCount['2'] = this.answer2.trim().split(/\s+/).length;
     }
     if (this.answer3) {
-      this.postWordCount['3'] = this.answer3.trim().split(' ').length;
+      this.postWordCount['3'] = this.answer3.trim().split(/\s+/).length;
     }
     if (this.answer4) {
-      this.postWordCount['4'] = this.answer4.trim().split(' ').length;
+      this.postWordCount['4'] = this.answer4.trim().split(/\s+/).length;
     }
     if (this.answer5) {
-      this.postWordCount['5'] = this.answer5.trim().split(' ').length;
+      this.postWordCount['5'] = this.answer5.trim().split(/\s+/).length;
     }
     if (this.answer6) {
-      this.postWordCount['6'] = this.answer6.trim().split(' ').length;
+      this.postWordCount['6'] = this.answer6.trim().split(/\s+/).length;
     }
 
     if (this.answer1 == "" || this.answer1 == null || this.answer1 == undefined) {
@@ -441,6 +446,7 @@ export class Module111Component implements OnInit {
             console.log(data);
             this.subFlagModule1 = 2;
             window.localStorage.setItem("subFlagModule1", "2");
+            window.localStorage.setItem("source", "module 1.11.2.2");
             this.questionFlag = false;
             localStorage.removeItem("questionFlag");
             this.reset();

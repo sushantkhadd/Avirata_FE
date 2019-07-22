@@ -271,13 +271,13 @@ export class McqcomponentComponent implements OnInit {
       else{
         this.bunchList = this.data.questionlist.splice(0,1)    
         this.queCount = 1;
-        
+        this.description = this.bunchList[0].description;
+        console.log("desc",this.description)
       }
       // this.priorities = this.data.questionlist[0].question;
      
       this.statement = this.bunchList[0].question;
       this.queDescription = this.bunchList[0].description;
-      this.description = this.bunchList[0].description;
       this.tasks = this.bunchList[0].options;
       for (var i = 0; i < this.tasks.length; i++)
       {
@@ -842,7 +842,7 @@ export class McqcomponentComponent implements OnInit {
             console.log("priorities",this.priorities)
           }
         }
-       console.log("options",this.bunchList,this.userOptions)
+       console.log("options",this.bunchList,this.userOptions,this.description)
       }
 
       if(this.queCount >= 3){
