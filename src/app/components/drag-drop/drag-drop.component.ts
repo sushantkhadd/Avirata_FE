@@ -408,6 +408,10 @@ export class DragDropComponent implements OnInit {
         this.check1 = false;
       }, 1000);
     }
+
+    if (this.check1 && this.check2 && this.check3 && this.check4){
+      this.toastr.success(this.translate.instant("Errors.rightAns"));
+    }
   }
 
   singleonAnyDrop2(e: any,stmt) {
@@ -428,6 +432,10 @@ export class DragDropComponent implements OnInit {
         this.droppedItems2 = [];
         this.check2 = false;
       }, 1000);
+    }
+
+    if (this.check1 && this.check2 && this.check3 && this.check4){
+      this.toastr.success(this.translate.instant("Errors.rightAns"));
     }
   }
 
@@ -452,6 +460,10 @@ export class DragDropComponent implements OnInit {
         this.check3 = false;
       }, 1000);
     }
+
+    if (this.check1 && this.check2 && this.check3 && this.check4){
+      this.toastr.success(this.translate.instant("Errors.rightAns"));
+    }
   }
 
   singleonAnyDrop4(e: any,stmt) {
@@ -472,6 +484,10 @@ export class DragDropComponent implements OnInit {
         this.droppedItems4 = [];
         this.check4 = false;
       }, 1000);
+    }
+
+    if (this.check1 && this.check2 && this.check3 && this.check4){
+      this.toastr.success(this.translate.instant("Errors.rightAns"));
     }
   }
   // singleonAnyDrop5(e: any, id) {

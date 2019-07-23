@@ -62,12 +62,35 @@ export class Module33Component implements OnInit {
     }
   }
 
+  hideMsg(val){
+    if(val==1){
+      this.showLimit['1']=false;
+      this.zeroMsgFlag['1']=false
+    }
+    else if(val==2){
+      this.showLimit['2']=false;
+      this.zeroMsgFlag['2']=false
+    }
+  }
+
   ngDoCheck() {
     if (this.answer1) {
       this.postWordCount['1'] = this.answer1.trim().split(/\s+/).length;
+      if(this.postWordCount['1'] ==0 || this.postWordCount['1'] > 150){
+        this.showLimit['1']=false
+      }
+      else if(this.postWordCount['1'] >=1){
+        this.showLimit['1']=true
+      }
     }
     if (this.answer2) {
       this.postWordCount['2'] = this.answer2.trim().split(/\s+/).length;
+      if(this.postWordCount['2'] == 0 || this.postWordCount['2'] > 150){
+        this.showLimit['2']=false
+      }
+      else if(this.postWordCount['2'] >=1){
+        this.showLimit['2']=true
+      }
     }
 
     if (this.answer1 == "" || this.answer1 == null || this.answer1 == undefined) {
