@@ -3,7 +3,7 @@ import {
   OnInit,
   ViewChild,
   ViewContainerRef,
-  HostListener
+  HostListener, ElementRef
 } from "@angular/core";
 import { FullLayoutService } from "./full-layout.service";
 import { Router, NavigationStart, NavigationEnd, ActivatedRoute } from "@angular/router";
@@ -60,6 +60,14 @@ export class FullLayoutComponent implements OnInit {
   @ViewChild("instructionModal") public instructionModal: ModalDirective;
 
   @ViewChild("instructionModal0") public instructionModal0: ModalDirective;
+
+  @ViewChild('screen') screen: ElementRef;
+  @ViewChild('canvas') canvas: ElementRef;
+  @ViewChild('downloadLink') downloadLink: ElementRef;
+  @ViewChild('cupPopup') cupPopup:ElementRef;
+  @ViewChild('screen') screencup: ElementRef;
+  @ViewChild('canvas') canvascup: ElementRef;
+  @ViewChild('downloadLink') downloadLinkcup: ElementRef;
   public passwordChange;
   newPasswordChange1;
   public confirmPaswwordTrue = false;
@@ -225,46 +233,33 @@ export class FullLayoutComponent implements OnInit {
     }
   }
 
-  downloadReward() {
-    document.getElementById("popup").style.backgroundColor = '#ffffff'
-    html2canvas(document.body).then(     
-      canvas => {
-      // Export canvas as a blob  
-      this.shareableImage = canvas;
-      canvas.toBlob(function (blob) {
-        console.log(blob);
-        setTimeout(() => {
-          fileSaver.saveAs(blob, "My-Reward.png")
-        }, 1000);
+  
+  downloadReward(){
+    this.isloaded = true;
+    setTimeout(() => {
+      html2canvas(this.screen.nativeElement,{backgroundColor:'transperent'}).then(canvas => {
+        this.canvas.nativeElement.src = canvas.toDataURL();
+        this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
+        this.isloaded = false;
+        this.downloadLink.nativeElement.download = 'My-Reward.png';
+        this.downloadLink.nativeElement.click();
       });
-    });
-    jQuery("#popup").css({ 'background-color' : '', 'opacity' : '' });
-    // document.getElementById("popup").style.zIndex = '1050';
-    // document.getElementById("popup").style.backgroundColor = '#000000';
-    // document.getElementById("popup").style.opacity = '0.6';
+    }, 1000);
+    
   }
 
   downloadCupReward() {
-    document.getElementById("cupPopup").style.backgroundColor = '#ffffff';
-    html2canvas(document.body).then(     
-      canvas => {
-      // Export canvas as a blob  
-      this.shareableImage = canvas;
-      jQuery("#cupPopup").css({ 'width' : '100%' });
-      canvas.toBlob(blob => {
-        console.log(blob);
-        setTimeout(() => {
-          fileSaver.saveAs(blob, "Cup-Reward.png")
-        }, 1000);
+    this.isloaded = true;
+    setTimeout(() => {
+      html2canvas(this.cupPopup.nativeElement,{backgroundColor:'transperent'}).then(canvas => {
+        this.canvascup.nativeElement.src = canvas.toDataURL();
+        this.downloadLinkcup.nativeElement.href = canvas.toDataURL('image/png');
+        this.isloaded = false;
+        this.downloadLinkcup.nativeElement.download = 'CupReward.png';
+        this.downloadLinkcup.nativeElement.click();
       });
-    });
-    jQuery("#cupPopup").css({ 'background-color' : '', 'opacity' : '' });
-    // document.getElementById("popup").style.zIndex = '1050';
-    // document.getElementById("popup").style.backgroundColor = '#000000';
-    // document.getElementById("popup").style.opacity = '0.6';
+    }, 100);
   }
-
-
  
   shareReward() {
     document.getElementById("popup").style.backgroundColor = '#ffffff'
@@ -284,18 +279,6 @@ export class FullLayoutComponent implements OnInit {
       });
     });
     jQuery("#popup").css({ 'background-color' : '', 'opacity' : '' });
-    // html2canvas(document.querySelector("#capture")).then(canvas => {
-    //   this.shareableImage = canvas.toDataURL();
-    //   console.log(canvas, this.shareableImage);
-    //   var link = document.createElement("a");
-    //   link.href = this.shareableImage; //function blocks CORS
-    //   link.download = "my-reward.png";
-    //   link.click();
-    //   var file = this.dataURLtoFile(this.shareableImage, "a.png");
-    //   var shareUrl = "whatsapp://send?text=" + file.name;
-    //   this.getImage = this._sanitizer.bypassSecurityTrustResourceUrl(shareUrl);
-    //   console.log(file, file.name, this.getImage);
-    // });
   }
 
   dataURLtoFile(dataurl, filename) {
