@@ -1,5 +1,5 @@
 <div class="row imageArea mt-2 mb-4" [class.bg-white]="isLoaded">
-  <div class="mx-auto w-100" style="position:relative;">
+  <div class="mx-auto" style="position:relative;">
     <pdf-viewer *ngIf="!isLoaded" [autoresize]="true" [original-size]="false" [fit-to-page]="true"
       style="display: block" [render-text]="true" class="embed-responsive-item pdfViewer" [src]="pdfURL"
       [show-all]="false"
