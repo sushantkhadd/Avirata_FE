@@ -53,8 +53,7 @@ export class Module26Component implements OnInit {
   }
 
   start() {
-    this.startFlag = true;
-
+    
     var jsonBody = {};
     jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
     jsonBody["useranswer"] = "";
@@ -65,6 +64,7 @@ export class Module26Component implements OnInit {
     this.Module2Service.apiCall(jsonBody, apiUrl).subscribe(
       data => {
         if (data["message"] == "submodule started") {
+          this.startFlag = true;
           this.data = data["data"];
           // console.log('mcq',this.data);
 

@@ -31,8 +31,9 @@
     <div *ngIf="subFlagModule3 == 2">
       <div *ngIf="jsonData != undefined && !showInst">
         <h6 class="questionHead lineHeight">
-          <b>{{'L2common.caution' | translate}}&nbsp;{{'L2Module3.que3_1' | translate}}</b>
-           <span class="f-right mt11">{{queCount | numberConvertor : 'Devanagari'}} / {{'number.8' | translate}}</span>
+          <!-- <b>{{'L2common.caution' | translate}}&nbsp;{{'L2Module3.que3_1' | translate}}</b> -->
+          <span [innerHTML]="'L2Module3.que3_1' | translate"></span>
+           <span class="mt-1 f-right">{{queCount | numberConvertor : 'Devanagari'}} / {{'number.8' | translate}}</span>
         </h6>
         <span *ngIf="data" class="custom_counter">{{queCount | numberConvertor : 'Devanagari'}}. </span>
         <app-mcqcomponent [passFlags]='passFlags' [data]='data' (sendAns)="getAnswer($event)"></app-mcqcomponent>

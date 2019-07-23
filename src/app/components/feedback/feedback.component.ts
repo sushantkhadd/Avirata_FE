@@ -73,7 +73,7 @@ export class FeedbackComponent implements OnInit {
     this.jsonObject["questionid"] = id;
     this.ansJson[id] = e.value;
     this.ansJsonLength = Object.keys(this.ansJson).length;
-    console.log(this.activeItem.answer,optionId,queType,this.activeItem,this.activeItem.question_type);
+    console.log(this.activeItem.answer,optionId,queType,this.activeItem,this.activeItem.question_type,this.jsonObject);
     // if(this.activeItem.answer == ""){
       if(this.onlyCnt <=4){
         if(optionId=="c"){
@@ -194,7 +194,7 @@ export class FeedbackComponent implements OnInit {
       jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
       jsonBody["event"] = "answer";
       jsonBody["useranswer"] = this.jsonObject["useranswer"];
-      jsonBody["questionid"] = this.jsonObject["questionid"];
+      jsonBody["questionid"] = this.activeItem.questionid;
 
       this.jsonBody1['submoduleid'] = window.localStorage.getItem('uuid')
       this.jsonBody1["event"] = "answer";
@@ -221,7 +221,7 @@ export class FeedbackComponent implements OnInit {
     // console.log("ewewesfdxdzcxaSXXX",this.queArray1[this.counter-1].answer)
     this.queArray1[this.questionCount-1].answer  =  this.jsonObject["useranswer"]
     this.queArray2[this.questionCount-1].answer  =  this.textanswer1.trim()
-    console.log("next",this.questionCount,this.queArray1,this.queArray2)
+    console.log("next",this.questionCount,this.queArray1,this.queArray2,this.jsonObject,this.queArray1[this.questionCount-1].questionid)
     if(this.queArray1[this.questionCount].answer != ""){
       this.optionArray=[];
       this.priorities=[];
@@ -271,18 +271,20 @@ export class FeedbackComponent implements OnInit {
     }
 
     else{
+      console.log("else part",this.jsonObject,this.userAnswer)
       this.type1Ans = ""
       this.textanswer1="";
       jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
       jsonBody["event"] = "answer";
       jsonBody["useranswer"] = this.jsonObject["useranswer"];
-      jsonBody["questionid"] = this.jsonObject["questionid"];
+      jsonBody["questionid"] = this.activeItem.questionid;
 
       this.jsonBody1['submoduleid'] = window.localStorage.getItem('uuid')
       this.jsonBody1["event"] = "answer";
       this.jsonBody1["useranswer"] =  this.userAnswer["answer"];
       this.jsonBody1["questionid"] = this.activeItem1.questionid;
-    
+      
+      console.log("else part")
     }
     
     this.apiCall(jsonBody, this.apiurl, "next");
@@ -292,7 +294,7 @@ export class FeedbackComponent implements OnInit {
     // }, 200);
    
 
-    console.log("jsonbody",this.activeItem1,this.ansJson)
+    console.log("jsonbody",jsonBody,this.activeItem,this.activeItem1,this.ansJson,this.queArray1)
   }
 
   finish2() {
@@ -316,7 +318,7 @@ export class FeedbackComponent implements OnInit {
       jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
       jsonBody["event"] = "answer";
       jsonBody["useranswer"] = this.jsonObject["useranswer"];
-      jsonBody["questionid"] = this.jsonObject["questionid"];
+      jsonBody["questionid"] = this.activeItem.questionid;
 
       this.jsonBody1['submoduleid'] = window.localStorage.getItem('uuid')
       this.jsonBody1["event"] = "finish";
@@ -370,9 +372,10 @@ export class FeedbackComponent implements OnInit {
                 for(let i=0; i< this.optionArray.length ; i++){
                   if(this.activeItem.answer == this.optionArray[i].option){
                     this.type1Ans = this.optionArray[i].value
-                    console.log("ghgqfgdh")
+                   
                     this.jsonObject["useranswer"] = this.activeItem.answer;
                     this.jsonObject["questionid"] = this.activeItem.questionid;
+                    console.log("ghgqfgdh",this.jsonObject)
                   }
                 }
                 if(this.activeItem.question_type <=4 && this.activeItem.answer == "c"){

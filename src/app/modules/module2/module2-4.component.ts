@@ -97,7 +97,7 @@ export class Module24Component implements OnInit {
   }
 
   startEvent2() {
-    this.startFlag = true;
+    
     var jsonBody = {};
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
     jsonBody['useranswer'] = ""
@@ -108,6 +108,7 @@ export class Module24Component implements OnInit {
     this.Module2Service.apiCall(jsonBody, apiUrl).subscribe(
       data => {
         if (data['message'] == 'submodule started'){
+          this.startFlag = true;
           this.questionStatement = data['data'].question;
           this.options = data['data'].statementlist;
           console.log("id",this.selectedId)
