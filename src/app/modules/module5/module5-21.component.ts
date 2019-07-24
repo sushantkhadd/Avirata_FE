@@ -38,10 +38,10 @@ export class Module521Component implements OnInit {
   mainFlagModule5;
   subFlagModule5;
   finishJSONBody = {}; urlArray = {}; thumb_title; flag;
-  private pdfUrl = environment.pdfUrl; submitFlag;
+  private pdfUrl = environment.pdfUrl; submitFlag; errorMsgFlag={};
   pdf1; personId; userAnswer = {}; showLimit = {}; postWordCount = {}; zeroMsgFlag = {}
   public questionArray; que1; queId1; que2; queId2; que3; queId3; que4; queId4; que5; queId5; que6; queId6; que7; queId7; answer1; answer2; answer3; answer4; answer5; answer6; answer7;
-  @ViewChild('assignForm') assignForm: NgForm; noHitFlag;
+  @ViewChild('assignForm') assignForm: NgForm; noHitFlag; 
   public inst = "एक समुपदेशक म्हणून सातत्याने अपडेटेड राहण्यासाठी इथे एक प्रकल्प तुम्हांला करावयास देण्यात आला आहे. जो तुम्हांला वेगवेगळ्या करिअर संधी, त्यात येणारी आव्हाने, लागणारी कौशल्ये याविषयी अपडेट राहण्यासाठी नक्कीच मदतीचा ठरू शकतो."
 
   ngOnInit() {
@@ -479,12 +479,27 @@ export class Module521Component implements OnInit {
     // }
     if (this.answer5) {
       this.postWordCount['5'] = this.answer5.trim().split(/\s+/).length;
+      if(this.postWordCount['5']>150 || this.postWordCount['5']<5){
+        this.errorMsgFlag['5']=true;
+      } else{
+        this.errorMsgFlag['5']=false;
+      }
     }
     if (this.answer6) {
       this.postWordCount['6'] = this.answer6.trim().split(/\s+/).length;
+      if(this.postWordCount['6']>150 || this.postWordCount['6']<5){
+        this.errorMsgFlag['6']=true;
+      } else{
+        this.errorMsgFlag['6']=false;
+      }
     }
     if (this.answer7) {
       this.postWordCount['7'] = this.answer7.trim().split(/\s+/).length;
+      if(this.postWordCount['7']>150 || this.postWordCount['7']<5){
+        this.errorMsgFlag['7']=true;
+      } else{
+        this.errorMsgFlag['7']=false;
+      }
     }
 
     if (this.answer1 != "" && this.answer1 != undefined && this.answer1 != null ||
