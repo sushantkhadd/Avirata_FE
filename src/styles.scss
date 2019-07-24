@@ -312,6 +312,57 @@ body {
   border-radius: 15px !important;
 }
 
+.loginBack {
+  background-image: url("../src/assets/img/loginBg.png");
+  background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+
+  .shadowMe {
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5), 0 5px 5px rgba(0, 0, 0, 0.5);
+    -ms-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5), 0 5px 5px rgba(0, 0, 0, 0.5);
+    -o-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5), 0 5px 5px rgba(0, 0, 0, 0.5);
+    border-radius: 40px;
+  }
+
+  .card-group {
+    border-radius: 0;
+    box-shadow: none;
+
+    .card:not(:last-child) {
+      border-top-left-radius: 30px;
+      border-bottom-left-radius: 30px;
+      border-top-right-radius: 0;
+    }
+
+    .card:not(:first-child) {
+      border-top-right-radius: 30px;
+      border-bottom-right-radius: 30px;
+      border-top-left-radius: 0;
+    }
+  }
+
+  .card {
+    background-color: #2368a2;
+    border: none;
+    box-shadow: none;
+
+    .card-block {
+      .appBox {
+        padding-top: 5rem;
+      }
+
+      label {
+        font-size: 1rem;
+        margin-bottom: 0;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+
 .loginBg {
   background-image: url("../src/assets/img/loginBg.png");
   background-repeat: no-repeat;
@@ -4469,4 +4520,10 @@ mfBootstrapPaginator {
     } 
     }
   }
+}
+
+.color-alert{
+  color: #dc2738;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
 }

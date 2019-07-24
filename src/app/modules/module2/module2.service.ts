@@ -128,7 +128,7 @@ export class Module2Service {
            window.localStorage.setItem("currentstatus", "3");
            window.localStorage.setItem('mainFlagModule3', '1');
             this.setLocalStorage2(18);
-            var obj1 = { "type": "moduleFinish", "route": true, "current": this.translate.instant('L2Module2.subMenu2-17'), "next": this.translate.instant('L2Module3.title'), "nextRoute": "/dashboard", "finishHead": this.translate.instant('L2Module2.title') }
+            var obj1 = { "type": "moduleFinish", "route": true, "current": this.translate.instant('L2Module2.subMenu2-17'), "next": this.translate.instant('L2Module3.title'), "nextRoute": "/dashboard", "finishHead": this.translate.instant('L2Module2.title'), "moduleNo": this.translate.instant('number.2') }
             this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj1));
         }
       },

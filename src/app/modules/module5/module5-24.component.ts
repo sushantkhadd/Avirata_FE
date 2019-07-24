@@ -150,7 +150,8 @@ export class Module524Component implements OnInit {
                 "route": true,
                 "current": this.translate.instant('L2Module5.subMenu5-24'),
                 "next": this.translate.instant('otherMessages.7-Next'),
-                "nextRoute": "/dashboard", "finishHead": this.translate.instant('L2Module5.title')
+                "nextRoute": "/dashboard", "finishHead": this.translate.instant('L2Module5.title'),
+                "moduleNo": this.translate.instant('number.5')
               }
               this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
               // window.localStorage.setItem('currentstatus', '6');

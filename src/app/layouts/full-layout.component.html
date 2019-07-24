@@ -1230,7 +1230,7 @@
             <span> ६. </span>{{'newTranslate.noteRule6' | translate}}</p>
           <p class="questionHead">
             <span> ७. </span>{{'newTranslate.noteRule7' | translate}} </p>
-          <p class="questionHead color_red">
+          <p class="questionHead">
             <span> ८. </span>{{'newTranslate.noteRule14' | translate}}</p>
           <!-- <p class="questionHead"> <span> ८. </span>{{'newTranslate.noteRule8' | translate}} </p>
                     <p class="questionHead"> <span> ९. </span>{{'newTranslate.noteRule9' | translate}} </p>
@@ -1278,6 +1278,8 @@
             <span> ३. </span>{{'L2Module0.pop10' | translate}} </p>
           <p class="questionHead">
             <span> ४. </span>{{'L2Module0.pop8' | translate}}</p>
+            <p class="questionHead">
+              <span> ५. </span>{{'L2Module0.pop11' | translate}}</p>
           <!-- <p class="questionHead"> <span> ७. </span>{{'L2Module0.pop7' | translate}} </p>
                     <p class="questionHead"> <span> ८. </span>{{'L2Module0.pop8' | translate}} </p> -->
           <p class="questionHead">
@@ -1458,7 +1460,7 @@
             <div id="main">
               <h5 class="success-title">
                 <span *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' || moduleCompleteStatus['type'] == 'allFinish'">
-                  {{'layout.module' | translate}} {{moduleCompleteStatus['finishHead']}}
+                  {{'layout.module' | translate}} {{moduleCompleteStatus['moduleNo']}}. {{moduleCompleteStatus['finishHead']}}
                 </span>
                 <!-- <span *ngIf="moduleCompleteStatus['type'] == 'allFinish'">
                       {{'layout.course' | translate}}
@@ -1490,9 +1492,14 @@
                   <span [innerHTML]="'layout.bronzeMedalMsg' | translate"></span>
                 </h5>
               </div>
-              <div class="text-center font-weight-normal p-1">
+
+              <div class="text-center font-weight-normal p-1" *ngIf="moduleStatus0 != 1">
                 <span [innerHTML]="'layout.allMedalMsg1' | translate"></span>
                 <span class="color_red" [innerHTML]="'layout.allMedalMsg2' | translate"></span>
+              </div>
+              <div *ngIf="moduleStatus0 == 1" class="text-center mt-2"> 
+                <span>{{moduleCompleteStatus['submoduleSuccess']}}</span><br/>
+                <span>{{moduleCompleteStatus['submoduleFinish']}}</span>
               </div>
             </div>
           </div>
@@ -1537,7 +1544,7 @@
         </div>
 
         <div class="row mt-2 justify-content-center social-icons" *ngIf="!needEfforts">
-            <ul data-html2canvas-ignore class="social-logo">
+            <ul data-html2canvas-ignore class="social-logo" *ngIf="!mainFlagModule0">
               <li>
                 <a class="c-pointer" (click)="downloadReward()">
                   <img class="img-responsive" src="../../assets/img/fb.png">
@@ -1698,12 +1705,12 @@
   </div>
 </div>
 
-<div id="download">
+<div id="download" style="display:none">
   <img #canvas>
   <a #downloadLink></a>
 </div>
 
-<div id="downloadcup">
+<div id="downloadcup" style="display:none">
   <img #canvascup>
   <a #downloadLinkcup></a>
 </div>

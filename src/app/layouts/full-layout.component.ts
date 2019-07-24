@@ -125,7 +125,7 @@ export class FullLayoutComponent implements OnInit {
 
   statusFlag;
   finishImgUrl;
-  intVal; sharedData; module5FinishFlag;
+  intVal; sharedData; module5FinishFlag; moduleStatus0
   // imageJson = {
   //   a1: "../../assets/img/rewards/side_gold_star.png",
   //   a2: "../../assets/img/rewards/side_silver_star.png",
@@ -235,23 +235,41 @@ export class FullLayoutComponent implements OnInit {
 
   
   downloadReward(){
-    this.isloaded = true;
+    //this.isloaded = true;
     setTimeout(() => {
-      html2canvas(this.screen.nativeElement,{backgroundColor:'transperent'}).then(canvas => {
-        this.canvas.nativeElement.src = canvas.toDataURL();
-        this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
-        this.isloaded = false;
-        this.downloadLink.nativeElement.download = 'My-Reward.png';
-        this.downloadLink.nativeElement.click();
-      });
-    }, 1000);
+      if(window.localStorage.getItem("currentstatus")=='1' ||
+      window.localStorage.getItem("currentstatus")=='2' ||
+      window.localStorage.getItem("currentstatus")=='3' ||
+      window.localStorage.getItem("currentstatus")=='4' ||
+      window.localStorage.getItem("currentstatus")=='5'){
+        this.isloaded = true;
+        console.log('currentstatus',window.localStorage.getItem("currentstatus"))
+        html2canvas(this.screen.nativeElement,{backgroundColor:'transperent',x:300,y:200,width:1000}).then(canvas => {
+          this.canvas.nativeElement.src = canvas.toDataURL();
+          this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
+          this.isloaded = false;
+          this.downloadLink.nativeElement.download = 'Reward.png';
+          this.downloadLink.nativeElement.click();
+        });
+      } else if(window.localStorage.getItem("currentstatus")=='6'){
+        this.isloaded = true;
+        console.log('current 5',window.localStorage.getItem("currentstatus"))
+        html2canvas(this.screen.nativeElement,{backgroundColor:'transperent',width:1000}).then(canvas => {
+          this.canvas.nativeElement.src = canvas.toDataURL();
+          this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
+          this.isloaded = false;
+          this.downloadLink.nativeElement.download = 'My-Reward.png';
+          this.downloadLink.nativeElement.click();
+        });
+      }
+    }, 1200);
     
   }
 
   downloadCupReward() {
     this.isloaded = true;
     setTimeout(() => {
-      html2canvas(this.cupPopup.nativeElement,{backgroundColor:'transperent'}).then(canvas => {
+      html2canvas(this.cupPopup.nativeElement,{backgroundColor:'transperent',width:1000}).then(canvas => {
         this.canvascup.nativeElement.src = canvas.toDataURL();
         this.downloadLinkcup.nativeElement.href = canvas.toDataURL('image/png');
         this.isloaded = false;
@@ -1917,7 +1935,7 @@ export class FullLayoutComponent implements OnInit {
     } else {
       var source = window.localStorage.getItem("source");
 
-      if (
+      if (source == "module 1" ||
         source == "module 1.1" ||
         source == "module 1.1.1" ||
         source == "module 1.1.2" ||
@@ -2338,6 +2356,9 @@ export class FullLayoutComponent implements OnInit {
   }
 
   ngDoCheck() {
+    this.moduleStatus0 = window.localStorage.getItem("currentstatus")
+    //console.log('current finish module',this.moduleStatus0)
+
     if (
       localStorage.getItem("levelData") != null &&
       localStorage.getItem("levelData") != "" &&

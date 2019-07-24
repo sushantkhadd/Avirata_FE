@@ -117,7 +117,8 @@ export class Module4Service {
              "route": true,
              "current": this.translate.instant('L2Module4.subMenu4-14'),
              "next": this.translate.instant('L2Module5.title'),
-             "nextRoute": "/dashboard", "finishHead": this.translate.instant('L2Module4.title')
+             "nextRoute": "/dashboard", "finishHead": this.translate.instant('L2Module4.title'),
+             "moduleNo": this.translate.instant('number.4')
            }
             this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj1));
         }

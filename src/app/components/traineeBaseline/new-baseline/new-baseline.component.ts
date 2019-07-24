@@ -724,7 +724,9 @@ export class NewBaselineComponent implements OnInit {
               window.localStorage.setItem("currentstatus", "1");
               window.localStorage.setItem('mainFlagModule1', '1');
               this.Module2Service.setLocalStorage2(4);
-               var obj1 = { "type": "moduleFinish", "route": true, "current": this.translate.instant('L2Module0.subMenu1-3'), "next": this.translate.instant('L2Module1.title'), "nextRoute": "/dashboard", "finishHead": this.translate.instant('L2Module0.title') }
+               var obj1 = { "type": "moduleFinish", "route": true, "current": this.translate.instant('L2Module0.subMenu1-3'), "next": this.translate.instant('L2Module1.title'), "nextRoute": "/dashboard", "finishHead": this.translate.instant('L2Module0.title'),
+              "submoduleFinish":this.translate.instant('L2Module1Finish.submodule0-finish'),
+            "submoduleSuccess":this.translate.instant('L2Module1Finish.submodule0-success') }
                this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj1));
             }
           }

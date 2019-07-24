@@ -1,3 +1,4 @@
+<!-- <div [ngClass]="loginbgFlag ? 'loginBg':'loginBack'"> -->
 <div class="loginBg">
 <div class="container-fluid">
     <div class="row justify-content-center">
@@ -5,7 +6,7 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-md-6 p-1">
-            <p class="logo-tagline">
+            <p class="logo-tagline mb-1">
                 {{'L2NewLines.loginTitle' | translate}}
                 <br>
                 <span class="mt-2">
@@ -21,11 +22,11 @@
                 <div class="card-group mb-0">
                     <div class="card p-2">
                         <h1 class="mt-2 px-3">{{'L2NewLines.dashHeadLine_hello' | translate}}</h1>
-                        <p class="text-muted px-3">{{'Login.Sign In to your account' | translate}}</p>
+                        <p class="text-muted px-3 mb-0">{{'Login.Sign In to your account' | translate}}</p>
                         <div class="card-block card-border">
                             <form #loginForm="ngForm">
-                                <div class="form-group">
-                                    <div class="input-group mb-3">
+                                <div class="form-group mb-0">
+                                    <div class="input-group mb-2">
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa fa-phone" aria-hidden="true"></i>
@@ -34,11 +35,11 @@
                                         <input type="text" id="userName" name="userName" class="form-control input_user" #userName="ngModel" [(ngModel)]="username"
                                             placeholder="{{ 'Login.E-mail ID / Mobile' | translate }}" autocomplete="off" required>
                                     </div>
-                                    <div class="input-group errorMessage alert alert-danger row loginInput ml-3" *ngIf="userName.errors && userName.dirty">
+                                    <div class="errorMessage color-alert" *ngIf="userName.errors && userName.dirty">
                                         <div [hidden]="!userName.errors.required"> {{ 'Login.Email mobile required' | translate }}
                                         </div>
                                     </div>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mt-3 mb-2">
                                         <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <i class="fa fa-lock" aria-hidden="true"></i>
@@ -49,12 +50,12 @@
                                             required>
                                     </div>
 
-                                    <div class="input-group errorMessage alert alert-danger loginInput" *ngIf="_password.errors && _password.dirty">
+                                    <div class="errorMessage color-alert" *ngIf="_password.errors && _password.dirty">
                                         <div [hidden]="!_password.errors.required"> {{ 'Login.Password required' | translate }} </div>
                                     </div>
 
                                     <div class="row">
-                                        <button class="btn password-link px-3" type="button" data-toggle="modal" (click)="emailVerifyClicked=false;mobileVerifyClicked=false;forgetPassword();">
+                                        <button class="btn password-link px-3 mb-1" type="button" data-toggle="modal" (click)="emailVerifyClicked=false;mobileVerifyClicked=false;forgetPassword();">
                                             {{'Login.Forget Password' | translate}} ?
                                         </button>
                                         <div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" [config]="{backdrop: 'static'}" role="dialog" aria-labelledby="myModalLabel"
@@ -243,9 +244,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mb-0">
                                     <div class="row px-3">
-                                        <button class="btn btn-primary btn-block btn-login px-3" type="button" [disabled]="!loginForm.valid || !disableLogin" appPreventDoubleClick (debounceClick)="login();">{{'Login.Log in' | translate}}</button>
+                                        <button class="btn btn-primary btn-block btn-login px-3" type="button" [disabled]="!loginForm.valid || !disableLogin" appPreventDoubleClick (debounceClick)="login(loginForm);">{{'Login.Log in' | translate}}</button>
                                     </div>
                                 </div>
                             </form>
