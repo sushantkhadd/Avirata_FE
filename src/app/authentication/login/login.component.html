@@ -246,7 +246,7 @@
                                 </div>
                                 <div class="form-group mb-0">
                                     <div class="row px-3">
-                                        <button class="btn btn-primary btn-block btn-login px-3" type="button" [disabled]="!loginForm.valid || !disableLogin" appPreventDoubleClick (debounceClick)="login(loginForm);">{{'Login.Log in' | translate}}</button>
+                                        <button class="btn btn-primary btn-block btn-login px-3" type="button" [disabled]="!loginForm.valid || !disableLogin" appPreventDoubleClick (debounceClick)="login();">{{'Login.Log in' | translate}}</button>
                                     </div>
                                 </div>
                             </form>
