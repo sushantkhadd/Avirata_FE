@@ -283,7 +283,7 @@
 
                 <h5 class="text-white mb-1" *ngIf="rightFlag==true && questionType == 'checkBoxOption'">{{'subModule1_9.correctAns' | translate }}</h5>
             </div>
-            <div class="modal-body" *ngIf="questionType != 'checkBoxOption'" [class.d-none]="(mysubModule4==5 || mysubModule4==7 ||mysubModule3==7|| mysubModule4==11 || mysubModule2==9 || mysubModule2==11 || mysubModule0==2) && rightFlag">
+            <div class="modal-body" *ngIf="questionType != 'checkBoxOption'" [class.d-none]="(mysubModule4==5 || mysubModule4==7 ||mysubModule3==7|| mysubModule4==11 || mysubModule0==2) && rightFlag">
                 <span *ngIf="mysubModule4 != 9 && mysubModule4 != 13">
                 <p *ngIf="rightFlag==false"><b>{{'subModule1_9.correctAns' | translate }} :</b></p>
                 <p *ngIf="rightFlag==false">{{showCorrectAns}}</p>
@@ -293,7 +293,7 @@
                     <br>
                     <img src={{answerImg}} class="imgOption center-block">
                 </div>
-                <p *ngIf="description"><b>{{'newTranslate.description' | translate }}</b></p>
+                <p *ngIf="description && questionType != 'mcqWithTwoStatements'"><b>{{'newTranslate.description' | translate }}</b></p>
                 <p *ngIf="description">
                     <span [innerHTML]="description"></span></p>
             </div>

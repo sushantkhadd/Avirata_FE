@@ -44,7 +44,7 @@
         </div>
         <div class="card-block text-center" *ngIf="subFlagModule2 == 1">
           <!-- <img alt="" [src]="imgUrl" class="mx-auto img-fluid w-35"> -->
-          <img alt="Image" *ngIf="imgUrl" [src]="imgUrl" class="mx-auto img-fluid w-35">
+          <img alt="Image" *ngIf="imgUrl" [src]="imgUrl" class="mx-auto img-fluid w-50">
           <hr>
           <div class="text-center" *ngIf="mainFlagModule2 ==15">
             <button class="btn btn-primary btn-pad " appPreventDoubleClick (debounceClick)="finish()">{{'Stepper.Finish' | translate}}</button>

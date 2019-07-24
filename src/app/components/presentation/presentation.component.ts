@@ -198,7 +198,8 @@ export class PresentationComponent implements OnInit {
       }
       else if (this.finalCount == 1) {
 
-        if ((window.localStorage.getItem('mainFlagModule5')) == '4' || (window.localStorage.getItem('mainFlagModule4')) == '14') {
+        if ((window.localStorage.getItem('mainFlagModule5')) == '4' || (window.localStorage.getItem('mainFlagModule4')) == '14' ||
+        (window.localStorage.getItem('mainFlagModule2')) == '17') {
           this.showFinish = true;
         } else {
           this.showFinish = false;

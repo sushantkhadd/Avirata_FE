@@ -174,6 +174,7 @@ export class VideoPlayerComponent implements OnInit {
               console.log(current1, "askme")
             }
           }
+          console.log("askmeFlah",this.askMeFlag)
           }
         }
       },

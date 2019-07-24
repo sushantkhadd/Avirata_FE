@@ -37,7 +37,7 @@ export class Module16Component implements OnInit {
   sumbitButton;
   startFlag;
   public inst =
-    "खाली दिलेल्या विधानांना तुम्ही खालीलपैकी कोणते प्रश्न विचाराल?";
+    "खाली दिलेल्या अविवेकी विचारांना खोडून काढण्यासाठी तुम्ही कोणते प्रश्न विचाराल?";
   ngOnInit() {
     this.startFlag = false;
     this.showAnswer = true;

@@ -118,7 +118,7 @@ export class McqcomponentComponent implements OnInit {
             this.rightAnsId = this.data.statementlist[i].statementid;
           }
         }
-
+        this.description = this.data.description 
     } else if (this.questionType == 'mcqTextOption' && (window.localStorage.getItem('mainFlagModule2') == '3' || window.localStorage.getItem('mainFlagModule4') == '5' || window.localStorage.getItem('mainFlagModule3') == '9' || window.localStorage.getItem('mainFlagModule3') == '11' || window.localStorage.getItem('mainFlagModule3') == '5' || window.localStorage.getItem('mainFlagModule4')== '7')) {
         console.log("data",this.data.questionlist[0].question,this.data.questionlist[0].options)
         this.priorities= []

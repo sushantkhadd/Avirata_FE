@@ -21,7 +21,7 @@ import { Module5Service } from 'src/app/modules/module5/module5.service';
 })
 export class NewBaselineComponent implements OnInit {
   private selectedQuestionId; selectedAnswer; finishExamCard;userOption={};dummyAnsJson={};
-  public moduleNumber; mySubmodule2; lastAns; mySubmodule4; mySubmodule5;mySubmodule0;mySubFlagmodule0;
+  public moduleNumber; mySubmodule2; lastAns; mySubmodule4; mySubmodule5;mySubmodule0;mySubFlagmodule0;levelData;
   // public nextButtonFlag;answerJSON;
   // oldSelectedAns;endApiAnsHit;
   @Input() public passData;
@@ -719,6 +719,22 @@ export class NewBaselineComponent implements OnInit {
               this.sendAns.emit("finish1")
             }
             else if(window.localStorage.getItem('subFlagModule0') == '3'){
+              window.localStorage.setItem('moduleFinishCount', JSON.stringify(data['data']));
+              this.levelData =localStorage.getItem("levelData");
+              for (let index = 0; index < this.levelData.length; index++)
+              {
+                if (parseInt(window.localStorage.getItem("currentstatus")) == index)
+                {
+                  let current1 = [];
+                  current1 = JSON.parse(window.localStorage.getItem("levelData"));
+                  let index1 = current1.findIndex(
+                    item => item.module == index);
+                  current1[index1].percent = JSON.stringify(data['data'].percentage);
+                  current1[index1 + 1].status = true;
+                  window.localStorage.setItem("levelData", JSON.stringify(current1));
+                  console.log(current1, "fifirty")
+                }
+              }
               window.localStorage.setItem('mainFlagModule0', '4');
               window.localStorage.setItem('uuid', data['data'].nextuuid)
               window.localStorage.setItem("currentstatus", "1");
