@@ -114,7 +114,7 @@ export class DistrictTrainingReportComponent implements OnInit {
           this.toastr.error('source required');
         } else if (error.error.message == 'unknown source') {
           this.toastr.error('unknown source');
-        } else if (error.error.message == 'token not found') {
+        } else if (error.error.message == 'token not found' || error.error.message == 'token not matches please re-login') {
           this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
         } else if (error.error.message == 'token not matches') {
           this.toastr.error(this.translate.instant('Errors.tokenNotMatch'));
@@ -223,7 +223,11 @@ export class DistrictTrainingReportComponent implements OnInit {
       error => {
         if (error.error.message == 'source required' || error.error.message == 'unknown source') {
           console.log("seatnumber key wrong or required")
-        } else if (error.error.message == 'token not found' || error.error.message == 'token not matches') {
+        } else if (error.error.message == 'token not found' || error.error.message == 'token not matches' || error.error.message == 'token not matches please re-login') {
+          this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
+          setTimeout(() => {
+            this.router.navigate(['/']);
+          }, 4000)
         } else if (error.error.message == 'activity key required' || error.error.message == 'Wrong activity' || error.error.message == 'required district key') {
         } else if (error.error.message == 'access denied') {
         } else if (error.error.message == 'district not found' || error.error.message == 'invalid district' || error.error.message == 'required district field' || error.error.message == 'wrong district') {
@@ -306,7 +310,11 @@ export class DistrictTrainingReportComponent implements OnInit {
       error => {
         if (error.error.message == 'source required' || error.error.message == 'unknown source') {
           console.log("seatnumber key wrong or required")
-        } else if (error.error.message == 'token not found' || error.error.message == 'token not matches') {
+        } else if (error.error.message == 'token not found' || error.error.message == 'token not matches' || error.error.message == 'token not matches please re-login' ) {
+          this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
+          setTimeout(() => {
+            this.router.navigate(['/']);
+          }, 4000)
         } else if (error.error.message == 'activity key required' || error.error.message == 'Wrong activity' || error.error.message == 'required district key') {
         } else if (error.error.message == 'access denied') {
         } else if (error.error.message == 'district not found' || error.error.message == 'invalid district' || error.error.message == 'required district field' || error.error.message == 'wrong district') {
@@ -374,7 +382,11 @@ export class DistrictTrainingReportComponent implements OnInit {
       error => {
         if (error.error.message == 'source required' || error.error.message == 'unknown source') {
           console.log("seatnumber key wrong or required")
-        } else if (error.error.message == 'token not found' || error.error.message == 'token not matches') {
+        } else if (error.error.message == 'token not found' || error.error.message == 'token not matches' || error.error.message == 'token not matches please re-login') {
+          this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
+          setTimeout(() => {
+            this.router.navigate(['/']);
+          }, 4000)
         } else if (error.error.message == 'activity key required' || error.error.message == 'Wrong activity' || error.error.message == 'required district key') {
         } else if (error.error.message == 'access denied') {
         } else if (error.error.message == 'district not found' || error.error.message == 'invalid district' || error.error.message == 'required district field' || error.error.message == 'wrong district') {
@@ -448,7 +460,11 @@ export class DistrictTrainingReportComponent implements OnInit {
       error => {
         if (error.error.message == 'source required' || error.error.message == 'unknown source') {
           console.log("seatnumber key wrong or required")
-        } else if (error.error.message == 'token not found' || error.error.message == 'token not matches') {
+        } else if (error.error.message == 'token not found' || error.error.message == 'token not matches' || error.error.message == 'token not matches please re-login') {
+          this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
+          setTimeout(() => {
+            this.router.navigate(['/']);
+          }, 4000)
         } else if (error.error.message == 'activity key required' || error.error.message == 'Wrong activity' || error.error.message == 'required district key') {
         } else if (error.error.message == 'access denied') {
         } else if (error.error.message == 'district not found' || error.error.message == 'invalid district' || error.error.message == 'required district field' || error.error.message == 'wrong district') {

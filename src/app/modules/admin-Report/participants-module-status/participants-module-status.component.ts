@@ -9,6 +9,8 @@ import 'rxjs/add/operator/take'
 import { ToastsManager } from 'ng6-toastr';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
+import { Router } from "@angular/router";
+
 
 @Component({
   selector: 'app-participants-module-status',
@@ -30,7 +32,7 @@ export class ParticipantsModuleStatusComponent implements OnInit {
 
   public time1; tmSec1; countDown; tick = 1000;
   selectedLevel; storedLevel;
-  constructor(public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService, public _service: AdminReportService, private csvService: CsvService) {
+  constructor(public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService, public _service: AdminReportService, private csvService: CsvService,private router: Router) {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
@@ -115,12 +117,20 @@ export class ParticipantsModuleStatusComponent implements OnInit {
         } else if (error.error.message == 'unknown source') {
           // alert(this.translate.instant("errors.feedbackNotFound"));
           console.log("unknown source")
-        } else if (error.error.message == 'token not found') {
+        } else if (error.error.message == 'token not found' || error.error.message == 'token not matches please re-login') {
           // alert(this.translate.instant("errors.feedbackNotFound"));
-          console.log("token not found")
+          // console.log("token not found")
+          this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
+            setTimeout(()=>{
+              this.router.navigate(['/']);
+            },5000)
         } else if (error.error.message == 'token not matches') {
           // alert(this.translate.instant("errors.feedbackNotFound"));
-          console.log("token not matches")
+          // console.log("token not matches")
+          this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
+          setTimeout(()=>{
+            this.router.navigate(['/']);
+          },5000)
         } else if (error.error.message == 'activity key required') {
           // alert(this.translate.instant("errors.feedbackNotFound"));
           console.log("activity key required")
@@ -222,7 +232,11 @@ export class ParticipantsModuleStatusComponent implements OnInit {
       error => {
         if (error.error.message == 'source required' || error.error.message == 'unknown source') {
           console.log("seatnumber key wrong or required")
-        } else if (error.error.message == 'token not found' || error.error.message == 'token not matches') {
+        } else if (error.error.message == 'token not found' || error.error.message == 'token not matches' || error.error.message == 'token not matches please re-login') {
+          this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
+          setTimeout(()=>{
+            this.router.navigate(['/']);
+          },5000)
         } else if (error.error.message == 'activity key required' || error.error.message == 'Wrong activity' || error.error.message == 'required district key') {
         } else if (error.error.message == 'access denied') {
         } else if (error.error.message == 'district not found' || error.error.message == 'invalid district' || error.error.message == 'required district field' || error.error.message == 'wrong district') {
@@ -312,7 +326,11 @@ export class ParticipantsModuleStatusComponent implements OnInit {
       error => {
         if (error.error.message == 'source required' || error.error.message == 'unknown source') {
           console.log("seatnumber key wrong or required")
-        } else if (error.error.message == 'token not found' || error.error.message == 'token not matches') {
+        } else if (error.error.message == 'token not found' || error.error.message == 'token not matches' || error.error.message == 'token not matches please re-login') {
+          this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
+          setTimeout(()=>{
+            this.router.navigate(['/']);
+          },5000)
         } else if (error.error.message == 'activity key required' || error.error.message == 'Wrong activity' || error.error.message == 'required district key') {
         } else if (error.error.message == 'access denied') {
         } else if (error.error.message == 'district not found' || error.error.message == 'invalid district' || error.error.message == 'required district field' || error.error.message == 'wrong district') {
@@ -390,7 +408,11 @@ export class ParticipantsModuleStatusComponent implements OnInit {
       error => {
         if (error.error.message == 'source required' || error.error.message == 'unknown source') {
           console.log("seatnumber key wrong or required")
-        } else if (error.error.message == 'token not found' || error.error.message == 'token not matches') {
+        } else if (error.error.message == 'token not found' || error.error.message == 'token not matches' || error.error.message == 'token not matches please re-login') {
+          this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
+          setTimeout(()=>{
+            this.router.navigate(['/']);
+          },5000)
         } else if (error.error.message == 'activity key required' || error.error.message == 'Wrong activity' || error.error.message == 'required district key') {
         } else if (error.error.message == 'access denied') {
         } else if (error.error.message == 'district not found' || error.error.message == 'invalid district' || error.error.message == 'required district field' || error.error.message == 'wrong district') {
@@ -474,7 +496,11 @@ export class ParticipantsModuleStatusComponent implements OnInit {
       error => {
         if (error.error.message == 'source required' || error.error.message == 'unknown source') {
           console.log("seatnumber key wrong or required")
-        } else if (error.error.message == 'token not found' || error.error.message == 'token not matches') {
+        } else if (error.error.message == 'token not found' || error.error.message == 'token not matches' || error.error.message == 'token not matches please re-login') {
+          this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
+          setTimeout(()=>{
+            this.router.navigate(['/']);
+          },5000)
         } else if (error.error.message == 'activity key required' || error.error.message == 'Wrong activity' || error.error.message == 'required district key') {
         } else if (error.error.message == 'access denied') {
         } else if (error.error.message == 'district not found' || error.error.message == 'invalid district' || error.error.message == 'required district field' || error.error.message == 'wrong district') {

@@ -98,7 +98,7 @@ export class NewBaselineComponent implements OnInit {
         }
       },
       error => {
-        if (error.error.message == 'token not found' || error.error.message == 'token not match') {
+        if (error.error.message == 'token not found' || error.error.message == 'token not match' || error.error.message == 'token not matches please re-login') {
 
           this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
           setTimeout(() => {
@@ -145,7 +145,7 @@ export class NewBaselineComponent implements OnInit {
         }
       },
       error => {
-        if (error.error.message == 'token not found' || error.error.message == 'token not match') {
+        if (error.error.message == 'token not found' || error.error.message == 'token not match' || error.error.message == 'token not matches please re-login') {
 
           this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
           setTimeout(() => {
@@ -785,7 +785,7 @@ export class NewBaselineComponent implements OnInit {
         }
       },
       error => {
-        if (error.error.message == 'token not found' || error.error.message == 'token not match') {
+        if (error.error.message == 'token not found' || error.error.message == 'token not match' || error.error.message == 'token not matches please re-login') {
 
           this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
           setTimeout(() => {
@@ -850,7 +850,8 @@ export class NewBaselineComponent implements OnInit {
         } else if (data['message'] == "json key error") {
           this.toastr.error(this.translate.instant('Errors.wrongInfo'));
 
-        } else if (data['message'] == "token not found") {
+        } else if (data['message'] == "token not found" ||
+        data['message'] == "token not matches please re-login" || data['message'] == "token not match") {
           this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
 
         } else if (data['message'] == 'exam finish') {

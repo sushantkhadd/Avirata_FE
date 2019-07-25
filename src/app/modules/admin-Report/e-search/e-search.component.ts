@@ -230,8 +230,12 @@ export class ESearchComponent implements OnInit {
       error => {
         if (error.error.message == 'access denied') {
           console.log(error.error.message);
-        } else if(error.error.message == 'token not found'){
-          console.log(error.error.message);
+        } else if(error.error.message == 'token not found' || error.error.message == 'token not matches please re-login'){
+          this.toastr.error(this.translate.instant("Errors.tokenNotFound"));
+          setTimeout(() => {
+            this.router.navigate(["/"]);
+          }, 1000);
+          // console.log(error.error.message);
         } else if(error.error.message == 'token not matches'){
           console.log(error.error.message);
         } else if(error.error.message == 'source required'){

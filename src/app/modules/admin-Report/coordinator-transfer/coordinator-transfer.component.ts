@@ -102,7 +102,7 @@ export class CoordinatorTransferComponent implements OnInit {
         }
       },
       error => {
-        if (error.error.message == "token not found") {
+        if (error.error.message == "token not found" || error.error.message == 'token not matches please re-login') {
           this.toastr.error(this.translate.instant("Errors.tokenNotFound"));
           setTimeout(() => {
             this.router.navigate(["/"]);
@@ -182,7 +182,7 @@ export class CoordinatorTransferComponent implements OnInit {
         error => {
           if (error.error.message == 'source required' || error.error.message == 'unknown source') {
             console.log("seatnumber key wrong or required")
-          } else if (error.error.message == 'token not found' || error.error.message == 'token not match') {
+          } else if (error.error.message == 'token not found' || error.error.message == 'token not match' || error.error.message == 'token not matches please re-login') {
             this.toastr.error("Session Expires Please Re-login");
             setTimeout(() => {
               this.router.navigate(["/"]);
@@ -330,7 +330,7 @@ export class CoordinatorTransferComponent implements OnInit {
       error => {
         if (error.error.message == 'source required' || error.error.message == 'unknown source') {
           console.log("seatnumber key wrong or required")
-        } else if (error.error.message == 'token not found' || error.error.message == 'token not match') {
+        } else if (error.error.message == 'token not found' || error.error.message == 'token not match' || error.error.message == 'token not matches please re-login') {
           this.toastr.error("Session Expires Please Re-login");
           setTimeout(() => {
             this.router.navigate(["/"]);
@@ -429,7 +429,7 @@ export class CoordinatorTransferComponent implements OnInit {
         this.talukaEnable = true
       },
       error => {
-        if (error.error.message == "token not found") {
+        if (error.error.message == "token not found" || error.error.message == 'token not matches please re-login') {
           this.toastr.error(this.translate.instant("Errors.tokenNotFound"));
           setTimeout(() => {
             this.router.navigate(["/"]);

@@ -107,14 +107,14 @@ public replyBox = false; token;showCoomentArea=false
         }
       },
       error => {
-        if (error.json().message == 'token not found' || error.json().message == 'token not match') {
+        if (error.error.message == 'token not found' || error.error.message == 'token not match'
+        || error.error.message == 'token not matches please re-login') {
           this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
-
           setTimeout(() => {
             this.router.navigate(['/']);
           }, 500)
 
-        } else if (error.json().message == 'json Key Error') {
+        } else if (error.error.message == 'json Key Error') {
           this.toastr.error(this.translate.instant('Errors.wrongInfo'));
         }
         else {
@@ -164,13 +164,14 @@ public replyBox = false; token;showCoomentArea=false
         }
       },
       error => {
-        if (error.json().message == 'token not found' || error.json().message == 'token not match') {
+        if (error.error.message == 'token not found' || error.error.message == 'token not match'
+        || error.error.message == 'token not matches please re-login') {
           this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
 
           setTimeout(() => {
             this.router.navigate(['/']);
           }, 500)
-        } else if (error.json().message == 'json Key Error') {
+        } else if (error.error.message == 'json Key Error') {
           this.toastr.error(this.translate.instant('Errors.wrongInfo'));
         }
         else {
@@ -232,13 +233,13 @@ public replyBox = false; token;showCoomentArea=false
         this.posts[index].viewComments = true;
       },
       error => {
-        if (error.json().message == 'token not found' || error.json().message == 'token not match') {
+        if (error.error.message == 'token not found' || error.error.message == 'token not match'
+        || error.error.message == 'token not matches please re-login') {
           this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
-
           setTimeout(() => {
             this.router.navigate(['/']);
           }, 500)
-        } else if (error.json().message == 'json Key Error') {
+        } else if (error.error.message == 'json Key Error') {
           this.toastr.error(this.translate.instant('Errors.wrongInfo'));
         }
         else {

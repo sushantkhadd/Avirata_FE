@@ -86,7 +86,7 @@ export class TalukaUserListComponent implements OnInit {
         }
       },
       error => {
-         if (error.error.message == 'token not found') {
+         if (error.error.message == 'token not found' || error.error.message == 'token not matches please re-login') {
           this.toastr.error("Session not matches please re-login");
           setTimeout(() => {
             this.router.navigate(['/']);
@@ -122,7 +122,7 @@ export class TalukaUserListComponent implements OnInit {
         this.talukaOverallReport(this.selectedTaluka, this.selectedRole);
       },
       error => {
-        if (error.error.message == 'token not found') {
+        if (error.error.message == 'token not found' || error.error.message == 'token not matches please re-login') {
           this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
           setTimeout(() => {
             this.router.navigate(['/']);

@@ -67,28 +67,28 @@ export class DistAggregateReportComponent implements OnInit {
           console.log('something went wrong')
         }
       },
-      err => {
-        if (err.json().message == 'source required') {
+      error => {
+        if (error.error.message == 'source required') {
           this.toastr.error('source required');
-        } else if (err.json().message == 'unknown source') {
+        } else if (error.error.message == 'unknown source') {
           this.toastr.error('unknown source');
-        } else if (err.json().message == 'token not found') {
+        } else if (error.error.message == 'token not found' || error.error.message == 'token not matches please re-login') {
           this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
           setTimeout(() => {
             this.router.navigate(['/']);
           }, 4000)
-        } else if (err.json().message == 'token not matches') {
+        } else if (error.error.message == 'token not matches') {
           this.toastr.error(this.translate.instant('Errors.tokenNotMatch'));
           setTimeout(() => {
             this.router.navigate(['/']);
           }, 4000)
-        } else if (err.json().message == 'activity key required') {
+        } else if (error.error.message == 'activity key required') {
           this.toastr.error('activity key required');
-        } else if (err.json().message == 'Wrong activity') {
+        } else if (error.error.message == 'Wrong activity') {
           this.toastr.error('Wrong activity');
-        } else if (err.json().message == 'access denied') {
+        } else if (error.error.message == 'access denied') {
           this.toastr.error(this.translate.instant('Errors.accessDenied'));
-        } else if (err.json().message == 'json key error' || err.json().message == 'invalid district') {
+        } else if (error.error.message == 'json key error' || error.error.message == 'invalid district') {
           console.log('json key error or invalid district');
         } else {
           this.toastr.error(this.translate.instant('Errors.cannotProceed'))
@@ -140,28 +140,28 @@ export class DistAggregateReportComponent implements OnInit {
           console.log('something went wrong')
         }
       },
-      err => {
-        if (err.json().message == 'source required') {
+      error => {
+        if (error.error.message == 'source required') {
           this.toastr.error('source required');
-        } else if (err.json().message == 'unknown source') {
+        } else if (error.error.message == 'unknown source') {
           this.toastr.error('unknown source');
-        } else if (err.json().message == 'token not found') {
+        } else if (error.error.message == 'token not found' || error.error.message == 'token not matches please re-login') {
           this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
           setTimeout(() => {
             this.router.navigate(['/']);
           }, 4000)
-        } else if (err.json().message == 'token not matches') {
+        } else if (error.error.message == 'token not matches') {
           this.toastr.error(this.translate.instant('Errors.tokenNotMatch'));
           setTimeout(() => {
             this.router.navigate(['/']);
           }, 4000)
-        } else if (err.json().message == 'invalid taluka') {
+        } else if (error.error.message == 'invalid taluka') {
           this.toastr.error('Invalid Taluka');
-        } else if (err.json().message == 'Wrong activity') {
+        } else if (error.error.message == 'Wrong activity') {
           this.toastr.error('Wrong activity');
-        } else if (err.json().message == 'access denied') {
+        } else if (error.error.message == 'access denied') {
           this.toastr.error(this.translate.instant('Errors.accessDenied'));
-        } else if (err.json().message == 'json key error' || err.json().message == 'invalid district') {
+        } else if (error.error.message == 'json key error' || error.error.message == 'invalid district') {
           console.log('json key error or invalid district');
         } else {
           this.toastr.error(this.translate.instant('Errors.cannotProceed'))

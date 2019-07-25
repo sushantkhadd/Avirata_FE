@@ -54,7 +54,7 @@ export class MailReportComponent implements OnInit {
           this.selectedReport = "";
         },
         error => {
-          if(error.error.message == 'token not found') {
+          if(error.error.message == 'token not found' || error.error.message == 'token not matches please re-login') {
             this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
             setTimeout(()=>{
               this.router.navigate(['/']);
@@ -90,7 +90,7 @@ export class MailReportComponent implements OnInit {
           this.selectedReport="";
         },
         error => {
-          if(error.error.message == 'token not found') {
+          if(error.error.message == 'token not found' || error.error.message == 'token not matches please re-login') {
             this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
             setTimeout(()=>{
               this.router.navigate(['/']);
@@ -137,7 +137,7 @@ export class MailReportComponent implements OnInit {
           console.log('dataaaaaa',data);
         },
         error => {
-          if(error.error.message == 'token not found') {
+          if(error.error.message == 'token not found' || error.error.message == 'token not matches please re-login') {
             this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
             setTimeout(()=>{
               this.router.navigate(['/']);

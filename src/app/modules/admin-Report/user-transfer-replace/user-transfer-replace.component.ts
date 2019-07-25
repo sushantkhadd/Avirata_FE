@@ -181,7 +181,7 @@ export class UserTransferReplaceComponent implements OnInit {
           this.oldSearchIndex = this.indexNumber;
           // this.showAddButton=true
           // this.toastr.success("Data not Avilable");
-        } else if (error.error.message == "token not matches" || error.error.message == "token not found") {
+        } else if (error.error.message == "token not matches" || error.error.message == "token not found" || error.error.message == 'token not matches please re-login') {
           this.toastr.error(this.translate.instant("Errors.tokenNotFound"));
           setTimeout(() => {
             this.router.navigate(["/"]);
@@ -210,7 +210,7 @@ export class UserTransferReplaceComponent implements OnInit {
         this.talukaEnable = true
       },
       error => {
-        if (error.error.message == "token not found") {
+        if (error.error.message == "token not found" || error.error.message == 'token not matches please re-login') {
           this.toastr.error(this.translate.instant("Errors.tokenNotFound"));
           setTimeout(() => {
             this.router.navigate(["/"]);
@@ -327,7 +327,7 @@ export class UserTransferReplaceComponent implements OnInit {
           console.log(error.error.message);
         } else if (error.error.message == "something went wrong") {
           this.toastr.error("something went wrong");
-        } else if (error.error.message == "token not matches" || error.error.message == "token not found") {
+        } else if (error.error.message == "token not matches" || error.error.message == "token not found" || error.error.message == 'token not matches please re-login') {
           this.toastr.error(this.translate.instant("Errors.tokenNotFound"));
           setTimeout(() => {
             this.router.navigate(["/"]);
@@ -491,7 +491,7 @@ export class UserTransferReplaceComponent implements OnInit {
           this.headmasterModal.show()
         } else if (error.error.message == "access denied") {
           this.toastr.error(this.translate.instant("Errors.accessDenied"));
-        } else if (error.error.message == "token not matches" || error.error.message == "token not found") {
+        } else if (error.error.message == "token not matches" || error.error.message == "token not found" || error.error.message == 'token not matches please re-login') {
           this.toastr.error(this.translate.instant("Errors.tokenNotFound"));
           setTimeout(() => {
             this.router.navigate(["/"]);
@@ -569,7 +569,7 @@ export class UserTransferReplaceComponent implements OnInit {
           this.toastr.error("Already Position full for Headmaster");
         } else if (error.error.message == "access denied") {
           this.toastr.error(this.translate.instant("Errors.accessDenied"));
-        } else if (error.error.message == "token not matches" || error.error.message == "token not found") {
+        } else if (error.error.message == "token not matches" || error.error.message == "token not found" || error.error.message == 'token not matches please re-login') {
           this.toastr.error(this.translate.instant("Errors.tokenNotFound"));
           setTimeout(() => {
             this.router.navigate(["/"]);

@@ -132,7 +132,8 @@ export class StatisticswidgetsComponent implements OnInit {
             setTimeout(()=>{
               this.router.navigate(['/']);
             },6000)
-        } else if (data['Response'] == "token not found") {
+        } else if (data['Response'] == "token not found" || data['Response'] == "token not matches please re-login" ||
+        data['Response'] == "token not match") {
           this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
             setTimeout(()=>{
               this.router.navigate(['/']);
@@ -188,7 +189,8 @@ export class StatisticswidgetsComponent implements OnInit {
             setTimeout(()=>{
               this.router.navigate(['/']);
             },6000)
-          } else if (data['Response'] == "token not found") {
+          } else if (data['Response'] == "token not found" || data['Response'] == "token not matches please re-login" ||
+          data['Response'] == "token not match") {
             this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
             setTimeout(()=>{
               this.router.navigate(['/']);
@@ -259,7 +261,8 @@ export class StatisticswidgetsComponent implements OnInit {
             setTimeout(()=>{
               this.router.navigate(['/']);
             },6000)
-          } else if (data['Response'] == "token not found") {
+          } else if (data['Response'] == "token not found" || data['Response'] == "token not matches please re-login" ||
+          data['Response'] == "token not match") {
             this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
             setTimeout(()=>{
               this.router.navigate(['/']);
@@ -347,7 +350,7 @@ export class StatisticswidgetsComponent implements OnInit {
         this.ExportService.approveUserbyCoordinator(approveUserJson,this.LocalstoragedetailsService.token)
           .subscribe(
           data => {
-             if (data['message'] == "token not found") {
+             if (data['message'] == "token not found" || data['message'] == "token not matches please re-login" || data['message'] == "token not match") {
               this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
               setTimeout(()=>{
                 this.router.navigate(['/']);
@@ -397,7 +400,7 @@ export class StatisticswidgetsComponent implements OnInit {
               setTimeout(()=>{
                 this.router.navigate(['/']);
               },6000)
-          } else if (data['message'] == "token not found") {
+          } else if (data['message'] == "token not found" || data['message'] == "token not matches please re-login" || data['message'] == "token not match") {
             this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
               setTimeout(()=>{
                 this.router.navigate(['/']);
@@ -430,7 +433,7 @@ export class StatisticswidgetsComponent implements OnInit {
               setTimeout(()=>{
                 this.router.navigate(['/']);
               },6000)
-          } else if (data['message'] == "token not found") {
+          } else if (data['message'] == "token not found" || data['message'] == "token not matches please re-login" || data['message'] == "token not match") {
             this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
               setTimeout(()=>{
                 this.router.navigate(['/']);

@@ -3,6 +3,7 @@ import { CsvService } from "angular2-json2csv";
 import { ToastsManager } from 'ng6-toastr';
 import { TranslateService } from '@ngx-translate/core';
 import { AdminReportService } from '../admin-report.service';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-history-log',
@@ -15,7 +16,7 @@ export class HistoryLogComponent implements OnInit {
 
   public show1;show2;show3;show4;show5;show6;show7;show8;show9;show10;show11;show12;show13;show14;show15;show16;show17;show18;show19;show20;show21;show22;
   btnValid;
-  constructor(public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService, public AdminReportService: AdminReportService, private csvService: CsvService) { }
+  constructor(public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService, public AdminReportService: AdminReportService, private csvService: CsvService,private router: Router) { }
 
   ngOnInit() {
     this.showHistoryFlag=false;
@@ -51,7 +52,11 @@ export class HistoryLogComponent implements OnInit {
       error => {
         if (error.error.message == 'source required' || error.error.message == 'unknown source') {
           console.log("seatnumber key wrong or required")
-        } else if (error.error.message == 'token not found' || error.error.message == 'token not matches') {
+        } else if (error.error.message == 'token not found' || error.error.message == 'token not matches' || error.error.message == 'token not matches please re-login') {
+          this.toastr.error(this.translate.instant("Errors.tokenNotFound"));
+          setTimeout(() => {
+            this.router.navigate(["/"]);
+          }, 1000);
         } else if (error.error.message == 'activity key required' || error.error.message == 'Wrong activity' || error.error.message == 'required district key') {
         } else if (error.error.message == 'access denied') {
         } else if (error.error.message == 'district not found' || error.error.message == 'invalid district' || error.error.message == 'required district field' || error.error.message == 'wrong district') {

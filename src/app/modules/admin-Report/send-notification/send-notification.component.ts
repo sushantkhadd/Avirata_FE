@@ -134,7 +134,7 @@ export class SendNotificationComponent implements OnInit {
         this.selectedTaluka = "";
       },
       error => {
-        if (error.error.message == "token not found") {
+        if (error.error.message == "token not found" || error.error.message == 'token not matches please re-login') {
           this.toastr.error(this.translate.instant("Errors.tokenNotFound"));
           setTimeout(() => {
             this.router.navigate(["/"]);
@@ -192,10 +192,18 @@ export class SendNotificationComponent implements OnInit {
         }
       },
       error => {
-        if (error.error.message == "token not found") {
-          console.log("token not found");
+        if (error.error.message == "token not found" || error.error.message == 'token not matches please re-login') {
+          // console.log("token not found");
+          this.toastr.error(this.translate.instant("otherMessages.sessionLogout"));
+      setTimeout(() => {
+        this.router.navigate(["/"]);
+      }, 500);
         } else if (error.error.message == "token not matches please re-login") {
-          console.log("token not matches please re-login");
+          // console.log("token not matches please re-login");
+          this.toastr.error(this.translate.instant("otherMessages.sessionLogout"));
+      setTimeout(() => {
+        this.router.navigate(["/"]);
+      }, 500);
         } else if (error.error.message == "source is required") {
           console.log("source is required");
         } else if (error.error.message == "wrong source") {

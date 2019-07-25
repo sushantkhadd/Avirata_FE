@@ -263,7 +263,7 @@ export class AdminPanelComponent implements OnInit {
         this.allDistricts = data['results'];
       },
       error => {
-        if (error.error.message == "token not found") {
+        if (error.error.message == "token not found" || error.error.message == 'token not matches please re-login') {
           this.toastr.error(this.translate.instant("Errors.tokenNotFound"));
           setTimeout(() => {
             this.router.navigate(["/"]);
@@ -312,7 +312,7 @@ export class AdminPanelComponent implements OnInit {
       }
     },
       error => {
-        if (error.error.message == "token not found") {
+        if (error.error.message == "token not found" || error.error.message == 'token not matches please re-login') {
           this.toastr.error(this.translate.instant("Errors.tokenNotFound"));
           setTimeout(() => {
             this.router.navigate(["/"]);
@@ -388,7 +388,7 @@ export class AdminPanelComponent implements OnInit {
         }
       },
       error => {
-        if (error.error.message == "token not found") {
+        if (error.error.message == "token not found" || error.error.message == 'token not matches please re-login') {
           this.toastr.error(this.translate.instant("Errors.tokenNotFound"));
           setTimeout(() => {
             this.router.navigate(["/"]);
@@ -466,7 +466,7 @@ export class AdminPanelComponent implements OnInit {
         }
       },
       error => {
-        if (error.error.message == "token not found") {
+        if (error.error.message == "token not found" || error.error.message == 'token not matches please re-login') {
           this.toastr.error(this.translate.instant("Errors.tokenNotFound"));
           setTimeout(() => {
             this.router.navigate(["/"]);

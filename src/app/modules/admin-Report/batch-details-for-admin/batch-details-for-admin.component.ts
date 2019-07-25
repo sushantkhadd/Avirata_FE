@@ -63,12 +63,20 @@ export class BatchDetailsForAdminComponent implements OnInit {
         if (error.error.message == "unknown source") {
           // alert(this.translate.instant("errors.feedbackNotFound"));
           console.log("unknown source");
-        } else if (error.error.message == "token not found") {
+        } else if (error.error.message == "token not found" || error.error.message == 'token not matches please re-login') {
           // alert(this.translate.instant("errors.feedbackNotFound"));
-          console.log("token not found");
+          // console.log("token not found");
+          this.toastr.error(this.translate.instant("Errors.tokenNotFound"));
+          setTimeout(() => {
+            this.router.navigate(["/"]);
+          }, 5000);
         } else if (error.error.message == "token not matches") {
           // alert(this.translate.instant("errors.feedbackNotFound"));
-          console.log("token not matches");
+          // console.log("token not matches");
+          this.toastr.error(this.translate.instant("Errors.tokenNotFound"));
+          setTimeout(() => {
+            this.router.navigate(["/"]);
+          }, 5000);
         } else if (error.error.message == "source required") {
           // alert(this.translate.instant("errors.feedbackNotFound"));
           console.log("source required");

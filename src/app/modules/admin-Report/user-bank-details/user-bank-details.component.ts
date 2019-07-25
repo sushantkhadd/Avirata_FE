@@ -43,7 +43,7 @@ export class UserBankDetailsComponent implements OnInit {
         this.showTableFlag = false;
       },
       error => {
-        if (error.error.message == "token not found") {
+        if (error.error.message == "token not found" || error.error.message == 'token not matches please re-login') {
           this.toastr.error(this.translate.instant("Errors.tokenNotFound"));
           setTimeout(() => {
             this.router.navigate(["/"]);
@@ -82,7 +82,7 @@ export class UserBankDetailsComponent implements OnInit {
         this.showTableFlag = true;
       },
       error => {
-        if (error.error.message == "token not found") {
+        if (error.error.message == "token not found" || error.error.message == 'token not matches please re-login') {
           this.toastr.error(this.translate.instant("Errors.tokenNotFound"));
           setTimeout(() => {
             this.router.navigate(["/"]);

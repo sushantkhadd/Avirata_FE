@@ -122,13 +122,14 @@ export class RedirectComponent implements OnInit {
         }
       },
       error => {
-        if (error.json().message == 'enter correct level number') {
-          console.log(error.json().message)
-        } else if (error.json().message == 'source is required' || error.json().message == 'unknown source') {
-          console.log(error.json().message)
-        } else if (error.json().message == 'json key error') {
-          console.log(error.json().message)
-        } else if (error.json().message == 'token not found' || error.json().message == 'session not matches please re-login') {
+        if (error.error.message == 'enter correct level number') {
+          console.log(error.error.message)
+        } else if (error.error.message == 'source is required' || error.error.message == 'unknown source') {
+          console.log(error.error.message)
+        } else if (error.error.message == 'json key error') {
+          console.log(error.error.message)
+        } else if (error.error.message == 'token not found' || error.error.message == 'session not matches please re-login'
+        || error.error.message == 'token not matches please re-login') {
           this.toastr.error(this.translate.instant("Errors.tokenNotFound"));
           setTimeout(() => {
             this.router.navigate(["/"]);

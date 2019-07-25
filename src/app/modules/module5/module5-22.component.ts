@@ -158,7 +158,7 @@ export class Module522Component implements OnInit {
           }
         },
         error => {
-          if (error.error.message == 'token not found' || error.error.message == 'token not match')
+          if (error.error.message == 'token not found' || error.error.message == 'token not match' || error.error.message == 'token not matches please re-login')
           {
             this.toastr.error(this.translate.instant('otherMessages.sessionLogout'));
             setTimeout(() => {

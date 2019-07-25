@@ -27,7 +27,7 @@ export class Module317Component implements OnInit {
   public mainFlagModule3; subFlagModule3;
   public question1; question2; question3; question4; question5; question6; questionid1; questionid2; questionid3; questionid4; questionid5; questionid6; answer1; answer2; answer3; answer4; answer5; answer6; stud_1; stud_2; stud_3; questionList; question_1; questionId_1; question_2; questionId_2; question_3; questionId_3; questionId_4; questionId_5; answer_1; answer_2; answer_3; answer_4; answer_5
   question_4; question_5; selectedId; studThreeFlag; studTwoFlag; studOneFlag; displayFormFlag; studDetails; radioFlagOne;
-  public trimFlag; showLimit = {}; postWordCount = {}; zeroMsgFlag = {};
+  public trimFlag; showLimit = {}; postWordCount = {}; zeroMsgFlag = {}; errorMsgFlag={};
 
   ngOnInit() {
     // this.displayFormFlag = false;
@@ -80,15 +80,35 @@ export class Module317Component implements OnInit {
     // }
     if (this.answer_2) {
       this.postWordCount['2'] = this.answer_2.trim().split(/\s+/).length;
+      if(this.postWordCount['2']>150 || this.postWordCount['2']<5){
+        this.errorMsgFlag['2']=true;
+      } else{
+        this.errorMsgFlag['2']=false;
+      }
     }
     if (this.answer_3) {
       this.postWordCount['3'] = this.answer_3.trim().split(/\s+/).length;
+      if(this.postWordCount['3']>150 || this.postWordCount['3']<5){
+        this.errorMsgFlag['3']=true;
+      } else{
+        this.errorMsgFlag['3']=false;
+      }
     }
     if (this.answer_4) {
       this.postWordCount['4'] = this.answer_4.trim().split(/\s+/).length;
+      if(this.postWordCount['4']>150 || this.postWordCount['4']<5){
+        this.errorMsgFlag['4']=true;
+      } else{
+        this.errorMsgFlag['4']=false;
+      }
     }
     if (this.answer_5) {
       this.postWordCount['5'] = this.answer_5.trim().split(/\s+/).length;
+      if(this.postWordCount['5']>150 || this.postWordCount['5']<5){
+        this.errorMsgFlag['5']=true;
+      } else{
+        this.errorMsgFlag['5']=false;
+      }
     }
 
     if (this.answer_1 != "" && this.answer_1 != undefined && this.answer_1 != null
@@ -278,6 +298,11 @@ export class Module317Component implements OnInit {
     this.postWordCount['3'] = 0;
     this.postWordCount['4'] = 0;
     this.postWordCount['5'] = 0;
+
+    this.errorMsgFlag['2']=false;
+    this.errorMsgFlag['3']=false;
+    this.errorMsgFlag['4']=false;
+    this.errorMsgFlag['5']=false;
   }
 
   handleInput(e) {
