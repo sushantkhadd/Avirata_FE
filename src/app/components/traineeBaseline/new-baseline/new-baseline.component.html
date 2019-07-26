@@ -1,4 +1,4 @@
-<div class="col-sm-12 col-md-12 " *ngIf="!showQuize && !finishExamCard">
+<div class="col-sm-12 col-md-12 " *ngIf="!showQuize && !finishExamCard && mySubmodule0!=3">
     <div class="instruction-wrap">
         <div class="borderBlue">
             <div class="card">
@@ -7,13 +7,13 @@
                     <h4>{{'Quiz.note' | translate}}</h4>
                 </div>
                 <div class="card-block inst-text">
-                    <div *ngIf="mySubmodule0 != 3">
+                    <div >
                             <p>{{'number.1' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_6' | translate}}</p>
                             <p>{{'number.2' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_7' | translate}}</p>
                             <p>{{'number.3' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_8' | translate}}</p>
                             <p>{{'number.4' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_9' | translate}}</p>
                     </div>
-                    <div *ngIf="mySubmodule0 == 3">
+                    <!-- <div *ngIf="mySubmodule0 == 3">
                     <p>{{'number.1' | translate}}. {{'L2Module0.inst0_3_1' | translate}}</p>
                     <p>{{'number.2' | translate}}. {{'L2Module0.inst0_2_2' | translate}}</p>
                     <p>{{'number.3' | translate}}. {{'L2Module0.inst0_2_3' | translate}}</p>
@@ -21,7 +21,7 @@
                     <p>{{'number.5' | translate}}. {{'L2Module0.inst0_2_5' | translate}}</p>
                     <p class="color_red">{{'number.6' | translate}}. {{'L2Module0.inst0_3_2' | translate}}</p>
                     <p>{{'L2Module0.inst0_2_12' | translate}}</p>
-                </div>
+                </div> -->
                 </div>
                 <div class="card-footer"
                   *ngIf="mySubmodule2==1 || mySubmodule2==7 || mySubmodule3==7 || moduleNumber==3 || moduleNumber==4 || moduleNumber==5 || mySubmodule0==3">
@@ -64,7 +64,7 @@
         <strong *ngIf="mySubmodule0 == 3 && mySubFlagmodule0==1">{{'Quiz.traineebaselineQue5' | translate}}</strong>
         <strong *ngIf="mySubmodule0 == 3 && mySubFlagmodule0==2">{{'Quiz.traineebaselineQue6' | translate}}</strong>
         <strong *ngIf="mySubmodule0 == 3 && mySubFlagmodule0==3">{{'Quiz.traineebaselineQue7' | translate}}</strong>
-        <strong *ngIf="mySubmodule5 == 18">{{'Quiz.traineebaselineQue7' | translate}}</strong>
+        <strong *ngIf="mySubmodule5 == 18">{{'Quiz.traineebaselineQue8' | translate}}</strong>
     </h6>
     <!-- <hr /> -->
 

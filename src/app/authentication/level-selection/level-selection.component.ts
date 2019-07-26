@@ -74,6 +74,7 @@ export class LevelSelectionComponent implements OnInit {
     } else if (this.completedLevelJson['level2'] == false && this.completedLevelJson['level1'] == false && this.completedLevelJson['level3'] == false && this.userType != 'superadmin' && this.userType != 'admin')
     {
       this.noAccessFlag = true
+      window.localStorage.setItem("hidemenu","true")
       // this.toastr.error("क्षमस्व. आपण ‘योजलेल्या प्रशिक्षण कालावधीमध्ये’ नसल्यामुळे आपला प्रवेश नाकारण्यात आला आहे.")
     } else if (this.userType == 'superadmin' || this.userType == 'admin') {
       this.lvl1Complete = true

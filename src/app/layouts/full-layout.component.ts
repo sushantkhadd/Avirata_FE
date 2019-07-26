@@ -322,6 +322,7 @@ export class FullLayoutComponent implements OnInit {
     // {
     //   this.setInterval()
     // }
+  
     this.subscription = this.sharedService.getData().subscribe(data => {
       console.log("sharedServicedata", data);
       if (data) {

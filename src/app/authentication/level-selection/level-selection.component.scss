@@ -421,3 +421,22 @@ header.navbar{
   background: #8895a7 !important;
   color: #fff;
 }
+
+.levelmenu{
+  .dropdown-menu{
+  li{
+    padding: 5px 10px;
+    border-bottom: 1px solid #ccc;
+
+    a{
+      background-color:transparent !important;
+      border-bottom: 0 !important;
+    }
+
+    a:hover{
+      color: #444444 !important;
+      text-decoration: none;
+    }
+  }
+}
+}

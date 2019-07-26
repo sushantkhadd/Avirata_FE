@@ -267,6 +267,9 @@ export class McqcomponentComponent implements OnInit {
           this.answerImg = this.bunchList[0].answer_url;
         }
         console.log("mcqtextoptionarr",this.mcqTextOption,this.bunchList,this.questionImg,this.answerImg)
+        if(window.localStorage.getItem('mainFlagModule3') == '7'){
+          this.description = this.bunchList[0].description;
+        }
       }
       else{
         this.bunchList = this.data.questionlist.splice(0,1)    
@@ -281,7 +284,7 @@ export class McqcomponentComponent implements OnInit {
       this.tasks = this.bunchList[0].options;
       for (var i = 0; i < this.tasks.length; i++)
       {
-        if (this.bunchList[0].options[i].value != "")
+        if (this.bunchList[0].options[i].value != "" && this.bunchList[0].options[i].value != undefined)
         {
           this.priorities.push(this.bunchList[0].options[i].value)
           console.log("priorities",this.priorities)
@@ -836,7 +839,7 @@ export class McqcomponentComponent implements OnInit {
         this.description = this.bunchList[0].description;
         for (var i = 0; i < this.tasks.length; i++)
         {
-          if (this.bunchList[0].options[i].value != "")
+          if (this.bunchList[0].options[i].value != "" && this.bunchList[0].options[i].value != undefined)
           {
             this.priorities.push(this.bunchList[0].options[i].value)
             console.log("priorities",this.priorities)
@@ -865,6 +868,9 @@ export class McqcomponentComponent implements OnInit {
             this.answerImg = this.bunchList[0].answer_url;
           }
           this.queDescription = this.bunchList[0].description;
+          if(window.localStorage.getItem('mainFlagModule3') == '7'){
+            this.description = this.bunchList[0].description;
+          }
           console.log("options11111111111",this.bunchList,this.userOptions,this.questionImg,this.answerImg)
             this.alreadyAns = this.bunchList[0].answer
           
@@ -881,7 +887,7 @@ export class McqcomponentComponent implements OnInit {
       
         for (var i = 0; i < this.tasks.length; i++)
         {
-          if (this.bunchList[0].options[i].value != "")
+          if (this.bunchList[0].options[i].value != "" && this.bunchList[0].options[i].value != undefined)
           {
             this.priorities.push(this.bunchList[0].options[i].value)
             console.log("priorities",this.priorities,this.bunchList)

@@ -6,11 +6,21 @@
           <img src="./../../assets/img/aviratalogolevelthree.png" alt="Avirata Logo">
         </a> -->
       </div>
-      <div class="col-6">
+      <div class="col-6" *ngIf="!noAccessFlag">
         <a class="btn btn-primary float-right logoutBtn" appPreventDoubleClick (debounceClick)="logout()">
           <i class="fa fa-power-off" aria-hidden="true"></i> &nbsp;लॉग-आऊट
         </a>
       </div>
+      <div class="col-6" *ngIf="userType!='superadmin' && userType!='admin'&& noAccessFlag">
+      <div class="dropdown float-right logoutBtn levelmenu">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Profile board
+          <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a [routerLink]="['/dashboard/profile']"> <em class="fa fa-user"></em>&nbsp;&nbsp;{{'Dashboard.Profile' | translate}}</a></li>
+            <li><a appPreventDoubleClick (debounceClick)="logout()"> <em class="fa fa-user"></em>&nbsp;&nbsp;{{'Dashboard.Logout' | translate}}</a></li>
+          </ul>
+        </div>
+        </div>
     </div>
   </header>
 
@@ -271,6 +281,33 @@
                   </div>
                 </a>
               </div>
+
+              <div class="col-md-3">
+                  <a class="custom-tooltip tooltiptriangle">
+                    <div class="card" [class.card-success]='lvl3Current' [class.card-secondary]='!lvl3Current && !lvl3Complete'>
+                      <div class="card-block text-center text-white custom-block">
+                        <div *ngIf="lvl3Complete" class="icon">
+                          <i class="fa fa-check-circle fa-3x pb-2"></i>
+                        </div>
+                        <div *ngIf="lvl3Current" class="icon">
+                          <i class="fa fa-unlock fa-3x pb-2"></i>
+                        </div>
+                        <div *ngIf="!lvl3Current && !lvl3Complete" class="icon">
+                          <i class="fa fa-lock fa-3x pb-2"></i>
+                        </div>
+                        <h3 class="level-text text-center">टप्पा</h3>
+                        <img class="img-fluid mb-4" src="../../../assets/img/three.png">
+                      </div>
+                      <!-- <div class="card-footer border-0 bg-gray"></div> -->
+                      <!-- <div class="card-footer border-0 bg-gray">
+                        <div>
+                          <p class="text-center">
+                          </p>
+                        </div>
+                      </div> -->
+                    </div>
+                  </a>
+                </div>
 
             </div>
           </div>

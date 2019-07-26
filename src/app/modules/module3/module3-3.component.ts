@@ -32,7 +32,7 @@ export class Module33Component implements OnInit {
   subFlagModule3;
   questionid1;
   questionid2;
-  trimFlag; showLimit = {}; postWordCount = {}; zeroMsgFlag = {};
+  trimFlag; showLimit = {}; postWordCount = {}; zeroMsgFlag = {};startFlag;
   ngOnInit() {
     this.answer1 = "";
     this.answer2 = "";
@@ -52,12 +52,13 @@ export class Module33Component implements OnInit {
     this.postWordCount['2'] = 0;
 
     if (this.mainFlagModule3 == 3) {
+      this.startFlag = false;
       if (
         this.subFlagModule3 == 1 ||
         this.subFlagModule3 == 2 ||
         this.subFlagModule3 == 3
       ) {
-        this.startEvent();
+        // this.startEvent();
       }
     }
   }
@@ -79,7 +80,7 @@ export class Module33Component implements OnInit {
       if(this.postWordCount['1'] ==0 || this.postWordCount['1'] > 150){
         this.showLimit['1']=false
       }
-      else if(this.postWordCount['1'] >=1){
+      else if(this.postWordCount['1'] >=5){
         this.showLimit['1']=true
       }
     }
@@ -88,7 +89,7 @@ export class Module33Component implements OnInit {
       if(this.postWordCount['2'] == 0 || this.postWordCount['2'] > 150){
         this.showLimit['2']=false
       }
-      else if(this.postWordCount['2'] >=1){
+      else if(this.postWordCount['2'] >=5){
         this.showLimit['2']=true
       }
     }
@@ -104,9 +105,9 @@ export class Module33Component implements OnInit {
       this.answer2 != null && this.answer2 != "" && this.answer2 != undefined) {
       if (this.answer1.trim().length == 0 || this.answer2.trim().length == 0) {
         this.trimFlag = true;
-      } else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 1) {
+      } else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 5) {
         this.trimFlag = true;
-      } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 1) {
+      } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 5) {
         this.trimFlag = true;
       } else {
         this.trimFlag = false;
@@ -167,6 +168,7 @@ export class Module33Component implements OnInit {
       data => {
         if (data["status"] == true) {
           if (fun == "start") {
+            this.startFlag = true;
             this.question1 = data["data"]["questionlist"][0].question;
             this.question2 = data["data"]["questionlist"][1].question;
             this.questionid1 = data["data"]["questionlist"][0].questionid;

@@ -18,7 +18,7 @@ export class Module214Component implements OnInit {
   answer;
   question;
   public mainFlagModule2;
-  subFlagModule2;startFlag;
+  subFlagModule2;
   questionid; trimFlag; showLimit; postWordCount;
   ngOnInit() {
     this.answer = "";
@@ -33,8 +33,7 @@ export class Module214Component implements OnInit {
     );
 
     if (this.mainFlagModule2 == 14) {
-      this.startFlag = false;
-      // this.startEvent();
+      this.startEvent();
     }
   }
 
@@ -42,6 +41,13 @@ export class Module214Component implements OnInit {
 
     if (this.answer) {
       this.postWordCount = this.answer.trim().split(/\s+/).length;
+      if(this.postWordCount == 0 || this.postWordCount > 150){
+        this.showLimit=false
+      }
+      else if(this.postWordCount >=5){
+        this.showLimit=true
+      }
+
     }
 
     if (this.answer != null && this.answer != "" && this.answer != undefined) {
@@ -86,7 +92,6 @@ export class Module214Component implements OnInit {
       data => {
         if (data['status'] == true) {
           if (fun == 'start') {
-            this.startFlag = true;
             this.question = data["data"]["questionlist"][0].question;
             this.questionid = data["data"]["questionlist"][0].questionid;
           }

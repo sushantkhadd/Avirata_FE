@@ -241,6 +241,7 @@ export class TimelineComponent implements OnInit {
       this.width = 4;
       if(window.localStorage.getItem("mainFlagModule5")=="25"){
         document.getElementById("progress-bar").style.width = "100%";
+        this.totalPer =100
       }
       if (this.mainFlagModule1 && this.currentstatus  == 1)
       {
@@ -273,11 +274,12 @@ export class TimelineComponent implements OnInit {
         this.totalPer = 80 + this.counterValue5;
         this.barWidth5 = this.counterValue5 * this.width + '%';
         
-      }else if (this.currentstatus  == 6)
-      {
-        this.totalPer =100 + '%'
-        // this.width = 1;
       }
+      // else if (this.currentstatus  == 6)
+      // {
+      //   this.totalPer =100 + '%'
+      //   // this.width = 1;
+      // }
     }
   }
 
