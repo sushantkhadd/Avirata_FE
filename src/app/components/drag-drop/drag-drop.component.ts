@@ -308,6 +308,8 @@ export class DragDropComponent implements OnInit {
   }
 
   ngDoCheck() {
+   this.subFlagModule1 = parseInt(window.localStorage.getItem('subFlagModule1'));
+   this.subFlagModule3 = parseInt(window.localStorage.getItem('subFlagModule3'));
     if (this.data.type == "multiple") {
       if (this.check1 && this.check2 && this.check3 && this.check4) {
         this.nextFlag = true;

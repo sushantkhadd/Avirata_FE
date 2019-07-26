@@ -34,7 +34,7 @@ export class Module03Component implements OnInit {
   public passFlags = {}; data; myjsondata; dummy; deleteAdd = []; questionCount;
   questionlist; optionArray; counter; disableIt; questionId; mainCounter;
   dummyArray = []; jsonObject = {}; ansJsonLength;
-  public apiEndStart; apiEndSendAns; apiEndFinish;
+  public apiEndStart; apiEndSendAns; apiEndFinish;startFlag;
 
   ngOnInit() {
     this.questionlist = [];
@@ -46,11 +46,12 @@ export class Module03Component implements OnInit {
 
     if (this.mainFlagModule0 == 3)
     {
+      this.showPart1Flag = false
       if (this.subFlagModule0 == 1 || this.subFlagModule0 == 2) {
-        this.start1()
+        // this.start1()
       }
      else if(this.subFlagModule0 == 3) {
-        this.start2()
+        // this.start2()
       }
     }
 

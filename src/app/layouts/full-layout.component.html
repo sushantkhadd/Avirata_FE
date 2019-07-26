@@ -63,10 +63,10 @@
         <li>
           <span *ngIf="!currentFlag0">
             <a href="#module0Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [ngClass]="{'dropdown-toggle': module0OnOffFlag }"
-              (click)="currentStatus(0);instruction0()" [class.deactive-menu1]="!module0OnOffFlag">{{'L2Module0.title' | translate}}</a>
+              (click)="currentStatus(0)" [class.deactive-menu1]="!module0OnOffFlag">{{'L2Module0.title' | translate}}</a>
           </span>
           <span *ngIf="currentFlag0">
-            <a href="#module0Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [ngClass]="{'dropdown-toggle': module0OnOffFlag }"
+            <a href="#module0Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [ngClass]="{'dropdown-toggle': module0OnOffFlag }" (click)=" mainFlag == true ? instruction0() : undefined;mainFlag = false"
               [class.deactive-menu1]="!module0OnOffFlag">{{'L2Module0.title' | translate}}</a>
           </span>
 

@@ -39,7 +39,7 @@
         <h6 class="text-center" *ngIf="subFlagModule3 == 6">{{'L2Module3.unlock_sub3_16_6' | translate}}</h6>
       </div>
       <div class="card-block text-center" *ngIf="subFlagModule3 == 1">
-        <img alt="image" *ngIf="imgUrl" [src]="imgUrl" class="mx-auto img-fluid w-35">
+        <img alt="image" *ngIf="imgUrl" [src]="imgUrl" class="mx-auto img-fluid w-50">
         <hr>
         <div class="text-center" *ngIf="mainFlagModule3 ==16">
           <button class="btn btn-primary btn-pad " appPreventDoubleClick (debounceClick)="finish()">{{'Stepper.Next' | translate}}</button>
@@ -215,7 +215,7 @@
         </div>
       </div>
       <div class="text-center" *ngIf="flag == 1">
-        <img class="img-fluid w-35" [src]="urlArray['src1']" alt="">
+        <img class="img-fluid w-50" [src]="urlArray['src1']" alt="">
         <div class="card-footer text-center bg-white border-0">
           <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>
         </div>

@@ -98,12 +98,16 @@ export class Module15Component implements OnInit {
   finishCFU(e) {
     if (e)
     {
-      this.parentUrlJson['1.5.2'] = e['url'];
       console.log("parenturl",this.parentUrlJson)
       var current1 = [];
       current1 = JSON.parse(window.localStorage.getItem("currentJson1"));
       var index = current1["children"].findIndex(
         item => item.source == "module 1.5");
+      var moduleJson = current1["children"][index]
+      var index1 = moduleJson["children"].findIndex(
+      item => item.source == "module 1.5.1");
+      this.parentUrlJson['1.5.1'] = moduleJson["children"][index1].url;
+      this.parentUrlJson['1.5.2'] = e['url'];
       current1["children"][index].url = JSON.stringify(this.parentUrlJson);
 
       window.localStorage.setItem("currentJson1", JSON.stringify(current1));

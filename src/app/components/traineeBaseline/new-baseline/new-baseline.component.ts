@@ -63,6 +63,10 @@ export class NewBaselineComponent implements OnInit {
     this.apiEndSendAns = this.passData.answer;
     this.apiEndFinish = this.passData.finish;
     this.startJson = this.passData.jsonData;
+    if(window.localStorage.getItem("mainFlagModule0")=="3"){
+      this.startExam()
+      console.log("safdsfsd")
+    }
   }
 
   ngDoCheck() {
