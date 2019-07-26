@@ -371,18 +371,18 @@ export class Module111Component implements OnInit {
             this.passData["videoUrl"] = data["data"].url;
             this.vedioCompleteUrl = data["data"].url;
 
-            // var current1 = [];
-            // current1 = JSON.parse(window.localStorage.getItem("currentJson1"));
-            // var child = {};
-            // var index = current1["children"].findIndex(
-            //   item => item.source == "module 1.13"
-            // );
-            // current1["children"][index].url = data["data"].url;
-            // console.log("FINISH ", current1);
-            // window.localStorage.setItem(
-            //   "currentJson1",
-            //   JSON.stringify(current1)
-            // );
+            var url = {};
+            url["1.11.1"] = this.vedioCompleteUrl;
+            var current1 = [];
+            current1 = JSON.parse(window.localStorage.getItem("currentJson1"));
+            var index = current1["children"].findIndex(
+              item => item.source == "module 1.11"
+            );
+            current1["children"][index].url = JSON.stringify(url);
+            window.localStorage.setItem(
+              "currentJson1",
+              JSON.stringify(current1)
+            );
             this.playVideo = true;
           } else if (fun == "finish1") {
             this.instFlag = true;
@@ -452,18 +452,21 @@ export class Module111Component implements OnInit {
             this.reset();
             this.startEvent2();
           } else if (fun == "finish2") {
-            var url = {};
-            url["1.11.1"] = this.vedioCompleteUrl;
+
             var current1 = [];
             current1 = JSON.parse(window.localStorage.getItem("currentJson1"));
             var index = current1["children"].findIndex(
-              item => item.source == "module 1.11"
-            );
-            current1["children"][index].url = JSON.stringify(url);
-            window.localStorage.setItem(
-              "currentJson1",
-              JSON.stringify(current1)
-            );
+              item => item.source == "module 1.11");
+            var moduleJson = current1["children"][index]
+            if(moduleJson["children"].length !=0){
+            var index1 = moduleJson["children"].findIndex(
+            item => item.source == "module 1.11.1");
+            var parentUrls = {}
+            parentUrls['1.11.1'] = moduleJson["children"][index1].url;
+            }
+            current1["children"][index].url = JSON.stringify(parentUrls);
+            window.localStorage.setItem("currentJson1", JSON.stringify(current1));
+
             this.statVideoFlag = true;
             this.mainFlagModule1 = 12;
             window.localStorage.setItem("uuid", data["data"].nextuuid);

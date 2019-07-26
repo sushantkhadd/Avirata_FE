@@ -16,7 +16,7 @@
           <h5>&nbsp;{{'Quiz.note' | translate}}</h5>
         </div>
         <div class="card-block inst-text">
-          <p class="" *ngIf="subFlagModule4!=4">{{'L2Instruction.inst_image' | translate}}</p>
+          <p class="" *ngIf="subFlagModule4!=4">{{'L2Instruction.inst_image2' | translate}}</p>
           <p *ngIf="subFlagModule4==4">{{'L2Instruction.inst_2_15_4' | translate}}</p>
         </div>
         <div class="card-footer">
@@ -41,7 +41,7 @@
         <h6 *ngIf="subFlagModule4 == 6">{{'L2Module4.unlock_sub4_13_6' | translate}}</h6>
       </div>
       <div class="card-block text-center" *ngIf="subFlagModule4 == 1">
-        <img alt="Image" *ngIf="imgUrl" [src]="imgUrl" class="mx-auto img-fluid w-35">
+        <img alt="Image" *ngIf="imgUrl" [src]="imgUrl" class="mx-auto img-fluid w-50">
         <hr>
         <div class="text-center" *ngIf="mainFlagModule4 ==13">
           <button class="btn btn-primary btn-pad " appPreventDoubleClick (debounceClick)="finish()">{{'Stepper.Next' | translate}}</button>
@@ -187,7 +187,7 @@
         </div>
       </div>
       <div class="text-center" *ngIf="flag == 1">
-        <img class="img-fluid w-35" [src]="urlArray['src1']" alt="">
+        <img class="img-fluid w-50" [src]="urlArray['src1']" alt="">
         <div class="card-footer text-center bg-white border-0">
           <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>
         </div>

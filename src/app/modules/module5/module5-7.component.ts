@@ -38,7 +38,7 @@ export class Module57Component implements OnInit {
   sumbitButton;loader;
   startFlag;
   public inst =
-    "खालील विधान पूर्ण करा.";
+    "खालील दिलेल्या पर्यायांपैकी योग्य पर्याय निवडा.";
   ngOnInit() {
     this.startFlag = false;
     this.showAnswer = true;

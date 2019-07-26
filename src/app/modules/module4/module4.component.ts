@@ -45,7 +45,7 @@ export class Module4Component implements OnInit {
   statVideoFlag;nextFlag;
   questionFlag;unlockVideoFlag;
   urlArray = {};
-  public inst = "खाली दिलेल्या पर्यायांतील काही मानसिक अस्वास्थ्याशी निगडित आहेत, तर काही मानसिक आजाराशी निगडित आहेत आणि काही दोन्हीशी निगडित नाहीत. प्रत्येक पर्यायावर विचार करून तो योग्य पर्याय निवडा."
+  public inst = "खाली दिलेल्या पर्यायांतील काही मानसिक अस्वास्थ्याशी निगडित आहेत, तर काही मानसिक आजाराशी निगडित आहेत आणि काही दोन्हीशी निगडित नाहीत. प्रत्येक पर्यायावर विचार करून योग्य तो पर्याय निवडा."
   ngOnInit() {
     this.vedioCompleteUrl = "79vHVVtmIoQ";
     this.mainFlagModule4 = parseInt(

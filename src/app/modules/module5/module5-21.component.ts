@@ -484,6 +484,11 @@ export class Module521Component implements OnInit {
       } else{
         this.errorMsgFlag['5']=false;
       }
+      if(this.postWordCount['5']>150 || this.postWordCount['5']==0){
+        this.showLimit['5'] = false;
+      } else if(this.postWordCount['5'] >=5){
+        this.showLimit['5'] = true;
+      }
     }
     if (this.answer6) {
       this.postWordCount['6'] = this.answer6.trim().split(/\s+/).length;
@@ -492,6 +497,11 @@ export class Module521Component implements OnInit {
       } else{
         this.errorMsgFlag['6']=false;
       }
+      if(this.postWordCount['6']>150 || this.postWordCount['6']==0){
+        this.showLimit['6'] = false;
+      } else if(this.postWordCount['6'] >=5){
+        this.showLimit['6'] = true;
+      }
     }
     if (this.answer7) {
       this.postWordCount['7'] = this.answer7.trim().split(/\s+/).length;
@@ -499,6 +509,11 @@ export class Module521Component implements OnInit {
         this.errorMsgFlag['7']=true;
       } else{
         this.errorMsgFlag['7']=false;
+      }
+      if(this.postWordCount['7']>150 || this.postWordCount['7']==0){
+        this.showLimit['7'] = false;
+      } else if(this.postWordCount['7'] >=5){
+        this.showLimit['7'] = true;
       }
     }
 

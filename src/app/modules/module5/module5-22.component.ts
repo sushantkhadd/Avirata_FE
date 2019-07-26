@@ -103,6 +103,7 @@ export class Module522Component implements OnInit {
         data => {
           if (data["message"] == "post submitted successfully") {
             window.localStorage.setItem("mainFlagModule5", "23");
+            window.localStorage.setItem("subFlagModule5", "1");
             this.mainFlagModule5 = 23;
             this.Module5Service.setLocalStorage5(23);
             window.localStorage.setItem(
