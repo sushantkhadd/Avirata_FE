@@ -139,6 +139,7 @@ import { Module02Component } from './module0/module0-2.component';
 import { Module03Component } from './module0/module0-3.component';
 import { FeedbackComponent } from '../components/feedback/feedback.component';
 import {AutosizeModule} from 'ngx-autosize';
+import { Module04Component } from './module0/module0-4.component';
 
 @NgModule({
   imports: [
@@ -278,6 +279,7 @@ import {AutosizeModule} from 'ngx-autosize';
     Module02Component,
     Module03Component,
     FeedbackComponent,
+    Module04Component,
   ],
   providers: [
     Module0Service,

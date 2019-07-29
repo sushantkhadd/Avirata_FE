@@ -91,6 +91,7 @@ import { AdminPanelComponent } from "./admin-Report/admin-panel/admin-panel.comp
 import { DistrictTrainingReportComponent } from "./admin-Report/district-training-report/district-training-report.component";
 import { Module02Component } from "./module0/module0-2.component";
 import { Module03Component } from "./module0/module0-3.component";
+import { Module04Component } from "./module0/module0-4.component";
 
 const routes: Routes = [
   {
@@ -104,12 +105,16 @@ const routes: Routes = [
         component: Module0Component
       },
       {
-        path: "module0/baseline1",
+        path: "module0/Module0.2",
         component: Module02Component
       },
       {
-        path: "module0/baseline2",
+        path: "module0/baseline1",
         component: Module03Component
+      },
+      {
+        path: "module0/baseline2",
+        component: Module04Component
       },
       {
         path: "Module1",

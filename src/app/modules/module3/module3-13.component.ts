@@ -96,16 +96,22 @@ this.videoData['apiUrl'] = 'modulethreecfustart/';
 }
 finishCFU(e) {
 if (e) {
-  var url ={}
-  url['3.13.1'] = this.passUrl;
-  url['3.13.2'] = e['url'];
-  console.log("urllll",url)
-  var current3 = [];
-  current3 = JSON.parse(window.localStorage.getItem("currentJson3")); 
-  var index = current3["children"].findIndex(
-    item => item.source == "module 3.13" );
-  current3["children"][index].url = JSON.stringify(url); 
-  window.localStorage.setItem("currentJson3", JSON.stringify(current3));
+    var url ={}
+    var current3 = [];
+    current3 = JSON.parse(window.localStorage.getItem("currentJson3"));
+    var index = current3["children"].findIndex(
+      item => item.source == "module 3.13");
+    var moduleJson = current3["children"][index]
+    if(moduleJson["children"].length !=0){
+    var index1 = moduleJson["children"].findIndex(
+    item => item.source == "module 3.13.1");
+    if(moduleJson["children"][index1].url !="" && moduleJson["children"][index1].url !=null && moduleJson["children"][index1].url !=undefined){
+    url['3.13.1'] = moduleJson["children"][index1].url;
+    }
+    }
+    url['3.13.2'] = e['url'];
+    current3["children"][index].url = JSON.stringify(url);
+    window.localStorage.setItem("currentJson3", JSON.stringify(current3));
 
   window.localStorage.setItem('mainFlagModule3', '14');
   window.localStorage.setItem('subFlagModule3', '1');

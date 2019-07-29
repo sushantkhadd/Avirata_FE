@@ -3,7 +3,7 @@
     <span class="counter" *ngIf="mysubModule1==4">{{queCount | numberConvertor : 'Devanagari'}} / १२</span>
     <span class="counter" *ngIf="mysubModule1==6">{{queCount | numberConvertor : 'Devanagari'}} / ७</span>
     <span class="counter" *ngIf="mysubModule5==7">{{queCount | numberConvertor : 'Devanagari'}} / ३</span>
-    <span class="counter" *ngIf="mysubModule0==2">{{queCount | numberConvertor : 'Devanagari'}} / २०</span>
+    <span class="counter" *ngIf="mysubModule0==3">{{queCount | numberConvertor : 'Devanagari'}} / २०</span>
     <span class="counter" *ngIf="mysubModule3==7 || mysubModule4==11">{{queCount | numberConvertor : 'Devanagari'}} / ५</span>
     <div class="row">
         <div class="col-sm-12 col-md-12">
@@ -18,12 +18,12 @@
                         <span class="inst-text" *ngIf="title"><strong>{{title}} :<br/> </strong></span>
                         <label class="f-1x p-2"><span *ngIf="queCount">{{queCount | numberConvertor : 'Devanagari'}}. </span><span [innerHTML]="statement"></span>
                     </label>
-                    <label *ngIf="mysubModule0==2 && queDescription !=''" class="f-1x p-2"><span [innerHTML]="queDescription"></span>
+                    <label *ngIf="mysubModule0==3 && queDescription !=''" class="f-1x p-2"><span [innerHTML]="queDescription"></span>
                     </label>
                     </div>
                     <!-- <h6 *ngIf="!queUrl" class="lineHeight" [innerHTML]="statement"></h6> -->
                 </div>
-                <div *ngIf="mysubModule0 == 2 && questionImg!=null" class="customimg text-center">
+                <div *ngIf="mysubModule0 == 3 && questionImg!=null" class="customimg text-center">
                     <br>
                     <img [src]=questionImg class="imgOption center-block">
                 </div>
@@ -52,7 +52,7 @@
     </div>
 
     <div class="text-center mt-4"
-      *ngIf="mysubModule == 3 || mysubModule0 == 3 || mysubModule6 == 2|| mysubModule7 == 2|| mysubModule7 == 3 || mysubModule2 == 3 || mysubModule3 == 1 || mysubModule3 == 5 || mysubModule3 == 9 || mysubModule3 == 11 || mysubModule4 == 5 || mysubModule4 == 7 || mysubModule5 == 7 || mysubModule0 == 2 || mysubModule3==7 || mysubModule4==11"> 
+      *ngIf="mysubModule == 3 || mysubModule0 == 3 || mysubModule6 == 2|| mysubModule7 == 2|| mysubModule7 == 3 || mysubModule2 == 3 || mysubModule3 == 1 || mysubModule3 == 5 || mysubModule3 == 9 || mysubModule3 == 11 || mysubModule4 == 5 || mysubModule4 == 7 || mysubModule5 == 7 || mysubModule3==7 || mysubModule4==11"> 
         <div class="">
             <button class="btn btn-primary" appPreventDoubleClick [disabled]="!submitFlag"
               (debounceClick)="goNext5_3()">{{'Cfu.submit' | translate}}</button>
@@ -283,13 +283,13 @@
 
                 <h5 class="text-white mb-1" *ngIf="rightFlag==true && questionType == 'checkBoxOption'">{{'subModule1_9.correctAns' | translate }}</h5>
             </div>
-            <div class="modal-body" *ngIf="questionType != 'checkBoxOption'" [class.d-none]="(mysubModule4==5 || mysubModule4==7 || mysubModule4==11 || mysubModule0==2) && rightFlag">
+            <div class="modal-body" *ngIf="questionType != 'checkBoxOption'" [class.d-none]="(mysubModule4==5 || mysubModule4==7 || mysubModule4==11 || mysubModule0==3) && rightFlag">
                 <span *ngIf="mysubModule4 != 9 && mysubModule4 != 13">
                 <p *ngIf="rightFlag==false"><b>{{'subModule1_9.correctAns' | translate }} :</b></p>
                 <p *ngIf="rightFlag==false">{{showCorrectAns}}</p>
                 <!-- <p *ngIf="mysubModule0==2"><b>{{'subModule1_9.correctAns' | translate }} :</b> {{showCorrectAns}}</p> -->
                 </span>
-                <div *ngIf="mysubModule0 == 2 && answerImg !=null" class="customimg text-center">
+                <div *ngIf="mysubModule0 == 3 && answerImg !=null" class="customimg text-center">
                     <br>
                     <img src={{answerImg}} class="imgOption center-block">
                 </div>

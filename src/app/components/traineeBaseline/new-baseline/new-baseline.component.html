@@ -1,4 +1,4 @@
-<div class="col-sm-12 col-md-12 " *ngIf="!showQuize && !finishExamCard && mySubmodule0!=3">
+<div class="col-sm-12 col-md-12 " *ngIf="!showQuize && !finishExamCard && mySubmodule0!=4">
     <div class="instruction-wrap">
         <div class="borderBlue">
             <div class="card">
@@ -24,7 +24,7 @@
                 </div> -->
                 </div>
                 <div class="card-footer"
-                  *ngIf="mySubmodule2==1 || mySubmodule2==7 || mySubmodule3==7 || moduleNumber==3 || moduleNumber==4 || moduleNumber==5 || mySubmodule0==3">
+                  *ngIf="mySubmodule2==1 || mySubmodule2==7 || mySubmodule3==7 || moduleNumber==3 || moduleNumber==4 || moduleNumber==5 || mySubmodule0==4">
                     <div class="float-right hidden-xs-0ow3"> 
                         <button class="btn btn-primary" appPreventDoubleClick
                           (debounceClick)="startExam()">{{'Module4.start' | translate}}</button>
@@ -61,9 +61,9 @@
        <strong *ngIf="mySubmodule4 == 2">{{'Quiz.traineebaselineQue3' | translate}}</strong>
        <strong *ngIf="mySubmodule4 == 11">{{'Quiz.traineebaselineQue4' | translate}}</strong>
         <strong *ngIf="mySubmodule5 == 23">{{'Quiz.traineebaselineQue4' | translate}}</strong>
-        <strong *ngIf="mySubmodule0 == 3 && mySubFlagmodule0==1">{{'Quiz.traineebaselineQue5' | translate}}</strong>
-        <strong *ngIf="mySubmodule0 == 3 && mySubFlagmodule0==2">{{'Quiz.traineebaselineQue6' | translate}}</strong>
-        <strong *ngIf="mySubmodule0 == 3 && mySubFlagmodule0==3">{{'Quiz.traineebaselineQue7' | translate}}</strong>
+        <strong *ngIf="mySubmodule0 == 4 && mySubFlagmodule0==1">{{'Quiz.traineebaselineQue5' | translate}}</strong>
+        <strong *ngIf="mySubmodule0 == 4 && mySubFlagmodule0==2">{{'Quiz.traineebaselineQue6' | translate}}</strong>
+        <strong *ngIf="mySubmodule0 == 4 && mySubFlagmodule0==3">{{'Quiz.traineebaselineQue7' | translate}}</strong>
         <strong *ngIf="mySubmodule5 == 18">{{'Quiz.traineebaselineQue8' | translate}}</strong>
     </h6>
     <!-- <hr /> -->

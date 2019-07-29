@@ -97,17 +97,22 @@ export class Module34Component implements OnInit {
   }
   finishCFU(e) {
     if (e) {
-      var url = {};
-      this.urlJson["3.4.1"] = this.passUrl;
-      this.urlJson['3.4.2'] = e['url'];
-      console.log("urllll", this.urlJson)
+
       var current3 = [];
       current3 = JSON.parse(window.localStorage.getItem("currentJson3"));
       var index = current3["children"].findIndex(
-        item => item.source == "module 3.4" );
+        item => item.source == "module 3.4");
+      var moduleJson = current3["children"][index]
+      if(moduleJson["children"].length !=0){
+      var index1 = moduleJson["children"].findIndex(
+      item => item.source == "module 3.4.1");
+      if(moduleJson["children"][index1].url !="" && moduleJson["children"][index1].url !=null && moduleJson["children"][index1].url !=undefined){
+      this.urlJson["3.4.1"] = moduleJson["children"][index1].url;
+      }
+      }
+      this.urlJson['3.4.2'] = e['url'];
       current3["children"][index].url = JSON.stringify(this.urlJson);
       window.localStorage.setItem("currentJson3", JSON.stringify(current3));
-
       window.localStorage.setItem('mainFlagModule3', '5');
       window.localStorage.setItem('subFlagModule3', '1');
       window.localStorage.setItem('source', 'module 3.5');

@@ -102,17 +102,24 @@ export class Module5Component implements OnInit {
 
   finishCFU(e) {
     if (e) {
+     
       var url = {}
-      url['5.1.1'] = this.passUrl;
-      url['5.1.2'] = e['url'];
-      console.log("urllll", url)
-      var current1 = [];
-      current1 = JSON.parse(window.localStorage.getItem("currentJson5"));
-      var index = current1["children"].findIndex(
+      var current5 = [];
+      current5 = JSON.parse(window.localStorage.getItem("currentJson5"));
+      var index = current5["children"].findIndex(
         item => item.source == "module 5.1");
-      current1["children"][index].url = JSON.stringify(url);
+      var moduleJson = current5["children"][index]
+      if(moduleJson["children"].length !=0){
+      var index1 = moduleJson["children"].findIndex(
+      item => item.source == "module 5.1.1");
+      if(moduleJson["children"][index1].url !="" && moduleJson["children"][index1].url !=null && moduleJson["children"][index1].url !=undefined){
+      url['5.1.1'] = moduleJson["children"][index1].url;
+      }
+      }
+      url['5.1.2'] = e['url'];
+      current5["children"][index].url = JSON.stringify(url);
+      window.localStorage.setItem("currentJson5", JSON.stringify(current5));
 
-      window.localStorage.setItem("currentJson5", JSON.stringify(current1));
       window.localStorage.setItem('mainFlagModule5', '2');
       window.localStorage.setItem('subFlagModule5', '1');
       window.localStorage.setItem('source', 'module 5.2');

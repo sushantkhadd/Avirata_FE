@@ -100,15 +100,23 @@ export class Module46Component implements OnInit {
   finishCFU(e) {
     if (e)
     {
+      
       var url = {}
-      url['4.6.1'] = this.passUrl;
-      url['4.6.2'] = e['urls'];
-      console.log("urllll", url,e)
       var current4 = [];
       current4 = JSON.parse(window.localStorage.getItem("currentJson4"));
       var index = current4["children"].findIndex(
         item => item.source == "module 4.6");
+      var moduleJson = current4["children"][index]
+      if(moduleJson["children"].length !=0){
+      var index1 = moduleJson["children"].findIndex(
+      item => item.source == "module 4.6.1");
+      if(moduleJson["children"][index1].url !="" && moduleJson["children"][index1].url !=null && moduleJson["children"][index1].url !=undefined){
+      url['4.6.1'] = moduleJson["children"][index1].url;
+      }
+      }
+      url['4.6.2'] = e['urls'];
       current4["children"][index].url = JSON.stringify(url);
+      window.localStorage.setItem("currentJson4", JSON.stringify(current4));
 
       window.localStorage.setItem("currentJson4", JSON.stringify(current4));
       window.localStorage.setItem('mainFlagModule4', '7');

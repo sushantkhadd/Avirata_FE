@@ -176,6 +176,18 @@ export class Module517Component implements OnInit {
             this.instructionModal.hide();
             this.LanguageService.toHide();
             this.mainFlagModule5 = 18;
+            console.log("parent",JSON.parse(data['data'].parenturl))
+            var current5 = [];
+            current5 = JSON.parse(window.localStorage.getItem("currentJson5"));
+            var index = current5["children"].findIndex(
+              item => item.source == "module 5.17"
+            );
+            current5["children"][index].url = data['data'].parenturl;
+            window.localStorage.setItem(
+              "currentJson5",
+              JSON.stringify(current5)
+            ); 
+
             window.localStorage.setItem("uuid", data["data"].nextuuid);
             window.localStorage.setItem("mainFlagModule5", "18");
             window.localStorage.setItem("subFlagModule5", "1");

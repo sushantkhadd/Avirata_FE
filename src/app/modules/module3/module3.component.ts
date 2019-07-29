@@ -225,6 +225,21 @@ export class Module3Component implements OnInit {
           {
             this.showVideoFlag = false;
             window.localStorage.setItem('uuid', data['data'].nextuuid)
+            var current3 = [];
+            current3 = JSON.parse(window.localStorage.getItem("currentJson3"));
+            var index = current3["children"].findIndex(
+              item => item.source == "module 3.1");
+            var moduleJson = current3["children"][index]
+            if(moduleJson["children"].length !=0){
+            var index1 = moduleJson["children"].findIndex(
+            item => item.source == "module 3.1.1");
+            var parentUrls = {}
+            if(moduleJson["children"][index1].url !="" && moduleJson["children"][index1].url !=null && moduleJson["children"][index1].url !=undefined){
+            parentUrls['3.1.1'] = moduleJson["children"][index1].url;
+            current3["children"][index].url = JSON.stringify(parentUrls);
+            }
+            window.localStorage.setItem("currentJson3", JSON.stringify(current3));
+          }
             this.mainFlagModule3 = 2;
             this.subFlagModule3 = 1;
             window.localStorage.setItem('mainFlagModule3', '2');

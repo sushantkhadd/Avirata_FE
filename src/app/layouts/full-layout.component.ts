@@ -2328,20 +2328,25 @@ export class FullLayoutComponent implements OnInit {
         if (source == "module 0.2") {
           this.subFlagModule0 = 1;
         }
-      } else if (
-        source == "module 0.3" ||
-        source == "module 0.3.1" ||
-        source == "module 0.3.2" ||
-        source == "module 0.3.3"
-      ) {
+      } else if (source == "module 0.3") {
         this.mainFlagModule0 = 3;
-        if (source == "module 0.3" || source == "module 0.3.1") {
+        if (source == "module 0.3") {
           this.subFlagModule0 = 1;
         }
-        else if (source == "module 0.3.2") {
+      } else if (
+        source == "module 0.4" ||
+        source == "module 0.4.1" ||
+        source == "module 0.4.2" ||
+        source == "module 0.4.3"
+      ) {
+        this.mainFlagModule0 = 4;
+        if (source == "module 0.4" || source == "module 0.4.1") {
+          this.subFlagModule0 = 1;
+        }
+        else if (source == "module 0.4.2") {
           this.subFlagModule0 = 2;
         }
-        else if (source == "module 0.3.3") {
+        else if (source == "module 0.4.3") {
           this.subFlagModule0 = 3;
         }
       }
@@ -2533,7 +2538,7 @@ export class FullLayoutComponent implements OnInit {
     this.mainFlagModule0 = parseInt(
       window.localStorage.getItem("mainFlagModule0")
     );
-    if (this.mainFlagModule0 > 3) {
+    if (this.mainFlagModule0 > 4) {
       this.currentFlag1 = false;
       this.module0OnOffFlag = true;
       this.module1OnOffFlag = true;

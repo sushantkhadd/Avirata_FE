@@ -84,7 +84,7 @@
                 <a class="deactive-menu" routerLinkActive="active">{{'L2Module0.subMenu1-2' | translate}}</a>
               </span>
               <span *ngIf="mainFlagModule0 >= 2">
-                <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/module0/baseline1']">{{'L2Module0.subMenu1-2' | translate}}</a>
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/module0/Module0.2']">{{'L2Module0.subMenu1-2' | translate}}</a>
               </span>
             </li>
             <li routerLinkActive="activeMenu">
@@ -92,7 +92,15 @@
                 <a class="deactive-menu" routerLinkActive="active">{{'L2Module0.subMenu1-3' | translate}}</a>
               </span>
               <span *ngIf="mainFlagModule0 >= 3">
-                <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/module0/baseline2']">{{'L2Module0.subMenu1-3' | translate}}</a>
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/module0/baseline1']">{{'L2Module0.subMenu1-3' | translate}}</a>
+              </span>
+            </li>
+            <li routerLinkActive="activeMenu">
+              <span *ngIf="mainFlagModule0 < 4">
+                <a class="deactive-menu" routerLinkActive="active">{{'L2Module0.subMenu1-4' | translate}}</a>
+              </span>
+              <span *ngIf="mainFlagModule0 >= 4">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/module0/baseline2']">{{'L2Module0.subMenu1-4' | translate}}</a>
               </span>
             </li>
           </ul>

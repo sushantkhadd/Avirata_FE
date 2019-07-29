@@ -224,6 +224,20 @@ export class Module4Component implements OnInit {
           this.loader = false;
           if (data['message'] == "submodule finish")
           {
+            var current4 = [];
+            current4 = JSON.parse(window.localStorage.getItem("currentJson4"));
+            var index = current4["children"].findIndex(
+              item => item.source == "module 4.1");
+            var moduleJson = current4["children"][index]
+            if(moduleJson["children"].length !=0){
+            var index1 = moduleJson["children"].findIndex(
+            item => item.source == "module 4.1.1");
+            if(moduleJson["children"][index1].url !="" && moduleJson["children"][index1].url !=null && moduleJson["children"][index1].url !=undefined){
+            current4["children"][index].url = moduleJson["children"][index1].url;
+            }
+            window.localStorage.setItem("currentJson4", JSON.stringify(current4));
+          }
+
             this.mainFlagModule4 = 2;
             this.data="";
             this.passFlags={};
