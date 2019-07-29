@@ -614,6 +614,22 @@ export class NewBaselineComponent implements OnInit {
         if (data['message'] == "submodule finish" || data['message'] == "module0 finish") {
           console.log("adsaffffffffffff")
           if(window.localStorage.getItem('mainFlagModule2') == '1'){
+            var current2 = [];
+            current2 = JSON.parse(window.localStorage.getItem("currentJson2"));
+            var index = current2["children"].findIndex(
+              item => item.source == "module 2.1");
+            var moduleJson = current2["children"][index]
+            if(moduleJson["children"].length !=0){
+            var index1 = moduleJson["children"].findIndex(
+            item => item.source == "module 2.1.1");
+            var parentUrls = {}
+            if(moduleJson["children"][index1].url !="" && moduleJson["children"][index1].url !=null && moduleJson["children"][index1].url !=undefined){
+            parentUrls['2.1.1'] = moduleJson["children"][index1].url;
+            }
+            current2["children"][index].url = JSON.stringify(parentUrls);
+            window.localStorage.setItem("currentJson2", JSON.stringify(current2));
+            }
+            
             var obj = {
               "type": "submodule",
               "route": true,
@@ -628,6 +644,21 @@ export class NewBaselineComponent implements OnInit {
             window.localStorage.setItem('mainFlagModule2', '2')
             window.localStorage.setItem('subFlagModule2', '1')
           } else if(window.localStorage.getItem('mainFlagModule2') == '7'){
+              var current2 = [];
+              current2 = JSON.parse(window.localStorage.getItem("currentJson2"));
+              var index = current2["children"].findIndex(
+                item => item.source == "module 2.7");
+              var moduleJson = current2["children"][index]
+              if(moduleJson["children"].length !=0){
+              var index1 = moduleJson["children"].findIndex(
+              item => item.source == "module 2.7.1");
+              var parentUrls = {}
+              if(moduleJson["children"][index1].url !="" && moduleJson["children"][index1].url !=null && moduleJson["children"][index1].url !=undefined){
+              parentUrls['2.7.1'] = moduleJson["children"][index1].url;
+              }
+              current2["children"][index].url = JSON.stringify(parentUrls);
+              window.localStorage.setItem("currentJson2", JSON.stringify(current2));
+            }
             var obj = {
               "type": "submodule",
               "route": true,

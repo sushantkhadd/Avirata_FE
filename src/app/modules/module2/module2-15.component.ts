@@ -246,6 +246,7 @@ export class Module215Component implements OnInit {
         window.localStorage.setItem("currentJson2", JSON.stringify(current2));
 
          if(window.localStorage.getItem("subFlagModule2")== "6"){
+           
           window.localStorage.setItem('mainFlagModule2', '16');
           window.localStorage.setItem('subFlagModule2', '1');
           window.localStorage.setItem('source', 'module 2.16');

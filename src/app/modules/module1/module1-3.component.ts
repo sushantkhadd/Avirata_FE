@@ -107,7 +107,9 @@ export class Module13Component implements OnInit {
       if(moduleJson["children"].length !=0){
       var index1 = moduleJson["children"].findIndex(
       item => item.source == "module 1.3.1");
+      if(moduleJson["children"][index1].url !="" && moduleJson["children"][index1].url !=null && moduleJson["children"][index1].url !=undefined){
       this.parentUrls['1'] = moduleJson["children"][index1].url;
+      }
       }
       this.parentUrls['2'] = e['url'];
       current1["children"][index].url = JSON.stringify(this.parentUrls);

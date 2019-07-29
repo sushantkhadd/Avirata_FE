@@ -101,16 +101,21 @@ export class Module213Component implements OnInit {
   finishCFU(result) {
     if (result["status"] == true)
     {
-      var url = {}
-      url['2.13.1'] = this.passUrl;
-      url['2.13.2'] = result['urls'];
-      console.log("urllll", url)
       var current2 = [];
       current2 = JSON.parse(window.localStorage.getItem("currentJson2"));
       var index = current2["children"].findIndex(
         item => item.source == "module 2.13");
-      current2["children"][index].url = JSON.stringify(url);
-
+      var moduleJson = current2["children"][index]
+      var parentUrls = {}
+      if(moduleJson["children"].length !=0){
+      var index1 = moduleJson["children"].findIndex(
+      item => item.source == "module 2.13.1");
+      if(moduleJson["children"][index1].url !="" && moduleJson["children"][index1].url !=null && moduleJson["children"][index1].url !=undefined){
+      parentUrls['2.13.1'] = moduleJson["children"][index1].url;
+      }
+      }
+      parentUrls['2.13.2'] = result['urls'];
+      current2["children"][index].url = JSON.stringify(parentUrls);
       window.localStorage.setItem("currentJson2", JSON.stringify(current2));
       window.localStorage.setItem('mainFlagModule2', '14');
       window.localStorage.setItem('subFlagModule2', '1');
@@ -133,11 +138,15 @@ export class Module213Component implements OnInit {
             this.showVideoFlag = true
             this.passUrl = data['data'].url;
 
-            // var dummylocal = JSON.parse(window.localStorage.getItem('currentJson1'))
-            // var index1 = dummylocal.children.findIndex(item =>
-            //   item.source == "module 3.8");
-            // dummylocal.children[index1].url = this.passUrl
-            // window.localStorage.setItem('currentJson1', JSON.stringify(dummylocal))
+            var url = {}
+            url['2.13.1'] = this.passUrl;
+            console.log("urllll", url)
+            var current2 = [];
+            current2 = JSON.parse(window.localStorage.getItem("currentJson2"));
+            var index = current2["children"].findIndex(
+              item => item.source == "module 2.13");
+            current2["children"][index].url = JSON.stringify(url);
+            window.localStorage.setItem("currentJson2", JSON.stringify(current2));
 
           } if (fun == 'finish1')
           {

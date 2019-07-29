@@ -462,9 +462,11 @@ export class Module111Component implements OnInit {
             var index1 = moduleJson["children"].findIndex(
             item => item.source == "module 1.11.1");
             var parentUrls = {}
+            if(moduleJson["children"][index1].url !="" && moduleJson["children"][index1].url !=null && moduleJson["children"][index1].url !=undefined){
             parentUrls['1.11.1'] = moduleJson["children"][index1].url;
             }
             current1["children"][index].url = JSON.stringify(parentUrls);
+            }
             window.localStorage.setItem("currentJson1", JSON.stringify(current1));
 
             this.statVideoFlag = true;

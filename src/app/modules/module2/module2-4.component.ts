@@ -135,15 +135,7 @@ export class Module24Component implements OnInit {
       // this.playVideo = false;
       this.instructionModal.show();
       this.LanguageService.toShow();
-      var url ={}
-      url['2.4.1'] = this.vedioCompleteUrl;
-      console.log("urllll",url)
-      var current2 = [];
-      current2 = JSON.parse(window.localStorage.getItem("currentJson2")); 
-      var index = current2["children"].findIndex(
-        item => item.source == "module 2.4" );
-      current2["children"][index].url = JSON.stringify(url); 
-      window.localStorage.setItem("currentJson2", JSON.stringify(current2));
+     
     } else {
       window.localStorage.setItem("mainFlagModule2", "4");
       this.router.navigate(["/modules/module2/Module2.4"]);
@@ -161,6 +153,22 @@ export class Module24Component implements OnInit {
     var apiUrl = "mcqwithoption/";
     this.Module2Service.apiCall(jsonBody, apiUrl).subscribe(
       data => {
+        var current2 = [];
+        current2 = JSON.parse(window.localStorage.getItem("currentJson2"));
+        var index = current2["children"].findIndex(
+          item => item.source == "module 2.4");
+        var moduleJson = current2["children"][index]
+        if(moduleJson["children"].length !=0){
+        var index1 = moduleJson["children"].findIndex(
+        item => item.source == "module 2.4.1");
+        var parentUrls = {}
+        if(moduleJson["children"][index1].url !="" && moduleJson["children"][index1].url !=null && moduleJson["children"][index1].url !=undefined){
+        parentUrls['2.4.1'] = moduleJson["children"][index1].url;
+        }
+        current2["children"][index].url = JSON.stringify(parentUrls);
+        window.localStorage.setItem("currentJson2", JSON.stringify(current2));
+        }
+
         if (data['message'] == 'submodule finish'){
          window.localStorage.setItem("uuid", data["data"].nextuuid);
           window.localStorage.setItem("mainFlagModule2", "5");
@@ -199,6 +207,15 @@ export class Module24Component implements OnInit {
             this.passData["videoUrl"] = data["data"].url;
             this.vedioCompleteUrl = data["data"].url;
             this.playVideo = true;
+            var url ={}
+            url['2.4.1'] = this.vedioCompleteUrl;
+            console.log("urllll",url)
+            var current2 = [];
+            current2 = JSON.parse(window.localStorage.getItem("currentJson2")); 
+            var index = current2["children"].findIndex(
+              item => item.source == "module 2.4" );
+            current2["children"][index].url = JSON.stringify(url); 
+            window.localStorage.setItem("currentJson2", JSON.stringify(current2));
           } else if (fun == "finish1") {
             this.instructionModal.hide();
             this.LanguageService.toHide();

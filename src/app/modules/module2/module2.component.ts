@@ -129,15 +129,6 @@ export class Module2Component implements OnInit {
       this.subFlagModule2 = 2;
       this.instructionModal.show();
       this.LanguageService.toShow();
-      var url ={}
-      url['2.1.1'] = this.vedioCompleteUrl;
-      console.log("urllll",url)
-      var current2 = [];
-      current2 = JSON.parse(window.localStorage.getItem("currentJson2")); 
-      var index = current2["children"].findIndex(
-        item => item.source == "module 2.1" );
-      current2["children"][index].url = JSON.stringify(url); 
-      window.localStorage.setItem("currentJson2", JSON.stringify(current2));
     } else {
       window.localStorage.setItem("mainFlagModule2", "1");
       this.router.navigate(["/modules/module2/Module2.1"]);
@@ -160,6 +151,15 @@ export class Module2Component implements OnInit {
             this.passData["videoUrl"] = data["data"].url;
             this.vedioCompleteUrl = data["data"].url;
             this.playVideo = true;
+            var url ={}
+            url['2.1.1'] = this.vedioCompleteUrl;
+            console.log("urllll",url)
+            var current2 = [];
+            current2 = JSON.parse(window.localStorage.getItem("currentJson2")); 
+            var index = current2["children"].findIndex(
+              item => item.source == "module 2.1" );
+            current2["children"][index].url = JSON.stringify(url); 
+            window.localStorage.setItem("currentJson2", JSON.stringify(current2));
           } else if (fun == "finish1") {
             this.instructionModal.hide();
             this.LanguageService.toHide();
