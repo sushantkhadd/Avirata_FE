@@ -18,95 +18,167 @@ export class Module03Component implements OnInit {
   );
   public subFlagModule0 = parseInt(
     window.localStorage.getItem("subFlagModule0")
-  )
+  );
   constructor(
     public LanguageService: LanguageService,
-    private LocalstoragedetailsService: LocalstoragedetailsService,
-    private router: Router,
+    public LocalstoragedetailsService: LocalstoragedetailsService,
     public Module0Service: Module0Service,
     public toastr: ToastsManager,
     vcr: ViewContainerRef,
+    public router: Router,
     public translate: TranslateService
   ) {
     this.toastr.setRootViewContainerRef(vcr);
   }
-  public startTest; passData = {}; showPart1Flag = false;
-  public passFlags = {}; data; myjsondata; dummy; deleteAdd = []; questionCount;
-  questionlist; optionArray; counter; disableIt; questionId; mainCounter;
-  dummyArray = []; jsonObject = {}; ansJsonLength;
-  public apiEndStart; apiEndSendAns; apiEndFinish;startFlag;
-
+  public data=[];
+  questionType;
+  passFlags = {};
+  showAnswer;count;
+  saveData;
+  useranswer={};
+  answer;loader;
+  queId;
+  sumbitButton;questionlist;
+  startFlag;
+  public inst =
+    "खाली दिलेल्या पर्यायांपैकी योग्य पर्याय निवडा.";
   ngOnInit() {
-    this.questionlist = [];
-    this.dummyArray = [];
-    this.questionId = "";
-    this.disableIt = true;
-    this.startTest = false
-    this.ansJsonLength = 0;
+    this.startFlag = false;
+    this.showAnswer = true;
+    this.saveData = true;
+    this.passFlags["saveData"] = this.saveData;
+    this.passFlags["showAnswer"] = this.showAnswer;
+    this.questionType = "mcqTextOption";
+    this.passFlags["questionType"] = this.questionType;
 
     if (this.mainFlagModule0 == 3)
     {
-      this.showPart1Flag = false
-      if (this.subFlagModule0 == 1 || this.subFlagModule0 == 2) {
-        // this.start1()
+      // this.start()
+    }
+  }
+
+  start() {
+    var jsonBody = {};
+    jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
+    jsonBody["useranswer"] = "";
+    jsonBody["event"] = "start";
+    var apiUrl = "baselineone/";
+
+    this.Module0Service.apiCall(jsonBody, apiUrl).subscribe(
+      data => {
+        if (data["status"] == true)
+        {
+          // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 1.3', window.localStorage.getItem('username'), 10);
+          console.log("data111111111", data["data"].questionlist);
+          this.questionlist =data["data"].questionlist
+          this.shuffle(this.questionlist);
+          for(let i=0; i< this.questionlist.length; i++){
+            if(this.questionlist[i].answer == ""){
+              this.data.push(this.questionlist[i])
+            }
+          }
+          var baselineCounter = 20-(this.data.length-1);
+          window.localStorage.setItem("baselineCounter",JSON.stringify(baselineCounter))
+          //this.data = data["data"];
+           console.log('mcq data', this.data,baselineCounter);
+         
+          this.startFlag = true;
+        }
+      },
+      error => {
+        this.LanguageService.handleError(error.error.message);
       }
-     else if(this.subFlagModule0 == 3) {
-        // this.start2()
+    );
+  }
+
+  saveAnswer(e) {
+    if(e){
+      this.loader = true;
+      console.log("ff ", e);
+      this.sumbitButton = true;
+      this.useranswer = e;
+      console.log("ff ", this.useranswer);
+      this.queId = Object.keys(this.useranswer)
+      this.answer = this.useranswer[this.queId]
+      console.log("savca",this.queId[0],this.answer)
+     
+      if(this.data == [] || this.data.length == 0){
+        this.submit("finish")
+      }
+      else{
+        this.submit("answer");
       }
     }
-
-
+   
   }
-  start1() {
-    console.log("dsshfjds")
-    var jsonData = {}
-    jsonData['submoduleid'] = window.localStorage.getItem('uuid')
-    jsonData['event'] = "start"
-    jsonData["useranswer"] = "";
+  submit(val) {
+    if(val == "answer"){
+    var jsonBody = {};
 
-    this.showPart1Flag = true;
-    this.apiEndStart = 'baselinetwoseconetwo/';
-      this.apiEndSendAns = 'baselinetwoseconetwo/';
-      this.apiEndFinish = 'baselinetwoseconetwo/';
-      // this.startJson['examtype'] = window.localStorage.getItem('uuid');
-
-      this.passData['start'] = this.apiEndStart;
-      this.passData['answer'] = this.apiEndSendAns;
-      this.passData['finish'] = this.apiEndFinish;
-      this.passData['jsonData'] = jsonData;
-  }
-
-  saveAnswer(e){
-    if(e=="finish"){
-      this.showPart1Flag = false;
-      this.subFlagModule0=2;
-      console.log("dsffffffffffAWQEW",this.showPart1Flag,this.mainFlagModule0)
-      this.start1();
+    jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
+    jsonBody["questionid"] = this.queId[0];
+    jsonBody["useranswer"] = this.answer;
+    jsonBody["event"] = "answer";
+    var apiUrl = "baselineone/";
+    console.log("dasd ", jsonBody);
     }
-    if(e=="finish1"){
-      this.showPart1Flag = false;
-      this.subFlagModule0=3;
-      console.log("dsffffffffffAWQEW",this.showPart1Flag,this.mainFlagModule0)
-      this.start2();
+    else if(val == "finish"){
+      var jsonBody = {};
+
+      jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
+      jsonBody["questionid"] = this.queId[0];
+      jsonBody["useranswer"] = this.answer;
+      jsonBody["event"] = "finish";
+      var apiUrl = "baselineone/";
+      console.log("dasdqddddddddddddd ", jsonBody);
     }
+    this.Module0Service.apiCall(jsonBody, apiUrl).subscribe(
+      data => {
+        this.loader = false;
+        if(data["message"] == "your answer stored"){
+          console.log("data",this.data)
+        }
+       else if (
+          data["message"] == "submodule finish"
+        )
+        {
+          this.startFlag = false;
+          this.data=[];
+          window.localStorage.setItem("uuid", data["data"].nextuuid);
+          this.mainFlagModule0 = 4;
+          window.localStorage.setItem("mainFlagModule0", "4");
+          window.localStorage.setItem("subFlagModule0", "1");
+          window.localStorage.setItem('source', 'module 0.4');
+          var obj = {
+            "type": "submodule",
+            "route": true,
+            "current": this.translate.instant("L2Module0.subMenu1-3"),
+            "next": this.translate.instant("L2Module0Finish.subMenu0-4"),
+            "nextRoute": "/modules/module0/baseline2"
+          };
+          this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+          this.Module0Service.setLocalStorage0(4);
+        }
+      },
+      error => {
+        this.LanguageService.handleError(error.error.message);
+      }
+    );
   }
 
-  start2() {
-    console.log("dsshfjds")
-    var jsonData = {}
-    jsonData['submoduleid'] = window.localStorage.getItem('uuid')
-    jsonData['event'] = "start"
-    jsonData["useranswer"] = "";
-
-    this.showPart1Flag = true;
-    this.apiEndStart = 'baselinetwosecthree/';
-      this.apiEndSendAns = 'baselinetwosecthree/';
-      this.apiEndFinish = 'baselinetwosecthree/';
-      // this.startJson['examtype'] = window.localStorage.getItem('uuid');
-
-      this.passData['start'] = this.apiEndStart;
-      this.passData['answer'] = this.apiEndSendAns;
-      this.passData['finish'] = this.apiEndFinish;
-      this.passData['jsonData'] = jsonData;
+  shuffle(arra1) {
+    var ctr = arra1.length, temp, index;
+    // While there are elements in the array
+    while (ctr > 0) {
+      // Pick a random index
+      index = Math.floor(Math.random() * ctr);
+      // Decrease ctr by 1
+      ctr--;
+      // And swap the last element with it
+      temp = arra1[ctr];
+      arra1[ctr] = arra1[index];
+      arra1[index] = temp;
+    }
+    return arra1;
   }
 }

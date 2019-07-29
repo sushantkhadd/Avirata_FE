@@ -41,23 +41,21 @@ export class Module0Component implements OnInit {
 
     else if (this.mainFlagModule0 > 1)
     {
-      this.passData['apiUrl'] = "";
-      this.passData['status'] = false;  //first time call
-
-      if (this.FullLayoutService.currentJson0.length > 0)
-      {
-        var index = this.FullLayoutService.currentJson0.findIndex(item =>
-          item.source == "module 0.1");
-        if (this.FullLayoutService.currentJson0[index].url != null)
-        {
-          this.passData['videoUrl'] = this.FullLayoutService.currentJson0[index].url
-        } else
-        {
-          this.passData['videoUrl'] = this.passUrl
+      var urlJson = {};
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson0"));
+      console.log("vcxxxx", urlJson);
+      if (urlJson["children"].length > 0) {
+        var index = urlJson["children"].findIndex(
+          item => item.source == "module 0.1"
+        );
+        console.log("qWSS", index);
+        // var mainJson;
+        // mainJson = JSON.parse(urlJson["children"][index].url);
+        // console.log("hjbhjb", mainJson);
+        if (urlJson["children"][index].url != null) {
+          // this.urlArray["src1"] = mainJson["4.1.1"];
+          this.passData["videoUrl"] = urlJson["children"][index].url;
         }
-      } else
-      {
-        this.passData['videoUrl'] = this.passUrl
       }
     }
   }
@@ -109,7 +107,7 @@ export class Module0Component implements OnInit {
             window.localStorage.setItem('subFlagModule0', '1');
             window.localStorage.setItem('source', 'module 0.2');
             this.Module0Service.setLocalStorage0(2);
-            var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module0.subMenu0-1'), "next": this.translate.instant('L2Module0Finish.subMenu0-2'), "nextRoute": "/modules/module0/baseline1" }
+            var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module0.subMenu0-1'), "next": this.translate.instant('L2Module0Finish.subMenu0-2'), "nextRoute": "/modules/module0/Module0.2" }
             this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
           }  
         }
