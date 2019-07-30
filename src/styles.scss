@@ -688,6 +688,7 @@ body {
 }
 
 #ytplayer {
+  // border: 1.5px solid;
   border: 1.5px solid;
 }
 
@@ -2053,6 +2054,17 @@ body {
 
 // FAQ section
 .faq-section {
+
+  .card-footer {
+    padding: .75rem .75rem;
+    background-color: #fff !important;
+    border-top: 1px solid rgba(0,0,0,.125);
+    -webkit-box-shadow: 0 10px 6px -6px #777;
+    -moz-box-shadow: 0 10px 6px -6px #777;
+    box-shadow: 0 10px 5px -6px #a3a1a1;
+    color: #005e9a;
+  }
+
   h5 {
     font-size: 0.95rem;
     font-weight: 600;
@@ -2753,7 +2765,8 @@ table,
     z-index: 999;
     right: 0;
     top: 0;
-    font-size: 80%;
+    // font-size: 80%;
+    font-size: 1rem;
     background: none;
   }
 }
@@ -3122,7 +3135,7 @@ body {
 
 // video player padding
 .embed-responsive-16by9::before {
-  padding-top: 55%;
+  padding-top: 56.30% !important;
 }
 
 .card.dynamic-view span.disable._play {

@@ -16,6 +16,7 @@ import { ConnectionService } from 'ng-connection-service';
 export class FeedbackComponent implements OnInit {
   @Output() public sendAns = new EventEmitter<Object>();
   @Input() public passData;
+  public inst = "कारण -"
 
   status = 'ONLINE';
   isConnected = true;

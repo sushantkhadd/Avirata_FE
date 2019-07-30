@@ -11,13 +11,14 @@
           <i class="fa fa-power-off" aria-hidden="true"></i> &nbsp;लॉग-आऊट
         </a>
       </div>
-      <div class="col-6" *ngIf="userType!='superadmin' && userType!='admin'&& noAccessFlag">
-      <div class="dropdown float-right logoutBtn levelmenu">
-          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Profile board
+      <div class="col-md-6 text-right" *ngIf="userType!='superadmin' && userType!='admin'&& noAccessFlag">
+          <span class="userName pr-2">{{userName}}</span>
+        <div class="dropdown logoutBtn levelmenu">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
           <span class="caret"></span></button>
           <ul class="dropdown-menu">
             <li><a [routerLink]="['/dashboard/profile']"> <em class="fa fa-user"></em>&nbsp;&nbsp;{{'Dashboard.Profile' | translate}}</a></li>
-            <li><a appPreventDoubleClick (debounceClick)="logout()"> <em class="fa fa-user"></em>&nbsp;&nbsp;{{'Dashboard.Logout' | translate}}</a></li>
+            <li><a appPreventDoubleClick (debounceClick)="logout()"> <em class="fa fa-sign-out-alt"></em>&nbsp;&nbsp;{{'Dashboard.Logout' | translate}}</a></li>
           </ul>
         </div>
         </div>
@@ -47,13 +48,18 @@
                   <div class="card" [class.card-success]='lvl1Current' [class.card-secondary]='!lvl1Current && !lvl1Complete'>
                     <div class="card-block text-center text-white custom-block">
                       <div *ngIf="lvl1Complete" class="icon">
-                        <i class="fa fa-check-circle fa-3x pb-2"></i>
+                        <!-- <i class="filled fa fa-check-circle fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledTick.png">
                       </div>
                       <div *ngIf="lvl1Current" class="icon">
-                        <i class="fa fa-unlock fa-3x pb-2"></i>
+                        <!-- <i class="fa fa-unlock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledUnlock.png">
+                        
                       </div>
                       <div *ngIf="!lvl1Current && !lvl1Complete" class="icon">
-                        <i class="fa fa-lock fa-3x pb-2"></i>
+                        <!-- <i class="fa fa-lock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledlock.png">
+                        
                       </div>
                       <h3 class="level-text text-center">टप्पा</h3>
                       <img class="img-fluid mb-4" src="../../../assets/img/one.png">
@@ -73,13 +79,18 @@
                   <div class="card" [class.card-success]="lvl2Current && lvl1Complete" [class.card-secondary]='!lvl2Current'>
                     <div class="card-block text-white custom-block">
                       <div *ngIf="lvl1Complete" class="icon">
-                        <i class="fa fa-check-circle fa-3x pb-2"></i>
+                        <!-- <i class="filled fa fa-check-circle fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledTick.png">
                       </div>
                       <div *ngIf="lvl1Current" class="icon">
-                        <i class="fa fa-unlock fa-3x pb-2"></i>
+                        <!-- <i class="fa fa-unlock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledUnlock.png">
+                        
                       </div>
                       <div *ngIf="!lvl1Current && !lvl1Complete" class="icon">
-                        <i class="fa fa-lock fa-3x pb-2"></i>
+                        <!-- <i class="fa fa-lock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledlock.png">
+                        
                       </div>
                       <h3 class="level-text text-center">टप्पा</h3>
                       <img class="img-fluid mb-4" src="../../../assets/img/one.png">
@@ -96,13 +107,18 @@
                   <div class="card text-center card-secondary">
                     <div class="card-block text-white custom-block">
                       <div *ngIf="lvl1Complete" class="icon">
-                        <i class="fa fa-check-circle fa-3x pb-2"></i>
+                        <!-- <i class="filled fa fa-check-circle fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledTick.png">
                       </div>
                       <div *ngIf="lvl1Current" class="icon">
-                        <i class="fa fa-unlock fa-3x pb-2"></i>
+                        <!-- <i class="fa fa-unlock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledUnlock.png">
+                        
                       </div>
                       <div *ngIf="!lvl1Current && !lvl1Complete" class="icon">
-                        <i class="fa fa-lock fa-3x pb-2"></i>
+                        <!-- <i class="fa fa-lock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledlock.png">
+                        
                       </div>
                       <h3 class="level-text text-center">टप्पा</h3>
                       <img class="img-fluid mb-4" src="../../../assets/img/one.png">
@@ -124,13 +140,18 @@
                   <div class="card" [class.card-success]='lvl2Current' [class.card-secondary]='!lvl2Current && !lvl2Complete'>
                     <div class="card-block text-center text-white custom-block">
                       <div *ngIf="lvl2Complete" class="icon">
-                        <i class="fa fa-check-circle fa-3x pb-2"></i>
+                        <!-- <i class="filled fa fa-check-circle fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledTick.png">
                       </div>
                       <div *ngIf="lvl2Current" class="icon">
-                        <i class="fa fa-unlock fa-3x pb-2"></i>
+                        <!-- <i class="fa fa-unlock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledUnlock.png">
+                        
                       </div>
                       <div *ngIf="!lvl2Current && !lvl2Complete" class="icon">
-                        <i class="fa fa-lock fa-3x pb-2"></i>
+                        <!-- <i class="fa fa-lock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledlock.png">
+                        
                       </div>
                       <h3 class="level-text text-center">टप्पा</h3>
                       <img class="img-fluid mb-4" src="../../../assets/img/two.png">
@@ -149,13 +170,18 @@
                   <div class="card text-center card-secondary">
                     <div class="card-block text-white custom-block">
                       <div *ngIf="lvl2Complete" class="icon">
-                        <i class="fa fa-check-circle fa-3x pb-2"></i>
+                        <!-- <i class="filled fa fa-check-circle fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledTick.png">
                       </div>
                       <div *ngIf="lvl2Current" class="icon">
-                        <i class="fa fa-unlock fa-3x pb-2"></i>
+                        <!-- <i class="fa fa-unlock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledUnlock.png">
+                        
                       </div>
                       <div *ngIf="!lvl2Current && !lvl2Complete" class="icon">
-                        <i class="fa fa-lock fa-3x pb-2"></i>
+                        <!-- <i class="fa fa-lock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledlock.png">
+                        
                       </div>
                       <h3 class="level-text text-center">टप्पा</h3>
                       <img class="img-fluid mb-4" src="../../../assets/img/two.png">
@@ -176,13 +202,18 @@
                   <div class="card" [class.card-success]='lvl3Current' [class.card-secondary]='!lvl3Current && !lvl3Complete'>
                     <div class="card-block text-center text-white custom-block">
                       <div *ngIf="lvl3Complete" class="icon">
-                        <i class="fa fa-check-circle fa-3x pb-2"></i>
+                        <!-- <i class="filled fa fa-check-circle fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledTick.png">
                       </div>
                       <div *ngIf="lvl3Current" class="icon">
-                        <i class="fa fa-unlock fa-3x pb-2"></i>
+                        <!-- <i class="fa fa-unlock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledUnlock.png">
+                        
                       </div>
                       <div *ngIf="!lvl3Current && !lvl3Complete" class="icon">
-                        <i class="fa fa-lock fa-3x pb-2"></i>
+                        <!-- <i class="fa fa-lock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledlock.png">
+                        
                       </div>
                       <h3 class="level-text text-center">टप्पा</h3>
                       <img class="img-fluid mb-4" src="../../../assets/img/three.png">
@@ -201,13 +232,17 @@
                   <div class="card text-center card-secondary">
                     <div class="card-block text-center text-white custom-block">
                       <div *ngIf="lvl3Complete" class="icon">
-                        <i class="fa fa-check-circle fa-3x pb-2"></i>
+                        <!-- <i class="filled fa fa-check-circle fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledTick.png">
                       </div>
                       <div *ngIf="lvl3Current" class="icon">
-                        <i class="fa fa-unlock fa-3x pb-2"></i>
+                        <!-- <i class="fa fa-unlock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledUnlock.png">
+                        
                       </div>
                       <div *ngIf="!lvl3Current && !lvl3Complete" class="icon">
-                        <i class="fa fa-lock fa-3x pb-2"></i>
+                        <!-- <i class="fa fa-lock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledlock.png">
                       </div>
                       <h3 class="level-text text-center">टप्पा</h3>
                       <img class="img-fluid mb-4" src="../../../assets/img/three.png">
@@ -233,13 +268,18 @@
                   <div class="card" [class.card-success]='lvl1Current' [class.card-secondary]='!lvl1Current && !lvl1Complete'>
                     <div class="card-block text-center text-white custom-block">
                       <div *ngIf="lvl1Complete" class="icon">
-                        <i class="fa fa-check-circle fa-3x pb-2"></i>
+                        <!-- <i class="filled fa fa-check-circle fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledTick.png">
                       </div>
                       <div *ngIf="lvl1Current" class="icon">
-                        <i class="fa fa-unlock fa-3x pb-2"></i>
+                        <!-- <i class="fa fa-unlock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledUnlock.png">
+                        
                       </div>
                       <div *ngIf="!lvl1Current && !lvl1Complete" class="icon">
-                        <i class="fa fa-lock fa-3x pb-2"></i>
+                        <!-- <i class="fa fa-lock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledlock.png">
+                        
                       </div>
                       <h3 class="level-text text-center">टप्पा</h3>
                       <img class="img-fluid mb-4" src="../../../assets/img/one.png">
@@ -260,13 +300,18 @@
                   <div class="card" [class.card-success]='lvl2Current' [class.card-secondary]='!lvl2Current && !lvl2Complete'>
                     <div class="card-block text-center text-white custom-block">
                       <div *ngIf="lvl2Complete" class="icon">
-                        <i class="fa fa-check-circle fa-3x pb-2"></i>
+                        <!-- <i class="filled fa fa-check-circle fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledTick.png">
                       </div>
                       <div *ngIf="lvl2Current" class="icon">
-                        <i class="fa fa-unlock fa-3x pb-2"></i>
+                        <!-- <i class="fa fa-unlock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledUnlock.png">
+                        
                       </div>
                       <div *ngIf="!lvl2Current && !lvl2Complete" class="icon">
-                        <i class="fa fa-lock fa-3x pb-2"></i>
+                        <!-- <i class="fa fa-lock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledlock.png">
+                        
                       </div>
                       <h3 class="level-text text-center">टप्पा</h3>
                       <img class="img-fluid mb-4" src="../../../assets/img/two.png">
@@ -287,13 +332,17 @@
                     <div class="card" [class.card-success]='lvl3Current' [class.card-secondary]='!lvl3Current && !lvl3Complete'>
                       <div class="card-block text-center text-white custom-block">
                         <div *ngIf="lvl3Complete" class="icon">
-                          <i class="fa fa-check-circle fa-3x pb-2"></i>
+                            <img src="../../../assets/img/filledTick.png">
+                          <!-- <i class="filled fa fa-check-circle fa-3x pb-2"></i> -->
                         </div>
                         <div *ngIf="lvl3Current" class="icon">
-                          <i class="fa fa-unlock fa-3x pb-2"></i>
+                          <!-- <i class="fa fa-unlock fa-3x pb-2"></i> -->
+                          <img src="../../../assets/img/filledUnlock.png">
                         </div>
                         <div *ngIf="!lvl3Current && !lvl3Complete" class="icon">
-                          <i class="fa fa-lock fa-3x pb-2"></i>
+                          <!-- <i class="fa fa-lock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledlock.png">
+                          
                         </div>
                         <h3 class="level-text text-center">टप्पा</h3>
                         <img class="img-fluid mb-4" src="../../../assets/img/three.png">

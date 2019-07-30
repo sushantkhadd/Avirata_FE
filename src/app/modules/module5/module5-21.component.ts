@@ -42,7 +42,7 @@ export class Module521Component implements OnInit {
   pdf1; personId; userAnswer = {}; showLimit = {}; postWordCount = {}; zeroMsgFlag = {}
   public questionArray; que1; queId1; que2; queId2; que3; queId3; que4; queId4; que5; queId5; que6; queId6; que7; queId7; answer1; answer2; answer3; answer4; answer5; answer6; answer7;
   @ViewChild('assignForm') assignForm: NgForm; noHitFlag; 
-  public inst = "एक समुपदेशक म्हणून सातत्याने अपडेटेड राहण्यासाठी इथे एक प्रकल्प तुम्हांला करावयास देण्यात आला आहे. जो तुम्हांला वेगवेगळ्या करिअर संधी, त्यात येणारी आव्हाने, लागणारी कौशल्ये याविषयी अपडेट राहण्यासाठी नक्कीच मदतीचा ठरू शकतो."
+  public inst = "एक करिअर मार्गदर्शक म्हणून सातत्याने अपडेटेड राहण्यासाठी इथे एक प्रकल्प तुम्हांला करावयास देण्यात आला आहे. जो तुम्हांला वेगवेगळ्या करिअर संधी, त्यात येणारी आव्हाने, लागणारी कौशल्ये याविषयी अपडेट राहण्यासाठी नक्कीच मदतीचा ठरू शकतो.<strong>एकूण ५ व्यक्तींची मुलाखत घेऊन त्यांची माहिती तुम्हांला येथे भरायची आहे.</strong><br/>"
 
   ngOnInit() {
     this.pdf1 =

@@ -38,8 +38,9 @@ export class Module518Component implements OnInit {
   sumbitButton;
   startFlag;
   public inst =
-    "तुमच्या मते मानसिक आरोग्य म्हणजे काय?";
+    "(भाग १ ) - तुमच्या मते मानसिक आरोग्य म्हणजे काय?";
   ngOnInit() {
+    
     this.startFlag = false;
     this.showAnswer = true;
     this.saveData = true;
@@ -50,16 +51,17 @@ export class Module518Component implements OnInit {
 
     if (this.mainFlagModule5 == 18)
     {
-      if (this.subFlagModule5 == 1) {
-        this.startFlag = false;
-        //this.start1()
-      } else if (this.subFlagModule5 == 2) {
-        this.start2()
-      } else if (this.subFlagModule5 == 3) {
-        this.startFlag = false;
-      } else if (this.subFlagModule5 == 4) {
-        this.start2()
-      }
+      this.startFlag = false;
+      // if (this.subFlagModule5 == 1) {
+      //   this.startFlag = false;
+      //   //this.start1()
+      // } else if (this.subFlagModule5 == 2) {
+      //   this.start2()
+      // } else if (this.subFlagModule5 == 3) {
+      //   this.startFlag = false;
+      // } else if (this.subFlagModule5 == 4) {
+      //   this.start2()
+      // }
     }
   }
 
@@ -89,14 +91,14 @@ export class Module518Component implements OnInit {
 
   saveAnswer1(e) {
     if(e=="finish"){
-      this.startFlag = false;
+      // this.startFlag = false;
+      this.start3();
       this.subFlagModule5=3;
     }
   }
 
   finish1() {
     var jsonBody = {};
-
     jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
     jsonBody["useranswer"] = this.answer;
     jsonBody["event"] = "answer";
@@ -106,17 +108,14 @@ export class Module518Component implements OnInit {
   start3(){
     this.questionType = "mcqWithTwoStatements";
     this.passFlags["questionType"] = this.questionType;
-
     var jsonData = {}
     jsonData['submoduleid'] = window.localStorage.getItem('uuid')
     jsonData['event'] = "start"
     jsonData["useranswer"] = "";
-
     this.apiCall(jsonData, 'modulefivecmcqselection/', 'start3')
   }
 
   start2(){
-
     var jsonData = {}
     jsonData['submoduleid'] = window.localStorage.getItem('uuid')
     jsonData['event'] = "start"

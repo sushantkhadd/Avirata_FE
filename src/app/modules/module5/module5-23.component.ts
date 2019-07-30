@@ -41,7 +41,7 @@ export class Module523Component implements OnInit {
   public apiUrl;
  passData = {};
   public inst =
-    "अविरत 3 बद्दल तुमचा अभिप्राय सविस्तर नोंदवा.";
+    "(भाग २)-अविरत 3 बद्दल तुमचा अभिप्राय सविस्तर नोंदवा.";
   ngOnInit() {
     this.startFlag = false;
     this.showAnswer = true;

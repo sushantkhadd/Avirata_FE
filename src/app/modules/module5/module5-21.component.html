@@ -47,13 +47,13 @@
 
   <div *ngIf="subFlagModule5 == 2">
     <h6 class="questionHead lineHeight position-relative">{{'L2common.caution' | translate}}
-      <span [innerHTML]="inst"> </span>&nbsp;&nbsp;
+      <span [innerHTML]="inst"> </span>
       <span>
         <a class="c-pointer" (click)="showPdf()">Click here to view pdf &nbsp;
           <em class="fas fa-pdf"></em>
         </a>
       </span>
-      <div class="badge badge-info ml-3 float-right mt-5 p-2 mr-2 counter pt-3">{{'Quiz.Question' | translate}} {{personId | numberConvertor : 'Devanagari'}}/{{'number.5' | translate}}</div>
+      <div class="badge badge-info ml-3 float-right mt-5 p-2 mr-2 counter pt-3">{{personId | numberConvertor : 'Devanagari'}}/{{'number.5' | translate}}</div>
     </h6>
 
 
@@ -242,7 +242,8 @@
         </div>
         <div class="modal-body">
           <p class="text-center font-weight-normal">
-            {{'L2Module5.inst5_21' | translate}}
+            <!-- {{'L2Module5.inst5_21' | translate}} -->
+            <span [innerHTML]="'L2Module5.inst5_21' | translate"></span>
           </p>
           <hr />
         </div>
