@@ -21,7 +21,7 @@ import { Module5Service } from 'src/app/modules/module5/module5.service';
 })
 export class NewBaselineComponent implements OnInit {
   private selectedQuestionId; selectedAnswer; finishExamCard;userOption={};dummyAnsJson={};
-  public moduleNumber; mySubmodule2; lastAns; mySubmodule4; mySubmodule5;mySubmodule0;mySubFlagmodule0;levelData;
+  public moduleNumber; mySubmodule2; lastAns; mySubmodule4; mySubmodule5;mySubmodule0;mySubFlagmodule0;levelData;mySubFlagmodule5
   // public nextButtonFlag;answerJSON;
   // oldSelectedAns;endApiAnsHit;
   @Input() public passData;
@@ -63,7 +63,7 @@ export class NewBaselineComponent implements OnInit {
     this.apiEndSendAns = this.passData.answer;
     this.apiEndFinish = this.passData.finish;
     this.startJson = this.passData.jsonData;
-    if(window.localStorage.getItem("mainFlagModule0")=="3"){
+    if(window.localStorage.getItem("mainFlagModule0")=="3" || window.localStorage.getItem("mainFlagModule5")=="18"){
       this.startExam()
       console.log("safdsfsd")
     }
@@ -214,6 +214,8 @@ export class NewBaselineComponent implements OnInit {
     this.mySubmodule5 = parseInt(window.localStorage.getItem('mainFlagModule5'));
     this.mySubmodule0 = parseInt(window.localStorage.getItem('mainFlagModule0'));
     this.mySubFlagmodule0 = parseInt(window.localStorage.getItem('subFlagModule0'));
+    this.mySubFlagmodule5 = parseInt(window.localStorage.getItem('subFlagModule5'));
+    
     this.moduleNumber = window.localStorage.getItem('currentstatus');
     if (window.localStorage.getItem('token') == null) {
       this.router.navigate(['/']);

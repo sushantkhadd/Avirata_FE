@@ -1,4 +1,4 @@
-<div class="col-sm-12 col-md-12 " *ngIf="!showQuize && !finishExamCard && mySubmodule0!=3">
+<div class="col-sm-12 col-md-12 " *ngIf="!showQuize && !finishExamCard && mySubmodule0!=3 && mySubmodule5 !=18">
     <div class="instruction-wrap">
         <div class="borderBlue">
             <div class="card">
@@ -64,13 +64,15 @@
         <strong *ngIf="mySubmodule0 == 3 && mySubFlagmodule0==1">{{'Quiz.traineebaselineQue5' | translate}}</strong>
         <strong *ngIf="mySubmodule0 == 3 && mySubFlagmodule0==2">{{'Quiz.traineebaselineQue6' | translate}}</strong>
         <strong *ngIf="mySubmodule0 == 3 && mySubFlagmodule0==3">{{'Quiz.traineebaselineQue7' | translate}}</strong>
-        <strong *ngIf="mySubmodule5 == 18">{{'Quiz.traineebaselineQue8' | translate}}</strong>
+        <strong *ngIf="mySubmodule5 == 18 && mySubFlagmodule5==2">{{'Quiz.traineebaselineQue8' | translate}}</strong>
+        <strong *ngIf="mySubmodule5 == 18 && mySubFlagmodule5==4">{{'Quiz.traineebaselineQue9' | translate}}</strong>
+        
     </h6>
     <!-- <hr /> -->
 
     <div *ngIf="mode=='quiz' && quiz">
         <div *ngFor="let question of filteredQuestions;">
-                <div class="badge badge-info ml-3 float-right mt-3 p-2 mr-2 counter">{{'Quiz.Question' | translate}}
+                <div class="badge badge-info ml-3 float-right mt-3 p-2 mr-2 counter">
                   {{pager.index + 1 | numberConvertor : 'Devanagari'}} / {{pager.count | numberConvertor : 'Devanagari'}}
             </div>
                 <div class="card p-2">

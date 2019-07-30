@@ -26,8 +26,8 @@
                 <div *ngFor="let que of queArray2; let i = index">
                   <div class="form-group row" [class.d-none]="que != activeItem1">
                     <div class="col-sm-12">
-                        <span>{{que.question_type | numberConvertor : 'Devanagari'}}.</span>
-                      <label class="form-control-label ml-2" [innerHTML]="que.question"></label>
+                        <!-- <span>{{que.question_type | numberConvertor : 'Devanagari'}}.</span> -->
+                      <label class="form-control-label ml-2 font-weight-bold" [innerHTML]="inst"></label>
                     </div>
                     <div class="col-12 controls">
                       <textarea autosize [minRows]="2" class="form-control" name="answer" [(ngModel)]="textanswer1" rows="3" #addr="ngModel" required></textarea>

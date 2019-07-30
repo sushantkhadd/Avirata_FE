@@ -1425,7 +1425,7 @@
     </div> -->
     <div class="modal-content p-1">
       <div [ngClass]="'popup-bg'">
-        <div class="modal-body pb-0" [ngClass]="{
+        <div class="modal-body" [ngClass]="{
             'gold-bg': rewardsFlag == 1,
             'silver-bg': rewardsFlag == 2,
             'bronze-bg': rewardsFlag == 3
@@ -1443,14 +1443,16 @@
               <div id="main">
                 <div>
                   <img *ngIf="!needEfforts" class="img-responsive img-mitra" src="../../assets/img/expressions/clapping.png">
-                  <img *ngIf="needEfforts" class="img-responsive img-mitra" src="../../assets/img/expressions/wrong_ans.png">
+                  <img *ngIf="needEfforts" class="img-responsive img-mitra mb-4" src="../../assets/img/expressions/wrong_ans.png">
                 </div>
-                <div [class.pl-4]="needEfforts">
-                  <h1 class="congrats-text" *ngIf="!needEfforts">{{'layout.congo' | translate}} </h1>
+                <div [class.pl-2]="needEfforts">
+                  <!-- <h1 class="congrats-text" *ngIf="!needEfforts">
+                    {{'layout.congo' | translate}} </h1> -->
+                    <img *ngIf="!needEfforts" class="img-responsive" src="../../assets/img/rewards/single-stars/abhinandan.png" alt="Abhinandan">
                   <h5 class="congrats-text" *ngIf="needEfforts">
                     {{'layout.workHard' | translate}}
                   </h5>
-                  <h5>{{userName}}</h5>
+                  <h5 style="color:#347294">{{userName}}</h5>
                 </div>
               </div>
             </div>
@@ -1525,7 +1527,7 @@
                     <img [src]="animatedImageJson['c3']" alt="" class="img3 mt-5 pt-3"> -->
               </div>
             </div>
-            <span *ngIf="needEfforts && (moduleCompleteStatus['type'] == 'moduleFinish')">
+            <span class="p-3" *ngIf="needEfforts && (moduleCompleteStatus['type'] == 'moduleFinish')">
               {{'layout.needEfforts' | translate}}
             </span>
             <!-- <div *ngIf="moduleCompleteStatus['type'] == 'allFinish'">
@@ -1544,19 +1546,19 @@
 
         <div class="row mt-2 justify-content-center social-icons" *ngIf="!needEfforts">
             <ul data-html2canvas-ignore class="social-logo" *ngIf="!mainFlagModule0">
-              <li>
+              <!-- <li>
                 <a class="c-pointer" (click)="downloadReward()">
                   <img class="img-responsive" src="../../assets/img/fb.png">
                 </a>
-              </li>
-              <li>
+              </li> -->
+              <!-- <li>
                 <a *ngIf="!getImage" id="getImage" class="c-pointer" (click)="downloadReward()">
                   <img class="img-responsive" src="../../assets/img/whatsapp.png">
                 </a>
                 <a *ngIf="getImage" class="c-pointer" data-action="share/whatsapp/share" [href]="getImage">
                   <img class="img-responsive" src="../../assets/img/whatsapp.png">
                 </a>
-              </li>
+              </li> -->
               <li>
                 <a class="c-pointer" (click)="downloadReward()">
                   <img class="img-responsive" src="../../assets/img/download.png">
@@ -1601,7 +1603,7 @@
       </span> -->
     <!-- </div> -->
     <div class="modal-content" [ngClass]="'popup-bg'">
-      <div class="modal-body pb-0" [ngClass]="'cup-bg'">
+      <div class="modal-body" [ngClass]="'cup-bg'">
         <div>
           <div class="row">
             <div class="col-md-12 col-xs-12 col-sm-12">
@@ -1618,11 +1620,12 @@
                   <img *ngIf="needEfforts" class="img-responsive img-mitra" src="../../assets/img/expressions/wrong_ans.png">
                 </div>
                 <div [class.pl-4]="needEfforts">
-                  <h1 class="congrats-text">{{'layout.congo' | translate}} </h1>
+                  <!-- <h1 class="congrats-text">{{'layout.congo' | translate}} </h1> -->
+                  <img *ngIf="!needEfforts" class="img-responsive" src="../../assets/img/rewards/single-stars/abhinandan.png" alt="Abhinandan">
                   <h5 class="congrats-text" *ngIf="needEfforts">
                     {{'layout.workHard' | translate}}
                   </h5>
-                  <h5>{{userName}}</h5>
+                  <h5 style="color:#347294">{{userName}}</h5>
                   <!-- {{grandPercent}} -->
                 </div>
               </div>
@@ -1670,19 +1673,19 @@
 
       <div class="row mt-2 justify-content-center social-icons" *ngIf="!needEfforts">
         <ul data-html2canvas-ignore class="social-logo">
-          <li>
+          <!-- <li>
             <a class="c-pointer" (click)="downloadReward()">
               <img class="img-responsive" src="../../assets/img/fb.png">
             </a>
-          </li>
-          <li>
+          </li> -->
+          <!-- <li>
             <a *ngIf="!getImage" id="getImage" class="c-pointer" (click)="downloadReward()">
               <img class="img-responsive" src="../../assets/img/whatsapp.png">
             </a>
             <a *ngIf="getImage" class="c-pointer" data-action="share/whatsapp/share" [href]="getImage">
               <img class="img-responsive" src="../../assets/img/whatsapp.png">
             </a>
-          </li>
+          </li> -->
           <li>
             <a class="c-pointer" (click)="downloadCupReward()">
               <img class="img-responsive" src="../../assets/img/download.png">

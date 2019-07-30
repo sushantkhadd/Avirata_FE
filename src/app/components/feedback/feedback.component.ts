@@ -15,6 +15,7 @@ import { DxRadioGroupComponent } from 'devextreme-angular';
 export class FeedbackComponent implements OnInit {
   @Output() public sendAns = new EventEmitter<Object>();
   @Input() public passData;
+  public inst = "कारण -"
 
   constructor(
     public LanguageService: LanguageService,
