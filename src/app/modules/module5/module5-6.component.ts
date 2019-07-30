@@ -28,7 +28,7 @@ export class Module56Component implements OnInit {
   }
 
   public showVideoFlag; nextBtnFlag; passData = {}; passUrl; videoData = {}; urlArray = {}; lnk1; lnk2; flag;
-  public statVideoFlag; thumb_title;
+  public statVideoFlag; thumb_title;parentUrlJson={};
 
   ngOnInit() {
     this.lnk1 = ''
@@ -105,7 +105,6 @@ export class Module56Component implements OnInit {
   finishCFU(e) {
     if (e) {
 
-      var url = {}
       var current5 = [];
       current5 = JSON.parse(window.localStorage.getItem("currentJson5"));
       var index = current5["children"].findIndex(
@@ -115,11 +114,11 @@ export class Module56Component implements OnInit {
       var index1 = moduleJson["children"].findIndex(
       item => item.source == "module 5.6.1");
       if(moduleJson["children"][index1].url !="" && moduleJson["children"][index1].url !=null && moduleJson["children"][index1].url !=undefined){
-      url['5.6.1'] = moduleJson["children"][index1].url;
+      this.parentUrlJson['5.6.1'] = moduleJson["children"][index1].url;
       }
       }
-      url['5.6.2'] = e['url'];
-      current5["children"][index].url = JSON.stringify(url);
+      this.parentUrlJson['5.6.2'] = e['url'];
+      current5["children"][index].url = JSON.stringify(this.parentUrlJson);
       window.localStorage.setItem("currentJson5", JSON.stringify(current5));
 
       window.localStorage.setItem('mainFlagModule5', '7');
@@ -143,11 +142,12 @@ export class Module56Component implements OnInit {
           this.passUrl = data['data'].url;
           console.log('passurl', this.passUrl);
 
-          // var dummylocal = JSON.parse(window.localStorage.getItem('currentJson1'))
-          // var index1 = dummylocal.children.findIndex(item =>
-          //   item.source == "module 3.8");
-          // dummylocal.children[index1].url = this.passUrl
-          // window.localStorage.setItem('currentJson1', JSON.stringify(dummylocal))
+          this.parentUrlJson['5.6.1']=this.passUrl
+          var dummylocal = JSON.parse(window.localStorage.getItem('currentJson5'))
+          var index1 = dummylocal.children.findIndex(item =>
+            item.source == "module 5.6");
+          dummylocal.children[index1].url = JSON.stringify(this.parentUrlJson)
+          window.localStorage.setItem('currentJson5', JSON.stringify(dummylocal))
 
         } if (fun == 'finish1') {
           this.instructionModal.hide()

@@ -3196,6 +3196,7 @@ body {
   }
 
   .stepper-step-isActive {
+    
     .complete-circle {
       background-color: green !important;
     }
@@ -3245,7 +3246,8 @@ body {
   }
 
   .final-percent {
-    padding: 0.1rem 0.5rem;
+    padding: 0.1rem 0.3rem;
+    position: absolute;
     background: #3b97d2;
     color: #ffffff;
     // margin-top: -10px;
@@ -3255,6 +3257,7 @@ body {
     border-radius: 10px;
     font-weight: 600;
     margin-right: 35px;
+    font-size: 14px;
     @extend .breathing;
 
     &:hover {
@@ -3277,24 +3280,32 @@ body {
     @include text-shadow(3px 3px 5px #212529);
 
     .col-2 {
-      flex: 0 0 20%;
-      max-width: 20%;
+      flex: 0 0 16.6%;
+      max-width: 16.6%;
       padding-right: 0%;
-
       // border-right: 1px solid;
       &::after {
         content: "";
-        border-right: 1px solid;
+        // border-right: 1px solid;
         position: absolute;
         right: -9px;
         z-index: 99;
         top: 0;
         height: 80%;
       }
+     
     }
   }
 }
+.borderNo{
+  border-right: 1px solid;
+  height: 19px;
+  margin-right: -8px;
+}
 
+.margin-47{
+  margin-left: -47px;
+}
 // .glow{
 //   box-shadow: 0 5px 5px rgba(255, 255, 255, 0.7) inset,
 //     0 -5px 5px rgba(255, 255, 255, 0.7) inset;

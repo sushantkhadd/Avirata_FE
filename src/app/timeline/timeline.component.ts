@@ -162,7 +162,7 @@ export class TimelineComponent implements OnInit {
   }
 
   calPercentage(val) {
-    let perval = 20 / val;
+    let perval = 16 / val;
     var a =  perval.toString().split(".")[1]
     // console.log("a",a)
     // if()
@@ -240,38 +240,45 @@ export class TimelineComponent implements OnInit {
     //   } else
       this.width = 4;
       if(window.localStorage.getItem("mainFlagModule5")=="25"){
-        document.getElementById("progress-bar").style.width = "100%";
+        // document.getElementById("progress-bar").style.width = "100%";
         this.totalPer =100
       }
-      if (this.mainFlagModule1 && this.currentstatus  == 1)
+      if (this.mainFlagModule0 && this.currentstatus  == 0)
       {
-        this.counterValue1 = Math.round((this.mainFlagModule1 - 1) * this.calPercentage(12));
+        this.counterValue1 = Math.round((this.mainFlagModule0 - 1) * this.calPercentage(4));
         this.totalPer = this.counterValue1;
+        this.barWidth1 = this.counterValue1 * this.width + '%';
+      }
+      else if (this.mainFlagModule1 && this.currentstatus  == 1)
+      {
+        this.totalPer =16
+        this.counterValue1 = Math.round((this.mainFlagModule1 - 1) * this.calPercentage(12));
+        this.totalPer = 16 + this.counterValue1;
         this.barWidth1 = this.counterValue1 * this.width + '%';
       } else if (this.mainFlagModule2 && this.currentstatus  == 2)
       {
-        this.totalPer =20
+        this.totalPer =32
         this.counterValue2 = Math.round((this.mainFlagModule2 - 1) * this.calPercentage(17));
-        this.totalPer = 20 + this.counterValue2;
+        this.totalPer = 32 + this.counterValue2;
         this.barWidth2 = this.counterValue2 * this.width + '%';
 
       } else if (this.mainFlagModule3 && this.currentstatus  == 3)
       {
-        this.totalPer =40
+        this.totalPer =48
         this.counterValue3 = Math.round((this.mainFlagModule3 - 1) * this.calPercentage(18));
-        this.totalPer = 40 + this.counterValue3;
+        this.totalPer = 48 + this.counterValue3;
         this.barWidth3 = this.counterValue3 * this.width + '%';
       } else if (this.mainFlagModule4 && this.currentstatus  == 4)
       {
-        this.totalPer =60
+        this.totalPer =65
         this.counterValue4 = Math.round((this.mainFlagModule4 - 1) * this.calPercentage(14));
-        this.totalPer = 60 + this.counterValue4;
+        this.totalPer = 65 + this.counterValue4;
         this.barWidth4 = this.counterValue4 * this.width + '%';
       } else if (this.mainFlagModule5 && this.currentstatus  == 5)
       {
-        this.totalPer =80
+        this.totalPer =81
         this.counterValue5 = Math.round((this.mainFlagModule5 - 1) * this.calPercentage(24));
-        this.totalPer = 80 + this.counterValue5;
+        this.totalPer = 81 + this.counterValue5;
         this.barWidth5 = this.counterValue5 * this.width + '%';
         
       }

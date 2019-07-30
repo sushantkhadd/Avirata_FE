@@ -116,7 +116,7 @@
       </div>
       <span class="d-block d-md-none mob-counter">{{counterValue0}}</span>
     </div> -->
-    <div class="col-10 stepper-step-isActive">
+    <div class="col-md-12 stepper-step-isActive margin-47">
       <span class="complete-circle d-none"></span>
       <!-- <span class="circle start d-none"></span> -->
       <div class="progress shine">
@@ -125,15 +125,19 @@
         </div>
       </div>
       <div class="row text-center names-row">
-        <div class="col-2">
+          <div class="col-2 borderNo">
+              <span class="d-none d-md-block">{{'Dashboard.Module 0' | translate}}</span>
+              <span class="d-block d-md-none">{{'Dashboard.0' | translate}}</span>
+            </div>
+        <div class="col-2 borderNo">
           <span class="d-none d-md-block">{{'Dashboard.Module 1' | translate}}</span>
           <span class="d-block d-md-none">{{'Dashboard.1' | translate}}</span>
         </div>
-        <div class="col-2"><span class="d-none d-md-block">{{'Dashboard.Module 2' | translate}}</span>
+        <div class="col-2 borderNo"><span class="d-none d-md-block">{{'Dashboard.Module 2' | translate}}</span>
           <span class="d-block d-md-none">{{'Dashboard.2' | translate}}</span></div>
-        <div class="col-2"><span class="d-none d-md-block">{{'Dashboard.Module 3' | translate}}</span>
+        <div class="col-2 borderNo"><span class="d-none d-md-block">{{'Dashboard.Module 3' | translate}}</span>
           <span class="d-block d-md-none">{{'Dashboard.3' | translate}}</span></div>
-        <div class="col-2"><span class="d-none d-md-block">{{'Dashboard.Module 4' | translate}}</span>
+        <div class="col-2 borderNo"><span class="d-none d-md-block">{{'Dashboard.Module 4' | translate}}</span>
           <span class="d-block d-md-none">{{'Dashboard.4' | translate}}</span></div>
         <div class="col-2"><span class="d-none d-md-block">{{'Dashboard.Module 5' | translate}}</span>
           <span class="d-block d-md-none">{{'Dashboard.5' | translate}}</span></div>
@@ -180,7 +184,7 @@
         </div>
       </div>
     </div> -->
-    <div class="col-2"
+    <div class=""
       [ngClass]="{'stepper-step-isActive': completedModule['module5'] == true,'isCurrentstatus': currentstatus == '5'}">
       <span class="complete-circle d-none"></span>
       <!--<span class="circle finish">Finish</span> -->

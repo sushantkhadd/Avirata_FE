@@ -22,7 +22,7 @@ constructor(public FullLayoutService: FullLayoutService, public LanguageService:
 this.toastr.setRootViewContainerRef(vcr);
 }
 public showVideoFlag; nextBtnFlag; passData = {}; passUrl; videoData = {}; urlArray = {}; lnk1; lnk2;
-public statVideoFlag; thumb_title;flag;
+public statVideoFlag; thumb_title;flag;parentUrlJson={};
 ngOnInit() {
 this.lnk1 = ''
 this.lnk2 = ''
@@ -106,11 +106,11 @@ if (e) {
     var index1 = moduleJson["children"].findIndex(
     item => item.source == "module 3.13.1");
     if(moduleJson["children"][index1].url !="" && moduleJson["children"][index1].url !=null && moduleJson["children"][index1].url !=undefined){
-    url['3.13.1'] = moduleJson["children"][index1].url;
+      this.parentUrlJson['3.13.1'] = moduleJson["children"][index1].url;
     }
     }
-    url['3.13.2'] = e['url'];
-    current3["children"][index].url = JSON.stringify(url);
+    this.parentUrlJson['3.13.2'] = e['url'];
+    current3["children"][index].url = JSON.stringify(this.parentUrlJson);
     window.localStorage.setItem("currentJson3", JSON.stringify(current3));
 
   window.localStorage.setItem('mainFlagModule3', '14');
@@ -133,11 +133,12 @@ this.Module3Service.apiCall(jsonBody, apiUrl)
       this.showVideoFlag = true
       this.passUrl = data['data'].url;
 
-      // var dummylocal = JSON.parse(window.localStorage.getItem('currentJson3'))
-      // var index1 = dummylocal.children.findIndex(item =>
-      //   item.source == "module 3.8");
-      // dummylocal.children[index1].url = this.passUrl
-      // window.localStorage.setItem('currentJson3', JSON.stringify(dummylocal))
+      this.parentUrlJson['3.13.1']=this.passUrl
+      var dummylocal = JSON.parse(window.localStorage.getItem('currentJson3'))
+      var index1 = dummylocal.children.findIndex(item =>
+        item.source == "module 3.13");
+      dummylocal.children[index1].url = JSON.stringify(this.parentUrlJson)
+      window.localStorage.setItem('currentJson3', JSON.stringify(dummylocal))
 
     } if (fun == 'finish1') {
       this.instructionModal.hide()

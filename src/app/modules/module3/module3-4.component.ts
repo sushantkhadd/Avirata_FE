@@ -133,12 +133,12 @@ export class Module34Component implements OnInit {
           this.showVideoFlag = true
           this.passUrl = data['data'].url;
           console.log('data url', this.passUrl);
-          // this.urlJson["3.4.1"] = this.passUrl;
-          // var dummylocal = JSON.parse(window.localStorage.getItem('currentJson3'))
-          // var index1 = dummylocal.children.findIndex(item =>
-          //   item.source == "module 3.8");
-          // dummylocal.children[index1].url = this.passUrl
-          // window.localStorage.setItem('currentJson3', JSON.stringify(dummylocal))
+          this.urlJson["3.4.1"] = this.passUrl;
+          var dummylocal = JSON.parse(window.localStorage.getItem('currentJson3'))
+          var index1 = dummylocal.children.findIndex(item =>
+            item.source == "module 3.4");
+          dummylocal.children[index1].url = JSON.stringify(this.urlJson)
+          window.localStorage.setItem('currentJson3', JSON.stringify(dummylocal))
 
         } if (fun == 'finish1') {
           this.instructionModal.hide()

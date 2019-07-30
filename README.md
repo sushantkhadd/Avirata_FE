@@ -39,5 +39,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 10. npm install devextreme devextreme-angular --save --save-exact
 11. npm i ng2-pdf-viewer --save
 12. npm install ngx-autosize
+13. npm i ng-connection-service
 <!-- for error of stream in jszip lib after adding dx libraries -->
 Readme

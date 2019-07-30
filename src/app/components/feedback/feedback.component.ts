@@ -7,6 +7,7 @@ import { ToastsManager } from 'ng6-toastr';
 import { TranslateService } from '@ngx-translate/core';
 import {Module2Service} from '../../modules/module2/module2.service'
 import { DxRadioGroupComponent } from 'devextreme-angular';
+import { ConnectionService } from 'ng-connection-service';
 
 @Component({
   selector: 'app-feedback',
@@ -16,6 +17,9 @@ export class FeedbackComponent implements OnInit {
   @Output() public sendAns = new EventEmitter<Object>();
   @Input() public passData;
 
+  status = 'ONLINE';
+  isConnected = true;
+
   constructor(
     public LanguageService: LanguageService,
     private LocalstoragedetailsService: LocalstoragedetailsService,
@@ -23,9 +27,25 @@ export class FeedbackComponent implements OnInit {
     public Module2Service: Module2Service,
     public toastr: ToastsManager,
     vcr: ViewContainerRef,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private connectionService: ConnectionService
   ) {
     this.toastr.setRootViewContainerRef(vcr);
+    this.connectionService.monitor().subscribe(isConnected => {
+      this.isConnected = isConnected;
+      if (this.isConnected) {
+        this.toastr.success("इंटरनेट / WiFi कनेक्शन कनेक्ट झालेले आहे.")
+        this.status = "ONLINE";
+        console.log("You are online")
+        // this.submitFlag = false;
+      }
+      else {
+        this.toastr.error("इंटरनेट / WiFi कनेक्शन डिस्कनेक्ट झालेले आहे.")
+        this.status = "OFFLINE";
+        console.log("You are offline")
+        // this.submitFlag = true;
+      }
+    })
   }
   @ViewChild("eventRadioGroup") eventRadioGroup: DxRadioGroupComponent;
   public startTest; ansJson = {}; showPart1Flag = false;
@@ -119,7 +139,7 @@ export class FeedbackComponent implements OnInit {
 
   ngDoCheck(){
     if(this.freeTextFlag==true &&(this.textanswer1 !="" && this.textanswer1 != null && this.textanswer1 != undefined) ){
-      if (this.textanswer1.trim().length == 0){
+      if (this.textanswer1.trim().length == 0 || this.status == "OFFLINE"){
         this.submitFlag = true;
       }
       else {
