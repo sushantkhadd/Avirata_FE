@@ -131,7 +131,7 @@ export class AdminReportService {
       );
   }
 
-  postCallNotification(jsonBody, apiUrl, level) {
+  postCallNotification(jsonBody, apiUrl) {
     let putSource;
     /Android/i.test(navigator.userAgent)
       ? (putSource = "MWEB")
@@ -141,16 +141,8 @@ export class AdminReportService {
       Source: putSource
     });
     let options = { headers: headers };
-    let mainApiUrl;
-    if (level == "L1") {
-      mainApiUrl = this.apiUrl1;
-    } else if (level == "L2") {
-      mainApiUrl = this.apiUrl2;
-    } else if (level == "L3") {
-      mainApiUrl = this.apiUrl3;
-    }
     return this.httpClient
-      .post(mainApiUrl + apiUrl, { body: jsonBody }, options)
+      .post(this.apiUrl1 + apiUrl, { body: jsonBody }, options)
       .pipe(
         map(response => {
           return response;

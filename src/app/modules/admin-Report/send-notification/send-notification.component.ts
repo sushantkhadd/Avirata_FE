@@ -1,9 +1,11 @@
-import { Component, OnInit, Output, EventEmitter, ViewContainerRef, Input } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter, ViewContainerRef, Input, ViewChild } from "@angular/core";
 import { AdminReportService } from "../admin-report.service";
 import { Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { ToastsManager } from "ng6-toastr";
 import { CsvService } from "angular2-json2csv";
+import { HttpHeaders, HttpClient } from "@angular/common/http";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-send-notification",
@@ -13,17 +15,20 @@ import { CsvService } from "angular2-json2csv";
 export class SendNotificationComponent implements OnInit {
   @Output() public finishCall = new EventEmitter<any>();
   @Input() allDistricts;
-  constructor(private csvService: CsvService, public _service: AdminReportService, public translate: TranslateService, public toastr: ToastsManager, vcr: ViewContainerRef, private router: Router) {
+  @ViewChild('myInput') myInputVariable: any;
+  public formData = new FormData();
+  private apiUrl = environment.apiUrl;
+  constructor(private csvService: CsvService, public _service: AdminReportService, public translate: TranslateService, public toastr: ToastsManager, vcr: ViewContainerRef, private router: Router,public httpClient: HttpClient) {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
-  public showDetails; districtList; talukaList; showUser; selectedCategory; selectedDistrict; selectedTaluka; Not_title; message; districtName; notificationData; select_ctg; sendDisable;
+  public showDetails; districtList; talukaList; showUser; selectedCategory; selectedDistrict; selectedTaluka; Not_title; message; districtName; notificationData; select_ctg; sendDisable;resetButton;selectedEvent;select_eve;disableCtg;Mob_No;mul_Mob;disableMob;disableMob1;mul_arr:any;
 
   selectedLevel;
   public categories = [
     {
-      "label": "Send notification to All",
-      "value": "generalleveltwo"
+      "label": "General",
+      "value": "general"
     },
     {
       "label": "Admin",
@@ -34,6 +39,22 @@ export class SendNotificationComponent implements OnInit {
       "value": "co_ordinator"
     },
     {
+      "label": "General_level_One",
+      "value": "generallevelone"
+    },
+    {
+      "label": "General_level_two",
+      "value": "generalleveltwo"
+    },
+    {
+      "label": "General_level_three",
+      "value": "generallevelthree"
+    },
+    {
+      "label": "Superadmin",
+      "value": "superadmin"
+    },
+    {
       "label": "Master Trainer",
       "value": "master_trainer"
     },
@@ -41,12 +62,36 @@ export class SendNotificationComponent implements OnInit {
       "label": "Trainee",
       "value": "trainee"
     },
+    {
+      "label": "General_localmsgtest",
+      "value": "generallocalmsgtest"
+    },
+  ]
+
+  public events = [
+    {
+      "label": "Single",
+      "value": "single"
+    },
+    {
+      "label": "Multiple",
+      "value": "multiple"
+    },
+    {
+      "label": "Group",
+      "value": "group"
+    }
   ]
 
   public allTalukas;
 
   ngOnInit() {
+    this.disableMob1 = false;
+    this.disableMob = false;
+    this.disableCtg = false;
+    this.resetButton = false
     this.selectedCategory = "";
+    this.selectedEvent="";
     this.selectedDistrict = "";
     this.selectedTaluka = "";
     this.districtList = false;
@@ -54,24 +99,45 @@ export class SendNotificationComponent implements OnInit {
     this.showUser = false;
     this.showDetails = false;
     this.select_ctg = "Select Category";
+    this.select_eve = "Select Event"
     this.Not_title = "";
     this.message = "";
-    this.selectedLevel = ""
+    this.selectedLevel = "";
+    this.Mob_No = "";
+    this.mul_Mob ="";
+    this.mul_arr=[];
     // this.getAllDistricts();
   }
 
-  // getLevel() {
-  //   if (this.selectedLevel == "L1")
-  //   {
-  //     this.getAllParticipantsData(this.selectedLevel);
-  //   } else if (this.selectedLevel == "L2")
-  //   {
-  //     this.getAllParticipantsData(this.selectedLevel);
-  //   } else if (this.selectedLevel == "L3")
-  //   {
-  //     this.getAllParticipantsData(this.selectedLevel);
-  //   }
-  // }
+  fileChange(event) {
+    this.formData = new FormData();
+    this.resetButton = true;
+    let fileList: FileList = event.target.files;
+    if (fileList.length > 0) {
+      const file: File = fileList[0];
+      // if (file.type == 'application/pdf' || file.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || file.type == 'application/msword') {
+      if (file.size <= 1024000) {
+        // this.confirmModal.show();
+        const files = event.target.files || event.srcElement.files;
+        const file1 = files[0];
+
+        this.formData.append('image', file);
+
+      } else {
+        this.myInputVariable.nativeElement.value = "";
+        this.toastr.error('File size should be at most 1 MB');
+      }
+      // }
+      // else {
+      //   this.myInputVariable.nativeElement.value = "";
+      //   this.toastr.error(this.translate.instant('otherMessages.fileFormat'));
+      // }
+    }
+  }
+  reset() {
+    this.myInputVariable.nativeElement.value = "";
+    // this.confirmModal.hide();
+  }
 
   ngDoCheck() {
     if(this.Not_title.trim().length == 0 ){
@@ -88,87 +154,59 @@ export class SendNotificationComponent implements OnInit {
   }
 
   getCategory() {
-    // if (this.selectedCategory == "Send notification to Specific district") {
-    //   this.districtList = true;
-    //   this.talukaList = false;
-    //   this.showUser = false;
-    //   this.selectedDistrict = "";
-    // } else if (
-    //   this.selectedCategory == "Send notification to Specific taluka"
-    // ) {
-    //   this.talukaList = true;
-    //   this.districtList = true;
-    //   this.showUser = false;
-    //   this.selectedTaluka = "";
-    // } else if (
-    //   this.selectedCategory == "Send notification to individual user"
-    // ) {
-    //   this.showUser = true;
-    //   this.talukaList = false;
-    //   this.districtList = false;
-    // } else {
-    //   this.districtList = false;
-    //   this.talukaList = false;
-    //   this.showUser = false;
-    //   this.selectedCategory = "";
-    //   this.selectedDistrict = "";
-    //   this.selectedTaluka = "";
-    // }
-
     console.log(this.selectedCategory)
   }
 
-  getDistrict(e) {
-    this.districtName = document.getElementById("districtName").innerText;
-    this.getDistrictWiseTaluka();
-  }
+  getEvent(){
+    console.log(this.selectedEvent)
+    if(this.selectedEvent == "group"){
+      this.disableCtg = true;
+    }
+    else{
+      this.disableCtg = false;
+    }
 
-  getDistrictWiseTaluka() {
-    var apiUrl = "districtwisetaluka/";
-    this._service.getCall(
-      apiUrl + this.selectedDistrict,
-      window.localStorage.getItem("token")
-    ).subscribe(
-      data => {
-        this.allTalukas = data['results'];
-        this.selectedTaluka = "";
-      },
-      error => {
-        if (error.error.message == "token not found" || error.error.message == 'token not matches please re-login') {
-          this.toastr.error(this.translate.instant("Errors.tokenNotFound"));
-          setTimeout(() => {
-            this.router.navigate(["/"]);
-          }, 5000);
-        } else if (
-          error.error.message == "session not matches please re-login"
-        ) {
-          this.toastr.error(this.translate.instant("Errors.sessionNotMatches"));
-          setTimeout(() => {
-            this.router.navigate(["/"]);
-          }, 5000);
-        } else if (error.error.message == "source is required") {
-          this.toastr.error(
-            this.translate.instant("otherMessages.noInfoTryAgain")
-          );
-        } else if (error.error.message == "unknown source") {
-          this.toastr.error(
-            this.translate.instant("otherMessages.unknownSource")
-          );
-        } else {
-          this.toastr.error(this.translate.instant("Errors.cannotProceed"));
-        }
-      }
-      );
+    if(this.selectedEvent == "multiple"){
+      this.disableMob = true;
+    }
+    else{
+      this.disableMob = false;
+    }
+
+    if(this.selectedEvent == "single"){
+      this.disableMob1 = true;
+    }
+    else{
+      this.disableMob1 = false;
+    }
   }
 
   sendNotification() {
-    var jsonBody = {};
-    jsonBody["msgtitle"] = this.Not_title.trim();
-    jsonBody["msgbody"] = this.message.trim();
-    jsonBody["event"] = "group";
-    // jsonBody["regkey"] = "";
-    jsonBody["topic"] = this.selectedCategory;
+    if( this.myInputVariable.nativeElement.value == ""){
+      console.log("empty file")
+      this.toastr.error("Please select image file")
+    }
+    else
+    {
+    var str_array = this.mul_Mob.split(',');
+    for(var i = 0; i < str_array.length; i++) {
+      str_array[i] = str_array[i].replace(/^\s*/, "").replace(/\s*$/, "");
+      this.mul_arr.push(str_array[i]);
+    }
+   
+    console.log("qwsA",this.mul_arr)
+    this.formData.append('msgtitle', this.Not_title.trim())
+    this.formData.append('msgbody', this.message.trim())
+    this.formData.append('event',  this.selectedEvent)
+    this.formData.append('topic',  this.selectedCategory)
+    if(this.selectedEvent == "single"){
+      this.formData.append('regkey',  this.Mob_No)
+    }
+    if(this.selectedEvent == "multiple"){
+      this.formData.append('regkey', JSON.stringify(this.mul_arr))
+    }
 
+    console.log("formData",this.formData)
     /* Check as per selection */
 
     // if (this.selectedCategory == 'Send notification to Specific district') {
@@ -182,13 +220,24 @@ export class SendNotificationComponent implements OnInit {
     // }
 
     var apiUrl = "notification/";
-    this._service.postCallNotification(jsonBody, apiUrl, this.selectedLevel).subscribe(
-      data => {
-        if (data['message'] == "notification sent") {
-          this.notificationData = data['data'];
-          console.log(this.notificationData);
-          this.toastr.success(this.translate.instant("यशस्वीरीत्या पूर्ण."));
+    let headers = new HttpHeaders({ 'Authorization': window.localStorage.getItem('token') });
+      if (/Android/i.test(navigator.userAgent))
+      {
+        headers = headers.append("Source", "MWEB");
+      } else
+      {
+        headers = headers.append("Source", "WEB");
+      }
+      // let options = new RequestOptions({ headers });
+      let options = { headers: headers };
+      this.httpClient.post(this.apiUrl + apiUrl, this.formData, options).subscribe(data => {
+        let body = data;
+        console.log(body);
+        if (body['message'] == "notification sent") {
+          console.log("data",data)
+          this.toastr.success("Notification sent successfully !!")
           this.clear();
+          this.resetButton = false
         }
       },
       error => {
@@ -240,8 +289,17 @@ export class SendNotificationComponent implements OnInit {
       }
     );
   }
+}
+
   goToAdminPanel() {
     this.finishCall.emit(true);
+  }
+
+  isNumber(evt) {
+    var charCode = (evt.which) ? evt.which : evt.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+      return false;
+    return true;
   }
 
   clear() {
@@ -249,7 +307,12 @@ export class SendNotificationComponent implements OnInit {
     this.talukaList = false;
     this.showUser = false;
     this.Not_title = "";
+    this.Mob_No="";
+    this.mul_Mob ="";
     this.message = "";
     this.select_ctg = "Select Category";
+    this.select_eve = "Select Event"
+    this.myInputVariable.nativeElement.value = "";
+    this.mul_arr=[];
   }
 }
