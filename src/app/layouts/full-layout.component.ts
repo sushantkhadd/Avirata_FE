@@ -2989,8 +2989,13 @@ export class FullLayoutComponent implements OnInit {
     }
   }
   instruction() {
+    if(this.starPopupFlag == false){
     this.instructionModal.show();
     this.LanguageService.toShow();
+    }
+    else{
+      console.log("star function")
+    }
   }
   closeInstruction() {
     this.instructionModal.hide();

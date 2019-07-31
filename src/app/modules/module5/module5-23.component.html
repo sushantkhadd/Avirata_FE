@@ -192,6 +192,7 @@
           <form #assignForm="ngForm" >
             <div class="form-group row">
               <span [innerHTML]="'L2Module5.sub_5_23_6' | translate"></span>
+              {{section6Counter | numberConvertor : 'Devanagari'}}.&nbsp;
               <label class="form-control-label" [for]="questionid" [innerHTML]="question"></label>
               <div class="col-12 controls">
                 <textarea autosize [minRows]="2" class="form-control" [id]="questionid" name="answer" [(ngModel)]="textanswer1" rows="3" #addr="ngModel" (focus)="showLimit['1']=true" (focusout)="showLimit['1']=false" required></textarea>
