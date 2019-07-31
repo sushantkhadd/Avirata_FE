@@ -3,7 +3,7 @@
     <pdf-viewer *ngIf="!isLoaded" [autoresize]="true" [original-size]="false" [fit-to-page]="true"
       style="display: block" [render-text]="true" class="embed-responsive-item pdfViewer" [src]="pdfURL"
       [show-all]="false"
-      [page]="count" (after-load-complete)="afterLoadComplete($event)">
+      [page]="count" (after-load-complete)="afterLoadComplete($event)" (page-rendered)="pageRendered($event)">
     </pdf-viewer>
     <div class="loader-gif" *ngIf="isLoaded">
     <img [src]="loaderSrc" class="img-fluid" alt="">

@@ -96,7 +96,10 @@
                 <div class="card-header quetitle" *ngIf="statement">
                     <!-- <label><span [innerHTML]="statement"></span>
                  </label> -->
-                 <h6 [innerHTML]="statement"></h6>
+                 <h6>
+                    <span *ngIf="mysubModule5 == 23" [innerHTML]="'L2Module5.sub_5_23_5' | translate"></span>
+                     <span [innerHTML]="statement"></span>
+                 </h6>
                 </div>
                 <div class="card-block pt-0" [class.pt-0]="queCount">
                     <div class="row">

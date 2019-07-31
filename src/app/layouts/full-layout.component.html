@@ -1493,8 +1493,8 @@
                 </h5>
               </div>
               <div *ngIf="rewardsFlag == 3">
-                <h5 id="demo1" class="success-line font-weight-normal" *ngIf="(moduleCompleteStatus['type'] == 'moduleFinish' || moduleCompleteStatus['type'] == 'allFinish') && !needEfforts">
-                  <span [innerHTML]="'layout.bronzeMedalMsg' | translate"></span>
+                <h5 id="demo1" class="success-line font-weight-normal p-2" *ngIf="(moduleCompleteStatus['type'] == 'moduleFinish' || moduleCompleteStatus['type'] == 'allFinish') && !needEfforts">
+                  <span class="ml-2 text-center" [innerHTML]="'layout.bronzeMedalMsg' | translate"></span>
                 </h5>
               </div>
 
@@ -1575,6 +1575,7 @@
                 </span>
               </li>
             </ul>
+            <span class="mb-2" data-html2canvas-ignore>{{'layout.download_popupmsg' | translate}}</span>
           </div>
           <div [ngClass]="needEfforts ? 'pt-3': 'pt-1'" class="modal-footer justify-content-center pt-1 pb-4" *ngIf="moduleCompleteStatus['type'] != 'allFinish'">
             <span>
@@ -1701,6 +1702,9 @@
             </span>
           </li>
         </ul>
+      </div>
+      <div class="col-md-12" *ngIf="!needEfforts">
+          <span class="mb-2" data-html2canvas-ignore>{{'layout.download_popupmsg' | translate}}</span>
       </div>
       <div [ngClass]="needEfforts ? 'pt-3': 'pt-1'" class="modal-footer justify-content-center pt-1 pb-4">
         <span>

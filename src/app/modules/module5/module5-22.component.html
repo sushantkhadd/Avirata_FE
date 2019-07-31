@@ -136,11 +136,11 @@
          </div>
          <form #assignment="ngForm" *ngIf="startEvent">
            <div class="card">
-             <div class="card-header">
-               <label class="f-1x mb-0">
-                 <h6> {{'L2Module5.que5_22' | translate}}
+             <div class="card-header p-0">
+               <!-- <label class="f-1x mb-0"> -->
+                 <h6 class="questionHead lineHeight">{{'L2common.caution' | translate}} {{'L2Module5.que5_22' | translate}}
                  </h6>
-               </label>
+               <!-- </label> -->
              </div>
              <div class="card-block">
                <textarea class="form-control marathi" id="txt1" name="txtaraea" [(ngModel)]="txtcomment"

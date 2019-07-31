@@ -864,6 +864,13 @@ export class PresentationComponent implements OnInit {
     this.finalCount = pdfData.numPages;
   }
 
+  pageRendered(e) {
+    setTimeout(() => {
+      this.isLoaded = false;
+    }, 5000);
+    console.log('(page-rendered)',this.isLoaded, e);
+  }
+
   finishAudio(e) {
     console.log(e);
     if (e) {

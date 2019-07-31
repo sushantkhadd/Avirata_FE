@@ -59,6 +59,10 @@
 
     <div class="card">
       <div class="card-block pt-4">
+        <div class="row">
+          <div class="ml-3 counter mb-3 font-weight-bold">{{'L2Module5.interviewer' | translate}} {{personId | numberConvertor : 'Devanagari'}}</div>
+        </div>
+        
         <form #assignForm="ngForm" *ngIf="noHitFlag">
           <div class="form-group row">
             <label class="col-2 col-md-2 col-sm-2 form-control-label" [for]="queId1" [innerHTML]="que1"></label>
