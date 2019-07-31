@@ -123,9 +123,9 @@
               <span>{{'number.1' | translate}}.
               </span>{{'L2Module1.title' | translate}}
               <span *ngIf="statusFlag" class="reward-icon">
-                <em class="fas" [ngClass]="rewardImgUrl1"></em>
+                <em data-toggle="tooltip" title="Click here to open!" (click)="showStarPopUp(1)" class="fas" [ngClass]="rewardImgUrl1"></em>
               </span>
-            </a>
+            </a>  
           </span>
           <ul class="collapse list-unstyled" id="module1Submenu">
             <li class="nav-item" [class.activeMenu]="router['url']==='/modules/module1'">
@@ -264,7 +264,7 @@
               <span>{{'number.2' | translate}}.</span>
               {{'L2Module2.title' | translate}}
               <span *ngIf="statusFlag" class="reward-icon">
-                <em class="fas" [ngClass]="rewardImgUrl2"></em>
+                <em data-toggle="tooltip" title="Click here to open!" (click)="showStarPopUp(2)" class="fas" [ngClass]="rewardImgUrl2"></em>
               </span>
             </a>
           </span>
@@ -273,7 +273,7 @@
               <span>{{'number.2' | translate}}.</span>
               {{'L2Module2.title' | translate}}
               <span *ngIf="statusFlag" class="reward-icon">
-                <em class="fas" [ngClass]="rewardImgUrl2"></em>
+                <em data-toggle="tooltip" title="Click here to open!" (click)="showStarPopUp(2)" class="fas" [ngClass]="rewardImgUrl2"></em>
               </span>
             </a>
           </span>
@@ -470,7 +470,7 @@
               <span>{{'number.3' | translate}}.</span>
               {{'L2Module3.title' | translate}}
               <span *ngIf="statusFlag" class="reward-icon">
-                <em class="fas" [ngClass]="rewardImgUrl3"></em>
+                <em data-toggle="tooltip" title="Click here to open!" (click)="showStarPopUp(3)" class="fas" [ngClass]="rewardImgUrl3"></em>
               </span>
             </a>
           </span>
@@ -479,7 +479,7 @@
               <span>{{'number.3' | translate}}.</span>
               {{'L2Module3.title' | translate}}
               <span *ngIf="statusFlag" class="reward-icon">
-                <em class="fas" [ngClass]="rewardImgUrl3"></em>
+                <em data-toggle="tooltip" title="Click here to open!" (click)="showStarPopUp(3)" class="fas" [ngClass]="rewardImgUrl3"></em>
               </span>
             </a>
           </span>
@@ -639,7 +639,7 @@
               <span>{{'number.4' | translate}}.
               </span>{{'L2Module4.title' | translate}}
               <span *ngIf="statusFlag" class="reward-icon">
-                <em class="fas" [ngClass]="rewardImgUrl4"></em>
+                <em data-toggle="tooltip" title="Click here to open!" (click)="showStarPopUp(4)" class="fas" [ngClass]="rewardImgUrl4"></em>
               </span>
             </a>
           </span>
@@ -647,7 +647,7 @@
             <a href="#module4Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [class.deactive-menu1]="!module4OnOffFlag">
               <span>{{'number.4' | translate}}. </span>{{'L2Module4.title' | translate}}
               <span *ngIf="statusFlag" class="reward-icon">
-                <em class="fas" [ngClass]="rewardImgUrl4"></em>
+                <em data-toggle="tooltip" title="Click here to open!" (click)="showStarPopUp(4)" class="fas" [ngClass]="rewardImgUrl4"></em>
               </span>
             </a>
           </span>
@@ -786,7 +786,7 @@
               <span>{{'number.5' | translate}}.
               </span>{{'L2Module5.title' | translate}}
               <span *ngIf="statusFlag" class="reward-icon">
-                <em class="fas" [ngClass]="rewardImgUrl5"></em>
+                <em data-toggle="tooltip" title="Click here to open!" (click)="showStarPopUp(5)" class="fas" [ngClass]="rewardImgUrl5"></em>
               </span>
             </a>
           </span>
@@ -794,7 +794,7 @@
             <a href="#module5Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [class.deactive-menu1]="!module5OnOffFlag">
               <span>{{'number.5' | translate}}. </span>{{'L2Module5.title' | translate}}
               <span *ngIf="statusFlag" class="reward-icon">
-                <em class="fas" [ngClass]="rewardImgUrl5"></em>
+                <em data-toggle="tooltip" title="Click here to open!" (click)="showStarPopUp(5)" class="fas" [ngClass]="rewardImgUrl5"></em>
               </span>
             </a>
           </span>
@@ -1564,7 +1564,7 @@
                 </a>
               </li> -->
               <li>
-                <a class="c-pointer" (click)="downloadReward()">
+                <a data-toggle="tooltip" title="Click here to download!" class="c-pointer" (click)="downloadReward()">
                   <img class="img-responsive" src="../../assets/img/download.png">
                 </a>
               </li>
@@ -1583,7 +1583,7 @@
             </span>
           </div>
           <div class="row justify-content-center">
-            <span class="text-center mb-3" *ngIf="module5FinishFlag">
+            <span class="text-center mb-3" *ngIf="module5FinishFlag && !starPopupFlag">
               <button data-html2canvas-ignore class="btn btn-primary text-center" appPreventDoubleClick (debounceClick)="moduleComplete($event)">{{'Stepper.Next' | translate}}</button>
             </span>
           </div>
@@ -1692,7 +1692,7 @@
             </a>
           </li> -->
           <li>
-            <a class="c-pointer" (click)="downloadCupReward()">
+            <a class="c-pointer" data-toggle="tooltip" title="Click here to download!" (click)="downloadCupReward()">
               <img class="img-responsive" src="../../assets/img/download.png">
             </a>
           </li>

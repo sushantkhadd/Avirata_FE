@@ -38,7 +38,7 @@ export class FullLayoutComponent implements OnInit {
   subFlagModule2 = 0;
   subFlagModule3 = 0;
   public token;
-  userId;
+  userId;starPopupFlag;
   userType;
   public admin;
   public disabled: boolean = false;
@@ -322,7 +322,7 @@ export class FullLayoutComponent implements OnInit {
     // {
     //   this.setInterval()
     // }
-  
+  this.starPopupFlag = false;
     this.subscription = this.sharedService.getData().subscribe(data => {
       console.log("sharedServicedata", data);
       if (data) {
@@ -2476,7 +2476,7 @@ export class FullLayoutComponent implements OnInit {
     if (
       window.localStorage.getItem("moduleFinishCount") != null &&
       window.localStorage.getItem("moduleFinishCount") != "" &&
-      window.localStorage.getItem("moduleFinishCount") != undefined
+      window.localStorage.getItem("moduleFinishCount") != undefined && this.starPopupFlag == false
     ) {
       this.moduleFinishCount = JSON.parse(
         window.localStorage.getItem("moduleFinishCount")
@@ -2929,6 +2929,7 @@ export class FullLayoutComponent implements OnInit {
     }
   }
   moduleComplete(e) {
+    this.starPopupFlag = false;
     if (
       this.moduleCompleteStatus["nextRoute"] != null &&
       this.moduleCompleteStatus["nextRoute"] != undefined &&
@@ -3047,5 +3048,122 @@ export class FullLayoutComponent implements OnInit {
     this.moduleStatusCupModal.hide();
     this.LanguageService.toHide();
     this.router.navigate(["/dashboard"]);
+  }
+
+  showStarPopUp(val){
+    console.log("val",val)
+    var percent;
+    
+    if(val == 1){
+      if(parseInt(window.localStorage.getItem("currentstatus")) > 1){
+        this.starPopupFlag = true;
+        this.closeInstruction();
+        // this.module5FinishFlag= false;
+        this.moduleStatusModal.show()
+        this.moduleCompleteStatus['type'] = 'moduleFinish'
+        this.moduleCompleteStatus['moduleNo'] = "१"
+        this.moduleCompleteStatus['finishHead'] = "शिक्षक - एक व्यक्ती"
+        var current1;
+        current1 = JSON.parse(window.localStorage.getItem("levelData"))
+        percent = parseInt(current1[1].percent);
+        console.log("current1",percent,this.module5FinishFlag)
+      }
+    }
+    if(val == 2){
+      if(parseInt(window.localStorage.getItem("currentstatus")) > 2){
+        this.starPopupFlag = true;
+        this.moduleStatusModal.show()
+        // this.module5FinishFlag= false;
+        this.moduleCompleteStatus['type'] = 'moduleFinish'
+        this.moduleCompleteStatus['moduleNo'] = "२"
+        this.moduleCompleteStatus['finishHead'] = "शिक्षक - एक सुलभक"
+        var current1;
+        current1 = JSON.parse(window.localStorage.getItem("levelData"))
+        percent = parseInt(current1[2].percent);
+        console.log("current1",percent)
+      }
+    }
+   if(val == 3){
+      if(parseInt(window.localStorage.getItem("currentstatus")) > 3){
+        this.starPopupFlag = true;
+        this.moduleStatusModal.show()
+        // this.module5FinishFlag= false;
+        this.moduleCompleteStatus['type'] = 'moduleFinish'
+        this.moduleCompleteStatus['moduleNo'] = "३"
+        this.moduleCompleteStatus['finishHead'] = "शिक्षक - लोकशाहीचा अध्वर्यु"
+        var current1;
+        current1 = JSON.parse(window.localStorage.getItem("levelData"))
+        percent = parseInt(current1[3].percent);
+        console.log("current1",percent)
+      }
+    }
+   if(val == 4){
+      if(parseInt(window.localStorage.getItem("currentstatus")) > 4){
+        this.starPopupFlag = true;
+        this.moduleStatusModal.show()
+        // this.module5FinishFlag= false;
+        this.moduleCompleteStatus['type'] = 'moduleFinish'
+        this.moduleCompleteStatus['moduleNo'] = "४"
+        this.moduleCompleteStatus['finishHead'] = "शिक्षक - एक मार्गदर्शक"
+        var current1;
+        current1 = JSON.parse(window.localStorage.getItem("levelData"))
+        percent = parseInt(current1[4].percent);
+        console.log("current1",percent)
+      }
+    }
+    if(val == 5){
+      if(parseInt(window.localStorage.getItem("currentstatus")) > 5){
+        this.starPopupFlag = false;
+        this.moduleStatusModal.show()
+        this.moduleCompleteStatus['type'] = 'allFinish'
+        this.moduleCompleteStatus['moduleNo'] = "५"
+        this.moduleCompleteStatus['finishHead'] = "शिक्षक - एक करिअर समुपदेशक"
+        var current1;
+        current1 = JSON.parse(window.localStorage.getItem("levelData"))
+        percent = parseInt(current1[5].percent);
+        console.log("current1",percent)
+      }
+    }
+    if (percent > 80) {
+      this.finishImgUrl = this.imageJson["r1"];
+      this.needEfforts = false;
+      this.rewardsFlag = 1;
+      jQuery(".animate-reward img").each(function (i) {
+        jQuery(this)
+          .delay(100 * i)
+          .fadeIn(1500);
+      });
+    } else if (
+      percent > 50 &&
+      percent <= 80
+    ) {
+      this.finishImgUrl = this.imageJson["r2"];
+      this.needEfforts = false;
+      this.rewardsFlag = 2;
+      jQuery(".animate-reward img").each(function (i) {
+        jQuery(this)
+          .delay(100 * i)
+          .fadeIn(1500);
+      });
+    } else if (
+      percent >= 10 &&
+      percent < 50
+    ) {
+      this.finishImgUrl = this.imageJson["r3"];
+      this.needEfforts = false;
+      this.rewardsFlag = 3;
+      jQuery(".animate-reward img").each(function (i) {
+        jQuery(this)
+          .delay(100 * i)
+          .fadeIn(1500);
+      });
+    } else if (
+      percent >= 0 &&
+      percent < 10
+    ) {
+      this.finishImgUrl = this.imageJson["r4"];
+      this.needEfforts = true;
+      this.rewardsFlag = 4;
+    }
   }
 }
