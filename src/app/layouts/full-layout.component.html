@@ -61,6 +61,10 @@
         </li>
         <hr class="bottom_hr">
         <li>
+            <a class="nav-link">{{'Dashboard.Courses' | translate}}</a>
+          </li>
+          <hr class="bottom_hr">
+        <li>
           <span *ngIf="!currentFlag0">
             <a href="#module0Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [ngClass]="{'dropdown-toggle': module0OnOffFlag }"
               (click)="currentStatus(0)" [class.deactive-menu1]="!module0OnOffFlag">{{'L2Module0.title' | translate}}</a>
@@ -84,7 +88,7 @@
                 <a class="deactive-menu" routerLinkActive="active">{{'L2Module0.subMenu1-2' | translate}}</a>
               </span>
               <span *ngIf="mainFlagModule0 >= 2">
-                <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/module0/Module0.2']">{{'L2Module0.subMenu1-2' | translate}}</a>
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/module0/baseline1']">{{'L2Module0.subMenu1-2' | translate}}</a>
               </span>
             </li>
             <li routerLinkActive="activeMenu">
@@ -92,24 +96,16 @@
                 <a class="deactive-menu" routerLinkActive="active">{{'L2Module0.subMenu1-3' | translate}}</a>
               </span>
               <span *ngIf="mainFlagModule0 >= 3">
-                <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/module0/baseline1']">{{'L2Module0.subMenu1-3' | translate}}</a>
-              </span>
-            </li>
-            <li routerLinkActive="activeMenu">
-              <span *ngIf="mainFlagModule0 < 4">
-                <a class="deactive-menu" routerLinkActive="active">{{'L2Module0.subMenu1-4' | translate}}</a>
-              </span>
-              <span *ngIf="mainFlagModule0 >= 4">
-                <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/module0/baseline2']">{{'L2Module0.subMenu1-4' | translate}}</a>
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/module0/baseline2']">{{'L2Module0.subMenu1-3' | translate}}</a>
               </span>
             </li>
           </ul>
         </li>
 
         <!-- <p>Dummy Heading</p> -->
-        <li>
+        <!-- <li>
           <a class="nav-link">{{'Dashboard.Courses' | translate}}</a>
-        </li>
+        </li> -->
         <li>
           <span *ngIf="!currentFlag1">
             <a href="#module1Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" (click)="currentStatus(1);"
@@ -1451,7 +1447,7 @@
               <div id="main">
                 <div>
                   <img *ngIf="!needEfforts" class="img-responsive img-mitra" src="../../assets/img/expressions/clapping.png">
-                  <img *ngIf="needEfforts" class="img-responsive img-mitra mb-4" src="../../assets/img/expressions/wrong_ans.png">
+                  <img *ngIf="needEfforts" class="img-responsive img-mitra mb-3" src="../../assets/img/expressions/wrong_ans.png">
                 </div>
                 <div [class.pl-2]="needEfforts">
                   <!-- <h1 class="congrats-text" *ngIf="!needEfforts">
