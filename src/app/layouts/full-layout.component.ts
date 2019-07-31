@@ -2310,7 +2310,7 @@ export class FullLayoutComponent implements OnInit {
   }
   setStatus0(val) {
     if (val == true) {
-      this.mainFlagModule0 = 4;
+      this.mainFlagModule0 = 5;
       window.localStorage.setItem(
         "mainFlagModule0",
         this.mainFlagModule0.toString()

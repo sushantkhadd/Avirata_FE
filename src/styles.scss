@@ -3313,9 +3313,20 @@ body {
 .borderNo{
   border-right: 1px solid;
   height: 19px;
-  margin-right: -8px;
+  // margin-right: -8px;
+}
+.borderml-2{
+  border-right: 1px solid;
+  height: 19px;
+  margin-left: 2px;
 }
 
+.ml5{
+  margin-left: 5px;
+}
+.margin-11{
+  margin-left: -11px;
+}
 .margin-47{
   margin-left: -47px;
 }

@@ -270,9 +270,9 @@ export class TimelineComponent implements OnInit {
         this.barWidth3 = this.counterValue3 * this.width + '%';
       } else if (this.mainFlagModule4 && this.currentstatus  == 4)
       {
-        this.totalPer =65
+        this.totalPer =64
         this.counterValue4 = Math.round((this.mainFlagModule4 - 1) * this.calPercentage(14));
-        this.totalPer = 65 + this.counterValue4;
+        this.totalPer = 64 + this.counterValue4;
         this.barWidth4 = this.counterValue4 * this.width + '%';
       } else if (this.mainFlagModule5 && this.currentstatus  == 5)
       {

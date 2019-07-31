@@ -69,6 +69,11 @@
                   </label> -->
                     <h6 class="questionHead lineHeight" [innerHTML]="question3"></h6>
                 </div>
+                <div *ngIf="!section3Mcq">
+                <div *ngFor="let data of selectedTasks;let i=index">
+                    <label class="p-2" for={{i}} [class.text-success]="data.answer">{{i+1}}. {{data.statement}}</label>
+                </div>
+                </div>
                 <div class="card-block pt-0">
                   <div class="form float-left">
                     <div class="radio-opt-group">
