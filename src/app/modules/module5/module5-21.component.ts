@@ -380,6 +380,7 @@ export class Module521Component implements OnInit {
           this.subFlagModule5 = 3;
           window.localStorage.setItem('subFlagModule5', '3');
           window.localStorage.setItem("uuid", data['data'].nextuuid)
+          this.startPdf = false;
           // this.start();
           //   this.mainFlagModule5 = 22;
           //   window.localStorage.setItem('mainFlagModule5', '22');

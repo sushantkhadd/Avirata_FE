@@ -17,8 +17,8 @@
                     <div *ngIf="!queUrl" class="card-header mcq-title">
                         <span class="inst-text" *ngIf="title"><strong>{{title}} :<br/> </strong></span>
                         <label class="f-1x p-2"><span *ngIf="queCount">{{queCount | numberConvertor : 'Devanagari'}}. </span><span [innerHTML]="statement"></span>
-                    </label>
-                    <label *ngIf="mysubModule0==3 && queDescription !=''" class="f-1x p-2"><span [innerHTML]="queDescription"></span>
+                    </label><br>
+                    <label *ngIf="mysubModule0==3 && queDescription !=''" class="f-1x"><span [innerHTML]="queDescription"></span>
                     </label>
                     </div>
                     <!-- <h6 *ngIf="!queUrl" class="lineHeight" [innerHTML]="statement"></h6> -->
