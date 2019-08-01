@@ -203,7 +203,7 @@ export class ProfileComponent implements OnInit {
 
     if ((window.localStorage.getItem('profile') == null) || (window.localStorage.getItem('profile') == undefined) || (window.localStorage.getItem('profile') == "")) {
       console.log("token",this.LocalstoragedetailsService.token)
-      this.ProfileService.getProfileDetails(this.LocalstoragedetailsService.token)
+      this.ProfileService.getProfileDetails()
         .subscribe(
         data => {
           window.localStorage.setItem('profile', JSON.stringify(data['Response']))
@@ -1181,7 +1181,7 @@ export class ProfileComponent implements OnInit {
   generateMobileOtp() {
 
     var newEmailJson = '{"mobileno": "' + this.newMobile + '","oldmobile":"' + this.mobile + '","username":"' + this.mobile + '","password":"' + this.passwordMobile + '"}';
-    this.ProfileService.sendOTPToMobile(newEmailJson, this.token)
+    this.ProfileService.sendOTPToMobile(newEmailJson)
       .subscribe(
       data => {
         if (data['Response'] == "Mobile No Already Exist") {
@@ -1230,7 +1230,7 @@ export class ProfileComponent implements OnInit {
     } else {
       var verifyEmailOtpJson = '{"email":"' + this.newEmail + '","emailotp":"' + this.emailOtp + '"}'
 
-      this.ProfileService.verifyOtpEmail(verifyEmailOtpJson, this.token)
+      this.ProfileService.verifyOtpEmail(verifyEmailOtpJson)
         .subscribe(
         data => {
           if (data['Response'] == "Email otp expired regenerate otp") {
@@ -1278,7 +1278,7 @@ export class ProfileComponent implements OnInit {
     else {
       var verifyMobileOtpJson = '{"mobileno":"' + this.newMobile + '","mobileotp":"' + this.mobileOtp + '"}'
 
-      this.ProfileService.verifyOtpMobile(verifyMobileOtpJson, this.token)
+      this.ProfileService.verifyOtpMobile(verifyMobileOtpJson)
         .subscribe(
         data => {
           if (data['Response'] == "mobile otp expired regenerate otp") {
@@ -1597,7 +1597,7 @@ export class ProfileComponent implements OnInit {
 
     // var newEmailJson = '{"email": "' + this.newEmail + '","oldemail":"' + this.email + '","username":"' + this.mobile + '","password":"' + this.password + '"}';
     console.log(emailJson)
-    this.ProfileService.sendOTPToNewEmail(JSON.stringify(emailJson), this.token)
+    this.ProfileService.sendOTPToNewEmail(JSON.stringify(emailJson))
       .subscribe(
       data => {
         if (data['Response'] == "Email Already Exist") {

@@ -9,10 +9,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class ProfileService {
   public apiUrl = environment.apiUrl;
   constructor(private http: HttpClient) {}
-  getProfileDetails(token) {
+  getProfileDetails() {
     var headers = new HttpHeaders({
       "Content-Type": "application/json",
-      'Authorization':token,
+      'Authorization':window.localStorage.getItem("token"),
      // "Source": "WEB"
     });
     if (/Android/i.test(navigator.userAgent)) 
@@ -32,11 +32,11 @@ export class ProfileService {
   } //End of ProfileDetails
 
   //POST method for forget Password
-  sendOTPToNewEmail(newEmailJson: any, token) {
+  sendOTPToNewEmail(newEmailJson: any) {
     const body = JSON.parse(newEmailJson);
     var headers = new HttpHeaders({
       "Content-Type": "application/json",
-      'Authorization': token,
+      'Authorization': window.localStorage.getItem("token"),
      // "Source": "WEB"
     });
     if (/Android/i.test(navigator.userAgent)) 
@@ -51,11 +51,11 @@ export class ProfileService {
      
   } //End of postForgetPassword
 
-  sendOTPToMobile(newMobileJson: any, token) {
+  sendOTPToMobile(newMobileJson: any) {
     const body = JSON.parse(newMobileJson);
     var headers = new HttpHeaders({
       "Content-Type": "application/json",
-      'Authorization': token,
+      'Authorization': window.localStorage.getItem("token"),
      // "Source": "WEB"
     });
     if (/Android/i.test(navigator.userAgent)) 
@@ -70,11 +70,11 @@ export class ProfileService {
      
   }
 
-  verifyOtpEmail(verifyEmailOtpJson: any, token) {
+  verifyOtpEmail(verifyEmailOtpJson: any) {
     const body = JSON.parse(verifyEmailOtpJson);
     var headers = new HttpHeaders({
       "Content-Type": "application/json",
-      'Authorization': token,
+      'Authorization': window.localStorage.getItem("token"),
      // "Source": "WEB"
     });
     if (/Android/i.test(navigator.userAgent)) 
@@ -93,11 +93,11 @@ export class ProfileService {
       
   }
 
-  verifyOtpMobile(verifyMobileOtpJson: any, token) {
+  verifyOtpMobile(verifyMobileOtpJson: any) {
     const body = JSON.parse(verifyMobileOtpJson);
     var headers = new HttpHeaders({
       "Content-Type": "application/json",
-      'Authorization': token,
+      'Authorization': window.localStorage.getItem("token"),
      // "Source": "WEB"
     });
     if (/Android/i.test(navigator.userAgent)) 
