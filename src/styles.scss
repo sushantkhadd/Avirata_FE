@@ -2792,6 +2792,18 @@ table,
     }
   }
 
+  .level-bg {
+    height: 100%;
+  }
+
+  .mobcnt{
+    position: absolute;
+    font-size: 0.8rem;
+    top: 73px;
+    width: 69px;
+    right: -30px;
+  }
+
   .submoduleStatusModal {
     .modal {
       .modal-content {
@@ -2893,7 +2905,7 @@ table,
 
   .container.position-relative {
     h6.questionHead.lineHeight {
-      font-size: 0.8rem;
+      font-size: 0.96rem;
     }
   }
 
@@ -2936,7 +2948,7 @@ table,
 
   .position-relative {
     .badge.badge-info.float-right {
-      top: -14.7%;
+      top: 4.3%;
       font-size: 70%;
     }
   }
@@ -2997,12 +3009,27 @@ table,
         padding-top: 1rem;
       }
     }
+
+    .modal-body {
+      padding: 2.5rem 2rem 1rem 2rem;
+  
+      p {
+        font-size: 0.8rem;
+        line-height: 15px !important;
+      }
+    }
   }
 
   .custom_counter{
-    top: 105px!important;
+    top: 144px!important;
   }
 
+  .ml5{
+    margin-left: 8px !important;
+  }
+  .margin-11 {
+   margin-left: -5px !important; 
+  }
 }
 
 .dx-radiogroup .dx-radiobutton,
@@ -3384,7 +3411,7 @@ body {
   }
 }
 
-// SCSS for audio-player in firefox
+// SCSS for firefox
 @-moz-document url-prefix() {
   .audio-container {
     .card {
@@ -3432,7 +3459,12 @@ body {
     } 
   }
   }
-
+  .position-relative {
+    .badge.badge-info.float-right {
+      top: 14.3%;
+      font-size: 70%;
+    }
+  }
   @media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation: portrait) {
 
     /* For portrait layouts only */
