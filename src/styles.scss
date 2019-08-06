@@ -1169,7 +1169,7 @@ body {
   color: #fff;
   font-size: 13px;
   max-height: 56px;
-  min-height: 50px;
+  min-height: 43px;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -3207,7 +3207,7 @@ body {
     height: 1.45rem !important;
     border-radius: 5px !important;
     @include box-shadow(0 7px 6px -6px #777);
-    background-color: #e4e5e6;
+    background-color: #999999;
   }
 
   .complete-circle {

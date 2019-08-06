@@ -71,6 +71,7 @@ export class Module518Component implements OnInit {
     jsonBody["useranswer"] = "";
     jsonBody["event"] = "start";
     this.apiCall(jsonBody, 'modulefivecmcq/', 'start1')
+    this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 5.18', window.localStorage.getItem('username'), 10);
   }
 
   saveAnswer(e) {

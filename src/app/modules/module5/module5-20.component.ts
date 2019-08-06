@@ -115,7 +115,7 @@ export class Module520Component implements OnInit {
   }
 
   start() {
-    // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 4.9', window.localStorage.getItem('username'), 10);
+    this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 5.20', window.localStorage.getItem('username'), 10);
     this.finishJSONBody["submoduleid"] = window.localStorage.getItem("uuid");
     this.finishJSONBody["event"] = "start";
 

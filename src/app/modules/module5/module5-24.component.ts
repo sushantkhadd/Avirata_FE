@@ -105,7 +105,7 @@ export class Module524Component implements OnInit {
       data => {
         if (data["status"] == true) {
           if (fun == "start") {
-            // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 1.1', window.localStorage.getItem('username'), 10);
+            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 5.24', window.localStorage.getItem('username'), 10);
             this.passData["videoUrl"] = data["data"].url;
             this.vedioCompleteUrl = data["data"].url;
             var current5 = [];

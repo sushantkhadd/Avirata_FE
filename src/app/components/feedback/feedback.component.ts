@@ -228,7 +228,7 @@ export class FeedbackComponent implements OnInit {
 
    
     
-    console.log("jsonbody",this.activeItem1,this.ansJson)
+    console.log("jsonbody",this.activeItem1,this.ansJson,this.type1Ans)
   }
 
   next() {
@@ -474,7 +474,7 @@ export class FeedbackComponent implements OnInit {
             const newIndex = this.counter === 0 ? this.queArray1.length - 1 : this.counter - 1;
             this.activeItem = this.queArray1[newIndex];
             this.activeItem1 = this.queArray2[newIndex];
-            console.log(this.counter)
+            console.log(this.counter,this.type1Ans)
             this.counter--;
             this.questionCount  = this.questionCount - 1;
             //this.freeTextFlag = false;
@@ -494,7 +494,7 @@ export class FeedbackComponent implements OnInit {
                 this.priorities.push(this.activeItem.options[i].value)
               }
             }
-            console.log("after",this.activeItem,this.ansJson,this.activeItem)
+            console.log("after",this.activeItem,this.ansJson,this.activeItem,this.optionArray,this.type1Ans)
           } else if (fun == "finish") {
             window.localStorage.setItem('uuid', data['data'].nextuuid)
             window.localStorage.setItem('subFlagModule5', '2')

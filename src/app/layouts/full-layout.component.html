@@ -68,11 +68,11 @@
         <li>
           <span *ngIf="!currentFlag0">
             <a href="#module0Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [ngClass]="{'dropdown-toggle': module0OnOffFlag }"
-              (click)="currentStatus(0)" [class.deactive-menu1]="!module0OnOffFlag">{{'L2Module0.title' | translate}}</a>
+              (click)="currentStatus(0)" [class.deactive-menu1]="!module0OnOffFlag">{{'L2Module0.title1' | translate}}</a>
           </span>
           <span *ngIf="currentFlag0">
             <a href="#module0Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [ngClass]="{'dropdown-toggle': module0OnOffFlag }" (click)=" mainFlag == true ? instruction0() : undefined;mainFlag = false"
-              [class.deactive-menu1]="!module0OnOffFlag">{{'L2Module0.title' | translate}}</a>
+              [class.deactive-menu1]="!module0OnOffFlag">{{'L2Module0.title1' | translate}}</a>
           </span>
 
           <ul class="collapse list-unstyled" id="module0Submenu">
@@ -129,7 +129,7 @@
           </span>
           <span *ngIf="currentFlag1">
             <a href="#module1Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [class.deactive-menu1]="!module1OnOffFlag"
-              (click)=" mainFlag == true ? instruction() : undefined;mainFlag = false">
+              (click)=" mainFlag == true ? instruction() : undefined">
               <span>{{'number.1' | translate}}.
               </span>{{'L2Module1.title' | translate}}
               <span *ngIf="statusFlag" class="reward-icon">
@@ -1574,7 +1574,10 @@
                 </a>
               </li> -->
               <li>
-                <a data-toggle="tooltip" title="Click here to download!" class="c-pointer" (click)="downloadReward()">
+                <a *ngIf="!starPopupFlag" data-toggle="tooltip" title="Click here to download!" class="c-pointer" (click)="downloadReward()">
+                  <img class="img-responsive" src="../../assets/img/download.png">
+                </a>
+                <a *ngIf="starPopupFlag" data-toggle="tooltip" title="Click here to download!" class="c-pointer" (click)="downloadReward1()">
                   <img class="img-responsive" src="../../assets/img/download.png">
                 </a>
               </li>

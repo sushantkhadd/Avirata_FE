@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from 'src/app/language.service';
+import { LocalstoragedetailsService } from "../../services/localstoragedetails.service";
 import { Router } from '@angular/router';
 import { ToastsManager } from 'ng6-toastr';
 import { Module5Service } from './module5.service';
@@ -18,7 +19,7 @@ export class Module522Component implements OnInit {
 
   public submitPostDisable = true; startEvent;
   public checkAgree = false; missingPost = false; noPost;
-  constructor(public translate: TranslateService, public LanguageService: LanguageService, public router: Router, public Module5Service: Module5Service, public toastr: ToastsManager, vcr: ViewContainerRef) {
+  constructor(public translate: TranslateService, public LanguageService: LanguageService, public router: Router, public Module5Service: Module5Service, public toastr: ToastsManager, public LocalstoragedetailsService: LocalstoragedetailsService,vcr: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
@@ -102,10 +103,12 @@ export class Module522Component implements OnInit {
       .subscribe(
         data => {
           if (data["message"] == "post submitted successfully") {
+            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 5.22', window.localStorage.getItem('username'), 10);
             window.localStorage.setItem("mainFlagModule5", "23");
             window.localStorage.setItem("subFlagModule5", "1");
             this.mainFlagModule5 = 23;
             this.Module5Service.setLocalStorage5(23);
+            window.localStorage.setItem('source', 'module 5.23.1');
             window.localStorage.setItem(
               "uuid",
               data["data"].nextuuid
@@ -115,6 +118,14 @@ export class Module522Component implements OnInit {
                 "otherMessages.successfullySubmit"
               )
             );
+            var obj = {
+              "type": "submodule",
+              "route": true,
+              "current": this.translate.instant('L2Module5.subMenu5-23'),
+              "next": this.translate.instant('L2Module5Finish.subMenu5-23'),
+              // "nextRoute": "/modules/module5/Module5.23"
+              }
+              this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
           }
         },
         error => {

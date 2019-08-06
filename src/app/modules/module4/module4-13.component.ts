@@ -139,6 +139,7 @@ export class Module413Component implements OnInit {
       .subscribe(
       data => {
         if (data['message'] = "submodule started") {
+          this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 4.13', window.localStorage.getItem('username'), 10);
           if(window.localStorage.getItem("subFlagModule4")== "1"){
             this.imgUrl = data['data'].url;
           }

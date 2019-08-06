@@ -139,6 +139,7 @@ export class Module215Component implements OnInit {
       .subscribe(
       data => {
         if (data['message'] = "submodule started") {
+          this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 2.15', window.localStorage.getItem('username'), 10);
           if(window.localStorage.getItem("subFlagModule2")== "1"){
             this.imgUrl = data['data'].url;
           }
@@ -159,7 +160,6 @@ export class Module215Component implements OnInit {
           console.log("FINISH ",current2)
           window.localStorage.setItem('currentJson2',JSON.stringify(current2))
 
-          // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 2.15', window.localStorage.getItem('username'), 10);
         }
       },
       error => {

@@ -93,6 +93,7 @@ export class Module214Component implements OnInit {
       data => {
         if (data['status'] == true) {
           if (fun == 'start') {
+            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 2.14', window.localStorage.getItem('username'), 10);
             this.startFlag = true;
             this.question = data["data"]["questionlist"][0].question;
             this.questionid = data["data"]["questionlist"][0].questionid;

@@ -188,12 +188,12 @@ export class FullLayoutComponent implements OnInit {
     window.localStorage.setItem("myflag", "true");
   }
   logout() {
-    // this.LanguageService.googleEventTrack(
-    //   "OUT",
-    //   "currentuser",
-    //   "UserLogout",
-    //   10
-    // );
+    this.LanguageService.googleEventTrack(
+      "L3OUT",
+      "currentuser",
+      "UserLogout",
+      10
+    );
     this.FullLayoutService.logoutService(this.token).subscribe(
       data => {
         if (data["Response"] == "User Logged Out") {
@@ -233,9 +233,58 @@ export class FullLayoutComponent implements OnInit {
     }
   }
 
+  downloadReward1(){
+    //this.isloaded = true;
+    if(this.rewardsFlag == 1){
+       this.LanguageService.googleEventTrack('L3RewardDownload', 'Gold', this.moduleCompleteStatus['finishHead'], 10);
+    }
+    else if(this.rewardsFlag == 2){
+      this.LanguageService.googleEventTrack('L3RewardDownload', 'Silver', this.moduleCompleteStatus['finishHead'], 10);
+    }
+    else if(this.rewardsFlag == 3){
+      this.LanguageService.googleEventTrack('L3RewardDownload', 'Bronze', this.moduleCompleteStatus['finishHead'], 10);
+    }
+    setTimeout(() => {
+      if(window.localStorage.getItem("currentstatus")=='1' ||
+      window.localStorage.getItem("currentstatus")=='2' ||
+      window.localStorage.getItem("currentstatus")=='3' ||
+      window.localStorage.getItem("currentstatus")=='4' ||
+      window.localStorage.getItem("currentstatus")=='5'){
+        this.isloaded = true;
+        console.log('currentstatus,downloaded1',window.localStorage.getItem("currentstatus"))
+        html2canvas(this.screen.nativeElement,{backgroundColor:'transperent',x:180,width:1000}).then(canvas => {
+          this.canvas.nativeElement.src = canvas.toDataURL();
+          this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
+          this.isloaded = false;
+          this.downloadLink.nativeElement.download = 'Reward.png';
+          this.downloadLink.nativeElement.click();
+        });
+      } else if(window.localStorage.getItem("currentstatus")=='6'){
+        this.isloaded = true;
+        console.log('current 5,star',window.localStorage.getItem("currentstatus"))
+        html2canvas(this.screen.nativeElement,{backgroundColor:'transperent',x:180,width:1000}).then(canvas => {
+          this.canvas.nativeElement.src = canvas.toDataURL();
+          this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
+          this.isloaded = false;
+          this.downloadLink.nativeElement.download = 'My-Reward.png';
+          this.downloadLink.nativeElement.click();
+        });
+      }
+    }, 1200);
+    
+  }
   
   downloadReward(){
     //this.isloaded = true;
+    if(this.rewardsFlag == 1){
+       this.LanguageService.googleEventTrack('L3RewardDownload', 'Gold', this.moduleCompleteStatus['finishHead'], 10);
+    }
+    else if(this.rewardsFlag == 2){
+      this.LanguageService.googleEventTrack('L3RewardDownload', 'Silver', this.moduleCompleteStatus['finishHead'], 10);
+    }
+    else if(this.rewardsFlag == 3){
+      this.LanguageService.googleEventTrack('L3RewardDownload', 'Bronze', this.moduleCompleteStatus['finishHead'], 10);
+    }
     setTimeout(() => {
       if(window.localStorage.getItem("currentstatus")=='1' ||
       window.localStorage.getItem("currentstatus")=='2' ||
@@ -244,7 +293,7 @@ export class FullLayoutComponent implements OnInit {
       window.localStorage.getItem("currentstatus")=='5'){
         this.isloaded = true;
         console.log('currentstatus',window.localStorage.getItem("currentstatus"))
-        html2canvas(this.screen.nativeElement,{backgroundColor:'transperent',x:300,y:200,width:1000}).then(canvas => {
+        html2canvas(this.screen.nativeElement,{backgroundColor:'transperent',x:120,y:170,width:1000}).then(canvas => {
           this.canvas.nativeElement.src = canvas.toDataURL();
           this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
           this.isloaded = false;
@@ -254,7 +303,7 @@ export class FullLayoutComponent implements OnInit {
       } else if(window.localStorage.getItem("currentstatus")=='6'){
         this.isloaded = true;
         console.log('current 5',window.localStorage.getItem("currentstatus"))
-        html2canvas(this.screen.nativeElement,{backgroundColor:'transperent',width:1000}).then(canvas => {
+        html2canvas(this.screen.nativeElement,{backgroundColor:'transperent',x:180,width:1000}).then(canvas => {
           this.canvas.nativeElement.src = canvas.toDataURL();
           this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
           this.isloaded = false;
@@ -267,9 +316,18 @@ export class FullLayoutComponent implements OnInit {
   }
 
   downloadCupReward() {
+    if(this.cupImg == 1){
+      this.LanguageService.googleEventTrack('L3RewardDownload', 'Gold', "CupImage", 10);
+   }
+   else if(this.cupImg == 2){
+     this.LanguageService.googleEventTrack('L3RewardDownload', 'Silver', "CupImage", 10);
+   }
+   else if(this.cupImg == 3){
+     this.LanguageService.googleEventTrack('L3RewardDownload', 'Bronze', "CupImage", 10);
+   }
     this.isloaded = true;
     setTimeout(() => {
-      html2canvas(this.cupPopup.nativeElement,{backgroundColor:'transperent',width:1000}).then(canvas => {
+      html2canvas(this.cupPopup.nativeElement,{backgroundColor:'transperent',x:180,width:1000}).then(canvas => {
         this.canvascup.nativeElement.src = canvas.toDataURL();
         this.downloadLinkcup.nativeElement.href = canvas.toDataURL('image/png');
         this.isloaded = false;
@@ -2741,6 +2799,7 @@ export class FullLayoutComponent implements OnInit {
     this.LocalstoragedetailsService.getModuleStatus().subscribe(item => {
       var sumbmodulestatus = JSON.parse(item);
       this.moduleCompleteStatus = sumbmodulestatus;
+      // console.log("obj1",this.moduleCompleteStatus)
       if (this.moduleCompleteStatus["type"] == "submodule") {
         this.submoduleStatusModal.show();
         this.LanguageService.toShow();

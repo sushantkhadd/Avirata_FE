@@ -64,6 +64,7 @@ export class Module26Component implements OnInit {
     this.Module2Service.apiCall(jsonBody, apiUrl).subscribe(
       data => {
         if (data["message"] == "submodule started") {
+          this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 2.6', window.localStorage.getItem('username'), 10);
           this.startFlag = true;
           this.data = data["data"];
           // console.log('mcq',this.data);
@@ -133,6 +134,8 @@ export class Module26Component implements OnInit {
             window.localStorage.setItem("uuid", data["data"].nextuuid);
             this.instructionModal.show();
             this.LanguageService.toShow();
+            window.localStorage.setItem("mainFlagModule2", "7");
+            window.localStorage.setItem("subFlagModule2", "1");
           }
         },
         error => {

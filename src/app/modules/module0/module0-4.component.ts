@@ -73,6 +73,7 @@ export class Module04Component implements OnInit {
       this.passData['answer'] = this.apiEndSendAns;
       this.passData['finish'] = this.apiEndFinish;
       this.passData['jsonData'] = jsonData;
+      this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 0.4', window.localStorage.getItem('username'), 10);
   }
 
   saveAnswer(e){

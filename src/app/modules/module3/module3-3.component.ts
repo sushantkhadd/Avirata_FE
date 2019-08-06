@@ -168,6 +168,7 @@ export class Module33Component implements OnInit {
       data => {
         if (data["status"] == true) {
           if (fun == "start") {
+            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 3.3', window.localStorage.getItem('username'), 10);
             this.startFlag = true;
             this.question1 = data["data"]["questionlist"][0].question;
             this.question2 = data["data"]["questionlist"][1].question;

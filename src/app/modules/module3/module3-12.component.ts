@@ -66,7 +66,7 @@ export class Module312Component implements OnInit {
           this.passData6["type"] = "single";
           this.showInst = false;
           console.log(data)
-          // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 4.12', window.localStorage.getItem('username'), 10);
+          this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 3.12', window.localStorage.getItem('username'), 10);
         } else if (fun == "finish1")
         {
           if (data["message"] == "submodule finish next uuid is")

@@ -203,7 +203,7 @@
             </div>
             <!-- <p *ngIf="showLimit['1'] && postWordCount['1']>=1" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount['1'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}</p> -->
             <div *ngIf="section6Counter==3">
-            <div class="form-group row">
+            <div class="form-group row p-2">
               <div class="col-12 controls">
                 <textarea autosize [minRows]="2" class="form-control" [id]="questionid" name="answer" [(ngModel)]="textanswer2" rows="3" #addr="ngModel" (focus)="showLimit['2']=true" (focusout)="showLimit['2']=false" required></textarea>
               </div>
@@ -212,7 +212,7 @@
             </div> -->
             </div>
             <!-- <p *ngIf="showLimit['2'] && postWordCount['2']>=2" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}} {{postWordCount['2'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}</p> -->
-            <div class="form-group row">
+            <div class="form-group row p-2">
               <div class="col-12 controls">
                 <textarea autosize [minRows]="2" class="form-control" [id]="questionid" name="answer" [(ngModel)]="textanswer3" rows="3" #addr="ngModel" (focus)="showLimit['3']=true" (focusout)="showLimit['3']=false" required></textarea>
               </div>

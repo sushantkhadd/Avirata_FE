@@ -75,7 +75,7 @@ export class Module314Component implements OnInit {
     this.docData['showcfu'] = true;
     this.docData['apiurl'] = 'modulethreecfustart/';
     this.docData['apiurlResult'] = 'modulethreecfustart/';
-    // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 4.4', window.localStorage.getItem('username'), 10);
+    this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 3.14', window.localStorage.getItem('username'), 10);
   }
 
   checkAnswer(e) {

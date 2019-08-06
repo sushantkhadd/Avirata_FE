@@ -78,6 +78,7 @@ export class Module53Component implements OnInit {
     this.docData["showcfu"] = true;
     this.docData["apiurl"] = "modulefivecfustart/";
     this.docData["apiurlResult"] = "modulefivecfustart/";
+    this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 5.3', window.localStorage.getItem('username'), 10);
   }
 
   checkAnswer(e) {

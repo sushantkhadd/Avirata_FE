@@ -172,7 +172,7 @@ export class Module48Component implements OnInit {
         if (data["status"] == true) {
           if (fun == "start") {
             this.startFlag = true;
-            // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 1.1', window.localStorage.getItem('username'), 10);
+            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 4.8', window.localStorage.getItem('username'), 10);
             this.assignData = data["data"];
             this.mainQuestion = this.assignData.question;
             this.description = this.assignData.description;

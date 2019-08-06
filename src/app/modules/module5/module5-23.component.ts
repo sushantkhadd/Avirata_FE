@@ -183,6 +183,7 @@ export class Module523Component implements OnInit {
     this.passData['url'] = this.apiUrl;
     this.passData['jsonData'] = jsonData;
     console.log("start1")
+    this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 5.23', window.localStorage.getItem('username'), 10);
   }
 
   finish1(e){

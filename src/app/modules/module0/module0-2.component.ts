@@ -88,6 +88,7 @@ export class Module02Component implements OnInit {
       data => {
         if (data["status"] == true) {
           if (fun == "start") {
+            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 0.2', window.localStorage.getItem('username'), 10);
             this.passData['apiUrl'] = "modulezerosingleurl/";
             this.passData['videoUrl'] = data['data'].url;
             console.log("sacsac",this.passData)

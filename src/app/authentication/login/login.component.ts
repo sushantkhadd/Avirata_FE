@@ -109,6 +109,8 @@ export class LoginComponent implements OnInit {
     this.CommonService.postCallWT(apiUrl, jsonBody).subscribe(
       data => {
         if (data['message'] == 'ok') {
+          this.lang.googleEventTrack('L3Entry', this.username, data['data'].districtname, 10);
+          window.localStorage.setItem('username', this.username)
           window.localStorage.setItem('setData', JSON.stringify(data['data']))
           window.localStorage.setItem("token", data['data'].token)
           window.localStorage.setItem("coordinatorStatus", data['data'].coordinatorstatus)

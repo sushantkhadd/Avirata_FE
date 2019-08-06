@@ -68,7 +68,7 @@ export class Module03Component implements OnInit {
       data => {
         if (data["status"] == true)
         {
-          // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 1.3', window.localStorage.getItem('username'), 10);
+          this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 0.3', window.localStorage.getItem('username'), 10);
           console.log("data111111111", data["data"].questionlist);
           this.questionlist =data["data"].questionlist
           this.shuffle(this.questionlist);

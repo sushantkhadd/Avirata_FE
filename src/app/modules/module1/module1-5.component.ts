@@ -139,7 +139,7 @@ export class Module15Component implements OnInit {
         data => {
           if (fun == 'start')
           {
-            // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 3.8', window.localStorage.getItem('username'), 10);
+            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 1.5', window.localStorage.getItem('username'), 10);
             this.passData['apiUrl'] = "moduleonesingleurl/";
             this.passData['videoUrl'] = data['data'].url;
             this.showVideoFlag = true

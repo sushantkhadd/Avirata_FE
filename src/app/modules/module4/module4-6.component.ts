@@ -133,7 +133,7 @@ export class Module46Component implements OnInit {
         data => {
           if (fun == 'start')
           {
-            // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 3.8', window.localStorage.getItem('username'), 10);
+            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 4.6', window.localStorage.getItem('username'), 10);
             this.passData['apiUrl'] = "modulefoursingleurl/";
             this.passData['videoUrl'] = data['data'].url;
             this.showVideoFlag = true

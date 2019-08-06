@@ -127,7 +127,7 @@ this.Module3Service.apiCall(jsonBody, apiUrl)
   .subscribe(
   data => {
     if (fun == 'start') {
-      // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 3.8', window.localStorage.getItem('username'), 10);
+      this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 3.13', window.localStorage.getItem('username'), 10);
       this.passData['apiUrl'] = "modulethreesingleurl/";
       this.passData['videoUrl'] = data['data'].url;
       this.showVideoFlag = true

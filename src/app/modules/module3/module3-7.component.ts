@@ -46,7 +46,7 @@ export class Module37Component implements OnInit {
         data => {
           if (data['status'] == true)
           {
-            // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 1.3', window.localStorage.getItem('username'), 10);
+            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 3.7', window.localStorage.getItem('username'), 10);
             console.log("data ", data['data'])
             this.questionlist =data["data"].questionlist
             for(let i=0; i< this.questionlist.length; i++){

@@ -97,6 +97,7 @@ export class Module3Component implements OnInit {
       .subscribe(
       data => {
         if (fun == 'start') {
+          this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 3.1', window.localStorage.getItem('username'), 10);
           this.passData['apiUrl'] = "modulethreesingleurl/";
           this.passData['videoUrl'] = data['data'].url;
           this.showVideoFlag = true

@@ -95,7 +95,7 @@ export class Module19Component implements OnInit {
   }
 
   start() {
-    // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 1.11', window.localStorage.getItem('username'), 10);
+    this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 1.9', window.localStorage.getItem('username'), 10);
     this.finishJSONBody["submoduleid"] = window.localStorage.getItem("uuid");
     this.finishJSONBody["useroption"] = "";
     this.finishJSONBody["event"] = "start";

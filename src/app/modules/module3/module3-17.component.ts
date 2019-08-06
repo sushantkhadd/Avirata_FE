@@ -116,7 +116,7 @@ export class Module317Component implements OnInit {
       || this.answer_3 != "" && this.answer_3 != undefined && this.answer_3 != null
       || this.answer_4 != "" && this.answer_4 != undefined && this.answer_4 != null
       || this.answer_5 != "" && this.answer_5 != undefined && this.answer_5 != null) {
-      if (this.answer_2.trim().length == 0 ||
+      if (this.answer_1.trim().length == 0 || this.answer_2.trim().length == 0 ||
         this.answer_3.trim().length == 0 || this.answer_4.trim().length == 0 || this.answer_5.trim().length == 0) {
         this.trimFlag = true;
       }
@@ -168,6 +168,7 @@ export class Module317Component implements OnInit {
       data => {
         if (data["status"] == true) {
           if (fun == "start") {
+            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 3.17', window.localStorage.getItem('username'), 10);
             console.log('All Data', data);
             this.stud_1 = data["data"]["previous_answer"][0]["stud_1"];
             this.stud_2 = data["data"]["previous_answer"][1]["stud_2"];

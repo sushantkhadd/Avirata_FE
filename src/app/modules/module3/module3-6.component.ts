@@ -88,7 +88,7 @@ export class Module36Component implements OnInit {
     window.localStorage.setItem('subFlagModule3', this.subFlagModule3.toString());
   }
   start(){
-    // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 1.2', window.localStorage.getItem('username'), 10);
+    this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 3.6', window.localStorage.getItem('username'), 10);
   }
 
 }

@@ -125,7 +125,7 @@ export class Module4Component implements OnInit {
         data => {
           if (data['status'] == true)
           {
-            // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 1.3', window.localStorage.getItem('username'), 10);
+            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 4.1', window.localStorage.getItem('username'), 10);
             console.log("data ", data['data'])
             this.data = data['data']
             // this.startFlag = true;

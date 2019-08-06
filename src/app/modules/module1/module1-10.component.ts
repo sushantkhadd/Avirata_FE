@@ -57,7 +57,7 @@ export class Module110Component implements OnInit {
             this.audioSrc['url'] = data["data"].url;
             this.audioSrc["state"] = "dynamic";
             this.startAudio = true;
-            // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 4.12', window.localStorage.getItem('username'), 10);
+            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 1.10', window.localStorage.getItem('username'), 10);
           } else if (fun == "finish1")
           {
             if (data['message'] == "submodule finish next uuid is")

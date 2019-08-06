@@ -66,7 +66,7 @@ export class Module511Component implements OnInit {
       data => {
         if (data["status"] == true)
         {
-          // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 1.3', window.localStorage.getItem('username'), 10);
+          this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 5.11', window.localStorage.getItem('username'), 10);
           console.log("data ", data["data"]);
           this.data = data["data"];
           // console.log('mcq data', this.data);

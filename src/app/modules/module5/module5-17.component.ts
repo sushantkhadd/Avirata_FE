@@ -136,6 +136,7 @@ export class Module517Component implements OnInit {
         if (data["status"] == true) {
           if (fun == "start1")
           {
+            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 5.17', window.localStorage.getItem('username'), 10);
             this.startPdf = true;
             this.passValues["url"] = data["data"].url;
             this.urlObject["5.17.1"] = data["data"].url;

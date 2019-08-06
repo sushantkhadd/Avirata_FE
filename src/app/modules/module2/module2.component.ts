@@ -147,7 +147,7 @@ export class Module2Component implements OnInit {
       data => {
         if (data["status"] == true) {
           if (fun == "start1") {
-            // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 1.1', window.localStorage.getItem('username'), 10);
+            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 2.1', window.localStorage.getItem('username'), 10);
             this.passData["videoUrl"] = data["data"].url;
             this.vedioCompleteUrl = data["data"].url;
             this.playVideo = true;

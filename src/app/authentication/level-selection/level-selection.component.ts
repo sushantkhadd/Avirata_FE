@@ -204,7 +204,7 @@ export class LevelSelectionComponent implements OnInit {
   }
 
   logout(){
-    // this.LanguageService.googleEventTrack('OUT', 'currentuser', 'UserLogout', 10);
+    this.LanguageService.googleEventTrack('L3OUT', 'currentuser', 'UserLogout', 10);
     this.CommonServive.getCall("logout/").subscribe(
       data => {
         if (data['Response'] == "User Logged Out") {

@@ -22,8 +22,22 @@ export class AppComponent implements OnInit {
     vcr: ViewContainerRef,
     private lBar: SlimLoadingBarService,
     private _router: Router,
-    public _sharedService :SharedDataService
+    public _sharedService :SharedDataService,
+    private router: Router
   ) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        (<any>window).ga('set', 'page', event.urlAfterRedirects);
+        (<any>window).ga('send', 'pageview');
+      }
+    });
+
+    router.events
+      .filter(event => event instanceof NavigationEnd)
+      .subscribe((event: NavigationEnd) => {
+        window.scroll(0, 0);
+      });
+
     this.toastr.setRootViewContainerRef(vcr);
     this._router.events.subscribe((event: any) => {
       this.loadingBarInterceptor(event);

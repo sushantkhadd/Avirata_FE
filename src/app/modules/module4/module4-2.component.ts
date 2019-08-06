@@ -67,5 +67,6 @@ export class Module42Component implements OnInit {
       this.passData['answer'] = this.apiEndSendAns;
       this.passData['finish'] = this.apiEndFinish;
       this.passData['jsonData'] = jsonData;
+      this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 4.2', window.localStorage.getItem('username'), 10);
   }
 }
