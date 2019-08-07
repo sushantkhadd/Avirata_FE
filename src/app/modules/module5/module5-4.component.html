@@ -42,43 +42,12 @@
 </div>
 
 <div *ngIf="mainFlagModule5 > 4">
-  <div class="card unlock-view">
-    <div class="card-block cc p-4">
-      <div class="row static-content" *ngIf="flag == 0">
-        <div class="col-md-4">
-          <p class="title">{{'number.1' | translate}}. {{'L2Module5.subMenu5-4' | translate}}</p>
-          <div class="img-wrap">
-            <a (click)="showVideo(urlArray['src1'],'L2Module2.mitra',1)">
-              <img class="img-fluid v_thumb" src="../../../assets/img/pdf_thumb.png" alt="">
-              <div class="hover-opaque">
-              </div>
-            </a>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <p class="title">{{'number.2' | translate}}. {{'L2Module5.subMenu5-4' | translate}}</p>
-          <div class="img-wrap">
-            <a (click)="showVideo(urlArray['src2'],'L2Module2.subMenu2-15',2)">
-              <img class="img-fluid v_thumb" src="../../../assets/img/audio_thumb.png" alt="">
-              <div class="hover-opaque">
-                <i class="fa fa-play-circle fa-2x"></i>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div *ngIf="flag == 1">
-        <app-presentation [data]='passValues'></app-presentation>
-        <div class="card-footer text-center bg-white border-0">
-          <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>
-        </div>
-      </div>
-      <div *ngIf="flag == 2">
-        <app-audio-player-component [src]="audioSrc"></app-audio-player-component>
-        <div class="card-footer text-center bg-white border-0">
-          <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>
-        </div>
-      </div>
+  <div class="card">
+    <div class="card-footer">
+      <h6 class="lineHeight">
+        <div class="text-center">{{'L2Module5.subMenu5-4' | translate}}</div>
+      </h6>
     </div>
+    <app-presentation [data]='passValues'></app-presentation>
   </div>
 </div>

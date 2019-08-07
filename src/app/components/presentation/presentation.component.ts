@@ -410,9 +410,11 @@ export class PresentationComponent implements OnInit {
                       this.mainFlagModule5 == 4 ||
                       this.mainFlagModule5 == 5
                     ) {
+                      console.log("pdfurls",data["data"])
                       this.nextParentUrl = JSON.parse(
                         data["data"].nexturl
                       );
+                     
                       this.pdfURL = this.nextParentUrl["1"];
                     } else {
                       this.pdfURL = data["data"].nexturl;
@@ -907,8 +909,8 @@ export class PresentationComponent implements OnInit {
           this.audioModal.show();
           this.LanguageService.toShow()
           this.audioSrc = {};
-          this.audioSrc['url1'] = this.nextParentUrl["2"];
-          this.audioSrc['url2'] = this.nextParentUrl["3"];
+          this.audioSrc['url'] = this.nextParentUrl["2"];
+          // this.audioSrc['url2'] = this.nextParentUrl["3"];
           this.audioSrc["state"] = "dynamic";
           console.log(' mainFlagModule5.count++', this.count, this.audioSrc['url']);
         } 

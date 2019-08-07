@@ -1141,7 +1141,7 @@
                     <em class="fa fa-user"></em>&nbsp;&nbsp;{{'Dashboard.Profile' | translate}}</a>
                   <a class="dropdown-item" (click)="clearFieldsResetPassword();">
                     <em class="fa fa-key"></em>&nbsp;&nbsp;{{'Profile.edit password' | translate}}</a>
-                  <a class="dropdown-item" href="#">
+                  <a class="dropdown-item" (click)="setlocal();" [routerLink]="['/dashboard/notice_screen']">
                     <em class="fa fa-list-alt"></em>&nbsp;&nbsp;{{'Dashboard.form' | translate}}</a>
                   <a class="dropdown-item" (click)="logout()">
                     <em class="fa fa-sign-out-alt"></em>&nbsp;&nbsp;{{'Dashboard.Logout' | translate}}</a>
@@ -1775,8 +1775,9 @@
         </div> -->
           <div *ngIf="moduleCompleteStatus['type'] == 'submodule'">
             <p class="congratulation">{{'layout.nextSubmodule' | translate}}
-              <strong>'{{moduleCompleteStatus['next']}}'</strong> {{'layout.start' | translate}}</p>
-
+              <strong>'{{moduleCompleteStatus['next']}}'</strong> {{'layout.start' | translate}}
+            </p>
+            <span [innerHTML]="moduleCompleteStatus['inst']"></span>
           </div>
           <!-- <div class="finish-info text-center" *ngIf="moduleCompleteStatus['type'] == 'allFinish'">
           <span class="icon-check"></span>

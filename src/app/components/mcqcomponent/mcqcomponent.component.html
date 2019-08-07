@@ -188,7 +188,7 @@
                 <div class="card-header" [class.p-0]="mysubModule5==18" *ngIf="statement">
                     <!-- <label><span [innerHTML]="statement"></span>
                  </label> -->
-                    <h6 [class.questionHead]="mysubModule5==18 || mysubModule5==23" [class.lineHeight]="mysubModule5==18 || mysubModule5==23"[innerHTML]="statement"></h6>
+                    <h6 [class.questionHead]="mysubModule5==18 || mysubModule5==23" [class.lineHeight]="mysubModule5==18 || mysubModule5==23"><span *ngIf="mysubModule5==18 && mysubFlagModule5==3">({{'L2Module0.part3' | translate}}) - </span><span [innerHTML]="statement"></span></h6>
                 </div>
                 <div class="card-block pt-0" [class.pt-0]="queCount">
                     <div *ngIf="queCount" class="badge badge-custom ml-3">{{queCount | numberConvertor : 'Devanagari'}} / {{totalQueCount | numberConvertor : 'Devanagari'}}</div>
@@ -310,7 +310,7 @@
                 <div *ngFor="let item of rightAnsArray;let i=index">
                     <p>{{i+1}}. {{item}}</p>
                 </div>
-                <p *ngIf="description"><b>{{'newTranslate.description' | translate }}</b></p>
+                <p *ngIf="description && mysubModule5!=13"><b>{{'newTranslate.description' | translate }}</b></p>
                 <p *ngIf="description">
                     <span [innerHTML]="description"></span></p>
                 <!-- <p><b>{{'subModule1_9.correctAns' | translate }} :</b></p>

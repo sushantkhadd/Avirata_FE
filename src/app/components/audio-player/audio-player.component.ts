@@ -40,7 +40,7 @@ export class AudioPlayerComponent implements OnInit {
     {
       if (this.src.state == "dynamic")
       {
-        if (window.localStorage.getItem('mainFlagModule5') == '2' || window.localStorage.getItem('mainFlagModule5') == '4' || window.localStorage.getItem('mainFlagModule5') == '5' ||  window.localStorage.getItem('mainFlagModule1') == '10')
+        if (window.localStorage.getItem('mainFlagModule5') == '2' || window.localStorage.getItem('mainFlagModule5') == '3' || window.localStorage.getItem('mainFlagModule5') == '4' || window.localStorage.getItem('mainFlagModule5') == '5' ||  window.localStorage.getItem('mainFlagModule1') == '10')
         {
             this.audioSrc = this.sanitizer.bypassSecurityTrustResourceUrl(
               this.src.url

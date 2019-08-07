@@ -47,22 +47,17 @@ export class Module55Component implements OnInit {
     } else if (this.mainFlagModule5 == 5) {
       // this.startEvent();
     } else if (this.mainFlagModule5 > 5) {
-      this.flag = 0;
-      var urlJson = {};
-      this.audioSrc["state"] = "static";
-      urlJson = JSON.parse(window.localStorage.getItem("currentJson5"));
-      console.log("vcxxxx", urlJson);
-      if (urlJson["children"].length > 0) {
-        var index = urlJson["children"].findIndex(
-          item => item.source == "module 5.5"
-        );
-        console.log("qWSS", index);
-        var mainJson;
-        mainJson = JSON.parse(urlJson["children"][index].url);
-        console.log("hjbhjb", mainJson["1"]);
-        if (mainJson != null) {
-          this.urlArray["src1"] = mainJson["1"];
-          this.urlArray["src2"] = mainJson["2"];
+      this.passValues["unlockView"] = "static";
+      var unlockJson = {}
+      unlockJson = JSON.parse(window.localStorage.getItem('currentJson5'))
+      if (unlockJson['children'].length > 0)
+      {
+        var index = unlockJson['children'].findIndex(item =>
+          item.source == "module 5.5");
+
+        if (unlockJson['children'][index].url != null)
+        {
+          this.passValues['url'] = unlockJson['children'][index].url
         }
       }
     }
@@ -87,11 +82,7 @@ export class Module55Component implements OnInit {
       item => item.source == "module 5.5"
     );
     this.audioSrc["state"] = "static";
-    let dummyUrl = {};
-    let dummyData = JSON.parse(e["url"]);
-    dummyUrl["1"] = dummyData["1"];
-    dummyUrl["2"] = dummyData["2"];
-    current5["children"][index].url = JSON.stringify(dummyUrl);
+    current5["children"][index].url = e["url"];
     window.localStorage.setItem("currentJson5", JSON.stringify(current5));
     this.mainFlagModule5 = 6;
     window.localStorage.setItem("mainFlagModule5", "6");
@@ -106,19 +97,5 @@ export class Module55Component implements OnInit {
       nextRoute: "/modules/module5/Module5.6"
     };
     this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
-  }
-
-  showVideo(src, title, value) {
-    if (value == 1) {
-      this.passValues["url"] = src;
-      this.thumb_title = title;
-      this.flag = value;
-      this.passValues["unlockView"] = "static";
-    } else if (value == 2) {
-      this.audioSrc["url"] = src;
-      this.audioSrc["unlockView"] = "static";
-      this.thumb_title = title;
-      this.flag = value;
-    }
   }
 }

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { DashboardComponent } from "./dashboard.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { FaqComponent } from "src/app/dashboard/faq/faq.component";
+import { NoticeScreenComponent } from "./notice-screen/notice-screen.component";
 
 const routes: Routes = [
   {
@@ -20,10 +21,10 @@ const routes: Routes = [
     path: 'faq',
     component: FaqComponent
   },
-  // {
-  //   path: 'notice_screen',
-  //   component: NoticeScreenComponent
-  // }
+  {
+    path: 'notice_screen',
+    component: NoticeScreenComponent
+  }
 ];
 
 @NgModule({

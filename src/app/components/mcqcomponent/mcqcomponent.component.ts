@@ -21,7 +21,7 @@ export class McqcomponentComponent implements OnInit {
   public bunchCounter;bunchList;bunchOptions;userOptions={};mcqBunchFlag = false;totalBunchCounter = 1;bunchSelectedAns=[];mcqOption:any = []; priorities1=[];priorities2=[]
   public ansSelectCount; counter; selectedTasks = []; ans1; ans2; showAns1; showAns2; queUrl;title;rightAnsId;rightAnsArray=[];
   public nextQueFlag; subPriorities; sendYesNoType; mysubModule3; mysubModule4; mysubModule1;
-  public onlyPopUpAns; mysubModule; submitFlagMCQ; mysubModule0; mysubModule6; mysubModule7;mysubModule2;mysubModule5;totalQueCount;
+  public onlyPopUpAns; mysubModule; submitFlagMCQ; mysubModule0; mysubModule6; mysubModule7;mysubModule2;mysubModule5;totalQueCount;mysubFlagModule5;
   constructor(public lang: LanguageService) { }
 
   ngOnInit() {
@@ -30,6 +30,7 @@ export class McqcomponentComponent implements OnInit {
     this.mysubModule3 = parseInt(window.localStorage.getItem('mainFlagModule3'))
     this.mysubModule4 = parseInt(window.localStorage.getItem('mainFlagModule4'))
     this.mysubModule5 = parseInt(window.localStorage.getItem('mainFlagModule5'))
+    this.mysubFlagModule5 = parseInt(window.localStorage.getItem('subFlagModule5'))
     this.mysubModule0 = parseInt(window.localStorage.getItem('mainFlagModule0'))
     this.mysubModule6 = parseInt(window.localStorage.getItem('mainFlagModule6'))
     this.mysubModule7 = parseInt(window.localStorage.getItem('mainFlagModule7'))
@@ -198,7 +199,7 @@ export class McqcomponentComponent implements OnInit {
         console.log("bunchmcq",this.tasks);
         this.bunchOptions = [{"option":"a","value":"अस्वास्थ्याशी निगडित"},
                             {"option":"b","value":"आजाराशी निगडित"},
-                            {"option":"c","value":"वरील दोन्हीशी निगडित नाही"}];
+                            {"option":"c","value":"निगडित नाहीत"}];
           for(var i=0; i<this.bunchOptions.length;i++){
             this.priorities.push(this.bunchOptions[i].value)
   

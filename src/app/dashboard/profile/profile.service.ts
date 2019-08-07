@@ -136,4 +136,38 @@ export class ProfileService {
         { headers: headers }
       )
   }
+
+  getCall(api) {
+    var headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      'Authorization':window.localStorage.getItem("token"),
+     // "Source": "WEB"
+    });
+
+    if (/Android/i.test(navigator.userAgent)) 
+    { 
+      headers= headers.append("Source",'MWEB')
+     }else
+     { 
+      headers= headers.append("Source",'WEB') 
+     }
+    return this.http.get(this.apiUrl + api, { headers: headers })
+  }
+
+  postCall(apiUrl, jsonBody) {
+    var headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      'Authorization':window.localStorage.getItem("token"),
+     // "Source": "WEB"
+    });
+    if (/Android/i.test(navigator.userAgent)) 
+    { 
+      headers= headers.append("Source",'MWEB')
+     }else
+     { 
+      headers= headers.append("Source",'WEB') 
+     }
+    let options = { headers: headers };
+    return this.http.post(this.apiUrl + apiUrl, { body: jsonBody }, { headers: headers })
+  }
 }

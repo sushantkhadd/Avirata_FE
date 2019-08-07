@@ -57,8 +57,8 @@ export class Module46Component implements OnInit {
         {
           var mainJson;
           mainJson = JSON.parse(urlJson["children"][index].url);
-          this.urlArray["src1"] = mainJson["4.6.1"];
-          this.urlArray["src2"] = mainJson["4.6.2"];
+          this.urlArray["src1"] = mainJson["1"];
+          this.urlArray["src2"] = mainJson["2"];
         } else {
           this.mapJSON();
         }
@@ -110,10 +110,10 @@ export class Module46Component implements OnInit {
       var index1 = moduleJson["children"].findIndex(
       item => item.source == "module 4.6.1");
       if(moduleJson["children"][index1].url !="" && moduleJson["children"][index1].url !=null && moduleJson["children"][index1].url !=undefined){
-      this.parentUrlJson['4.6.1'] = moduleJson["children"][index1].url;
+      this.parentUrlJson['1'] = moduleJson["children"][index1].url;
       }
       }
-      this.parentUrlJson['4.6.2'] = e['urls'];
+      this.parentUrlJson['2'] = e['urls'];
       current4["children"][index].url = JSON.stringify(this.parentUrlJson);
       window.localStorage.setItem("currentJson4", JSON.stringify(current4));
 
@@ -139,7 +139,7 @@ export class Module46Component implements OnInit {
             this.showVideoFlag = true
             this.passUrl = data['data'].url;
 
-            this.parentUrlJson['4.6.1'] = this.passUrl;
+            this.parentUrlJson['1'] = this.passUrl;
             var dummylocal = JSON.parse(window.localStorage.getItem('currentJson4'))
             var index1 = dummylocal.children.findIndex(item =>
               item.source == "module 4.6");

@@ -68,20 +68,14 @@ export class LoginService {
   // }//End of postForgetPassword
 
 
-  //Get Request
+  // Get Request
   // getCall(api) {
   //   let headers = new HttpHeaders();
   //   headers.append("Authorization", window.localStorage.getItem('token'));
   //   headers.append("Source", "WEB");
 
   //   // let options = new RequestOptions({ headers: headers });
-  //   return this.httpClient.get(this.apiUrl + api, { headers: headers }).map(
-  //     data => {
-  //       data.json();
-  //       return data.json();
-  //     },
-  //     error => this.toastr.error(this.translate.instant("Errors.cannotProceed"))
-  //   );
+  //   return this.httpClient.get(this.apiUrl + api, { headers: headers })
   // }
 
   //Post Request

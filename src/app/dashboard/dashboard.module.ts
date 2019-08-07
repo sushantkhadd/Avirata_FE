@@ -14,6 +14,7 @@ import { FaqComponent } from "src/app/dashboard/faq/faq.component";
 import { AngularMultiSelectModule } from "angular2-multiselect-dropdown";
 import { SignupStepperService } from "../signup-stepper/signup-stepper.service";
 import { HttpClientModule } from "@angular/common/http";
+import { NoticeScreenComponent } from "./notice-screen/notice-screen.component";
 
 @NgModule({
   imports: [
@@ -26,7 +27,7 @@ import { HttpClientModule } from "@angular/common/http";
     DashboardRoutingModule,
     SharedModule
   ],
-  declarations: [DashboardComponent, ProfileComponent, FaqComponent],
+  declarations: [DashboardComponent, ProfileComponent, FaqComponent,NoticeScreenComponent],
   providers: [LanguageService,DashboardService,ProfileService,DatePipe,SignupStepperService]
 })
 export class DashboardModule {}

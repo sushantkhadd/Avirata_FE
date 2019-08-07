@@ -46,24 +46,18 @@ export class Module54Component implements OnInit {
       // this.startEvent();
     } else if (this.mainFlagModule5 > 4)
     {
-      this.flag = 0;
-      var urlJson = {};
-      this.audioSrc["state"] = "static";
-      urlJson = JSON.parse(window.localStorage.getItem("currentJson5"));
-      console.log("vcxxxx", urlJson)
-      if (urlJson["children"].length > 0)
+      
+      this.passValues["unlockView"] = "static";
+      var unlockJson = {}
+      unlockJson = JSON.parse(window.localStorage.getItem('currentJson5'))
+      if (unlockJson['children'].length > 0)
       {
-        var index = urlJson["children"].findIndex(
-          item => item.source == "module 5.4"
-        );
-        console.log("qWSS", index)
-        var mainJson;
-        mainJson = JSON.parse(urlJson["children"][index].url);
-        console.log("hjbhjb", mainJson["1"])
-        if (mainJson != null)
+        var index = unlockJson['children'].findIndex(item =>
+          item.source == "module 5.4");
+
+        if (unlockJson['children'][index].url != null)
         {
-          this.urlArray["src1"] = mainJson["1"];
-          this.urlArray["src2"] = mainJson["2"];
+          this.passValues['url'] = unlockJson['children'][index].url
         }
       }
     }
@@ -82,17 +76,15 @@ export class Module54Component implements OnInit {
   }
 
   checkAnswer(e) {
+    console.log("abc",e)
     var current5 = [];
     current5 = JSON.parse(window.localStorage.getItem("currentJson5"));
     var index = current5["children"].findIndex(
       item => item.source == "module 5.4"
     );
       this.audioSrc["state"] = "static";
-    let dummyUrl = {};
-    let dummyData = JSON.parse(e["url"]);
-    dummyUrl["1"] = dummyData["1"];
-    dummyUrl["2"] = dummyData["2"];
-    current5["children"][index].url = JSON.stringify(dummyUrl);
+   
+    current5["children"][index].url = e['url'];
     window.localStorage.setItem("currentJson5", JSON.stringify(current5));
     this.mainFlagModule5 = 5;
     window.localStorage.setItem("mainFlagModule5", "5");
@@ -107,22 +99,6 @@ export class Module54Component implements OnInit {
       nextRoute: "/modules/module5/Module5.5"
     };
     this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
-  }
-
-  showVideo(src, title, value) {
-    if (value == 1)
-    {
-      this.passValues["url"] = src;
-      this.thumb_title = title;
-      this.flag = value;
-      this.passValues["unlockView"] = "static";
-    } else if (value == 2)
-    {
-      this.audioSrc['url'] = src;
-      this.audioSrc["unlockView"] = "static";
-      this.thumb_title = title;
-      this.flag = value;
-    }
   }
 
 }
