@@ -1,8 +1,6 @@
 import 'rxjs/add/operator/map';
 import { Injectable } from '@angular/core';
 import { environment } from './../../../environments/environment';
-import { Response, Headers } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable(
@@ -19,81 +17,77 @@ export class ExportService {
   ) { }
 
   getUserDetails(token) {
-    let headers = new HttpHeaders();
-    headers.append("Authorization", token);
-    if (/Android/i.test(navigator.userAgent))
-    {
-      headers.append("Source", 'MWEB')
-    } else
-    {
-      headers.append("Source", 'WEB')
-    }
-    return this.httpClient.get(this.apiUrl + 'talukawiseregisteredusers/', { headers: headers })
+   let putSource;
+    /Android/i.test(navigator.userAgent)
+      ? (putSource = "MWEB")
+      : (putSource = "WEB");
+    let headers = new HttpHeaders({
+      Authorization: token,
+      Source: putSource
+    });
+    let options = { headers: headers };
+    return this.httpClient.get(this.apiUrl + 'talukawiseregisteredusers/', options)
   }
 
   //Service To get Total count by District for Admin Role
   districtwiseCount(token) {
-    let headers = new HttpHeaders();
-    headers.append("Authorization", token);
-    if (/Android/i.test(navigator.userAgent)) {
-      headers.append("Source", "MWEB");
-    } else {
-      headers.append("Source", "WEB");
-    }
-    return this.httpClient.get(this.apiUrl + "districtwisecount/", {
-      headers: headers
+    let putSource;
+    /Android/i.test(navigator.userAgent)
+      ? (putSource = "MWEB")
+      : (putSource = "WEB");
+    let headers = new HttpHeaders({
+      Authorization: window.localStorage.getItem("token"),
+      Source: putSource
     });
+    let options = { headers: headers };
+    return this.httpClient.get(this.apiUrl + "districtwisecount/", options);
   }//End Service To get Total count by District for Admin Role
 
   //Service To get Total count by District for Co-ordinator Role
-  districtwiseCountforCoordinator(token, districtId) {
-    let headers = new HttpHeaders();
-    headers.append("Authorization", token);
-    if (/Android/i.test(navigator.userAgent))
-    {
-      headers.append("Source", "MWEB");
-    } else
-    {
-      headers.append("Source", "WEB");
-    }
-    return this.httpClient.get(this.apiUrl + 'districwisetalukacount/' + districtId, {
-      headers: headers
+  districtwiseCountforCoordinator(districtId) {
+    let putSource;
+    /Android/i.test(navigator.userAgent)
+      ? (putSource = "MWEB")
+      : (putSource = "WEB");
+    let headers = new HttpHeaders({
+      Authorization: window.localStorage.getItem("token"),
+      Source: putSource
     });
+    let options = { headers: headers };
+    return this.httpClient.get(this.apiUrl + 'districwisetalukacount/' + districtId, options);
   }//End Service To get Total count by District for Co-ordinator Role
 
   //Service To get Total count by District for Co-ordinator Role
   talukawiseCountForMT(token, talukaId) {
-    let headers = new HttpHeaders();
-    headers.append("Authorization", token);
-    if (/Android/i.test(navigator.userAgent)) {
-      headers.append("Source", "MWEB");
-    } else {
-      headers.append("Source", "WEB");
-    }
+    let putSource;
+    /Android/i.test(navigator.userAgent)
+      ? (putSource = "MWEB")
+      : (putSource = "WEB");
+    let headers = new HttpHeaders({
+      Authorization: token,
+      Source: putSource
+    });
+    let options = { headers: headers };
     return this.httpClient.get(
       this.apiUrl + "talukawiseregisteredusers/" + talukaId,
-      {
-        headers: headers
-      }
+     options
     );
   }//End Service To get Total count by District for Co-ordinator Role
 
   //GET method for School Index and Name as per Taluka
   getSchoolnameList(taluka: any, token: any) {
-    let headers = new HttpHeaders();
-    headers.append("Authorization", token);
-    if (/Android/i.test(navigator.userAgent))
-    {
-      headers.append("Source", "MWEB");
-    } else
-    {
-      headers.append("Source", "WEB");
-    }
+    let putSource;
+    /Android/i.test(navigator.userAgent)
+      ? (putSource = "MWEB")
+      : (putSource = "WEB");
+    let headers = new HttpHeaders({
+      Authorization: token,
+      Source: putSource
+    });
+    let options = { headers: headers };
     return this.httpClient.get(
       this.apiUrl + "talukawiseschoolindexname/" + taluka,
-      {
-        headers: headers
-      }
+     options
     );
     // let headers = new Headers();
     // headers.append('Authorization', token);
@@ -108,20 +102,20 @@ export class ExportService {
   }//End of function
 
   approveUserbyCoordinator(json, token) {
-    let headers = new HttpHeaders();
-    headers.append("Authorization", token);
-    if (/Android/i.test(navigator.userAgent))
-    {
-      headers.append("Source", "MWEB");
-    } else
-    {
-      headers.append("Source", "WEB");
-    }
+    let putSource;
+    /Android/i.test(navigator.userAgent)
+      ? (putSource = "MWEB")
+      : (putSource = "WEB");
+    let headers = new HttpHeaders({
+      Authorization: token,
+      Source: putSource
+    });
+    let options = { headers: headers };
 
     return this.httpClient.post(
       this.apiUrl + "traineeapprovevalbycoordinator/",
       { body: JSON.parse(json) },
-      { headers: headers }
+      options
     );
     // const body = JSON.parse(json);
     // const headers = new Headers({
@@ -142,18 +136,18 @@ export class ExportService {
   }
 
   filterData(token, talukaId) {
-    let headers = new HttpHeaders();
-    headers.append("Authorization", token);
-    if (/Android/i.test(navigator.userAgent)) {
-      headers.append("Source", "MWEB");
-    } else {
-      headers.append("Source", "WEB");
-    }
+    let putSource;
+    /Android/i.test(navigator.userAgent)
+      ? (putSource = "MWEB")
+      : (putSource = "WEB");
+    let headers = new HttpHeaders({
+      Authorization: token,
+      Source: putSource
+    });
+    let options = { headers: headers };
     return this.httpClient.get(
       this.apiUrl + "coordinatorwiseregistertrainees/" + talukaId,
-      {
-        headers: headers
-      }
+      options
     );
     // let headers = new Headers();
     // headers.append('Authorization', token);
@@ -165,20 +159,18 @@ export class ExportService {
   }
 
   filterDataforNotPreset(token, talukaId) {
-    let headers = new HttpHeaders();
-    headers.append("Authorization", token);
-    if (/Android/i.test(navigator.userAgent))
-    {
-      headers.append("Source", "MWEB");
-    } else
-    {
-      headers.append("Source", "WEB");
-    }
+    let putSource;
+    /Android/i.test(navigator.userAgent)
+      ? (putSource = "MWEB")
+      : (putSource = "WEB");
+    let headers = new HttpHeaders({
+      Authorization: token,
+      Source: putSource
+    });
+    let options = { headers: headers };
     return this.httpClient.get(
-      this.apiUrl + "coordinatorwisenotregistertrainees/" + talukaId,
-      {
-        headers: headers
-      }
+      this.apiUrl + "coordinatorwisenotregistertrainees/",
+      options
     );
     // let headers = new Headers();
     // headers.append('Authorization', token);

@@ -2,11 +2,34 @@
   <header class="app-header navbar fixed-top">
     <div class="row w-100">
       <div class="col-6">
-        <!-- <a class="navbar-brand-logo">
-          <img src="./../../assets/img/aviratalogolevelthree.png" alt="Avirata Logo">
-        </a> -->
+          <!-- <div class="admin-panel ml-2" *ngIf="userType!='trainee'">
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 Admin Panel
+                </button>
+                <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                    <li class="dropdown-item" *ngIf="userType=='superadmin'||userType=='admin'"><a routerLinkActive="active" (click)="hideMenu()"><i class="icon-calculator"></i>&nbsp;&nbsp;Admin Panel</a></li>
+                    <li class="dropdown-item" *ngIf="userType=='master_trainer' || userType=='co_ordinator'" routerLinkActive="activeMenu"><a routerLinkActive="active" [routerLink]="['/modules/user_list']"> <i class="icon-calculator"></i>&nbsp;&nbsp;{{'Dashboard.talukaUserList' | translate}}</a></li>
+                    <li class="dropdown-divider"></li>
+                    <li class="dropdown-submenu" *ngIf="userType=='master_trainer' || userType=='admin' ||userType=='superadmin'|| userType=='co_ordinator'">
+                      <a *ngIf="userType=='admin' || userType=='superadmin'" class="dropdown-item" tabindex="-1" href="#">{{'Dashboard.admin' | translate}}</a>
+                      <a *ngIf="userType=='co_ordinator'" class="dropdown-item" tabindex="-1" href="#">{{'Dashboard.co-ordinator' | translate}}</a>
+                      <ul class="dropdown-menu">
+                        <li class="dropdown-submenu" *ngIf="userType=='co_ordinator'">
+                          <a class="dropdown-item" href="#"> <i class="icon-calculator"></i>&nbsp;&nbsp;{{'Dashboard.statistics' | translate}}</a>
+                          <ul class="dropdown-menu">
+                              <li class="dropdown-item" ><a routerLinkActive="active" [routerLink]="['/modules/masterstat']">{{'Quiz.registered' | translate}}</a></li>
+                              <li class="dropdown-item" ><a routerLinkActive="active" [routerLink]="['/modules/presentTrainee']">{{'Quiz.not accepted' | translate}}</a></li>
+                          </ul>
+                        </li>
+                        <li class="dropdown-item" *ngIf="userType=='admin' || userType=='superadmin'" routerLinkActive="activeMenu"><a routerLinkActive="active" [routerLink]="['/modules/masterstat']"><i class="icon-calculator"></i>&nbsp;&nbsp;{{'Dashboard.statistics' | translate}}</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+            </div>
+          </div> -->
       </div>
-      <div class="col-6" *ngIf="!noAccessFlag">
+      <div class="col-6" *ngIf="!noAccessFlag && userType=='trainee'">
         <a class="btn btn-primary float-right logoutBtn" appPreventDoubleClick (debounceClick)="logout()">
           <i class="fa fa-power-off" aria-hidden="true"></i> &nbsp;लॉग-आऊट
         </a>
@@ -22,6 +45,64 @@
           </ul>
         </div>
         </div>
+        <div class="col-md-6 text-right" *ngIf="userType!='trainee'">
+            <span class="userName pr-2">{{userName}}</span>
+          <div class="dropdown logoutBtn levelmenu">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li  *ngIf="userType=='superadmin'||userType=='admin'"><a  routerLinkActive="active" (click)="hideMenu()"><i class="icon-calculator"></i>&nbsp;&nbsp;Admin Panel</a></li>
+              <li  *ngIf="userType=='superadmin'||userType=='admin'"><a  [routerLink]="['/modules/masterstat']"><i class="icon-calculator"></i>&nbsp;&nbsp;{{'Dashboard.admin' | translate}}</a></li>
+              <li  *ngIf="userType=='master_trainer' || userType=='co_ordinator'"><a   routerLinkActive="active" (click)="hideMenu1()"> <i class="icon-calculator"></i>&nbsp;&nbsp;{{'Dashboard.talukaUserList' | translate}}</a></li>
+              <li><a appPreventDoubleClick (debounceClick)="logout()"> <em class="fa fa-sign-out-alt"></em>&nbsp;&nbsp;{{'Dashboard.Logout' | translate}}</a></li>
+            </ul>
+          </div>
+          </div>
+        <!-- <div class="col-md-6 text-right" *ngIf="userType!='trainee'">
+          <span class="userName pr-2">{{userName}}</span>
+        <div class="dropdown logoutBtn levelmenu">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+          <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li class="nav-item" *ngIf="userType=='superadmin'||userType=='admin'">
+                <a class="nav-link c-pointer" routerLinkActive="active" (click)="hideMenu()">
+                  <i class="icon-calculator"></i>&nbsp;&nbsp;Admin Panel</a>
+              </li> 
+            <li class="nav-item" *ngIf="userType=='master_trainer' || userType=='co_ordinator'" routerLinkActive="activeMenu">
+              <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/user_list']">
+                <i class="icon-calculator"></i>&nbsp;&nbsp;{{'Dashboard.talukaUserList' | translate}}</a>
+            </li>
+            <li *ngIf="userType=='master_trainer' || userType=='admin' ||userType=='superadmin'|| userType=='co_ordinator'">
+              <span class="bottom-divider" href="#authSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" *ngIf="userType=='admin' || userType=='superadmin'">
+                <a class="nav-link nav-dropdown-toggle">{{'Dashboard.admin' | translate}}</a>
+              </span>
+              <span class="bottom-divider" href="#authSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" *ngIf="userType=='co_ordinator'">
+                <a class="nav-link nav-dropdown-toggle">{{'Dashboard.co-ordinator' | translate}}</a>
+              </span>
+              <ul class="collapse list-unstyled" id="authSubmenu">
+                <li *ngIf="userType=='co_ordinator'">
+                  <a class="nav-link nav-dropdown-toggle" href="#authSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                    routerLinkActive="active">
+                    <i class="icon-calculator"></i>{{'Dashboard.statistics' | translate}}</a>
+                  <ul class="collapse list-unstyled" id="authSubmenu1">
+                    <li class="nav-item" [class.activeMenu]="router['url']==='/modules/masterstat'">
+                      <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/masterstat']">{{'Quiz.registered' | translate}}</a>
+                    </li>
+                    <li class="nav-item" [class.activeMenu]="router['url']==='/modules/presentTrainee'">
+                      <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/presentTrainee']">{{'Quiz.not accepted' | translate}}</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item" *ngIf="userType=='admin' || userType=='superadmin'" routerLinkActive="activeMenu">
+                  <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/masterstat']">
+                    <i class="icon-calculator"></i>{{'Dashboard.statistics' | translate}}</a>
+                </li>
+              </ul>
+            </li>
+            <li><a appPreventDoubleClick (debounceClick)="logout()"> <em class="fa fa-sign-out-alt"></em>&nbsp;&nbsp;{{'Dashboard.Logout' | translate}}</a></li>
+          </ul>
+        </div>
+        </div> -->
     </div>
   </header>
 

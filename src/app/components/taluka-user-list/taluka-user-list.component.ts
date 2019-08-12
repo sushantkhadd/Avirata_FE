@@ -19,7 +19,7 @@ export class TalukaUserListComponent implements OnInit {
   public userType; selectedDistrict; allTalukas; selectedTaluka = 'all'; selectedRole = 'all';
   public loader; showDetailTableFlag; showTaluka;
   public overviewList; userList; exportData; showReset;exportData1={};ex;
-  public time1; tmSec1; countDown; tick = 1000;
+  public time1; tmSec1; countDown; tick = 1000;selectedLevel;
   public time2; tmSec2; countDown2; tick2 = 1000; showReset2;
 
   constructor(public translate: TranslateService, private csvService: CsvService, public CommonComponentService: CommonComponentService, public router: Router, public toastr: ToastsManager, vcr: ViewContainerRef) {
@@ -31,10 +31,12 @@ export class TalukaUserListComponent implements OnInit {
     this.showReset = false;
     this.showReset2 = false;
     this.showDetailTableFlag = false
+    this.selectedLevel = "";
     this.userType = window.localStorage.getItem('group_name')
     var jsonBody = {}
     if (this.userType == 'master_trainer') {
       this.showTaluka = window.localStorage.getItem('talukaname')
+      jsonBody['level'] = '3'
       jsonBody['taluka_name'] = ''
       jsonBody['role'] = 'trainee'
       this.apiCall(jsonBody, 'l2talukawiseuserreport/', 'mtview')
@@ -44,6 +46,44 @@ export class TalukaUserListComponent implements OnInit {
     }
   }
 
+
+  getLevel() {
+    console.log("selectedLevel" ,this.selectedLevel)
+    var jsonBody = {}
+    if (this.selectedLevel == "L1") {
+      jsonBody['level'] = "1";
+    } else if (this.selectedLevel == "L2") {
+      jsonBody['level'] = "2";
+    } else if (this.selectedLevel == "L3")
+    {
+      jsonBody['level'] = "3";
+    }
+      this.showTaluka = window.localStorage.getItem('talukaname')
+      jsonBody['taluka_name'] = ''
+      jsonBody['role'] = 'trainee'
+      this.apiCall(jsonBody, 'l2talukawiseuserreport/', 'mtview')
+  }
+
+  getLevel1() {
+    console.log("selectedLevel" ,this.selectedLevel)
+    var jsonBody = {}
+    if (this.selectedLevel == "L1") {
+      jsonBody['level'] = "1";
+    } else if (this.selectedLevel == "L2") {
+      jsonBody['level'] = "2";
+    } else if (this.selectedLevel == "L3")
+    {
+      jsonBody['level'] = "3";
+    }
+    jsonBody['taluka_name'] = this.selectedTaluka
+    jsonBody['role'] = this.selectedRole
+
+    this.apiCall(jsonBody, 'taluka_allparticipant/', 'talukaOverallReport')
+  }
+
+  getTaluka(){
+
+  }
   apiCall(jsonBody, url, fun) {
     this.CommonComponentService.submoduleFinish(jsonBody, url)
       .subscribe(
@@ -105,6 +145,7 @@ export class TalukaUserListComponent implements OnInit {
     if (this.userType == 'master_trainer') {
       var jsonBody = {}
       this.showTaluka = window.localStorage.getItem('talukaname')
+      jsonBody['level'] = '3'
       jsonBody['taluka_name'] = ''
       jsonBody['role'] = 'trainee'
       this.apiCall(jsonBody, 'l2talukawiseuserreport/', 'mtview')
@@ -144,6 +185,7 @@ export class TalukaUserListComponent implements OnInit {
 
   talukaOverallReport(selectedTaluka, selectedRole) {
     var jsonBody = {}
+    jsonBody['level'] = '3'
     jsonBody['taluka_name'] = selectedTaluka
     jsonBody['role'] = selectedRole
 
@@ -161,6 +203,7 @@ export class TalukaUserListComponent implements OnInit {
     });
 
     var jsonBody = {}
+    jsonBody['level'] = '3'
     jsonBody['taluka_name'] = tempTaluka
     jsonBody['role'] = this.selectedRole
     this.apiCall(jsonBody, 'l2talukawiseuserreport/', 'coview')

@@ -15,6 +15,7 @@ export class AdminPanelComponent implements OnInit {
   public items;userType;
   alluserstatusreportL1;
   alluserstatusreportL2;
+  alluserstatusreportL3;
   public showDistrictData;
   showParticipantData;
   showSearchData;
@@ -27,10 +28,11 @@ export class AdminPanelComponent implements OnInit {
   allDistricts;
   coordinatorTransfer;
   historyLog;
-  notStartedCountL1; totalCountL1; notStartedCountL2; totalCountL2;
+  notStartedCountL1; totalCountL1; notStartedCountL2; totalCountL2;notStartedCountL3;totalCountL3;
   classFlag; piechartFlag;
   l1TotalUsersCount; l1DesktopCount; l1MobCount; l1TabCount;
   l2TotalUsersCount; l2DesktopCount; l2MobCount; l2TabCount; loader; refreshLoader;
+  l3TotalUsersCount; l3DesktopCount; l3MobCount; l3TabCount; inModuleCountL3; 
   inModuleCountL1; inModuleCountL2; L1_status; L2_status; L3_status; mouseOvered1; mouseOvered2; mouseOvered3; reportUrl; isLoaded;
   constructor(
     public AdminReportService: AdminReportService,
@@ -71,8 +73,7 @@ export class AdminPanelComponent implements OnInit {
     // } else {
     //   this.router.navigate(['/']);
     // }
-    this.getAllUserStatusReportL1();
-    this.getAllUserStatusReportL2();
+    this.allUserStatusReportL1();
     this.getAllActiveUsers();
   }
 
@@ -112,8 +113,7 @@ export class AdminPanelComponent implements OnInit {
 
   refresh(){
     this.getAllActiveUsers();
-    this.getAllUserStatusReportL1();
-    this.getAllUserStatusReportL2();
+    this.allUserStatusReportL1();
     this.piechartFlag = false;
     this.refreshLoader = true;
     setTimeout(() => {
@@ -293,7 +293,8 @@ export class AdminPanelComponent implements OnInit {
       if (data['message'] == "ok") {
         var activeUserDataL1 = data['data'].level1;
         var activeUserDataL2 = data['data'].level2;
-
+        var activeUserDataL3 = data['data'].level3;
+        
         this.l1TotalUsersCount = activeUserDataL1['totalusers'];
         this.l1DesktopCount = activeUserDataL1['desktop'];
         this.l1MobCount = activeUserDataL1['mobile'];
@@ -303,6 +304,11 @@ export class AdminPanelComponent implements OnInit {
         this.l2DesktopCount = activeUserDataL2['desktop'];
         this.l2MobCount = activeUserDataL2['mobile'];
         this.l2TabCount = activeUserDataL2['tablet'];
+
+        // this.l3TotalUsersCount = activeUserDataL3['totalusers'];
+        // this.l3DesktopCount = activeUserDataL3['desktop'];
+        // this.l3MobCount = activeUserDataL3['mobile'];
+        // this.l3TabCount = activeUserDataL3['tablet'];
 
         if (activeUserDataL1 && activeUserDataL2) {
           this.loader = true;
@@ -335,11 +341,13 @@ export class AdminPanelComponent implements OnInit {
       })
   }
 
-  getAllUserStatusReportL1() {
+  allUserStatusReportL1() {
+    var jsonBody={};
+    jsonBody["level"] = "1"
     var apiUrl = "alluserstatusreport/";
-    this.AdminReportService.getCalllvl1(
-      apiUrl,
-      window.localStorage.getItem("token")
+    this.AdminReportService.postCall(
+      jsonBody,
+      apiUrl
     ).subscribe(
       data => {
         if (data['message'] == "ok") {
@@ -385,6 +393,7 @@ export class AdminPanelComponent implements OnInit {
           }
           this.alluserstatusreportL1 = demo;
           console.log('demo', JSON.stringify(demo))
+          this.allUserStatusReportL2();
         }
       },
       error => {
@@ -412,11 +421,13 @@ export class AdminPanelComponent implements OnInit {
       );
   }
 
-  getAllUserStatusReportL2() {
+  allUserStatusReportL2() {
+    var jsonBody={};
+    jsonBody["level"] = "2"
     var apiUrl = "alluserstatusreport/";
-    this.AdminReportService.getCall(
-      apiUrl,
-      window.localStorage.getItem("token")
+    this.AdminReportService.postCall(
+     jsonBody,
+      apiUrl
     ).subscribe(
       data => {
         if (data['message'] == "ok") {
@@ -462,6 +473,86 @@ export class AdminPanelComponent implements OnInit {
             demo.push(j);
           }
           this.alluserstatusreportL2 = demo;
+          console.log('demo', JSON.stringify(demo))
+          this.allUserStatusReportL3();
+        }
+      },
+      error => {
+        if (error.error.message == "token not found" || error.error.message == 'token not matches please re-login') {
+          this.toastr.error(this.translate.instant("Errors.tokenNotFound"));
+          setTimeout(() => {
+            this.router.navigate(["/"]);
+          }, 5000);
+        } else if (
+          error.error.message == "session not matches please re-login"
+        ) {
+          this.toastr.error(this.translate.instant("Errors.sessionNotMatches"));
+          setTimeout(() => {
+            this.router.navigate(["/"]);
+          }, 5000);
+        } else if (
+          error.error.message == "source is required" ||
+          error.error.message == "unknown source"
+        ) {
+          console.log(error.error.message);
+        } else {
+          this.toastr.error(this.translate.instant("Errors.cannotProceed"));
+        }
+      }
+      );
+  }
+  
+  allUserStatusReportL3() {
+    var jsonBody={};
+    jsonBody["level"] = "3"
+    var apiUrl = "alluserstatusreport/";
+    this.AdminReportService.postCall(
+      jsonBody,
+      apiUrl
+    ).subscribe(
+      data => {
+        if (data['message'] == "ok") {
+          var result = data['data'].result[0];
+          console.log(result)
+          var dJson = {};
+          var demo = [];
+          dJson = result;
+          for (let i in dJson) {
+            var j = {};
+            console.log("key : " + i + " - value : " + dJson[i]);
+            j["que"] = i;
+            j["val"] = dJson[i];
+
+            i == "total" ? j["que"] = "Total" : "";
+            i == "not_started" ? j["que"] = "Not Started" : "";
+            i == "in_module0" ? j["que"] = "In Module0" : "";
+            i == "com_module0" ? j["que"] = "Base Module Complete" : "";
+            i == "com_module1" ? j["que"] = "Module1 Complete" : "";
+            i == "com_module2" ? j["que"] = "Module2 Complete" : "";
+            i == "com_module3" ? j["que"] = "Module3 Complete" : "";
+            i == "com_module4" ? j["que"] = "Module4 Complete" : "";
+            i == "com_module5" ? j["que"] = "Module5 Complete" : "";
+            i == "com_module6" ? j["que"] = "Endline Complete" : "";
+            i == "com_module7" ? j["que"] = "Project Complete" : "";
+
+            if (i == "completed") {
+              this.totalCountL3 = dJson[i];
+            }
+
+            if (i == "not_started") {
+              this.notStartedCountL3 = dJson[i];
+            }
+
+            if (i == "in_module") {
+              this.inModuleCountL3 = dJson[i];
+            }
+
+            if (i == "total" || i == "in_module0" || i == "not_started") {
+              delete j["que"];
+            }
+            demo.push(j);
+          }
+          this.alluserstatusreportL3 = demo;
           console.log('demo', JSON.stringify(demo))
         }
       },

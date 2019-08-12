@@ -344,6 +344,118 @@
                   </div>
                 </div>
               </div>
+              <div class="col-md-12 left-content mb-4">
+                <div class="row bg-custom">
+                  <div class="col-12">
+                    <div class="card-header">
+                      <h6>Level 3</h6>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="card bg-primary mt-1">
+                      <div class="card-block">
+                        <div class="counter-wrap p-1">
+                          <div class="row">
+                            <div class="col-md-4">
+                              <p class="d-inline">
+                                <em class="fas fa-users fa-3x mb-2"></em>
+                                <span>{{inModuleCountL3}}</span>In Module
+                              </p>
+                            </div>
+                            <div class="col-md-4">
+                              <p class="d-inline">
+                                <em class="fas fa-calendar-check fa-3x mb-2"></em>
+                                <span>{{totalCountL3}}</span>Completed
+                              </p>
+                            </div>
+                            <div class="col-md-4">
+                              <p class="d-inline">
+                                <em class="fas fa-clock fa-3x mb-2"></em>
+                                <span>{{notStartedCountL3}}</span>Pending
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="card bg-danger mt-1">
+                      <div class="card-block">
+                        <div class="counter-wrap">
+                          <div class="lds-facebook abs" *ngIf="!loader">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                          </div>
+                          <p class="text-center" [class.mt-3]="!loader"><span
+                              class="fa-2x">{{l3TotalUsersCount}}</span>Active Users</p>
+                          <div class="row text-center mt-2">
+                            <div class="col-md-4">
+                              <div class="lds-facebook" *ngIf="!loader">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                              </div>
+                              <p class="count">{{l3DesktopCount}}</p>
+                              <em class="fas fa-tv pr-3"></em>
+                              <p class="d-inline">Desktop</p>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="lds-facebook" *ngIf="!loader">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                              </div>
+                              <p class="count m-0">{{l3MobCount}}</p>
+                              <em class="fas fa-mobile pr-3 fs-25"></em>
+                              <p class="d-inline">Moblie</p>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="lds-facebook" *ngIf="!loader">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                              </div>
+                              <p class="count">{{l3TabCount}}</p>
+                              <em class="fas fa-tablet pr-3"></em>
+                              <p class="d-inline">Tablet</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 text-center">
+                    <div class="arrow" [ngClass]="!mouseOvered3 ? 'bounce' : ''" (mouseover)="mouseOvered3=true"
+                      (mouseout)="mouseOvered3=false">
+                      <a class="c-pointer" (click)="L3_status =! L3_status">
+                        <em class="fa fa-arrow-down fa-2x"></em>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mx-auto justify-content-center" *ngIf="L3_status">
+                  <div class="col-md-6">
+                    <div class="card custom-minh">
+                      <div class="card-block">
+                        <dx-pie-chart id="pie" title="Level 3 Current Status" palette="bright"
+                          [dataSource]="alluserstatusreportL3">
+                          <dxo-legend orientation="horizontal" itemTextPosition="right" horizontalAlignment="center"
+                            verticalAlignment="bottom" [columnCount]="4"></dxo-legend>
+                          <dxo-export [enabled]="true"></dxo-export>
+                          <dxi-series argumentField="que" valueField="val">
+                            <dxo-label [visible]="true" position="columns" [customizeText]="customizeLabel">
+                              <dxo-font [size]="16"></dxo-font>
+                              <dxo-connector [visible]="true" [width]="0.5"></dxo-connector>
+                            </dxo-label>
+                          </dxi-series>
+                        </dx-pie-chart>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <!-- <div class="row mx-auto">
               <div class="col-md-6">

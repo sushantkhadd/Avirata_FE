@@ -385,7 +385,9 @@ export class FullLayoutComponent implements OnInit {
       console.log("sharedServicedata", data);
       if (data) {
         this.mainFlag = data["currentstatusFlag"];
+        if(data["currentstatus"] !=undefined && data["currentstatus"] !=null && data["currentstatus"] !=""){
         this.currentStatus(data["currentstatus"]);
+        }
         this.sharedData = data;
         console.log(data);
         if (

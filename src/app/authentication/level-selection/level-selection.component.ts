@@ -6,6 +6,7 @@ import { environment } from "src/environments/environment";
 import { TranslateService } from "@ngx-translate/core";
 import { ToastsManager } from "ng6-toastr";
 import { CommonService } from "src/app/services/common.service";
+import { SharedDataService } from "src/app/services/shared-data.service";
 
 @Component({
   selector: 'app-level-selection',
@@ -14,7 +15,7 @@ import { CommonService } from "src/app/services/common.service";
 })
 export class LevelSelectionComponent implements OnInit {
 
-  constructor(public LocalstoragedetailsService: LocalstoragedetailsService, public LanguageService: LanguageService, public router: Router, public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService, public CommonServive:CommonService) {
+  constructor(public LocalstoragedetailsService: LocalstoragedetailsService, public LanguageService: LanguageService, public router: Router, public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService, public CommonServive:CommonService,private sharedService: SharedDataService,) {
     this.toastr.setRootViewContainerRef(vcr);
   }
   public completedLevelJson; lvl1Current; lvl1Complete; lvl2Current; lvl2Complete;
@@ -112,6 +113,22 @@ export class LevelSelectionComponent implements OnInit {
 
     this.cLink=Math.ceil((this.userID/1000))
 
+  }
+
+  hideMenu() {
+    this.router.navigate(["/modules/admin_panel"]);
+    let obJ = {};
+    obJ["isAdmin"] = true;
+    this.sharedService.sendData(obJ);
+    window.localStorage.setItem("hidemenu", "true");
+  }
+
+  hideMenu1() {
+    this.router.navigate(["/modules/user_list"]);
+    let obJ = {};
+    obJ["isAdmin"] = true;
+    this.sharedService.sendData(obJ);
+    window.localStorage.setItem("hidemenu", "true");
   }
 
   levelStatus(level) {

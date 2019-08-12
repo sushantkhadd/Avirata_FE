@@ -140,6 +140,8 @@ import { Module03Component } from './module0/module0-3.component';
 import { FeedbackComponent } from '../components/feedback/feedback.component';
 import {AutosizeModule} from 'ngx-autosize';
 import { Module04Component } from './module0/module0-4.component';
+import { MasterstatComponent } from './masterstat/masterstat.component';
+import { PresentlistComponent } from "./masterstat/presentlist.component";
 
 @NgModule({
   imports: [
@@ -280,6 +282,8 @@ import { Module04Component } from './module0/module0-4.component';
     Module03Component,
     FeedbackComponent,
     Module04Component,
+    MasterstatComponent,
+    PresentlistComponent
   ],
   providers: [
     Module0Service,

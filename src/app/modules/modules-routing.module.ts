@@ -92,6 +92,8 @@ import { DistrictTrainingReportComponent } from "./admin-Report/district-trainin
 import { Module02Component } from "./module0/module0-2.component";
 import { Module03Component } from "./module0/module0-3.component";
 import { Module04Component } from "./module0/module0-4.component";
+import { MasterstatComponent } from "./masterstat/masterstat.component";
+import { PresentlistComponent } from "./masterstat/presentlist.component";
 
 const routes: Routes = [
   {
@@ -456,21 +458,21 @@ const routes: Routes = [
         path: "module5/Module5.24",
         component: Module524Component
       },
-      // {
-      //   path: "masterstat",
-      //   component: MasterstatComponent,
-      //   canActivate: [PermissionModelService]
-      // },
+      {
+        path: "masterstat",
+        component: MasterstatComponent,
+        // canActivate: [PermissionModelService]
+      },
       {
         path: "user_list",
         component: TalukaUserListComponent
         // canActivate: [PermissionModelService]
       },
-      // {
-      //   path: "presentTrainee",
-      //   component: PresentlistComponent,
-      //   canActivate: [PermissionModelService]
-      // },
+      {
+        path: "presentTrainee",
+        component: PresentlistComponent,
+        // canActivate: [PermissionModelService]
+      },
       // {
       //   path: "studymaterialMT",
       //   component: StudyMaterialMTComponent,

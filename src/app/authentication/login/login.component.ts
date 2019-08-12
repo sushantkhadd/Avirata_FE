@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   loginModel = new Login();
   public username; password; disableLogin;
-  public trimFlag; trimFlag1; trimFlag3;
+  public trimFlag; trimFlag1; trimFlag3;patternFlag;
 
   // forget password
   public activeForgetPassword = true;
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
     this.username = "";
     this.password = "";
     this.disableLogin = false;
-
+    this.patternFlag = true;
     // forget password
     this.emailVerifyClicked = false;
     this.mobileVerifyClicked = false;
@@ -95,6 +95,25 @@ export class LoginComponent implements OnInit {
     }
     else {
       this.disableLogin = true;
+    }
+
+    if(this.username !="" && this.username !=null && this.username !=undefined){
+      if(isNaN(this.username)){
+      //  console.log("is not number")
+       this.patternFlag = true;
+      }
+      else{
+        // console.log("is number")
+        var patt = new RegExp("^[0-9]{10}$");
+        var res = patt.test(this.username);
+        // console.log("respatt",res)
+        if(res == true){
+          this.patternFlag = true;
+        }
+        else{
+          this.patternFlag = false;
+        }
+      }
     }
   }
 

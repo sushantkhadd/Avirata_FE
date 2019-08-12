@@ -39,6 +39,15 @@
           <i class="fa fa-archive"></i> &nbsp;Batch Details</h6>
       </div>
       <div class="card-body">
+          <div class="col-md-4 p-30-xs float-right mb-2">
+              <select class="form-control" name="selectedLevel" id="selectedLevel" [(ngModel)]="selectedLevel"
+                 (change)="getLevel()">
+                <option value="" disabled>Select Level</option>
+                <option value="L1">Level 1</option> 
+                <option value="L2">Level 2</option>
+                <option value="L3">Level 3</option>
+              </select>
+          </div>
         <div class="table-responsive" [class.padbottom]="loader==true">
           <table class="table table-hover mar-btm-0" [mfData]="userList" #mf="mfDataTable" [mfRowsOnPage]="10">
             <thead>
@@ -110,7 +119,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> 
 
   <div *ngIf="userType=='co_ordinator' && !showDetailTableFlag">
     <div class="card card-responsive w-100">
@@ -173,6 +182,15 @@
           <i class="fa fa-archive"></i> &nbsp;Batch Details</h6>
       </div>
       <div class="card-body">
+          <div class="col-md-4 p-30-xs float-right mb-2">
+              <select class="form-control" name="selectedLevel" id="selectedLevel" [(ngModel)]="selectedLevel"
+                 (change)="getLevel1()">
+                <option value="" disabled>Select Level</option>
+                <option value="L1">Level 1</option> 
+                <option value="L2">Level 2</option>
+                <option value="L3">Level 3</option>
+              </select>
+          </div>
         <div class="table-responsive" [class.padbottom]="loader==true">
           <table class="table table-hover mar-btm-0" [mfData]="overviewList" #mf="mfDataTable">
             <thead>

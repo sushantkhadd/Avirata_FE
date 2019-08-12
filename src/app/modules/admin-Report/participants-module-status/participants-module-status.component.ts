@@ -75,21 +75,19 @@ export class ParticipantsModuleStatusComponent implements OnInit {
     // this.total = 0;
     this.loader = false;
     this.jsonBody = {};
+    if (level == "L1") {
+      this.jsonBody['level'] = "1";
+    } else if (level == "L2") {
+      this.jsonBody['level'] = "2";
+    } else if (level == "L3")
+    {
+      this.jsonBody['level'] = "3";
+    }
     this.jsonBody['activity'] = "allparticipant";
     this.jsonBody['role'] = this.searchTxt;
     this.apiUrl = "report/";
     let apiService;
-    if (level == "L1")
-    {
-      apiService = this._service.postCalllvl1(this.jsonBody, this.apiUrl)
-    } else if (level == "L2")
-    {
-      apiService = this._service.postCall(this.jsonBody, this.apiUrl)
-    } else if (level == "L3")
-    {
-      apiService = this._service.postCalllvl3(this.jsonBody, this.apiUrl)
-    }
-    apiService
+    this._service.postCall(this.jsonBody, this.apiUrl)
       .subscribe(
       data => {
         if (data['message'] == "ok") {
@@ -168,22 +166,23 @@ export class ParticipantsModuleStatusComponent implements OnInit {
     this.showDetails = true
     this.selectedDist = tempDist
     this.selectedModuleNo = moduleNo
+    this.storedLevel = localStorage.getItem("selectedLevel");
     var jsonBody = {};
+    if (this.storedLevel == "L1") {
+      jsonBody['level'] = "1";
+    } else if (this.storedLevel == "L2") {
+      jsonBody['level'] = "2";
+    } else if (this.storedLevel == "L3")
+    {
+      jsonBody['level'] = "3";
+    }
     jsonBody['activity'] = "dwparticipant";
     jsonBody['district'] = tempDist;
     jsonBody['module'] = moduleNo;
     jsonBody['role'] = this.searchTxt;
     this.apiUrl = "report/";
     let apiService;
-    this.storedLevel = localStorage.getItem("selectedLevel");
-    if (this.storedLevel == "L1") {
-      apiService = this._service.postCalllvl1(jsonBody, this.apiUrl);
-    } else if (this.storedLevel == "L2") {
-      apiService = this._service.postCall(jsonBody, this.apiUrl);
-    } else if (this.storedLevel == "L3") {
-      apiService = this._service.postCalllvl3(jsonBody, this.apiUrl);
-    }
-    apiService
+    this._service.postCall(jsonBody, this.apiUrl)
       .subscribe(
       data => {
         if (data['message'] == "ok") {
@@ -210,6 +209,7 @@ export class ParticipantsModuleStatusComponent implements OnInit {
             this.button4 = false
             this.button3 = false
           }
+          console.log("reportprevlink",this.nextLink,this.previousLink)
           console.log(this.detailsData, typeof (this.detailsData))
           console.log(this.data, typeof (this.detailsData))
           this.exportData = this.detailsData;
@@ -267,26 +267,24 @@ export class ParticipantsModuleStatusComponent implements OnInit {
         tempDist=element['districtid']
       }
     });
-
+    this.storedLevel = localStorage.getItem("selectedLevel");
     // var apiUrl = this.previousLink.replace(environment.l3apiUrl, "");
     var jsonBody = {};
+    if (this.storedLevel == "L1") {
+      jsonBody['level'] = "1";
+    } else if (this.storedLevel == "L2") {
+      jsonBody['level'] = "2";
+    } else if (this.storedLevel == "L3")
+    {
+      jsonBody['level'] = "3";
+    }
     jsonBody['activity'] = "dwparticipant";
     jsonBody['district'] = tempDist;
     jsonBody['module'] = this.selectedModuleNo;
     jsonBody['role'] = this.searchTxt;
-    this.storedLevel = localStorage.getItem("selectedLevel");
-    let apiService;
-    if (this.storedLevel == "L1") {
-      this.apiUrl = this.previousLink.replace(environment.apiUrl, "");
-      apiService = this._service.postCalllvl1(jsonBody, this.apiUrl);
-    } else if (this.storedLevel == "L2") {
-      this.apiUrl = this.previousLink.replace(environment.l2apiUrl, "");
-      apiService = this._service.postCall(jsonBody, this.apiUrl);
-    } else if (this.storedLevel == "L3") {
-      this.apiUrl = this.previousLink.replace(environment.l3apiUrl, "");
-      apiService = this._service.postCalllvl3(jsonBody, this.apiUrl);
-    }
-    apiService
+    this.apiUrl = this.previousLink.replace(environment.l2apiUrl, "");
+    console.log("apiUrlprev",this.apiUrl)
+   this._service.postCall(jsonBody, this.apiUrl)
       .subscribe(
       data => {
         if (data['message'] == "ok") {
@@ -353,26 +351,27 @@ export class ParticipantsModuleStatusComponent implements OnInit {
         tempDist=element['districtid']
       }
     });
+    this.storedLevel = localStorage.getItem("selectedLevel");
     var jsonBody = {};
+    if (this.storedLevel == "L1") {
+      jsonBody['level'] = "1";
+    } else if (this.storedLevel == "L2") {
+      jsonBody['level'] = "2";
+    } else if (this.storedLevel == "L3")
+    {
+      jsonBody['level'] = "3";
+    }
     jsonBody['activity'] = "dwparticipant";
     jsonBody['district'] = tempDist;
     jsonBody['module'] = this.selectedModuleNo;
     jsonBody['role'] = this.searchTxt;
-    this.storedLevel = localStorage.getItem("selectedLevel");
+    
+    console.log("prvLink",this.previousLink,environment.apiUrl)
     let apiService;
-    if (this.storedLevel == "L1")
-    {
-      this.apiUrl = this.previousLink.replace(environment.apiUrl, "");
-      apiService = this._service.postCalllvl1(jsonBody, this.apiUrl);
-    } else if (this.storedLevel == "L2")
-    {
-      this.apiUrl = this.previousLink.replace(environment.l2apiUrl, "");
+   
+      this.apiUrl = this.nextLink.replace(environment.l2apiUrl, "");
       apiService = this._service.postCall(jsonBody, this.apiUrl);
-    } else if (this.storedLevel == "L3")
-    {
-      this.apiUrl = this.previousLink.replace(environment.l3apiUrl, "");
-      apiService = this._service.postCalllvl3(jsonBody, this.apiUrl);
-    }
+
     apiService
       .subscribe(
       data => {
@@ -389,12 +388,14 @@ export class ParticipantsModuleStatusComponent implements OnInit {
           });
           this.nextLink = data['next']
           this.previousLink = data['previous']
+          console.log("nextprev",this.previousLink,this.nextLink)
           this.total = data['count'];
           this.exportData = this.detailsData;
           this.button1 = true;
           this.button2 = true;
           this.button3 = true;
           this.button4 = true;
+          console.log("nextprev",this.previousLink,this.nextLink)
           if (this.nextLink == null || this.nextLink == undefined || this.nextLink == "") {
             this.button3 = false;
             this.button4 = false;
@@ -403,6 +404,7 @@ export class ParticipantsModuleStatusComponent implements OnInit {
             this.currentPage = parseInt(this.nextLink.substr(this.nextLink.length - 1)) - 1
           }
           this.timeCounter(data['data'].cachetime)
+          
         }
       },
       error => {
@@ -445,26 +447,27 @@ export class ParticipantsModuleStatusComponent implements OnInit {
       var lastPage = myTotal / 10;
     }
     this.apiUrl = 'report/?page=' + lastPage;
+    this.storedLevel = localStorage.getItem("selectedLevel");
     var jsonBody = {};
+    if (this.storedLevel == "L1") {
+      jsonBody['level'] = "1";
+    } else if (this.storedLevel == "L2") {
+      jsonBody['level'] = "2";
+    } else if (this.storedLevel == "L3")
+    {
+      jsonBody['level'] = "3";
+    }
     jsonBody['activity'] = "dwparticipant";
     jsonBody['district'] = tempDist;
     jsonBody['module'] = this.selectedModuleNo;
     jsonBody['role'] = this.searchTxt;
     this.storedLevel = localStorage.getItem("selectedLevel");
     let apiService;
-    if (this.storedLevel == "L1")
-    {
-      this.apiUrl = this.previousLink.replace(environment.apiUrl, "");
-      apiService = this._service.postCalllvl1(jsonBody, this.apiUrl);
-    } else if (this.storedLevel == "L2")
-    {
-      this.apiUrl = this.previousLink.replace(environment.l2apiUrl, "");
+    console.log("prvLink",this.previousLink,environment.apiUrl)
+    
+      this.apiUrl = this.nextLink.replace(environment.l2apiUrl, "");
       apiService = this._service.postCall(jsonBody, this.apiUrl);
-    } else if (this.storedLevel == "L3")
-    {
-      this.apiUrl = this.previousLink.replace(environment.l3apiUrl, "");
-      apiService = this._service.postCalllvl3(jsonBody, this.apiUrl);
-    }
+    
     apiService
       .subscribe(
       data => {

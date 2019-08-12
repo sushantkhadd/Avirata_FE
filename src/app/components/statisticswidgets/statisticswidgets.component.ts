@@ -1,6 +1,5 @@
 import { Component, OnInit, Pipe, ChangeDetectionStrategy, Input, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from "@angular/router";
-import { Http } from "@angular/http";
 import { DataFilterPipe } from './data-filter.pipe';
 import { LanguageService } from 'src/app/language.service';
 import { ExportService } from './export.service';
@@ -24,7 +23,7 @@ export class StatisticswidgetsComponent implements OnInit {
   public sortBy = "email";
   public sortOrder = "asc";
   public sort = new SortPipe();
-  constructor(private DataFilterPipe: DataFilterPipe,private router: Router, public lang: LanguageService, private http: Http, public ExportService: ExportService, public LocalstoragedetailsService: LocalstoragedetailsService, private csvService: CsvService,public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService) {
+  constructor(private DataFilterPipe: DataFilterPipe,private router: Router, public lang: LanguageService, public ExportService: ExportService, public LocalstoragedetailsService: LocalstoragedetailsService, private csvService: CsvService,public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService) {
     this.toastr.setRootViewContainerRef(vcr);
   }
   public districtId; talukaId; data = []; districtArray1 = []; district = "Select"; talukaJson; taluka = "Select";
@@ -181,7 +180,7 @@ export class StatisticswidgetsComponent implements OnInit {
 
     } else {
       this.schoolNameFlag = false;
-      this.ExportService.districtwiseCountforCoordinator(this.LocalstoragedetailsService.token, this.districtId)
+      this.ExportService.districtwiseCountforCoordinator(this.districtId)
         .subscribe(
         data => {
           if (data['Response'] == "session not matches please re-login") {

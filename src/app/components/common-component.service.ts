@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
   providedIn: "root"
 })
 export class CommonComponentService {
-  private apiUrl = environment.l3apiUrl;
+  private apiUrl = environment.l2apiUrl;
   public l1ApiUrl = environment.apiUrl;
 
   constructor(
