@@ -85,7 +85,7 @@ export class TalukaUserListComponent implements OnInit {
 
   }
   apiCall(jsonBody, url, fun) {
-    this.CommonComponentService.submoduleFinish(jsonBody, url)
+    this.CommonComponentService.submoduleFinishl2(jsonBody, url)
       .subscribe(
       data => {
         if (fun == 'mtview') {

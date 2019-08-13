@@ -10,7 +10,8 @@ import { TranslateService } from '@ngx-translate/core';
   providedIn: "root"
 })
 export class CommonComponentService {
-  private apiUrl = environment.l2apiUrl;
+  private apiUrl = environment.l3apiUrl;
+  private l2apiUrl = environment.l2apiUrl;
   public l1ApiUrl = environment.apiUrl;
 
   constructor(
@@ -95,6 +96,24 @@ export class CommonComponentService {
       Source: source
     });
     return this.httpClient.post(this.apiUrl + apiUrl, { body: jsonBody }, { headers: headers })
+
+  }
+
+  submoduleFinishl2(jsonBody, apiUrl) {
+    let source;
+    if (/Android/i.test(navigator.userAgent))
+    {
+      source = "MWEB";
+    } else
+    {
+      source = "WEB";
+    }
+    let headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: window.localStorage.getItem("token"),
+      Source: source
+    });
+    return this.httpClient.post(this.l2apiUrl + apiUrl, { body: jsonBody }, { headers: headers })
 
   }
 
