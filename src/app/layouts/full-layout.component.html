@@ -61,11 +61,12 @@
           </ul>
         </li>
         <hr class="bottom_hr">
+        <div [class.d-none]="hideMenuAdminFlag">
         <li>
             <a class="nav-link">{{'Dashboard.Courses' | translate}}</a>
           </li>
           <hr class="bottom_hr">
-        <li>
+        <li> 
           <span *ngIf="!currentFlag0">
             <a href="#module0Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [ngClass]="{'dropdown-toggle': module0OnOffFlag }"
               (click)="currentStatus(0)" [class.deactive-menu1]="!module0OnOffFlag">{{'L2Module0.title1' | translate}}</a>
@@ -1005,6 +1006,7 @@
           </ul>
         </li>
       </div>
+      </div>
       <!-- <li>
         <span *ngIf="!currentFlag6">
           <a href="#module6Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" (click)="currentStatus(6)"
@@ -1089,7 +1091,7 @@
       </li> -->
 
       <hr class="bottom_hr">
-      <div>
+      <div [class.d-none]="hideMenuAdminFlag">
         <li class="nav-item" [class.activeMenu]="router['url']==='/dashboard/faq'">
           <a class="nav-link" [routerLink]="['/dashboard/faq']">
             <i class="fa fa-pencil" aria-hidden="true"></i>{{'Dashboard.FAQ' | translate}}</a>

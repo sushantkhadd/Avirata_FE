@@ -31,7 +31,7 @@ export class TalukaUserListComponent implements OnInit {
     this.showReset = false;
     this.showReset2 = false;
     this.showDetailTableFlag = false
-    this.selectedLevel = "";
+    this.selectedLevel = "L3";
     this.userType = window.localStorage.getItem('group_name')
     var jsonBody = {}
     if (this.userType == 'master_trainer') {

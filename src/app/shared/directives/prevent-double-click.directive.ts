@@ -32,7 +32,11 @@ export class PreventDoubleClickDirective {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if(this.subscription != null && this.subscription != undefined)
+    {
+      this.subscription.unsubscribe();
+    }
+    
   }
 
   @HostListener("click", ["$event"])

@@ -125,15 +125,16 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  ngOnDestroy() {
-    if (localStorage.getItem("hidemenu") == 'false') {
-      this.router.navigate(["/modules/admin_panel"]);
-      let obJ = {};
-      obJ["isAdmin"] = true;
-      this.sharedService.sendData(obJ);
-      window.localStorage.setItem("hidemenu", "true");
-    }
-  }
+  // ngOnDestroy() {
+  //   if (localStorage.getItem("hidemenu") == 'false') {
+  //     // this.router.navigate(["/modules/admin_panel"]);
+  //     let obJ = {};
+  //     obJ["isAdmin"] = true;
+  //     this.sharedService.sendData(obJ);
+  //     window.localStorage.setItem("hidemenu", "true");
+  //     console.log("abcDash")
+  //   }
+  // }
   rankModalHide(){
     this.rankModal.hide();
     this.lang.toHide();

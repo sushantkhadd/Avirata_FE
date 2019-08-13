@@ -124,11 +124,13 @@ export class LevelSelectionComponent implements OnInit {
   }
 
   hideMenu1() {
-    this.router.navigate(["/modules/user_list"]);
-    let obJ = {};
-    obJ["isAdmin"] = true;
-    this.sharedService.sendData(obJ);
-    window.localStorage.setItem("hidemenu", "true");
+    if(this.userType =='superadmin'|| this.userType=='admin'){
+      this.router.navigate(["/modules/masterstat"]);
+    }
+   else if(this.userType =='master_trainer'|| this.userType=='co_ordinator'){
+      this.router.navigate(["/modules/user_list"]);
+    }
+    window.localStorage.setItem("hidemenuAdmin", "true");
   }
 
   levelStatus(level) {
@@ -140,6 +142,7 @@ export class LevelSelectionComponent implements OnInit {
       .subscribe(
       data => {
         if (level == 3) {
+          window.localStorage.setItem("hidemenuAdmin", "false");
           window.localStorage.setItem('startDate', data['data'].modulestatus.daterange.startDate)
           window.localStorage.setItem('endDate', data['data'].modulestatus.daterange.endDate)
           window.localStorage.setItem('assignmentDate', data['data'].modulestatus.daterange.assignmentDate)

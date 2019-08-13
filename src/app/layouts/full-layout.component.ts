@@ -95,6 +95,7 @@ export class FullLayoutComponent implements OnInit {
   public moduleStatusCheck;
   homeLinkEnabled;
   hideMenuFlag;
+  hideMenuAdminFlag;
   public currentFlag1;
   currentFlag2;
   currentFlag3;
@@ -433,6 +434,7 @@ export class FullLayoutComponent implements OnInit {
     }
 
     this.hideMenuFlag = false;
+    this.hideMenuAdminFlag = false;
     this.mainFlagModule7 = 0;
     if (window.localStorage.getItem("token") == null) {
       // this.router.navigate(["/"]);
@@ -2588,6 +2590,12 @@ export class FullLayoutComponent implements OnInit {
       this.hideMenuFlag = true;
     } else {
       this.hideMenuFlag = false;
+    }
+
+    if (window.localStorage.getItem("hidemenuAdmin") == "true") {
+      this.hideMenuAdminFlag = true;
+    } else {
+      this.hideMenuAdminFlag = false;
     }
 
     if (this.admin != window.localStorage.getItem("name")) {

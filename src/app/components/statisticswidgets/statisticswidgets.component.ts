@@ -64,7 +64,7 @@ export class StatisticswidgetsComponent implements OnInit {
       this.exportEvent="DistrictSummary";
 
     }else if (this.LocalstoragedetailsService.userType == 'master_trainer') {
-      this.ExportService.getUserDetails(this.LocalstoragedetailsService.token)
+      this.ExportService.getUserDetails()
         .subscribe(
         data => {
             this.districtId = data['Response'][0].districtid;
@@ -109,7 +109,7 @@ export class StatisticswidgetsComponent implements OnInit {
       this.schoolModel = [];
     } else {
       var token=window.localStorage.getItem('token')
-      this.ExportService.getSchoolnameList(this.talukaId,token)
+      this.ExportService.getSchoolnameList(this.talukaId)
         .subscribe(
         data => {
           this.schoolModel = data['results'];
@@ -123,7 +123,7 @@ export class StatisticswidgetsComponent implements OnInit {
 
   //Function To get Total count by District for Admin Role
   getDistrictwiseCountForAdmin() {
-    this.ExportService.districtwiseCount(this.LocalstoragedetailsService.token)
+    this.ExportService.districtwiseCount()
       .subscribe(
       data => {
         if (data['Response'] == "session not matches please re-login") {
@@ -252,7 +252,7 @@ export class StatisticswidgetsComponent implements OnInit {
       this.talukaOriginalData=this.data;
     } else {
       this.schoolNameFlag = false;
-      this.ExportService.talukawiseCountForMT(this.LocalstoragedetailsService.token, this.talukaId)
+      this.ExportService.talukawiseCountForMT(this.talukaId)
         .subscribe(
         data => {
           if (data['Response'] == "session not matches please re-login") {
@@ -346,7 +346,7 @@ export class StatisticswidgetsComponent implements OnInit {
   userApprove(){
     var mobileNo=this.item.mobile;
      var approveUserJson = '{"districtid":"'+this.districtId+'","mobileno":"'+this.item.mobile+'","event":"present"}';
-        this.ExportService.approveUserbyCoordinator(approveUserJson,this.LocalstoragedetailsService.token)
+        this.ExportService.approveUserbyCoordinator(approveUserJson)
           .subscribe(
           data => {
              if (data['message'] == "token not found" || data['message'] == "token not matches please re-login" || data['message'] == "token not match") {
@@ -391,7 +391,7 @@ export class StatisticswidgetsComponent implements OnInit {
   }
 
   filterItemAsPeresent(){
-   this.ExportService.filterData(this.LocalstoragedetailsService.token, this.talukaId)
+   this.ExportService.filterData(this.talukaId)
         .subscribe(
         data => {
           if (data['message'] == "session not matches please re-login") {
@@ -424,7 +424,7 @@ export class StatisticswidgetsComponent implements OnInit {
 
    filterItemAsNotPeresent(){
 
-   this.ExportService.filterDataforNotPreset(this.LocalstoragedetailsService.token, this.talukaId)
+   this.ExportService.filterDataforNotPreset()
         .subscribe(
         data => {
           if (data['message'] == "session not matches please re-login") {

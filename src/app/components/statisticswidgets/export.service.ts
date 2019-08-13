@@ -16,13 +16,13 @@ export class ExportService {
     private httpClient: HttpClient,
   ) { }
 
-  getUserDetails(token) {
+  getUserDetails() {
    let putSource;
     /Android/i.test(navigator.userAgent)
       ? (putSource = "MWEB")
       : (putSource = "WEB");
     let headers = new HttpHeaders({
-      Authorization: token,
+      Authorization: window.localStorage.getItem("token"),
       Source: putSource
     });
     let options = { headers: headers };
@@ -30,7 +30,7 @@ export class ExportService {
   }
 
   //Service To get Total count by District for Admin Role
-  districtwiseCount(token) {
+  districtwiseCount() {
     let putSource;
     /Android/i.test(navigator.userAgent)
       ? (putSource = "MWEB")
@@ -58,13 +58,13 @@ export class ExportService {
   }//End Service To get Total count by District for Co-ordinator Role
 
   //Service To get Total count by District for Co-ordinator Role
-  talukawiseCountForMT(token, talukaId) {
+  talukawiseCountForMT(talukaId) {
     let putSource;
     /Android/i.test(navigator.userAgent)
       ? (putSource = "MWEB")
       : (putSource = "WEB");
     let headers = new HttpHeaders({
-      Authorization: token,
+      Authorization: window.localStorage.getItem("token"),
       Source: putSource
     });
     let options = { headers: headers };
@@ -75,13 +75,13 @@ export class ExportService {
   }//End Service To get Total count by District for Co-ordinator Role
 
   //GET method for School Index and Name as per Taluka
-  getSchoolnameList(taluka: any, token: any) {
+  getSchoolnameList(taluka: any) {
     let putSource;
     /Android/i.test(navigator.userAgent)
       ? (putSource = "MWEB")
       : (putSource = "WEB");
     let headers = new HttpHeaders({
-      Authorization: token,
+      Authorization: window.localStorage.getItem("token"),
       Source: putSource
     });
     let options = { headers: headers };
@@ -101,13 +101,13 @@ export class ExportService {
     //   });
   }//End of function
 
-  approveUserbyCoordinator(json, token) {
+  approveUserbyCoordinator(json) {
     let putSource;
     /Android/i.test(navigator.userAgent)
       ? (putSource = "MWEB")
       : (putSource = "WEB");
     let headers = new HttpHeaders({
-      Authorization: token,
+      Authorization: window.localStorage.getItem("token"),
       Source: putSource
     });
     let options = { headers: headers };
@@ -135,13 +135,13 @@ export class ExportService {
 
   }
 
-  filterData(token, talukaId) {
+  filterData(talukaId) {
     let putSource;
     /Android/i.test(navigator.userAgent)
       ? (putSource = "MWEB")
       : (putSource = "WEB");
     let headers = new HttpHeaders({
-      Authorization: token,
+      Authorization: window.localStorage.getItem("token"),
       Source: putSource
     });
     let options = { headers: headers };
@@ -158,13 +158,13 @@ export class ExportService {
     //   });
   }
 
-  filterDataforNotPreset(token, talukaId) {
+  filterDataforNotPreset() {
     let putSource;
     /Android/i.test(navigator.userAgent)
       ? (putSource = "MWEB")
       : (putSource = "WEB");
     let headers = new HttpHeaders({
-      Authorization: token,
+      Authorization: window.localStorage.getItem("token"),
       Source: putSource
     });
     let options = { headers: headers };
