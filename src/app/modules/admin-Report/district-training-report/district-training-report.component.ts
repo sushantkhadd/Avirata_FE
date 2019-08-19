@@ -414,7 +414,9 @@ export class DistrictTrainingReportComponent implements OnInit {
     } else {
       var lastPage = myTotal / 10;
     }
+    console.log("pagination",pageCount,pg,myTotal,lastPage)
     this.apiUrl = 'report/?page=' + lastPage;
+    console.log("apiURL111",this.apiUrl)
     this.storedLevel = localStorage.getItem("selectedLevel");
     var jsonBody = {};
     if (this.storedLevel == "L1") {
@@ -431,9 +433,9 @@ export class DistrictTrainingReportComponent implements OnInit {
    
     let apiService;
     
-      this.apiUrl = this.nextLink.replace(environment.l2apiUrl, "");
+      // this.apiUrl = this.nextLink.replace(environment.l2apiUrl, "");
       apiService = this._service.postCall(jsonBody, this.apiUrl);
-   
+      console.log("apiURL222",this.apiUrl)
     apiService
       .subscribe(
       data => {

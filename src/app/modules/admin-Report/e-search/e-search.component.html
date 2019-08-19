@@ -915,8 +915,18 @@
                 <div [hidden]="!DOB.hasError('pattern') ">Invalid date</div>
             </div>
 
-        </div>
+        </div> 
 
+          </div>
+
+          <div class="row">
+            <div class="col-md-5">
+              <p>
+                <strong>Remark : </strong></p>
+            </div>
+            <div class="col-md-5">
+              <textarea name="remarks" cols="5" rows="3" class="form-control" placeholder="Enter text" [(ngModel)]="dateRemark" #remarks="ngModel" required></textarea>
+            </div>
           </div>
         </form>
       </div>

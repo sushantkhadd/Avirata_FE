@@ -142,6 +142,7 @@ import {AutosizeModule} from 'ngx-autosize';
 import { Module04Component } from './module0/module0-4.component';
 import { MasterstatComponent } from './masterstat/masterstat.component';
 import { PresentlistComponent } from "./masterstat/presentlist.component";
+import {DatePipe} from '@angular/common';
 
 @NgModule({
   imports: [
@@ -298,7 +299,8 @@ import { PresentlistComponent } from "./masterstat/presentlist.component";
     PermissionModelService,
     ExportService,
     CsvService,
-    AdminReportService
+    AdminReportService,
+    DatePipe
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

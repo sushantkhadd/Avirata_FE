@@ -139,6 +139,7 @@ export class Module524Component implements OnInit {
                 }
               }
               this.subFlagModule5 = 1
+              window.scroll(0,0)
               window.localStorage.setItem('subFlagModule5', this.subFlagModule5.toString())
               window.localStorage.setItem('mainFlagModule5', '25');
               this.mainFlagModule5 = 25;

@@ -468,7 +468,17 @@ export class CoordinatorTransferComponent implements OnInit {
   }
 
   onDojChange() {
-    this.dojSelect = true;
+   
+    if(parseInt(this.dateofJoin) < parseInt(this.dobyear))
+    {
+      console.log("dob should be small")
+      this.dojSelect = true;
+    }
+    else{
+      console.log("dob should be greater")
+      this.dojSelect = false;
+    }
+    
   }
 
 

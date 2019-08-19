@@ -5,6 +5,7 @@ import { ModalDirective } from 'ngx-bootstrap';
 import { AdminReportService } from '../admin-report.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastsManager } from 'ng6-toastr';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-e-search',
@@ -19,7 +20,7 @@ export class ESearchComponent implements OnInit {
   public result;
   public tempNum;
   public remark;fname;mobNo;
-  public position;endDate;rangeFlag;
+  public position;endDate;rangeFlag;dateRemark;
   public btnValid;exportData=[];
   InitialPosition : any;
   UpdatedPosition : any;
@@ -28,13 +29,14 @@ export class ESearchComponent implements OnInit {
   @ViewChild('positionChangeModal') public positionChangeModal: ModalDirective;
   @ViewChild('dateChangeModal') public dateChangeModal: ModalDirective;
 
-  constructor(private csvService: CsvService, public _service: AdminReportService, public translate: TranslateService, public toastr: ToastsManager, vcr: ViewContainerRef, private router: Router) {
+  constructor(private csvService: CsvService, public _service: AdminReportService, public translate: TranslateService, public toastr: ToastsManager, vcr: ViewContainerRef, private router: Router,private datePipe: DatePipe) {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
   ngOnInit() {
     this.number = '';
     this.endDate="";
+    this.dateRemark ="";
     this.showDetails = false;
     this.result = false;
     this.btnValid = false;
@@ -211,20 +213,23 @@ export class ESearchComponent implements OnInit {
   }
 
   changeDate(){
-    this.apiUrl = 'userdatechange/';
+    this.apiUrl = 'dateextend/';
+    // var ddMMyyyy = this.datePipe.transform(this.endDate,"MM-dd-yyyy");
+    // console.log("poptdate",ddMMyyyy)
     var jsonBody = {};
-    jsonBody['mobile']=this.mobNo;
-    jsonBody['startdate'] = "";
-    jsonBody['enddate'] =this.endDate
-    jsonBody['event'] = "enddate";
+    jsonBody['username']=this.mobNo;
+    jsonBody['remark'] = this.dateRemark;
+    jsonBody['extenddate'] =this.endDate
+    
 
-    this._service.postCalllvl1(jsonBody, this.apiUrl)
+    this._service.postCall(jsonBody, this.apiUrl)
     .subscribe(
        data => {
-        if (data['message'] == "date change") {
-          this.toastr.success(this.translate.instant('Date changed successfully!!'));
+        if (data['message'] == "user date extend successfully") {
+          this.toastr.success(this.translate.instant('user date extend successfully!!'));
           this.dateChangeModal.hide();
           this.endDate="";
+          this.dateRemark="";
         }
       },
       error => {
@@ -249,6 +254,7 @@ export class ESearchComponent implements OnInit {
 
   clearField(){
     this.endDate="";
+    this.dateRemark="";
     this.rangeFlag=false;
   }
 }

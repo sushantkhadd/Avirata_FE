@@ -250,7 +250,13 @@
                 </select>
               </div>
             </div>
-
+            <div class="form-group row" *ngIf="dojSelect">
+              <div class="col-md-6 offset-md-3">
+                <div class="alert alert-danger errorMessage">
+                  <div>Date of joining should be greater than date of birth.</div>
+                </div>
+              </div>
+            </div>
             <!-- <div class="form-group row">
               <label class="col-md-3 form-control-label font-weight-bold" for="bankname">Bank Name</label>
               <div class="col-sm-8 col-xs-12 col-md-6 controls">
@@ -377,7 +383,7 @@
             <div class="form-group row">
               <div class="col-md-10 btn-top-m10 pr-1">
                 <button class="btn btn-primary float-right mr-5"
-                appPreventDoubleClick (debounceClick)="createNewUser()" [disabled]="formNewuser.form.invalid">
+                appPreventDoubleClick (debounceClick)="createNewUser()" [disabled]="formNewuser.form.invalid || dojSelect">
                   <i class="fa fa-plus-square"></i> &nbsp;Add Co-ordinator</button>
               </div>
             </div>

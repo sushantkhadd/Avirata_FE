@@ -123,6 +123,7 @@ export class Module1Service {
                console.log(current1, "fifirty")
              }
            }
+           window.scroll(0,0)
            window.localStorage.setItem("currentstatus", "2");
            window.localStorage.setItem('mainFlagModule1', '13');
            window.localStorage.setItem('mainFlagModule2', '1');

@@ -465,7 +465,7 @@ export class ParticipantsModuleStatusComponent implements OnInit {
     let apiService;
     console.log("prvLink",this.previousLink,environment.apiUrl)
     
-      this.apiUrl = this.nextLink.replace(environment.l2apiUrl, "");
+      // this.apiUrl = this.nextLink.replace(environment.l2apiUrl, "");
       apiService = this._service.postCall(jsonBody, this.apiUrl);
     
     apiService

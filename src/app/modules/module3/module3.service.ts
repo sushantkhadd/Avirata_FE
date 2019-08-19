@@ -124,6 +124,7 @@ export class Module3Service {
                console.log(current1, "fifirty")
              }
            }
+           window.scroll(0,0)
            window.localStorage.setItem("currentstatus", "4");
            window.localStorage.setItem('mainFlagModule4', '1');
             this.setLocalStorage3(19);

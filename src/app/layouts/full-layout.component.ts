@@ -253,7 +253,7 @@ export class FullLayoutComponent implements OnInit {
       window.localStorage.getItem("currentstatus")=='5'){
         this.isloaded = true;
         console.log('currentstatus,downloaded1',window.localStorage.getItem("currentstatus"))
-        html2canvas(this.screen.nativeElement,{backgroundColor:'transperent',x:180,width:1000}).then(canvas => {
+        html2canvas(this.screen.nativeElement,{backgroundColor:'transperent'}).then(canvas => {
           this.canvas.nativeElement.src = canvas.toDataURL();
           this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
           this.isloaded = false;
@@ -263,7 +263,7 @@ export class FullLayoutComponent implements OnInit {
       } else if(window.localStorage.getItem("currentstatus")=='6'){
         this.isloaded = true;
         console.log('current 5,star',window.localStorage.getItem("currentstatus"))
-        html2canvas(this.screen.nativeElement,{backgroundColor:'transperent',x:180,width:1000}).then(canvas => {
+        html2canvas(this.screen.nativeElement,{backgroundColor:'transperent'}).then(canvas => {
           this.canvas.nativeElement.src = canvas.toDataURL();
           this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
           this.isloaded = false;
@@ -294,7 +294,7 @@ export class FullLayoutComponent implements OnInit {
       window.localStorage.getItem("currentstatus")=='5'){
         this.isloaded = true;
         console.log('currentstatus',window.localStorage.getItem("currentstatus"))
-        html2canvas(this.screen.nativeElement,{backgroundColor:'transperent',x:120,y:170,width:1000}).then(canvas => {
+        html2canvas(this.screen.nativeElement,{backgroundColor:'transperent'}).then(canvas => {
           this.canvas.nativeElement.src = canvas.toDataURL();
           this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
           this.isloaded = false;
@@ -304,7 +304,7 @@ export class FullLayoutComponent implements OnInit {
       } else if(window.localStorage.getItem("currentstatus")=='6'){
         this.isloaded = true;
         console.log('current 5',window.localStorage.getItem("currentstatus"))
-        html2canvas(this.screen.nativeElement,{backgroundColor:'transperent',x:180,width:1000}).then(canvas => {
+        html2canvas(this.screen.nativeElement,{backgroundColor:'transperent'}).then(canvas => {
           this.canvas.nativeElement.src = canvas.toDataURL();
           this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
           this.isloaded = false;
@@ -328,7 +328,7 @@ export class FullLayoutComponent implements OnInit {
    }
     this.isloaded = true;
     setTimeout(() => {
-      html2canvas(this.cupPopup.nativeElement,{backgroundColor:'transperent',x:180,width:1000}).then(canvas => {
+      html2canvas(this.cupPopup.nativeElement,{backgroundColor:'transperent'}).then(canvas => {
         this.canvascup.nativeElement.src = canvas.toDataURL();
         this.downloadLinkcup.nativeElement.href = canvas.toDataURL('image/png');
         this.isloaded = false;
