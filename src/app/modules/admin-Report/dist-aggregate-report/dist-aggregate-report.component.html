@@ -1,0 +1,265 @@
+<div class="container">
+  <div class="row">
+    <div class="col-6 pad-0" *ngIf="showDetails">
+      <button class="btn btn-primary float-left backBtn or-section" (click)="showDetails=false;">
+        <i class="fa fa-reply"></i>&nbsp;&nbsp;Back</button>
+    </div>
+    <div class="col-6 pad-0" *ngIf="!showDetails">
+      <button class="btn btn-primary float-left backBtn or-section" (click)="goToAdminPanel()">
+        <i class="fa fa-reply"></i>&nbsp;&nbsp;Back</button>
+    </div>
+    <div class="col-6 pad-0">
+      <button class="btn btn-primary float-right or-section" (click)="export()">
+        <span>
+          <i class="fa fa-download" aria-hidden="true"></i>
+        </span>Download</button>
+    </div>
+    <h6 class="mb-1" *ngIf="!showDetails">
+      Click on a district to view
+      <b>District Wise Aggregate Report</b>
+    </h6>
+    <div class="card card-responsive" *ngIf="!showDetails">
+      <div class="card-header text-center">
+        <h6 class="text-center">
+          <i class="fa fa-archive"></i> &nbsp;District Wise Aggregate Report</h6>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive" [class.padbottom]="loader==true">
+          <table class="table table-hover" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="10">
+            <thead>
+              <tr>
+                <!-- <th>Sr.no</th> -->
+                <th>
+                  <mfDefaultSorter by="district_name">District
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="com_module1">Module1
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="com_module2">Module2
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="com_module3">Module3
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="com_module4">Module4
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="com_module5">Module5
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="endline">Endline
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="completed">Completed
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="not_started">Not Started
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="not_approve">Not Approved
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="total">Total
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+              </tr>
+            </thead>
+            <div class="mx-auto loader content-loader" *ngIf="loader"></div>
+            <tbody>
+              <tr *ngFor="let item of mf.data; let i=index">
+                <td>
+                  <a class="btn viewdetails" title="View Details" appPreventDoubleClick (debounceClick)="viewTalukaDetails(item.district_name);">
+                    <!-- <i class="fa fa-eye" aria-hidden="true"></i>
+                  </a> -->
+                    <b>{{item.district_name}}</b>
+                    <!-- <a class="btn btn-primary showBtn" (click)="viewTalukaDetails(item.district_name)">
+                    <i class="fa fa-eye" aria-hidden="true"></i> -->
+                  </a>
+                </td>
+                <td>{{item.com_module1}}
+                  <span *ngIf="item.percent_com_module1 != 0.00">({{item.percent_com_module1}}%)</span>
+                </td>
+                <td>{{item.com_module2}}
+                  <span *ngIf="item.percent_com_module2 != 0.00">({{item.percent_com_module2}}%)</span>
+                </td>
+                <td>{{item.com_module3}}
+                  <span *ngIf="item.percent_com_module3 != 0.00">({{item.percent_com_module3}}%)</span>
+                </td>
+                <td>{{item.com_module4}}
+                  <span *ngIf="item.percent_com_module4 != 0.00">({{item.percent_com_module4}}%)</span>
+                </td>
+                <td>{{item.com_module5}}
+                  <span *ngIf="item.percent_com_module5 != 0.00">({{item.percent_com_module5}}%)</span>
+                </td>
+                <td>{{item.endline}}
+                  <span *ngIf="item.percent_endline != 0.00">({{item.percent_endline}}%)</span>
+                </td>
+                <td>{{item.completed}}
+                  <span *ngIf="item.percent_completed != 0.00">({{item.percent_completed}}%)</span>
+                </td>
+                <td>{{item.not_started}}
+                  <span *ngIf="item.percent_not_started != 0.00">({{item.percent_not_started}}%)</span>
+                </td>
+                <td>{{item.not_approve}}
+                  <span *ngIf="item.percent_not_approve != 0.00">({{item.percent_not_approve}}%)</span>
+                </td>
+                <td>{{item.total}}</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="11">
+                  <mfBootstrapPaginator></mfBootstrapPaginator>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="showDetails" class="w-100">
+      <h6 class="mb-1">
+        <span>
+          <b>District</b> : {{selectedDist}}
+        </span>
+      </h6>
+      <div class="card card-responsive">
+        <div class="card-header text-center">
+          <h6 class="text-center">
+            <i class="fa fa-archive"></i> &nbsp;District Wise Aggregate Report</h6>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover" [mfData]="talukaDetailsData" #mf="mfDataTable" [mfRowsOnPage]="10">
+              <thead>
+                <tr>
+                  <!-- <th>Sr.no</th> -->
+                  <th>
+                    <mfDefaultSorter by="taluka_name">Taluka
+                      <i class="fa fa-sort" aria-hidden="true"></i>
+                    </mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="com_module1">Module1
+                      <i class="fa fa-sort" aria-hidden="true"></i>
+                    </mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="com_module2">Module2
+                      <i class="fa fa-sort" aria-hidden="true"></i>
+                    </mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="com_module3">Module3
+                      <i class="fa fa-sort" aria-hidden="true"></i>
+                    </mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="com_module4">Module4
+                      <i class="fa fa-sort" aria-hidden="true"></i>
+                    </mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="com_module5">Module5
+                      <i class="fa fa-sort" aria-hidden="true"></i>
+                    </mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="endline">Endline
+                      <i class="fa fa-sort" aria-hidden="true"></i>
+                    </mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="completed">Completed
+                      <i class="fa fa-sort" aria-hidden="true"></i>
+                    </mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="not_started">Not Started
+                      <i class="fa fa-sort" aria-hidden="true"></i>
+                    </mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="not_approve">Not Approved
+                      <i class="fa fa-sort" aria-hidden="true"></i>
+                    </mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="total">Total
+                      <i class="fa fa-sort" aria-hidden="true"></i>
+                    </mfDefaultSorter>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of mf.data; let i=index">
+                  <td>
+                    <b>{{item.taluka_name}}</b>
+                  </td>
+                  <td>{{item.com_module1}}
+                    <span *ngIf="item.percent_com_module1 != 0.00">({{item.percent_com_module1}}%)</span>
+                  </td>
+                  <td>{{item.com_module2}}
+                    <span *ngIf="item.percent_com_module2 != 0.00">({{item.percent_com_module2}}%)</span>
+                  </td>
+                  <td>{{item.com_module3}}
+                    <span *ngIf="item.percent_com_module3 != 0.00">({{item.percent_com_module3}}%)</span>
+                  </td>
+                  <td>{{item.com_module4}}
+                    <span *ngIf="item.percent_com_module4 != 0.00">({{item.percent_com_module4}}%)</span>
+                  </td>
+                  <td>{{item.com_module5}}
+                    <span *ngIf="item.percent_com_module5 != 0.00">({{item.percent_com_module5}}%)</span>
+                  </td>
+                  <td>{{item.endline}}
+                    <span *ngIf="item.percent_endline != 0.00">({{item.percent_endline}}%)</span>
+                  </td>
+                  <td>{{item.completed}}
+                    <span *ngIf="item.percent_completed != 0.00">({{item.percent_completed}}%)</span>
+                  </td>
+                  <td>{{item.not_started}}
+                    <span *ngIf="item.percent_not_started != 0.00">({{item.percent_not_started}}%)</span>
+                  </td>
+                  <td>{{item.not_approve}}
+                    <span *ngIf="item.percent_not_approve != 0.00">({{item.percent_not_approve}}%)</span>
+                  </td>
+                  <td>{{item.total}}</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="11">
+                    <mfBootstrapPaginator></mfBootstrapPaginator>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

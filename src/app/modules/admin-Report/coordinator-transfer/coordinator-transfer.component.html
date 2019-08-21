@@ -1,0 +1,468 @@
+<div class="container">
+  <div class="row" *ngIf="!showCordinators">
+    <!-- <div class="col-6 p-0" *ngIf="showDetails">
+      <button class="btn btn-primary float-left backBtn or-section" (click)="back();">
+        <i class="fa fa-reply"></i>&nbsp;&nbsp;Back</button>
+    </div> -->
+    <div class="col-6 p-0">
+      <button class="btn btn-primary float-left backBtn or-section" (click)="goToAdminPanel()">
+        <i class="fa fa-reply"></i>&nbsp;&nbsp;Back</button>
+    </div>
+    <div class="col-6 p-0">
+      <button class="btn btn-primary float-right or-section" (click)="newUserFlag=true;showCordinators=true">
+          <i class="fa fa-users" aria-hidden="true"></i>
+        &nbsp;&nbsp;Add Co-ordinator</button>
+    </div>
+    <div class="card card-responsive w-100" *ngIf="showList && !newUserFlag">
+      <div class="card-header text-center">
+        <h6 class="text-center">
+          <i class="fa fa-archive"></i> &nbsp;&nbsp;All Co-ordinator List</h6>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive" [class.padbottom]="loader==true">
+          <table class="table table-hover" [mfData]="coList" #mf="mfDataTable" [mfRowsOnPage]="10">
+            <thead>
+              <tr>
+                <!-- <th>Sr.no</th> -->
+                <th>
+                  <mfDefaultSorter by="userid">User Id
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="name">Name
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="mobile">Mobile No.
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="district">District
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <div class="mx-auto loader content-loader" *ngIf="loader"></div>
+            <tbody>
+              <tr *ngFor="let item of mf.data; let i=index">
+                <!-- <td>{{data.indexOf(item) + 1}}</td> -->
+                <td>{{item.userid}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.mobile}}</td>
+                <td>{{item.district}}</td>
+                <td>
+                  <a class="btn btn-primary actionBtn" (click)="transferUser(item)">
+                    <i class="fa fa-exchange" aria-hidden="true"></i>Transfer
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="6">
+                  <mfBootstrapPaginator></mfBootstrapPaginator>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center create-user" *ngIf="newUserFlag">
+    <div class="col-md-10">
+      <button class="btn btn-primary float-left backBtn or-section" (click)="clearField();">
+        <i class="fa fa-reply"></i>&nbsp;&nbsp;Back</button>
+    </div>
+    <div class="col-md-10">
+      <div class="card">
+        <div class="card-header text-center">
+          <h6 class="text-center">
+            <i class="fa fa-archive"></i> &nbsp;Add Co-ordinator</h6>
+        </div>
+        <div class="card-block">
+          <form #formNewuser="ngForm" name="formNewuser" class="text-left">
+            <div class="form-group row">
+              <label for="gender" class="col-md-3 col-form-label font-weight-bold">Staff <span class="color_red">*</span></label>
+              <div class="col-md-6 text-left-md">
+                <label class="radio inline">
+                  <input type="radio" name="isstaff" value="1" [(ngModel)]="isstaff" required>
+                  <span>Yes</span>
+                </label>
+                <label class="radio inline">
+                  <input type="radio" name="isstaff" value="0" [(ngModel)]="isstaff" required>
+                  <span>No</span>
+                </label>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="fullName" class="col-md-3 col-form-label font-weight-bold">Full Name <span class="color_red">*</span></label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="fullName" [(ngModel)]="fullName" placeholder="Enter full name"
+                  name="fullName" #userfullName="ngModel" pattern="^[A-Za-z\s]{1,}[A-Za-z\s]{0,}$" autocomplete="off"
+                  required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-6 offset-md-3">
+                <div [hidden]="userfullName.valid || userfullName.pristine" class="alert alert-danger errorMessage">
+                  <div [hidden]="!userfullName.hasError('required')">Please Enter Full Name</div>
+                  <div [hidden]="!userfullName.hasError('pattern')">Name should contains only alphabets</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="gender" class="col-md-3 col-form-label font-weight-bold">Gender <span class="color_red">*</span></label>
+              <div class="col-md-6 text-left-md">
+                <label class="radio inline">
+                  <input type="radio" name="gender" value="male" [(ngModel)]="gender" required>
+                  <span>Male</span>
+                </label>
+                <label class="radio inline">
+                  <input type="radio" name="gender" value="female" [(ngModel)]="gender" required>
+                  <span>Female</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-sm-6 col-xs-6 col-md-9 offset-md-1 controls row">
+                <div class="col-sm-2 col-md-3"></div>
+                <div class="col-sm-1 col-xs-6 col-md-2 controls">Year</div>
+                <div class="col-sm-1 col-xs-6 col-md-2 controls">Month</div>
+                <div class="col-sm-1 col-xs-6 col-md-2 controls">Day</div>
+              </div>
+              <div class="col-sm-12 col-xs-12 col-md-9 offset-0 pl-2-5 text-left">
+                <div class="row">
+                  <label class="col-sm-3 form-control-label font-weight-bold" for="dob">Date Of Birth <span class="color_red">*</span></label>
+                  <div class="col-sm-6 col-xs-6 col-md-9 controls row pr-0 offset-md-4">
+                    <div class="col-sm-1 col-xs-6 col-md-3 controls">
+                      <select class="form-control" id="sel1" [(ngModel)]="dobyear" [ngModelOptions]="{standalone: true}"
+                        (change)="setDays();" required>
+                        <option value="" disabled>Year</option>
+                        <option *ngFor="let item of dojArray" [value]="item">{{item}}</option>
+                      </select>
+                    </div>
+                    <div class="col-sm-1 col-xs-6 col-md-3 controls">
+                      <select class="form-control" id="sel2" [(ngModel)]="monthSelect" [ngModelOptions]="{standalone: true}"
+                        (change)="setDays();" required>
+                        <option value="" disabled>Month</option>
+                        <option *ngFor="let item of monthDate" [value]="item.id">{{item.name}}</option>
+                      </select>
+                    </div>
+                    <div class="col-sm-1 col-xs-6 col-md-3 controls">
+                      <select class="form-control" id="sel3" [(ngModel)]="dateSelect" [ngModelOptions]="{standalone: true}"
+                        (change)="setDays();" required>
+                        <option value="" disabled>Day</option>
+                        <option *ngFor="let item of dummyDate" [value]="item">{{item}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="mobNumber" class="col-md-3 col-form-label font-weight-bold">Mobile Number <span class="color_red">*</span></label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="mobNumber" name="mobNumber" [(ngModel)]="mobNumber"
+                  placeholder="Enter mobile number" pattern="^\d{10}$" minlength="10" maxlength="10" #mobileNo="ngModel"
+                  autocomplete="off" required (keypress)="isNumber($event)">
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-6 offset-md-3">
+                <div [hidden]="mobileNo.valid || mobileNo.pristine" class="alert alert-danger errorMessage">
+                  <div [hidden]="!mobileNo.hasError('minlength')">Mobile Number should be 10 digits</div>
+                  <div [hidden]="!mobileNo.hasError('required')">Please Enter correct mobile number</div>
+                  <div [hidden]="!mobileNo.hasError('pattern') ">Invalid Mobile number</div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- <div class="form-group row">
+              <label for="aadharNumber" class="col-md-3 col-form-label font-weight-bold">Aadhar Number</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="aadharNumber" name="aadharNumber" [(ngModel)]="aadharNumber"
+                  placeholder="Enter aadhar number" pattern="^\d{12}$" minlength="12" maxlength="12" #adhar="ngModel"
+                  autocomplete="off" (keypress)="isNumber($event)">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-md-6 offset-md-3">
+                <div [hidden]="adhar.valid || adhar.pristine" class="alert alert-danger errorMessage">
+                  <div [hidden]="!adhar.hasError('minlength')">Aadhar number should be 12 digits</div>
+                  <div [hidden]="!adhar.hasError('pattern') ">Invalid Aadhar number</div>
+                </div>
+              </div>
+            </div>-->
+
+            <div class="form-group row">
+              <label for="selectedDistrict" class="col-md-3 col-form-label font-weight-bold">Select District <span class="color_red">*</span></label>
+              <div class="col-md-6">
+                <select class="form-control" name="selectedDistrict" id="selectedDistrict" [(ngModel)]="selectedDistrict" (change)="getDistrictWiseTaluka(selectedDistrict)"
+                  required #district="ngModel">
+                  <option value="" disabled>Select District</option>
+                  <option [value]="district.districtid" *ngFor="let district of allDistricts">{{district.name}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="selectedTaluka" class="col-md-3 col-form-label font-weight-bold">Select Taluka <span class="color_red">*</span></label>
+              <div class="col-md-6">
+                <select class="form-control" name="taluka" id="selectedTaluka" [(ngModel)]="selectedTaluka" [disabled]="!talukaEnable" name="selectedTaluka"
+                  required #taluka="ngModel">
+                  <option value="" disabled>Select Taluka</option>
+                  <option [value]="taluka.taluka_id" *ngFor="let taluka of allTalukas">{{taluka.taluka_name}}</option>
+                </select>
+              </div>
+            </div>
+
+
+            <div class="form-group row">
+              <label for="position" class="col-md-3 col-form-label font-weight-bold">Position</label>
+              <div class="col-md-6 text-left-md">
+                <label class="radio inline">
+                  <input type="radio" name="position" value="Sr. Lecturer" [(ngModel)]="position">
+                  <span>Sr. Lecturer</span>
+                </label>
+                <label class="radio inline">
+                  <input type="radio" name="position" value="Lecturer" [(ngModel)]="position">
+                  <span>Lecturer</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="dateofJoin" class="col-md-3 col-form-label font-weight-bold">Date Of Joining</label>
+              <div class="col-sm-1 col-md-6 controls">
+                <select class="form-control" id="dateofJoin" [(ngModel)]="dateofJoin" [ngModelOptions]="{standalone: true}" name="dateofJoin"
+                  (change)="onDojChange()">
+                  <option value="" disabled>Select</option>
+                  <option *ngFor="let item of dojJson" [value]="item">{{item}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row" *ngIf="dojSelect">
+              <div class="col-md-6 offset-md-3">
+                <div class="alert alert-danger errorMessage">
+                  <div>Date of joining should be greater than date of birth.</div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="form-group row">
+              <label class="col-md-3 form-control-label font-weight-bold" for="bankname">Bank Name</label>
+              <div class="col-sm-8 col-xs-12 col-md-6 controls">
+                <div class="input-prepend input-group">
+                  <input class="form-control" id="bankname" name="bankname" [(ngModel)]="bankName" #bankname="ngModel"
+                    maxlength="70" pattern="^([a-zA-Z]+)[ A-Za-z0-9_@./#&+\-,]*$" autocomplete="off">
+                </div>
+              </div>
+            </div> -->
+
+            <!-- <div class="form-group row">
+              <label class="col-md-3  form-control-label font-weight-bold" for="accountno">Bank Account
+                Number</label>
+              <div class="col-sm-8 col-xs-12 col-md-6 controls">
+                <div class="input-prepend input-group">
+                  <input class="form-control" id="accountno" name="accountno" [(ngModel)]="accountNo" maxlength="18" minlength="9"
+                    pattern="[0-9]{9,18}" #accountno="ngModel" autocomplete="off">
+                </div>
+              </div>
+            </div> -->
+
+            <!-- <div class="form-group row">
+              <label class="col-md-3 form-control-label font-weight-bold" for="ifsccode">IFSC Code</label>
+              <div class="col-sm-8 col-xs-12 col-md-6 controls">
+                <div class="input-prepend input-group">
+                  <input class="form-control" pattern="^[A-Za-z]{4}0[A-Z0-9a-z]{6}$" id="ifsccode" name="ifsccode"
+                    placeholder="For example : SBIN0123456"
+                    maxlength="11" [(ngModel)]="ifscCode"
+                    #ifsccode="ngModel" autocomplete="off">
+                </div>
+              </div>
+            </div> -->
+
+            <!-- <div class="form-group row">
+              <label class="col-md-3  form-control-label font-weight-bold" for="underGraduate">Undergraduation</label>
+              <div class="col-sm-4 col-xs-12 col-md-6">
+                <select id="underGraduate" class="form-control" name="underGraduate" [(ngModel)]="underGraduate" [ngModelOptions]="{standalone: true}"
+                  autofocus>
+                  <option value="" disabled>Select</option>
+                  <option value="B.A.">B.A.</option>
+                  <option value="B.Com.">B.Com.</option>
+                  <option value="B.Sc.">B.Sc.</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div *ngIf="underGraduate === 'other'" class="col-xs-12 col-sm-6 offset-sm-3 mt-2">
+                <input class="form-control input-sm" id="otherUgSpecial" (focus)="otherUgFlag=true" (focusout)="otherUgFlag=false"
+                  [(ngModel)]="otherUgSpecial" [ngModelOptions]="{standalone: true}" maxlength="50" name="otherUgSpecial"
+                  placeholder="Other Degree" type="text" #other="ngModel" autocomplete='off' >
+              </div>
+            </div> -->
+
+            <!-- <div class="form-group row">
+              <label class="col-md-3 form-control-label font-weight-bold" for="ugSpecialisation">Under Graduate
+                Specialisation </label>
+              <div class="col-sm-4 col-xs-12 col-md-6">
+                <input class="form-control input-sm" id="ugSpecialisation" (focus)="ugSpecialisationFlag=true" (focusout)="ugSpecialisationFlag=false"
+                  name="ugSpecialisation" [(ngModel)]="ugSpecialisation" maxlength="50" type="text" autocomplete='off'
+                  >
+              </div>
+            </div> -->
+
+            <!-- <div class="form-group row">
+              <label class="col-md-3  form-control-label font-weight-bold" for="postGraduate">Post Graduate</label>
+              <div class="col-sm-4 col-xs-12 col-md-6">
+                <select class="form-control" id="postGraduate" name="postGraduate" [(ngModel)]="postGraduate" [ngModelOptions]="{standalone: true}">
+                  <option value="" disabled>Select</option>
+                  <option value="M.A.">M.A.</option>
+                  <option value="M.Com.">M.Com.</option>
+                  <option value="M.Sc.">M.Sc.</option>
+                  <option value="pgother">Other</option>
+                </select>
+              </div>
+              <div *ngIf="postGraduate === 'pgother'" class="col-xs-12 col-sm-6 offset-sm-3 mt-2">
+                <input type="text" id="otherPgSpecial" (focus)="otherPgSpecialFlag=true" (focusout)="otherPgSpecialFlag=false"
+                  [(ngModel)]="otherPgSpecial" [ngModelOptions]="{standalone: true}" maxlength="50" class="form-control"
+                  placeholder="Other Degree" autocomplete='off' autofocus>
+              </div>
+            </div> -->
+            <!-- <div class="form-group row">
+              <label class="col-md-3  form-control-label font-weight-bold" for="pgSpecialisation">Post Graduate
+                Specialisation</label>
+              <div class="col-sm-4 col-md-6 col-xs-12">
+                <input class="form-control input-sm" id="pgSpecialisation" (focus)="pgSpecialisationFlag=true" (focusout)="pgSpecialisationFlag=false"
+                  name="pgSpecialisation" [(ngModel)]="pgSpecialisation" [ngModelOptions]="{standalone: true}" maxlength="50"
+                  type="text" autocomplete='off'>
+              </div>
+            </div> -->
+
+            <!-- <div class="form-group row">
+              <label class="col-md-3  form-control-label font-weight-bold" for="professional">Professional</label>
+              <div class="col-sm-4 col-xs-12 col-md-6">
+                <select id="professional" class="form-control" [(ngModel)]="professional" [ngModelOptions]="{standalone: true}"
+                  name="professional" autofocus>
+                  <option value="">Select</option>
+                  <option value="D.Ed.">D.Ed.</option>
+                  <option value="B.Ed.">B.Ed.</option>
+                  <option value="M.Ed.">M.Ed.</option>
+                  <option value="B.P.Ed.">B.P.Ed.</option>
+                  <option value="M.P.Ed.">M.P.Ed.</option>
+                  <option value="A.T.D.">A.T.D.</option>
+                </select>
+              </div>
+            </div> -->
+            <!-- <div class="form-group row">
+              <label class="col-md-3  form-control-label font-weight-bold" for="professionalSpecialization">Professional
+                Specialisation</label>
+              <div class="col-sm-4 col-xs-12 col-md-6">
+                <input class="form-control input-sm" id="professionalSpecialization" (focus)="professionalSpecializationFlag=true"
+                  (focusout)="professionalSpecializationFlag=false" name="professionalSpecialization" [(ngModel)]="professionalSpecialization"
+                  [ngModelOptions]="{standalone: true}" maxlength="80" type="text" autocomplete='off'>
+              </div>
+            </div> -->
+
+            <!-- <div class="form-group row">
+              <label class="col-md-3  form-control-label font-weight-bold" for="othersQualification">Other</label>
+              <div class="col-sm-4 col-xs-12 col-md-6">
+                <input class="form-control input-sm" id="othersQualification" (focus)="othersQualificationFlag=true" (focusout)="othersQualificationFlag=false"
+                  name="othersQualification" [(ngModel)]="othersQualification" [ngModelOptions]="{standalone: true}" maxlength="200"
+                  type="text" autocomplete='off'>
+              </div>
+            </div> -->
+
+            <div class="form-group row">
+              <div class="col-md-10 btn-top-m10 pr-1">
+                <button class="btn btn-primary float-right mr-5"
+                appPreventDoubleClick (debounceClick)="createNewUser()" [disabled]="formNewuser.form.invalid || dojSelect">
+                  <i class="fa fa-plus-square"></i> &nbsp;Add Co-ordinator</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div bsModal #transferModal="bs-modal" class="modal fade transferModal" [config]="{backdrop: 'static'}" tabindex="-1"
+  role="dialog" aria-labelledby="headmasterModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-primary" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Transfer User</h5>
+        <button type="button" class="close" (click)="transferModal.hide();" aria-label="Close" id="btnCloseModal">
+          <span aria-hidden="true" class="text-white">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-5">
+            <p> <b> Name : </b> &nbsp;{{tName}} </p>
+          </div>
+          <div class="col-md-5">
+            <p> <b> Mobile : </b> &nbsp;{{tMobile}} </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5">
+            <p><b>Current District : </b> &nbsp;{{tDistrict}} </p>
+          </div>
+          <div class="col-md-7">
+            <div class="form-group row" *ngIf="allDistricts">
+              <label for="districtList" class="col-md-5 col-form-label font-weight-bold text-left">Select District :
+              </label>
+              <div class="col-md-7 pl-0">
+                <select class="form-control" name="district" id="districtList" [(ngModel)]="selectedDistrict" (change)="getDistrict(selectedDistrict)">
+                  <option value="" disabled>Select District</option>
+                  <option [value]="district.districtid" *ngFor="let district of allDistricts">
+                    <span id="districtName">{{district.name}}</span>
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mb-2" style="padding-right: 110px;">
+            <div class="row mb-2 col-md-5">
+              <input #myInput type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.JPG,.JPEG,.png,.PNG"
+                data-buttonText="Your label here.">
+            </div>
+            <div class="row justify-content-end"> <button class="btn btn-primary" (click)="reset()" *ngIf="resetButton">
+                <i class="fa fa-refresh" aria-hidden="true"></i> &nbsp; Reset
+              </button>
+            </div>
+            <!-- <p id="fileHelp" class="form-text text-muted">
+              {{'newTranslate.fileFormat' | translate}}</p> -->
+          </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group row">
+              <label for="transReason" class="col-md-2 col-form-label font-weight-bold text-left">Remark : </label>
+              <div class="col-md-10">
+                <textarea class="form-control" rows="5" id="transReason" name="transReason" [(ngModel)]="transferReason"
+                  placeholder="Write remark here..." required></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" [disabled]="!selectedDistrict || !transferReason" appPreventDoubleClick (debounceClick)="transfer()">
+          <i class="fa fa-check-circle text-white"></i>&nbsp;&nbsp;Transfer
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

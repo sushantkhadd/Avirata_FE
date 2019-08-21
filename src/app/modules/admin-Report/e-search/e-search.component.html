@@ -1,0 +1,940 @@
+<div class="container">
+  <div class="row">
+    <div class="col-6 pad-0" *ngIf="showDetails">
+      <button class="btn btn-primary float-left backBtn or-section" (click)="showDetails=false">
+        <i class="fa fa-reply"></i>&nbsp;&nbsp;Back</button>
+    </div>
+    <div class="col-6 pad-0" *ngIf="!showDetails">
+      <button class="btn btn-primary float-left backBtn or-section" (click)="goToAdminPanel()">
+        <i class="fa fa-reply"></i>&nbsp;&nbsp;Back</button>
+    </div>
+    <!-- code for export data -->
+    <!-- <div class="col-6 pad-0" *ngIf="result">
+            <button class="btn btn-primary float-right or-section" (click)="export()"><span><i class="fa fa-download" aria-hidden="true"></i></span>{{'Report.Download' | translate}}</button>
+        </div> -->
+    <div class="card">
+      <div class="card-header text-center">
+        <h6 class="text-center">
+          <i class="fa fa-archive"></i> &nbsp;Search by Aadhar or Mobile No</h6>
+      </div>
+      <div class="card-block">
+        <form #formSearch="ngForm" name="formSearch" class="text-center">
+          <div class="form-group row">
+            <label for="search" class="col-md-4 col-form-label font-weight-bold">Search Mobile Number OR Aadhar Number</label>
+            <div class="col-md-5">
+              <input type="text" class="form-control" id="mob" name="number" #numbers="ngModel" [(ngModel)]="number"
+                placeholder="Enter mobile number / aadhar number" minlength="10" maxlength="12" autocomplete="off"
+                pattern="^[0-9]\d{9}$|^[0-9]\d{11}$" (keypress)="onKey($event)" required>
+            </div>
+            <div class="mr-2">
+              <button class="btn btn-primary" [disabled]="!formSearch.form.valid || btnValid" appPreventDoubleClick (debounceClick)="searchRecord()">
+                <i class="fa fa-search"></i>Search
+              </button>
+            </div>
+            <div class="m1-2">
+              <button class="btn btn-primary" [disabled]="!result" (click)="reset()">
+                <i class="fa fa-refresh"></i>Reset
+              </button>
+            </div>
+          </div>
+        </form>
+        <hr>
+        <div class="row justify-content-center no-gutters" *ngIf="result">
+          <div class="col-md-3">
+            <p class="mar-btm-0">
+              <strong>Full Name: </strong>&nbsp;{{data.name}}</p>
+          </div>
+          <div class="col-md-3">
+            <p class="mar-btm-0">
+              <strong>Mobile Number: </strong>&nbsp;{{data.mobile}}</p>
+          </div>
+          <div class="col-md-4">
+            <p class="mar-btm-0">
+              <strong>E-mail ID: </strong>&nbsp;{{data.email}}</p>
+          </div>
+          <div class="col-md-2">
+            <p class="mar-btm-0">
+              <button class="btn btn-primary" (click)="dateChangeModal.show();clearField()">
+                 Change Date
+              </button></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card l1 mt-3" *ngIf="result">
+      <div class="card-header">
+        <strong>Level 1 Module Status</strong>
+      </div>
+      <div class="card-block pad-b-t-0 pad-l-r-0">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="text-center"></th>
+                <th class="text-center">Module 1</th>
+                <th class="text-center">Module 2</th>
+                <th class="text-center">Module 3</th>
+                <th class="text-center">Module 4</th>
+                <th class="text-center">Module 5</th>
+                <th class="text-center">Module 6</th>
+                <th class="text-center">Module 7</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="text-center">
+                <td class="text-left font-weight-bold">
+                  Status:
+                </td>
+                <td>
+                  <span *ngIf="data.module1">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.module1">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.module2">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.module2">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.module3">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.module3">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.module4">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.module4">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.module5">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.module5">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.module6">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.module6">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.module7">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.module7">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+              </tr>
+              <tr class="text-center">
+                <td class="text-left font-weight-bold"> Module start date: </td>
+                <td>
+                  <span *ngIf="data.module1_start == '0/0/0' || data.module1_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.module1_start !== '0/0/0' && data.module1_start !== 'null'">
+                    {{ data.module1_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.module2_start == '0/0/0' || data.module1_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.module2_start !== '0/0/0' && data.module2_start !== 'null'">
+                    {{ data.module2_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.module3_start == '0/0/0' || data.module3_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.module3_start !== '0/0/0' && data.module3_start !== 'null'">
+                    {{ data.module3_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.module4_start == '0/0/0'|| data.module4_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.module4_start !== '0/0/0' && data.module4_start !== 'null'">
+                    {{ data.module4_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.module5_start == '0/0/0'|| data.module5_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.module5_start !== '0/0/0' && data.module5_start !== 'null'">
+                    {{ data.module5_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.module6_start === '0/0/0'|| data.module6_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.module6_start !== '0/0/0' && data.module6_start !== 'null'">
+                    {{ data.module6_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.module7_start === '0/0/0' || data.module7_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.module7_start !== '0/0/0' && data.module7_start !== 'null'">
+                    {{ data.module7_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card l2 mt-3" *ngIf="result">
+      <div class="card-header">
+        <strong>Level 2 Module Status</strong>
+      </div>
+      <div class="card-block pad-b-t-0 pad-l-r-0">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="text-center"></th>
+                <th class="text-center">Baseline</th>
+                <th class="text-center">Module 1</th>
+                <th class="text-center">Module 2</th>
+                <th class="text-center">Module 3</th>
+                <th class="text-center">Module 4</th>
+                <th class="text-center">Module 5</th>
+                <th class="text-center">Endline</th>
+                <th class="text-center">Project</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="text-center">
+                <td class="text-left font-weight-bold">
+                  Status:
+                </td>
+                <td>
+                  <span *ngIf="data.l2module0">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.l2module0">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l2module1">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.l2module1">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l2module2">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.l2module2">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l2module3">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.l2module3">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l2module4">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.l2module4">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l2module5">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.l2module5">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l2module6">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.l2module6">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l2module7">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.l2module7">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+              </tr>
+              <tr class="text-center">
+                <td class="text-left font-weight-bold"> Module start date: </td>
+                <td>
+                  <span *ngIf="data.l2module0_start == '0/0/0' || data.l2module0_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.l2module0_start !== '0/0/0' && data.l2module0_start !== 'null'">
+                    {{ data.l2module0_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l2module1_start == '0/0/0' || data.l2module1_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.l2module1_start !== '0/0/0' && data.l2module1_start !== 'null'">
+                    {{ data.l2module1_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l2module2_start == '0/0/0' || data.l2module1_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.l2module2_start !== '0/0/0' && data.l2module2_start !== 'null'">
+                    {{ data.l2module2_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l2module3_start == '0/0/0' || data.l2module3_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.l2module3_start !== '0/0/0' && data.l2module3_start !== 'null'">
+                    {{ data.l2module3_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l2module4_start == '0/0/0'|| data.l2module4_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.l2module4_start !== '0/0/0' && data.l2module4_start !== 'null'">
+                    {{ data.l2module4_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l2module5_start == '0/0/0'|| data.l2module5_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.l2module5_start !== '0/0/0' && data.l2module5_start !== 'null'">
+                    {{ data.l2module5_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l2module6_start === '0/0/0'|| data.l2module6_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.l2module6_start !== '0/0/0' && data.l2module6_start !== 'null'">
+                    {{ data.l2module6_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l2module7_start === '0/0/0' || data.l2module7_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.l2module7_start !== '0/0/0' && data.l2module7_start !== 'null'">
+                    {{ data.l2module7_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card l3 mt-3" *ngIf="result">
+      <div class="card-header">
+        <strong>Level 3 Module Status</strong>
+      </div>
+      <div class="card-block pad-b-t-0 pad-l-r-0">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="text-center"></th>
+                <th class="text-center">Baseline</th>
+                <th class="text-center">Module 1</th>
+                <th class="text-center">Module 2</th>
+                <th class="text-center">Module 3</th>
+                <th class="text-center">Module 4</th>
+                <th class="text-center">Module 5</th>
+                <!-- <th class="text-center">Endline</th>
+                <th class="text-center">Project</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="text-center">
+                <td class="text-left font-weight-bold">
+                  Status:
+                </td>
+                <td>
+                  <span *ngIf="data.l3module0">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.l3module0">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l3module1">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.l3module1">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l3module2">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.l3module2">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l3module3">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.l3module3">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l3module4">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.l3module4">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l3module5">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.l3module5">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <!-- <td>
+                  <span *ngIf="data.l3module6">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.l3module6">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l3module7">
+                    <i class="fa fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="!data.l3module7">
+                    <i class="fa fa-times-circle"></i>
+                  </span>
+                </td> -->
+              </tr>
+              <tr class="text-center">
+                <td class="text-left font-weight-bold"> Module start date: </td>
+                <td>
+                  <span *ngIf="data.l3module0_start == '0/0/0' || data.l3module0_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.l3module0_start !== '0/0/0' && data.l3module0_start !== 'null'">
+                    {{ data.l3module0_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l3module1_start == '0/0/0' || data.l3module1_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.l3module1_start !== '0/0/0' && data.l3module1_start !== 'null'">
+                    {{ data.l3module1_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l3module2_start == '0/0/0' || data.l3module1_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.l3module2_start !== '0/0/0' && data.l3module2_start !== 'null'">
+                    {{ data.l3module2_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l3module3_start == '0/0/0' || data.l3module3_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.l3module3_start !== '0/0/0' && data.l3module3_start !== 'null'">
+                    {{ data.l3module3_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l3module4_start == '0/0/0'|| data.l3module4_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.l3module4_start !== '0/0/0' && data.l3module4_start !== 'null'">
+                    {{ data.l3module4_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l3module5_start == '0/0/0'|| data.l3module5_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.l3module5_start !== '0/0/0' && data.l3module5_start !== 'null'">
+                    {{ data.l3module5_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <!-- <td>
+                  <span *ngIf="data.l3module6_start === '0/0/0'|| data.l3module6_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.l3module6_start !== '0/0/0' && data.l3module6_start !== 'null'">
+                    {{ data.l2module6_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="data.l3module7_start === '0/0/0' || data.l3module7_start == 'null'">
+                    -
+                  </span>
+                  <span *ngIf="data.l3module7_start !== '0/0/0' && data.l3module7_start !== 'null'">
+                    {{ data.l2module7_start | date: 'dd/MM/yyyy' }}
+                  </span>
+                </td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3" *ngIf="result">
+    <div class="col-md-6 pl-0">
+      <div class="card">
+        <div class="card-header">
+          <strong>Personal Details</strong>
+        </div>
+        <div class="card-block">
+          <div class="row">
+            <h6 class="col-md-12 ">
+              <u>Personal Details</u>
+            </h6>
+          </div>
+          <div class="row">
+            <label class="col-sm-2" for="name">
+              <strong>Full Name: </strong>
+            </label>
+            <div class="col-sm-8 col-xs-12 col-md-6">
+              <p class="mar-btm-0">{{data.name}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-sm-2" for="aadhar">
+              <strong>Aadhar Number: </strong>
+            </label>
+            <div class="col-sm-8 col-xs-12 col-md-6">
+              <p class="mar-btm-0">{{data.aadhar_no}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-sm-2" for="DOB">
+              <strong>Date of Birth: </strong>
+            </label>
+            <div class="col-sm-8 col-xs-12 col-md-6">
+              <p class="mar-btm-0">{{data.date_of_birth}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-sm-2" for="gender">
+              <strong>Gender: </strong>
+            </label>
+            <div class="col-sm-8 col-xs-12 col-md-6">
+              <p class="mar-btm-0" *ngIf="data.gender=='F'">Female</p>
+              <p class="mar-btm-0" *ngIf="data.gender=='M'">Male</p>
+
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-sm-2" for="address">
+              <strong>Address: </strong>
+            </label>
+            <div class="col-sm-8 col-xs-12 col-md-6">
+              <p class="mar-btm-0">{{data.address}}</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <h6 class="col-md-12 ">
+              <u>Bank Details</u>
+            </h6>
+          </div>
+          <div class="row">
+            <label class="col-sm-2" for="bankName">
+              <strong>Bank Name: </strong>
+            </label>
+            <div class="col-sm-8 col-xs-12 col-md-6">
+              <p class="mar-btm-0">{{data.bank_name}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-sm-2" for="accountNum">
+              <strong>Account Number: </strong>
+            </label>
+            <div class="col-sm-8 col-xs-12 col-md-6">
+              <p class="mar-btm-0">{{data.account_no}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-sm-2" for="IFSC">
+              <strong>IFSC Code: </strong>
+            </label>
+            <div class="col-sm-8 col-xs-12 col-md-6">
+              <p class="mar-btm-0">{{data.ifsc_code}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 pr-0 xsl">
+      <div class="col-md-12 pr-0 xs">
+
+        <div class="card">
+          <div class="card-header">
+            <strong>Basic Details</strong>
+          </div>
+          <div class="card-block">
+            <div class="row">
+              <label class="col-sm-3" for="District">
+                <strong>District: </strong>
+              </label>
+              <div class="col-sm-7 col-xs-12 col-md-6">
+                <p class="mar-btm-0">{{data.District}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <label class="col-sm-3" for="Taluka">
+                <strong>Taluka: </strong>
+              </label>
+              <div class="col-sm-7 col-xs-12 col-md-6">
+                <p class="mar-btm-0">{{data.Taluka}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <label class="col-sm-3" for="schoolName">
+                <strong>School Name: </strong>
+              </label>
+              <div class="col-sm-7 col-xs-12 col-md-6">
+                <p class="mar-btm-0">{{data.school_name}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <label class="col-sm-3" for="schoolIndexNumber">
+                <strong>School Index Number: </strong>
+              </label>
+              <div class="col-sm-7 col-xs-12 col-md-6">
+                <p class="mar-btm-0">{{data.school_index}}</p>
+              </div>
+            </div>
+            <div class="row bg-gray p-10">
+              <label class="col-sm-3" for="Designation">
+                <strong>Designation: </strong>
+              </label>
+              <div class="col-sm-7 col-xs-12 col-md-3">
+                <p *ngIf="InitialPosition" class="mar-btm-0">{{data.position}}</p>
+                <p *ngIf="UpdatedPosition" class="mar-btm-0">{{position}}</p>
+              </div>
+              <div class="">
+                <button class="btn btn-primary btn-sm" (click)="positionChangeModal.show();PositionModal()"><i class="fa fa-edit"></i>&nbsp;Edit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 pr-0 xs mt-3">
+
+        <div class="card">
+          <div class="card-header">
+            <strong>Service Details</strong>
+          </div>
+          <div class="card-block">
+            <div class="row">
+              <label class="col-sm-2" for="DOJ">
+                <strong>Date Of Joining: </strong>
+              </label>
+              <div class="col-sm-8 col-xs-12 col-md-6">
+                <p class="mar-btm-0" *ngIf="data.date_of_joining == 'null'">-</p>
+                <p class="mar-btm-0" *ngIf="data.date_of_joining != 'null'">{{data.date_of_joining}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <label class="col-sm-2" for="subject">
+                <strong>Teaching Subject: </strong>
+              </label>
+              <div class="col-sm-8 col-xs-12 col-md-6">
+                <p class="mar-btm-0" *ngIf="data.subject == 'null'">-</p>
+                <p class="mar-btm-0" *ngIf="data.subject != 'null'">{{data.subject}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <label class="col-sm-2" for="class">
+                <strong>Teaching class: </strong>
+              </label>
+              <div class="col-sm-8 col-xs-12 col-md-6">
+                <p class="mar-btm-0" *ngIf="data.grade == 'null'">-</p>
+                <p class="mar-btm-0" *ngIf="data.grade != 'null'">{{data.grade}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="result">
+    <div class="col-md-6 pl-0">
+
+
+      <div class="card">
+        <div class="card-header">
+          <strong>Education Details</strong>
+        </div>
+        <div class="card-block">
+          <div class="row">
+            <label class="col-sm-3" for="name">
+              <strong>Under Graduate: </strong>
+            </label>
+            <div class="col-sm-7 col-xs-12 col-md-6">
+              <p class="mar-btm-0" *ngIf="data.under_graduation == 'undefined' || data.under_graduation == '' || data.under_graduation != 'null'">-</p>
+              <p class="mar-btm-0" *ngIf="data.under_graduation != 'undefined' && data.under_graduation != '' && data.under_graduation != 'null'">{{data.under_graduation}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-sm-3" for="DOB">
+              <strong>Under Graduate Specialisation: </strong>
+            </label>
+            <div class="col-sm-7 col-xs-12 col-md-6">
+              <p class="mar-btm-0">
+                <span *ngIf="data.ugspecial == 'undefined' ||data.ugspecial == 'null' || data.ugspecial == ''">
+                  -
+                </span>
+                <span *ngIf="data.ugspecial != 'undefined' && data.ugspecial != '' && data.ugspecial != 'null'">
+                  {{data.ugspecial}}
+                </span>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-sm-3" for="aadhar">
+              <strong>Post Graduate: </strong>
+            </label>
+            <div class="col-sm-7 col-xs-12 col-md-6">
+              <p class="mar-btm-0" *ngIf="data.post_graduation == 'undefined' || data.post_graduation == '' || data.post_graduation != 'null'">
+                - </p>
+              <p class="mar-btm-0" *ngIf="data.post_graduation != 'undefined' && data.post_graduation != '' && data.post_graduation != 'null'">{{data.post_graduation}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-sm-3" for="gender">
+              <strong>Post Graduate Specialisation: </strong>
+            </label>
+            <div class="col-sm-7 col-xs-12 col-md-6">
+              <p class="mar-btm-0">
+                <span *ngIf="data.pgspecial == 'undefined' || data.pgspecial == ''|| data.pgspecial == 'null'">
+                  -
+                </span>
+                <span *ngIf="data.pgspecial != 'undefined' && data.pgspecial != ''&& data.pgspecial != 'null'">
+                  {{data.pgspecial}}
+                </span>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-sm-3" for="address">
+              <strong>Professional Degree: </strong>
+            </label>
+            <div class="col-sm-7 col-xs-12 col-md-6">
+              <p class="mar-btm-0" *ngIf="data.professional == 'undefined' || data.professional == '' || data.professional != 'null'">
+                - </p>
+              <p class="mar-btm-0" *ngIf="data.professional != 'undefined' && data.professional != '' && data.professional != 'null'">{{data.professional}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-sm-3" for="bankName">
+              <strong>Professional Degree Specialisation: </strong>
+            </label>
+            <div class="col-sm-7 col-xs-12 col-md-6">
+              <p class="mar-btm-0">
+                <span *ngIf="data.profspecial == 'undefined' || data.profspecial == ''|| data.profspecial == 'null'">
+                  -
+                </span>
+                <span *ngIf="data.profspecial != 'undefined' && data.profspecial != ''&& data.profspecial != 'null'">
+                  {{data.profspecial}}
+                </span>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <label class="col-sm-3" for="accountNum">
+              <strong>Other: </strong>
+            </label>
+            <div class="col-sm-7 col-xs-12 col-md-6">
+              <p class="mar-btm-0">
+                <span *ngIf="data.other == 'undefined' || data.other == ''|| data.other == 'null'">
+                  -
+                </span>
+                <span *ngIf="data.other != 'undefined' && data.other != ''&& data.other != 'null'">
+                  {{data.other}}
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div bsModal #positionChangeModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="positionChangeModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-danger">
+        <h5 class="text-white">Edit Designation</h5>
+        <button type="button" class="close" (click)="positionChangeModal.hide();" aria-label="Close" id="btnCloseModal">
+          <span aria-hidden="true" class="text-white">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form  #f="ngForm" novalidate>
+          <div class="row form-group">
+            <label class="col-sm-3"><span style="color:red;">*</span>Designation :</label>
+            <div class="col-sm-9">
+
+              <label class="radio inline">
+                <input type="radio" name="Designation" value="headmaster" [(ngModel)]="position" #Designation="ngModel" required>
+                <span>Headmaster</span>
+              </label>
+              <label class="radio inline">
+                <input type="radio" name="Designation" value="teacher" [(ngModel)]="position" #Designation="ngModel" required>
+                <span>Teacher</span>
+              </label>
+            </div>
+
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-3"><span style="color:red;">*</span>Remark :</label>
+          <div class="col-sm-8">
+            <textarea name="remarks" cols="4" rows="3" class="form-control" placeholder="Enter text" [(ngModel)]="remark" #remarks="ngModel" required></textarea>
+
+          </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success btn-sm" (click)="positionChangeModal.hide();UpdateDesignation()" [disabled]= "f.invalid" novalidate>
+          <i class="fa fa-check-circle text-white"></i>&nbsp;Okay
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div bsModal #dateChangeModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="dateChangeModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-danger">
+        <h5 class="text-white">Extend User Date</h5>
+        <button type="button" class="close" (click)="dateChangeModal.hide();" aria-label="Close" id="btnCloseModal">
+          <span aria-hidden="true" class="text-white">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #dateForm="ngForm">
+          <div class="row">
+            <div class="col-md-5">
+              <p>
+                <strong>Full Name : </strong></p>
+            </div>
+            <div class="col-md-5">
+              <p>
+                {{fname}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-5">
+              <p>
+                <strong>Mobile Number : </strong></p>
+            </div>
+            <div class="col-md-5">
+              <p> 
+                {{mobNo}}</p>
+            </div>
+          </div>
+            
+          <div class="row form-group">
+              <div class="col-md-5">
+                  <p>
+                    <strong>End Date : </strong></p>
+                </div>
+            <div class="col-md-5">
+              <div class="input-group">
+                <input type="text" id="DOB" class="date-form-control" placeholder="DD/MM/YYYY" [(ngModel)]="endDate "
+                  name="DOB" #DOB="ngModel" autocomplete='off' (keyup)="getDate(DOB)" pattern="(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)"
+                  (keypress)="addSlash();numberOnly($event)" maxlength="10" required>
+                            
+              </div>
+              <div class="mt-1" *ngIf="rangeFlag">
+                <div class="alert alert-danger errorMessage">
+                  Invalid date range
+                </div>
+              </div>
+              <div class="alert alert-danger errorMessage mt-1" *ngIf="DOB.errors && DOB.dirty">
+                <div [hidden]="!DOB.hasError('pattern') ">Invalid date</div>
+            </div>
+
+        </div> 
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-5">
+              <p>
+                <strong>Remark : </strong></p>
+            </div>
+            <div class="col-md-5">
+              <textarea name="remarks" cols="5" rows="3" class="form-control" placeholder="Enter text" [(ngModel)]="dateRemark" #remarks="ngModel" required></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success btn-sm" (click)="changeDate()" [disabled]= "dateForm.invalid || rangeFlag" novalidate>
+          <i class="fa fa-check-circle text-white"></i>&nbsp;Okay
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

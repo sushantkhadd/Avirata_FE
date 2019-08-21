@@ -1,0 +1,130 @@
+@mixin transform($property...) {
+  -webkit-transform: $property;
+  -moz-transform: $property;
+  -ms-transform: $property;
+  -o-transform: $property;
+  transform: $property;
+}
+
+@mixin transition($property...) {
+  -webkit-transition: $property;
+  -moz-transition: $property;
+  -ms-transition: $property;
+  -o-transition: $property;
+  transition: $property;
+}
+
+@mixin box-shadow($property...) {
+  -webkit-box-shadow: $property;
+  -moz-box-shadow: $property;
+  -ms-box-shadow: $property;
+  -o-box-shadow: $property;
+  box-shadow: $property;
+}
+
+@mixin text-shadow($property...) {
+  -webkit-text-shadow: $property;
+  -moz-text-shadow: $property;
+  -ms-text-shadow: $property;
+  -o-text-shadow: $property;
+  text-shadow: $property;
+}
+
+@mixin appearance($property...) {
+  -webkit-box-shadow: $property;
+  -moz-box-shadow: $property;
+  -ms-box-shadow: $property;
+  -o-box-shadow: $property;
+  box-shadow: $property;
+}
+
+@mixin animation($property...) {
+  -webkit-animation: $property;
+  -moz-animation: $property;
+  -ms-animation: $property;
+  -o-animation: $property;
+  animation: $property;
+}
+
+@mixin text-security($property...) {
+  -webkit-text-security: $property;
+  -moz-text-security: $property;
+  -ms-text-security: $property;
+  -o-text-security: $property;
+  text-security: $property;
+}
+
+@mixin linearGradient($property...) {
+  background: -webkit-linear-gradient($property);
+  background: -moz-linear-gradient($property);
+  background: -ms-linear-gradient($property);
+  background: -o-linear-gradient($property);
+  background: linear-gradient($property);
+}
+
+// keyframes mixin
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+
+  @-o-keyframes #{$name} {
+    @content;
+  }
+
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+
+
+$ios-width: 220px;
+$mob-width: 480px;
+$tablet-width: 767px;
+$desktop-width: 991px;
+$lg-width: 1200px;
+
+@mixin iMobile {
+  @media (min-width: #{$ios-width}) and (max-width: #{$mob-width}) {
+    @content;
+  }
+}
+
+@mixin mTablet {
+  @media (min-width: #{$mob-width}) and (max-width: #{$tablet-width}) {
+    @content;
+  }
+}
+
+@mixin tDesktop {
+  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width}) {
+    @content;
+  }
+}
+
+@mixin dLDesk {
+  @media (min-width: #{$desktop-width}) and (max-width: #{$lg-width}) {
+    @content;
+  }
+}
+
+@mixin iDesktop {
+  @media (min-width: #{$ios-width}) and (max-width: #{$desktop-width}) {
+    @content;
+  }
+}
+
+@mixin iTablet {
+  @media (min-width: #{$ios-width}) and (max-width: #{$tablet-width}) {
+    @content;
+  }
+}

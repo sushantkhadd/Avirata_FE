@@ -1,0 +1,86 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <button class="btn btn-primary mb-2 backBtn float-left" (click)="goToAdminPanel()">
+        <i class="fa fa-reply"></i>&nbsp;&nbsp;Back</button>
+    </div>
+  </div>
+  <div class="card w-100">
+    <div class="card-header text-center">
+      <h6 class="text-center">
+        <i class="fa fa-bell"></i> &nbsp;Send Notification</h6>
+    </div>
+    <div class="card-block">
+      <form #formNotification="ngForm" name="formNotification">
+        <div class="form-group row justify-content-center">
+          <label for="category" class="col-md-3 col-form-label font-weight-bold">Send Notification For:</label>
+          <div class="col-md-5">
+            <select class="form-control" name="category" id="category" [(ngModel)]="selectedEvent" (change)="getEvent()" required>
+              <option value="" disabled>{{select_eve}}</option>
+              <option [value]="event.value" *ngFor="let event of events">{{event.label}}</option>
+            </select>
+          </div> 
+        </div>
+        <div class="form-group row justify-content-center" *ngIf="disableCtg">
+          <label for="category" class="col-md-3 col-form-label font-weight-bold">Select Category</label>
+          <div class="col-md-5">
+            <select class="form-control" name="category" id="category" [(ngModel)]="selectedCategory" (change)="getCategory()" required>
+              <option value="" disabled>{{select_ctg}}</option>
+              <option [value]="category.value" *ngFor="let category of categories">{{category.label}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row justify-content-center" *ngIf="disableMob1">
+            <label for="Not_title" class="col-md-3 col-form-label font-weight-bold">Mobile</label>
+            <div class="col-md-5">
+              <input type="text" class="form-control" id="Mob_No" pattern="^\d{10}$" minlength="10" maxlength="10" name="Mob_No" [(ngModel)]="Mob_No" placeholder="Enter mobile number" (keypress)="isNumber($event)"
+                required autocomplete="off">
+            </div>
+          </div>
+ 
+          <div class="form-group row justify-content-center" *ngIf="disableMob">
+              <label for="message" class="col-md-3 col-form-label font-weight-bold">Mobile</label>
+              <div class="col-md-5">
+                <textarea class="form-control" placeholder="Enter mobile number" rows="5" name="mul_Mob" [(ngModel)]="mul_Mob" 
+                  id="mul_Mob" required></textarea>
+              </div>
+            </div>
+ 
+        <div class="form-group row justify-content-center">
+          <label for="Not_title" class="col-md-3 col-form-label font-weight-bold">Notification Title</label>
+          <div class="col-md-5">
+            <input type="text" class="form-control" id="Not_title" name="Not_title" [(ngModel)]="Not_title" placeholder="Enter notification title"
+              required autocomplete="off">
+          </div> 
+        </div>
+        <div class="form-group row justify-content-center">
+          <label for="message" class="col-md-3 col-form-label font-weight-bold">Notification Message</label>
+          <div class="col-md-5">
+            <textarea class="form-control" placeholder="Write notification message here..." rows="5" name="message" [(ngModel)]="message"
+              id="message" required></textarea>
+          </div>
+        </div>
+        <div class="form-group row justify-content-center">
+          <div class="col-md-4">
+            <input #myInput type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".jpg,.jpeg,.JPG,.JPEG,.png,.PNG"
+              data-buttonText="Your label here.">
+          </div>
+          <div class="col-md-3 justify-content-end"> <button class="btn btn-primary" (click)="reset()" *ngIf="resetButton">
+              <i class="fa fa-refresh" aria-hidden="true"></i> Reset
+            </button>
+          </div>
+          <!-- <p id="fileHelp" class="form-text text-muted">
+            {{'newTranslate.fileFormat' | translate}}</p> -->
+        </div>
+        <div class="form-group row justify-content-center">
+          <div class="col-md-8">
+            <button class="btn btn-primary float-right" [disabled]="!formNotification.form.valid || sendDisable" appPreventDoubleClick (debounceClick)="sendNotification()">
+              <i class="fa fa-send-o"></i>&nbsp;&nbsp;Send
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

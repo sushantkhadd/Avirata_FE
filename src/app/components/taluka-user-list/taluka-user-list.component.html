@@ -1,0 +1,243 @@
+<div class="container">
+  <div class="row" *ngIf="userType=='master_trainer' || showDetailTableFlag">
+    <div class="col-md-10 p-0" *ngIf="showDetailTableFlag">
+      <button class="btn btn-primary float-left backBtn or-section" (click)="showDetailTableFlag=false;getTime()">
+        <i class="fa fa-reply"></i>&nbsp;&nbsp;Back</button>
+    </div>
+    <div class="card card-responsive w-100">
+      <div class="card-header text-center row m-0">
+        <div class="col-md-6 p-0">
+          <h6 class="mb-0 text-left">
+            <span>
+              <b>Taluka</b> : {{showTaluka}}</span>
+          </h6>
+        </div>
+      </div>
+      <div class="card-block">
+        <div class="row">
+          <div class="col-6 pad-0">
+            <p class="time-counter p-0" *ngIf="!showReset"> Updated result will available after : <b> {{countDown | async | formatTime}}</b><br>
+              <span>(Interval Time between updated status is 4 hrs)
+              </span>
+            </p>
+            <button class="btn btn-primary" *ngIf="showReset" appPreventDoubleClick (debounceClick)="updatedResult()">
+              Get updated result
+            </button>
+          </div>
+          <div class="col-6 pad-0">
+            <button class="btn btn-primary m-0 float-right or-section" (click)="export(1)">
+              <span>
+                <i class="fa fa-download" aria-hidden="true"></i>
+              </span>Download</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card card-responsive w-100">
+      <div class="card-header text-center">
+        <h6 class="text-center">
+          <i class="fa fa-archive"></i> &nbsp;Batch Details</h6>
+      </div>
+      <div class="card-body">
+          <div class="col-md-4 p-30-xs float-right mb-2">
+              <select class="form-control" name="selectedLevel" id="selectedLevel" [(ngModel)]="selectedLevel"
+                 (change)="getLevel()">
+                <option value="" disabled>Select Level</option>
+                <option value="L1">Level 1</option> 
+                <option value="L2">Level 2</option>
+                <option value="L3">Level 3</option>
+              </select>
+          </div>
+        <div class="table-responsive" [class.padbottom]="loader==true">
+          <table class="table table-hover mar-btm-0" [mfData]="userList" #mf="mfDataTable" [mfRowsOnPage]="10">
+            <thead>
+              <tr>
+                <th>
+                  <mfDefaultSorter by="Name">Name
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="Mobile_No">Mobile No
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="Module_Status">Module Status
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="School_Name">School Name
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="School_Index">School Index
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="Role">Role
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+              </tr>
+            </thead>
+            <div class="mx-auto loader content-loader" *ngIf="loader"></div>
+            <tbody>
+              <tr *ngFor="let item of mf.data; let i=index">
+                <td>{{item.Name}}</td>
+                <td>{{item.Mobile_No}}</td>
+                 <td>{{item.Module_Status}}</td> 
+                <!-- <td *ngIf="item.Module_Status == 'Not Started'">Pending</td>
+                <td *ngIf="item.Module_Status == 'module 0'">Baseline</td>
+                <td *ngIf="item.Module_Status == 'module 1'">Module 1</td>
+                <td *ngIf="item.Module_Status == 'module 2'">Module 2</td>
+                <td *ngIf="item.Module_Status == 'module 3'">Module 3</td>
+                <td *ngIf="item.Module_Status == 'module 4'">Module 4</td>
+                <td *ngIf="item.Module_Status == 'module 5'">Module 5</td>
+                <td *ngIf="item.Module_Status == 'module 6'">Endline</td>
+                <td *ngIf="item.Module_Status == 'module 7'">Project</td>
+                <td *ngIf="item.Module_Status == 'level 2 completed'">Completed</td> -->
+
+                <td>{{item.School_Name}}</td>
+                <td>{{item.School_Index}}</td>
+
+                <td *ngIf="item.Role == 'trainee'">Trainee</td>
+                <td *ngIf="item.Role == 'master_trainer'">Master Trainer</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="11">
+                  <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div> 
+
+  <div *ngIf="userType=='co_ordinator' && !showDetailTableFlag">
+    <div class="card card-responsive w-100">
+      <div class="card-header text-center row m-0">
+        <div class="form-group row col-md-4">
+          <label for="districtList" class="col-md-5 col-form-label font-weight-bold">Select District</label>
+          <div class="col-md-7">
+            <select class="form-control" name="district" id="districtList" [(ngModel)]="selectedDistrict" (change)="getTaluka()" required
+              #district="ngModel" disabled>
+              <option [value]="selectedDistrict">{{selectedDistrict}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row col-md-4">
+          <label for="talukaList" class="col-md-5 col-form-label font-weight-bold">Select Taluka</label>
+          <div class="col-md-7">
+            <select class="form-control" name="taluka" id="talukaList" [(ngModel)]="selectedTaluka" appPreventDoubleClick (debounceClick)="talukaOverallReport(selectedTaluka,selectedRole)"
+              [disabled]="!selectedDistrict" required #taluka="ngModel">
+              <option value="all">All</option>
+              <option [value]="taluka.taluka_id" *ngFor="let taluka of allTalukas">{{taluka.taluka_name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row col-md-4">
+          <label for="talukaList" class="col-md-5 col-form-label font-weight-bold">Select Role</label>
+          <div class="col-md-7">
+            <select class="form-control" name="search" id="selectedRole" [(ngModel)]="selectedRole" (change)="talukaOverallReport(selectedTaluka,selectedRole)">
+              <option value="all">Select Role</option>
+              <option value="trainee">Trainee</option>
+              <option value="master_trainer">Master Trainer</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-block">
+        <div class="row">
+          <div class="col-md-6">
+            <p class="time-counter m-0 p-0" *ngIf="!showReset2"> Updated result will available after : <b> {{countDown2 | async |
+                formatTime}}</b><br>
+              <span>(Interval Time between updated status is 4 hrs)
+                  </span>
+            </p>
+            <button class="btn btn-primary" *ngIf="showReset2" appPreventDoubleClick (debounceClick)="talukaOverallReport(selectedTaluka,selectedRole);showReset2=false">
+                Get updated result
+              </button>
+          </div>
+          <div class="col-6 pad-0">
+            <button class="btn btn-primary float-right or-section" (click)="export(2)">
+              <span>
+                <i class="fa fa-download" aria-hidden="true"></i>
+              </span>Download</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card card-responsive w-100">
+      <div class="card-header text-center">
+        <h6 class="text-center">
+          <i class="fa fa-archive"></i> &nbsp;Batch Details</h6>
+      </div>
+      <div class="card-body">
+          <div class="col-md-4 p-30-xs float-right mb-2">
+              <select class="form-control" name="selectedLevel" id="selectedLevel" [(ngModel)]="selectedLevel"
+                 (change)="getLevel1()">
+                <option value="" disabled>Select Level</option>
+                <option value="L1">Level 1</option> 
+                <option value="L2">Level 2</option>
+                <option value="L3">Level 3</option>
+              </select>
+          </div>
+        <div class="table-responsive" [class.padbottom]="loader==true">
+          <table class="table table-hover mar-btm-0" [mfData]="overviewList" #mf="mfDataTable">
+            <thead>
+              <tr>
+                <th>
+                  <mfDefaultSorter by="Taluka">Taluka
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+
+                <th>
+                  <mfDefaultSorter by="Completed">Completed
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="Pending">Pending
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="Total">Total
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  Action
+                </th>
+              </tr>
+            </thead>
+            <div class="mx-auto loader content-loader" *ngIf="loader"></div>
+            <tbody>
+              <tr *ngFor="let item of mf.data; let i=index">
+                <td>{{item.Taluka}}</td>
+                <td>{{item.Completed}}</td>
+                <td>{{item.Total - item.Completed}}</td>
+                <td>{{item.Total}}</td>
+                <td>
+                  <a class="btn btn-primary actionBtn mr-1 text-white" (click)="viewDetailsforCo(item.Taluka);showReset2=false">
+                    View
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

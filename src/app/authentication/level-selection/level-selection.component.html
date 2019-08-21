@@ -1,0 +1,511 @@
+<div class="wrapper">
+  <header class="app-header navbar fixed-top">
+    <div class="row w-100">
+      <div class="col-6">
+          <!-- <div class="admin-panel ml-2" *ngIf="userType!='trainee'">
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 Admin Panel
+                </button>
+                <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                    <li class="dropdown-item" *ngIf="userType=='superadmin'||userType=='admin'"><a routerLinkActive="active" (click)="hideMenu()"><i class="icon-calculator"></i>&nbsp;&nbsp;Admin Panel</a></li>
+                    <li class="dropdown-item" *ngIf="userType=='master_trainer' || userType=='co_ordinator'" routerLinkActive="activeMenu"><a routerLinkActive="active" [routerLink]="['/modules/user_list']"> <i class="icon-calculator"></i>&nbsp;&nbsp;{{'Dashboard.talukaUserList' | translate}}</a></li>
+                    <li class="dropdown-divider"></li>
+                    <li class="dropdown-submenu" *ngIf="userType=='master_trainer' || userType=='admin' ||userType=='superadmin'|| userType=='co_ordinator'">
+                      <a *ngIf="userType=='admin' || userType=='superadmin'" class="dropdown-item" tabindex="-1" href="#">{{'Dashboard.admin' | translate}}</a>
+                      <a *ngIf="userType=='co_ordinator'" class="dropdown-item" tabindex="-1" href="#">{{'Dashboard.co-ordinator' | translate}}</a>
+                      <ul class="dropdown-menu">
+                        <li class="dropdown-submenu" *ngIf="userType=='co_ordinator'">
+                          <a class="dropdown-item" href="#"> <i class="icon-calculator"></i>&nbsp;&nbsp;{{'Dashboard.statistics' | translate}}</a>
+                          <ul class="dropdown-menu">
+                              <li class="dropdown-item" ><a routerLinkActive="active" [routerLink]="['/modules/masterstat']">{{'Quiz.registered' | translate}}</a></li>
+                              <li class="dropdown-item" ><a routerLinkActive="active" [routerLink]="['/modules/presentTrainee']">{{'Quiz.not accepted' | translate}}</a></li>
+                          </ul>
+                        </li>
+                        <li class="dropdown-item" *ngIf="userType=='admin' || userType=='superadmin'" routerLinkActive="activeMenu"><a routerLinkActive="active" [routerLink]="['/modules/masterstat']"><i class="icon-calculator"></i>&nbsp;&nbsp;{{'Dashboard.statistics' | translate}}</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+            </div>
+          </div> -->
+      </div>
+      <div class="col-6" *ngIf="userType=='trainee'">
+        <a class="btn btn-primary float-right logoutBtn" appPreventDoubleClick (debounceClick)="logout()">
+          <i class="fa fa-power-off" aria-hidden="true"></i> &nbsp;लॉग-आऊट
+        </a>
+      </div>
+      <!-- <div class="col-md-6 text-right" *ngIf="userType!='superadmin' && userType!='admin'&& noAccessFlag">
+          <span class="userName pr-2">{{userName}}</span>
+        <div class="dropdown logoutBtn levelmenu">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+          <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a [routerLink]="['/dashboard/profile']"> <em class="fa fa-user"></em>&nbsp;&nbsp;{{'Dashboard.Profile' | translate}}</a></li>
+            <li><a appPreventDoubleClick (debounceClick)="logout()"> <em class="fa fa-sign-out-alt"></em>&nbsp;&nbsp;{{'Dashboard.Logout' | translate}}</a></li>
+          </ul>
+        </div>
+        </div> -->
+        <div class="col-md-6 text-right" *ngIf="userType!='trainee'">
+            <span class="userName pr-2">{{userName}}</span>
+          <div class="dropdown logoutBtn levelmenu">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li  *ngIf="userType=='superadmin'||userType=='admin'"><a  routerLinkActive="active" (click)="hideMenu()"><i class="icon-calculator"></i>&nbsp;&nbsp;Admin Panel</a></li>
+              <li  *ngIf="userType=='superadmin'||userType=='admin'"><a routerLinkActive="active" (click)="hideMenu1()"><i class="icon-calculator"></i>&nbsp;&nbsp;{{'Dashboard.admin' | translate}}</a></li>
+              <li  *ngIf="userType=='master_trainer' || userType=='co_ordinator'"><a routerLinkActive="active" (click)="hideMenu1()"> <i class="icon-calculator"></i>&nbsp;&nbsp;{{'Dashboard.talukaUserList' | translate}}</a></li>
+              <li><a appPreventDoubleClick (debounceClick)="logout()"> <em class="fa fa-sign-out-alt"></em>&nbsp;&nbsp;{{'Dashboard.Logout' | translate}}</a></li>
+            </ul>
+          </div>
+          </div>
+        <!-- <div class="col-md-6 text-right" *ngIf="userType!='trainee'">
+          <span class="userName pr-2">{{userName}}</span>
+        <div class="dropdown logoutBtn levelmenu">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+          <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li class="nav-item" *ngIf="userType=='superadmin'||userType=='admin'">
+                <a class="nav-link c-pointer" routerLinkActive="active" (click)="hideMenu()">
+                  <i class="icon-calculator"></i>&nbsp;&nbsp;Admin Panel</a>
+              </li> 
+            <li class="nav-item" *ngIf="userType=='master_trainer' || userType=='co_ordinator'" routerLinkActive="activeMenu">
+              <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/user_list']">
+                <i class="icon-calculator"></i>&nbsp;&nbsp;{{'Dashboard.talukaUserList' | translate}}</a>
+            </li>
+            <li *ngIf="userType=='master_trainer' || userType=='admin' ||userType=='superadmin'|| userType=='co_ordinator'">
+              <span class="bottom-divider" href="#authSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" *ngIf="userType=='admin' || userType=='superadmin'">
+                <a class="nav-link nav-dropdown-toggle">{{'Dashboard.admin' | translate}}</a>
+              </span>
+              <span class="bottom-divider" href="#authSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" *ngIf="userType=='co_ordinator'">
+                <a class="nav-link nav-dropdown-toggle">{{'Dashboard.co-ordinator' | translate}}</a>
+              </span>
+              <ul class="collapse list-unstyled" id="authSubmenu">
+                <li *ngIf="userType=='co_ordinator'">
+                  <a class="nav-link nav-dropdown-toggle" href="#authSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                    routerLinkActive="active">
+                    <i class="icon-calculator"></i>{{'Dashboard.statistics' | translate}}</a>
+                  <ul class="collapse list-unstyled" id="authSubmenu1">
+                    <li class="nav-item" [class.activeMenu]="router['url']==='/modules/masterstat'">
+                      <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/masterstat']">{{'Quiz.registered' | translate}}</a>
+                    </li>
+                    <li class="nav-item" [class.activeMenu]="router['url']==='/modules/presentTrainee'">
+                      <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/presentTrainee']">{{'Quiz.not accepted' | translate}}</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item" *ngIf="userType=='admin' || userType=='superadmin'" routerLinkActive="activeMenu">
+                  <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/masterstat']">
+                    <i class="icon-calculator"></i>{{'Dashboard.statistics' | translate}}</a>
+                </li>
+              </ul>
+            </li>
+            <li><a appPreventDoubleClick (debounceClick)="logout()"> <em class="fa fa-sign-out-alt"></em>&nbsp;&nbsp;{{'Dashboard.Logout' | translate}}</a></li>
+          </ul>
+        </div>
+        </div> -->
+    </div>
+  </header>
+
+  <div class="level-bg p-1">
+      <div class="level-wrapper">
+          <div class="container">
+            <div class="row justify-content-center">
+              <img class="img-fluid" src="../../../assets/img/logo_cpd_combine_web.png">
+            </div>
+
+            <div class="title text-center">
+              <h4 class="welcome-line row justify-content-center mt-2">'अविरत' मध्ये आपले स्वागत !</h4>
+              <!-- <h5>कृपया अविरत प्रशिक्षणाविषयी पुढील सुचानासाठी अविरत समन्वयकांच्या संपर्कात रहा.</h5> -->
+              <div *ngIf="noAccessFlag">
+                <h6 class="mar-bottom-0 pad-top-75 line-height-75">
+                  <i class="fa fa-bell-o font-weight-bold"></i>&nbsp;{{ 'Dashboard.levelmsg1' | translate }} {{startDate| date:'dd-MM-yyyy'}} {{ 'Dashboard.to' | translate
+                  }} {{endDate| date:'dd-MM-yyyy'}}.
+                </h6>
+              </div>
+            </div>
+            <div class="row justify-content-center" *ngIf="!noAccessFlag">
+              <div class="col-md-3" *ngIf="lvl1Current">
+                <a class="custom-tooltip tooltip--triangle" href="{{setUrl1}}" target="_blank">
+                  <div class="card" [class.card-success]='lvl1Current' [class.card-secondary]='!lvl1Current && !lvl1Complete'>
+                    <div class="card-block text-center text-white custom-block">
+                      <div *ngIf="lvl1Complete" class="icon">
+                        <!-- <i class="filled fa fa-check-circle fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledTick.png">
+                      </div>
+                      <div *ngIf="lvl1Current" class="icon">
+                        <!-- <i class="fa fa-unlock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledUnlock.png">
+                        
+                      </div>
+                      <div *ngIf="!lvl1Current && !lvl1Complete" class="icon">
+                        <!-- <i class="fa fa-lock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledlock.png">
+                        
+                      </div>
+                      <h3 class="level-text text-center">टप्पा</h3>
+                      <img class="img-fluid mb-4" src="../../../assets/img/one.png">
+                    </div>
+                    <!-- <div class="card-footer border-0">
+                      <p class="text-center" *ngIf="!lvl1Complete">
+                        सुरु करा
+                      </p>
+                      <p *ngIf="lvl1Complete" class="text-center text-white">पूर्ण</p>
+                    </div> -->
+                  </div>
+                </a>
+              </div>
+              <div class="col-md-3 text-center" *ngIf="!lvl1Current">
+                <a class="custom-tooltip tooltip--triangle" [attr.href]="lvl2Current ? setUrl2 : undefined" [attr.target]="lvl2Current ?  '_blank' : undefined"
+                  *ngIf="superAdminFlag">
+                  <div class="card" [class.card-success]="lvl2Current && lvl1Complete" [class.card-secondary]='!lvl2Current'>
+                    <div class="card-block text-white custom-block">
+                      <div *ngIf="lvl1Complete" class="icon">
+                        <!-- <i class="filled fa fa-check-circle fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledTick.png">
+                      </div>
+                      <div *ngIf="lvl1Current" class="icon">
+                        <!-- <i class="fa fa-unlock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledUnlock.png">
+                        
+                      </div>
+                      <div *ngIf="!lvl1Current && !lvl1Complete" class="icon">
+                        <!-- <i class="fa fa-lock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledlock.png">
+                        
+                      </div>
+                      <h3 class="level-text text-center">टप्पा</h3>
+                      <img class="img-fluid mb-4" src="../../../assets/img/one.png">
+                    </div>
+                    <!-- <div class="card-footer border-0" [ngClass]="lvl2Current ? 'bg-success' : 'bg-gray'">
+                      <div>
+                        <p class="text-center p-1">
+                        </p>
+                      </div>
+                    </div> -->
+                  </div>
+                </a>
+                <a class="custom-tooltip tooltip--triangle" *ngIf="!superAdminFlag">
+                  <div class="card text-center card-secondary">
+                    <div class="card-block text-white custom-block">
+                      <div *ngIf="lvl1Complete" class="icon">
+                        <!-- <i class="filled fa fa-check-circle fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledTick.png">
+                      </div>
+                      <div *ngIf="lvl1Current" class="icon">
+                        <!-- <i class="fa fa-unlock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledUnlock.png">
+                        
+                      </div>
+                      <div *ngIf="!lvl1Current && !lvl1Complete" class="icon">
+                        <!-- <i class="fa fa-lock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledlock.png">
+                        
+                      </div>
+                      <h3 class="level-text text-center">टप्पा</h3>
+                      <img class="img-fluid mb-4" src="../../../assets/img/one.png">
+                    </div>
+                    <!-- <div class="card-footer border-0"></div> -->
+                    <!-- <div class="card-footer text-center border-0">
+                      <div>
+
+                        <p class="text-center">
+
+                        </p>
+                      </div>
+                    </div> -->
+                  </div>
+                </a>
+              </div>
+              <div class="col-md-3 justify-content-center" *ngIf="lvl2Current">
+                <a class="custom-tooltip tooltip--triangle" href="{{setUrl2}}" target="_blank">
+                  <div class="card" [class.card-success]='lvl2Current' [class.card-secondary]='!lvl2Current && !lvl2Complete'>
+                    <div class="card-block text-center text-white custom-block">
+                      <div *ngIf="lvl2Complete" class="icon">
+                        <!-- <i class="filled fa fa-check-circle fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledTick.png">
+                      </div>
+                      <div *ngIf="lvl2Current" class="icon">
+                        <!-- <i class="fa fa-unlock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledUnlock.png">
+                        
+                      </div>
+                      <div *ngIf="!lvl2Current && !lvl2Complete" class="icon">
+                        <!-- <i class="fa fa-lock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledlock.png">
+                        
+                      </div>
+                      <h3 class="level-text text-center">टप्पा</h3>
+                      <img class="img-fluid mb-4" src="../../../assets/img/two.png">
+                    </div>
+                    <!-- <div class="card-footer border-0">
+                      <p class="text-center" *ngIf="!lvl2Complete">
+                        सुरु करा
+                      </p>
+                      <p *ngIf="lvl2Complete" class="text-center">पूर्ण</p>
+                    </div> -->
+                  </div>
+                </a>
+              </div>
+              <div class="col-md-3 justify-content-center" *ngIf="!lvl2Current">
+                <a class="custom-tooltip tooltip--triangle">
+                  <div class="card text-center card-secondary">
+                    <div class="card-block text-white custom-block">
+                      <div *ngIf="lvl2Complete" class="icon">
+                        <!-- <i class="filled fa fa-check-circle fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledTick.png">
+                      </div>
+                      <div *ngIf="lvl2Current" class="icon">
+                        <!-- <i class="fa fa-unlock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledUnlock.png">
+                        
+                      </div>
+                      <div *ngIf="!lvl2Current && !lvl2Complete" class="icon">
+                        <!-- <i class="fa fa-lock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledlock.png">
+                        
+                      </div>
+                      <h3 class="level-text text-center">टप्पा</h3>
+                      <img class="img-fluid mb-4" src="../../../assets/img/two.png">
+                    </div>
+                    <!-- <div class="card-footer border-0"></div> -->
+                    <!-- <div class="card-footer border-0">
+                      <div>
+                        <p class="text-center">
+                        </p>
+                      </div>
+                    </div> -->
+                  </div>
+                </a>
+              </div>
+
+              <div class="col-md-3 text-center" *ngIf="lvl3Current">
+                <a class="custom-tooltip tooltip--triangle" appPreventDoubleClick (debounceClick)="levelStatus(3)">
+                  <div class="card" [class.card-success]='lvl3Current' [class.card-secondary]='!lvl3Current && !lvl3Complete'>
+                    <div class="card-block text-center text-white custom-block">
+                      <div *ngIf="lvl3Complete" class="icon">
+                        <!-- <i class="filled fa fa-check-circle fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledTick.png">
+                      </div>
+                      <div *ngIf="lvl3Current" class="icon">
+                        <!-- <i class="fa fa-unlock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledUnlock.png">
+                        
+                      </div>
+                      <div *ngIf="!lvl3Current && !lvl3Complete" class="icon">
+                        <!-- <i class="fa fa-lock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledlock.png">
+                        
+                      </div>
+                      <h3 class="level-text text-center">टप्पा</h3>
+                      <img class="img-fluid mb-4" src="../../../assets/img/three.png">
+                    </div>
+                    <!-- <div class="card-footer border-0">
+                      <p class="text-center" *ngIf="!lvl2Complete">
+                        सुरु करा
+                      </p>
+                      <p *ngIf="lvl2Complete" class="text-center">पूर्ण</p>
+                    </div> -->
+                  </div>
+                </a>
+              </div>
+              <div class="col-md-3" *ngIf="!lvl3Current">
+                <a class="custom-tooltip tooltip--triangle">
+                  <div class="card text-center card-secondary">
+                    <div class="card-block text-center text-white custom-block">
+                      <div *ngIf="lvl3Complete" class="icon">
+                        <!-- <i class="filled fa fa-check-circle fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledTick.png">
+                      </div>
+                      <div *ngIf="lvl3Current" class="icon">
+                        <!-- <i class="fa fa-unlock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledUnlock.png">
+                        
+                      </div>
+                      <div *ngIf="!lvl3Current && !lvl3Complete" class="icon">
+                        <!-- <i class="fa fa-lock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledlock.png">
+                      </div>
+                      <h3 class="level-text text-center">टप्पा</h3>
+                      <img class="img-fluid mb-4" src="../../../assets/img/three.png">
+                    </div>
+                    <!-- <div class="card-footer border-0"></div> -->
+                    <!-- <div class="card-footer border-0">
+                      <div>
+                        <p class="text-center">
+
+                        </p>
+                      </div>
+                    </div> -->
+                  </div>
+                </a>
+              </div>
+
+            </div>
+
+            <div class="row justify-content-center" *ngIf="userType!='superadmin' && userType!='admin'&& noAccessFlag">
+
+              <div class="col-md-3">
+                <a class="custom-tooltip tooltiptriangle">
+                  <div class="card" [class.card-success]='lvl1Current' [class.card-secondary]='!lvl1Current && !lvl1Complete'>
+                    <div class="card-block text-center text-white custom-block">
+                      <div *ngIf="lvl1Complete" class="icon">
+                        <!-- <i class="filled fa fa-check-circle fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledTick.png">
+                      </div>
+                      <div *ngIf="lvl1Current" class="icon">
+                        <!-- <i class="fa fa-unlock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledUnlock.png">
+                        
+                      </div>
+                      <div *ngIf="!lvl1Current && !lvl1Complete" class="icon">
+                        <!-- <i class="fa fa-lock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledlock.png">
+                        
+                      </div>
+                      <h3 class="level-text text-center">टप्पा</h3>
+                      <img class="img-fluid mb-4" src="../../../assets/img/one.png">
+                    </div>
+                    <!-- <div class="card-footer border-0 bg-gray"></div> -->
+                    <!-- <div class="card-footer border-0 bg-gray">
+                      <div>
+                        <p class="text-center">
+                        </p>
+                      </div>
+                    </div> -->
+                  </div>
+                </a>
+              </div>
+
+              <div class="col-md-3 ">
+                <a class="custom-tooltip tooltip--triangle">
+                  <div class="card" [class.card-success]='lvl2Current' [class.card-secondary]='!lvl2Current && !lvl2Complete'>
+                    <div class="card-block text-center text-white custom-block">
+                      <div *ngIf="lvl2Complete" class="icon">
+                        <!-- <i class="filled fa fa-check-circle fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledTick.png">
+                      </div>
+                      <div *ngIf="lvl2Current" class="icon">
+                        <!-- <i class="fa fa-unlock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledUnlock.png">
+                        
+                      </div>
+                      <div *ngIf="!lvl2Current && !lvl2Complete" class="icon">
+                        <!-- <i class="fa fa-lock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledlock.png">
+                        
+                      </div>
+                      <h3 class="level-text text-center">टप्पा</h3>
+                      <img class="img-fluid mb-4" src="../../../assets/img/two.png">
+                    </div>
+                    <!-- <div class="card-footer border-0 bg-gray"></div> -->
+                    <!-- <div class="card-footer border-0 bg-gray">
+                      <div>
+                        <p class="text-center">
+                        </p>
+                      </div>
+                    </div> -->
+                  </div>
+                </a>
+              </div>
+
+              <div class="col-md-3">
+                  <a class="custom-tooltip tooltiptriangle">
+                    <div class="card" [class.card-success]='lvl3Current' [class.card-secondary]='!lvl3Current && !lvl3Complete'>
+                      <div class="card-block text-center text-white custom-block">
+                        <div *ngIf="lvl3Complete" class="icon">
+                            <img src="../../../assets/img/filledTick.png">
+                          <!-- <i class="filled fa fa-check-circle fa-3x pb-2"></i> -->
+                        </div>
+                        <div *ngIf="lvl3Current" class="icon">
+                          <!-- <i class="fa fa-unlock fa-3x pb-2"></i> -->
+                          <img src="../../../assets/img/filledUnlock.png">
+                        </div>
+                        <div *ngIf="!lvl3Current && !lvl3Complete" class="icon">
+                          <!-- <i class="fa fa-lock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledlock.png">
+                          
+                        </div>
+                        <h3 class="level-text text-center">टप्पा</h3>
+                        <img class="img-fluid mb-4" src="../../../assets/img/three.png">
+                      </div>
+                      <!-- <div class="card-footer border-0 bg-gray"></div> -->
+                      <!-- <div class="card-footer border-0 bg-gray">
+                        <div>
+                          <p class="text-center">
+                          </p>
+                        </div>
+                      </div> -->
+                    </div>
+                  </a>
+                </div>
+
+            </div>
+          </div>
+
+          <!-- <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-md-3 text-center">
+                <div class="mt-5">
+                  <img class="img-fluid" src="../../../assets/img/certificate_1.png">
+                </div>
+              </div>
+              <div class="col-md-3 text-center">
+                <div class="mt-5">
+                  <img class="img-fluid" src="../../../assets/img/certificate_2.png">
+                </div>
+              </div>
+              <div class="col-md-3">
+
+              </div>
+            </div>
+          </div> -->
+
+          <div class="container">
+              <div class="row justify-content-center mt-3" *ngIf="certificate!=''">
+                  <div class="col-md-3 text-center">
+                    <div class="mt-2" *ngIf="certificate.L1!=''">
+                      <a class="downloadtable" href="{{pdfUrl}}L1/{{cLink}}/{{certificate.L1}}.pdf" target="_blank">
+                        <img class="img-fluid" src="../../../assets/img/certificate_1.png">
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-md-3 text-center">
+                    <div class="mt-2" *ngIf="certificate.L2!=''">
+                        <a class="downloadtable" href="{{pdfUrl}}L2/{{cLink}}/{{certificate.L2}}.pdf" target="_blank">
+                          <img class="img-fluid" src="../../../assets/img/certificate_2.png">
+                        </a>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+
+                  </div>
+
+                  <!-- <table align="center" class="imagetable">
+                    <tr>
+                      <th align="center">Level</th>
+                      <th align="center">प्रमाणपत्र</th>
+                    </tr>
+                    <tr *ngIf="certificate.L1!=''">
+                      <td align="center">Level 1</td>
+                      <td align="center">
+                        <a class="downloadtable" href="{{pdfUrl}}L1/{{cLink}}/{{certificate.L1}}.pdf" target="_blank">
+                          <img class="img-fluid" src="../../../assets/img/certificate_1.png">
+                        </a>
+                      </td>
+                    </tr>
+                    <tr *ngIf="certificate.L2!=''">
+                      <td align="center">Level 2</td>
+                      <td align="center">
+                        <a class="downloadtable" href="{{pdfUrl}}L2/{{cLink}}/{{certificate.L2}}.pdf" target="_blank">
+                          <img class="img-fluid" src="../../../assets/img/certificate_2.png">
+                        </a>
+                      </td>
+                    </tr>
+                  </table> -->
+                </div>
+          </div>
+
+        </div>
+  </div>
+
+

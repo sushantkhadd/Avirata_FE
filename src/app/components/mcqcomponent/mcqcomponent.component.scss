@@ -1,0 +1,168 @@
+ .mcqComponentModal{
+  .card-header span{
+    font-size: 1rem;
+   }
+
+  .card{
+    border-radius:0;
+    border: none;
+   }
+
+    .modal {
+      padding-top: 60px;
+
+      .modal-content {
+        border-radius: 20px;
+        position: relative;
+
+
+        .modal-header {
+          padding: 20px 0 0;
+          // background: #4dbd74;
+          position: relative;
+          border-top-left-radius: 20px;
+          border-top-right-radius: 20px;
+
+          span.exp-img {
+            // background: url(../../../assets/img/mitra.png);
+            background-size: contain;
+            background-position: left;
+            background-repeat: no-repeat;
+            position: absolute;
+            z-index: 99;
+            width: 100px;
+            height: 100px;
+            bottom: 42px;
+            right: 0;
+            left: 12px;
+          }
+
+          button.close {
+            position: absolute;
+            right: 0;
+            color: #fff;
+            opacity: 1;
+          }
+
+          h5 {
+            margin: 15px auto 0;
+            padding-bottom: 20px;
+            font-weight: 600;
+            color: #444;
+          }
+        }
+
+        .modal-body {
+          // -webkit-box-sizing: content-box;
+          // -moz-box-sizing: content-box;
+          // box-sizing: content-box;
+          // border: none;
+          // -o-text-overflow: clip;
+          // text-overflow: clip;
+          // background: -webkit-linear-gradient(0deg, rgba(0, 0, 0, 0) 79px, rgb(171, 206, 212) 79px, rgb(171, 206, 212) 81px, rgba(0, 0, 0, 0) 81px), -webkit-linear-gradient(90deg, rgb(238, 238, 238) 0.1em, rgba(0, 0, 0, 0) 0.1em), rgb(255, 255, 255);
+          // background: -moz-linear-gradient(90deg, rgba(0, 0, 0, 0) 79px, rgb(171, 206, 212) 79px, rgb(171, 206, 212) 81px, rgba(0, 0, 0, 0) 81px), -moz-linear-gradient(0deg, rgb(238, 238, 238) 0.1em, rgba(0, 0, 0, 0) 0.1em), rgb(255, 255, 255);
+          // background: linear-gradient(90deg, rgba(0, 0, 0, 0) 79px, rgb(171, 206, 212) 79px, rgb(171, 206, 212) 81px, rgba(0, 0, 0, 0) 81px), linear-gradient(0deg, rgb(238, 238, 238) 0.1em, rgba(0, 0, 0, 0) 0.1em), rgb(255, 255, 255);
+          // background-position: auto auto;
+          // -webkit-background-origin: padding-box;
+          // background-origin: padding-box;
+          // -webkit-background-clip: border-box;
+          // background-clip: border-box;
+          // -webkit-background-size: 100% 1.2em;
+          // background-size: 100% 1.2em;
+
+          // &::before {
+          //   content: "";
+          //   position: absolute;
+          //   bottom: -1px;
+          //   left: 0px;
+          //   border-width: 16px 0 0 16px;
+          //   border-style: solid;
+          //   border-color: #abced4 #fff;
+          }
+
+          p {
+            // padding-left: 5rem;
+            line-height: 25px;
+            margin-top: 10px;
+            font-size: 1rem;
+          }
+        }
+      }
+
+      .modal-footer{
+        border-bottom-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+      }
+  }
+
+
+  .customimg img{
+  // width: 500px;
+  width: 450px;
+}
+
+.badge-custom {
+  float: right;
+  margin-top: -40px;
+  padding: 8px;
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.90rem;
+}
+
+.bunch-mcqs {
+  .dx-radiobutton {
+    margin: 1px 5px !important;
+    float: left;
+}
+}
+
+.quetitle {
+  background-color: #2196f3;
+  color: white;
+}
+
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+  .mcqComponentModal{
+    .modal{
+      .modal-content{
+        p{
+          font-size: 0.85rem;
+          line-height: 22px;
+        }
+        .modal-header{
+          h5{
+            padding-bottom: 10px;
+            font-size: 0.85rem;
+          }
+          span.exp-img{
+            width: 80px;
+            height: 80px;
+            bottom: 40px;
+            left: 12px;
+          }
+        }
+        .modal-body{
+          .customimg img{
+            // width: 500px;
+            width: 277px;
+          }
+        }
+      } 
+    }
+  }
+  .customimg img{
+    // width: 500px;
+    width: 300px;
+  }
+}
+
+.counter{
+  float: right;
+  margin: -35px 11px;
+  position: relative;
+  font-size: 90%;
+  color: #fff;
+  font-weight: 700;
+}

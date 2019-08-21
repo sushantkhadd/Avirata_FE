@@ -1,0 +1,256 @@
+<!-- <header class="app-header navbar">
+    <div class="row w-100">
+        <div class="col-6">
+            <a class="navbar-brand .navbar-brand-logo"></a>
+        </div>
+        <div class="col-6">
+            <a href="#" class="btn btn-primary float-right logoutBtn">
+                <i class="fa fa-power-off" aria-hidden="true"></i> &nbsp;लॉग-आऊट
+            </a>
+        </div>
+    </div>
+</header> -->
+<div class="info-wraaper">
+    <div class="container mb-3 mt-4 mar-type">
+        <div class="row">
+          
+            <div class="col-md-8 pull-md-4">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h6 style="padding-top: 0.70rem;" class="d-inline-block font-weight-bold">माहिती फॉर्म</h6>
+                        <span *ngIf="showEdit">
+                          <a class="btn btn-primary float-right editBtn m-0" title="बदल करा" (click)="editForm()">
+                            <i class="fa fa-edit" aria-hidden="true"></i>
+                          </a>
+                        </span>
+                    </div>
+                    <div class="card-block">
+                        <form #formNotice="ngForm" name="formNotice" class="text-center formNotice">
+                            <div class="form-group row">
+                                <label for="surname" class="col-md-3 col-form-label font-weight-bold"></label>
+                                <div class="col-md-6 text-left">
+                                    <label class="radio inline">
+                                      <input type="radio" name="options" value="श्री" [(ngModel)]="initials" [disabled]="disabledFields" required>
+                                      <span>श्री.</span>
+                                    </label>
+                                    <label class="radio inline">
+                                      <input type="radio" name="options" value="श्रीमती" [(ngModel)]="initials" [disabled]="disabledFields" required>
+                                      <span>श्रीमती</span>
+                                    </label>
+                                    <label class="radio inline">
+                                      <input type="radio" name="options" value="कु" [(ngModel)]="initials" [disabled]="disabledFields" required>
+                                      <span>कु.</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="surname" class="col-md-3 col-form-label font-weight-bold">आडनाव <span class="color_red">*</span></label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control marathi" id="surname" name="surname" placeholder="आडनाव" [(ngModel)]="surName" [disabled]="disabledFields"
+                                        autocomplete='off' required>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="name" class="col-md-3 col-form-label font-weight-bold">नाव <span class="color_red">*</span></label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control marathi" id="name" name="name" placeholder="नाव" [(ngModel)]="firstName" [disabled]="disabledFields"
+                                        autocomplete='off' required>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="fatherName" class="col-md-3 col-form-label font-weight-bold">वडीलांचे/पतीचे नाव <span class="color_red">*</span></label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control marathi" id="fatherName" name="fatherName" placeholder="वडीलांचे / पतीचे नाव" [(ngModel)]="fatherName"
+                                        [disabled]="disabledFields" autocomplete='off' required>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="schoolIndex" class="col-md-3 col-form-label font-weight-bold">शाळा क्रमांक</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="schoolIndex" name="schoolIndex" placeholder="शाळा क्रमांक" [(ngModel)]="schoolIndex"
+                                        required disabled>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="schoolName" class="col-md-3 col-form-label font-weight-bold">शाळेचे नाव <span class="color_red">*</span></label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control marathi" id="schoolName" name="schoolName" placeholder="शाळेचे नाव " [(ngModel)]="schoolName"
+                                        [disabled]="disabledFields" autocomplete='off' required>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="cityName" class="col-md-3 col-form-label font-weight-bold">गावाचे/शहराचे नाव <span class="color_red">*</span></label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control marathi" id="cityName" name="cityName" placeholder="गावाचे / शहराचे नाव" [(ngModel)]="cityName"
+                                        [disabled]="disabledFields" autocomplete='off' required>
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                                <label for="taluka" class="col-md-3 col-form-label font-weight-bold">तालुका <span class="color_red">*</span></label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control marathi" id="taluka" name="taluka" placeholder="तालुका" [(ngModel)]="taluka" [disabled]="disabledFields"
+                                        autocomplete='off' required>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="district" class="col-md-3 col-form-label font-weight-bold">जिल्हा <span class="color_red">*</span></label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control marathi" id="district" name="district" placeholder="जिल्हा" [(ngModel)]="district"
+                                        [disabled]="disabledFields" autocomplete='off' required>
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                                <label for="saralNumber" class="col-md-3 col-form-label font-weight-bold">सरल क्रमांक (वैकल्पिक)</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="saralNumber" name="saralNumber" placeholder="सरल क्रमांक" [(ngModel)]="saralNumber"
+                                        [disabled]="disabledFields" autocomplete='off'>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="text-center offset-md-0 col-md-6">
+                                    <button class="btn btn-danger mr-btn" (click)="confirmModal.show()" *ngIf="!disabledFields">
+                                       रीसेट करा
+                                    </button>
+                                    <button *ngIf="hideBtn" [ngClass]="(!tempFieldArea === true)?'float-right':'mr-btn'" class="btn btn-primary" [disabled]="!formNotice.form.valid"
+                                        (click)="submitForm()">
+                                        सबमिट करा
+                                    </button>
+                                    <!-- <button *ngIf="!hideBtn" [ngClass]="(!tempFieldArea === true)?'float-right':'mr-btn'" class="btn btn-primary" [disabled]="!formNotice.form.valid" (click)="afterEditForm()">
+                                    <i class="fa fa-send-o"></i> &nbsp; सबमिट करा
+                                </button> -->
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 push-md-8">
+                <div class="card">
+                    <div class="card-header text-center bg-danger">
+                        <h6 style="padding-top: 0.70rem;" class="d-inline-block font-weight-bold">महत्त्वाच्या सूचना :</h6>
+                    </div>
+                    <div class="card-block">
+                        <!-- <p class="font-weight-bold">1. &nbsp; हि प्रक्रिया आपल्या प्रशिक्षण कालावधी दरम्यानच उपलब्ध आहे.</p> -->
+                        <p>1. &nbsp; आपण दिलेली माहिती योग्य प्रमाणित असावी.</p>
+                        <!-- <p class="font-weight-bold">3. &nbsp; प्रमाणित केलेली माहिती आपल्या प्रमाणपत्रात छापील झाल्यानंतर प्रमाणपत्र दुरुस्त अथवा बदलले
+                            जाणार नाही.
+                        </p> -->
+                        <p>2. &nbsp; गुगल इनपुट टूल प्रमाणे आपण इंग्लिशमध्ये भरलेली माहिती आपोआप मराठीमध्ये भाषांतरित होईल,
+                            जर भाषांतरामध्ये काही चुक असेल तर कीबोर्डवरील बॅक स्पेस (Backspace) बटनचा वापर करून येणाऱ्या
+                            पर्यायातील योग्य भाषांतर निवडु शकता.
+                            <br> तरीदेखील जर योग्य भाषांतर होऊ शकले नाही , तर गुगलच्या इनपुट टूलचा किंवा इतर कोणत्याही भाषांतर
+                            टूलचा वापर करून माहिती टाईप करा आणि दिलेल्या चौकटीमध्ये पेस्ट करा. </p>
+                        <p>3. &nbsp;गुगल इनपुट टूल वापरण्यासाठी
+                            <a class="word-break" href="https://www.google.com/intl/mr/inputtools/try/" target="_blank">https://www.google.com/intl/mr/inputtools/try/</a>                            या लिंकवर क्लिक करू शकता.</p>
+                        <p>4. &nbsp; हेल्पलाईन क्रमांकद्वारे
+                            <a href="tel:०२०-६७६८६७८८">(०२०-६७६८६७८८)</a> आपण फक्त दिलेला फॉर्म भरण्याविषयी माहिती विचारू
+                            शकता.</p>
+                        <!-- <p>6. &nbsp;ज्यांचे प्रशिक्षण पूर्ण झाले आहे अशांनाच प्रमाणपत्र दिले जाईल , तरीही सर्व प्रशिणार्थीनी माहिती भरावी.</p> -->
+                        <!-- <p>7. &nbsp; लेव्हल १ अथवा लेव्हल २ प्रशिक्षणासाठीची माहिती यामध्ये उपलब्ध नाही. </p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div bsModal #aceeptCheck="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-danger">
+                    <h5 class="modal-title">महत्त्वाच्या सूचना :</h5>
+                </div>
+                <div class="modal-body">
+                    <!-- <p class="font-weight-bold">1. &nbsp; हि प्रक्रिया आपल्या प्रशिक्षण कालावधी दरम्यानच उपलब्ध आहे.</p> -->
+                    <p>1. &nbsp; आपण दिलेली माहिती योग्य प्रमाणित असावी.</p>
+                    <!-- <p class="font-weight-bold">3. &nbsp; प्रमाणित केलेली माहिती आपल्या प्रमाणपत्रात छापील झाल्यानंतर प्रमाणपत्र दुरुस्त अथवा बदलले जाणार
+                        नाही.
+                    </p> -->
+                    <p>2. &nbsp; गुगल इनपुट टूल प्रमाणे आपण इंग्लिशमध्ये भरलेली माहिती आपोआप मराठीमध्ये भाषांतरित होईल, जर भाषांतरामध्ये
+                        काही चुक असेल तर कीबोर्डवरील बॅक स्पेस (Backspace) बटनचा वापर करून येणाऱ्या पर्यायातील योग्य भाषांतर
+                        निवडु शकता.
+                        <br> तरीदेखील जर योग्य भाषांतर होऊ शकले नाही , तर गुगलच्या इनपुट टूलचा किंवा इतर कोणत्याही भाषांतर
+                        टूलचा वापर करून माहिती टाईप करा आणि दिलेल्या चौकटीमध्ये पेस्ट करा. </p>
+                    <p>3. &nbsp;गुगल इनपुट टूल वापरण्यासाठी
+                        <a href="https://www.google.com/intl/mr/inputtools/try/" target="_blank">https://www.google.com/intl/mr/inputtools/try/</a>                        या लिंकवर क्लिक करू शकता.</p>
+                    <p>4. &nbsp; हेल्पलाईन क्रमांकद्वारे
+                        <a href="tel:०२०-६७६८६७८८">(०२०-६७६८६७८८)</a> आपण फक्त दिलेला फॉर्म भरण्याविषयी माहिती विचारू शकता.</p>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                          <input type="checkbox" class="form-check-input" (change)="checkEvent($event)">
+                          <span class="font-weight-bold">मी प्रमाणित करतो / करते की, वरील सर्व सूचना मी व्यवस्थित वाचल्या आहेत आणि माझी सहमती आहे.</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer floatRight">
+                    <button class="btn btn-primary" (click)="aceeptCheck.hide();myclick();" [disabled]="enableBtn">ठीक आहे</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    <div bsModal #confirmModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-danger">
+                    <h5>महत्त्वाच्या सूचना :</h5>
+                    <!-- <button type="button" class="close" (click)="confirmModal.hide()" aria-label="Close" id="btnCloseModal">
+                        <span aria-hidden="true">&times;</span>
+                    </button> -->
+                </div>
+                <div class="modal-body">
+                    रिसेट केल्याने फॉर्मवरील संपूर्ण माहिती रिक्त होईल, तरीही फॉर्म रिसेट करू इच्छिता का ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" (click)="confirmModal.hide()">
+                        <i class="fa fa-times-circle text-white"></i>&nbsp;&nbsp;नाही
+                    </button>
+                    <button type="button" class="btn btn-primary" (click)="resetForm()">
+                        <i class="fa fa-check-circle"></i>&nbsp;&nbsp;होय
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div bsModal #requiredModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-danger">
+                    <h5>महत्त्वाच्या सूचना :</h5>
+                    <!-- <button type="button" class="close" (click)="confirmModal.hide()" aria-label="Close" id="btnCloseModal">
+                            <span aria-hidden="true">&times;</span>
+                    </button> -->
+                </div>
+                <div class="modal-body">
+                    <p>मराठी चौकटीमधील माहिती तपासा आणि फॉर्म पुन्हा सबमिट करा</p>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-danger" (click)="requiredModal.hide()">
+                            <i class="fa fa-times-circle text-white"></i>&nbsp;&nbsp;No
+                    </button> -->
+                    <button type="button" class="btn btn-primary" (click)="requiredModal.hide()">
+                        <i class="fa fa-check-circle"></i>&nbsp;&nbsp;ठीक आहे
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,77 @@
+<div class="forum">
+  <div class="blog-comment">
+    <ul class="comments" *ngFor="let post of posts; let i= index">
+      <li class="clearfix" id={{i}} *ngIf="post['type']=='post'">
+        <div class="post-comments">
+          <p class="meta">{{post['fullName']}}</p>
+          <p>
+            {{post['post']}}
+          </p>
+          <!-- <p class="meta">{{post.fullName}} <i class="pull-right"><a (click)="subComment(i,)"><small>Reply</small></a></i></p>  -->
+          <div class="meta-footer">
+            <a appPreventDoubleClick (debounceClick)="commentFlag=!commentFlag;subComment(post['postid'],i)"><i
+                class="fa fa-comments count-label"
+                aria-hidden="true"></i>&nbsp;&nbsp;{{'forum.comment' | translate}}</a>
+            <a class="float-right" appPreventDoubleClick
+              (debounceClick)="viewCommentFlag=!viewCommentFlag;viewComments(post['postid'],i)">
+              <span *ngIf="!post.viewComments"><i class="fa fa-plus count-label"
+                  aria-hidden="true"></i>&nbsp;&nbsp;{{'forum.comments' | translate}}
+                &nbsp;{{'L2Module2.see' | translate}}({{post['commentcount'] | numberConvertor : 'Devanagari'}})</span><span
+                  *ngIf="post.viewComments"><i
+                  class="fa fa-minus count-label" aria-hidden="true"></i>&nbsp;&nbsp;{{'forum.comments' | translate}}
+                &nbsp;{{'L2Module2.see' | translate}}({{post['commentcount'] | numberConvertor : 'Devanagari'}})</span></a>
+          </div>
+          <!-- <p class="meta-footer"><a (click)="subcomments=!subcomments;reply.show = !reply.show"><i class="pull-right fa " [class.fa-plus]="subcomments==false" [class.fa-minus]="subcomments==true" aria-hidden="true"></i></a></p> -->
+        </div>
+        <div class="" id="" *ngIf="post.show">
+          <div class="post-comments-text form-group" *ngIf="replyBox">
+            <textarea class="form-control txtarea" id="exampleTextarea" rows="3" #newHero [(ngModel)]="txtcommentSub"
+              maxlength="500"></textarea>
+            <div class="text-right">
+              <button class="btn btn-primary btn-pad comment-btn mr-1 mt-2"
+                appPreventDoubleClick
+                (debounceClick)="setComment(newHero.value,post['postid'],post['refCommentId'],i)"
+                [disabled]="disableCommentSubmit"><i class="fa fa-comments count-label"
+                  aria-hidden="true"></i>&nbsp;{{'forum.comment' | translate}}</button>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="clearfix box-shadow-none" id={{i}} *ngIf="post['type']=='comment'">
+        <!-- <li class="clearfix" id={{i}} *ngIf="hero.type=='reply'" [hidden]="reply.show"> -->
+        <div class="post-comments-child" style="margin-left:6%">
+          <p class="meta">{{post['fullName']}}
+          </p>
+          <p>
+            {{post['comment']}}
+          </p>
+          <!-- <div class="meta-footer" *ngIf="!post['refCommentId']">
+                      <a (click)="commentFlag=!commentFlag;subComment(post['postid'],i)"><i class="fa fa-comments count-label" aria-hidden="true"></i>{{'forum.comment' | translate}}</a>
+                      <a class="pull-right" (click)="viewCommentFlag=!viewCommentFlag;viewComments(post['postid'],i)"> <span *ngIf="!post.viewComments"><i class="fa fa-plus count-label" aria-hidden="true"></i>{{'forum.comments' | translate}} &nbsp;{{'Module2.see' | translate}}({{post['commentCount']}})</span><span *ngIf="post.viewComments"><i class="fa fa-minus count-label" aria-hidden="true"></i>{{'forum.comments' | translate}} &nbsp;{{'Module2.see' | translate}}({{post['commentCount']}})</span></a>
+                  </div> -->
+        </div>
+        <div class="" id="" *ngIf="post.show">
+          <div class="post-comments-text form-group" *ngIf="replyBox">
+            <textarea class="form-control txtarea" id="exampleTextarea" rows="3" #newHero [(ngModel)]="txtcommentSub"
+              maxlength="500"></textarea>
+            <div class="text-right">
+              <button class="btn btn-primary btn-pad mt-2 mr-1 comment-btn mt-2"
+                appPreventDoubleClick
+                (debounceClick)="setComment(newHero.value,post['postid'],post['commentId'],i)"
+                [disabled]="disableCommentSubmit"><i class="fa fa-comments count-label"
+                  aria-hidden="true"></i>&nbsp;{{'forum.comment' | translate}}</button>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div class="text-center">
+      <button class="btn btn-secondary links mb-3" *ngIf="allPosts['next'] != null" appPreventDoubleClick
+        (debounceClick)="showMore()"><i
+          class="fa fa-arrow-down" aria-hidden="true"></i>&nbsp;&nbsp;Show more</button>
+      <button class="btn btn-secondary links mb-3" *ngIf="counter > 3" appPreventDoubleClick (debounceClick)="less()"><i
+          class="fa fa-arrow-up"
+          aria-hidden="true"></i>&nbsp;&nbsp;Less</button>
+    </div>
+  </div>
+</div>

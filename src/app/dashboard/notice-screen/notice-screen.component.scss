@@ -1,0 +1,136 @@
+.form-group.row {
+  margin-bottom: 1.5rem;
+  justify-content: center;
+}
+
+.w-70 {
+  max-width: 70%;
+}
+
+.w-80 {
+  max-width: 70%;
+}
+
+.mr-btn {
+  margin: 0 0.75rem 0.75rem;
+}
+
+.info-wraaper {
+  font-family: 'Hind', sans-serif;
+}
+
+.mt-5 {
+  margin-top: 5rem !important;
+}
+
+label.radio.inline span {
+  padding: 0 25px 0 25px;
+}
+
+.inline {
+  display: inline-block;
+}
+
+.inline+.inline {
+  margin-left: 10px;
+}
+
+.logoutBtn {
+  margin-top: 0.75rem;
+}
+
+.editBtn {
+  border-radius: 30px;
+  padding: 10px;
+  line-height: 0.25rem;
+  color: #fff !important;
+}
+
+.p-125 {
+  padding: 1.25rem 1.25rem;
+}
+
+.card {
+  -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  -ms-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  -o-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.radio {
+  color: #999;
+  font-size: 15px;
+  position: relative;
+}
+
+.radio span {
+  position: relative;
+  padding-left: 20px;
+  color: #263238;
+}
+
+.radio span:after {
+  content: '';
+  width: 15px;
+  height: 15px;
+  border: 3px solid;
+  position: absolute;
+  left: 0;
+  top: 1px;
+  border-radius: 100%;
+  -ms-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -webkit-border-radius: 100%;
+  box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+.radio input[type="radio"] {
+  cursor: pointer;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.radio input[type="radio"]:checked+span {
+  color: #1985ac;
+}
+
+.radio input[type="radio"]:checked+span:before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  position: absolute;
+  background: #1985ac;
+  left: 5px;
+  top: 6px;
+  border-radius: 100%;
+  -ms-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -webkit-border-radius: 100%;
+}
+
+@media screen and (max-width: 767px) {
+  .font-weight-bold {
+    text-align: left;
+  }
+  .form-control:disabled {
+    margin-top: 15px;
+  }
+}
+
+.form-control:disabled {
+  background: #eceff1;
+}
+
+input[type="radio"]:disabled{
+  cursor: not-allowed !important;
+}

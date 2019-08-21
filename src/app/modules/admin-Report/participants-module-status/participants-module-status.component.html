@@ -1,0 +1,307 @@
+<div class="container">
+  <div class="row">
+    <div class="col-6 pad-0" *ngIf="showDetails">
+      <button class="btn btn-primary float-left backBtn or-section" (click)="back()">
+        <i class="fa fa-reply"></i>&nbsp;&nbsp;Back</button>
+    </div>
+    <div class="col-6 pad-0" *ngIf="!showDetails">
+      <button class="btn btn-primary float-left backBtn or-section" (click)="goToAdminPanel()">
+        <i class="fa fa-reply"></i>&nbsp;&nbsp;Back</button>
+    </div>
+    <div class="col-6 pad-0 ">
+      <button class="btn btn-primary float-right or-section" *ngIf="!showDetails" [disabled]="!showCount"
+        (click)="export()">
+        <span>
+          <i class="fa fa-download" aria-hidden="true"></i>
+        </span>Download</button>
+      <button class="btn btn-primary float-right or-section" *ngIf="showDetails" [disabled]="total==0"
+        (click)="export()">
+        <span>
+          <i class="fa fa-download" aria-hidden="true"></i>
+        </span>Download</button>
+    </div>
+    <div class="card card-responsive" *ngIf="!showDetails">
+      <div class="card-header text-center">
+        <h6 class="text-center">
+          <i class="fa fa-archive"></i> &nbsp;All Participant Module Status Count</h6>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <p class="time-counter" *ngIf="showCount || showDetails"> Updated result will available after : <b>
+                {{countDown | async | formatTime}} </b><br>
+              <span>(Interval Time between updated status is 4 hrs)
+              </span>
+            </p>
+          </div>
+          <div class="col-md-6">
+            <div class="row mb-1 mt-1">
+
+              <label class="col-md-3 text-right font-weight-bold p-30-xs">Search</label>
+              <div class="col-md-4 p-30-xs">
+                <select class="form-control" name="search" id="searchTxt" [(ngModel)]="searchTxt" (change)="getRole()">
+                  <option value="" disabled>Select Role</option>
+                  <option value="trainee">Trainee</option>
+                  <option value="master_trainer">Master Trainer</option>
+                </select>
+              </div>
+              <div class="col-md-4 p-30-xs">
+                <select class="form-control" name="selectedLevel" id="selectedLevel" [(ngModel)]="selectedLevel"
+                  [disabled]="!searchTxt" (change)="getLevel()">
+                  <option value="" disabled>Select Level</option>
+                  <option value="L1">Level 1</option>
+                  <option value="L2">Level 2</option>
+                  <option value="L3">Level 3</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive custom-table" [class.padbottom]="loader==true" *ngIf="showCount">
+          <table class="table table-hover mar-btm-0" [mfData]="allParticipantsData" #mf="mfDataTable"
+            [mfRowsOnPage]="10">
+            <thead>
+              <tr>
+                <th>
+                  <mfDefaultSorter by="district_name">District
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="module1">BaseLine Test
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="module1">Module-1
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="module2">Module-2
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="module3">Module-3
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="module4">Module-4
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="module5">Module-5
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="module6">EndLine Test
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="module7">Project
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="not_started">Not Started
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="all_complete">All Complete
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="!loader" class="data-loader">
+                <td colspan="6" class="text-center">
+                  <div class="lds-facebook">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
+                </td>
+              </tr>
+              <tr *ngFor="let item of mf.data; let i=index">
+                <td>{{item.district_name}}</td>
+                <td>{{item.module0}}
+                  <a class="btn btn-primary showBtn" appPreventDoubleClick (debounceClick)="viewdetails(item.district_name,0)">
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                  </a>
+                </td>
+                <td>{{item.module1}}
+                  <a class="btn btn-primary showBtn" appPreventDoubleClick (debounceClick)="viewdetails(item.district_name,1)">
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                  </a>
+                </td>
+                <td>{{item.module2}}
+                  <a class="btn btn-primary showBtn" appPreventDoubleClick (debounceClick)="viewdetails(item.district_name,2)">
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                  </a>
+                </td>
+                <td>{{item.module3}}
+                  <a class="btn btn-primary showBtn" appPreventDoubleClick (debounceClick)="viewdetails(item.district_name,3)">
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                  </a>
+                </td>
+                <td>{{item.module4}}
+                  <a class="btn btn-primary showBtn" appPreventDoubleClick (debounceClick)="viewdetails(item.district_name,4)">
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                  </a>
+                </td>
+                <td>{{item.module5}}
+                  <a class="btn btn-primary showBtn" appPreventDoubleClick (debounceClick)="viewdetails(item.district_name,5)">
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                  </a>
+                </td>
+                <td>{{item.module6}}
+                  <a class="btn btn-primary showBtn" appPreventDoubleClick (debounceClick)="viewdetails(item.district_name,6)">
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                  </a>
+                </td>
+                <td>{{item.module7}}
+                  <a class="btn btn-primary showBtn" appPreventDoubleClick (debounceClick)="viewdetails(item.district_name,7)">
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                  </a>
+                </td>
+                <td>{{item.not_started}}</td>
+                <td>{{item.all_complete}}</td>
+                <td>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="11">
+                  <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="showDetails" class="w-100">
+      <h6 class="mb-1">
+        <span>
+          <b>District</b> : {{showDist}}</span> &nbsp;&nbsp;
+        <span *ngIf="selectedModuleNo >= 1 && selectedModuleNo <= 5">
+          <b>Module No</b> : {{selectedModuleNo}}</span>
+        <span *ngIf="selectedModuleNo == 0 ">
+          <b>Module No</b> : BaseLine Test</span>
+        <span *ngIf="selectedModuleNo == 6 ">
+          <b>Module No</b> : Endline Test</span>
+        <span *ngIf="selectedModuleNo == 7 ">
+          <b>Module No</b> : Project</span>
+      </h6>
+      <div class="card">
+        <div class="card-header text-center">
+          <h6 class="text-center">
+            <i class="fa fa-archive"></i> &nbsp;All Participant Module Status Count</h6>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <p class="time-counter"> Updated result will available after : <b> {{countDown | async | formatTime}}
+                </b><br>
+                <span>(Interval Time between updated status is 4 hrs)
+                </span>
+              </p>
+            </div>
+            <div class="col-md-6">
+              <div class="row mt-1 mb-1">
+
+                <label class="col-md-3 text-right font-weight-bold p-30-xs">Search</label>
+                <div class="col-md-8 p-30-xs">
+                  <select class="form-control" name="search" id="searchTxt" [(ngModel)]="searchTxt" (change)="first()">
+                    <option value="" disabled>Select Role</option>
+                    <option value="trainee">Trainee</option>
+                    <option value="master_trainer">Master Trainer</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-hover" [mfData]="detailsData | search:searchTxt" #mf="mfDataTable">
+              <thead>
+                <tr>
+                  <th>
+                    <mfDefaultSorter by="userid">UserId
+                      <i class="fa fa-sort" aria-hidden="true"></i>
+                    </mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="name">Name
+                      <i class="fa fa-sort" aria-hidden="true"></i>
+                    </mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="mobile">Mobile No
+                      <i class="fa fa-sort" aria-hidden="true"></i>
+                    </mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="school_name">School Name
+                      <i class="fa fa-sort" aria-hidden="true"></i>
+                    </mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="role">Role
+                      <i class="fa fa-sort" aria-hidden="true"></i>
+                    </mfDefaultSorter>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="loader" class="data-loader">
+                  <td colspan="6" class="text-center">
+                    <div class="lds-facebook">
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr *ngFor="let item of mf.data; let i=index">
+                  <td>{{item.userid}}</td>
+                  <td>{{item.name}}</td>
+                  <td>{{item.mobile}}</td>
+                  <td>{{item.school_name}}</td>
+                  <td *ngIf="item.role == 'trainee'">Trainee</td>
+                  <td *ngIf="item.role == 'master_trainer'">Master Trainer</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="float-left">
+            <b>Total {{total}}</b>
+          </span>
+          <span class="float-right">
+            <button class="btn btn-link" (click)="first()" [disabled]="!button1">
+              <i class="fa fa fa-step-backward pad-both-l-r"></i>First</button>
+            <button class="btn btn-link" (click)="prev()" [disabled]="!button2">
+              <i class="fa fa-arrow-left pad-both-l-r" aria-hidden="true"></i>Previous</button>
+            <button class="btn btn-link" (click)="next()" [disabled]="!button3">Next
+              <i class="fa fa-arrow-right pad-both-l-r" aria-hidden="true"></i>
+            </button>
+            <button class="btn btn-link" (click)="last()" [disabled]="!button4">Last
+              <i class="fa fa fa-step-forward pad-both-l-r"></i>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

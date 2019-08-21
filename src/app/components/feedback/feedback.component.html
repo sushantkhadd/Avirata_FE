@@ -1,0 +1,56 @@
+<div *ngIf="startTest">
+    <!-- <app-new-baseline [passData]='passFlags' (exam2finish)="sendAnswer($event)"></app-new-baseline> -->
+    <form #mcqForm="ngForm">
+      <div class="card">
+        <div *ngFor="let item1 of queArray1; let i = index">
+        <div class="form-group" [class.d-none]="item1 != activeItem">
+          <div class="card-header">
+              <span>{{item1.question_type | numberConvertor : 'Devanagari'}}. </span>
+            <label for="item.questionid ml-2">{{ item1.question }}</label>
+            <span class="float-right font-weight-normal mobcnt">
+              {{item1.question_type | numberConvertor : 'Devanagari'}} / {{'number.8' | translate}}
+            </span>
+          </div>
+          <div class="card-body">
+              <div class="dx-fieldset">
+                  <div class="dx-field">
+                      <div class="dx-field-value">
+                          <dx-radio-group #eventRadioGroup id="mcq" [value]="type1Ans" [items]="priorities" (onValueChanged)="onValueChanged($event,item1.questionid,item1.question_type)">
+                          </dx-radio-group>
+                      </div>
+                  </div>
+              </div>
+
+              <div *ngIf="freeTextFlag">
+                <hr>
+                <div *ngFor="let que of queArray2; let i = index">
+                  <div class="form-group row" [class.d-none]="que != activeItem1">
+                    <div class="col-sm-12">
+                        <!-- <span>{{que.question_type | numberConvertor : 'Devanagari'}}.</span> -->
+                      <label class="form-control-label ml-2 font-weight-bold" [innerHTML]="inst"></label>
+                    </div>
+                    <div class="col-12 controls">
+                      <textarea autosize [minRows]="2" class="form-control" name="answer" [(ngModel)]="textanswer1" rows="3" #addr="ngModel" required></textarea>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+            <!-- <div *ngFor="let item of optionArray">
+              <input type="radio" [name]="i" class="mcqClass" value={{type1Ans}}
+                (change)="onValueChange($event, item.option,item1.questionid,item1.question_type)" required />
+              <label class="ml-2">{{ item.value }}</label>
+            </div> -->
+
+     
+          </div>
+        </div>
+      </div>
+      
+      <div class="card-footer text-center">
+        <button class="btn btn-primary mr-3" [disabled]="onlyCnt==1 || submitFlag || mcqForm.invalid" appPreventDoubleClick (debounceClick)="previous()">{{'Quiz.back' | translate}}</button>
+        <button class="btn btn-primary" [disabled]="submitFlag || mcqForm.invalid" *ngIf="counter < 7" appPreventDoubleClick (debounceClick)="next();">{{'Quiz.next' | translate}}</button>
+        <button class="btn btn-success" [disabled]="submitFlag || mcqForm.invalid" *ngIf="counter === 7" appPreventDoubleClick (debounceClick)="finish2()">{{'Quiz.finish' | translate}}</button>
+      </div>
+    </div>  
+  </form> 
+  </div>

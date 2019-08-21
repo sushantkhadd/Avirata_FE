@@ -1,0 +1,537 @@
+<div class="container">
+  <h5 class="text-center">User Transfer And Replacement</h5>
+  <div class="row justify-content-center" *ngIf="!newUserFlag">
+    <div class="col-md-10">
+      <button class="btn btn-primary float-left backBtn or-section" (click)="goToAdminPanel()">
+      <i class="fa fa-reply"></i>&nbsp;&nbsp;Back</button>
+    </div>
+    <div class="col-md-10">
+      <div class="card w-100">
+        <div class="card-header text-center">
+          <h6 class="text-center">
+            <i class="fa fa-search-plus"></i> &nbsp;Search Participant</h6>
+        </div>
+        <div class="card-block pad-l-r-0">
+          <form #formSearch="ngForm" name="formSearch" class="text-center">
+            <div class="form-group row">
+              <label for="indexNumber" class="col-md-4 col-form-label font-weight-bold">School Index Number</label>
+              <div class="col-md-5">
+                <input type="text" class="form-control" id="indexNumber" name="indexNumber" #Unumber [(ngModel)]="indexNumber" placeholder="Enter School Index number"
+                  autocomplete="off" required>
+              </div>
+              <div class="mr-2">
+                <button class="btn btn-primary" [disabled]="!formSearch.form.valid || disableSearch" appPreventDoubleClick (debounceClick)="searchRecord(1)">
+                <i class="fa fa-search pr-1"></i>Search
+              </button>
+              </div>
+              <!-- <div class="col-md-1 ml-1">
+              <button class="btn btn-primary" [disabled]="!result" (click)="reset()">
+                <i class="fa fa-refresh pr-1"></i>Reset
+              </button>
+            </div> -->
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="row justify-content-center" *ngIf="showAddButton">
+    <div class="col-md-10">
+      <button class="btn btn-primary float-right backBtn or-section ml-1" (click)="newUserFlag=true">Create New User</button>
+    </div>
+  </div> -->
+  <div class="row justify-content-center" *ngIf="showDetails && !newUserFlag && !transferUserFlag">
+    <div class="col-md-10">
+      <button class="btn btn-primary float-right backBtn or-section ml-1 mt-4" (click)="newUserFlag=true">Create New User</button>
+    </div>
+    <div class="col-md-10 mb-3">
+      <div class="card">
+        <div class="card-header text-center">
+          <h6 class="text-center">
+            <i class="fa fa-user-plus bg-success" aria-hidden="true"></i> &nbsp;Active Users</h6>
+        </div>
+        <div class="card-block">
+          <div class="table-responsive">
+            <table class="table table-hover" [mfData]="userDetails.activate" #mf1="mfDataTable">
+              <thead>
+                <tr>
+                  <th>User Id</th>
+                  <th>Name</th>
+                  <th>Mobile</th>
+                  <th>Position</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of mf1.data; let i=index">
+                  <td>{{item.userid}}</td>
+                  <td>{{item.name}}</td>
+                  <td>{{item.username}}</td>
+                  <td>{{item.position}}</td>
+                  <td>
+                    <a class="btn btn-primary actionBtn mr-1" (click)="blockUserpopup(item);">
+                      <i class="fa fa-ban" aria-hidden="true"></i>Block
+                    </a>
+                    <a class="btn btn-primary actionBtn" appPreventDoubleClick (debounceClick)="transferUser(item)">
+                      <i class="fa fa-exchange" aria-hidden="true"></i>Transfer
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-10">
+      <div class="card">
+        <div class="card-header text-center">
+          <h6 class="text-center">
+            <i class="fa fa-user-times bg-danger" aria-hidden="true"></i> &nbsp;Inactive Users</h6>
+        </div>
+        <div class="card-block">
+          <div class="table-responsive">
+            <table class="table table-hover" [mfData]="userDetails.deactivate" #mf2="mfDataTable">
+              <thead>
+                <tr>
+                  <th>User Id</th>
+                  <th>Name</th>
+                  <th>Mobile</th>
+                  <th>Position</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of mf2.data; let i=index">
+                  <td>{{item.userid}}</td>
+                  <td>{{item.name}}</td>
+                  <td>{{item.username}}</td>
+                  <td>{{item.position}}</td>
+                  <td>
+                    <a class="btn btn-primary actionBtn" (click)="unblockUserpopup(item)">
+                      <i class="fa fa-ban" aria-hidden="true"></i>Unblock
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center" *ngIf="newUserFlag">
+    <div class="col-md-10">
+      <button class="btn btn-primary float-right backBtn or-section ml-1" (click)="clearField();">
+        <i class="fa fa-reply"></i>&nbsp;&nbsp;Back</button>
+    </div>
+    <div class="col-md-10">
+      <div class="card">
+        <div class="card-header text-center">
+          <h6 class="text-center">
+            <i class="fa fa-archive"></i> &nbsp;Create New User</h6>
+        </div>
+        <div class="card-block">
+          <form #formNewuser="ngForm" name="formNewuser" class="text-center">
+            <div class="form-group row">
+              <label for="schoolIndex" class="col-md-4 col-form-label font-weight-bold">School Index</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="schoolIndex" name="schoolIndex" [(ngModel)]="schoolIndex" placeholder="school index number"
+                  required disabled>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="schoolName" class="col-md-4 col-form-label font-weight-bold">School Name</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="schoolName" name="schoolName" [(ngModel)]="schoolName" placeholder="school name"
+                  required disabled>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="fullName" class="col-md-4 col-form-label font-weight-bold">Full Name</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="fullName" [(ngModel)]="fullName" placeholder="Enter full name" name="fullName"
+                  #userfullName="ngModel" pattern="^[A-Za-z\s]{1,}[A-Za-z\s]{0,}$" autocomplete="off" required>
+              </div>
+            </div>
+            <div class="form-group row" class="col-md-6 offset-md-4">
+              <div [hidden]="userfullName.valid || userfullName.pristine" class="alert alert-danger errorMessage">
+                <div [hidden]="!userfullName.hasError('required')">Please Enter Full Name</div>
+                <div [hidden]="!userfullName.hasError('pattern')">Name should contains only alphabets</div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="gender" class="col-md-4 col-form-label font-weight-bold">Gender</label>
+              <div class="col-md-6 text-left-md">
+                <label class="radio inline">
+                  <input type="radio" name="gender" value="1" [(ngModel)]="gender" required>
+                  <span>Male</span>
+                </label>
+                <label class="radio inline">
+                  <input type="radio" name="gender" value="2" [(ngModel)]="gender" required>
+                  <span>Female</span>
+                </label>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="mobNumber" class="col-md-4 col-form-label font-weight-bold">Mobile Number</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="mobNumber" name="mobNumber" [(ngModel)]="mobNumber" placeholder="Enter mobile number"
+                  pattern="^\d{10}$" minlength="10" maxlength="10" #mobileNo="ngModel" autocomplete="off" required (keypress)="isNumber($event)">
+              </div>
+            </div>
+            <div class="form-group row" class="col-md-6 offset-md-4">
+              <div [hidden]="mobileNo.valid || mobileNo.pristine" class="alert alert-danger errorMessage">
+                <div [hidden]="!mobileNo.hasError('minlength')">Mobile Number should be 10 digits</div>
+                <div [hidden]="!mobileNo.hasError('required')">Please Enter correct mobile number</div>
+                <div [hidden]="!mobileNo.hasError('pattern') ">Invalid Mobile number</div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="aadharNumber" class="col-md-4 col-form-label font-weight-bold">Aadhar Number</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="aadharNumber" name="aadharNumber" [(ngModel)]="aadharNumber" placeholder="Enter aadhar number"
+                  pattern="^\d{12}$" minlength="12" maxlength="12" #adhar="ngModel" autocomplete="off" (keypress)="isNumber($event)">
+              </div>
+            </div>
+            <div class="form-group row" class="col-md-6 offset-md-4">
+              <div [hidden]="adhar.valid || adhar.pristine" class="alert alert-danger errorMessage">
+                <div [hidden]="!adhar.hasError('minlength')">Aadhar number should be 12 digits</div>
+                <!-- <div [hidden]="!adhar.hasError('required')">Please Enter correct Aadhar number</div> -->
+                <div [hidden]="!adhar.hasError('pattern') ">Invalid Aadhar number</div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="position" class="col-md-4 col-form-label font-weight-bold">Position</label>
+              <div class="col-md-6 text-left-md">
+                <label class="radio inline">
+                  <input type="radio" name="position" value="1" [(ngModel)]="position" required>
+                  <span>Headmaster</span>
+                </label>
+                <label class="radio inline">
+                  <input type="radio" name="position" value="2" [(ngModel)]="position" required>
+                  <span>Teacher</span>
+                </label>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="districtList" class="col-md-4 col-form-label font-weight-bold">Select District</label>
+              <div class="col-md-6">
+                <select class="form-control" name="district" id="districtList" [(ngModel)]="selectedDistrict" (change)="getDistrictWiseTaluka(selectedDistrict)"
+                  required #district="ngModel">
+                  <option value="" disabled>Select District</option>
+                  <option [value]="district.districtid" *ngFor="let district of allDistricts">{{district.name}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="talukaList" class="col-md-4 col-form-label font-weight-bold">Select Taluka</label>
+              <div class="col-md-6">
+                <select class="form-control" name="taluka" id="talukaList" [(ngModel)]="selectedTaluka" required
+                  #taluka="ngModel">
+                  <option value="" disabled>Select Taluka</option>
+                  <option [value]="taluka.taluka_id" *ngFor="let taluka of allTalukas">{{taluka.taluka_name}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="remark" class="col-md-4 col-form-label font-weight-bold">Remark</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="remark" name="remark" [(ngModel)]="remark" placeholder="remark" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-10 btn-top-m10">
+                <button class="btn btn-primary float-right" [disabled]="!formNewuser.form.valid || createDisable" appPreventDoubleClick (debounceClick)="createNewUser()">
+                  <i class="fa fa-plus-square"></i> &nbsp;Create User</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center" *ngIf="transferUserFlag" id="transferDiv">
+    <div class="col-md-10">
+      <button class="btn btn-primary float-right backBtn or-section ml-1" (click)="transferUserFlag=false">
+        <i class="fa fa-reply"></i>&nbsp;&nbsp;Back</button>
+    </div>
+    <div class="col-md-10">
+      <div class="card">
+        <div class="card-header text-center">
+          <h6 class="text-center">
+            <i class="fa fa-exchange"></i> &nbsp;Transfer User</h6>
+        </div>
+        <div class="card-block">
+          <form #formTransferuser="ngForm" name="formTransferuser" class="text-center">
+            <div class="form-group row">
+              <label for="transferFullName" class="col-md-4 col-form-label font-weight-bold">Full Name</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="transferFullName" name="transferFullName" [(ngModel)]="transferFullName" placeholder="full name"
+                  required disabled>
+              </div>
+            </div>
+            <!-- <div class="form-group row">
+              <label for="transferGender" class="col-md-4 col-form-label font-weight-bold">Gender</label>
+              <div class="col-md-6 text-left-md">
+                <label class="radio inline">
+                  <input type="radio" name="transferGender" value="Male" [(ngModel)]="transferGender" required>
+                  <span>Male</span>
+                </label>
+                <label class="radio inline">
+                  <input type="radio" name="transferGender" value="Female" [(ngModel)]="transferGender" required>
+                  <span>Female</span>
+                </label>
+              </div>
+            </div> -->
+            <div class="form-group row">
+              <label for="transferMobNumber" class="col-md-4 col-form-label font-weight-bold">Mobile Number</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="transferMobNumber" name="transferMobNumber" [(ngModel)]="transferMobNumber" placeholder="mobile number"
+                  required disabled>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="transferPosition" class="col-md-4 col-form-label font-weight-bold">Position</label>
+              <div class="col-md-6 text-left-md">
+                <div class="position-div form-control">
+                  <label class="radio inline mb-0">
+                  <input type="radio" name="transferPosition" value="1" [(ngModel)]="transferPosition" disabled required>
+                  <span>Headmaster</span>
+                </label>
+                  <label class="radio inline mb-0">
+                  <input type="radio" name="transferPosition" value="2" [(ngModel)]="transferPosition" disabled required>
+                  <span>Teacher</span>
+                </label>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="form-group row">
+              <label for="districtList" class="col-md-4 col-form-label font-weight-bold">Select District</label>
+              <div class="col-md-6">
+                <select class="form-control" name="district" id="districtList" [(ngModel)]="transferSelectedDistrict" (change)="getDistrictWiseTaluka(transferSelectedDistrict)"
+                  required #district="ngModel">
+                  <option value="" disabled>Select District</option>
+                  <option [value]="district.districtid" *ngFor="let district of allDistricts">{{district.name}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="talukaList" class="col-md-4 col-form-label font-weight-bold">Select Taluka</label>
+              <div class="col-md-6">
+                <select class="form-control" name="taluka" id="talukaList" [(ngModel)]="transferSelectedTaluka" [disabled]="!talukaEnable"
+                  required #taluka="ngModel">
+                  <option value="" disabled>Select Taluka</option>
+                  <option [value]="taluka.taluka_id" *ngFor="let taluka of allTalukas">{{taluka.taluka_name}}</option>
+                </select>
+              </div>
+            </div> -->
+            <div class="form-group row">
+              <label for="transferSchoolIndex" class="col-md-4 col-form-label font-weight-bold">School Index</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="transferSchoolIndex" name="transferSchoolIndex" [(ngModel)]="transferSchoolIndex"
+                  (blur)="searchRecord(2)" placeholder="school index number" autocomplete="off" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="transferSchoolName" class="col-md-4 col-form-label font-weight-bold">School Name</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="transferSchoolName" name="transferSchoolName" [(ngModel)]="transferSchoolName"
+                  placeholder="school name" required disabled>
+              </div>
+            </div>
+
+            <div class="text-center mb-2">
+              <input #myInput type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.JPG,.JPEG,.png,.PNG"
+                data-buttonText="Your label here.">
+              <button class="btn btn-primary" (click)="reset()" *ngIf="resetButton">
+                <i class="fa fa-refresh" aria-hidden="true"></i> &nbsp; Reset
+              </button>
+              <!-- <p id="fileHelp" class="form-text text-muted">
+              {{'newTranslate.fileFormat' | translate}}</p> -->
+            </div>
+
+            <div class="form-group row">
+              <label for="transferRemark" class="col-md-4 col-form-label font-weight-bold">Remark</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="transferRemark" name="transferRemark" #tRemark="ngModel" [(ngModel)]="transferRemark"
+                  placeholder="remark" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-10 btn-top-m10">
+                <button class="btn btn-primary float-right" [disabled]="!formTransferuser.form.valid || transferDisable" appPreventDoubleClick (debounceClick)="transferUserCheck()">
+                  <i class="fa fa-exchange"></i> &nbsp;Transfer User</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div bsModal #blockModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="blockModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-danger">
+        <h5>Important Notice</h5>
+        <button type="button" class="close" (click)="blockModal.hide();blockFormFlag=false" aria-label="Close" id="btnCloseModal">
+          <span aria-hidden="true" class="text-white">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h6 class="font-weight-bold pl-3 mb-2 mt-2"> Do you really want to block this user ? </h6>
+
+        <form #formBlock="ngForm" name="formBlock" class="text-center" *ngIf="blockFormFlag">
+
+          <div class="text-center mb-2" style="padding-right: 110px;">
+            <div class="row mb-2 justify-content-center">
+              <input #myInput type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.JPG,.JPEG,.png,.PNG"
+                data-buttonText="Your label here.">
+            </div>
+            <div class="row justify-content-end"><button class="btn btn-primary" (click)="reset()" *ngIf="resetButton">
+                <i class="fa fa-refresh" aria-hidden="true"></i> &nbsp; Reset
+              </button>
+            </div>
+            <!-- <p id="fileHelp" class="form-text text-muted">
+              {{'newTranslate.fileFormat' | translate}}</p> -->
+          </div>
+
+          <div class="form-group row justify-content-center">
+            <div class="col-md-9 p-0">
+              <textarea class="form-control" rows="5" id="blockReason" name="blockReason" [(ngModel)]="blockReason" placeholder="Write reason here..."
+                required></textarea>
+            </div>
+
+          </div>
+          <div class="form-group row">
+            <div class="col-md-11">
+              <button class="btn btn-primary float-right" [disabled]="!formBlock.form.valid || blockDisable" appPreventDoubleClick (debounceClick)="blockUser();">
+                <i class="fa fa-ban"></i> &nbsp;Block</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer" *ngIf="!blockFormFlag">
+        <button type="button" class="btn btn-danger" (click)="blockModal.hide();blockFormFlag=false">
+          <i class="fa fa-times-circle text-white"></i>&nbsp;&nbsp;No
+        </button>
+        <button type="button" class="btn btn-primary" [disabled]="blockFormFlag==true" (click)="blockFormFlag=true;">
+          <i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div bsModal #unblockModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="unblockModalModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-danger">
+        <h5>Important Notice</h5>
+        <button type="button" class="close" (click)="unblockModal.hide();unblockFormFlag=false" aria-label="Close" id="btnCloseModal">
+          <span aria-hidden="true" class="text-white">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h6 class="font-weight-bold pl-3 mb-2 mt-2"> Do you really want to unblock this user ? </h6>
+        <form #formUnBlock="ngForm" name="formUnBlock" class="text-center" *ngIf="unblockFormFlag">
+          <div class="text-center mb-2" style="padding-right: 110px;">
+            <div class="row mb-2 justify-content-center">
+              <input #myInput type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.JPG,.JPEG,.png,.PNG"
+                data-buttonText="Your label here.">
+            </div>
+            <div class="row justify-content-end"> <button class="btn btn-primary" (click)="reset()" *ngIf="resetButton">
+                <i class="fa fa-refresh" aria-hidden="true"></i> &nbsp; Reset
+              </button>
+            </div>
+            <!-- <p id="fileHelp" class="form-text text-muted">
+              {{'newTranslate.fileFormat' | translate}}</p> -->
+          </div>
+
+          <div class="form-group row justify-content-center">
+            <div class="col-md-9 p-0">
+              <textarea class="form-control" rows="5" id="unblockReason" name="unblockReason" [(ngModel)]="unblockReason" placeholder="Write reason here..."
+                required></textarea>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-11">
+              <button class="btn btn-primary float-right" [disabled]="!formUnBlock.form.valid ||unblockDisable" appPreventDoubleClick (debounceClick)="unblockUser()">
+                <i class="fa fa-ban"></i> &nbsp;Unblock</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer" *ngIf="!unblockFormFlag">
+        <button type="button" class="btn btn-danger" (click)="unblockModal.hide();unblockFormFlag=false">
+          <i class="fa fa-times-circle text-white"></i>&nbsp;&nbsp;No
+        </button>
+        <button type="button" class="btn btn-primary" [disabled]="unblockFormFlag==true" (click)="unblockFormFlag=true;">
+          <i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div bsModal #teacherModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="teacherModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-danger">
+        <h5>Important Notice</h5>
+        <button type="button" class="close" (click)="teacherModal.hide();" aria-label="Close" id="btnCloseModal">
+          <span aria-hidden="true" class="text-white">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h6 class="font-weight-bold pl-3 mb-2 mt-2"> Already 2 position full for teacher. Do you want to
+          <span *ngIf="showCreate">create</span>
+          <span *ngIf="showTransfer">transfer</span> user? </h6>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="teacherModal.hide();">
+          <i class="fa fa-times-circle text-white"></i>&nbsp;&nbsp;No
+        </button>
+        <span *ngIf="newUserFlag">
+          <button type="button" class="btn btn-primary" appPreventDoubleClick (debounceClick)="addNewUserHit()">
+            <i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes
+          </button>
+        </span>
+        <span *ngIf="!newUserFlag">
+          <button type="button" class="btn btn-primary" appPreventDoubleClick (debounceClick)="transferAPICall()">
+            <i class="fa fa-check-circle"></i>&nbsp;&nbsp;Yes
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div bsModal #headmasterModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="headmasterModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-danger">
+        <h5>Important Notice</h5>
+        <button type="button" class="close" (click)="headmasterModal.hide();" aria-label="Close" id="btnCloseModal">
+          <span aria-hidden="true" class="text-white">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h6 class="font-weight-bold pl-3 mb-2 mt-2">Already position full for headmaster
+        </h6>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="headmasterModal.hide();">
+          <i class="fa fa-check-circle text-white"></i>&nbsp;&nbsp;Okay
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

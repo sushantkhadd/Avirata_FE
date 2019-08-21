@@ -1,0 +1,114 @@
+<div class="col-sm-12 col-md-12 " *ngIf="!showQuize && !finishExamCard && mySubmodule0!=4 && mySubmodule5 !=18">
+    <div class="instruction-wrap">
+        <div class="borderBlue">
+            <div class="card">
+                <div class="card-header text-white">
+                    <span class="exp-img instructions-img"></span>
+                    <h4>{{'Quiz.note' | translate}}</h4>
+                </div>
+                <div class="card-block inst-text">
+                    <div >
+                            <p>{{'number.1' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_6' | translate}}</p>
+                            <p>{{'number.2' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_7' | translate}}</p>
+                            <p>{{'number.3' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_8' | translate}}</p>
+                            <p>{{'number.4' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_9' | translate}}</p>
+                    </div>
+                    <!-- <div *ngIf="mySubmodule0 == 3">
+                    <p>{{'number.1' | translate}}. {{'L2Module0.inst0_3_1' | translate}}</p>
+                    <p>{{'number.2' | translate}}. {{'L2Module0.inst0_2_2' | translate}}</p>
+                    <p>{{'number.3' | translate}}. {{'L2Module0.inst0_2_3' | translate}}</p>
+                    <p>{{'number.4' | translate}}. {{'L2Module0.inst0_2_4' | translate}}</p>
+                    <p>{{'number.5' | translate}}. {{'L2Module0.inst0_2_5' | translate}}</p>
+                    <p class="color_red">{{'number.6' | translate}}. {{'L2Module0.inst0_3_2' | translate}}</p>
+                    <p>{{'L2Module0.inst0_2_12' | translate}}</p>
+                </div> -->
+                </div>
+                <div class="card-footer"
+                  *ngIf="mySubmodule2==1 || mySubmodule2==7 || mySubmodule3==7 || moduleNumber==3 || moduleNumber==4 || moduleNumber==5 || mySubmodule0==4">
+                    <div class="float-right hidden-xs-0ow3"> 
+                        <button class="btn btn-primary" appPreventDoubleClick
+                          (debounceClick)="startExam()">{{'Module4.start' | translate}}</button>
+                    </div>
+                </div>
+                <div class="card-footer" *ngIf="moduleNumber==6">
+                    <div class="float-right hidden-xs-down">
+                        <button class="btn btn-primary" appPreventDoubleClick
+                          (debounceClick)="startEndLine()">{{'Quiz.start exam' | translate}}</button>
+                    </div>
+                    <div class="hidden-sm-up text-center">
+                        <button class="btn btn-primary" appPreventDoubleClick
+                          (debounceClick)="startEndLine()">{{'Quiz.start exam' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-12 col-md-12 " *ngIf="!showQuize && finishExamCard">
+    <div class="card">
+        <div class="card-block text-center greenText">
+            {{'Quiz.exam given' | translate}}
+        </div>
+    </div>
+</div>
+
+<div id="quiz" *ngIf="showQuize" class="baseline-instructtion" class="position-relative">
+    <h6 class="questionHead lineHeight p-2">
+       <strong *ngIf="mySubmodule2 == 1">{{'Quiz.traineebaselineQue' | translate}}</strong>
+       <strong *ngIf="mySubmodule2 == 7">{{'Quiz.traineebaselineQue1' | translate}}</strong>
+       <strong *ngIf="mySubmodule3 == 7">{{'Quiz.traineebaselineQue2' | translate}}</strong>
+       <strong *ngIf="mySubmodule4 == 2">{{'Quiz.traineebaselineQue3' | translate}}</strong>
+       <strong *ngIf="mySubmodule4 == 11">{{'Quiz.traineebaselineQue4' | translate}}</strong>
+        <strong *ngIf="mySubmodule5 == 23">{{'Quiz.traineebaselineQue4' | translate}}</strong>
+        <strong *ngIf="mySubmodule0 == 4 && mySubFlagmodule0==1">{{'Quiz.traineebaselineQue5' | translate}}</strong>
+        <strong *ngIf="mySubmodule0 == 4 && mySubFlagmodule0==2">{{'Quiz.traineebaselineQue6' | translate}}</strong>
+        <strong *ngIf="mySubmodule0 == 4 && mySubFlagmodule0==3">{{'Quiz.traineebaselineQue7' | translate}}</strong>
+        <strong *ngIf="mySubmodule5 == 18 && mySubFlagmodule5==2">{{'Quiz.traineebaselineQue8' | translate}}</strong>
+        <strong *ngIf="mySubmodule5 == 18 && mySubFlagmodule5==4">{{'Quiz.traineebaselineQue9' | translate}}</strong>
+        
+    </h6>
+    <!-- <hr /> -->
+
+    <div *ngIf="mode=='quiz' && quiz">
+        <div *ngFor="let question of filteredQuestions;">
+                <div class="badge badge-info ml-3 float-right mt-3 p-2 mr-2 counter">
+                  {{pager.index + 1 | numberConvertor : 'Devanagari'}} / {{pager.count | numberConvertor : 'Devanagari'}}
+            </div>
+                <div class="card p-2">
+                <h6 class="font-weight-bold p-2">{{pager.index + 1 | numberConvertor : 'Devanagari'}}.
+                    <strong><span [innerHTML]="question.name"></span></strong>
+                </h6>
+                <p *ngIf="question.description" class="ml-4">{{question.description}}</p>
+                <span *ngIf="question.queUrl" class="text-center"><img src={{question.queUrl}} class="imgOption center-block w-50"></span>
+                <div class="row options ml-3">
+                    <div class="col-md-12" *ngFor="let option of question.options">
+                        <div class="option">
+                            <label class="" [attr.for]="option.id">
+                                <input id="{{option.id}}" type="checkbox" [(ngModel)]="option.selected" (change)="onSelect(question,question.id, option,$event);"
+                                /> <span class="ml-2">{{option.name}}</span>
+                                <!-- span added to align checkbox and label -->
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="d-flex justify-content-center mb-3">
+                  <button class="btn btn-primary float-left mr-3" appPreventDoubleClick *ngIf="config.allowBack"
+                    [disabled]="(pager.index + 1)==1" (debounceClick)="goTo(pager.index-1,1)">
+                    <i class="fa fa-arrow-left btn-arrow" aria-hidden="true"></i> {{'Quiz.back' | translate}}</button>
+                  <button class="btn btn-primary float-left marginLeft" appPreventDoubleClick
+                    (debounceClick)="goTo(pager.index + 1,2);"
+                    *ngIf="(pager.index + 1)<(pager.count)">{{'Quiz.next' | translate}}
+                    <i class="fa fa-arrow-right btn-arrow" aria-hidden="true"></i>
+                  </button>
+                  <button class="btn btn-primary float-left marginLeft" appPreventDoubleClick
+                    *ngIf="(pager.index + 1)==(pager.count)"
+                    (debounceClick)="goTo(pager.index,3)">{{'Quiz.finish' | translate}}
+                    <i class="fa fa-arrow-right btn-arrow" aria-hidden="true"></i>
+                  </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
