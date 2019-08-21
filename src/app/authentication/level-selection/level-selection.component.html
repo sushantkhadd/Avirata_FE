@@ -29,12 +29,12 @@
             </div>
           </div> -->
       </div>
-      <div class="col-6" *ngIf="!noAccessFlag && userType=='trainee'">
+      <div class="col-6" *ngIf="userType=='trainee'">
         <a class="btn btn-primary float-right logoutBtn" appPreventDoubleClick (debounceClick)="logout()">
           <i class="fa fa-power-off" aria-hidden="true"></i> &nbsp;लॉग-आऊट
         </a>
       </div>
-      <div class="col-md-6 text-right" *ngIf="userType!='superadmin' && userType!='admin'&& noAccessFlag">
+      <!-- <div class="col-md-6 text-right" *ngIf="userType!='superadmin' && userType!='admin'&& noAccessFlag">
           <span class="userName pr-2">{{userName}}</span>
         <div class="dropdown logoutBtn levelmenu">
           <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
@@ -44,7 +44,7 @@
             <li><a appPreventDoubleClick (debounceClick)="logout()"> <em class="fa fa-sign-out-alt"></em>&nbsp;&nbsp;{{'Dashboard.Logout' | translate}}</a></li>
           </ul>
         </div>
-        </div>
+        </div> -->
         <div class="col-md-6 text-right" *ngIf="userType!='trainee'">
             <span class="userName pr-2">{{userName}}</span>
           <div class="dropdown logoutBtn levelmenu">
