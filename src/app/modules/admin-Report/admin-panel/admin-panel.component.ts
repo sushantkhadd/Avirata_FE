@@ -305,12 +305,12 @@ export class AdminPanelComponent implements OnInit {
         this.l2MobCount = activeUserDataL2['mobile'];
         this.l2TabCount = activeUserDataL2['tablet'];
 
-        // this.l3TotalUsersCount = activeUserDataL3['totalusers'];
-        // this.l3DesktopCount = activeUserDataL3['desktop'];
-        // this.l3MobCount = activeUserDataL3['mobile'];
-        // this.l3TabCount = activeUserDataL3['tablet'];
+        this.l3TotalUsersCount = activeUserDataL3['totalusers'];
+        this.l3DesktopCount = activeUserDataL3['desktop'];
+        this.l3MobCount = activeUserDataL3['mobile'];
+        this.l3TabCount = activeUserDataL3['tablet'];
 
-        if (activeUserDataL1 && activeUserDataL2) {
+        if (activeUserDataL1 && activeUserDataL2 && activeUserDataL3) {
           this.loader = true;
         } else {
           this.loader = false;
