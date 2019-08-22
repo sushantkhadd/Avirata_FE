@@ -10,7 +10,7 @@ export const environment = {
   // apiUrl: 'http://192.168.1.223:9255/'
   // apiUrl: "https://maacpd.in/api/",
   redirectUrl1: "http://l1.maacpd.in/#/l1/",
-  redirectUrl2: "http://l1.maacpd.in/#/l2/",
+  redirectUrl2: "http://l2.maacpd.in/#/l2/",
 
   downloadUrl: "https://maacpd.in"
 };
