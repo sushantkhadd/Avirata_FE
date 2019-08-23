@@ -116,12 +116,12 @@
             <div class="title text-center">
               <h4 class="welcome-line row justify-content-center mt-2">'अविरत' मध्ये आपले स्वागत !</h4>
               <!-- <h5>कृपया अविरत प्रशिक्षणाविषयी पुढील सुचानासाठी अविरत समन्वयकांच्या संपर्कात रहा.</h5> -->
-              <div *ngIf="noAccessFlag">
+              <!-- <div *ngIf="noAccessFlag">
                 <h6 class="mar-bottom-0 pad-top-75 line-height-75">
                   <i class="fa fa-bell-o font-weight-bold"></i>&nbsp;{{ 'Dashboard.levelmsg1' | translate }} {{startDate| date:'dd-MM-yyyy'}} {{ 'Dashboard.to' | translate
                   }} {{endDate| date:'dd-MM-yyyy'}}.
                 </h6>
-              </div>
+              </div> -->
             </div>
             <div class="row justify-content-center" *ngIf="!noAccessFlag">
               <div class="col-md-3" *ngIf="lvl1Current">
