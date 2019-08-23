@@ -102,7 +102,7 @@ export class LevelSelectionComponent implements OnInit {
       this.superAdminFlag = false;
     }
 
-    this.userID=window.localStorage.getItem('userid')
+    this.userID=window.localStorage.getItem('user_id')
     if(window.localStorage.getItem('certificate')!=undefined){
       this.certificate=JSON.parse((window.localStorage.getItem('certificate')).replace(/'/g, '"'))
     }else{
