@@ -187,7 +187,7 @@ export class ParticipantsModuleStatusComponent implements OnInit {
       data => {
         if (data['message'] == "ok") {
           this.detailsData = data['data'].results
-          this.loader = true;
+          this.loader = false;
           this.detailsData.sort(function (a, b) {
             var A = a.name.toLowerCase();
             var B = b.name.toLowerCase();

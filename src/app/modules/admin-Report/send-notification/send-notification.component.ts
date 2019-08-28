@@ -182,12 +182,12 @@ export class SendNotificationComponent implements OnInit {
   }
 
   sendNotification() {
-    if( this.myInputVariable.nativeElement.value == ""){
-      console.log("empty file")
-      this.toastr.error("Please select image file")
-    }
-    else
-    {
+    // if( this.myInputVariable.nativeElement.value == ""){
+    //   console.log("empty file")
+    //   this.toastr.error("Please select image file")
+    // }
+    // else
+    // {
     var str_array = this.mul_Mob.split(',');
     for(var i = 0; i < str_array.length; i++) {
       str_array[i] = str_array[i].replace(/^\s*/, "").replace(/\s*$/, "");
@@ -288,7 +288,6 @@ export class SendNotificationComponent implements OnInit {
         }
       }
     );
-  }
 }
 
   goToAdminPanel() {

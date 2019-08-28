@@ -40,7 +40,7 @@ export class PresentationComponent implements OnInit {
   public mainFlagModule5 = parseInt(window.localStorage.getItem('mainFlagModule5'));
   public mainFlagModule1 = parseInt(window.localStorage.getItem('mainFlagModule1'));
   public count: any = 1; finalCount; page; pdfURL; totalPages;
-  public imgUrl; downloadLink; download; newUrl; nextParentUrl; helplineFlag;
+  public imgUrl; downloadLink; download; newUrl; nextParentUrl; helplineFlag;renderFlag;
   public showCFU; buttonShowFlag; question; selectedAnswer; submitDisabled; apiUrl;
   public questionSet = {}; options = []; showFinish; optionsStateDyanamic;
   @Output() public ansCorrect = new EventEmitter();  //For interest Video 5.6 to send result success
@@ -234,7 +234,7 @@ export class PresentationComponent implements OnInit {
     }, 4000);
     console.log("data", this.data, 'count init', this.count,this.finalCount)
     this.count = 1;
-   
+    this.renderFlag = false;
     this.submitDisabled = false;
    
     this.imgUrl = this.data.url;
@@ -866,12 +866,16 @@ export class PresentationComponent implements OnInit {
 
   afterLoadComplete(pdfData: any) {
     this.finalCount = pdfData.numPages;
+    // this.isLoaded = false;
+    console.log("afterLoadComplete",pdfData,this.isLoaded)
   }
 
   pageRendered(e) {
-    setTimeout(() => {
-      this.isLoaded = false;
-    }, 5000);
+    // setTimeout(() => {
+    //   this.isLoaded = false;
+    // }, 5000);
+    // this.isLoaded = false;
+    this.renderFlag = true;
     console.log('(page-rendered)',this.isLoaded, e);
   }
 
