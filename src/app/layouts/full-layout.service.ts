@@ -96,10 +96,10 @@ export class FullLayoutService {
     return this.currentCall1;
   }
 
-  logoutService(token: any) {
+  logoutService() {
     var headers = new HttpHeaders({
       "Content-Type": "application/json",
-      'Authorization': token,
+      'Authorization': window.localStorage.getItem('token'),
      // "Source": "WEB"
     });
     if (/Android/i.test(navigator.userAgent)) 

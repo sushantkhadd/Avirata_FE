@@ -89,7 +89,7 @@ export class LevelSelectionComponent implements OnInit {
     } else if (this.userType == 'superadmin' || this.userType == 'admin') {
       this.lvl1Complete = true
       this.lvl2Complete = true;
-      this.lvl3Current = true
+      this.lvl3Current = true;
       this.noAccessFlag = false
 
     }
@@ -98,6 +98,11 @@ export class LevelSelectionComponent implements OnInit {
 
     if (this.userType == 'superadmin') {
       this.superAdminFlag = true;
+      this.lvl2Complete = false;
+      this.lvl1Complete = false;
+      this.lvl2Current = true
+      this.lvl1Current = true
+      console.log("aSAAD",this.lvl1Current,this.lvl1Complete,this.lvl2Current,this.lvl2Complete,this.lvl3Current,this.lvl3Complete)
     } else {
       this.superAdminFlag = false;
     }

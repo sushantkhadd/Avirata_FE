@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
     this.token = window.localStorage.getItem("token")
     if(this.token =="" || this.token == null || this.token == undefined){
     }else{
-    this.FullLayoutService.logoutService(this.token).subscribe(
+    this.FullLayoutService.logoutService().subscribe(
       data => {
         if (data["Response"] == "User Logged Out") {
           window.localStorage.clear();

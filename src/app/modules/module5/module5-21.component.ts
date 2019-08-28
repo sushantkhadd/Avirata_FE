@@ -268,6 +268,9 @@ export class Module521Component implements OnInit {
             window.localStorage.setItem("personId", this.personId)
           }
           this.clearField();
+          if( window.localStorage.getItem("personId")=="6"){
+            this.noHitFlag = false;
+          }
           console.log("param")
           if ((data['data'].person1 != null && data['data'].person1 != "" && data['data'].person1 != undefined) && window.localStorage.getItem("personId") == "1") {
             this.answer1 = data['data'].person1[this.queId1]
@@ -339,6 +342,8 @@ export class Module521Component implements OnInit {
     if (window.localStorage.getItem("personId") == "5") {
       this.confirmationModal.show();
       this.LanguageService.toShow();
+      this.personId=5;
+      this.noHitFlag = false;
     }
 
     if (!assignForm.dirty) {

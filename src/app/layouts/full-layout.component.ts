@@ -195,8 +195,9 @@ export class FullLayoutComponent implements OnInit {
       "UserLogout",
       10
     );
-    this.FullLayoutService.logoutService(this.token).subscribe(
+    this.FullLayoutService.logoutService().subscribe(
       data => {
+        console.log("logout enters")
         if (data["Response"] == "User Logged Out") {
           window.localStorage.clear();
           this.router.navigate(["/"]);
@@ -2607,7 +2608,7 @@ export class FullLayoutComponent implements OnInit {
       window.localStorage.getItem("mainFlagModule0")
     );
     if (this.mainFlagModule0 > 4) {
-      this.currentFlag1 = false;
+      // this.currentFlag1 = false;
       this.module0OnOffFlag = true;
       this.module1OnOffFlag = true;
       this.mainFlagModule1 = 1;

@@ -34,10 +34,10 @@
     <ul class="nav-dropdown-items submenu list-unstyled components">
       <div *ngIf="!permission.user_admin">
         <li *ngIf="userType=='master_trainer' || userType=='admin' ||userType=='superadmin'|| userType=='co_ordinator'">
-          <span class="bottom-divider" href="#authSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" *ngIf="userType=='admin' || userType=='superadmin'">
+          <span class="bottom-divider" href="#authSubmenu" data-toggle="collapse" aria-expanded="false" *ngIf="userType=='admin' || userType=='superadmin'">
             <a class="nav-link nav-dropdown-toggle">{{'Dashboard.admin' | translate}}</a>
           </span>
-          <span class="bottom-divider" href="#authSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" *ngIf="userType=='co_ordinator'">
+          <span class="bottom-divider" href="#authSubmenu" data-toggle="collapse" aria-expanded="false" *ngIf="userType=='co_ordinator'">
             <a class="nav-link nav-dropdown-toggle">{{'Dashboard.co-ordinator' | translate}}</a>
           </span>
           <ul class="collapse list-unstyled" id="authSubmenu">
@@ -72,10 +72,10 @@
               (click)="currentStatus(0)" [class.deactive-menu1]="!module0OnOffFlag">{{'L2Module0.title1' | translate}}</a>
           </span>
           <span *ngIf="currentFlag0">
-            <a href="#module0Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [ngClass]="{'dropdown-toggle': module0OnOffFlag }" (click)=" mainFlag == true ? instruction0() : undefined;mainFlag = false"
+            <a href="#module0Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [ngClass]="{'dropdown-toggle': module0OnOffFlag }" (click)="instruction0()"
               [class.deactive-menu1]="!module0OnOffFlag">{{'L2Module0.title1' | translate}}</a>
           </span>
-
+      
           <ul class="collapse list-unstyled" id="module0Submenu">
             <li [class.activeMenu]="router['url']==='/modules/Module0'">
               <span *ngIf="mainFlagModule0 < 1">
@@ -130,7 +130,7 @@
           </span>
           <span *ngIf="currentFlag1">
             <a href="#module1Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [class.deactive-menu1]="!module1OnOffFlag"
-              (click)=" mainFlag == true ? instruction() : undefined">
+              (click)="instruction()">
               <span>{{'number.1' | translate}}.
               </span>{{'L2Module1.title' | translate}}
               <span *ngIf="statusFlag" class="reward-icon">
@@ -138,6 +138,7 @@
               </span>
             </a>  
           </span>
+          
           <ul class="collapse list-unstyled" id="module1Submenu">
             <li class="nav-item" [class.activeMenu]="router['url']==='/modules/module1'">
               <span *ngIf="mainFlagModule1 < 1">
@@ -1543,7 +1544,7 @@
                     <img [src]="animatedImageJson['c3']" alt="" class="img3 mt-5 pt-3"> -->
               </div>
             </div>
-            <span class="p-3" *ngIf="needEfforts && (moduleCompleteStatus['type'] == 'moduleFinish')">
+            <span class="p-3" *ngIf="needEfforts && (moduleCompleteStatus['type'] == 'moduleFinish' || 'allFinish')">
               {{'layout.needEfforts' | translate}}
             </span>
             <!-- <div *ngIf="moduleCompleteStatus['type'] == 'allFinish'">
@@ -1636,7 +1637,7 @@
             <div class="col-md-10 col-xs-12 col-sm-12">
               <div id="main">
                 <div>
-                  <img class="img-responsive img-mitra" src="../../assets/img/expressions/clapping.png">
+                  <img *ngIf="!needEfforts" class="img-responsive img-mitra" src="../../assets/img/expressions/clapping.png">
                   <img *ngIf="needEfforts" class="img-responsive img-mitra" src="../../assets/img/expressions/wrong_ans.png">
                 </div>
                 <div [class.pl-4]="needEfforts">

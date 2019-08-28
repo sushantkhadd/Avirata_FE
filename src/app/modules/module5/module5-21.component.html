@@ -61,7 +61,7 @@
     <div class="card">
       <div class="card-block pt-4">
         <div class="row">
-          <div class="ml-3 counter mb-3 font-weight-bold">{{'L2Module5.interviewer' | translate}} {{personId | numberConvertor : 'Devanagari'}}</div>
+          <div class="ml-3 counter mb-3 font-weight-bold" *ngIf="noHitFlag">{{'L2Module5.interviewer' | translate}} {{personId | numberConvertor : 'Devanagari'}}</div>
         </div>
         
         <form #assignForm="ngForm" *ngIf="noHitFlag">
