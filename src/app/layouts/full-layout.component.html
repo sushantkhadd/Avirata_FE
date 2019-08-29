@@ -1637,13 +1637,13 @@
             <div class="col-md-10 col-xs-12 col-sm-12">
               <div id="main">
                 <div>
-                  <img *ngIf="!needEfforts" class="img-responsive img-mitra" src="../../assets/img/expressions/clapping.png">
-                  <img *ngIf="needEfforts" class="img-responsive img-mitra" src="../../assets/img/expressions/wrong_ans.png">
+                  <img class="img-responsive img-mitra" src="../../assets/img/expressions/clapping.png">
+                  <img *ngIf="needEfforts1" class="img-responsive img-mitra" src="../../assets/img/expressions/wrong_ans.png">
                 </div>
-                <div [class.pl-4]="needEfforts">
+                <div [class.pl-4]="needEfforts1">
                   <!-- <h1 class="congrats-text">{{'layout.congo' | translate}} </h1> -->
-                  <img *ngIf="!needEfforts" class="img-responsive" src="../../assets/img/rewards/single-stars/abhinandan.png" alt="Abhinandan">
-                  <h5 class="congrats-text" *ngIf="needEfforts">
+                  <img *ngIf="!needEfforts1" class="img-responsive" src="../../assets/img/rewards/single-stars/abhinandan.png" alt="Abhinandan">
+                  <h5 class="congrats-text" *ngIf="needEfforts1">
                     {{'layout.workHard' | translate}}
                   </h5>
                   <h5 style="color:#347294">{{userName}}</h5>
@@ -1668,7 +1668,7 @@
             <!-- <h5 id="demo1" class="success-line" *ngIf="moduleCompleteStatus['type'] == 'moduleFinish'">
               {{'layout.cupMessage' | translate}}
             </h5> -->
-            <h5 id="demo1" class="success-line p-3" *ngIf="moduleCompleteStatus['type'] == 'allFinish' && !needEfforts">
+            <h5 id="demo1" class="success-line p-3" *ngIf="moduleCompleteStatus['type'] == 'allFinish' && !needEfforts1">
               {{'layout.cupMessage' | translate}}
             </h5>
           </div>
@@ -1692,7 +1692,7 @@
         </div>
       </div>
 
-      <div class="row mt-2 justify-content-center social-icons" *ngIf="!needEfforts">
+      <div class="row mt-2 justify-content-center social-icons" *ngIf="!needEfforts1">
         <ul data-html2canvas-ignore class="social-logo">
           <!-- <li>
             <a class="c-pointer" (click)="downloadReward()">
@@ -1719,10 +1719,10 @@
           </li>
         </ul>
       </div>
-      <div class="col-md-12" *ngIf="!needEfforts">
+      <div class="col-md-12" *ngIf="!needEfforts1">
           <span class="mb-2" data-html2canvas-ignore>{{'layout.download_popupmsg' | translate}}</span>
       </div>
-      <div [ngClass]="needEfforts ? 'pt-3': 'pt-1'" class="modal-footer justify-content-center pt-1 pb-4">
+      <div [ngClass]="needEfforts1 ? 'pt-3': 'pt-1'" class="modal-footer justify-content-center pt-1 pb-4">
         <span>
           <button data-html2canvas-ignore class="btn btn-primary text-center" appPreventDoubleClick (debounceClick)="closeMe()">{{'Stepper.Next' | translate}}</button>
         </span>

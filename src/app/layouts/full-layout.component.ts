@@ -47,7 +47,7 @@ export class FullLayoutComponent implements OnInit {
   imgUrl;
   rewardsFlag;
   cupImg;
-  needEfforts;
+  needEfforts;needEfforts1;
   subscription: Subscription; isloaded; grandPercent;
   @ViewChild("passwordChangeModal") public passwordChangeModal: ModalDirective;
   @ViewChild("moduleStatusModal") public moduleStatusModal: ModalDirective;
@@ -2463,7 +2463,7 @@ export class FullLayoutComponent implements OnInit {
         // console.log('bronze');
       } else if (this.grandPercent >= 0 &&
         this.grandPercent < 10) {
-        this.needEfforts = true;
+        this.needEfforts1 = true;
       }
 
       if (perval0 == false && this.levelData[0].status == true) {
@@ -3018,6 +3018,7 @@ export class FullLayoutComponent implements OnInit {
     this.LanguageService.toHide();
 
     if (this.moduleCompleteStatus["type"] == "allFinish") {
+      this.needEfforts = false;
       this.moduleStatusModal.hide();
       this.LanguageService.toHide();
       this.moduleStatusCupModal.show();
@@ -3112,6 +3113,7 @@ export class FullLayoutComponent implements OnInit {
   }
 
   cupModelShow() {
+    this.needEfforts = false;
     this.moduleStatusModal.hide();
     this.LanguageService.toHide();
     this.moduleStatusCupModal.show();

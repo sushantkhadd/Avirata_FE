@@ -44,6 +44,7 @@ export class LevelSelectionComponent implements OnInit {
     this.userType = window.localStorage.getItem('group_name');
     this.startDate = window.localStorage.getItem('startDate');
     this.endDate = window.localStorage.getItem('endDate');
+    this.userName = window.localStorage.getItem("firstname");
     this.lvl1Current = false;
     this.lvl1Complete = false;
     this.lvl2Current = false;

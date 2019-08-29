@@ -17,7 +17,7 @@ import { ToastsManager } from 'ng6-toastr';
 })
 export class TalukaUserListComponent implements OnInit {
   public userType; selectedDistrict; allTalukas; selectedTaluka = 'all'; selectedRole = 'all';
-  public loader; showDetailTableFlag; showTaluka;
+  public loader; showDetailTableFlag; showTaluka;talukaId;
   public overviewList; userList; exportData; showReset;exportData1={};ex;
   public time1; tmSec1; countDown; tick = 1000;selectedLevel;
   public time2; tmSec2; countDown2; tick2 = 1000; showReset2;
@@ -59,7 +59,8 @@ export class TalukaUserListComponent implements OnInit {
       jsonBody['level'] = "3";
     }
       this.showTaluka = window.localStorage.getItem('talukaname')
-      jsonBody['taluka_name'] = ''
+      this.talukaId = window.localStorage.getItem('talukaid')
+      jsonBody['taluka_name'] = this.talukaId;
       jsonBody['role'] = 'trainee'
       this.apiCall(jsonBody, 'l2talukawiseuserreport/', 'mtview')
   }
