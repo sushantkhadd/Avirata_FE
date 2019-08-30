@@ -19,7 +19,7 @@ export class TalukaUserListComponent implements OnInit {
   public userType; selectedDistrict; allTalukas; selectedTaluka = 'all'; selectedRole = 'all';
   public loader; showDetailTableFlag; showTaluka;talukaId;
   public overviewList; userList; exportData; showReset;exportData1={};ex;
-  public time1; tmSec1; countDown; tick = 1000;selectedLevel;
+  public time1; tmSec1; countDown; tick = 1000;selectedLevel;level;
   public time2; tmSec2; countDown2; tick2 = 1000; showReset2;
 
   constructor(public translate: TranslateService, private csvService: CsvService, public CommonComponentService: CommonComponentService, public router: Router, public toastr: ToastsManager, vcr: ViewContainerRef) {
@@ -32,6 +32,7 @@ export class TalukaUserListComponent implements OnInit {
     this.showReset2 = false;
     this.showDetailTableFlag = false
     this.selectedLevel = "L3";
+    this.level ="Level 3";
     this.userType = window.localStorage.getItem('group_name')
     var jsonBody = {}
     if (this.userType == 'master_trainer') {
@@ -59,7 +60,7 @@ export class TalukaUserListComponent implements OnInit {
       jsonBody['level'] = "3";
     }
       this.showTaluka = window.localStorage.getItem('talukaname')
-      this.talukaId = window.localStorage.getItem('talukaid')
+      this.talukaId = window.localStorage.getItem('tempTaluka')
       jsonBody['taluka_name'] = this.talukaId;
       jsonBody['role'] = 'trainee'
       this.apiCall(jsonBody, 'l2talukawiseuserreport/', 'mtview')
@@ -70,11 +71,14 @@ export class TalukaUserListComponent implements OnInit {
     var jsonBody = {}
     if (this.selectedLevel == "L1") {
       jsonBody['level'] = "1";
+      this.level = "Level 1"
     } else if (this.selectedLevel == "L2") {
       jsonBody['level'] = "2";
+      this.level = "Level 2"
     } else if (this.selectedLevel == "L3")
     {
       jsonBody['level'] = "3";
+      this.level = "Level 3"
     }
     jsonBody['taluka_name'] = this.selectedTaluka
     jsonBody['role'] = this.selectedRole
@@ -202,7 +206,8 @@ export class TalukaUserListComponent implements OnInit {
         tempTaluka=element['taluka_id']
       }
     });
-
+    console.log("level",this.level)
+    window.localStorage.setItem("tempTaluka",tempTaluka)
     var jsonBody = {}
     jsonBody['level'] = '3'
     jsonBody['taluka_name'] = tempTaluka

@@ -40,13 +40,7 @@
       </div>
       <div class="card-body">
           <div class="col-md-4 p-30-xs float-right mb-2">
-              <select class="form-control" name="selectedLevel" id="selectedLevel" [(ngModel)]="selectedLevel"
-                 (change)="getLevel()">
-                <option value="" disabled>Select Level</option>
-                <option value="L1">Level 1</option> 
-                <option value="L2">Level 2</option>
-                <option value="L3">Level 3</option>
-              </select>
+              <input type="text" [(ngModel)]="level" disabled>
           </div>
         <div class="table-responsive" [class.padbottom]="loader==true">
           <table class="table table-hover mar-btm-0" [mfData]="userList" #mf="mfDataTable" [mfRowsOnPage]="10">

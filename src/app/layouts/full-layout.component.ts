@@ -2463,7 +2463,7 @@ export class FullLayoutComponent implements OnInit {
         // console.log('bronze');
       } else if (this.grandPercent >= 0 &&
         this.grandPercent < 10) {
-        this.needEfforts1 = true;
+          this.cupImg = '';
       }
 
       if (perval0 == false && this.levelData[0].status == true) {
