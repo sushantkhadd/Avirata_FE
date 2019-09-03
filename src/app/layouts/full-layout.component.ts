@@ -46,7 +46,7 @@ export class FullLayoutComponent implements OnInit {
   private trainee = false;
   imgUrl;
   rewardsFlag;
-  cupImg;
+  cupImg;profileFlag;
   needEfforts;needEfforts1;
   subscription: Subscription; isloaded; grandPercent;
   @ViewChild("passwordChangeModal") public passwordChangeModal: ModalDirective;
@@ -382,6 +382,7 @@ export class FullLayoutComponent implements OnInit {
     // {
     //   this.setInterval()
     // }
+    this.profileFlag = window.localStorage.getItem("is_profile_visible");
   this.starPopupFlag = false;
     this.subscription = this.sharedService.getData().subscribe(data => {
       console.log("sharedServicedata", data);
@@ -2427,7 +2428,7 @@ export class FullLayoutComponent implements OnInit {
   ngDoCheck() {
     this.moduleStatus0 = window.localStorage.getItem("currentstatus")
     //console.log('current finish module',this.moduleStatus0)
-
+    this.profileFlag = window.localStorage.getItem("is_profile_visible");
     if (
       localStorage.getItem("levelData") != null &&
       localStorage.getItem("levelData") != "" &&

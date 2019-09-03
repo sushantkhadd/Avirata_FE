@@ -143,6 +143,7 @@ import { Module04Component } from './module0/module0-4.component';
 import { MasterstatComponent } from './masterstat/masterstat.component';
 import { PresentlistComponent } from "./masterstat/presentlist.component";
 import {DatePipe} from '@angular/common';
+import { SetProfileComponent } from './admin-Report/set-profile/set-profile.component';
 
 @NgModule({
   imports: [
@@ -284,7 +285,8 @@ import {DatePipe} from '@angular/common';
     FeedbackComponent,
     Module04Component,
     MasterstatComponent,
-    PresentlistComponent
+    PresentlistComponent,
+    SetProfileComponent
   ],
   providers: [
     Module0Service,

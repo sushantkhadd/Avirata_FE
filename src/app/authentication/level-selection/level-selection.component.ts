@@ -19,7 +19,7 @@ export class LevelSelectionComponent implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
   public completedLevelJson; lvl1Current; lvl1Complete; lvl2Current; lvl2Complete;
-  lvl3Current; lvl3Complete;
+  lvl3Current; lvl3Complete;profileFlag;
   superAdminFlag; currentLevel; userType;
   complete = "पूर्ण";
   start1 = "पहिला टप्पा सुरू करण्यासाठी येथे क्लिक करा.";
@@ -78,6 +78,7 @@ export class LevelSelectionComponent implements OnInit {
     {
       this.noAccessFlag = true
       window.localStorage.setItem("hidemenu","true");
+      this.profileFlag = window.localStorage.getItem("is_profile_visible");
       if (
         window.localStorage.getItem("firstname") != null &&
         window.localStorage.getItem("firstname") != null &&

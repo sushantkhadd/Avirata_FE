@@ -14,7 +14,13 @@
       <!-- <a class="nav-link" routerLinkActive="active" [routerLink]="['/dashboard']"><i class="icon-speedometer"></i>
         {{'Dashboard.Dashboard' | translate}}</a> -->
       <ul class="nav d-block">
-        <li class="nav-item" [class.activeMenu]="router['url']==='/dashboard'">
+        <li class="nav-item" *ngIf="hideMenuAdminFlag" [class.activeMenu]="router['url']==='/level-selection'">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/level-selection']">
+            <i class="icon-speedometer"></i>&nbsp;&nbsp; {{'Dashboard.Dashboard' | translate}}</a>
+          <!-- <button (click)="successModal.show()">successModal</button> -->
+
+        </li>
+        <li class="nav-item" *ngIf="!hideMenuAdminFlag" [class.activeMenu]="router['url']==='/dashboard'">
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/dashboard']">
             <i class="icon-speedometer"></i>&nbsp;&nbsp; {{'Dashboard.Dashboard' | translate}}</a>
           <!-- <button (click)="successModal.show()">successModal</button> -->
@@ -49,9 +55,9 @@
                 <li class="nav-item" [class.activeMenu]="router['url']==='/modules/masterstat'">
                   <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/masterstat']">{{'Quiz.registered' | translate}}</a>
                 </li>
-                <li class="nav-item" [class.activeMenu]="router['url']==='/modules/presentTrainee'">
+                <!-- <li class="nav-item" [class.activeMenu]="router['url']==='/modules/presentTrainee'">
                   <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/presentTrainee']">{{'Quiz.not accepted' | translate}}</a>
-                </li>
+                </li> -->
               </ul>
             </li>
             <li class="nav-item" *ngIf="userType=='admin' || userType=='superadmin'" routerLinkActive="activeMenu">
@@ -1140,7 +1146,7 @@
                   <div class="dropdown-header">
                     <strong>{{'Dashboard.Account' | translate}}</strong>
                   </div>
-                  <a class="dropdown-item" [routerLink]="['/dashboard/profile']">
+                  <a *ngIf="profileFlag=='true'" class="dropdown-item" [routerLink]="['/dashboard/profile']">
                     <em class="fa fa-user"></em>&nbsp;&nbsp;{{'Dashboard.Profile' | translate}}</a>
                   <a class="dropdown-item" (click)="clearFieldsResetPassword();">
                     <em class="fa fa-key"></em>&nbsp;&nbsp;{{'Profile.edit password' | translate}}</a>

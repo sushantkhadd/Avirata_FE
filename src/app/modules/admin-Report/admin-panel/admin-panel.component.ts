@@ -29,7 +29,7 @@ export class AdminPanelComponent implements OnInit {
   coordinatorTransfer;
   historyLog;
   notStartedCountL1; totalCountL1; notStartedCountL2; totalCountL2;notStartedCountL3;totalCountL3;
-  classFlag; piechartFlag;
+  classFlag; piechartFlag;showProfileData;
   l1TotalUsersCount; l1DesktopCount; l1MobCount; l1TabCount;
   l2TotalUsersCount; l2DesktopCount; l2MobCount; l2TabCount; loader; refreshLoader;
   l3TotalUsersCount; l3DesktopCount; l3MobCount; l3TabCount; inModuleCountL3; 
@@ -57,6 +57,7 @@ export class AdminPanelComponent implements OnInit {
     this.showParticipantData = false;
     this.showBatchDetails = false;
     this.showSearchData = false;
+    this.showProfileData = false;
     this.distAggregate = false;
     this.showNotification = false;
     this.showMailReport = false;
@@ -144,6 +145,7 @@ export class AdminPanelComponent implements OnInit {
     this.historyLog = false
     this.showNotification = false;
     this.showSearchData = false;
+    this.showProfileData = false;
     this.toggleSidebar();
   }
 
@@ -170,6 +172,7 @@ export class AdminPanelComponent implements OnInit {
       this.userTransferNReplace = false;
       this.coordinatorTransfer = false;
       this.historyLog = false;
+      this.showProfileData = false;
       this.toggleSidebar();
     }
   }
@@ -182,6 +185,19 @@ export class AdminPanelComponent implements OnInit {
     this.showDistrictData = false;
     this.coordinatorTransfer = false;
     this.historyLog = false;
+    this.showProfileData = false;
+    this.toggleSidebar();
+  }
+ 
+  setProfile(){
+    this.showDistrictData = false;
+    this.showParticipantData = false;
+    this.userTransferNReplace = false;
+    this.coordinatorTransfer = false;
+    this.historyLog = false
+    this.showNotification = false;
+    this.showSearchData = false;
+    this.showProfileData = true;
     this.toggleSidebar();
   }
 
@@ -193,6 +209,7 @@ export class AdminPanelComponent implements OnInit {
     this.coordinatorTransfer = false;
     this.historyLog = false;
     this.showSearchData = false;
+    this.showProfileData = false;
     this.toggleSidebar();
   }
 
@@ -217,6 +234,7 @@ export class AdminPanelComponent implements OnInit {
     this.historyLog = false;
     this.showNotification = false;
     this.showSearchData = false;
+    this.showProfileData = false;
     this.toggleSidebar();
   }
   coordinatorTransferAndCreate() {
@@ -227,6 +245,7 @@ export class AdminPanelComponent implements OnInit {
     this.userTransferNReplace = false;
     this.showNotification = false;
     this.showSearchData = false;
+    this.showProfileData = false;
     this.toggleSidebar();
   }
 
@@ -238,11 +257,12 @@ export class AdminPanelComponent implements OnInit {
     this.userTransferNReplace = false;
     this.showNotification = false;
     this.showSearchData = false;
+    this.showProfileData = false;
     this.toggleSidebar();
   }
   setMenu() {
     window.localStorage.setItem("hidemenu", "false");
-    this.router.navigate(["/dashboard"]);
+    this.router.navigate(["/level-selection"]);
     let obJ = {};
     obJ['isAdmin'] = true;
     this._DataService.sendData(obJ);

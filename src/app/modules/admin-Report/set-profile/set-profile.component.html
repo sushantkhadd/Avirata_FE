@@ -1,0 +1,45 @@
+<div class="container">
+  <div class=row>
+      <div class="card col-md-12">
+          <div class="card-header text-center">
+            <h6 class="text-center">
+              <i class="fa fa-archive"></i> &nbsp;Set User Profile</h6>
+          </div>
+          <div class="card-block">
+            <form #formSearch="ngForm" name="formSearch" class="text-center">
+              <div class="form-group row">
+                <label for="search" class="col-md-4 col-form-label font-weight-bold">Set User  Profile</label>
+                <div class="col-md-5">
+                    <select class="form-control" name="group" id="group" [(ngModel)]="selectedGroup" (change)="getGroup()" required>
+                        <option value="" disabled>Select Role</option>
+                        <option value="trainee">Trainee</option>
+                        <option value="master_trainer">Master Trainer</option>
+                        <option value="co-ordinator">Co-ordinator</option>
+                        <option value="admin">Admin</option>
+                        <option value="super_admin">Super Admin</option>
+                      </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                  <label for="search" class="col-md-4 col-form-label font-weight-bold">Status</label>
+                <div class="col-md-5">
+                   
+                    <select class="form-control" name="status" id="status" [(ngModel)]="selectedStatus" (change)="getStatus()" required>
+                        <option value="" disabled>Select Status</option>
+                        <option value="active">Active</option>
+                        <option value="deactive">Deactive</option>
+                      </select>
+                </div>
+              </div>
+                <div class="mr-2">
+                  <button class="btn btn-primary" [disabled]="!formSearch.form.valid" appPreventDoubleClick (debounceClick)="setProfile()">
+                   Submit
+                  </button>
+                </div>
+          
+            </form> 
+        
+          </div>
+        </div>
+  </div>
+</div>
