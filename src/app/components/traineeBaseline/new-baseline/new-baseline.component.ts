@@ -648,6 +648,7 @@ export class NewBaselineComponent implements OnInit {
           } else if(window.localStorage.getItem('mainFlagModule2') == '7'){
               var current2 = [];
               current2 = JSON.parse(window.localStorage.getItem("currentJson2"));
+              window.localStorage.setItem('uuid', data['data'].nextuuid)
               var index = current2["children"].findIndex(
                 item => item.source == "module 2.7");
               var moduleJson = current2["children"][index]
@@ -670,7 +671,6 @@ export class NewBaselineComponent implements OnInit {
             }
             this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
             this.Module2Service.setLocalStorage2(8);
-            window.localStorage.setItem('uuid', data['data'].nextuuid)
 
             window.localStorage.setItem('mainFlagModule2', '8')
             window.localStorage.setItem('subFlagModule2', '1')

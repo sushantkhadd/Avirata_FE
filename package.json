@@ -50,6 +50,7 @@
     "popper.js": "^1.15.0",
     "rxjs": "~6.2.0",
     "rxjs-compat": "~6.2.1",
+    "stream": "0.0.2",
     "youtube-player": "^5.4.0",
     "zone.js": "~0.8.26"
   },

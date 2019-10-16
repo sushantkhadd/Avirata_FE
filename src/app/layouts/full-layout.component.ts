@@ -621,7 +621,7 @@ export class FullLayoutComponent implements OnInit {
       );
     } else if (window.localStorage.getItem("profileComplete") != "false") {
       this.temp = false;
-      if (moduleNo == 5) {
+      if (moduleNo >= 5) {
         this.jsonBody["module"] = "5";
       } else if (moduleNo == 4) {
         this.jsonBody["module"] = "4";
@@ -804,6 +804,7 @@ export class FullLayoutComponent implements OnInit {
     if (this.temp == false) {
       var i = 0;
       for (var key in obj) {
+        console.log("objuuif",obj)
         if (key == "uuid") {
           if (obj[key] != null) {
             if (
