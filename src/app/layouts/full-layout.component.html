@@ -1484,7 +1484,7 @@
             <div id="main">
               <h5 class="success-title">
                 <span *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' || moduleCompleteStatus['type'] == 'allFinish'">
-                  {{'layout.module' | translate}} {{moduleCompleteStatus['moduleNo']}}. {{moduleCompleteStatus['finishHead']}}
+                  <span *ngIf="moduleStatus0 > 1">{{'layout.module' | translate}} {{moduleCompleteStatus['moduleNo']}}.</span> {{moduleCompleteStatus['finishHead']}}
                 </span>
                 <!-- <span *ngIf="moduleCompleteStatus['type'] == 'allFinish'">
                       {{'layout.course' | translate}}
