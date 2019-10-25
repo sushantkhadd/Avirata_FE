@@ -199,7 +199,7 @@ export class McqcomponentComponent implements OnInit {
         console.log("bunchmcq",this.tasks);
         this.bunchOptions = [{"option":"a","value":"अस्वास्थ्याशी निगडित"},
                             {"option":"b","value":"आजाराशी निगडित"},
-                            {"option":"c","value":"निगडित नाहीत"}];
+                            {"option":"c","value":"वरील दोन्हीशी निगडित नाही"}];
           for(var i=0; i<this.bunchOptions.length;i++){
             this.priorities.push(this.bunchOptions[i].value)
   
