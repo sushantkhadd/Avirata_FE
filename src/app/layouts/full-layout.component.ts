@@ -3196,7 +3196,7 @@ export class FullLayoutComponent implements OnInit {
         this.moduleStatusModal.show()
         this.moduleCompleteStatus['type'] = 'allFinish'
         this.moduleCompleteStatus['moduleNo'] = "५"
-        this.moduleCompleteStatus['finishHead'] = "शिक्षक - एक करिअर समुपदेशक"
+        this.moduleCompleteStatus['finishHead'] = "शिक्षक - एक करिअर मार्गदर्शक"
         var current1;
         current1 = JSON.parse(window.localStorage.getItem("levelData"))
         percent = parseInt(current1[5].percent);
