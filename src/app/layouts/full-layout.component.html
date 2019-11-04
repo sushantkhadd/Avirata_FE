@@ -811,7 +811,7 @@
           <span *ngIf="currentFlag5">
             <a href="#module5Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" [class.deactive-menu1]="!module5OnOffFlag">
               <span>{{'number.5' | translate}}. </span>{{'L2Module5.title' | translate}}
-              <span *ngIf="statusFlag" class="reward-icon">
+              <span *ngIf="statusFlag && mainFlagModule5>24" class="reward-icon">
                 <em data-toggle="tooltip" title="Click here to open!" (click)="showStarPopUp(5)" class="fas" [ngClass]="rewardImgUrl5"></em>
               </span>
             </a>

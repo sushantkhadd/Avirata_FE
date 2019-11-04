@@ -2533,7 +2533,14 @@ export class FullLayoutComponent implements OnInit {
         } else if (percent5 >= 10 && percent5 < 50) {
           this.rewardImgUrl5 = this.imageJson["a3"];
         } else if (percent5 >= 0 && percent5 < 10) {
-          this.rewardImgUrl5 = this.imageJson["a4"];
+          // this.rewardImgUrl5 = this.imageJson["a4"];
+          if(this.cupImg==1){
+            this.rewardImgUrl5='fa-trophy gold_star'
+          }else if(this.cupImg==2){
+            this.rewardImgUrl5='fa-trophy silver_star'
+          }else if(this.cupImg==3){
+            this.rewardImgUrl5='fa-trophy bronze_star'
+          }
         }
       }
     }
@@ -3193,7 +3200,21 @@ export class FullLayoutComponent implements OnInit {
     if(val == 5){
       if(parseInt(window.localStorage.getItem("currentstatus")) > 5){
         this.starPopupFlag = false;
-        this.moduleStatusModal.show()
+        // this.moduleStatusModal.show()
+        
+        let percent5 = parseInt(this.levelData[5].percent);
+        var perval5 = isNaN(percent5);
+
+      if (perval5 == false && this.levelData[5].status == true) {
+          if (percent5 >= 0 && percent5 < 10) {
+            this.moduleStatusCupModal.show();
+          }else{
+            this.moduleStatusModal.show()
+          }
+        }else{
+          this.moduleStatusModal.show()
+        }
+
         this.moduleCompleteStatus['type'] = 'allFinish'
         this.moduleCompleteStatus['moduleNo'] = "५"
         this.moduleCompleteStatus['finishHead'] = "शिक्षक - एक करिअर मार्गदर्शक"
