@@ -34,6 +34,7 @@ export class AdminPanelComponent implements OnInit {
   l2TotalUsersCount; l2DesktopCount; l2MobCount; l2TabCount; loader; refreshLoader;
   l3TotalUsersCount; l3DesktopCount; l3MobCount; l3TabCount; inModuleCountL3; 
   inModuleCountL1; inModuleCountL2; L1_status; L2_status; L3_status; mouseOvered1; mouseOvered2; mouseOvered3; reportUrl; isLoaded;
+  resultl1;resultl2;resultl3
   constructor(
     public AdminReportService: AdminReportService,
     private router: Router,
@@ -371,11 +372,11 @@ export class AdminPanelComponent implements OnInit {
     ).subscribe(
       data => {
         if (data['message'] == "ok") {
-          var result = data['data'].result[0];
-          console.log(result)
+          this.resultl1 = data['data'].result[0];
+          console.log(this.resultl1)
           var dJson = {};
           var demo = [];
-          dJson = result;
+          dJson = this.resultl1;
           for (let i in dJson) {
             var j = {};
             console.log("key : " + i + " - value : " + dJson[i]);
@@ -398,11 +399,9 @@ export class AdminPanelComponent implements OnInit {
             if (i == "completed") {
               this.totalCountL1 = dJson[i];
             }
-
             if (i == "not_started") {
               this.notStartedCountL1 = dJson[i];
             }
-
             if (i == "in_module") {
               this.inModuleCountL1 = dJson[i];
             }
@@ -452,11 +451,11 @@ export class AdminPanelComponent implements OnInit {
     ).subscribe(
       data => {
         if (data['message'] == "ok") {
-          var result = data['data'].result[0];
-          console.log(result)
+          this.resultl2 = data['data'].result[0];
+          console.log(this.resultl2)
           var dJson = {};
           var demo = [];
-          dJson = result;
+          dJson = this.resultl2;
           for (let i in dJson) {
             var j = {};
             console.log("key : " + i + " - value : " + dJson[i]);
@@ -533,11 +532,11 @@ export class AdminPanelComponent implements OnInit {
     ).subscribe(
       data => {
         if (data['message'] == "ok") {
-          var result = data['data'].result[0];
-          console.log(result)
+          this.resultl3 = data['data'].result[0];
+          console.log(this.resultl3)
           var dJson = {};
           var demo = [];
-          dJson = result;
+          dJson = this.resultl3;
           for (let i in dJson) {
             var j = {};
             console.log("key : " + i + " - value : " + dJson[i]);
