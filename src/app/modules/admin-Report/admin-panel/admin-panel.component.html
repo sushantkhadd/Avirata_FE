@@ -121,15 +121,15 @@
                 <button class="btn btn-primary mb-1 mr-2" (click)="refresh()">Refresh &nbsp; <em
                     class="fas fa-sync"></em></button>
               </div>
-              <div class="col-md-12 left-content mb-4">
-                <div class="row bg-custom">
+              <div class="col-md-12 left-content mb-4 bg-custom">
+                <div class="row ">
                   <div class="col-12">
                     <div class="card-header">
                       <h6>Level 1</h6>
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    <div class="card bg-primary mt-1">
+                  <div class="col-md-6">                     
+                     <div class="card bg-primary mt-1">
                       <div class="card-block">
                         <div class="counter-wrap p-1">
                           <div class="row">
@@ -154,7 +154,7 @@
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> 
                   </div>
                   <div class="col-md-6">
                     <div class="card bg-danger mt-1">
@@ -204,37 +204,80 @@
                     </div>
                   </div>
                   <div class="col-12 text-center">
-                    <div class="arrow" [ngClass]="!mouseOvered1 ? 'bounce' : ''" (mouseover)="mouseOvered1=true"
+                    <div class="arrow" [ngClass]="!mouseOvered1 ? '' : ''" (mouseover)="mouseOvered1=true"
                       (mouseout)="mouseOvered1=false">
                       <a class="c-pointer" (click)="L1_status =! L1_status">
-                        <em class="fa fa-arrow-down fa-2x"></em>
-                      </a>
+                          <em [ngClass]="!L1_status ? 'fa fa-chevron-down fa-2x' : 'fa fa-chevron-up fa-2x'"></em>
+                        </a>
                     </div>
-                  </div>
+                  </div>                   
                 </div>
-                <div class="row mx-auto justify-content-center" *ngIf="L1_status">
+                <div class="row mx-auto" *ngIf="L1_status">
                   <div class="col-md-6">
-                    <div class="card custom-minh">
-                      <div class="card-block">
-                        <dx-pie-chart id="pie" title="Level 1 Current Status" palette="bright"
-                          [dataSource]="alluserstatusreportL1">
-                          <dxo-legend orientation="horizontal" itemTextPosition="right" horizontalAlignment="center"
-                            verticalAlignment="bottom" [columnCount]="4"></dxo-legend>
-                          <dxo-export [enabled]="true"></dxo-export>
-                          <dxi-series argumentField="que" valueField="val">
-                            <dxo-label [visible]="true" position="columns" [customizeText]="customizeLabel">
-                              <dxo-font [size]="16"></dxo-font>
-                              <dxo-connector [visible]="true" [width]="0.5"></dxo-connector>
-                            </dxo-label>
-                          </dxi-series>
-                        </dx-pie-chart>
+                      <table class="table table-bordered" >                          
+                           <tbody >
+                              <tr>
+                                <td>Not Started</td>
+                                <td>{{resultl1['not_started']}}</td> 
+                              </tr>                               
+                              <tr>
+                                <td>In Module 1</td>
+                                <td>{{resultl1['in_module1']}}</td>
+                              </tr>
+                              <tr>
+                                <td>In Module 2</td>
+                                <td>{{resultl1['com_module1']}}</td> 
+                              </tr>
+                              <tr>
+                                <td>In Module 3</td>
+                                <td>{{resultl1['com_module2']}}</td> 
+                              </tr>
+                              <tr>
+                                <td>In Module 4</td>
+                                <td>{{resultl1['com_module3']}}</td> 
+                              </tr>
+                              <tr>
+                                <td>In Module 5</td>
+                                <td>{{resultl1['com_module4']}}</td>
+                              </tr>
+                              <tr>
+                                  <td>Endline</td>
+                                  <td>{{resultl1['com_module5']}}</td>
+                                </tr>
+                              <tr>
+                                <td>Completed</td>
+                                <td>{{resultl1['completed']}}</td>
+                              </tr>
+                              <tr class="total">
+                                <td><strong>Total</strong></td>
+                                <td>{{resultl1['not_started']+resultl1['in_module1']+resultl1['com_module1']+resultl1['com_module2']+resultl1['com_module3']+resultl1['com_module4']+resultl1['com_module5']+resultl1['completed']}}</td>
+                              </tr>
+                            </tbody> 
+                        </table>
+                  </div>
+                    <div class="col-md-6">
+                      <div class="card custom-minh">
+                        <div class="card-block">
+                          <dx-pie-chart id="pie" title="Level 1 Current Status" palette="bright"
+                            [dataSource]="alluserstatusreportL1">
+                            <dxo-legend orientation="horizontal" itemTextPosition="right" horizontalAlignment="center"
+                              verticalAlignment="bottom" [columnCount]="4"></dxo-legend>
+                            <dxo-export [enabled]="true"></dxo-export>
+                            <dxi-series argumentField="que" valueField="val">
+                              <dxo-label [visible]="true" position="columns" [customizeText]="customizeLabel">
+                                <dxo-font [size]="16"></dxo-font>
+                                <dxo-connector [visible]="true" [width]="0.5"></dxo-connector>
+                              </dxo-label>
+                            </dxi-series>
+                          </dx-pie-chart>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
+               
               </div>
-              <div class="col-md-12 left-content mb-4">
-                <div class="row bg-custom">
+              <div class="col-md-12 left-content mb-4 bg-custom">
+                <div class="row ">
                   <div class="col-12">
                     <div class="card-header">
                       <h6>Level 2</h6>
@@ -316,15 +359,61 @@
                     </div>
                   </div>
                   <div class="col-12 text-center">
-                    <div class="arrow" [ngClass]="!mouseOvered2 ? 'bounce' : ''" (mouseover)="mouseOvered2=true"
+                    <div class="arrow" [ngClass]="!mouseOvered2 ? '' : ''" (mouseover)="mouseOvered2=true"
                       (mouseout)="mouseOvered2=false">
                       <a class="c-pointer" (click)="L2_status =! L2_status">
-                        <em class="fa fa-arrow-down fa-2x"></em>
-                      </a>
+                          <em [ngClass]="!L2_status ? 'fa fa-chevron-down fa-2x' : 'fa fa-chevron-up fa-2x'"></em>
+                        </a>
                     </div>
                   </div>
                 </div>
-                <div class="row mx-auto justify-content-center" *ngIf="L2_status">
+                <div class="row mx-auto" *ngIf="L2_status">
+                    <div class="col-md-6">
+                        <table class="table table-bordered" >                          
+                             <tbody >
+                                <tr>
+                                  <td>Not Started</td>
+                                  <td>{{resultl2['not_started']}}</td> 
+                                </tr>  
+                                <tr>
+                                    <td>Baseline</td>
+                                    <td>{{resultl2['in_module0']}}</td>
+                                  </tr>                             
+                                <tr>
+                                  <td>In Module 1</td>
+                                  <td>{{resultl2['com_module0']}}</td>
+                                </tr>
+                                <tr>
+                                  <td>In Module 2</td>
+                                  <td>{{resultl2['com_module1']}}</td> 
+                                </tr>
+                                <tr>
+                                  <td>In Module 3</td>
+                                  <td>{{resultl2['com_module2']}}</td> 
+                                </tr>
+                                <tr>
+                                  <td>In Module 4</td>
+                                  <td>{{resultl2['com_module3']}}</td> 
+                                </tr>
+                                <tr>
+                                  <td>In Module 5</td>
+                                  <td>{{resultl2['com_module4']}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Endline</td>
+                                    <td>{{resultl2['com_module5']}}</td>
+                                  </tr>
+                                <tr>
+                                  <td>Completed</td>
+                                  <td>{{resultl2['completed']}}</td>
+                                </tr>
+                                <tr class="total">
+                                  <td><strong>Total</strong></td>
+                                  <td>{{resultl2['not_started']+resultl2['in_module0']+resultl2['com_module0']+resultl2['com_module1']+resultl2['com_module2']+resultl2['com_module3']+resultl2['com_module4']+resultl2['com_module5']+resultl2['completed']}}</td>
+                                </tr>
+                              </tbody> 
+                          </table>
+                    </div>
                   <div class="col-md-6">
                     <div class="card custom-minh">
                       <div class="card-block">
@@ -345,8 +434,8 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-12 left-content mb-4">
-                <div class="row bg-custom">
+              <div class="col-md-12 left-content mb-4 bg-custom">
+                <div class="row ">
                   <div class="col-12">
                     <div class="card-header">
                       <h6>Level 3</h6>
@@ -428,15 +517,61 @@
                     </div>
                   </div>
                   <div class="col-12 text-center">
-                    <div class="arrow" [ngClass]="!mouseOvered3 ? 'bounce' : ''" (mouseover)="mouseOvered3=true"
+                    <div class="arrow" [ngClass]="!mouseOvered3 ? '' : ''" (mouseover)="mouseOvered3=true"
                       (mouseout)="mouseOvered3=false">
                       <a class="c-pointer" (click)="L3_status =! L3_status">
-                        <em class="fa fa-arrow-down fa-2x"></em>
+                        <em [ngClass]="!L3_status ? 'fa fa-chevron-down fa-2x' : 'fa fa-chevron-up fa-2x'"></em>
                       </a>
                     </div>
                   </div>
                 </div>
-                <div class="row mx-auto justify-content-center" *ngIf="L3_status">
+                <div class="row mx-auto" *ngIf="L3_status">
+                    <div class="col-md-6">
+                        <table class="table table-bordered" >                          
+                             <tbody >
+                                <tr>
+                                  <td>Not Started</td>
+                                  <td>{{resultl3['not_started']}}</td> 
+                                </tr>  
+                                <tr>
+                                    <td>Baseline</td>
+                                    <td>{{resultl3['in_module0']}}</td>
+                                  </tr>                             
+                                <tr>
+                                  <td>In Module 1</td>
+                                  <td>{{resultl3['com_module0']}}</td>
+                                </tr>
+                                <tr>
+                                  <td>In Module 2</td>
+                                  <td>{{resultl3['com_module1']}}</td> 
+                                </tr>
+                                <tr>
+                                  <td>In Module 3</td>
+                                  <td>{{resultl3['com_module2']}}</td> 
+                                </tr>
+                                <tr>
+                                  <td>In Module 4</td>
+                                  <td>{{resultl3['com_module3']}}</td> 
+                                </tr>
+                                <tr>
+                                  <td>In Module 5</td>
+                                  <td>{{resultl3['com_module4']}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Endline</td>
+                                    <td>{{resultl3['com_module5']}}</td>
+                                  </tr>
+                                <tr>
+                                  <td>Completed</td>
+                                  <td>{{resultl3['completed']}}</td>
+                                </tr>
+                                <tr class="total">
+                                  <td><strong>Total</strong></td>
+                                  <td>{{resultl3['not_started']+resultl3['in_module0']+resultl3['com_module0']+resultl3['com_module1']+resultl3['com_module2']+resultl3['com_module3']+resultl3['com_module4']+resultl3['com_module5']+resultl3['completed']}}</td>
+                                </tr>
+                              </tbody> 
+                          </table>
+                    </div>
                   <div class="col-md-6">
                     <div class="card custom-minh">
                       <div class="card-block">
