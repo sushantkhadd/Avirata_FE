@@ -383,16 +383,17 @@ export class AdminPanelComponent implements OnInit {
             j["val"] = dJson[i];
 
             i == "total" ? j["que"] = "Total" : "";
-            i == "not_started" ? j["que"] = "Not Started" : "";
-            i == "in_module0" ? j["que"] = "In Module0" : "";
-            i == "com_module0" ? j["que"] = "Base Module Complete" : "";
-            i == "com_module1" ? j["que"] = "Module1 Complete" : "";
-            i == "com_module2" ? j["que"] = "Module2 Complete" : "";
-            i == "com_module3" ? j["que"] = "Module3 Complete" : "";
-            i == "com_module4" ? j["que"] = "Module4 Complete" : "";
-            i == "com_module5" ? j["que"] = "Module5 Complete" : "";
-            i == "com_module6" ? j["que"] = "Endline Complete" : "";
-            i == "com_module7" ? j["que"] = "Project Complete" : "";
+            i == "not_started" ? j["que"] = "Not Started"+ " ("+dJson[i]+")" : "";
+            // i == "in_module0" ? j["que"] = "In Module0"+ " ("+dJson[i]+")" : "";
+            i == "com_module0" ? j["que"] = "In Module 1"+ " ("+dJson[i]+")" : "";
+            i == "com_module1" ? j["que"] = "In Module 2"+ " ("+dJson[i]+")" : "";
+            i == "com_module2" ? j["que"] = "In Module 3"+ " ("+dJson[i]+")" : "";
+            i == "com_module3" ? j["que"] = "In Module 4"+ " ("+dJson[i]+")" : "";
+            i == "com_module4" ? j["que"] = "In Module 5"+ " ("+dJson[i]+")" : "";
+            i == "com_module5" ? j["que"] = "Endline"+ " ("+dJson[i]+")" : "";
+            // i == "com_module6" ? j["que"] = "Endline Complete"+ " ("+dJson[i]+")" : "";
+            // i == "com_module7" ? j["que"] = "Project Complete"+ " ("+dJson[i]+")" : "";
+            i == "completed" ? j["que"] = "completed"+ " ("+dJson[i]+")" : "";
 
             if (i == "completed") {
               this.totalCountL1 = dJson[i];
@@ -406,13 +407,13 @@ export class AdminPanelComponent implements OnInit {
               this.inModuleCountL1 = dJson[i];
             }
 
-            if (i == "total" || i == "in_module0" || i == "not_started") {
+            if (i == "in_module" || i == "com_module6" || i == "com_module7") {
               delete j["que"];
             }
             demo.push(j);
           }
           this.alluserstatusreportL1 = demo;
-          console.log('demo', JSON.stringify(demo))
+          console.log('demo', this.alluserstatusreportL1)
           this.allUserStatusReportL2();
         }
       },
@@ -463,16 +464,16 @@ export class AdminPanelComponent implements OnInit {
             j["val"] = dJson[i];
 
             i == "total" ? j["que"] = "Total" : "";
-            i == "not_started" ? j["que"] = "Not Started" : "";
-            i == "in_module0" ? j["que"] = "In Module0" : "";
-            i == "com_module0" ? j["que"] = "Base Module Complete" : "";
-            i == "com_module1" ? j["que"] = "Module1 Complete" : "";
-            i == "com_module2" ? j["que"] = "Module2 Complete" : "";
-            i == "com_module3" ? j["que"] = "Module3 Complete" : "";
-            i == "com_module4" ? j["que"] = "Module4 Complete" : "";
-            i == "com_module5" ? j["que"] = "Module5 Complete" : "";
-            i == "com_module6" ? j["que"] = "Endline Complete" : "";
-            i == "com_module7" ? j["que"] = "Project Complete" : "";
+            i == "not_started" ? j["que"] = "Not Started"+ " ("+dJson[i]+")" : "";
+            i == "in_module0" ? j["que"] = "Baseline"+ " ("+dJson[i]+")" : "";
+            i == "com_module0" ? j["que"] = "In Module 1"+ " ("+dJson[i]+")" : "";
+            i == "com_module1" ? j["que"] = "In Module 2"+ " ("+dJson[i]+")" : "";
+            i == "com_module2" ? j["que"] = "In Module 3"+ " ("+dJson[i]+")" : "";
+            i == "com_module3" ? j["que"] = "In Module 4"+ " ("+dJson[i]+")" : "";
+            i == "com_module4" ? j["que"] = "In Module 5"+ " ("+dJson[i]+")" : "";
+            i == "com_module5" ? j["que"] = "Endline"+ " ("+dJson[i]+")" : "";
+            i == "completed" ? j["que"] = "completed"+ " ("+dJson[i]+")" : "";
+            // i == "com_module7" ? j["que"] = "Project Complete"+ " ("+dJson[i]+")" : "";
 
             if (i == "completed") {
               this.totalCountL2 = dJson[i];
@@ -487,13 +488,13 @@ export class AdminPanelComponent implements OnInit {
             }
 
 
-            if (i == "total" || i == "in_module0" || i == "not_started") {
+            if (i == "in_module" || i == "com_module6" || i == "com_module7") {
               delete j["que"];
             }
             demo.push(j);
           }
           this.alluserstatusreportL2 = demo;
-          console.log('demo', JSON.stringify(demo))
+          console.log('demo', this.alluserstatusreportL2)
           this.allUserStatusReportL3();
         }
       },
@@ -544,16 +545,16 @@ export class AdminPanelComponent implements OnInit {
             j["val"] = dJson[i];
 
             i == "total" ? j["que"] = "Total" : "";
-            i == "not_started" ? j["que"] = "Not Started" : "";
-            i == "in_module0" ? j["que"] = "In Module0" : "";
-            i == "com_module0" ? j["que"] = "Base Module Complete" : "";
-            i == "com_module1" ? j["que"] = "Module1 Complete" : "";
-            i == "com_module2" ? j["que"] = "Module2 Complete" : "";
-            i == "com_module3" ? j["que"] = "Module3 Complete" : "";
-            i == "com_module4" ? j["que"] = "Module4 Complete" : "";
-            i == "com_module5" ? j["que"] = "Module5 Complete" : "";
-            i == "com_module6" ? j["que"] = "Endline Complete" : "";
-            i == "com_module7" ? j["que"] = "Project Complete" : "";
+            i == "not_started" ? j["que"] = "Not Started" + " ("+dJson[i]+")" : "";
+            i == "in_module0" ? j["que"] = "Baseline" + " ("+dJson[i]+")" : "";
+            i == "com_module0" ? j["que"] = "In Module 1" + " ("+dJson[i]+")" : "";
+            i == "com_module1" ? j["que"] = "In Module 2" + " ("+dJson[i]+")" : "";
+            i == "com_module2" ? j["que"] = "In Module 3" + " ("+dJson[i]+")" : "";
+            i == "com_module3" ? j["que"] = "In Module 4" + " ("+dJson[i]+")" : "";
+            i == "com_module4" ? j["que"] = "In Module 5" + " ("+dJson[i]+")" : "";
+            i == "com_module5" ? j["que"] = "Endline" + " ("+dJson[i]+")" : "";
+            i == "completed" ? j["que"] = "completed" + " ("+dJson[i]+")" : "";
+            // i == "com_module7" ? j["que"] = "Project Complete" + " ("+dJson[i]+")" : "";
 
             if (i == "completed") {
               this.totalCountL3 = dJson[i];
@@ -567,13 +568,13 @@ export class AdminPanelComponent implements OnInit {
               this.inModuleCountL3 = dJson[i];
             }
 
-            if (i == "total" || i == "in_module0" || i == "not_started") {
+            if (i == "in_module") {
               delete j["que"];
             }
             demo.push(j);
           }
           this.alluserstatusreportL3 = demo;
-          console.log('demo', JSON.stringify(demo))
+          console.log('demoL33', this.alluserstatusreportL3)
         }
       },
       error => {
