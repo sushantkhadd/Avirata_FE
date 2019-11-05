@@ -126,13 +126,21 @@
                   <div class="col-12">
                     <div class="card-header">
                       <h6>Level 1</h6>
+                      <b class="adminTimer">{{countDown | async | formatTime}}</b>
                     </div>
+                    
                   </div>
                   <div class="col-md-6">                     
                      <div class="card bg-primary mt-1">
                       <div class="card-block">
                         <div class="counter-wrap p-1">
-                          <div class="row">
+                           <div class="row">
+                            <div class="col-md-4">
+                              <p class="d-inline">
+                                <em class="fas fa-clock fa-3x mb-2"></em>
+                                <span>{{notStartedCountL1}}</span>Pending
+                              </p>
+                            </div>
                             <div class="col-md-4">
                               <p class="d-inline">
                                 <em class="fas fa-users fa-3x mb-2"></em>
@@ -143,12 +151,6 @@
                               <p class="d-inline">
                                 <em class="fas fa-calendar-check fa-3x mb-2"></em>
                                 <span>{{totalCountL1}}</span>Completed
-                              </p>
-                            </div>
-                            <div class="col-md-4">
-                              <p class="d-inline">
-                                <em class="fas fa-clock fa-3x mb-2"></em>
-                                <span>{{notStartedCountL1}}</span>Pending
                               </p>
                             </div>
                           </div>
@@ -217,7 +219,7 @@
                       <table class="table table-bordered" >                          
                            <tbody >
                               <tr>
-                                <td>Not Started</td>
+                                <td>Pending</td>
                                 <td>{{resultl1['not_started']}}</td> 
                               </tr>                               
                               <tr>
@@ -281,6 +283,7 @@
                   <div class="col-12">
                     <div class="card-header">
                       <h6>Level 2</h6>
+                      <b class="adminTimer">{{countDown2 | async | formatTime}}</b>
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -290,6 +293,12 @@
                           <div class="row">
                             <div class="col-md-4">
                               <p class="d-inline">
+                                <em class="fas fa-clock fa-3x mb-2"></em>
+                                <span>{{notStartedCountL2}}</span>Pending
+                              </p>
+                            </div>
+                            <div class="col-md-4"> 
+                              <p class="d-inline">
                                 <em class="fas fa-users fa-3x mb-2"></em>
                                 <span>{{inModuleCountL2}}</span>In Module
                               </p>
@@ -298,12 +307,6 @@
                               <p class="d-inline">
                                 <em class="fas fa-calendar-check fa-3x mb-2"></em>
                                 <span>{{totalCountL2}}</span>Completed
-                              </p>
-                            </div>
-                            <div class="col-md-4">
-                              <p class="d-inline">
-                                <em class="fas fa-clock fa-3x mb-2"></em>
-                                <span>{{notStartedCountL2}}</span>Pending
                               </p>
                             </div>
                           </div>
@@ -372,7 +375,7 @@
                         <table class="table table-bordered" >                          
                              <tbody >
                                 <tr>
-                                  <td>Not Started</td>
+                                  <td>Pending</td>
                                   <td>{{resultl2['not_started']}}</td> 
                                 </tr>  
                                 <tr>
@@ -439,6 +442,7 @@
                   <div class="col-12">
                     <div class="card-header">
                       <h6>Level 3</h6>
+                      <b class="adminTimer">{{countDown2 | async | formatTime}}</b>
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -446,6 +450,12 @@
                       <div class="card-block">
                         <div class="counter-wrap p-1">
                           <div class="row">
+                            <div class="col-md-4">
+                              <p class="d-inline">
+                                <em class="fas fa-clock fa-3x mb-2"></em>
+                                <span>{{notStartedCountL3}}</span>Pending
+                              </p>
+                            </div>
                             <div class="col-md-4">
                               <p class="d-inline">
                                 <em class="fas fa-users fa-3x mb-2"></em>
@@ -456,12 +466,6 @@
                               <p class="d-inline">
                                 <em class="fas fa-calendar-check fa-3x mb-2"></em>
                                 <span>{{totalCountL3}}</span>Completed
-                              </p>
-                            </div>
-                            <div class="col-md-4">
-                              <p class="d-inline">
-                                <em class="fas fa-clock fa-3x mb-2"></em>
-                                <span>{{notStartedCountL3}}</span>Pending
                               </p>
                             </div>
                           </div>
@@ -530,7 +534,7 @@
                         <table class="table table-bordered" >                          
                              <tbody >
                                 <tr>
-                                  <td>Not Started</td>
+                                  <td>Pending</td>
                                   <td>{{resultl3['not_started']}}</td> 
                                 </tr>  
                                 <tr>

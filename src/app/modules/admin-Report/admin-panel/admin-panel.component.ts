@@ -5,6 +5,10 @@ import { TranslateService } from "@ngx-translate/core";
 import { ToastsManager } from "ng6-toastr";
 import { SharedDataService } from "src/app/services/shared-data.service";
 import { environment } from "src/environments/environment";
+import { Observable } from 'rxjs/Observable'
+import 'rxjs/add/observable/timer'
+import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/take'
 
 declare var jQuery: any;
 @Component({
@@ -34,7 +38,8 @@ export class AdminPanelComponent implements OnInit {
   l2TotalUsersCount; l2DesktopCount; l2MobCount; l2TabCount; loader; refreshLoader;
   l3TotalUsersCount; l3DesktopCount; l3MobCount; l3TabCount; inModuleCountL3; 
   inModuleCountL1; inModuleCountL2; L1_status; L2_status; L3_status; mouseOvered1; mouseOvered2; mouseOvered3; reportUrl; isLoaded;
-  resultl1;resultl2;resultl3
+  resultl1;resultl2;resultl3;
+  public time1; tmSec1; countDown; tick = 1000;time2; tmSec2; countDown2; tick2 = 1000;time3; tmSec3; countDown3; tick3 = 1000;
   constructor(
     public AdminReportService: AdminReportService,
     private router: Router,
@@ -373,6 +378,7 @@ export class AdminPanelComponent implements OnInit {
       data => {
         if (data['message'] == "ok") {
           this.resultl1 = data['data'].result[0];
+          this.timeCounter(data['data'].cachetime)
           console.log(this.resultl1)
           var dJson = {};
           var demo = [];
@@ -384,7 +390,7 @@ export class AdminPanelComponent implements OnInit {
             j["val"] = dJson[i];
 
             i == "total" ? j["que"] = "Total" : "";
-            i == "not_started" ? j["que"] = "Not Started"+ " ("+dJson[i]+")" : "";
+            i == "not_started" ? j["que"] = "Pending"+ " ("+dJson[i]+")" : "";
             // i == "in_module0" ? j["que"] = "In Module0"+ " ("+dJson[i]+")" : "";
             i == "com_module0" ? j["que"] = "In Module 1"+ " ("+dJson[i]+")" : "";
             i == "com_module1" ? j["que"] = "In Module 2"+ " ("+dJson[i]+")" : "";
@@ -453,6 +459,7 @@ export class AdminPanelComponent implements OnInit {
         if (data['message'] == "ok") {
           this.resultl2 = data['data'].result[0];
           console.log(this.resultl2)
+          this.timeCounter2(data['data'].cachetime)
           var dJson = {};
           var demo = [];
           dJson = this.resultl2;
@@ -463,7 +470,7 @@ export class AdminPanelComponent implements OnInit {
             j["val"] = dJson[i];
 
             i == "total" ? j["que"] = "Total" : "";
-            i == "not_started" ? j["que"] = "Not Started"+ " ("+dJson[i]+")" : "";
+            i == "not_started" ? j["que"] = "Pending"+ " ("+dJson[i]+")" : "";
             i == "in_module0" ? j["que"] = "Baseline"+ " ("+dJson[i]+")" : "";
             i == "com_module0" ? j["que"] = "In Module 1"+ " ("+dJson[i]+")" : "";
             i == "com_module1" ? j["que"] = "In Module 2"+ " ("+dJson[i]+")" : "";
@@ -534,6 +541,7 @@ export class AdminPanelComponent implements OnInit {
         if (data['message'] == "ok") {
           this.resultl3 = data['data'].result[0];
           console.log(this.resultl3)
+          this.timeCounter3(data['data'].cachetime)
           var dJson = {};
           var demo = [];
           dJson = this.resultl3;
@@ -544,7 +552,7 @@ export class AdminPanelComponent implements OnInit {
             j["val"] = dJson[i];
 
             i == "total" ? j["que"] = "Total" : "";
-            i == "not_started" ? j["que"] = "Not Started" + " ("+dJson[i]+")" : "";
+            i == "not_started" ? j["que"] = "Pending" + " ("+dJson[i]+")" : "";
             i == "in_module0" ? j["que"] = "Baseline" + " ("+dJson[i]+")" : "";
             i == "com_module0" ? j["que"] = "In Module 1" + " ("+dJson[i]+")" : "";
             i == "com_module1" ? j["que"] = "In Module 2" + " ("+dJson[i]+")" : "";
@@ -599,5 +607,39 @@ export class AdminPanelComponent implements OnInit {
         }
       }
       );
+  }
+  
+
+  timeCounter(catche) {
+    //Timer for catche
+    this.time1 = catche
+    var a = this.time1.split(':'); // split it at the colons
+    // minutes are worth 60 seconds. Hours are worth 60 minutes.
+    this.tmSec1 = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
+    this.countDown = Observable.timer(0, this.tick)
+      .take(this.tmSec1)
+      .map(() => --this.tmSec1)
+  }
+
+  timeCounter2(catche) {
+    //Timer for catche
+    this.time2 = catche
+    var a = this.time2.split(':'); // split it at the colons
+    // minutes are worth 60 seconds. Hours are worth 60 minutes.
+    this.tmSec2 = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
+    this.countDown2 = Observable.timer(0, this.tick2)
+      .take(this.tmSec2)
+      .map(() => --this.tmSec2)
+  }
+
+  timeCounter3(catche) {
+    //Timer for catche
+    this.time3 = catche
+    var a = this.time3.split(':'); // split it at the colons
+    // minutes are worth 60 seconds. Hours are worth 60 minutes.
+    this.tmSec3 = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
+    this.countDown3 = Observable.timer(0, this.tick3)
+      .take(this.tmSec3)
+      .map(() => --this.tmSec3)
   }
 }

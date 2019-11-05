@@ -128,6 +128,7 @@ export class LevelSelectionComponent implements OnInit {
     obJ["isAdmin"] = true;
     this.sharedService.sendData(obJ);
     window.localStorage.setItem("hidemenu", "true");
+    window.localStorage.setItem("hidemenuAdmin", "true");
   }
 
   hideMenu1() {
