@@ -382,6 +382,7 @@ export class FullLayoutComponent implements OnInit {
     // {
     //   this.setInterval()
     // }
+    this.hideMenuFlag = false;
     this.profileFlag = window.localStorage.getItem("is_profile_visible");
   this.starPopupFlag = false;
     this.subscription = this.sharedService.getData().subscribe(data => {
@@ -435,7 +436,7 @@ export class FullLayoutComponent implements OnInit {
       );
     }
 
-    this.hideMenuFlag = false;
+    
     this.hideMenuAdminFlag = false;
     this.mainFlagModule7 = 0;
     if (window.localStorage.getItem("token") == null) {
