@@ -412,7 +412,7 @@ export class AdminPanelComponent implements OnInit {
               this.inModuleCountL1 = dJson[i];
             }
 
-            if (i == "in_module" || i == "com_module6" || i == "com_module7") {
+            if (i == "in_module" || i == "com_module6" || i == "com_module7" || i == "com_module5") {
               delete j["que"];
             }
             demo.push(j);
@@ -494,7 +494,7 @@ export class AdminPanelComponent implements OnInit {
             }
 
 
-            if (i == "in_module" || i == "com_module6" || i == "com_module7") {
+            if (i == "in_module" || i == "com_module6" || i == "com_module7" || i == "com_module5") {
               delete j["que"];
             }
             demo.push(j);
@@ -575,7 +575,7 @@ export class AdminPanelComponent implements OnInit {
               this.inModuleCountL3 = dJson[i];
             }
 
-            if (i == "in_module") {
+            if (i == "in_module" || i == "com_module5") {
               delete j["que"];
             }
             demo.push(j);
