@@ -150,6 +150,7 @@ export class LevelSelectionComponent implements OnInit {
       .subscribe(
       data => {
         if (level == 3) {
+          window.localStorage.setItem("hidemenu","false");
           window.localStorage.setItem("hidemenuAdmin", "false");
           window.localStorage.setItem('startDate', data['data'].modulestatus.daterange.startDate)
           window.localStorage.setItem('endDate', data['data'].modulestatus.daterange.endDate)
