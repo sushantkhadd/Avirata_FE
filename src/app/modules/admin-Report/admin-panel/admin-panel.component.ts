@@ -38,7 +38,9 @@ export class AdminPanelComponent implements OnInit {
   l2TotalUsersCount; l2DesktopCount; l2MobCount; l2TabCount; loader; refreshLoader;
   l3TotalUsersCount; l3DesktopCount; l3MobCount; l3TabCount; inModuleCountL3; 
   inModuleCountL1; inModuleCountL2; L1_status; L2_status; L3_status; mouseOvered1; mouseOvered2; mouseOvered3; reportUrl; isLoaded;
-  resultl1;resultl2;resultl3;
+  resultl1;resultl2;resultl3;l1_graph =[]
+  resolveOverlappingTypes = ["shift", "hide", "none"];
+
   // public time1; tmSec1; countDown; tick = 1000;time2; tmSec2; countDown2; tick2 = 1000;time3; tmSec3; countDown3; tick3 = 1000;
   constructor(
     public AdminReportService: AdminReportService,
@@ -51,7 +53,7 @@ export class AdminPanelComponent implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.userType=window.localStorage.getItem('group_name')
     console.log("admin");
     document.querySelector("#content").classList.add("ml-0");
@@ -416,10 +418,23 @@ export class AdminPanelComponent implements OnInit {
             if (i == "in_module" || i == "com_module6" || i == "com_module7" || i == "com_module5") {
               delete j["que"];
             }
+           
             demo.push(j);
           }
+          this.l1_graph=[{"que":"Pending","val":this.notStartedCountL1},
+          {"que":"Completed","val":this.totalCountL1},
+          {"que":"in_module","val":this.inModuleCountL1}]
           this.alluserstatusreportL1 = demo;
-          console.log('demo', this.alluserstatusreportL1)
+          this.alluserstatusreportL1=[{"que":"Pending" + " ("+this.resultl1['not_started']+")","val":this.resultl1['not_started']},
+          // {"que":"Just Startd","val":this.resultl1['in_module0']},
+          {"que":"In Module 1 "+ " ("+this.resultl1['in_module1']+")","val":this.resultl1['in_module1']},
+          {"que":"In Module 2"+ " ("+this.resultl1['com_module1']+")","val":this.resultl1['com_module1']},
+          {"que":"In Module 3"+ " ("+this.resultl1['com_module2']+")","val":this.resultl1['com_module2']},
+          {"que":"In Module 4"+ " ("+this.resultl1['com_module3']+")","val":this.resultl1['com_module3']},
+          {"que":"In Module 5"+ " ("+this.resultl1['com_module4']+")","val":this.resultl1['com_module4']},
+          {"que":"Completed"+ " ("+this.resultl1['completed']+")","val":this.resultl1['completed']}]
+          console.log('dsfsafaFSAFSA',this.alluserstatusreportL1)
+          
           this.allUserStatusReportL2();
         }
       },
@@ -472,7 +487,7 @@ export class AdminPanelComponent implements OnInit {
 
             i == "total" ? j["que"] = "Total" : "";
             i == "not_started" ? j["que"] = "Pending"+ " ("+dJson[i]+")" : "";
-            i == "in_module0" ? j["que"] = "Baseline"+ " ("+dJson[i]+")" : "";
+            i == "in_module0" ? j["que"] = "Just Started"+ " ("+dJson[i]+")" : "";
             i == "com_module0" ? j["que"] = "In Module 1"+ " ("+dJson[i]+")" : "";
             i == "com_module1" ? j["que"] = "In Module 2"+ " ("+dJson[i]+")" : "";
             i == "com_module2" ? j["que"] = "In Module 3"+ " ("+dJson[i]+")" : "";
@@ -500,7 +515,15 @@ export class AdminPanelComponent implements OnInit {
             }
             demo.push(j);
           }
-          this.alluserstatusreportL2 = demo;
+          // this.alluserstatusreportL2 = demo;
+          this.alluserstatusreportL2=[{"que":"Pending"+ " ("+this.resultl2['not_started']+")","val":this.resultl2['not_started']},
+          {"que":"Just Startd"+ " ("+this.resultl2['in_module0']+")","val":this.resultl2['in_module0']},
+          {"que":"In Module 1"+ " ("+this.resultl2['com_module0']+")","val":this.resultl2['com_module0']},
+          {"que":"In Module 2"+ " ("+this.resultl2['com_module1']+")","val":this.resultl2['com_module1']},
+          {"que":"In Module 3"+ " ("+this.resultl2['com_module2']+")","val":this.resultl2['com_module2']},
+          {"que":"In Module 4"+ " ("+this.resultl2['com_module3']+")","val":this.resultl2['com_module3']},
+          {"que":"In Module 5"+ " ("+this.resultl2['com_module4']+")","val":this.resultl2['com_module4']},
+          {"que":"Completed"+ " ("+this.resultl2['completed']+")","val":this.resultl2['completed']}]
           console.log('demo', this.alluserstatusreportL2)
           this.allUserStatusReportL3();
         }
@@ -554,13 +577,13 @@ export class AdminPanelComponent implements OnInit {
 
             i == "total" ? j["que"] = "Total" : "";
             i == "not_started" ? j["que"] = "Pending" + " ("+dJson[i]+")" : "";
-            i == "in_module0" ? j["que"] = "Baseline" + " ("+dJson[i]+")" : "";
+            i == "in_module0" ? j["que"] = "Just Started" + " ("+dJson[i]+")" : "";
             i == "com_module0" ? j["que"] = "In Module 1" + " ("+dJson[i]+")" : "";
             i == "com_module1" ? j["que"] = "In Module 2" + " ("+dJson[i]+")" : "";
             i == "com_module2" ? j["que"] = "In Module 3" + " ("+dJson[i]+")" : "";
             i == "com_module3" ? j["que"] = "In Module 4" + " ("+dJson[i]+")" : "";
             i == "com_module4" ? j["que"] = "In Module 5" + " ("+dJson[i]+")" : "";
-            i == "com_module5" ? j["que"] = "Endline" + " ("+dJson[i]+")" : "";
+            // i == "com_module5" ? j["que"] = "Endline" + " ("+dJson[i]+")" : "";
             i == "completed" ? j["que"] = "completed" + " ("+dJson[i]+")" : "";
             // i == "com_module7" ? j["que"] = "Project Complete" + " ("+dJson[i]+")" : "";
 
@@ -581,7 +604,17 @@ export class AdminPanelComponent implements OnInit {
             }
             demo.push(j);
           }
-          this.alluserstatusreportL3 = demo;
+          this.alluserstatusreportL3=[{"que":"Pending"+ " ("+this.resultl3['not_started']+")","val":this.resultl3['not_started']},
+          {"que":"Just Startd"+ " ("+this.resultl3['in_module0']+")","val":this.resultl3['in_module0']},
+          {"que":"In Module 1"+ " ("+this.resultl3['com_module0']+")","val":this.resultl3['com_module0']},
+          {"que":"In Module 2"+ " ("+this.resultl3['com_module1']+")","val":this.resultl3['com_module1']},
+          {"que":"In Module 3"+ " ("+this.resultl3['com_module2']+")","val":this.resultl3['com_module2']},
+          {"que":"In Module 4"+ " ("+this.resultl3['com_module3']+")","val":this.resultl3['com_module3']},
+          {"que":"In Module 5"+ " ("+this.resultl3['com_module4']+")","val":this.resultl3['com_module4']},
+          {"que":"Completed"+ " ("+this.resultl3['completed']+")","val":this.resultl3['completed']}]
+
+          // this.alluserstatusreportL3 = demo;
+          
           console.log('demoL33', this.alluserstatusreportL3)
         }
       },

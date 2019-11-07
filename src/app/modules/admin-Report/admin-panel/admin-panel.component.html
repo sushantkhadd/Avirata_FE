@@ -165,7 +165,7 @@
                                   <div></div>
                                   <div></div>
                                 </div>
-                                <p class="count m-0">{{l1MobCount}}</p>
+                                <p class="count ">{{l1MobCount}}</p>
                                 <!-- <em class="fas fa-mobile pr-3 fs-25"></em> -->
                                 <p class="d-inline">Moblie</p>
                               </div>
@@ -240,7 +240,7 @@
                             <div class=" custom-minh">
                               <div class="card-block">
                                 <dx-pie-chart id="pie" type="doughnut" title="Level 1 Current Status" palette="bright"
-                                  [dataSource]="alluserstatusreportL1" (onPointClick)="pointClickHandler($event)">
+                                  [dataSource]="alluserstatusreportL1" [resolveLabelOverlapping]="resolveOverlappingTypes[0]">
                                   <dxo-legend orientation="horizontal" itemTextPosition="right"
                                     horizontalAlignment="center" verticalAlignment="bottom" [columnCount]="4">
                                   </dxo-legend>
@@ -300,7 +300,7 @@
                                   <div></div>
                                   <div></div>
                                 </div>
-                                <p class="count m-0">{{l2MobCount}}</p>
+                                <p class="count ">{{l2MobCount}}</p>
                                 <!-- <em class="fas fa-mobile pr-3 fs-25"></em> -->
                                 <p class="d-inline">Moblie</p>
                               </div>
@@ -375,7 +375,7 @@
                             <div class=" custom-minh">
                               <div class="card-block">
                                 <dx-pie-chart id="pie"  type="doughnut" title="Level 2 Current Status" palette="bright"
-                                  [dataSource]="alluserstatusreportL2" (onPointClick)="pointClickHandler($event)">
+                                  [dataSource]="alluserstatusreportL2" [resolveLabelOverlapping]="resolveOverlappingTypes[0]">
                                   <dxo-legend orientation="horizontal" itemTextPosition="right"
                                     horizontalAlignment="center" verticalAlignment="bottom" [columnCount]="4">
                                   </dxo-legend>
@@ -433,7 +433,7 @@
                                   <div></div>
                                   <div></div>
                                 </div>
-                                <p class="count m-0">{{l3MobCount}}</p>
+                                <p class="count ">{{l3MobCount}}</p>
                                 <!-- <em class="fas fa-mobile pr-3 fs-25"></em> -->
                                 <p class="d-inline">Moblie</p>
                               </div>
@@ -508,7 +508,7 @@
                               <div class=" custom-minh">
                                 <div class="card-block">
                                   <dx-pie-chart id="pie" type="doughnut" title="Level 3 Current Status" palette="bright"
-                                    [dataSource]="alluserstatusreportL3" (onPointClick)="pointClickHandler($event)">
+                                    [dataSource]="alluserstatusreportL3" [resolveLabelOverlapping]="resolveOverlappingTypes[0]">
                                     <dxo-legend orientation="horizontal" itemTextPosition="right" horizontalAlignment="center"
                                       verticalAlignment="bottom" [columnCount]="4"></dxo-legend>
                                     <dxo-export [enabled]="true"></dxo-export>
