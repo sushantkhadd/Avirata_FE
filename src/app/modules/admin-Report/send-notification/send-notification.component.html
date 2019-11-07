@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-12 text-center">
+    <!-- <div class="col-md-12 text-center">
       <button class="btn btn-primary mb-2 backBtn float-left" (click)="goToAdminPanel()">
         <i class="fa fa-reply"></i>&nbsp;&nbsp;Back</button>
-    </div>
+    </div> -->
   </div>
   <div class="card w-100">
     <div class="card-header text-center">
@@ -79,7 +79,7 @@
               <button class="btn btn-reset mr-2" (click)="reset()">
                    Reset
                 </button>
-            <button class="btn btn-send" [disabled]="!formNotification.form.valid || sendDisable" appPreventDoubleClick (debounceClick)="sendNotification()">
+            <button class="btn btn-primary" [disabled]="!formNotification.form.valid || sendDisable" appPreventDoubleClick (debounceClick)="sendNotification()">
              Send
             </button>
           </div>

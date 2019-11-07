@@ -6,27 +6,33 @@
         <h3>Admin Panel</h3>
         <a class="btn btn-primary c-pointer mb-2" (click)="setMenu()">
           <em class="fa fa-chevron-left"></em>&nbsp;&nbsp;&nbsp;&nbsp;Level Dashboard</a><br>
-          <a class="btn btn-primary c-pointer" (click)="levelBoard()">
-           Report Dashboard</a>
+         
       </div>
       <ul class="nav-dropdown-items submenu list-unstyled components pt-0">
-        <p> Reports</p>
+        <a class="ml-2" (click)="levelBoard()">
+          Report Dashboard</a>
+          <li class="dropdown-divider"></li>
         <li *ngIf="userType == 'superadmin'">
           <a href="#module3Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><em
-              class="fas fa-file mr-2"></em>&nbsp;Consolidated Report</a>
+              class="fas fa-file mr-2"></em>&nbsp;Reports</a>
           <ul class="collapse list-unstyled" id="module3Submenu">
-            <li>
-              <a appPreventDoubleClick (debounceClick)="getAllReport()">&nbsp;Detailed Report of All Users
+            <!-- <li>
+              <a appPreventDoubleClick (debounceClick)="getAllReport()">&nbsp;Consolidated Report
                 <i *ngIf="isLoaded" class="fa fa-circle-o-notch fa-spin spinner-loader"></i>
               </a> 
+            </li> -->
+            <li *ngIf="userType == 'superadmin' ||userType == 'admin' ">
+              <a [class.active]="showDistrictData" (click)="ShowDistrictData()">
+                &nbsp;Not Started</a>
+            </li>
+            <li *ngIf="userType == 'superadmin' ||userType == 'admin' ">
+              <a [class.active]="showParticipantData" (click)="ShowParticipantData()">&nbsp;Module Status</a> 
             </li>
           </ul>
         </li>
+        <li class="dropdown-divider"></li>
         <li *ngIf="userType == 'superadmin' ||userType == 'admin' ">
-          <a href="#module1Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"> <em
-              class="fas fa-book mr-2"></em>&nbsp;Progress
-            Report</a>
-          <ul class="collapse list-unstyled" id="module1Submenu">
+                    <ul class="collapse list-unstyled" id="module1Submenu">
             <li>
               <a [class.active]="showDistrictData" (click)="ShowDistrictData()">
                 &nbsp;Not Started</a>
