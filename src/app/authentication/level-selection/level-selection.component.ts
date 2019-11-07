@@ -54,27 +54,27 @@ export class LevelSelectionComponent implements OnInit {
     this.completedLevelJson = JSON.parse(window.localStorage.getItem('levelStatus'));
     this.currentLevel = this.completedLevelJson['currentlevel']
     // this.currentLevel='completed'
-    if (this.completedLevelJson['level1'] == true && this.completedLevelJson['level2'] == false && this.completedLevelJson['level3'] == false && this.userType != 'superadmin' && this.userType != 'admin') {
+    if (this.completedLevelJson['level1'] == true && this.completedLevelJson['level2'] == false && this.completedLevelJson['level3'] == false && this.userType != 'superadmin') {
       this.lvl1Current = true;
-    } else if (this.completedLevelJson['level2'] == true && this.completedLevelJson['level1'] == false && this.completedLevelJson['level3'] == false && this.userType != 'superadmin' && this.userType != 'admin') {
+    } else if (this.completedLevelJson['level2'] == true && this.completedLevelJson['level1'] == false && this.completedLevelJson['level3'] == false && this.userType != 'superadmin') {
       this.lvl2Current = true;
       this.lvl1Complete = true
-    } else if (this.completedLevelJson['level3'] == true && this.completedLevelJson['level1'] == false && this.completedLevelJson['level2'] == false && this.userType != 'superadmin' && this.userType != 'admin') {
+    } else if (this.completedLevelJson['level3'] == true && this.completedLevelJson['level1'] == false && this.completedLevelJson['level2'] == false && this.userType != 'superadmin') {
       this.lvl1Complete = true
       this.lvl2Complete = true;
       this.lvl3Current = true
     }
-    else if (this.completedLevelJson['level1'] == true && this.completedLevelJson['level2'] == true && this.completedLevelJson['level3'] == false && this.userType != 'superadmin' && this.userType != 'admin')
+    else if (this.completedLevelJson['level1'] == true && this.completedLevelJson['level2'] == true && this.completedLevelJson['level3'] == false && this.userType != 'superadmin')
     {
       this.lvl1Complete = true
       this.lvl2Current = true
     }
-    else if (this.completedLevelJson['level2'] == true && this.completedLevelJson['level1'] == true && this.completedLevelJson['level3'] == true && this.userType != 'superadmin' && this.userType != 'admin')
+    else if (this.completedLevelJson['level2'] == true && this.completedLevelJson['level1'] == true && this.completedLevelJson['level3'] == true && this.userType != 'superadmin')
     {
       this.lvl1Complete = true
       this.lvl2Complete = true
       this.lvl3Current = true
-    } else if (this.completedLevelJson['level2'] == false && this.completedLevelJson['level1'] == false && this.completedLevelJson['level3'] == false && this.userType != 'superadmin' && this.userType != 'admin')
+    } else if (this.completedLevelJson['level2'] == false && this.completedLevelJson['level1'] == false && this.completedLevelJson['level3'] == false && this.userType != 'superadmin')
     {
       this.noAccessFlag = true
       window.localStorage.setItem("hidemenu","true");
@@ -88,7 +88,7 @@ export class LevelSelectionComponent implements OnInit {
         console.log('username',this.userName)
       }
       // this.toastr.error("क्षमस्व. आपण ‘योजलेल्या प्रशिक्षण कालावधीमध्ये’ नसल्यामुळे आपला प्रवेश नाकारण्यात आला आहे.")
-    } else if (this.userType == 'superadmin' || this.userType == 'admin') {
+    } else if (this.userType == 'superadmin') {
       this.lvl1Complete = true
       this.lvl2Complete = true;
       this.lvl3Current = true;

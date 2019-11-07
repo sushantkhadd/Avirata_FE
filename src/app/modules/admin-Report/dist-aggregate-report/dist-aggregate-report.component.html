@@ -1,14 +1,14 @@
 <div class="container">
   <div class="row">
-    <div class="col-6 pad-0" *ngIf="showDetails">
+    <div class="mb-2 pad-0 mr-2" *ngIf="showDetails">
       <button class="btn btn-primary float-left backBtn or-section" (click)="showDetails=false;">
         <i class="fa fa-reply"></i>&nbsp;&nbsp;Back</button>
     </div>
-    <div class="col-6 pad-0" *ngIf="!showDetails">
+    <!-- <div class="col-6 pad-0" *ngIf="!showDetails">
       <button class="btn btn-primary float-left backBtn or-section" (click)="goToAdminPanel()">
         <i class="fa fa-reply"></i>&nbsp;&nbsp;Back</button>
-    </div>
-    <div class="col-6 pad-0">
+    </div> -->
+    <div class="mb-2 pad-0">
       <button class="btn btn-primary float-right or-section" (click)="export()">
         <span>
           <i class="fa fa-download" aria-hidden="true"></i>

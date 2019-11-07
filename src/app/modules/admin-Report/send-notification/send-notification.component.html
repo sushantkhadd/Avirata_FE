@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-12 text-center">
+    <!-- <div class="col-md-12 text-center">
       <button class="btn btn-primary mb-2 backBtn float-left" (click)="goToAdminPanel()">
         <i class="fa fa-reply"></i>&nbsp;&nbsp;Back</button>
-    </div>
+    </div> -->
   </div>
   <div class="card w-100">
     <div class="card-header text-center">
@@ -62,21 +62,25 @@
           </div>
         </div>
         <div class="form-group row justify-content-center">
-          <div class="col-md-4">
+            <label for="message" class="col-md-3 col-form-label font-weight-bold">Upload Notification Image</label>
+          <div class="col-md-5">
             <input #myInput type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".jpg,.jpeg,.JPG,.JPEG,.png,.PNG"
               data-buttonText="Your label here.">
-          </div>
-          <div class="col-md-3 justify-content-end"> <button class="btn btn-primary" (click)="reset()" *ngIf="resetButton">
-              <i class="fa fa-refresh" aria-hidden="true"></i> Reset
-            </button>
           </div>
           <!-- <p id="fileHelp" class="form-text text-muted">
             {{'newTranslate.fileFormat' | translate}}</p> -->
         </div>
         <div class="form-group row justify-content-center">
-          <div class="col-md-8">
-            <button class="btn btn-primary float-right" [disabled]="!formNotification.form.valid || sendDisable" appPreventDoubleClick (debounceClick)="sendNotification()">
-              <i class="fa fa-send-o"></i>&nbsp;&nbsp;Send
+          <!-- <div class="col-md-3 justify-content-end"> <button class="btn btn-warning" (click)="reset()" *ngIf="resetButton">
+              <i class="fa fa-refresh" aria-hidden="true"></i> Reset
+            </button>
+          </div> -->
+          <div class="text-center">
+              <button class="btn btn-reset mr-2" (click)="reset()">
+                   Reset
+                </button>
+            <button class="btn btn-primary" [disabled]="!formNotification.form.valid || sendDisable" appPreventDoubleClick (debounceClick)="sendNotification()">
+             Send
             </button>
           </div>
         </div>

@@ -4,58 +4,65 @@
     <nav id="sidebar">
       <div class="sidebar-header">
         <h3>Admin Panel</h3>
-        <a class="btn btn-primary c-pointer" (click)="setMenu()">
-          <em class="fas fa-chevron-circle-left"></em>&nbsp;&nbsp;Go to Dashboard</a>
+        <a class="btn btn-primary c-pointer mb-2" (click)="setMenu()">
+          <em class="fa fa-chevron-left"></em>&nbsp;&nbsp;&nbsp;&nbsp;Level Dashboard</a><br>
+         
       </div>
       <ul class="nav-dropdown-items submenu list-unstyled components pt-0">
-        <p> <em class="fas fa-file" aria-hidden="true"></em> &nbsp; Reports</p>
+        <a class="ml-2" (click)="levelBoard()">
+          Report Dashboard</a>
+          <li class="dropdown-divider"></li>
+        <li *ngIf="userType == 'superadmin'">
+          <a href="#module3Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><em
+              class="fas fa-file mr-2"></em>&nbsp;Reports</a>
+          <ul class="collapse list-unstyled" id="module3Submenu">
+            <!-- <li>
+              <a appPreventDoubleClick (debounceClick)="getAllReport()">&nbsp;Consolidated Report
+                <i *ngIf="isLoaded" class="fa fa-circle-o-notch fa-spin spinner-loader"></i>
+              </a> 
+            </li> -->
+            <li *ngIf="userType == 'superadmin' ||userType == 'admin' ">
+              <a [class.active]="showDistrictData" (click)="ShowDistrictData()">
+                &nbsp;Not Started</a>
+            </li>
+            <li *ngIf="userType == 'superadmin' ||userType == 'admin' ">
+              <a [class.active]="showParticipantData" (click)="ShowParticipantData()">&nbsp;Module Status</a> 
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown-divider"></li>
         <li *ngIf="userType == 'superadmin' ||userType == 'admin' ">
-          <a href="#module1Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"> <em
-              class="fas fa-book mr-2"></em>&nbsp;Progress
-            Report</a>
-          <ul class="collapse list-unstyled" id="module1Submenu">
+                    <ul class="collapse list-unstyled" id="module1Submenu">
             <li>
               <a [class.active]="showDistrictData" (click)="ShowDistrictData()">
-                &nbsp;All District Not Started Count</a>
+                &nbsp;Not Started</a>
             </li>
             <li>
-              <a [class.active]="showParticipantData" (click)="ShowParticipantData()">&nbsp;All Participant Module
-                Status
-                Count</a>
+              <a [class.active]="showParticipantData" (click)="ShowParticipantData()">&nbsp;Module Status</a> 
             </li>
           </ul>
         </li>
         <li *ngIf="userType == 'superadmin'">
           <a href="#module2Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><em
-              class="fas fa-wrench mr-2"></em>&nbsp;Utility</a>
+              class="fas fa-wrench mr-2"></em>&nbsp;Utilities</a>
           <ul class="collapse list-unstyled" id="module2Submenu">
+              <li>
+                  <a [class.active]="showNotification" (click)="ShowNotification()"><em class="fa fa-bell"></em>&nbsp;&nbsp;Send Notification</a>
+                </li>
+                <li> <a [class.active]="showSearchData" (click)="searchData()"><em class="fa fa-search"></em>&nbsp;&nbsp;Search User</a> </li>
+                <li> <a><em class="fa fa-plus"></em>&nbsp;&nbsp;Add User</a> </li>
             <li>
-              <a [class.active]="userTransferNReplace" (click)="userTransferAndReplace()">&nbsp;User Transfer And
-                Replacement</a>
+              <a [class.active]="userTransferNReplace" (click)="userTransferAndReplace()"><em class="fa fa-exchange-alt"></em>&nbsp;&nbsp;User Transfer</a>
             </li>
             <li>
-              <a [class.active]="coordinatorTransfer" (click)="coordinatorTransferAndCreate()">&nbsp;Co-ordinator
-                Transfer
-                And Create</a>
+              <a [class.active]="coordinatorTransfer" (click)="coordinatorTransferAndCreate()"><em class="fa fa-exchange-alt"></em>&nbsp;&nbsp;Co-ordinator Transfer</a>
             </li>
-            <li>
-              <a [class.active]="showNotification" (click)="ShowNotification()">&nbsp;Send Notification</a>
-            </li>
-            <li> <a [class.active]="showSearchData" (click)="searchData()"> Search by Aadhar or Mobile No</a> </li>
-            <li> <a [class.active]="showProfileData" (click)="setProfile()"> Set User Profile</a> </li>
+            
+           
+            <li> <a [class.active]="showProfileData" (click)="setProfile()"><em class="fa fa-user"></em>&nbsp;&nbsp;User Profile Config</a> </li> 
           </ul>
         </li>
-        <li *ngIf="userType == 'superadmin'">
-          <a href="#module3Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><em
-              class="fas fa-wrench mr-2"></em>&nbsp;All Users Report</a>
-          <ul class="collapse list-unstyled" id="module3Submenu">
-            <li>
-              <a appPreventDoubleClick (debounceClick)="getAllReport()">&nbsp;Download Report
-                <i *ngIf="isLoaded" class="fa fa-circle-o-notch fa-spin spinner-loader"></i>
-              </a>
-            </li>
-          </ul>
-        </li>
+      
       </ul>
       <!-- <ul class="list-unstyled components">
         <p> <em class="fas fa-file" aria-hidden="true"></em> &nbsp; Reports</p>

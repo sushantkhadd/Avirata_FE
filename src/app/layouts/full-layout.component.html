@@ -1461,7 +1461,7 @@
               </div>
             </div>
           </div>
-          <div class="row mt-1">
+          <div class="row">
             <div class="col-md-10 col-xs-12 col-sm-12">
               <div id="main">
                 <div>
@@ -1471,14 +1471,18 @@
                 <div [class.pl-2]="needEfforts">
                   <!-- <h1 class="congrats-text" *ngIf="!needEfforts">
                     {{'layout.congo' | translate}} </h1> -->
-                    <img *ngIf="!needEfforts" class="img-responsive" src="../../assets/img/rewards/single-stars/abhinandan.png" alt="Abhinandan">
+                    <img *ngIf="!needEfforts" class="img-responsive mb-4" src="../../assets/img/rewards/single-stars/abhinandan.png" alt="Abhinandan">
                   <h5 class="congrats-text" *ngIf="needEfforts">
                     {{'layout.workHard' | translate}}
                   </h5>
-                  <h5 style="color:#347294">{{userName}}</h5>
-                </div>
-              </div>
+                  <!-- <h5 style="color:#347294">{{userName}}</h5> -->
+                </div><br>
+              
+              </div> 
             </div>
+          </div>
+          <div>   
+              <h5 class="text-center mb-3" style="color:#347294">{{userName}}</h5>
           </div>
           <div class="row mt-1 justify-content-center">
             <div id="main">
