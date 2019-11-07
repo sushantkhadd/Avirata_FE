@@ -61,11 +61,7 @@ export class SendNotificationComponent implements OnInit {
     {
       "label": "Trainee",
       "value": "trainee"
-    },
-    {
-      "label": "General_localmsgtest",
-      "value": "generallocalmsgtest"
-    },
+    }
   ]
 
   public events = [
@@ -111,7 +107,6 @@ export class SendNotificationComponent implements OnInit {
 
   fileChange(event) {
     this.formData = new FormData();
-    this.resetButton = true;
     let fileList: FileList = event.target.files;
     if (fileList.length > 0) {
       const file: File = fileList[0];
@@ -136,6 +131,7 @@ export class SendNotificationComponent implements OnInit {
   }
   reset() {
     this.myInputVariable.nativeElement.value = "";
+    this.clear();
     // this.confirmModal.hide();
   }
 

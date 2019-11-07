@@ -7,9 +7,9 @@ export const environment = {
   production: false,
   //  apiUrl: 'http://192.168.1.110:8000/api/',
   // l2apiUrl: 'http://192.168.1.110:8000/l2api/',
-  apiUrl: "http://192.168.1.223:5113/api/",
-  l2apiUrl: "http://192.168.1.223:5113/l2api/",
-  l3apiUrl: "http://192.168.1.223:5113/l3api/",
+  apiUrl: "http://192.168.1.223:5112/api/",
+  l2apiUrl: "http://192.168.1.223:5112/l2api/",
+  l3apiUrl: "http://192.168.1.223:5112/l3api/",
 
   apiUrlNot: "http://192.168.1.116:8002/api/",
   pdfUrl: "https://s3-ap-southeast-1.amazonaws.com/maacpd/static/pdf/",

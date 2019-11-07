@@ -3,20 +3,19 @@
       <div class="card col-md-12">
           <div class="card-header text-center">
             <h6 class="text-center">
-              <i class="fa fa-archive"></i> &nbsp;Set User Profile</h6>
+              <i class="fa fa-archive"></i> &nbsp;User Profile Configuration</h6>
           </div>
           <div class="card-block">
-            <form #formSearch="ngForm" name="formSearch" class="text-center">
+            <span><span class="font-weight-bold">Note : </span><span>This utility is used for setting user profile view/ update access for trainee and master trainee users.
+                By setiing active option user profile menu will be visible on app and web , by selecting deactive user profile menu will be hide on app and web.</span></span>
+            <form #formSearch="ngForm" name="formSearch" class="text-center mt-4">
               <div class="form-group row">
-                <label for="search" class="col-md-4 col-form-label font-weight-bold">Set User  Profile</label>
+                <label for="search" class="col-md-4 col-form-label font-weight-bold">Select User  Role</label>
                 <div class="col-md-5">
                     <select class="form-control" name="group" id="group" [(ngModel)]="selectedGroup" (change)="getGroup()" required>
                         <option value="" disabled>Select Role</option>
                         <option value="trainee">Trainee</option>
                         <option value="master_trainer">Master Trainer</option>
-                        <option value="co_ordinator">Co-ordinator</option>
-                        <option value="admin">Admin</option>
-                        <option value="superadmin">Super Admin</option>
                       </select>
                 </div>
               </div>

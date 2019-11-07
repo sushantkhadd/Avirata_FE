@@ -91,17 +91,18 @@ export class AdminPanelComponent implements OnInit {
 
   getAllReport() {
     this.isLoaded = true;
-    this.AdminReportService.getCalllvl1("alluserlevelstatusreport/", localStorage.getItem("token")).subscribe(data => {
+    // this.AdminReportService.getCalllvl1("alluserlevelstatusreport/", localStorage.getItem("token")).subscribe(data => {
       this.isLoaded = false;
-      this.reportUrl = environment.downloadUrl + data["data"];
+      this.reportUrl = environment.downloadUrl + "/media/Report/alluserlevelstatus.csv";
+      console.log("sadsadsds",this.reportUrl)
       var link = document.createElement("a");
       link.href = this.reportUrl;
       link.download = "alluserlevelstatus.csv";
       link.click();
-      console.log(data)
-    }, error => {
-        this.toastr.error(error.error.message)
-    })
+      // console.log(data)
+    // }, error => {
+    //     this.toastr.error(error.error.message)
+    // })
   }
 
   scrollUp(){
@@ -152,7 +153,7 @@ export class AdminPanelComponent implements OnInit {
     this.showNotification = false;
     this.showSearchData = false;
     this.showProfileData = false;
-    this.toggleSidebar();
+    // this.toggleSidebar();
   }
 
   ShowParticipantData() {
@@ -162,7 +163,7 @@ export class AdminPanelComponent implements OnInit {
     this.coordinatorTransfer = false;
     this.historyLog = false;
     this.showNotification = false;
-    this.toggleSidebar();
+    // this.toggleSidebar();
   }
 
   backEvent(event) {
@@ -179,7 +180,7 @@ export class AdminPanelComponent implements OnInit {
       this.coordinatorTransfer = false;
       this.historyLog = false;
       this.showProfileData = false;
-      this.toggleSidebar();
+      // this.toggleSidebar();
     }
   }
 
@@ -192,7 +193,7 @@ export class AdminPanelComponent implements OnInit {
     this.coordinatorTransfer = false;
     this.historyLog = false;
     this.showProfileData = false;
-    this.toggleSidebar();
+    // this.toggleSidebar();
   }
  
   setProfile(){
@@ -204,7 +205,7 @@ export class AdminPanelComponent implements OnInit {
     this.showNotification = false;
     this.showSearchData = false;
     this.showProfileData = true;
-    this.toggleSidebar();
+    // this.toggleSidebar();
   }
 
   ShowNotification() {
@@ -216,7 +217,7 @@ export class AdminPanelComponent implements OnInit {
     this.historyLog = false;
     this.showSearchData = false;
     this.showProfileData = false;
-    this.toggleSidebar();
+    // this.toggleSidebar();
   }
 
   batchDetails() {
@@ -241,7 +242,7 @@ export class AdminPanelComponent implements OnInit {
     this.showNotification = false;
     this.showSearchData = false;
     this.showProfileData = false;
-    this.toggleSidebar();
+    // this.toggleSidebar();
   }
   coordinatorTransferAndCreate() {
     this.coordinatorTransfer = true;
@@ -252,7 +253,7 @@ export class AdminPanelComponent implements OnInit {
     this.showNotification = false;
     this.showSearchData = false;
     this.showProfileData = false;
-    this.toggleSidebar();
+    // this.toggleSidebar();
   }
 
   showHistory() {
@@ -264,7 +265,7 @@ export class AdminPanelComponent implements OnInit {
     this.showNotification = false;
     this.showSearchData = false;
     this.showProfileData = false;
-    this.toggleSidebar();
+    // this.toggleSidebar();
   }
   setMenu() {
     window.localStorage.setItem("hidemenu", "false");
@@ -642,4 +643,19 @@ export class AdminPanelComponent implements OnInit {
   //     .take(this.tmSec3)
   //     .map(() => --this.tmSec3)
   // }
+
+  levelBoard(){
+    this.showDistrictData = false;
+      this.showParticipantData = false;
+      this.distAggregate = false;
+      this.showBatchDetails = false;
+      this.showSearchData = false;
+      this.showNotification = false;
+      this.showMailReport = false;
+      this.showBankDetails = false;
+      this.userTransferNReplace = false;
+      this.coordinatorTransfer = false;
+      this.historyLog = false;
+      this.showProfileData = false;
+  }
 }
