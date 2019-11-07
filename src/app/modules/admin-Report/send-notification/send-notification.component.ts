@@ -17,7 +17,7 @@ export class SendNotificationComponent implements OnInit {
   @Input() allDistricts;
   @ViewChild('myInput') myInputVariable: any;
   public formData = new FormData();
-  private apiUrl = environment.apiUrl;
+  private apiUrl = environment.apiUrl;file;
   constructor(private csvService: CsvService, public _service: AdminReportService, public translate: TranslateService, public toastr: ToastsManager, vcr: ViewContainerRef, private router: Router,public httpClient: HttpClient) {
     this.toastr.setRootViewContainerRef(vcr);
   }
@@ -199,6 +199,9 @@ export class SendNotificationComponent implements OnInit {
     this.formData.append('msgbody', this.message.trim())
     this.formData.append('event',  this.selectedEvent)
     this.formData.append('topic',  this.selectedCategory)
+    if( this.myInputVariable.nativeElement.value == ""){
+      this.formData.append('image', '');
+    }
     if(this.selectedEvent == "single"){
       this.formData.append('regkey',  this.Mob_No)
     }
@@ -236,8 +239,10 @@ export class SendNotificationComponent implements OnInit {
         if (body['message'] == "notification sent") {
           console.log("data",data)
           this.toastr.success("Notification sent successfully !!")
+          this.myInputVariable.nativeElement.value = "";
           this.clear();
           this.resetButton = false
+          this.formData = new FormData();
         }
       },
       error => {

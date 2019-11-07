@@ -1516,20 +1516,12 @@
                   <span class="ml-2 text-center" [innerHTML]="'layout.bronzeMedalMsg' | translate"></span>
                 </h5>
               </div>
-
-              <div class="text-center font-weight-normal p-1" *ngIf="moduleStatus0 != 1">
-                <span [innerHTML]="'layout.allMedalMsg1' | translate"></span>
-                <span class="color_red" [innerHTML]="'layout.allMedalMsg2' | translate"></span>
-              </div>
               <div *ngIf="moduleStatus0 == 1" class="text-center mt-2"> 
                 <span>{{moduleCompleteStatus['submoduleSuccess']}}</span><br/>
                 <span>{{moduleCompleteStatus['submoduleFinish']}}</span>
               </div>
             </div>
           </div>
-          <div>
-          </div>
-
           <div class="row mt-1 justify-content-center">
             <!-- <img *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' && !needEfforts" class="img-responsive img-goldcup" [src]="finishImgUrl"> -->
             <div *ngIf="(moduleCompleteStatus['type'] == 'moduleFinish' || moduleCompleteStatus['type'] == 'allFinish') && !needEfforts"
@@ -1564,6 +1556,25 @@
                     <img class="img-responsive img-goldcup" src="../../assets/img/rewards/single-stars/bronze_cup.png">
                   </div>
                 </div> -->
+          </div>
+          <div class="row mt-1 justify-content-center">
+            <!-- <h5 id="demo1" class="success-line" *ngIf="moduleCompleteStatus['type'] == 'moduleFinish' && !needEfforts">
+                  {{'layout.moduleFinish' | translate}}
+                </h5>
+                <h5 id="demo1" class="success-line" *ngIf="moduleCompleteStatus['type'] == 'allFinish' && !needEfforts">
+                  {{'layout.congrats' | translate}}
+                </h5> -->
+            <div *ngIf="(moduleCompleteStatus['type'] == 'moduleFinish' || moduleCompleteStatus['type'] == 'allFinish') && !needEfforts"
+              class="">
+              <div class="text-center font-weight-normal p-1" *ngIf="moduleStatus0 != 1">
+                <span [innerHTML]="'layout.allMedalMsg1' | translate"></span>
+                <span class="color_red" [innerHTML]="'layout.allMedalMsg2' | translate"></span>
+              </div>
+              <div *ngIf="moduleStatus0 == 1" class="text-center mt-2"> 
+                <span>{{moduleCompleteStatus['submoduleSuccess']}}</span><br/>
+                <span>{{moduleCompleteStatus['submoduleFinish']}}</span>
+              </div>
+            </div>
           </div>
         </div>
 
