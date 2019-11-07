@@ -42,7 +42,7 @@
               <a [class.active]="showNotification" (click)="ShowNotification()">&nbsp;Send Notification</a>
             </li>
             <li> <a [class.active]="showSearchData" (click)="searchData()"> Search by Aadhar or Mobile No</a> </li>
-            <li> <a [class.active]="showProfileData" (click)="setProfile()"> Set User Profile</a> </li> 
+            <li> <a [class.active]="showProfileData" (click)="setProfile()"> Set User Profile</a> </li>
           </ul>
         </li>
         <li *ngIf="userType == 'superadmin'">
@@ -121,20 +121,67 @@
                 <button class="btn btn-primary mb-1 mr-2" (click)="refresh()">Refresh &nbsp; <em
                     class="fas fa-sync"></em></button>
               </div>
-              <div class="col-md-12 left-content mb-4 bg-custom">
-                <div class="row ">
+              <div class="col-md-4 left-content mb-4 ">
+                <div class="row bg-custom ">
                   <div class="col-12">
                     <div class="card-header">
                       <h6>Level 1</h6>
                       <!-- <b class="adminTimer">{{countDown | async | formatTime}}</b> -->
                     </div>
-                    
+
                   </div>
-                  <div class="col-md-6">                     
+                  <div class="col-md-12">
+                      <div class="card bg-danger mt-1">
+                        <div class="card-block">
+                          <div class="counter-wrap">
+                            <div class="lds-facebook abs" *ngIf="!loader">
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                            </div>
+                            <p class="fa-1x" [class.mt-3]="!loader">Active Users : {{l1TotalUsersCount}}</p>
+  
+                            <div class="row text-center mt-2">
+                              <div class="col-md-4">
+                                <div class="lds-facebook" *ngIf="!loader">
+                                  <div></div>
+                                  <div></div>
+                                  <div></div>
+                                </div>
+                                <p class="count">{{l1DesktopCount}}</p>
+                                <!-- <em class="fas fa-tv pr-3"></em> -->
+                                <p class="d-inline">Desktop</p>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="lds-facebook" *ngIf="!loader">
+                                  <div></div>
+                                  <div></div>
+                                  <div></div>
+                                </div>
+                                <p class="count m-0">{{l1MobCount}}</p>
+                                <!-- <em class="fas fa-mobile pr-3 fs-25"></em> -->
+                                <p class="d-inline">Moblie</p>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="lds-facebook" *ngIf="!loader">
+                                  <div></div>
+                                  <div></div>
+                                  <div></div>
+                                </div>
+                                <p class="count">{{l1TabCount}}</p>
+                                <!-- <em class="fas fa-tablet pr-3"></em> -->
+                                <p class="d-inline">Tablet</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <div class="col-md-12">                      
                      <div class="card bg-primary mt-1">
                       <div class="card-block">
                         <div class="counter-wrap p-1">
-                           <div class="row">
+                          <div class="row">
                             <div class="col-md-4">
                               <p class="d-inline">
                                 <em class="fas fa-clock fa-2x mb-2"></em>
@@ -156,137 +203,116 @@
                           </div>
                         </div>
                       </div>
-                    </div> 
+                    </div>                   
                   </div>
-                  <div class="col-md-6">
-                    <div class="card bg-danger mt-1">
-                      <div class="card-block">
-                        <div class="counter-wrap">
-                          <div class="lds-facebook abs" *ngIf="!loader">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                          </div>
-                          <p class="text-center" [class.mt-3]="!loader"><span
-                              class="fa-2x">{{l1TotalUsersCount}}</span>Active Users</p>
-                          <div class="row text-center mt-2">
-                            <div class="col-md-4">
-                              <div class="lds-facebook" *ngIf="!loader">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                              </div>
-                              <p class="count">{{l1DesktopCount}}</p>
-                              <em class="fas fa-tv pr-3"></em>
-                              <p class="d-inline">Desktop</p>
-                            </div>
-                            <div class="col-md-4">
-                              <div class="lds-facebook" *ngIf="!loader">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                              </div>
-                              <p class="count m-0">{{l1MobCount}}</p>
-                              <em class="fas fa-mobile pr-3 fs-25"></em>
-                              <p class="d-inline">Moblie</p>
-                            </div>
-                            <div class="col-md-4">
-                              <div class="lds-facebook" *ngIf="!loader">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                              </div>
-                              <p class="count">{{l1TabCount}}</p>
-                              <em class="fas fa-tablet pr-3"></em>
-                              <p class="d-inline">Tablet</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-12 text-center">
+                
+                  <!-- <div class="col-12 text-center">
                     <div class="arrow" [ngClass]="!mouseOvered1 ? '' : ''" (mouseover)="mouseOvered1=true"
                       (mouseout)="mouseOvered1=false">
                       <a class="c-pointer" (click)="L1_status =! L1_status">
                           <em [ngClass]="!L1_status ? 'fa fa-chevron-down fa-2x' : 'fa fa-chevron-up fa-2x'"></em>
                         </a>
                     </div>
-                  </div>                   
+                  </div>                    -->
+                  <div class=" col-md-12 p-1 text-center">
+                      <a class="text-blue" data-toggle="modal" data-target="#level1">
+                        View Details
+                      </a>
+                    </div>
                 </div>
-                <div class="row mx-auto" *ngIf="L1_status">
-                  <div class="col-md-6">
-                      <table class="table table-bordered" >                          
-                           <tbody >
-                              <tr>
-                                <td>Pending</td>
-                                <td>{{resultl1['not_started']}}</td> 
-                              </tr>                               
-                              <tr>
-                                <td>In Module 1</td>
-                                <td>{{resultl1['in_module1']}}</td>
-                              </tr>
-                              <tr>
-                                <td>In Module 2</td>
-                                <td>{{resultl1['com_module1']}}</td> 
-                              </tr>
-                              <tr>
-                                <td>In Module 3</td>
-                                <td>{{resultl1['com_module2']}}</td> 
-                              </tr>
-                              <tr>
-                                <td>In Module 4</td>
-                                <td>{{resultl1['com_module3']}}</td> 
-                              </tr>
-                              <tr>
-                                <td>In Module 5</td>
-                                <td>{{resultl1['com_module4']}}</td>
-                              </tr>
-                              <!-- <tr>
-                                  <td>Endline</td>
-                                  <td>{{resultl1['com_module5']}}</td>
-                                </tr> -->
-                              <tr>
-                                <td>Completed</td>
-                                <td>{{resultl1['completed']}}</td>
-                              </tr>
-                              <tr class="total">
-                                <td><strong>Total</strong></td>
-                                <td>{{resultl1['not_started']+resultl1['in_module1']+resultl1['com_module1']+resultl1['com_module2']+resultl1['com_module3']+resultl1['com_module4']+resultl1['com_module5']+resultl1['completed']}}</td>
-                              </tr>
-                            </tbody> 
-                        </table>
-                  </div>
-                    <div class="col-md-6">
-                      <div class="card custom-minh">
-                        <div class="card-block">
-                          <dx-pie-chart id="pie" title="Level 1 Current Status" palette="bright"
-                            [dataSource]="alluserstatusreportL1">
-                            <dxo-legend orientation="horizontal" itemTextPosition="right" horizontalAlignment="center"
-                              verticalAlignment="bottom" [columnCount]="4"></dxo-legend>
-                            <dxo-export [enabled]="true"></dxo-export>
-                            <dxi-series argumentField="que" valueField="val">
-                              <dxo-label [visible]="true" position="columns" [customizeText]="customizeLabel">
-                                <dxo-font [size]="16"></dxo-font>
-                                <dxo-connector [visible]="true" [width]="0.5"></dxo-connector>
-                              </dxo-label>
-                            </dxi-series>
-                          </dx-pie-chart>
+                <div class="modal fade" id="level1" tabindex="-1" role="dialog"
+                  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                        <div class="row mx-auto">
+                          <div class="col-md-12">
+                            <div class=" custom-minh">
+                              <div class="card-block">
+                                <dx-pie-chart id="pie" type="doughnut" title="Level 1 Current Status" palette="bright"
+                                  [dataSource]="alluserstatusreportL1" (onPointClick)="pointClickHandler($event)">
+                                  <dxo-legend orientation="horizontal" itemTextPosition="right"
+                                    horizontalAlignment="center" verticalAlignment="bottom" [columnCount]="4">
+                                  </dxo-legend>
+                                  <dxo-export [enabled]="true"></dxo-export>
+                                  <dxo-tooltip [enabled]="true" format="currency" [customizeTooltip]="customizeTooltip">
+                                  </dxo-tooltip>
+                                  <dxi-series argumentField="que" valueField="val">
+                                    <dxo-label [visible]="true" position="columns" [customizeText]="customizeLabel">
+                                      <dxo-font [size]="16"></dxo-font>
+                                      <dxo-connector [visible]="true" [width]="0.5"></dxo-connector>
+                                    </dxo-label>
+                                  </dxi-series>                                  
+                                </dx-pie-chart>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
+
                     </div>
                   </div>
-               
+                </div>
+
               </div>
-              <div class="col-md-12 left-content mb-4 bg-custom">
-                <div class="row ">
+              <div class="col-md-4 left-content mb-4 ">
+                <div class="row bg-custom ">
                   <div class="col-12">
                     <div class="card-header">
                       <h6>Level 2</h6>
                       <!-- <b class="adminTimer">{{countDown2 | async | formatTime}}</b> -->
                     </div>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-12">
+                      <div class="card bg-danger mt-1">
+                        <div class="card-block">
+                          <div class="counter-wrap">
+                            <div class="lds-facebook abs" *ngIf="!loader">
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                            </div>
+                            <p class="fa-1x" [class.mt-3]="!loader">Active Users : {{l2TotalUsersCount}}</p>
+                            <div class="row text-center mt-2">
+                              <div class="col-md-4">
+                                <div class="lds-facebook" *ngIf="!loader">
+                                  <div></div>
+                                  <div></div>
+                                  <div></div>
+                                </div>
+                                <p class="count">{{l2DesktopCount}}</p>
+                                <!-- <em class="fas fa-tv pr-3"></em> -->
+                                <p class="d-inline">Desktop</p>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="lds-facebook" *ngIf="!loader">
+                                  <div></div>
+                                  <div></div>
+                                  <div></div>
+                                </div>
+                                <p class="count m-0">{{l2MobCount}}</p>
+                                <!-- <em class="fas fa-mobile pr-3 fs-25"></em> -->
+                                <p class="d-inline">Moblie</p>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="lds-facebook" *ngIf="!loader">
+                                  <div></div>
+                                  <div></div>
+                                  <div></div>
+                                </div>
+                                <p class="count">{{l2TabCount}}</p>
+                                <!-- <em class="fas fa-tablet pr-3"></em> -->
+                                <p class="d-inline">Tablet</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <div class="col-md-12">
                     <div class="card bg-primary mt-1">
                       <div class="card-block">
                         <div class="counter-wrap p-1">
@@ -297,7 +323,7 @@
                                 <span>{{notStartedCountL2}}</span>Pending
                               </p>
                             </div>
-                            <div class="col-md-4"> 
+                            <div class="col-md-4">
                               <p class="d-inline">
                                 <em class="fas fa-users fa-2x mb-2"></em>
                                 <span>{{inModuleCountL2}}</span>In Module
@@ -314,138 +340,112 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    <div class="card bg-danger mt-1">
-                      <div class="card-block">
-                        <div class="counter-wrap">
-                          <div class="lds-facebook abs" *ngIf="!loader">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                          </div>
-                          <p class="text-center" [class.mt-3]="!loader"><span
-                              class="fa-2x">{{l2TotalUsersCount}}</span>Active Users</p>
-                          <div class="row text-center mt-2">
-                            <div class="col-md-4">
-                              <div class="lds-facebook" *ngIf="!loader">
-                                <div></div>
-                                <div></div>
-                                <div></div>
+                 
+                  <!-- <div class="col-12 text-center">
+                    <div class="arrow" [ngClass]="!mouseOvered2 ? '' : ''" (mouseover)="mouseOvered2=true"
+                      (mouseout)="mouseOvered2=false">
+                      <a class="c-pointer" (click)="L2_status =! L2_status">
+                        <em [ngClass]="!L2_status ? 'fa fa-chevron-down fa-2x' : 'fa fa-chevron-up fa-2x'"></em>
+                      </a>
+                    </div>
+                  </div> -->
+                  <div class=" col-md-12 p-1 text-center">
+                    <a class="text-blue" data-toggle="modal" data-target="#level2">
+                      View Details
+                    </a>
+                  </div>
+                </div>
+                <div class="modal fade" id="level2" tabindex="-1" role="dialog"
+                  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                        <div class="row mx-auto">
+                          <div class="col-md-12">
+                            <div class=" custom-minh">
+                              <div class="card-block">
+                                <dx-pie-chart id="pie"  type="doughnut" title="Level 2 Current Status" palette="bright"
+                                  [dataSource]="alluserstatusreportL2" (onPointClick)="pointClickHandler($event)">
+                                  <dxo-legend orientation="horizontal" itemTextPosition="right"
+                                    horizontalAlignment="center" verticalAlignment="bottom" [columnCount]="4">
+                                  </dxo-legend>
+                                  <dxo-export [enabled]="true"></dxo-export>
+                                  <dxi-series argumentField="que" valueField="val">
+                                    <dxo-label [visible]="true" position="columns" [customizeText]="customizeLabel">
+                                      <dxo-font [size]="16"></dxo-font>
+                                      <dxo-connector [visible]="true" [width]="0.5"></dxo-connector>
+                                    </dxo-label>
+                                  </dxi-series>
+                                </dx-pie-chart>
                               </div>
-                              <p class="count">{{l2DesktopCount}}</p>
-                              <em class="fas fa-tv pr-3"></em>
-                              <p class="d-inline">Desktop</p>
-                            </div>
-                            <div class="col-md-4">
-                              <div class="lds-facebook" *ngIf="!loader">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                              </div>
-                              <p class="count m-0">{{l2MobCount}}</p>
-                              <em class="fas fa-mobile pr-3 fs-25"></em>
-                              <p class="d-inline">Moblie</p>
-                            </div>
-                            <div class="col-md-4">
-                              <div class="lds-facebook" *ngIf="!loader">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                              </div>
-                              <p class="count">{{l2TabCount}}</p>
-                              <em class="fas fa-tablet pr-3"></em>
-                              <p class="d-inline">Tablet</p>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                  <div class="col-12 text-center">
-                    <div class="arrow" [ngClass]="!mouseOvered2 ? '' : ''" (mouseover)="mouseOvered2=true"
-                      (mouseout)="mouseOvered2=false">
-                      <a class="c-pointer" (click)="L2_status =! L2_status">
-                          <em [ngClass]="!L2_status ? 'fa fa-chevron-down fa-2x' : 'fa fa-chevron-up fa-2x'"></em>
-                        </a>
+
                     </div>
                   </div>
                 </div>
-                <div class="row mx-auto" *ngIf="L2_status">
-                    <div class="col-md-6">
-                        <table class="table table-bordered" >                          
-                             <tbody >
-                                <tr>
-                                  <td>Pending</td>
-                                  <td>{{resultl2['not_started']}}</td> 
-                                </tr>  
-                                <tr>
-                                    <td>Baseline</td>
-                                    <td>{{resultl2['in_module0']}}</td>
-                                  </tr>                             
-                                <tr>
-                                  <td>In Module 1</td>
-                                  <td>{{resultl2['com_module0']}}</td>
-                                </tr>
-                                <tr>
-                                  <td>In Module 2</td>
-                                  <td>{{resultl2['com_module1']}}</td> 
-                                </tr>
-                                <tr>
-                                  <td>In Module 3</td>
-                                  <td>{{resultl2['com_module2']}}</td> 
-                                </tr>
-                                <tr>
-                                  <td>In Module 4</td>
-                                  <td>{{resultl2['com_module3']}}</td> 
-                                </tr>
-                                <tr>
-                                  <td>In Module 5</td>
-                                  <td>{{resultl2['com_module4']}}</td>
-                                </tr>
-                                <!-- <tr>
-                                    <td>Endline</td>
-                                    <td>{{resultl2['com_module5']}}</td>
-                                  </tr> -->
-                                <tr>
-                                  <td>Completed</td>
-                                  <td>{{resultl2['completed']}}</td>
-                                </tr>
-                                <tr class="total">
-                                  <td><strong>Total</strong></td>
-                                  <td>{{resultl2['not_started']+resultl2['in_module0']+resultl2['com_module0']+resultl2['com_module1']+resultl2['com_module2']+resultl2['com_module3']+resultl2['com_module4']+resultl2['com_module5']+resultl2['completed']}}</td>
-                                </tr>
-                              </tbody> 
-                          </table>
-                    </div>
-                  <div class="col-md-6">
-                    <div class="card custom-minh">
-                      <div class="card-block">
-                        <dx-pie-chart id="pie" title="Level 2 Current Status" palette="bright"
-                          [dataSource]="alluserstatusreportL2">
-                          <dxo-legend orientation="horizontal" itemTextPosition="right" horizontalAlignment="center"
-                            verticalAlignment="bottom" [columnCount]="4"></dxo-legend>
-                          <dxo-export [enabled]="true"></dxo-export>
-                          <dxi-series argumentField="que" valueField="val">
-                            <dxo-label [visible]="true" position="columns" [customizeText]="customizeLabel">
-                              <dxo-font [size]="16"></dxo-font>
-                              <dxo-connector [visible]="true" [width]="0.5"></dxo-connector>
-                            </dxo-label>
-                          </dxi-series>
-                        </dx-pie-chart>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+
               </div>
-              <div class="col-md-12 left-content mb-4 bg-custom">
-                <div class="row ">
+              <div class="col-md-4 left-content mb-4 ">
+                <div class="row bg-custom ">
                   <div class="col-12">
                     <div class="card-header">
                       <h6>Level 3</h6>
                       <!-- <b class="adminTimer">{{countDown2 | async | formatTime}}</b> -->
                     </div>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-12">
+                      <div class="card bg-danger">
+                        <div class="card-block">
+                          <div class="counter-wrap">
+                            <div class="lds-facebook abs" *ngIf="!loader">
+                              <div></div>
+                              <div></div>
+                              <div></div>
+                            </div>
+                            <p class="fa-1x" [class.mt-3]="!loader">Active Users :{{l3TotalUsersCount}}</p>
+                            <div class="row text-center mt-2">
+                              <div class="col-md-4">
+                                <div class="lds-facebook" *ngIf="!loader">
+                                  <div></div>
+                                  <div></div>
+                                  <div></div>
+                                </div>
+                                <p class="count">{{l3DesktopCount}}</p>
+                                <!-- <em class="fas fa-tv pr-3"></em> -->
+                                <p class="d-inline">Desktop</p>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="lds-facebook" *ngIf="!loader">
+                                  <div></div>
+                                  <div></div>
+                                  <div></div>
+                                </div>
+                                <p class="count m-0">{{l3MobCount}}</p>
+                                <!-- <em class="fas fa-mobile pr-3 fs-25"></em> -->
+                                <p class="d-inline">Moblie</p>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="lds-facebook" *ngIf="!loader">
+                                  <div></div>
+                                  <div></div>
+                                  <div></div>
+                                </div>
+                                <p class="count">{{l3TabCount}}</p>
+                                <!-- <em class="fas fa-tablet pr-3"></em> -->
+                                <p class="d-inline">Tablet</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <div class="col-md-12">
                     <div class="card bg-primary mt-1">
                       <div class="card-block">
                         <div class="counter-wrap p-1">
@@ -473,128 +473,56 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    <div class="card bg-danger mt-1">
-                      <div class="card-block">
-                        <div class="counter-wrap">
-                          <div class="lds-facebook abs" *ngIf="!loader">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                          </div>
-                          <p class="text-center" [class.mt-3]="!loader"><span
-                              class="fa-2x">{{l3TotalUsersCount}}</span>Active Users</p>
-                          <div class="row text-center mt-2">
-                            <div class="col-md-4">
-                              <div class="lds-facebook" *ngIf="!loader">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                              </div>
-                              <p class="count">{{l3DesktopCount}}</p>
-                              <em class="fas fa-tv pr-3"></em>
-                              <p class="d-inline">Desktop</p>
-                            </div>
-                            <div class="col-md-4">
-                              <div class="lds-facebook" *ngIf="!loader">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                              </div>
-                              <p class="count m-0">{{l3MobCount}}</p>
-                              <em class="fas fa-mobile pr-3 fs-25"></em>
-                              <p class="d-inline">Moblie</p>
-                            </div>
-                            <div class="col-md-4">
-                              <div class="lds-facebook" *ngIf="!loader">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                              </div>
-                              <p class="count">{{l3TabCount}}</p>
-                              <em class="fas fa-tablet pr-3"></em>
-                              <p class="d-inline">Tablet</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-12 text-center">
+                 
+                  <!-- <div class="col-12 text-center">
                     <div class="arrow" [ngClass]="!mouseOvered3 ? '' : ''" (mouseover)="mouseOvered3=true"
                       (mouseout)="mouseOvered3=false">
                       <a class="c-pointer" (click)="L3_status =! L3_status">
                         <em [ngClass]="!L3_status ? 'fa fa-chevron-down fa-2x' : 'fa fa-chevron-up fa-2x'"></em>
                       </a>
                     </div>
-                  </div>
-                </div>
-                <div class="row mx-auto" *ngIf="L3_status">
-                    <div class="col-md-6">
-                        <table class="table table-bordered" >                          
-                             <tbody >
-                                <tr>
-                                  <td>Pending</td>
-                                  <td>{{resultl3['not_started']}}</td> 
-                                </tr>  
-                                <tr>
-                                    <td>Baseline</td>
-                                    <td>{{resultl3['in_module0']}}</td>
-                                  </tr>                             
-                                <tr>
-                                  <td>In Module 1</td>
-                                  <td>{{resultl3['com_module0']}}</td>
-                                </tr>
-                                <tr>
-                                  <td>In Module 2</td>
-                                  <td>{{resultl3['com_module1']}}</td> 
-                                </tr>
-                                <tr>
-                                  <td>In Module 3</td>
-                                  <td>{{resultl3['com_module2']}}</td> 
-                                </tr>
-                                <tr>
-                                  <td>In Module 4</td>
-                                  <td>{{resultl3['com_module3']}}</td> 
-                                </tr>
-                                <tr>
-                                  <td>In Module 5</td>
-                                  <td>{{resultl3['com_module4']}}</td>
-                                </tr>
-                                <!-- <tr>
-                                    <td>Endline</td>
-                                    <td>{{resultl3['com_module5']}}</td>
-                                  </tr> -->
-                                <tr>
-                                  <td>Completed</td>
-                                  <td>{{resultl3['completed']}}</td>
-                                </tr>
-                                <tr class="total">
-                                  <td><strong>Total</strong></td>
-                                  <td>{{resultl3['not_started']+resultl3['in_module0']+resultl3['com_module0']+resultl3['com_module1']+resultl3['com_module2']+resultl3['com_module3']+resultl3['com_module4']+resultl3['com_module5']+resultl3['completed']}}</td>
-                                </tr>
-                              </tbody> 
-                          </table>
+                  </div> -->
+                  <div class=" col-md-12 p-1 text-center">
+                      <a class="text-blue" data-toggle="modal" data-target="#level3">
+                        View Details
+                      </a>
                     </div>
-                  <div class="col-md-6">
-                    <div class="card custom-minh">
-                      <div class="card-block">
-                        <dx-pie-chart id="pie" title="Level 3 Current Status" palette="bright"
-                          [dataSource]="alluserstatusreportL3">
-                          <dxo-legend orientation="horizontal" itemTextPosition="right" horizontalAlignment="center"
-                            verticalAlignment="bottom" [columnCount]="4"></dxo-legend>
-                          <dxo-export [enabled]="true"></dxo-export>
-                          <dxi-series argumentField="que" valueField="val">
-                            <dxo-label [visible]="true" position="columns" [customizeText]="customizeLabel">
-                              <dxo-font [size]="16"></dxo-font>
-                              <dxo-connector [visible]="true" [width]="0.5"></dxo-connector>
-                            </dxo-label>
-                          </dxi-series>
-                        </dx-pie-chart>
+                </div>
+                <div class="modal fade" id="level3" tabindex="-1" role="dialog"
+                  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                        <div class="row mx-auto">                            
+                            <div class="col-md-12">
+                              <div class=" custom-minh">
+                                <div class="card-block">
+                                  <dx-pie-chart id="pie" type="doughnut" title="Level 3 Current Status" palette="bright"
+                                    [dataSource]="alluserstatusreportL3" (onPointClick)="pointClickHandler($event)">
+                                    <dxo-legend orientation="horizontal" itemTextPosition="right" horizontalAlignment="center"
+                                      verticalAlignment="bottom" [columnCount]="4"></dxo-legend>
+                                    <dxo-export [enabled]="true"></dxo-export>
+                                    <dxi-series argumentField="que" valueField="val">
+                                      <dxo-label [visible]="true" position="columns" [customizeText]="customizeLabel">
+                                        <dxo-font [size]="16"></dxo-font>
+                                        <dxo-connector [visible]="true" [width]="0.5"></dxo-connector>
+                                      </dxo-label>
+                                    </dxi-series>
+                                  </dx-pie-chart>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        
                       </div>
+
                     </div>
                   </div>
                 </div>
+               
               </div>
             </div>
             <!-- <div class="row mx-auto">
