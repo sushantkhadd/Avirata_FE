@@ -11,7 +11,7 @@
       <ul class="nav-dropdown-items submenu list-unstyled components pt-0">
         <a class="ml-2" (click)="levelBoard()">
           Report Dashboard</a>
-          <li class="dropdown-divider"></li>
+          <li class="dropdown-dividerAdmin"></li>
         <li *ngIf="userType == 'superadmin'">
           <a href="#module3Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><em
               class="fas fa-file mr-2"></em>&nbsp;Reports</a>
@@ -23,14 +23,14 @@
             </li> -->
             <li *ngIf="userType == 'superadmin' ||userType == 'admin' ">
               <a [class.active]="showDistrictData" (click)="ShowDistrictData()">
-                &nbsp;Not Started</a>
+                  <em class="fa fa-times"></em>&nbsp;&nbsp;Not Started</a>
             </li>
             <li *ngIf="userType == 'superadmin' ||userType == 'admin' ">
-              <a [class.active]="showParticipantData" (click)="ShowParticipantData()">&nbsp;Module Status</a> 
+              <a [class.active]="showParticipantData" (click)="ShowParticipantData()">  <em class="fa fa-adjust"></em>&nbsp;&nbsp;Module Status</a> 
             </li>
           </ul>
         </li>
-        <li class="dropdown-divider"></li>
+        <li class="dropdown-dividerAdmin"></li>
         <li *ngIf="userType == 'superadmin' ||userType == 'admin' ">
                     <ul class="collapse list-unstyled" id="module1Submenu">
             <li>
@@ -245,7 +245,7 @@
                                     horizontalAlignment="center" verticalAlignment="bottom" [columnCount]="4">
                                   </dxo-legend>
                                   <dxo-export [enabled]="true"></dxo-export>
-                                  <dxo-tooltip [enabled]="true" format="currency" [customizeTooltip]="customizeTooltip">
+                                 <dxo-tooltip [enabled]="true" format="currency" [customizeTooltip]="customizeTooltip">
                                   </dxo-tooltip>
                                   <dxi-series argumentField="que" valueField="val">
                                     <dxo-label [visible]="true" position="columns" [customizeText]="customizeLabel">
