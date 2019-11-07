@@ -517,7 +517,7 @@ export class AdminPanelComponent implements OnInit {
           }
           // this.alluserstatusreportL2 = demo;
           this.alluserstatusreportL2=[{"que":"Pending"+ " ("+this.resultl2['not_started']+")","val":this.resultl2['not_started']},
-          {"que":"Just Startd"+ " ("+this.resultl2['in_module0']+")","val":this.resultl2['in_module0']},
+          {"que":"Just Started"+ " ("+this.resultl2['in_module0']+")","val":this.resultl2['in_module0']},
           {"que":"In Module 1"+ " ("+this.resultl2['com_module0']+")","val":this.resultl2['com_module0']},
           {"que":"In Module 2"+ " ("+this.resultl2['com_module1']+")","val":this.resultl2['com_module1']},
           {"que":"In Module 3"+ " ("+this.resultl2['com_module2']+")","val":this.resultl2['com_module2']},
@@ -605,7 +605,7 @@ export class AdminPanelComponent implements OnInit {
             demo.push(j);
           }
           this.alluserstatusreportL3=[{"que":"Pending"+ " ("+this.resultl3['not_started']+")","val":this.resultl3['not_started']},
-          {"que":"Just Startd"+ " ("+this.resultl3['in_module0']+")","val":this.resultl3['in_module0']},
+          {"que":"Just Started"+ " ("+this.resultl3['in_module0']+")","val":this.resultl3['in_module0']},
           {"que":"In Module 1"+ " ("+this.resultl3['com_module0']+")","val":this.resultl3['com_module0']},
           {"que":"In Module 2"+ " ("+this.resultl3['com_module1']+")","val":this.resultl3['com_module1']},
           {"que":"In Module 3"+ " ("+this.resultl3['com_module2']+")","val":this.resultl3['com_module2']},
