@@ -1133,7 +1133,7 @@
         </button>
         <div class="" id="navbarSupportedContent">
           <div class="nav navbar-nav ml-auto">
-            <span class="d-none d-md-block">
+            <span class="d-none d-md-block" class="dropdown-toggle p-2 c-pointer" data-toggle="dropdown">
               <img [src]="imgUrl" alt="" class="rounded-circle mr-2" height="35" *ngIf="imgUrl">
               <i class="icon-user px-2" *ngIf="!imgUrl"></i>
               <span class="pr-2">{{userName}}</span>
@@ -1142,7 +1142,7 @@
             <span class="dropdown-toggle p-2 c-pointer" data-toggle="dropdown">
               <div class="dropdown">
                 <!-- <i class="icon-user px-2"></i><span class="hidden-md-down pr-2">Admin</span> -->
-                <div class="dropdown-menu dropdown-menu-right">
+                <div class="dropdown-menu dropdown-menu-right mt-4">
                   <div class="dropdown-header">
                     <strong>{{'Dashboard.Account' | translate}}</strong>
                   </div>
