@@ -423,12 +423,11 @@ export class AdminPanelComponent implements OnInit {
            
             demo.push(j);
           }
-          this.l1_graph=[{"que":"Pending"+ " ("+this.notStartedCountL1+")" ,"val":this.notStartedCountL1},          
-          {"que":"In Module" + " ("+this.inModuleCountL1+")","val":this.inModuleCountL1},
-          {"que":"Completed" + " ("+this.totalCountL1+")","val":this.totalCountL1}]
+          this.l1_graph=[{"que":"Completed" + " ("+this.totalCountL1+")","val":this.totalCountL1},         
+          {"que":"In Module" + " ("+this.inModuleCountL1+")","val":this.inModuleCountL1},          
+          {"que":"Pending"+ " ("+this.notStartedCountL1+")" ,"val":this.notStartedCountL1}]
           this.alluserstatusreportL1 = demo;
           this.alluserstatusreportL1=[{"que":"Pending" + " ("+this.resultl1['not_started']+")","val":this.resultl1['not_started']},
-          // {"que":"Just Startd","val":this.resultl1['in_module0']},
           {"que":"In Module 1 "+ " ("+this.resultl1['in_module1']+")","val":this.resultl1['in_module1']},
           {"que":"In Module 2"+ " ("+this.resultl1['com_module1']+")","val":this.resultl1['com_module1']},
           {"que":"In Module 3"+ " ("+this.resultl1['com_module2']+")","val":this.resultl1['com_module2']},
@@ -517,9 +516,9 @@ export class AdminPanelComponent implements OnInit {
             }
             demo.push(j);
           }
-          this.l2_graph=[{"que":"Pending"+ " ("+this.notStartedCountL2+")" ,"val":this.notStartedCountL2},          
+          this.l2_graph=[{"que":"Completed" + " ("+this.totalCountL2+")","val":this.totalCountL2},
           {"que":"In Module" + " ("+this.inModuleCountL2+")","val":this.inModuleCountL2},
-          {"que":"Completed" + " ("+this.totalCountL2+")","val":this.totalCountL2}]
+          {"que":"Pending"+ " ("+this.notStartedCountL2+")" ,"val":this.notStartedCountL2},]
           // this.alluserstatusreportL2 = demo;
           this.alluserstatusreportL2=[{"que":"Pending"+ " ("+this.resultl2['not_started']+")","val":this.resultl2['not_started']},
           {"que":"Just Started"+ " ("+this.resultl2['in_module0']+")","val":this.resultl2['in_module0']},
@@ -609,9 +608,9 @@ export class AdminPanelComponent implements OnInit {
             }
             demo.push(j);
           }
-          this.l3_graph=[{"que":"Pending"+ " ("+this.notStartedCountL3+")" ,"val":this.notStartedCountL3},          
+          this.l3_graph=[{"que":"Completed" + " ("+this.totalCountL3+")","val":this.totalCountL3},
           {"que":"In Module" + " ("+this.inModuleCountL3+")","val":this.inModuleCountL3},
-          {"que":"Completed" + " ("+this.totalCountL3+")","val":this.totalCountL3}]
+          {"que":"Pending"+ " ("+this.notStartedCountL3+")" ,"val":this.notStartedCountL3}]
           this.alluserstatusreportL3=[{"que":"Pending"+ " ("+this.resultl3['not_started']+")","val":this.resultl3['not_started']},
           {"que":"Just Started"+ " ("+this.resultl3['in_module0']+")","val":this.resultl3['in_module0']},
           {"que":"In Module 1"+ " ("+this.resultl3['com_module0']+")","val":this.resultl3['com_module0']},
