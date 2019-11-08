@@ -38,7 +38,7 @@ export class AdminPanelComponent implements OnInit {
   l2TotalUsersCount; l2DesktopCount; l2MobCount; l2TabCount; loader; refreshLoader;
   l3TotalUsersCount; l3DesktopCount; l3MobCount; l3TabCount; inModuleCountL3; 
   inModuleCountL1; inModuleCountL2; L1_status; L2_status; L3_status; mouseOvered1; mouseOvered2; mouseOvered3; reportUrl; isLoaded;
-  resultl1;resultl2;resultl3;l1_graph =[]
+  resultl1;resultl2;resultl3;l1_graph =[];l2_graph =[];l3_graph =[]
   resolveOverlappingTypes = ["shift", "hide", "none"];
 
   // public time1; tmSec1; countDown; tick = 1000;time2; tmSec2; countDown2; tick2 = 1000;time3; tmSec3; countDown3; tick3 = 1000;
@@ -52,7 +52,9 @@ export class AdminPanelComponent implements OnInit {
   ) {
     this.toastr.setRootViewContainerRef(vcr);
   }
-
+  customizeTooltip(arg) {
+    return { text: arg.argumentText  };
+}
   ngOnInit() {    
     this.userType=window.localStorage.getItem('group_name')
     console.log("admin");
@@ -421,9 +423,9 @@ export class AdminPanelComponent implements OnInit {
            
             demo.push(j);
           }
-          this.l1_graph=[{"que":"Pending","val":this.notStartedCountL1},
-          {"que":"Completed","val":this.totalCountL1},
-          {"que":"in_module","val":this.inModuleCountL1}]
+          this.l1_graph=[{"que":"Pending"+ " ("+this.notStartedCountL1+")" ,"val":this.notStartedCountL1},          
+          {"que":"In Module" + " ("+this.inModuleCountL1+")","val":this.inModuleCountL1},
+          {"que":"Completed" + " ("+this.totalCountL1+")","val":this.totalCountL1}]
           this.alluserstatusreportL1 = demo;
           this.alluserstatusreportL1=[{"que":"Pending" + " ("+this.resultl1['not_started']+")","val":this.resultl1['not_started']},
           // {"que":"Just Startd","val":this.resultl1['in_module0']},
@@ -515,6 +517,9 @@ export class AdminPanelComponent implements OnInit {
             }
             demo.push(j);
           }
+          this.l2_graph=[{"que":"Pending"+ " ("+this.notStartedCountL2+")" ,"val":this.notStartedCountL2},          
+          {"que":"In Module" + " ("+this.inModuleCountL2+")","val":this.inModuleCountL2},
+          {"que":"Completed" + " ("+this.totalCountL2+")","val":this.totalCountL2}]
           // this.alluserstatusreportL2 = demo;
           this.alluserstatusreportL2=[{"que":"Pending"+ " ("+this.resultl2['not_started']+")","val":this.resultl2['not_started']},
           {"que":"Just Started"+ " ("+this.resultl2['in_module0']+")","val":this.resultl2['in_module0']},
@@ -604,6 +609,9 @@ export class AdminPanelComponent implements OnInit {
             }
             demo.push(j);
           }
+          this.l3_graph=[{"que":"Pending"+ " ("+this.notStartedCountL3+")" ,"val":this.notStartedCountL3},          
+          {"que":"In Module" + " ("+this.inModuleCountL3+")","val":this.inModuleCountL3},
+          {"que":"Completed" + " ("+this.totalCountL3+")","val":this.totalCountL3}]
           this.alluserstatusreportL3=[{"que":"Pending"+ " ("+this.resultl3['not_started']+")","val":this.resultl3['not_started']},
           {"que":"Just Started"+ " ("+this.resultl3['in_module0']+")","val":this.resultl3['in_module0']},
           {"que":"In Module 1"+ " ("+this.resultl3['com_module0']+")","val":this.resultl3['com_module0']},
