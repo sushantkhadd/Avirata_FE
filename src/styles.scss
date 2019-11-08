@@ -3874,7 +3874,7 @@ body {
   }
 
   #sidebar ul.components {
-    padding: 20px 0;
+    padding: 5px 0;
     border-bottom: 1px solid #545e61;
 
     a {
@@ -4084,7 +4084,6 @@ body {
     p {
       margin-bottom: 4px;
       line-height: 25px;
-      font-weight: 800;
 
       span {
         display: block;
@@ -4625,5 +4624,6 @@ mfBootstrapPaginator {
   cursor: pointer;
 }
 .dropdown-dividerAdmin{
+  padding: 5px 0;
   border-bottom: 1px solid #545e61;
 }
