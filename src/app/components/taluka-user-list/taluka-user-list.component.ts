@@ -104,6 +104,7 @@ export class TalukaUserListComponent implements OnInit {
           this.timeCounter(data['data'].cachetime)
         } else if (fun == 'talukaOverallReport') {
           this.overviewList = data['data'].result;
+          console.log("sadddddddd",this.overviewList,data['data'].result)
           if (this.overviewList) {
             this.loader = false;
           } else {
@@ -113,9 +114,9 @@ export class TalukaUserListComponent implements OnInit {
           this.ex=this.exportData
           console.log(this.exportData)
 
-          for(let i of this.ex){
-            i['Pending']=i['Total']-i['Completed']
-          }
+          // for(let i of this.ex){
+          //   i['Pending']=i['Total']-i['Completed']
+          // }
           this.timeCounter2(data['data'].cachetime)
         } else if (fun == 'coview') {
           this.userList = data['data'].result;

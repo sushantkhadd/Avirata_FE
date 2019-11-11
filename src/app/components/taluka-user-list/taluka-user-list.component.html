@@ -200,11 +200,16 @@
                     <i class="fa fa-sort" aria-hidden="true"></i>
                   </mfDefaultSorter>
                 </th>
-                <!-- <th>
+                <th>
                   <mfDefaultSorter by="Pending">Pending
                     <i class="fa fa-sort" aria-hidden="true"></i>
                   </mfDefaultSorter>
-                </th> -->
+                </th>
+                <th>
+                  <mfDefaultSorter>In Module
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
                 <th>
                   <mfDefaultSorter by="Total">Total
                     <i class="fa fa-sort" aria-hidden="true"></i>
@@ -220,7 +225,8 @@
               <tr *ngFor="let item of mf.data; let i=index">
                 <td>{{item.Taluka}}</td>
                 <td>{{item.Completed}}</td>
-                <td>{{item.Total - item.Completed}}</td>
+                <td>{{item.Pending}}</td>
+                <td>{{item.Total - (item.Pending + item.Completed)}}</td>
                 <td>{{item.Total}}</td>
                 <td>
                   <a class="btn btn-primary actionBtn mr-1 text-white" (click)="viewDetailsforCo(item.Taluka);showReset2=false">
