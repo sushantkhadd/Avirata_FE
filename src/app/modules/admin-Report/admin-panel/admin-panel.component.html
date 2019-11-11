@@ -6,13 +6,12 @@
         <h3>Admin Panel</h3>
         <a class="btn btn-primary c-pointer" (click)="setMenu()">
           <em class="fa fa-chevron-left"></em>&nbsp;&nbsp;&nbsp;&nbsp;Course Dashboard</a><br>
-         
+
       </div>
       <ul class="nav-dropdown-items submenu list-unstyled components pt-0">
-        <li><a (click)="levelBoard()"><em
-          class="fas fa-tachometer-alt"></em>&nbsp;
+        <li><a (click)="levelBoard()"><em class="fas fa-tachometer-alt"></em>&nbsp;
             Report Dashboard</a></li>
-          <li class="dropdown-dividerAdmin"></li>
+        <li class="dropdown-dividerAdmin"></li>
         <li *ngIf="userType == 'superadmin' ||userType == 'admin' ">
           <a href="#module3Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><em
               class="fas fa-file mr-2"></em>&nbsp;Reports</a>
@@ -25,10 +24,11 @@
             </li> -->
             <li *ngIf="userType == 'superadmin' ||userType == 'admin' ">
               <a [class.active]="showDistrictData" (click)="ShowDistrictData()">
-                  <em class="fa fa-times"></em>&nbsp;&nbsp;Not Started</a>
+                <em class="fa fa-times"></em>&nbsp;&nbsp;Not Started</a>
             </li>
             <li *ngIf="userType == 'superadmin' ||userType == 'admin' ">
-              <a [class.active]="showParticipantData" (click)="ShowParticipantData()">  <em class="fa fa-adjust"></em>&nbsp;&nbsp;Module Status</a> 
+              <a [class.active]="showParticipantData" (click)="ShowParticipantData()"> <em
+                  class="fa fa-adjust"></em>&nbsp;&nbsp;Module Status</a>
             </li>
           </ul>
         </li>
@@ -37,23 +37,28 @@
           <a href="#module2Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><em
               class="fas fa-wrench mr-2"></em>&nbsp;Utilities</a>
           <ul class="collapse list-unstyled" id="module2Submenu">
-              <li>
-                  <a [class.active]="showNotification" (click)="ShowNotification()"><em class="fa fa-bell"></em>&nbsp;&nbsp;Send Notification</a>
-                </li>
-                <li> <a [class.active]="showSearchData" (click)="searchData()"><em class="fa fa-search"></em>&nbsp;&nbsp;Search User</a> </li>
-                <li> <a><em class="fa fa-plus"></em>&nbsp;&nbsp;Add User</a> </li>
             <li>
-              <a [class.active]="userTransferNReplace" (click)="userTransferAndReplace()"><em class="fa fa-exchange-alt"></em>&nbsp;&nbsp;User Transfer</a>
+              <a [class.active]="showNotification" (click)="ShowNotification()"><em
+                  class="fa fa-bell"></em>&nbsp;&nbsp;Send Notification</a>
+            </li>
+            <li> <a [class.active]="showSearchData" (click)="searchData()"><em
+                  class="fa fa-search"></em>&nbsp;&nbsp;Search User</a> </li>
+            <li> <a><em class="fa fa-plus"></em>&nbsp;&nbsp;Add User</a> </li>
+            <li>
+              <a [class.active]="userTransferNReplace" (click)="userTransferAndReplace()"><em
+                  class="fa fa-exchange-alt"></em>&nbsp;&nbsp;User Transfer</a>
             </li>
             <li>
-              <a [class.active]="coordinatorTransfer" (click)="coordinatorTransferAndCreate()"><em class="fa fa-exchange-alt"></em>&nbsp;&nbsp;Co-ordinator Transfer</a>
+              <a [class.active]="coordinatorTransfer" (click)="coordinatorTransferAndCreate()"><em
+                  class="fa fa-exchange-alt"></em>&nbsp;&nbsp;Co-ordinator Transfer</a>
             </li>
-            
-           
-            <li> <a [class.active]="showProfileData" (click)="setProfile()"><em class="fa fa-user"></em>&nbsp;&nbsp;User Profile Config</a> </li> 
+
+
+            <li> <a [class.active]="showProfileData" (click)="setProfile()"><em class="fa fa-user"></em>&nbsp;&nbsp;User
+                Profile Config</a> </li>
           </ul>
         </li>
-      
+
       </ul>
       <!-- <ul class="list-unstyled components">
         <p> <em class="fas fa-file" aria-hidden="true"></em> &nbsp; Reports</p>
@@ -129,54 +134,73 @@
 
                   </div>
                   <div class="col-md-12">
-                      <div class="card bg-danger mt-1">
-                        <div class="card-block">
-                          <div class="counter-wrap">
-                            <div class="lds-facebook abs" *ngIf="!loader">
-                              <div></div>
-                              <div></div>
-                              <div></div>
+                    <div class="card bg-danger mt-1">
+                      <div class="card-block">
+                        <div class="counter-wrap">
+                          <div class="lds-facebook abs" *ngIf="!loader">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                          </div>
+                          <p class="fa-1x" [class.mt-3]="!loader">Active Users : {{l1TotalUsersCount}}</p>
+
+                          <div class="row text-center mt-2">
+                            <div class="col-md-4">
+                              <div class="lds-facebook" *ngIf="!loader">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                              </div>
+                              <p class="count">{{l1DesktopCount}}</p>
+                              <!-- <em class="fas fa-tv pr-3"></em> -->
+                              <p class="d-inline">Desktop</p>
                             </div>
-                            <p class="fa-1x" [class.mt-3]="!loader">Active Users : {{l1TotalUsersCount}}</p>
-  
-                            <div class="row text-center mt-2">
-                              <div class="col-md-4">
-                                <div class="lds-facebook" *ngIf="!loader">
-                                  <div></div>
-                                  <div></div>
-                                  <div></div>
-                                </div>
-                                <p class="count">{{l1DesktopCount}}</p>
-                                <!-- <em class="fas fa-tv pr-3"></em> -->
-                                <p class="d-inline">Desktop</p>
+                            <div class="col-md-4">
+                              <div class="lds-facebook" *ngIf="!loader">
+                                <div></div>
+                                <div></div>
+                                <div></div>
                               </div>
-                              <div class="col-md-4">
-                                <div class="lds-facebook" *ngIf="!loader">
-                                  <div></div>
-                                  <div></div>
-                                  <div></div>
-                                </div>
-                                <p class="count ">{{l1MobCount}}</p>
-                                <!-- <em class="fas fa-mobile pr-3 fs-25"></em> -->
-                                <p class="d-inline">Moblie</p>
+                              <p class="count ">{{l1MobCount}}</p>
+                              <!-- <em class="fas fa-mobile pr-3 fs-25"></em> -->
+                              <p class="d-inline">Moblie</p>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="lds-facebook" *ngIf="!loader">
+                                <div></div>
+                                <div></div>
+                                <div></div>
                               </div>
-                              <div class="col-md-4">
-                                <div class="lds-facebook" *ngIf="!loader">
-                                  <div></div>
-                                  <div></div>
-                                  <div></div>
-                                </div>
-                                <p class="count">{{l1TabCount}}</p>
-                                <!-- <em class="fas fa-tablet pr-3"></em> -->
-                                <p class="d-inline">Tablet</p>
-                              </div>
+                              <p class="count">{{l1TabCount}}</p>
+                              <!-- <em class="fas fa-tablet pr-3"></em> -->
+                              <p class="d-inline">Tablet</p>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  <div class="col-md-12">                      
-                     <div class="card bg-primary mt-1">
+                  </div>
+                  <div class="col-md-12 ">
+                    <h5 class="text-black text-center mt-2">Current Status</h5>
+                    <div class="chart mt-2">
+                      <dx-pie-chart id="pie" type="doughnut" palette="bright" [dataSource]="l1_graph"
+                        [resolveLabelOverlapping]="resolveOverlappingTypes[0]">
+                        <dxo-legend orientation="horizontal" itemTextPosition="right" horizontalAlignment="center"
+                          verticalAlignment="bottom" [columnCount]="4">
+                        </dxo-legend>
+                        <dxo-export [enabled]="false"></dxo-export>
+                        <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip">
+                        </dxo-tooltip>
+                        <dxi-series argumentField="que" valueField="val">
+                          <dxo-label [visible]="false" position="columns" [customizeText]="customizeLabel">
+                            <dxo-font [size]="16"></dxo-font>
+                            <dxo-connector [visible]="true" [width]="0.5"></dxo-connector>
+                          </dxo-label>
+                        </dxi-series>
+                      </dx-pie-chart>
+                    </div>
+
+                    <!-- <div class="card bg-primary mt-1">
                       <div class="card-block">
                         <div class="counter-wrap p-1">
                           <div class="row">
@@ -201,9 +225,9 @@
                           </div>
                         </div>
                       </div>
-                    </div>                   
+                    </div>                    -->
                   </div>
-                
+
                   <!-- <div class="col-12 text-center">
                     <div class="arrow" [ngClass]="!mouseOvered1 ? '' : ''" (mouseover)="mouseOvered1=true"
                       (mouseout)="mouseOvered1=false">
@@ -213,10 +237,11 @@
                     </div>
                   </div>                    -->
                   <div class=" col-md-12 p-1 text-center">
-                      <a class="text-blue" data-toggle="modal" data-target="#level1">
-                        View Details
-                      </a>
-                    </div>
+                    <a class="text-blue" data-toggle="modal" data-target="#level1" data-backdrop="static"
+                      data-keyboard="false">
+                      View Details
+                    </a>
+                  </div>
                 </div>
                 <div class="modal fade" id="level1" tabindex="-1" role="dialog"
                   aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -226,24 +251,30 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
-                        <div class="row mx-auto">
+                        <div class="row ">
                           <div class="col-md-12">
                             <div class=" custom-minh">
                               <div class="card-block">
-                                <dx-pie-chart id="pie" type="doughnut" title="Level 1 Current Status" palette="bright"
-                                  [dataSource]="alluserstatusreportL1" [resolveLabelOverlapping]="resolveOverlappingTypes[0]">
+                                <dx-pie-chart id="pie" type="doughnut" palette="bright"
+                                  [dataSource]="alluserstatusreportL1"
+                                  [resolveLabelOverlapping]="resolveOverlappingTypes[0]">
                                   <dxo-legend orientation="horizontal" itemTextPosition="right"
                                     horizontalAlignment="center" verticalAlignment="bottom" [columnCount]="4">
                                   </dxo-legend>
+                                  <dxo-title text="Avirata">
+                                    <dxo-subtitle text="Level 1 - Current Status">
+                                    </dxo-subtitle>
+                                  </dxo-title>
                                   <dxo-export [enabled]="true"></dxo-export>
-                                 <dxo-tooltip [enabled]="true" format="currency" [customizeTooltip]="customizeTooltip">
+                                  <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip">
                                   </dxo-tooltip>
                                   <dxi-series argumentField="que" valueField="val">
                                     <dxo-label [visible]="true" position="columns" [customizeText]="customizeLabel">
                                       <dxo-font [size]="16"></dxo-font>
                                       <dxo-connector [visible]="true" [width]="0.5"></dxo-connector>
                                     </dxo-label>
-                                  </dxi-series>                                  
+                                  </dxi-series>
+
                                 </dx-pie-chart>
                               </div>
                             </div>
@@ -265,53 +296,72 @@
                     </div>
                   </div>
                   <div class="col-md-12">
-                      <div class="card bg-danger mt-1">
-                        <div class="card-block">
-                          <div class="counter-wrap">
-                            <div class="lds-facebook abs" *ngIf="!loader">
-                              <div></div>
-                              <div></div>
-                              <div></div>
+                    <div class="card bg-danger mt-1">
+                      <div class="card-block">
+                        <div class="counter-wrap">
+                          <div class="lds-facebook abs" *ngIf="!loader">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                          </div>
+                          <p class="fa-1x" [class.mt-3]="!loader">Active Users : {{l2TotalUsersCount}}</p>
+                          <div class="row text-center mt-2">
+                            <div class="col-md-4">
+                              <div class="lds-facebook" *ngIf="!loader">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                              </div>
+                              <p class="count">{{l2DesktopCount}}</p>
+                              <!-- <em class="fas fa-tv pr-3"></em> -->
+                              <p class="d-inline">Desktop</p>
                             </div>
-                            <p class="fa-1x" [class.mt-3]="!loader">Active Users : {{l2TotalUsersCount}}</p>
-                            <div class="row text-center mt-2">
-                              <div class="col-md-4">
-                                <div class="lds-facebook" *ngIf="!loader">
-                                  <div></div>
-                                  <div></div>
-                                  <div></div>
-                                </div>
-                                <p class="count">{{l2DesktopCount}}</p>
-                                <!-- <em class="fas fa-tv pr-3"></em> -->
-                                <p class="d-inline">Desktop</p>
+                            <div class="col-md-4">
+                              <div class="lds-facebook" *ngIf="!loader">
+                                <div></div>
+                                <div></div>
+                                <div></div>
                               </div>
-                              <div class="col-md-4">
-                                <div class="lds-facebook" *ngIf="!loader">
-                                  <div></div>
-                                  <div></div>
-                                  <div></div>
-                                </div>
-                                <p class="count ">{{l2MobCount}}</p>
-                                <!-- <em class="fas fa-mobile pr-3 fs-25"></em> -->
-                                <p class="d-inline">Moblie</p>
+                              <p class="count ">{{l2MobCount}}</p>
+                              <!-- <em class="fas fa-mobile pr-3 fs-25"></em> -->
+                              <p class="d-inline">Moblie</p>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="lds-facebook" *ngIf="!loader">
+                                <div></div>
+                                <div></div>
+                                <div></div>
                               </div>
-                              <div class="col-md-4">
-                                <div class="lds-facebook" *ngIf="!loader">
-                                  <div></div>
-                                  <div></div>
-                                  <div></div>
-                                </div>
-                                <p class="count">{{l2TabCount}}</p>
-                                <!-- <em class="fas fa-tablet pr-3"></em> -->
-                                <p class="d-inline">Tablet</p>
-                              </div>
+                              <p class="count">{{l2TabCount}}</p>
+                              <!-- <em class="fas fa-tablet pr-3"></em> -->
+                              <p class="d-inline">Tablet</p>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
+                  </div>
                   <div class="col-md-12">
-                    <div class="card bg-primary mt-1">
+
+                    <h5 class="text-black text-center mt-2">Current Status</h5>
+                    <div class="chart mt-2">
+                      <dx-pie-chart id="pie" type="doughnut" palette="bright" [dataSource]="l2_graph"
+                        [resolveLabelOverlapping]="resolveOverlappingTypes[0]">
+                        <dxo-legend orientation="horizontal" itemTextPosition="right" horizontalAlignment="center"
+                          verticalAlignment="bottom" [columnCount]="4">
+                        </dxo-legend>
+                        <dxo-export [enabled]="false"></dxo-export>
+                        <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip">
+                        </dxo-tooltip>
+                        <dxi-series argumentField="que" valueField="val">
+                          <dxo-label [visible]="false" position="columns" [customizeText]="customizeLabel">
+                            <dxo-font [size]="16"></dxo-font>
+                            <dxo-connector [visible]="true" [width]="0.5"></dxo-connector>
+                          </dxo-label>
+                        </dxi-series>
+                      </dx-pie-chart>
+                    </div>
+                    <!-- <div class="card bg-primary mt-1">
                       <div class="card-block">
                         <div class="counter-wrap p-1">
                           <div class="row">
@@ -336,9 +386,9 @@
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
                   </div>
-                 
+
                   <!-- <div class="col-12 text-center">
                     <div class="arrow" [ngClass]="!mouseOvered2 ? '' : ''" (mouseover)="mouseOvered2=true"
                       (mouseout)="mouseOvered2=false">
@@ -348,7 +398,8 @@
                     </div>
                   </div> -->
                   <div class=" col-md-12 p-1 text-center">
-                    <a class="text-blue" data-toggle="modal" data-target="#level2">
+                    <a class="text-blue" data-toggle="modal" data-target="#level2" data-backdrop="static"
+                      data-keyboard="false">
                       View Details
                     </a>
                   </div>
@@ -361,15 +412,20 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
-                        <div class="row mx-auto">
+                        <div class="row">
                           <div class="col-md-12">
                             <div class=" custom-minh">
                               <div class="card-block">
-                                <dx-pie-chart id="pie"  type="doughnut" title="Level 2 Current Status" palette="bright"
-                                  [dataSource]="alluserstatusreportL2" [resolveLabelOverlapping]="resolveOverlappingTypes[0]">
+                                <dx-pie-chart id="pie" type="doughnut" palette="bright"
+                                  [dataSource]="alluserstatusreportL2"
+                                  [resolveLabelOverlapping]="resolveOverlappingTypes[0]">
                                   <dxo-legend orientation="horizontal" itemTextPosition="right"
                                     horizontalAlignment="center" verticalAlignment="bottom" [columnCount]="4">
                                   </dxo-legend>
+                                  <dxo-title text="Avirata">
+                                    <dxo-subtitle text="Level 2 - Current Status">
+                                    </dxo-subtitle>
+                                  </dxo-title>
                                   <dxo-export [enabled]="true"></dxo-export>
                                   <dxi-series argumentField="que" valueField="val">
                                     <dxo-label [visible]="true" position="columns" [customizeText]="customizeLabel">
@@ -398,53 +454,72 @@
                     </div>
                   </div>
                   <div class="col-md-12">
-                      <div class="card bg-danger">
-                        <div class="card-block">
-                          <div class="counter-wrap">
-                            <div class="lds-facebook abs" *ngIf="!loader">
-                              <div></div>
-                              <div></div>
-                              <div></div>
+                    <div class="card bg-danger">
+                      <div class="card-block">
+                        <div class="counter-wrap">
+                          <div class="lds-facebook abs" *ngIf="!loader">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                          </div>
+                          <p class="fa-1x" [class.mt-3]="!loader">Active Users :{{l3TotalUsersCount}}</p>
+                          <div class="row text-center mt-2">
+                            <div class="col-md-4">
+                              <div class="lds-facebook" *ngIf="!loader">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                              </div>
+                              <p class="count">{{l3DesktopCount}}</p>
+                              <!-- <em class="fas fa-tv pr-3"></em> -->
+                              <p class="d-inline">Desktop</p>
                             </div>
-                            <p class="fa-1x" [class.mt-3]="!loader">Active Users :{{l3TotalUsersCount}}</p>
-                            <div class="row text-center mt-2">
-                              <div class="col-md-4">
-                                <div class="lds-facebook" *ngIf="!loader">
-                                  <div></div>
-                                  <div></div>
-                                  <div></div>
-                                </div>
-                                <p class="count">{{l3DesktopCount}}</p>
-                                <!-- <em class="fas fa-tv pr-3"></em> -->
-                                <p class="d-inline">Desktop</p>
+                            <div class="col-md-4">
+                              <div class="lds-facebook" *ngIf="!loader">
+                                <div></div>
+                                <div></div>
+                                <div></div>
                               </div>
-                              <div class="col-md-4">
-                                <div class="lds-facebook" *ngIf="!loader">
-                                  <div></div>
-                                  <div></div>
-                                  <div></div>
-                                </div>
-                                <p class="count ">{{l3MobCount}}</p>
-                                <!-- <em class="fas fa-mobile pr-3 fs-25"></em> -->
-                                <p class="d-inline">Moblie</p>
+                              <p class="count ">{{l3MobCount}}</p>
+                              <!-- <em class="fas fa-mobile pr-3 fs-25"></em> -->
+                              <p class="d-inline">Moblie</p>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="lds-facebook" *ngIf="!loader">
+                                <div></div>
+                                <div></div>
+                                <div></div>
                               </div>
-                              <div class="col-md-4">
-                                <div class="lds-facebook" *ngIf="!loader">
-                                  <div></div>
-                                  <div></div>
-                                  <div></div>
-                                </div>
-                                <p class="count">{{l3TabCount}}</p>
-                                <!-- <em class="fas fa-tablet pr-3"></em> -->
-                                <p class="d-inline">Tablet</p>
-                              </div>
+                              <p class="count">{{l3TabCount}}</p>
+                              <!-- <em class="fas fa-tablet pr-3"></em> -->
+                              <p class="d-inline">Tablet</p>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
+                  </div>
                   <div class="col-md-12">
-                    <div class="card bg-primary mt-1">
+
+                    <h5 class="text-black text-center mt-2">Current Status</h5>
+                    <div class="chart mt-2">
+                      <dx-pie-chart id="pie" type="doughnut" palette="bright" [dataSource]="l3_graph"
+                        [resolveLabelOverlapping]="resolveOverlappingTypes[0]">
+                        <dxo-legend orientation="horizontal" itemTextPosition="right" horizontalAlignment="center"
+                          verticalAlignment="bottom" [columnCount]="4">
+                        </dxo-legend>
+                        <dxo-export [enabled]="false"></dxo-export>
+                        <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip">
+                        </dxo-tooltip>
+                        <dxi-series argumentField="que" valueField="val">
+                          <dxo-label [visible]="false" position="columns" [customizeText]="customizeLabel">
+                            <dxo-font [size]="16"></dxo-font>
+                            <dxo-connector [visible]="true" [width]="0.5"></dxo-connector>
+                          </dxo-label>
+                        </dxi-series>
+                      </dx-pie-chart>
+                    </div>
+                    <!-- <div class="card bg-primary mt-1">
                       <div class="card-block">
                         <div class="counter-wrap p-1">
                           <div class="row">
@@ -469,9 +544,9 @@
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
                   </div>
-                 
+
                   <!-- <div class="col-12 text-center">
                     <div class="arrow" [ngClass]="!mouseOvered3 ? '' : ''" (mouseover)="mouseOvered3=true"
                       (mouseout)="mouseOvered3=false">
@@ -481,10 +556,11 @@
                     </div>
                   </div> -->
                   <div class=" col-md-12 p-1 text-center">
-                      <a class="text-blue" data-toggle="modal" data-target="#level3">
-                        View Details
-                      </a>
-                    </div>
+                    <a class="text-blue" data-toggle="modal" data-target="#level3" data-backdrop="static"
+                      data-keyboard="false">
+                      View Details
+                    </a>
+                  </div>
                 </div>
                 <div class="modal fade" id="level3" tabindex="-1" role="dialog"
                   aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -494,33 +570,39 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
-                        <div class="row mx-auto">                            
-                            <div class="col-md-12">
-                              <div class=" custom-minh">
-                                <div class="card-block">
-                                  <dx-pie-chart id="pie" type="doughnut" title="Level 3 Current Status" palette="bright"
-                                    [dataSource]="alluserstatusreportL3" [resolveLabelOverlapping]="resolveOverlappingTypes[0]">
-                                    <dxo-legend orientation="horizontal" itemTextPosition="right" horizontalAlignment="center"
-                                      verticalAlignment="bottom" [columnCount]="4"></dxo-legend>
-                                    <dxo-export [enabled]="true"></dxo-export>
-                                    <dxi-series argumentField="que" valueField="val">
-                                      <dxo-label [visible]="true" position="columns" [customizeText]="customizeLabel">
-                                        <dxo-font [size]="16"></dxo-font>
-                                        <dxo-connector [visible]="true" [width]="0.5"></dxo-connector>
-                                      </dxo-label>
-                                    </dxi-series>
-                                  </dx-pie-chart>
-                                </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class=" custom-minh">
+                              <div class="card-block">
+                                <dx-pie-chart id="pie" type="doughnut" palette="bright"
+                                  [dataSource]="alluserstatusreportL3"
+                                  [resolveLabelOverlapping]="resolveOverlappingTypes[0]">
+                                  <dxo-legend orientation="horizontal" itemTextPosition="right"
+                                    horizontalAlignment="center" verticalAlignment="bottom" [columnCount]="4">
+                                  </dxo-legend>
+                                  <dxo-title text="Avirata">
+                                    <dxo-subtitle text="Level 3 - Current Status">
+                                    </dxo-subtitle>
+                                  </dxo-title>
+                                  <dxo-export [enabled]="true"></dxo-export>
+                                  <dxi-series argumentField="que" valueField="val">
+                                    <dxo-label [visible]="true" position="columns" [customizeText]="customizeLabel">
+                                      <dxo-font [size]="16"></dxo-font>
+                                      <dxo-connector [visible]="true" [width]="0.5"></dxo-connector>
+                                    </dxo-label>
+                                  </dxi-series>
+                                </dx-pie-chart>
                               </div>
                             </div>
                           </div>
-                        
+                        </div>
+
                       </div>
 
                     </div>
                   </div>
                 </div>
-               
+
               </div>
             </div>
             <!-- <div class="row mx-auto">

@@ -3793,6 +3793,9 @@ body {
       }
     }
   }
+  .close{
+    padding: 5px !important;
+  }
 
 }
 
@@ -4055,15 +4058,23 @@ body {
   dx-pie-chart#pie {
     // position: absolute;
     left: 0;
-    @include transition(all 0.6s cubic-bezier(0.945, 0.02, 0.27, 0.665));
+    @include transition(all 0.6s cubic-bezier(0.945, 0.02, 0.27, 0.665));    
   }
   ::ng-deep #pie {
     height: 520px;
  }
+ .chart {
+  dx-pie-chart#pie {   
+    left: 0;
+    @include transition(all 0.6s cubic-bezier(0.945, 0.02, 0.27, 0.665));
+    height: 200px;    
+  }
+
+ }
  
 
   .custom-minh {
-    min-height: 440px;
+    min-height: 200px;
   }
 
   .counter-wrap {
@@ -4088,7 +4099,7 @@ body {
       span {
         display: block;
         font-size: 16px;
-        font-weight: 800;
+        // font-weight: 800;
         margin-bottom: 5px;
         margin-top: 10px;
       }
@@ -4156,12 +4167,21 @@ body {
 
     .bg-danger {
       // background: transparent;
-      background: linear-gradient(to right, #f6c23e, #f6c23e);
+      // background: linear-gradient(to right, #f6c23e, #f6c23e);
       margin: 0px !important;
       font-size: 12px !important;
+      border: none;
+      /* box-shadow: none !important; */
+      background: #EEEEEE !important;
+      color: #333;
+      font-weight: 400 !important;
+      border-left: 3px solid #36b9cb;
       .card-block{
         padding: 20px !important
       }
+    }
+    .text-black{
+      color: #333;
     }
 
     &:hover {
@@ -4626,4 +4646,9 @@ mfBootstrapPaginator {
 .dropdown-dividerAdmin{
   padding: 5px 0;
   border-bottom: 1px solid #545e61;
+}
+.model-img{
+  width: 200px !important;
+  display: block !important;
+  margin: 0px auto;
 }
