@@ -3793,6 +3793,9 @@ body {
       }
     }
   }
+  .close{
+    padding: 5px !important;
+  }
 
 }
 
@@ -4643,4 +4646,9 @@ mfBootstrapPaginator {
 .dropdown-dividerAdmin{
   padding: 5px 0;
   border-bottom: 1px solid #545e61;
+}
+.model-img{
+  width: 200px !important;
+  display: block !important;
+  margin: 0px auto;
 }

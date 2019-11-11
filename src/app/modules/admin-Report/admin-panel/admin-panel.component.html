@@ -6,13 +6,12 @@
         <h3>Admin Panel</h3>
         <a class="btn btn-primary c-pointer" (click)="setMenu()">
           <em class="fa fa-chevron-left"></em>&nbsp;&nbsp;&nbsp;&nbsp;Course Dashboard</a><br>
-         
+
       </div>
       <ul class="nav-dropdown-items submenu list-unstyled components pt-0">
-        <li><a (click)="levelBoard()"><em
-          class="fas fa-tachometer-alt"></em>&nbsp;
+        <li><a (click)="levelBoard()"><em class="fas fa-tachometer-alt"></em>&nbsp;
             Report Dashboard</a></li>
-          <li class="dropdown-dividerAdmin"></li>
+        <li class="dropdown-dividerAdmin"></li>
         <li *ngIf="userType == 'superadmin' ||userType == 'admin' ">
           <a href="#module3Submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><em
               class="fas fa-file mr-2"></em>&nbsp;Reports</a>
@@ -182,7 +181,6 @@
                     </div>
                   </div>
                   <div class="col-md-12 ">
-                    
                     <h5 class="text-black text-center mt-2">Current Status</h5>
                     <div class="chart mt-2">
                       <dx-pie-chart id="pie" type="doughnut" palette="bright" [dataSource]="l1_graph"
@@ -239,7 +237,8 @@
                     </div>
                   </div>                    -->
                   <div class=" col-md-12 p-1 text-center">
-                    <a class="text-blue" data-toggle="modal" data-target="#level1" data-backdrop="static" data-keyboard="false">
+                    <a class="text-blue" data-toggle="modal" data-target="#level1" data-backdrop="static"
+                      data-keyboard="false">
                       View Details
                     </a>
                   </div>
@@ -256,14 +255,18 @@
                           <div class="col-md-12">
                             <div class=" custom-minh">
                               <div class="card-block">
-                                <dx-pie-chart id="pie" type="doughnut" title="Level 1 Current Status" palette="bright"
+                                <dx-pie-chart id="pie" type="doughnut" palette="bright"
                                   [dataSource]="alluserstatusreportL1"
                                   [resolveLabelOverlapping]="resolveOverlappingTypes[0]">
                                   <dxo-legend orientation="horizontal" itemTextPosition="right"
                                     horizontalAlignment="center" verticalAlignment="bottom" [columnCount]="4">
                                   </dxo-legend>
+                                  <dxo-title text="Avirata">
+                                    <dxo-subtitle text="Level 1 - Current Status">
+                                    </dxo-subtitle>
+                                  </dxo-title>
                                   <dxo-export [enabled]="true"></dxo-export>
-                                  <dxo-tooltip [enabled]="true" format="currency" [customizeTooltip]="customizeTooltip">
+                                  <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip">
                                   </dxo-tooltip>
                                   <dxi-series argumentField="que" valueField="val">
                                     <dxo-label [visible]="true" position="columns" [customizeText]="customizeLabel">
@@ -271,6 +274,7 @@
                                       <dxo-connector [visible]="true" [width]="0.5"></dxo-connector>
                                     </dxo-label>
                                   </dxi-series>
+
                                 </dx-pie-chart>
                               </div>
                             </div>
@@ -338,25 +342,25 @@
                     </div>
                   </div>
                   <div class="col-md-12">
-                      
-                      <h5 class="text-black text-center mt-2">Current Status</h5>
-                      <div class="chart mt-2">
-                          <dx-pie-chart id="pie" type="doughnut" palette="bright" [dataSource]="l2_graph"
-                            [resolveLabelOverlapping]="resolveOverlappingTypes[0]">
-                            <dxo-legend orientation="horizontal" itemTextPosition="right" horizontalAlignment="center"
-                              verticalAlignment="bottom" [columnCount]="4">
-                            </dxo-legend>
-                            <dxo-export [enabled]="false"></dxo-export>
-                            <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip">
-                            </dxo-tooltip>
-                            <dxi-series argumentField="que" valueField="val">
-                              <dxo-label [visible]="false" position="columns" [customizeText]="customizeLabel">
-                                <dxo-font [size]="16"></dxo-font>
-                                <dxo-connector [visible]="true" [width]="0.5"></dxo-connector>
-                              </dxo-label>
-                            </dxi-series>
-                          </dx-pie-chart>
-                        </div>
+
+                    <h5 class="text-black text-center mt-2">Current Status</h5>
+                    <div class="chart mt-2">
+                      <dx-pie-chart id="pie" type="doughnut" palette="bright" [dataSource]="l2_graph"
+                        [resolveLabelOverlapping]="resolveOverlappingTypes[0]">
+                        <dxo-legend orientation="horizontal" itemTextPosition="right" horizontalAlignment="center"
+                          verticalAlignment="bottom" [columnCount]="4">
+                        </dxo-legend>
+                        <dxo-export [enabled]="false"></dxo-export>
+                        <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip">
+                        </dxo-tooltip>
+                        <dxi-series argumentField="que" valueField="val">
+                          <dxo-label [visible]="false" position="columns" [customizeText]="customizeLabel">
+                            <dxo-font [size]="16"></dxo-font>
+                            <dxo-connector [visible]="true" [width]="0.5"></dxo-connector>
+                          </dxo-label>
+                        </dxi-series>
+                      </dx-pie-chart>
+                    </div>
                     <!-- <div class="card bg-primary mt-1">
                       <div class="card-block">
                         <div class="counter-wrap p-1">
@@ -394,7 +398,8 @@
                     </div>
                   </div> -->
                   <div class=" col-md-12 p-1 text-center">
-                    <a class="text-blue" data-toggle="modal" data-target="#level2" data-backdrop="static" data-keyboard="false">
+                    <a class="text-blue" data-toggle="modal" data-target="#level2" data-backdrop="static"
+                      data-keyboard="false">
                       View Details
                     </a>
                   </div>
@@ -411,12 +416,16 @@
                           <div class="col-md-12">
                             <div class=" custom-minh">
                               <div class="card-block">
-                                <dx-pie-chart id="pie" type="doughnut" title="Level 2 Current Status" palette="bright"
+                                <dx-pie-chart id="pie" type="doughnut" palette="bright"
                                   [dataSource]="alluserstatusreportL2"
                                   [resolveLabelOverlapping]="resolveOverlappingTypes[0]">
                                   <dxo-legend orientation="horizontal" itemTextPosition="right"
                                     horizontalAlignment="center" verticalAlignment="bottom" [columnCount]="4">
                                   </dxo-legend>
+                                  <dxo-title text="Avirata">
+                                    <dxo-subtitle text="Level 2 - Current Status">
+                                    </dxo-subtitle>
+                                  </dxo-title>
                                   <dxo-export [enabled]="true"></dxo-export>
                                   <dxi-series argumentField="que" valueField="val">
                                     <dxo-label [visible]="true" position="columns" [customizeText]="customizeLabel">
@@ -491,25 +500,25 @@
                     </div>
                   </div>
                   <div class="col-md-12">
-                      
-                      <h5 class="text-black text-center mt-2">Current Status</h5>
-                      <div class="chart mt-2">
-                          <dx-pie-chart id="pie" type="doughnut" palette="bright" [dataSource]="l3_graph"
-                            [resolveLabelOverlapping]="resolveOverlappingTypes[0]">
-                            <dxo-legend orientation="horizontal" itemTextPosition="right" horizontalAlignment="center"
-                              verticalAlignment="bottom" [columnCount]="4">
-                            </dxo-legend>
-                            <dxo-export [enabled]="false"></dxo-export>
-                            <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip">
-                            </dxo-tooltip>
-                            <dxi-series argumentField="que" valueField="val">
-                              <dxo-label [visible]="false" position="columns" [customizeText]="customizeLabel">
-                                <dxo-font [size]="16"></dxo-font>
-                                <dxo-connector [visible]="true" [width]="0.5"></dxo-connector>
-                              </dxo-label>
-                            </dxi-series>
-                          </dx-pie-chart>
-                        </div>
+
+                    <h5 class="text-black text-center mt-2">Current Status</h5>
+                    <div class="chart mt-2">
+                      <dx-pie-chart id="pie" type="doughnut" palette="bright" [dataSource]="l3_graph"
+                        [resolveLabelOverlapping]="resolveOverlappingTypes[0]">
+                        <dxo-legend orientation="horizontal" itemTextPosition="right" horizontalAlignment="center"
+                          verticalAlignment="bottom" [columnCount]="4">
+                        </dxo-legend>
+                        <dxo-export [enabled]="false"></dxo-export>
+                        <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip">
+                        </dxo-tooltip>
+                        <dxi-series argumentField="que" valueField="val">
+                          <dxo-label [visible]="false" position="columns" [customizeText]="customizeLabel">
+                            <dxo-font [size]="16"></dxo-font>
+                            <dxo-connector [visible]="true" [width]="0.5"></dxo-connector>
+                          </dxo-label>
+                        </dxi-series>
+                      </dx-pie-chart>
+                    </div>
                     <!-- <div class="card bg-primary mt-1">
                       <div class="card-block">
                         <div class="counter-wrap p-1">
@@ -547,7 +556,8 @@
                     </div>
                   </div> -->
                   <div class=" col-md-12 p-1 text-center">
-                    <a class="text-blue" data-toggle="modal" data-target="#level3" data-backdrop="static" data-keyboard="false">
+                    <a class="text-blue" data-toggle="modal" data-target="#level3" data-backdrop="static"
+                      data-keyboard="false">
                       View Details
                     </a>
                   </div>
@@ -564,12 +574,16 @@
                           <div class="col-md-12">
                             <div class=" custom-minh">
                               <div class="card-block">
-                                <dx-pie-chart id="pie" type="doughnut" title="Level 3 Current Status" palette="bright"
+                                <dx-pie-chart id="pie" type="doughnut" palette="bright"
                                   [dataSource]="alluserstatusreportL3"
                                   [resolveLabelOverlapping]="resolveOverlappingTypes[0]">
                                   <dxo-legend orientation="horizontal" itemTextPosition="right"
                                     horizontalAlignment="center" verticalAlignment="bottom" [columnCount]="4">
                                   </dxo-legend>
+                                  <dxo-title text="Avirata">
+                                    <dxo-subtitle text="Level 3 - Current Status">
+                                    </dxo-subtitle>
+                                  </dxo-title>
                                   <dxo-export [enabled]="true"></dxo-export>
                                   <dxi-series argumentField="que" valueField="val">
                                     <dxo-label [visible]="true" position="columns" [customizeText]="customizeLabel">

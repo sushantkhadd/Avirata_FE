@@ -38,7 +38,8 @@ export class AdminPanelComponent implements OnInit {
   l2TotalUsersCount; l2DesktopCount; l2MobCount; l2TabCount; loader; refreshLoader;
   l3TotalUsersCount; l3DesktopCount; l3MobCount; l3TabCount; inModuleCountL3; 
   inModuleCountL1; inModuleCountL2; L1_status; L2_status; L3_status; mouseOvered1; mouseOvered2; mouseOvered3; reportUrl; isLoaded;
-  resultl1;resultl2;resultl3;l1_graph =[];l2_graph =[];l3_graph =[]
+  resultl1;resultl2;resultl3;l1_graph =[];l2_graph =[];l3_graph =[];
+  calculateTotall1;
   resolveOverlappingTypes = ["shift", "hide", "none"];
 
   // public time1; tmSec1; countDown; tick = 1000;time2; tmSec2; countDown2; tick2 = 1000;time3; tmSec3; countDown3; tick3 = 1000;
@@ -86,8 +87,9 @@ export class AdminPanelComponent implements OnInit {
     // }
     this.allUserStatusReportL1();
     this.getAllActiveUsers();
+    
   }
-
+ 
 
   ngOnDestroy() {
     this.setMenu()
@@ -434,7 +436,9 @@ export class AdminPanelComponent implements OnInit {
           {"que":"In Module 4"+ " ("+this.resultl1['com_module3']+")","val":this.resultl1['com_module3']},
           {"que":"In Module 5"+ " ("+this.resultl1['com_module4']+")","val":this.resultl1['com_module4']},
           {"que":"Completed"+ " ("+this.resultl1['completed']+")","val":this.resultl1['completed']}]
-          console.log('dsfsafaFSAFSA',this.alluserstatusreportL1)
+          console.log('dsfsafaFSAFSA',this.alluserstatusreportL1);
+          this.calculateTotall1 = this.totalCountL1 + this.inModuleCountL1 + this.notStartedCountL1;
+          console.log('total count', this.calculateTotall1) 
           
           this.allUserStatusReportL2();
         }
