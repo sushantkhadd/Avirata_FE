@@ -20,7 +20,7 @@ export class TalukaUserListComponent implements OnInit {
   public loader; showDetailTableFlag; showTaluka;talukaId;
   public overviewList; userList; exportData; showReset;exportData1={};ex;
   public time1; tmSec1; countDown; tick = 1000;selectedLevel;level;
-  public time2; tmSec2; countDown2; tick2 = 1000; showReset2;
+  public time2; tmSec2; countDown2; tick2 = 1000; showReset2;pendingTotal=0;inModuleTotal =0;completedTotal=0;finalTotal=0;
 
   constructor(public translate: TranslateService, private csvService: CsvService, public CommonComponentService: CommonComponentService, public router: Router, public toastr: ToastsManager, vcr: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vcr);
@@ -104,7 +104,14 @@ export class TalukaUserListComponent implements OnInit {
           this.timeCounter(data['data'].cachetime)
         } else if (fun == 'talukaOverallReport') {
           this.overviewList = data['data'].result;
-          console.log("sadddddddd",this.overviewList,data['data'].result)
+          for(let i=0 ;i < this.overviewList.length;i++){
+            this.pendingTotal += this.overviewList[i].Pending ;
+            this.inModuleTotal += this.overviewList[i].Total - (this.overviewList[i].Completed + this.overviewList[i].Pending) ;
+            this.completedTotal += this.overviewList[i].Completed ;
+            this.finalTotal += this.overviewList[i].Total ;
+            console.log("abc",this.overviewList[i].Pending,this.pendingTotal)
+          }
+          console.log("sadddddddd",this.pendingTotal)
           if (this.overviewList) {
             this.loader = false;
           } else {

@@ -120,7 +120,7 @@
           </div> -->
           <div class="pie-chart-block" *ngIf="piechartFlag">
             <div class="row mx-auto text-white">
-              <div class="col-md-12 text-right mb-3">
+              <div class="col-md-12 text-right mb-1">
                 <button class="btn btn-primary mb-1 mr-2" (click)="refresh()">Refresh &nbsp; <em
                     class="fas fa-sync"></em></button>
               </div>
@@ -142,7 +142,7 @@
                             <div></div>
                             <div></div>
                           </div>
-                          <p class="fa-1x" [class.mt-3]="!loader">Active Users : {{l1TotalUsersCount}}</p>
+                          <p class="fa-1x" [class.mt-3]="!loader">Active Users : {{l1TotalUsersCount | number}}</p>
 
                           <div class="row text-center mt-2">
                             <div class="col-md-4">
@@ -151,7 +151,7 @@
                                 <div></div>
                                 <div></div>
                               </div>
-                              <p class="count">{{l1DesktopCount}}</p>
+                              <p class="count">{{l1DesktopCount | number}}</p>
                               <!-- <em class="fas fa-tv pr-3"></em> -->
                               <p class="d-inline">Desktop</p>
                             </div>
@@ -161,7 +161,7 @@
                                 <div></div>
                                 <div></div>
                               </div>
-                              <p class="count ">{{l1MobCount}}</p>
+                              <p class="count ">{{l1MobCount | number}}</p>
                               <!-- <em class="fas fa-mobile pr-3 fs-25"></em> -->
                               <p class="d-inline">Moblie</p>
                             </div>
@@ -171,7 +171,7 @@
                                 <div></div>
                                 <div></div>
                               </div>
-                              <p class="count">{{l1TabCount}}</p>
+                              <p class="count">{{l1TabCount | number}}</p>
                               <!-- <em class="fas fa-tablet pr-3"></em> -->
                               <p class="d-inline">Tablet</p>
                             </div>
@@ -304,7 +304,7 @@
                             <div></div>
                             <div></div>
                           </div>
-                          <p class="fa-1x" [class.mt-3]="!loader">Active Users : {{l2TotalUsersCount}}</p>
+                          <p class="fa-1x" [class.mt-3]="!loader">Active Users : {{l2TotalUsersCount | number}}</p>
                           <div class="row text-center mt-2">
                             <div class="col-md-4">
                               <div class="lds-facebook" *ngIf="!loader">
@@ -312,7 +312,7 @@
                                 <div></div>
                                 <div></div>
                               </div>
-                              <p class="count">{{l2DesktopCount}}</p>
+                              <p class="count">{{l2DesktopCount | number}}</p>
                               <!-- <em class="fas fa-tv pr-3"></em> -->
                               <p class="d-inline">Desktop</p>
                             </div>
@@ -322,7 +322,7 @@
                                 <div></div>
                                 <div></div>
                               </div>
-                              <p class="count ">{{l2MobCount}}</p>
+                              <p class="count ">{{l2MobCount | number}}</p>
                               <!-- <em class="fas fa-mobile pr-3 fs-25"></em> -->
                               <p class="d-inline">Moblie</p>
                             </div>
@@ -332,7 +332,7 @@
                                 <div></div>
                                 <div></div>
                               </div>
-                              <p class="count">{{l2TabCount}}</p>
+                              <p class="count">{{l2TabCount | number}}</p>
                               <!-- <em class="fas fa-tablet pr-3"></em> -->
                               <p class="d-inline">Tablet</p>
                             </div>
@@ -462,7 +462,7 @@
                             <div></div>
                             <div></div>
                           </div>
-                          <p class="fa-1x" [class.mt-3]="!loader">Active Users :{{l3TotalUsersCount}}</p>
+                          <p class="fa-1x" [class.mt-3]="!loader">Active Users :{{l3TotalUsersCount | number}}</p>
                           <div class="row text-center mt-2">
                             <div class="col-md-4">
                               <div class="lds-facebook" *ngIf="!loader">
@@ -470,7 +470,7 @@
                                 <div></div>
                                 <div></div>
                               </div>
-                              <p class="count">{{l3DesktopCount}}</p>
+                              <p class="count">{{l3DesktopCount | number}}</p>
                               <!-- <em class="fas fa-tv pr-3"></em> -->
                               <p class="d-inline">Desktop</p>
                             </div>
@@ -480,7 +480,7 @@
                                 <div></div>
                                 <div></div>
                               </div>
-                              <p class="count ">{{l3MobCount}}</p>
+                              <p class="count ">{{l3MobCount | number}}</p>
                               <!-- <em class="fas fa-mobile pr-3 fs-25"></em> -->
                               <p class="d-inline">Moblie</p>
                             </div>
@@ -490,7 +490,7 @@
                                 <div></div>
                                 <div></div>
                               </div>
-                              <p class="count">{{l3TabCount}}</p>
+                              <p class="count">{{l3TabCount | number}}</p>
                               <!-- <em class="fas fa-tablet pr-3"></em> -->
                               <p class="d-inline">Tablet</p>
                             </div>

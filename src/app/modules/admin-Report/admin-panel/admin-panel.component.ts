@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/observable/timer'
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/take'
+import { DecimalPipe } from '@angular/common'
 
 declare var jQuery: any;
 @Component({
@@ -49,7 +50,8 @@ export class AdminPanelComponent implements OnInit {
     public translate: TranslateService,
     public toastr: ToastsManager,
     vcr: ViewContainerRef,
-    private _DataService :SharedDataService
+    private _DataService :SharedDataService,
+    public  number : DecimalPipe
   ) {
     this.toastr.setRootViewContainerRef(vcr);
   }
@@ -87,7 +89,7 @@ export class AdminPanelComponent implements OnInit {
     // }
     this.allUserStatusReportL1();
     this.getAllActiveUsers();
-    
+  
   }
  
 
@@ -425,17 +427,17 @@ export class AdminPanelComponent implements OnInit {
            
             demo.push(j);
           }
-          this.l1_graph=[{"que":"Completed" + " ("+this.totalCountL1+")","val":this.totalCountL1},         
-          {"que":"In Module" + " ("+this.inModuleCountL1+")","val":this.inModuleCountL1},          
-          {"que":"Pending"+ " ("+this.notStartedCountL1+")" ,"val":this.notStartedCountL1}]
+          this.l1_graph=[{"que":"Completed" + " ("+this.number.transform(this.totalCountL1)+")","val":this.totalCountL1},         
+          {"que":"In Module" + " ("+this.number.transform(this.inModuleCountL1)+")","val":this.inModuleCountL1},          
+          {"que":"Pending"+ " ("+this.number.transform(this.notStartedCountL1)+")" ,"val":this.notStartedCountL1}]
           this.alluserstatusreportL1 = demo;
-          this.alluserstatusreportL1=[{"que":"Pending" + " ("+this.resultl1['not_started']+")","val":this.resultl1['not_started']},
-          {"que":"In Module 1 "+ " ("+this.resultl1['in_module1']+")","val":this.resultl1['in_module1']},
-          {"que":"In Module 2"+ " ("+this.resultl1['com_module1']+")","val":this.resultl1['com_module1']},
-          {"que":"In Module 3"+ " ("+this.resultl1['com_module2']+")","val":this.resultl1['com_module2']},
-          {"que":"In Module 4"+ " ("+this.resultl1['com_module3']+")","val":this.resultl1['com_module3']},
-          {"que":"In Module 5"+ " ("+this.resultl1['com_module4']+")","val":this.resultl1['com_module4']},
-          {"que":"Completed"+ " ("+this.resultl1['completed']+")","val":this.resultl1['completed']}]
+          this.alluserstatusreportL1=[{"que":"Pending" + " ("+this.number.transform(this.resultl1['not_started'])+")","val":this.resultl1['not_started']},
+          {"que":"In Module 1 "+ " ("+this.number.transform(this.resultl1['in_module1'])+")","val":this.resultl1['in_module1']},
+          {"que":"In Module 2"+ " ("+this.number.transform(this.resultl1['com_module1'])+")","val":this.resultl1['com_module1']},
+          {"que":"In Module 3"+ " ("+this.number.transform(this.resultl1['com_module2'])+")","val":this.resultl1['com_module2']},
+          {"que":"In Module 4"+ " ("+this.number.transform(this.resultl1['com_module3'])+")","val":this.resultl1['com_module3']},
+          {"que":"In Module 5"+ " ("+this.number.transform(this.resultl1['com_module4'])+")","val":this.resultl1['com_module4']},
+          {"que":"Completed"+ " ("+this.number.transform(this.resultl1['completed'])+")","val":this.resultl1['completed']}]
           console.log('dsfsafaFSAFSA',this.alluserstatusreportL1);
           this.calculateTotall1 = this.totalCountL1 + this.inModuleCountL1 + this.notStartedCountL1;
           console.log('total count', this.calculateTotall1) 
@@ -520,18 +522,18 @@ export class AdminPanelComponent implements OnInit {
             }
             demo.push(j);
           }
-          this.l2_graph=[{"que":"Completed" + " ("+this.totalCountL2+")","val":this.totalCountL2},
-          {"que":"In Module" + " ("+this.inModuleCountL2+")","val":this.inModuleCountL2},
-          {"que":"Pending"+ " ("+this.notStartedCountL2+")" ,"val":this.notStartedCountL2},]
+          this.l2_graph=[{"que":"Completed" + " ("+this.number.transform(this.totalCountL2)+")","val":this.totalCountL2},
+          {"que":"In Module" + " ("+this.number.transform(this.inModuleCountL2)+")","val":this.inModuleCountL2},
+          {"que":"Pending"+ " ("+this.number.transform(this.notStartedCountL2)+")" ,"val":this.notStartedCountL2},]
           // this.alluserstatusreportL2 = demo;
-          this.alluserstatusreportL2=[{"que":"Pending"+ " ("+this.resultl2['not_started']+")","val":this.resultl2['not_started']},
-          {"que":"Just Started"+ " ("+this.resultl2['in_module0']+")","val":this.resultl2['in_module0']},
-          {"que":"In Module 1"+ " ("+this.resultl2['com_module0']+")","val":this.resultl2['com_module0']},
-          {"que":"In Module 2"+ " ("+this.resultl2['com_module1']+")","val":this.resultl2['com_module1']},
-          {"que":"In Module 3"+ " ("+this.resultl2['com_module2']+")","val":this.resultl2['com_module2']},
-          {"que":"In Module 4"+ " ("+this.resultl2['com_module3']+")","val":this.resultl2['com_module3']},
-          {"que":"In Module 5"+ " ("+this.resultl2['com_module4']+")","val":this.resultl2['com_module4']},
-          {"que":"Completed"+ " ("+this.resultl2['completed']+")","val":this.resultl2['completed']}]
+          this.alluserstatusreportL2=[{"que":"Pending"+ " ("+this.number.transform(this.resultl2['not_started'])+")","val":this.resultl2['not_started']},
+          {"que":"Just Started"+ " ("+this.number.transform(this.resultl2['in_module0'])+")","val":this.resultl2['in_module0']},
+          {"que":"In Module 1"+ " ("+this.number.transform(this.resultl2['com_module0'])+")","val":this.resultl2['com_module0']},
+          {"que":"In Module 2"+ " ("+this.number.transform(this.resultl2['com_module1'])+")","val":this.resultl2['com_module1']},
+          {"que":"In Module 3"+ " ("+this.number.transform(this.resultl2['com_module2'])+")","val":this.resultl2['com_module2']},
+          {"que":"In Module 4"+ " ("+this.number.transform(this.resultl2['com_module3'])+")","val":this.resultl2['com_module3']},
+          {"que":"In Module 5"+ " ("+this.number.transform(this.resultl2['com_module4'])+")","val":this.resultl2['com_module4']},
+          {"que":"Completed"+ " ("+this.number.transform(this.resultl2['completed'])+")","val":this.resultl2['completed']}]
           console.log('demo', this.alluserstatusreportL2)
           this.allUserStatusReportL3();
         }
@@ -612,17 +614,17 @@ export class AdminPanelComponent implements OnInit {
             }
             demo.push(j);
           }
-          this.l3_graph=[{"que":"Completed" + " ("+this.totalCountL3+")","val":this.totalCountL3},
-          {"que":"In Module" + " ("+this.inModuleCountL3+")","val":this.inModuleCountL3},
-          {"que":"Pending"+ " ("+this.notStartedCountL3+")" ,"val":this.notStartedCountL3}]
-          this.alluserstatusreportL3=[{"que":"Pending"+ " ("+this.resultl3['not_started']+")","val":this.resultl3['not_started']},
-          {"que":"Just Started"+ " ("+this.resultl3['in_module0']+")","val":this.resultl3['in_module0']},
-          {"que":"In Module 1"+ " ("+this.resultl3['com_module0']+")","val":this.resultl3['com_module0']},
-          {"que":"In Module 2"+ " ("+this.resultl3['com_module1']+")","val":this.resultl3['com_module1']},
-          {"que":"In Module 3"+ " ("+this.resultl3['com_module2']+")","val":this.resultl3['com_module2']},
-          {"que":"In Module 4"+ " ("+this.resultl3['com_module3']+")","val":this.resultl3['com_module3']},
-          {"que":"In Module 5"+ " ("+this.resultl3['com_module4']+")","val":this.resultl3['com_module4']},
-          {"que":"Completed"+ " ("+this.resultl3['completed']+")","val":this.resultl3['completed']}]
+          this.l3_graph=[{"que":"Completed" + " ("+this.number.transform(this.totalCountL3)+")","val":this.totalCountL3},
+          {"que":"In Module" + " ("+this.number.transform(this.inModuleCountL3)+")","val":this.inModuleCountL3},
+          {"que":"Pending"+ " ("+this.number.transform(this.notStartedCountL3)+")" ,"val":this.notStartedCountL3}]
+          this.alluserstatusreportL3=[{"que":"Pending"+ " ("+this.number.transform(this.resultl3['not_started'])+")","val":this.resultl3['not_started']},
+          {"que":"Just Started"+ " ("+this.number.transform(this.resultl3['in_module0'])+")","val":this.resultl3['in_module0']},
+          {"que":"In Module 1"+ " ("+this.number.transform(this.resultl3['com_module0'])+")","val":this.resultl3['com_module0']},
+          {"que":"In Module 2"+ " ("+this.number.transform(this.resultl3['com_module1'])+")","val":this.resultl3['com_module1']},
+          {"que":"In Module 3"+ " ("+this.number.transform(this.resultl3['com_module2'])+")","val":this.resultl3['com_module2']},
+          {"que":"In Module 4"+ " ("+this.number.transform(this.resultl3['com_module3'])+")","val":this.resultl3['com_module3']},
+          {"que":"In Module 5"+ " ("+this.number.transform(this.resultl3['com_module4'])+")","val":this.resultl3['com_module4']},
+          {"que":"Completed"+ " ("+this.number.transform(this.resultl3['completed'])+")","val":this.resultl3['completed']}]
 
           // this.alluserstatusreportL3 = demo;
           

@@ -177,7 +177,7 @@
       </div>
       <div class="card-body">
           <div class="col-md-4 p-30-xs float-right mb-2">
-              <select class="form-control" name="selectedLevel" id="selectedLevel" [(ngModel)]="selectedLevel"
+              <select class="form-control c-none" name="selectedLevel" id="selectedLevel" [(ngModel)]="selectedLevel" disabled
                  (change)="getLevel1()">
                 <option value="" disabled>Select Level</option>
                 <option value="L1">Level 1</option> 
@@ -194,12 +194,6 @@
                     <i class="fa fa-sort" aria-hidden="true"></i>
                   </mfDefaultSorter>
                 </th>
-
-                <th>
-                  <mfDefaultSorter by="Completed">Completed
-                    <i class="fa fa-sort" aria-hidden="true"></i>
-                  </mfDefaultSorter>
-                </th>
                 <th>
                   <mfDefaultSorter by="Pending">Pending
                     <i class="fa fa-sort" aria-hidden="true"></i>
@@ -207,6 +201,11 @@
                 </th>
                 <th>
                   <mfDefaultSorter>In Module
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                  </mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="Completed">Completed
                     <i class="fa fa-sort" aria-hidden="true"></i>
                   </mfDefaultSorter>
                 </th>
@@ -224,15 +223,22 @@
             <tbody>
               <tr *ngFor="let item of mf.data; let i=index">
                 <td>{{item.Taluka}}</td>
-                <td>{{item.Completed}}</td>
                 <td>{{item.Pending}}</td>
                 <td>{{item.Total - (item.Pending + item.Completed)}}</td>
+                <td>{{item.Completed}}</td>
                 <td>{{item.Total}}</td>
                 <td>
                   <a class="btn btn-primary actionBtn mr-1 text-white" (click)="viewDetailsforCo(item.Taluka);showReset2=false">
                     View
                   </a>
                 </td>
+              </tr>
+              <tr class="font-weight-bold">
+                <td>Total</td>
+                <td>{{pendingTotal}}</td>
+                <td>{{inModuleTotal}}</td> 
+                <td>{{completedTotal}}</td>
+                <td>{{finalTotal}}</td>
               </tr>
             </tbody>
           </table>

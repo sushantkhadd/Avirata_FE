@@ -142,7 +142,7 @@ import {AutosizeModule} from 'ngx-autosize';
 import { Module04Component } from './module0/module0-4.component';
 import { MasterstatComponent } from './masterstat/masterstat.component';
 import { PresentlistComponent } from "./masterstat/presentlist.component";
-import {DatePipe} from '@angular/common';
+import {DatePipe, DecimalPipe} from '@angular/common';
 import { SetProfileComponent } from './admin-Report/set-profile/set-profile.component';
 
 @NgModule({
@@ -302,7 +302,8 @@ import { SetProfileComponent } from './admin-Report/set-profile/set-profile.comp
     ExportService,
     CsvService,
     AdminReportService,
-    DatePipe
+    DatePipe,
+    DecimalPipe
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
