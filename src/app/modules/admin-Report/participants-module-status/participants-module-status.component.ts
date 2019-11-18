@@ -48,14 +48,15 @@ export class ParticipantsModuleStatusComponent implements OnInit {
     this.showDetails = false;
     this.loader = true;
     // this.getAllParticipantsData();
-    this.selectedLevel = "";
+    this.selectedLevel = "L3";
   }
   ngOnDestroy() {
     localStorage.removeItem("selectedLevel");
   }
   getRole() {
     console.log("dasdasd ", this.searchTxt)
-    this.selectedLevel = ""
+    this.selectedLevel = "L3";
+    this.getAllParticipantsData(this.selectedLevel);
   }
 
   getLevel() {

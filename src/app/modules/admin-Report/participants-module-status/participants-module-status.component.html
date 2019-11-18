@@ -46,8 +46,8 @@
                 </select>
               </div>
               <div class="col-md-4 p-30-xs">
-                <select class="form-control" name="selectedLevel" id="selectedLevel" [(ngModel)]="selectedLevel"
-                  [disabled]="!searchTxt" (change)="getLevel()">
+                <select class="form-control" name="selectedLevel" id="selectedLevel" [(ngModel)]="selectedLevel" disabled
+                 (change)="getLevel()">
                   <option value="" disabled>Select Level</option>
                   <option value="L1">Level 1</option>
                   <option value="L2">Level 2</option>

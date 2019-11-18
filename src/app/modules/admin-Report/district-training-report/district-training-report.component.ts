@@ -35,8 +35,8 @@ export class DistrictTrainingReportComponent implements OnInit {
 
   getRole() {
     console.log("dasdasd ", this.searchTxt)
-    this.selectedLevel = ""
-    // this.getCount()
+    this.selectedLevel = "L3"
+    this.getCount(this.selectedLevel)
   }
 
   getLevel() {
@@ -57,7 +57,7 @@ export class DistrictTrainingReportComponent implements OnInit {
     this.showDetails = false
     this.exportData = this.data;
     this.loader = true;
-    this.selectedLevel = "";
+    this.selectedLevel = "L3";
   }
   ngOnDestroy() {
     localStorage.removeItem("selectedLevel");
