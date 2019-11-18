@@ -73,7 +73,10 @@ export class LevelSelectionComponent implements OnInit {
     {
       this.lvl1Complete = true
       this.lvl2Complete = true
-      this.lvl3Current = true
+      this.lvl3Current = true 
+      if(this.completedLevelJson['currentlevel']=="completed"){
+          this.lvl3Complete = true;
+      }
     } else if (this.completedLevelJson['level2'] == false && this.completedLevelJson['level1'] == false && this.completedLevelJson['level3'] == false && this.userType != 'superadmin')
     {
       this.noAccessFlag = true
