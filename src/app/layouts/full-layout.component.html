@@ -1150,7 +1150,7 @@
                     <em class="fa fa-user"></em>&nbsp;&nbsp;{{'Dashboard.Profile' | translate}}</a>
                   <a class="dropdown-item" (click)="clearFieldsResetPassword();">
                     <em class="fa fa-key"></em>&nbsp;&nbsp;{{'Profile.edit password' | translate}}</a>
-                  <a class="dropdown-item" *ngIf="userType=='master_trainer' ||userType=='co_ordinator' || userType=='trainee'" (click)="setlocal();" [routerLink]="['/dashboard/notice_screen']">
+                  <a class="dropdown-item" *ngIf="userType=='master_trainer' || userType=='trainee'" (click)="setlocal();" [routerLink]="['/dashboard/notice_screen']">
                     <em class="fa fa-list-alt"></em>&nbsp;&nbsp;{{'Dashboard.form' | translate}}</a>
                   <a class="dropdown-item" (click)="logout()">
                     <em class="fa fa-sign-out-alt"></em>&nbsp;&nbsp;{{'Dashboard.Logout' | translate}}</a>
