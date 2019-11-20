@@ -40,12 +40,12 @@
     <ul class="nav-dropdown-items submenu list-unstyled components">
       <div *ngIf="!permission.user_admin">
         <li *ngIf="userType=='master_trainer' || userType=='admin' ||userType=='superadmin'|| userType=='co_ordinator'">
-          <span class="bottom-divider" href="#authSubmenu" data-toggle="collapse" aria-expanded="false" *ngIf="userType=='admin' || userType=='superadmin'">
+          <span class="bottom-divider" href="#authSubmenu" data-toggle="collapse" aria-expanded="false" *ngIf="userType=='superadmin'">
             <a class="nav-link nav-dropdown-toggle">{{'Dashboard.admin' | translate}}</a>
           </span>
-          <span class="bottom-divider" href="#authSubmenu" data-toggle="collapse" aria-expanded="false" *ngIf="userType=='co_ordinator'">
+          <!-- <span class="bottom-divider" href="#authSubmenu" data-toggle="collapse" aria-expanded="false" *ngIf="userType=='co_ordinator'">
             <a class="nav-link nav-dropdown-toggle">{{'Dashboard.co-ordinator' | translate}}</a>
-          </span>
+          </span> -->
           <ul class="collapse list-unstyled" id="authSubmenu">
             <li *ngIf="userType=='co_ordinator'">
               <a class="nav-link nav-dropdown-toggle" href="#authSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
@@ -1150,7 +1150,7 @@
                     <em class="fa fa-user"></em>&nbsp;&nbsp;{{'Dashboard.Profile' | translate}}</a>
                   <a class="dropdown-item" (click)="clearFieldsResetPassword();">
                     <em class="fa fa-key"></em>&nbsp;&nbsp;{{'Profile.edit password' | translate}}</a>
-                  <a class="dropdown-item" (click)="setlocal();" [routerLink]="['/dashboard/notice_screen']">
+                  <a class="dropdown-item" *ngIf="userType=='master_trainer' ||userType=='co_ordinator' || userType=='trainee'" (click)="setlocal();" [routerLink]="['/dashboard/notice_screen']">
                     <em class="fa fa-list-alt"></em>&nbsp;&nbsp;{{'Dashboard.form' | translate}}</a>
                   <a class="dropdown-item" (click)="logout()">
                     <em class="fa fa-sign-out-alt"></em>&nbsp;&nbsp;{{'Dashboard.Logout' | translate}}</a>

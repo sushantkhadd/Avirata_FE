@@ -37,23 +37,23 @@
           </div>
           <div class="col-md-6">
             <div class="row mb-1 mt-1">
-              <label class="col-md-3 text-right font-weight-bold p-30-xs">Search</label>
-              <div class="col-md-4 p-30-xs">
+              <label class="col-md-3 text-right font-weight-bold p-30-xs mt-1">Search</label>
+              <div class="col-md-6 p-30-xs">
                 <select class="form-control" name="search" id="searchTxt" [(ngModel)]="searchTxt" (change)="getRole()">
                   <option value="" disabled>Select Role</option>
                   <option value="trainee">Trainee</option>
                   <option value="master_trainer">Master Trainer</option>
                 </select>
               </div>
-              <div class="col-md-4 p-30-xs">
+              <!-- <div class="col-md-4 p-30-xs">
                 <select class="form-control" name="selectedLevel" id="selectedLevel" [(ngModel)]="selectedLevel" disabled
                  (change)="getLevel()">
-                  <!-- <option value="" disabled>Select Level</option>
+                  <option value="" disabled>Select Level</option>
                   <option value="L1">Level 1</option>
-                  <option value="L2">Level 2</option> -->
+                  <option value="L2">Level 2</option>
                   <option value="L3">Level 3</option>
                 </select>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

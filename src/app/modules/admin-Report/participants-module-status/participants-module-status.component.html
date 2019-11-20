@@ -37,15 +37,15 @@
           <div class="col-md-6">
             <div class="row mb-1 mt-1">
 
-              <label class="col-md-3 text-right font-weight-bold p-30-xs">Search</label>
-              <div class="col-md-4 p-30-xs">
+              <label class="col-md-3 text-right font-weight-bold p-30-xs mt-1">Search</label>
+              <div class="col-md-6 p-30-xs">
                 <select class="form-control" name="search" id="searchTxt" [(ngModel)]="searchTxt" (change)="getRole()">
                   <option value="" disabled>Select Role</option>
                   <option value="trainee">Trainee</option>
                   <option value="master_trainer">Master Trainer</option>
                 </select>
               </div>
-              <div class="col-md-4 p-30-xs">
+              <!-- <div class="col-md-4 p-30-xs">
                 <select class="form-control" name="selectedLevel" id="selectedLevel" [(ngModel)]="selectedLevel" disabled
                  (change)="getLevel()">
                   <option value="" disabled>Select Level</option>
@@ -53,7 +53,7 @@
                   <option value="L2">Level 2</option>
                   <option value="L3">Level 3</option>
                 </select>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -97,7 +97,7 @@
                     <i class="fa fa-sort" aria-hidden="true"></i>
                   </mfDefaultSorter>
                 </th>
-                <th>
+                <!-- <th>
                   <mfDefaultSorter by="module6">EndLine Test
                     <i class="fa fa-sort" aria-hidden="true"></i>
                   </mfDefaultSorter>
@@ -106,7 +106,7 @@
                   <mfDefaultSorter by="module7">Project
                     <i class="fa fa-sort" aria-hidden="true"></i>
                   </mfDefaultSorter>
-                </th>
+                </th> -->
                 <th>
                   <mfDefaultSorter by="not_started">Not Started
                     <i class="fa fa-sort" aria-hidden="true"></i>
@@ -161,7 +161,7 @@
                     <i class="fa fa-eye" aria-hidden="true"></i>
                   </a>
                 </td>
-                <td>{{item.module6}}
+                <!-- <td>{{item.module6}}
                   <a class="btn btn-primary showBtn" appPreventDoubleClick (debounceClick)="viewdetails(item.district_name,6)">
                     <i class="fa fa-eye" aria-hidden="true"></i>
                   </a>
@@ -170,7 +170,7 @@
                   <a class="btn btn-primary showBtn" appPreventDoubleClick (debounceClick)="viewdetails(item.district_name,7)">
                     <i class="fa fa-eye" aria-hidden="true"></i>
                   </a>
-                </td>
+                </td> -->
                 <td>{{item.not_started}}</td>
                 <td>{{item.all_complete}}</td>
                 <td>
@@ -219,7 +219,7 @@
             <div class="col-md-6">
               <div class="row mt-1 mb-1">
 
-                <label class="col-md-3 text-right font-weight-bold p-30-xs">Search</label>
+                <label class="col-md-3 text-right font-weight-bold p-30-xs mt-1">Search</label>
                 <div class="col-md-8 p-30-xs">
                   <select class="form-control" name="search" id="searchTxt" [(ngModel)]="searchTxt" (change)="first()">
                     <option value="" disabled>Select Role</option>

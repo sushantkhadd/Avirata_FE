@@ -599,6 +599,12 @@ export class AdminPanelComponent implements OnInit {
 
             if (i == "completed") {
               this.totalCountL3 = dJson[i];
+              if(this.totalCountL3 <= 2){
+                this.totalCountL3 =0
+              }
+              else {
+                this.totalCountL3 = Math.round(this.totalCountL3 / 3)
+              }
             }
 
             if (i == "not_started") {
@@ -624,7 +630,7 @@ export class AdminPanelComponent implements OnInit {
           {"que":"In Module 3"+ " ("+this.number.transform(this.resultl3['com_module2'])+")","val":this.resultl3['com_module2']},
           {"que":"In Module 4"+ " ("+this.number.transform(this.resultl3['com_module3'])+")","val":this.resultl3['com_module3']},
           {"que":"In Module 5"+ " ("+this.number.transform(this.resultl3['com_module4'])+")","val":this.resultl3['com_module4']},
-          {"que":"Completed"+ " ("+this.number.transform(this.resultl3['completed'])+")","val":this.resultl3['completed']}]
+          {"que":"Completed"+ " ("+this.number.transform(this.totalCountL3)+")","val":this.totalCountL3}]
 
           // this.alluserstatusreportL3 = demo;
           
