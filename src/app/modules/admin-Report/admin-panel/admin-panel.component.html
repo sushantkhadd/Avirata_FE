@@ -24,7 +24,7 @@
             </li> -->
             <li *ngIf="userType == 'superadmin' ||userType == 'admin' ">
               <a [class.active]="showDistrictData" (click)="ShowDistrictData()">
-                <em class="fa fa-times"></em>&nbsp;&nbsp;Not Started</a>
+                <em class="fa fa-times"></em>&nbsp;&nbsp;Pending</a>
             </li>
             <li *ngIf="userType == 'superadmin' ||userType == 'admin' ">
               <a [class.active]="showParticipantData" (click)="ShowParticipantData()"> <em

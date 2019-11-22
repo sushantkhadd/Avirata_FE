@@ -62,61 +62,52 @@
             [mfRowsOnPage]="10">
             <thead>
               <tr>
-                <th>
-                  <mfDefaultSorter by="district_name">District
-                    <i class="fa fa-sort" aria-hidden="true"></i>
-                  </mfDefaultSorter>
-                </th>
-                <th>
-                  <mfDefaultSorter by="module1">BaseLine Test
-                    <i class="fa fa-sort" aria-hidden="true"></i>
-                  </mfDefaultSorter>
-                </th>
-                <th>
-                  <mfDefaultSorter by="module1">Module-1
-                    <i class="fa fa-sort" aria-hidden="true"></i>
-                  </mfDefaultSorter>
-                </th>
-                <th>
-                  <mfDefaultSorter by="module2">Module-2
-                    <i class="fa fa-sort" aria-hidden="true"></i>
-                  </mfDefaultSorter>
-                </th>
-                <th>
-                  <mfDefaultSorter by="module3">Module-3
-                    <i class="fa fa-sort" aria-hidden="true"></i>
-                  </mfDefaultSorter>
-                </th>
-                <th>
-                  <mfDefaultSorter by="module4">Module-4
-                    <i class="fa fa-sort" aria-hidden="true"></i>
-                  </mfDefaultSorter>
-                </th>
-                <th>
-                  <mfDefaultSorter by="module5">Module-5
-                    <i class="fa fa-sort" aria-hidden="true"></i>
-                  </mfDefaultSorter>
-                </th>
-                <!-- <th>
-                  <mfDefaultSorter by="module6">EndLine Test
-                    <i class="fa fa-sort" aria-hidden="true"></i>
-                  </mfDefaultSorter>
-                </th>
-                <th>
-                  <mfDefaultSorter by="module7">Project
-                    <i class="fa fa-sort" aria-hidden="true"></i>
-                  </mfDefaultSorter>
-                </th> -->
-                <th>
-                  <mfDefaultSorter by="not_started">Not Started
-                    <i class="fa fa-sort" aria-hidden="true"></i>
-                  </mfDefaultSorter>
-                </th>
-                <th>
-                  <mfDefaultSorter by="all_complete">All Complete
-                    <i class="fa fa-sort" aria-hidden="true"></i>
-                  </mfDefaultSorter>
-                </th>
+                  <th>
+                    <mfDefaultSorter by="district_name">District
+                      <i class="fa fa-sort" aria-hidden="true"></i>
+                    </mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="not_started">Pending
+                      <i class="fa fa-sort" aria-hidden="true"></i>
+                    </mfDefaultSorter>
+                  </th>
+                  <th>
+                      <mfDefaultSorter by="module1">Started
+                        <i class="fa fa-sort" aria-hidden="true"></i>
+                      </mfDefaultSorter>
+                    </th>
+                    <th>
+                      <mfDefaultSorter by="module1">M1
+                        <i class="fa fa-sort" aria-hidden="true"></i>
+                      </mfDefaultSorter>
+                    </th>
+                    <th>
+                      <mfDefaultSorter by="module2">M2
+                        <i class="fa fa-sort" aria-hidden="true"></i>
+                      </mfDefaultSorter>
+                    </th>
+                    <th>
+                      <mfDefaultSorter by="module3">M3
+                        <i class="fa fa-sort" aria-hidden="true"></i>
+                      </mfDefaultSorter>
+                    </th>
+                    <th>
+                      <mfDefaultSorter by="module4">M4
+                        <i class="fa fa-sort" aria-hidden="true"></i>
+                      </mfDefaultSorter>
+                    </th>
+                    <th>
+                      <mfDefaultSorter by="module5">M5
+                        <i class="fa fa-sort" aria-hidden="true"></i>
+                      </mfDefaultSorter>
+                    </th>
+                    <th>
+                        <mfDefaultSorter by="all_complete">Completed
+                          <i class="fa fa-sort" aria-hidden="true"></i>
+                        </mfDefaultSorter>
+                      </th>
+            
               </tr>
             </thead>
             <tbody>
@@ -130,37 +121,35 @@
                 </td>
               </tr>
               <tr *ngFor="let item of mf.data; let i=index">
-                <td>{{item.district_name}}</td>
-                <td>{{item.module0}}
-                  <a class="btn btn-primary showBtn" appPreventDoubleClick (debounceClick)="viewdetails(item.district_name,0)">
-                    <i class="fa fa-eye" aria-hidden="true"></i>
+                  <td>{{item.district_name}}</td>
+                  <td class="text-center">{{item.not_started}}</td>
+
+                <td class="text-center">
+                  <a class="link" appPreventDoubleClick (debounceClick)="viewdetails(item.district_name,0)">
+                      {{item.module0}}
                   </a>
                 </td>
-                <td>{{item.module1}}
-                  <a class="btn btn-primary showBtn" appPreventDoubleClick (debounceClick)="viewdetails(item.district_name,1)">
-                    <i class="fa fa-eye" aria-hidden="true"></i>
+                <td class="text-center">
+                  <a class="link" appPreventDoubleClick (debounceClick)="viewdetails(item.district_name,1)">{{item.module1}}
                   </a>
                 </td>
-                <td>{{item.module2}}
-                  <a class="btn btn-primary showBtn" appPreventDoubleClick (debounceClick)="viewdetails(item.district_name,2)">
-                    <i class="fa fa-eye" aria-hidden="true"></i>
+                <td class="text-center">
+                  <a class="link" appPreventDoubleClick (debounceClick)="viewdetails(item.district_name,2)">{{item.module2}}
                   </a>
                 </td>
-                <td>{{item.module3}}
-                  <a class="btn btn-primary showBtn" appPreventDoubleClick (debounceClick)="viewdetails(item.district_name,3)">
-                    <i class="fa fa-eye" aria-hidden="true"></i>
+                <td class="text-center">
+                  <a class="link" appPreventDoubleClick (debounceClick)="viewdetails(item.district_name,3)">{{item.module3}}
                   </a>
                 </td>
-                <td>{{item.module4}}
-                  <a class="btn btn-primary showBtn" appPreventDoubleClick (debounceClick)="viewdetails(item.district_name,4)">
-                    <i class="fa fa-eye" aria-hidden="true"></i>
+                <td class="text-center">
+                  <a class="link" appPreventDoubleClick (debounceClick)="viewdetails(item.district_name,4)">{{item.module4}}
                   </a>
                 </td>
-                <td>{{item.module5}}
-                  <a class="btn btn-primary showBtn" appPreventDoubleClick (debounceClick)="viewdetails(item.district_name,5)">
-                    <i class="fa fa-eye" aria-hidden="true"></i>
+                <td class="text-center">
+                  <a class="link" appPreventDoubleClick (debounceClick)="viewdetails(item.district_name,5)">{{item.module5}}
                   </a>
                 </td>
+                <td class="text-center">{{item.all_complete}}</td>
                 <!-- <td>{{item.module6}}
                   <a class="btn btn-primary showBtn" appPreventDoubleClick (debounceClick)="viewdetails(item.district_name,6)">
                     <i class="fa fa-eye" aria-hidden="true"></i>
@@ -171,16 +160,16 @@
                     <i class="fa fa-eye" aria-hidden="true"></i>
                   </a>
                 </td> -->
-                <td>{{item.not_started}}</td>
-                <td>{{item.all_complete}}</td>
-                <td>
-                </td>
+                <!-- <td>{{item.not_started}}</td> -->
+               
+                <!-- <td>
+                </td> -->
               </tr>
             </tbody>
             <tfoot>
               <tr>
                 <td colspan="11">
-                  <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                  <mfBootstrapPaginator></mfBootstrapPaginator>
                 </td>
               </tr>
             </tfoot>
