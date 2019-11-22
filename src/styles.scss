@@ -4063,6 +4063,7 @@ body {
   ::ng-deep #pie {
     height: 520px;
  }
+ 
  .chart {
   dx-pie-chart#pie {   
     left: 0;
@@ -4071,7 +4072,21 @@ body {
   }
 
  }
- 
+ .chart.mt-2.admin{
+  dx-pie-chart#pie {   
+    left: 0;
+    @include transition(all 0.6s cubic-bezier(0.945, 0.02, 0.27, 0.665));
+    height: 350px !important;   
+    width: 350px !important 
+  }
+
+
+ }
+
+ .admin1{
+   margin:0px auto;
+   width: 400px;
+ }
 
   .custom-minh {
     min-height: 200px;

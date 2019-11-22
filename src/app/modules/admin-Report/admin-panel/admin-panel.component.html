@@ -445,7 +445,7 @@
                 </div>
 
               </div>
-              <div class="col-md-4 left-content mb-4 ">
+              <div class="col-md-4 left-content mb-4 " *ngIf="userType == 'superadmin'">
                 <div class="row bg-custom ">
                   <div class="col-12">
                     <div class="card-header">
@@ -555,6 +555,80 @@
                       </a>
                     </div>
                   </div> -->
+                  <div class=" col-md-12 p-1 text-center">
+                    <a class="text-blue" data-toggle="modal" data-target="#level3" data-backdrop="static"
+                      data-keyboard="false">
+                      View Details
+                    </a>
+                  </div>
+                </div>
+                <div class="modal fade" id="level3" tabindex="-1" role="dialog"
+                  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class=" custom-minh">
+                              <div class="card-block">
+                                <dx-pie-chart id="pie" type="doughnut" palette="bright"
+                                  [dataSource]="alluserstatusreportL3"
+                                  [resolveLabelOverlapping]="resolveOverlappingTypes[0]">
+                                  <dxo-legend orientation="horizontal" itemTextPosition="right"
+                                    horizontalAlignment="center" verticalAlignment="bottom" [columnCount]="4">
+                                  </dxo-legend>
+                                  <dxo-title text="Avirata">
+                                    <dxo-subtitle text="Level 3 - Current Status">
+                                    </dxo-subtitle>
+                                  </dxo-title>
+                                  <dxo-export [enabled]="true"></dxo-export>
+                                  <dxi-series argumentField="que" valueField="val">
+                                    <dxo-label [visible]="true" position="columns" [customizeText]="customizeLabel">
+                                      <dxo-font [size]="16"></dxo-font>
+                                      <dxo-connector [visible]="true" [width]="0.5"></dxo-connector>
+                                    </dxo-label>
+                                  </dxi-series>
+                                </dx-pie-chart>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="left-content mb-4 admin1" *ngIf="userType == 'admin'">
+                <div class="row bg-custom ">
+                  <div class="col-md-12">
+
+                    <h5 class="text-black text-center mt-2">Avirata Level 3 Current Status</h5>
+                    <div class="chart mt-2 admin">
+                      <dx-pie-chart id="pie" type="doughnut" palette="bright" [dataSource]="l3_graph"
+                        [resolveLabelOverlapping]="resolveOverlappingTypes[0]" [innerRadius]="0.65">
+                        <dxo-legend orientation="horizontal" itemTextPosition="right" horizontalAlignment="center"
+                          verticalAlignment="bottom" [columnCount]="4">
+                        </dxo-legend>
+                        <dxo-export [enabled]="false"></dxo-export>
+                        <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip">
+                        </dxo-tooltip>
+                        <dxi-series argumentField="que" valueField="val">
+                          <dxo-label [visible]="false" position="columns" [customizeText]="customizeLabel">
+                            <dxo-font [size]="16"></dxo-font>
+                            <dxo-connector [visible]="true" [width]="0.5"></dxo-connector>
+                          </dxo-label>
+                        </dxi-series>
+                      </dx-pie-chart>
+                    </div>
+                 
+                  </div>
+
                   <div class=" col-md-12 p-1 text-center">
                     <a class="text-blue" data-toggle="modal" data-target="#level3" data-backdrop="static"
                       data-keyboard="false">
