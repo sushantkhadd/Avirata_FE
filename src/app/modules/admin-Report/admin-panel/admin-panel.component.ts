@@ -599,12 +599,12 @@ export class AdminPanelComponent implements OnInit {
 
             if (i == "completed") {
               this.totalCountL3 = dJson[i];
-              //if(this.totalCountL3 <= 2){
-                //this.totalCountL3 =0
-              //}
-              //else {
-                //this.totalCountL3 = Math.round(this.totalCountL3 / 3)
-              //}
+              if(this.totalCountL3 <= 2){
+                this.totalCountL3 =0
+              }
+              else {
+                this.totalCountL3 = Math.round(this.totalCountL3 / 3)
+              }
             }
 
             if (i == "not_started") {
