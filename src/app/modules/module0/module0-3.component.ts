@@ -81,7 +81,11 @@ export class Module03Component implements OnInit {
           window.localStorage.setItem("baselineCounter",JSON.stringify(baselineCounter))
           //this.data = data["data"];
            console.log('mcq data', this.data,baselineCounter);
-         
+         if(this.data==[] || baselineCounter == 21){
+          this.answer = data["data"].questionlist[data["data"].questionlist.length-1].answer
+          this.submit("finish1")
+          console.log("111111111",this.answer)
+         }
           this.startFlag = true;
         }
       },
@@ -122,11 +126,21 @@ export class Module03Component implements OnInit {
     var apiUrl = "baselineone/";
     console.log("dasd ", jsonBody);
     }
-    else if(val == "finish"){
+    else if(val == "finish"){ 
       var jsonBody = {};
 
       jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
       jsonBody["questionid"] = this.queId[0];
+      jsonBody["useranswer"] = this.answer;
+      jsonBody["event"] = "finish";
+      var apiUrl = "baselineone/";
+      console.log("dasdqddddddddddddd ", jsonBody);
+    }
+    else if(val == "finish1"){ 
+      var jsonBody = {};
+
+      jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
+      jsonBody["questionid"] = this.questionlist[this.questionlist.length-1].questionid
       jsonBody["useranswer"] = this.answer;
       jsonBody["event"] = "finish";
       var apiUrl = "baselineone/";
