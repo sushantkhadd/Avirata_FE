@@ -55,10 +55,15 @@ export class Module37Component implements OnInit {
               }
             }
             // this.data = data['data'].questionlist
-            this.startFlag = true;
+           
             console.log("datttaaaa",this.data)
             var baselineCounter = 5-(this.data.length-1);
             window.localStorage.setItem("baselineCounter",JSON.stringify(baselineCounter))
+            if(this.data ==[] || baselineCounter ==6){
+              this.answer = this.questionlist[this.questionlist.length-1].answer;
+              this.submit("finish1")
+            }
+            this.startFlag = true;
           }
         },
         error => {
@@ -100,6 +105,16 @@ export class Module37Component implements OnInit {
   
         jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
         jsonBody["questionid"] = this.queId[0];
+        jsonBody["useranswer"] = this.answer;
+        jsonBody["event"] = "finish";
+        var apiUrl = "l3module3_ans_return_mcq/";
+        console.log("dasdqddddddddddddd ", jsonBody);
+      }
+      else if(val == "finish1"){
+        var jsonBody = {};
+  
+        jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
+        jsonBody["questionid"] = this.questionlist[this.questionlist.length-1].questionid;
         jsonBody["useranswer"] = this.answer;
         jsonBody["event"] = "finish";
         var apiUrl = "l3module3_ans_return_mcq/";

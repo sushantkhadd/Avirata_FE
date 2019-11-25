@@ -118,13 +118,15 @@
               <div class="spinner spinner2"></div>
             </div>
           </div> -->
-          <div class="pie-chart-block" *ngIf="piechartFlag">
+          <div class="pie-chart-block overflow" *ngIf="piechartFlag">
+              <span class="ml-4 text-blue1">{{'Common.userInst' | translate}}</span>
             <div class="row mx-auto text-white">
               <div class="col-md-12 text-right mb-1">
                 <button class="btn btn-primary mb-1 mr-2" (click)="refresh()">Refresh &nbsp; <em
                     class="fas fa-sync"></em></button>
               </div>
-              <div class="col-md-4 left-content mb-4 " *ngIf="userType == 'superadmin'">
+              
+              <div class="col-md-4 left-content mb-0 " *ngIf="userType == 'superadmin'">
                 <div class="row bg-custom ">
                   <div class="col-12">
                     <div class="card-header">
@@ -287,7 +289,7 @@
                 </div>
 
               </div>
-              <div class="col-md-4 left-content mb-4 " *ngIf="userType == 'superadmin'">
+              <div class="col-md-4 left-content mb-0 " *ngIf="userType == 'superadmin'">
                 <div class="row bg-custom ">
                   <div class="col-12">
                     <div class="card-header">
@@ -445,7 +447,7 @@
                 </div>
 
               </div>
-              <div class="col-md-4 left-content mb-4 " *ngIf="userType == 'superadmin'">
+              <div class="col-md-4 left-content mb-0 " *ngIf="userType == 'superadmin'">
                 <div class="row bg-custom ">
                   <div class="col-12">
                     <div class="card-header">
@@ -604,7 +606,7 @@
                 </div>
 
               </div>
-              <div class="left-content mb-4 admin1" *ngIf="userType == 'admin'">
+              <div class="left-content mb-0 admin1" *ngIf="userType == 'admin'">
                 <div class="row bg-custom ">
                   <div class="col-md-12">
 
@@ -679,6 +681,7 @@
 
               </div>
             </div>
+            
             <!-- <div class="row mx-auto">
               <div class="col-md-6">
                 <div class="card custom-minh">

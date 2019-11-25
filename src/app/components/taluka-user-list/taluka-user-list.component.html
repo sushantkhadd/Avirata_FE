@@ -30,6 +30,7 @@
                 <i class="fa fa-download" aria-hidden="true"></i>
               </span>Download</button>
           </div>
+          <span class="ml-3 text-blue1">{{'Common.userInst' | translate}}</span>
         </div>
       </div>
     </div>
@@ -156,6 +157,7 @@
                 formatTime}}</b><br>
               <span>(Interval Time between updated status is 4 hrs)
                   </span>
+                 
             </p>
             <button class="btn btn-primary" *ngIf="showReset2" appPreventDoubleClick (debounceClick)="talukaOverallReport(selectedTaluka,selectedRole);showReset2=false">
                 Get updated result
@@ -167,6 +169,7 @@
                 <i class="fa fa-download" aria-hidden="true"></i>
               </span>Download</button>
           </div>
+          <span class="ml-3 text-blue1 mt-2">{{'Common.userInst' | translate}}</span>
         </div>
       </div>
     </div>
