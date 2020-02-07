@@ -34,7 +34,7 @@
           <i class="fa fa-power-off" aria-hidden="true"></i> &nbsp;लॉग-आऊट
         </a>
       </div>
-      <div class="col-md-6 text-right" *ngIf="userType!='superadmin' && userType!='admin'&& noAccessFlag">
+      <div class="col-md-6 text-right" *ngIf="userType!='superadmin' && noAccessFlag">
           <span class="userName pr-2">{{userName}}</span>
         <div class="dropdown logoutBtn levelmenu">
           <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
@@ -51,7 +51,7 @@
             <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
             <span class="caret"></span></button>
             <ul class="dropdown-menu">
-              <li  *ngIf="userType=='superadmin'||userType=='admin'"><a  routerLinkActive="active" (click)="hideMenu()"><i class="icon-calculator"></i>&nbsp;&nbsp;Admin Panel</a></li>
+              <li  *ngIf="userType=='superadmin'"><a  routerLinkActive="active" (click)="hideMenu()"><i class="icon-calculator"></i>&nbsp;&nbsp;Admin Panel</a></li>
               <li  *ngIf="userType=='superadmin'"><a routerLinkActive="active" (click)="hideMenu1()"><i class="icon-calculator"></i>&nbsp;&nbsp;{{'Dashboard.admin' | translate}}</a></li>
               <li  *ngIf="userType=='master_trainer' || userType=='co_ordinator'"><a routerLinkActive="active" (click)="hideMenu1()"> <i class="icon-calculator"></i>&nbsp;&nbsp;{{'Dashboard.talukaUserList' | translate}}</a></li>
               <li><a appPreventDoubleClick (debounceClick)="logout()"> <em class="fa fa-sign-out-alt"></em>&nbsp;&nbsp;{{'Dashboard.Logout' | translate}}</a></li>
