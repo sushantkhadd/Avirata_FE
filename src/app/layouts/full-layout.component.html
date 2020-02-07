@@ -39,7 +39,7 @@
 
     <ul class="nav-dropdown-items submenu list-unstyled components">
       <div *ngIf="!permission.user_admin">
-        <li *ngIf="userType=='master_trainer' || userType=='admin' ||userType=='superadmin'|| userType=='co_ordinator'">
+        <li *ngIf="userType=='master_trainer' ||userType=='superadmin'|| userType=='co_ordinator'">
           <span class="bottom-divider" href="#authSubmenu" data-toggle="collapse" aria-expanded="false" *ngIf="userType=='superadmin'">
             <a class="nav-link nav-dropdown-toggle">{{'Dashboard.admin' | translate}}</a>
           </span>
@@ -60,7 +60,7 @@
                 </li> -->
               </ul>
             </li>
-            <li class="nav-item" *ngIf="userType=='admin' || userType=='superadmin'" routerLinkActive="activeMenu">
+            <li class="nav-item" *ngIf="userType=='superadmin'" routerLinkActive="activeMenu">
               <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/masterstat']">
                 <i class="icon-calculator"></i>{{'Dashboard.statistics' | translate}}</a>
             </li>
