@@ -30,10 +30,10 @@
           <a class="nav-link c-pointer" routerLinkActive="active" (click)="hideMenu()">
             <i class="icon-calculator"></i>&nbsp;&nbsp;Admin Panel</a>
         </li>
-        <li class="nav-item" *ngIf="userType=='master_trainer' || userType=='co_ordinator'" routerLinkActive="activeMenu">
+        <!-- <li class="nav-item" *ngIf="userType=='master_trainer' || userType=='co_ordinator'" routerLinkActive="activeMenu">
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/user_list']">
             <i class="icon-calculator"></i>&nbsp;&nbsp;{{'Dashboard.talukaUserList' | translate}}</a>
-        </li>
+        </li> -->
       </ul>
     </div>
 
