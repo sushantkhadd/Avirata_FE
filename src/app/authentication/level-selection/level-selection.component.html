@@ -45,7 +45,7 @@
           </ul>
         </div>
         </div>
-        <div class="col-md-6 text-right" *ngIf="userType!='trainee'">
+        <div class="col-md-6 text-right" *ngIf="userType!='trainee' && !noAccessFlag">
             <span class="userName pr-2">{{userName}}</span>
           <div class="dropdown logoutBtn levelmenu">
             <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
