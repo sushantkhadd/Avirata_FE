@@ -4,9 +4,7 @@
 // The list of which env maps to which file can be found in `angular-cli.json`.
 
 export const environment = {
-  production: false,
-  //  apiUrl: 'http://192.168.1.110:8000/api/',
-  // l2apiUrl: 'http://192.168.1.110:8000/l2api/',
+  production: false,  
   apiUrl: "http://192.168.1.223:5112/api/",
   l2apiUrl: "http://192.168.1.223:5112/l2api/",
   l3apiUrl: "http://192.168.1.223:5112/l3api/",
