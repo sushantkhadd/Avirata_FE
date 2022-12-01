@@ -23,6 +23,7 @@
     "@angular/router": "^6.1.0",
     "@ngx-translate/core": "^10.0.0",
     "@ngx-translate/http-loader": "^3.0.0",
+    "@types/html2canvas": "^1.0.0",
     "@types/pdfjs-dist": "^2.0.0",
     "angular2-json2csv": "^1.1.2",
     "angular2-multiselect-dropdown": "^4.2.2",

@@ -5,13 +5,15 @@
 
 export const environment = {
   production: false,  
-  apiUrl: "http://192.168.1.223:5112/api/",
-  l2apiUrl: "http://192.168.1.223:5112/l2api/",
-  l3apiUrl: "http://192.168.1.223:5112/l3api/",
+  apiUrl: "http://172.26.1.149:8001/api/", 
+  
+  // apiUrl: "http://172.26.1.149:8001/api/",
+  l2apiUrl: "http://172.26.1.149:8001/l2api/",
+  l3apiUrl: "http://172.26.1.149:8001/l3api/",
 
   apiUrlNot: "http://192.168.1.116:8002/api/",
   pdfUrl: "https://s3-ap-southeast-1.amazonaws.com/maacpd/static/pdf/",
   redirectUrl1: "http://192.168.1.223:7112/#/l1/",
   redirectUrl2: "http://192.168.1.223:7114/#/l2/",
-  downloadUrl: "http://192.168.1.223:5112"
+  downloadUrl: "http://172.26.1.149:8001"
 };
