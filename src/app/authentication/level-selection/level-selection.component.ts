@@ -19,7 +19,8 @@ export class LevelSelectionComponent implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
   public completedLevelJson; lvl1Current; lvl1Complete; lvl2Current; lvl2Complete;
-  lvl3Current; lvl3Complete;profileFlag;
+  lvl3Current; lvl3Complete;lvl4Current; lvl4Complete
+  profileFlag;
   superAdminFlag; currentLevel; userType;
   complete = "पूर्ण";
   start1 = "पहिला टप्पा सुरू करण्यासाठी येथे क्लिक करा.";
@@ -51,33 +52,41 @@ export class LevelSelectionComponent implements OnInit {
     this.lvl2Complete = false;
     this.lvl3Current = false;
     this.lvl3Complete = false;
+    this.lvl4Current = false;
+    this.lvl4Complete = false;
     this.completedLevelJson = JSON.parse(window.localStorage.getItem('levelStatus'));
     this.currentLevel = this.completedLevelJson['currentlevel']
     // this.currentLevel='completed'
-    if (this.completedLevelJson['level1'] == true && this.completedLevelJson['level2'] == false && this.completedLevelJson['level3'] == false && this.userType != 'superadmin') {
+    if (this.completedLevelJson['level1'] == true && this.completedLevelJson['level2'] == false && this.completedLevelJson['level3'] == false && this.completedLevelJson['level4'] == false && this.userType != 'superadmin') {
       this.lvl1Current = true;
-    } else if (this.completedLevelJson['level2'] == true && this.completedLevelJson['level1'] == false && this.completedLevelJson['level3'] == false && this.userType != 'superadmin') {
+    } else if (this.completedLevelJson['level2'] == true && this.completedLevelJson['level1'] == false && this.completedLevelJson['level3'] == false && this.completedLevelJson['level4'] == false && this.userType != 'superadmin') {
       this.lvl2Current = true;
       this.lvl1Complete = true
-    } else if (this.completedLevelJson['level3'] == true && this.completedLevelJson['level1'] == false && this.completedLevelJson['level2'] == false && this.userType != 'superadmin') {
+    } else if (this.completedLevelJson['level3'] == true && this.completedLevelJson['level1'] == false && this.completedLevelJson['level2'] == false &&this.completedLevelJson['level4'] == false && this.userType != 'superadmin') {
       this.lvl1Complete = true
       this.lvl2Complete = true;
       this.lvl3Current = true
     }
-    else if (this.completedLevelJson['level1'] == true && this.completedLevelJson['level2'] == true && this.completedLevelJson['level3'] == false && this.userType != 'superadmin')
+    else if (this.completedLevelJson['level4'] == true && this.completedLevelJson['level3'] == false && this.completedLevelJson['level1'] == false && this.completedLevelJson['level2'] == false && this.userType != 'superadmin') {
+      this.lvl1Complete = true;
+      this.lvl2Complete = true;
+      this.lvl3Current = true;
+      this.lvl4Current=true;
+    }
+    else if (this.completedLevelJson['level1'] == true && this.completedLevelJson['level2'] == true && this.completedLevelJson['level3'] == false && this.completedLevelJson['level4'] == false  && this.userType != 'superadmin')
     {
       this.lvl1Complete = true
       this.lvl2Current = true
-    }
-    else if (this.completedLevelJson['level2'] == true && this.completedLevelJson['level1'] == true && this.completedLevelJson['level3'] == true && this.userType != 'superadmin')
+    }else if (this.completedLevelJson['level2'] == true && this.completedLevelJson['level1'] == true && this.completedLevelJson['level3'] == true && this.completedLevelJson['level4'] == true && this.userType != 'superadmin')
     {
       this.lvl1Complete = true
       this.lvl2Complete = true
       this.lvl3Current = true 
+      this.lvl4Current = true 
       if(this.completedLevelJson['currentlevel']=="completed"){
-          this.lvl3Complete = true;
+          this.lvl4Complete = true;
       }
-    } else if (this.completedLevelJson['level2'] == false && this.completedLevelJson['level1'] == false && this.completedLevelJson['level3'] == false && this.userType != 'superadmin')
+    } else if (this.completedLevelJson['level2'] == false && this.completedLevelJson['level1'] == false && this.completedLevelJson['level3'] == false && this.completedLevelJson['level4'] == false && this.userType != 'superadmin')
     {
       this.noAccessFlag = true
       window.localStorage.setItem("hidemenu","true");
@@ -95,6 +104,7 @@ export class LevelSelectionComponent implements OnInit {
       this.lvl1Complete = true
       this.lvl2Complete = true;
       this.lvl3Current = true;
+      this.lvl4Current = true;
       this.noAccessFlag = false
 
     }
@@ -152,7 +162,81 @@ export class LevelSelectionComponent implements OnInit {
     this.CommonServive.postCall('levelstatus/', jsonBody)
       .subscribe(
       data => {
-        if (level == 3) {
+        if (level == 4) {
+          window.localStorage.setItem("hidemenu","false");
+          window.localStorage.setItem("hidemenuAdmin", "false");
+          window.localStorage.setItem('startDate', data['data'].modulestatus.daterange.startDate)
+          window.localStorage.setItem('endDate', data['data'].modulestatus.daterange.endDate)
+          window.localStorage.setItem('assignmentDate', data['data'].modulestatus.daterange.assignmentDate)
+
+          window.localStorage.setItem('levelData', JSON.stringify(data['data'].modulestatus.level4));
+
+          if (data['data'].modulestatus["level4"].module0 == false) {
+            window.localStorage.setItem('currentstatus', '-1');
+          }
+          if (
+            data["data"].modulestatus.level4[0]["module"] == "0" &&
+            data["data"].modulestatus.level4[0]["status"] == true
+          ) {
+            window.localStorage.setItem("currentstatus", "0");
+          } if (
+            data['data'].modulestatus.level4[1]["module"] == "1" &&
+            data["data"].modulestatus.level4[1]["status"] == true
+          )
+          {
+            window.localStorage.setItem('currentstatus', '1');
+          } if (
+            data['data'].modulestatus.level4[2]["module"] == "2" &&
+            data["data"].modulestatus.level4[2]["status"] == true
+          )
+          {
+            window.localStorage.setItem('currentstatus', '2');
+          } if (
+            data['data'].modulestatus.level4[3]["module"] == "3" &&
+            data["data"].modulestatus.level4[3]["status"] == true
+          )
+          {
+            window.localStorage.setItem('currentstatus', '3');
+          } if (
+            data['data'].modulestatus.level4[4]["module"] == "4" &&
+            data["data"].modulestatus.level4[4]["status"] == true
+          )
+          {
+            window.localStorage.setItem('currentstatus', '4');
+          } if (
+            data['data'].modulestatus.level4[5]["module"] == "5" &&
+            data["data"].modulestatus.level4[5]["status"] == true
+          )
+          {
+            window.localStorage.setItem('currentstatus', '5');
+          }
+
+          var completeModule = {};
+          completeModule['module0'] = false;
+          completeModule['module1'] = false;
+          completeModule['module2'] = false;
+          completeModule['module3'] = false;
+          completeModule['module4'] = false;
+          completeModule['module5'] = false;
+          completeModule['module6'] = false;
+          completeModule['module7'] = false;
+
+          if (data['data'].modulestatus.last_completed_ids.includes(0)) {
+            completeModule['module0'] = true;
+          } if (data['data'].modulestatus.last_completed_ids.includes(1)) {
+            completeModule['module1'] = true;
+          } if (data['data'].modulestatus.last_completed_ids.includes(2)) {
+            completeModule['module2'] = true;
+          } if (data['data'].modulestatus.last_completed_ids.includes(3)) {
+            completeModule['module3'] = true;
+          } if (data['data'].modulestatus.last_completed_ids.includes(4)) {
+            completeModule['module4'] = true;
+          } if (data['data'].modulestatus.last_completed_ids.includes(5)) {
+            completeModule['module5'] = true;
+          }
+          window.localStorage.setItem('completeModule', JSON.stringify(completeModule));
+          this.router.navigate(["/dashboard"]);
+        }else if (level == 3) {
           window.localStorage.setItem("hidemenu","false");
           window.localStorage.setItem("hidemenuAdmin", "false");
           window.localStorage.setItem('startDate', data['data'].modulestatus.daterange.startDate)

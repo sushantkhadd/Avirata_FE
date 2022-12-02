@@ -246,9 +246,10 @@
                   </div>
                 </a>
               </div>
-              <div class="col-md-3 justify-content-center" *ngIf="!lvl2Current">
-                <a class="custom-tooltip tooltip--triangle">
-                  <div class="card text-center card-secondary">
+              <div class="col-md-3 text-center" *ngIf="!lvl2Current">
+                <a class="custom-tooltip tooltip--triangle" [attr.href]="lvl2Current ? setUrl2 : undefined" [attr.target]="lvl2Current ?  '_blank' : undefined"
+                  *ngIf="superAdminFlag">
+                  <div class="card" [class.card-success]="lvl2Current && lvl2Complete" [class.card-secondary]='!lvl2Current'>
                     <div class="card-block text-white custom-block">
                       <div *ngIf="lvl2Complete" class="icon">
                         <!-- <i class="filled fa fa-check-circle fa-3x pb-2"></i> -->
@@ -267,16 +268,47 @@
                       <h3 class="level-text text-center">टप्पा</h3>
                       <img class="img-fluid mb-4" src="../../../assets/img/two.png">
                     </div>
-                    <!-- <div class="card-footer border-0"></div> -->
-                    <!-- <div class="card-footer border-0">
+                    <!-- <div class="card-footer border-0" [ngClass]="lvl2Current ? 'bg-success' : 'bg-gray'">
                       <div>
+                        <p class="text-center p-1">
+                        </p>
+                      </div>
+                    </div> -->
+                  </div>
+                </a>
+                <a class="custom-tooltip tooltip--triangle" *ngIf="!superAdminFlag">
+                  <div class="card text-center card-secondary">
+                    <div class="card-block text-white custom-block">
+                      <div *ngIf="lvl1Complete" class="icon">
+                        <!-- <i class="filled fa fa-check-circle fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledTick.png">
+                      </div>
+                      <div *ngIf="lvl1Current" class="icon">
+                        <!-- <i class="fa fa-unlock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledUnlock.png">
+                        
+                      </div>
+                      <div *ngIf="!lvl1Current && !lvl1Complete" class="icon">
+                        <!-- <i class="fa fa-lock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledlock.png">
+                        
+                      </div>
+                      <h3 class="level-text text-center">टप्पा</h3>
+                      <img class="img-fluid mb-4" src="../../../assets/img/two.png">
+                    </div>
+                    <!-- <div class="card-footer border-0"></div> -->
+                    <!-- <div class="card-footer text-center border-0">
+                      <div>
+
                         <p class="text-center">
+
                         </p>
                       </div>
                     </div> -->
                   </div>
                 </a>
               </div>
+             
 
               <div class="col-md-3 text-center" *ngIf="lvl3Current">
                 <a class="custom-tooltip tooltip--triangle" appPreventDoubleClick (debounceClick)="levelStatus(3)">
@@ -339,7 +371,70 @@
                   </div>
                 </a>
               </div>
+              <!-- level 4 -->
+              <div class="col-md-3 text-center" *ngIf="lvl4Current">
+                <a class="custom-tooltip tooltip--triangle" appPreventDoubleClick (debounceClick)="levelStatus(4)">
+                  <div class="card" [class.card-success]='lvl3Current' [class.card-secondary]='!lvl3Current && !lvl3Complete'>
+                    <div class="card-block text-center text-white custom-block">
+                      <div *ngIf="lvl3Complete" class="icon">
+                        <!-- <i class="filled fa fa-check-circle fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledTickclr.png">
+                      </div>
+                      <div *ngIf="lvl4Current && !lvl4Complete" class="icon">
+                        <!-- <i class="fa fa-unlock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledUnlock.png">
+                        
+                      </div>
+                      <div *ngIf="!lvl4Current && !lvl4Complete" class="icon">
+                        <!-- <i class="fa fa-lock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledlock.png">
+                        
+                      </div>
+                      <h3 class="level-text text-center">टप्पा</h3>
+                      <img class="img-fluid mb-4" src="../../../assets/img/one.png">
+                    </div>
+                    <!-- <div class="card-footer border-0">
+                      <p class="text-center" *ngIf="!lvl2Complete">
+                        सुरु करा
+                      </p>
+                      <p *ngIf="lvl2Complete" class="text-center">पूर्ण</p>
+                    </div> -->
+                  </div>
+                </a>
+              </div>
+              <div class="col-md-3" *ngIf="!lvl4Current">
+                <a class="custom-tooltip tooltip--triangle">
+                  <div class="card text-center card-secondary">
+                    <div class="card-block text-center text-white custom-block">
+                      <div *ngIf="lvl4Complete" class="icon">
+                        <!-- <i class="filled fa fa-check-circle fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledTick.png">
+                      </div>
+                      <div *ngIf="lvl4Current" class="icon">
+                        <!-- <i class="fa fa-unlock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledUnlock.png">
+                        
+                      </div>
+                      <div *ngIf="!lvl4Current && !lvl4Complete" class="icon">
+                        <!-- <i class="fa fa-lock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledlock.png">
+                      </div>
+                      <h3 class="level-text text-center">टप्पा</h3>
+                      <img class="img-fluid mb-4" src="../../../assets/img/one.png">
+                    </div>
+                    <!-- <div class="card-footer border-0"></div> -->
+                    <!-- <div class="card-footer border-0">
+                      <div>
+                        <p class="text-center">
 
+                        </p>
+                      </div>
+                    </div> -->
+                  </div>
+                </a>
+              </div>
+               <!-- End level 4 -->
+              
             </div>
 
             <div class="row justify-content-center" *ngIf="userType!='superadmin' && noAccessFlag">
@@ -409,6 +504,36 @@
               </div>
 
               <div class="col-md-3">
+                  <a class="custom-tooltip tooltiptriangle">
+                    <div class="card" [class.card-success]='lvl3Current' [class.card-secondary]='!lvl3Current && !lvl3Complete'>
+                      <div class="card-block text-center text-white custom-block">
+                        <div *ngIf="lvl3Complete" class="icon">
+                            <img src="../../../assets/img/filledTick.png">
+                          <!-- <i class="filled fa fa-check-circle fa-3x pb-2"></i> -->
+                        </div>
+                        <div *ngIf="lvl3Current" class="icon">
+                          <!-- <i class="fa fa-unlock fa-3x pb-2"></i> -->
+                          <img src="../../../assets/img/filledUnlock.png">
+                        </div>
+                        <div *ngIf="!lvl3Current && !lvl3Complete" class="icon">
+                          <!-- <i class="fa fa-lock fa-3x pb-2"></i> -->
+                        <img src="../../../assets/img/filledlock.png">
+                          
+                        </div>
+                        <h3 class="level-text text-center">टप्पा</h3>
+                        <img class="img-fluid mb-4" src="../../../assets/img/three.png">
+                      </div>
+                      <!-- <div class="card-footer border-0 bg-gray"></div> -->
+                      <!-- <div class="card-footer border-0 bg-gray">
+                        <div>
+                          <p class="text-center">
+                          </p>
+                        </div>
+                      </div> -->
+                    </div>
+                  </a>
+                </div>
+                <div class="col-md-3">
                   <a class="custom-tooltip tooltiptriangle">
                     <div class="card" [class.card-success]='lvl3Current' [class.card-secondary]='!lvl3Current && !lvl3Complete'>
                       <div class="card-block text-center text-white custom-block">
