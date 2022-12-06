@@ -129,7 +129,7 @@ export class FullLayoutService {
      }
     return this.http
       .post(
-        this.apiUrl + "l3currentstatus/",
+        this.apiUrl + "l4currentstatus/",
         { body: jsonBody },
         { headers: headers }
       )

@@ -7,7 +7,7 @@
   </div>
 </div>
 <div *ngIf="mainFlagModule0 == 3">
-  <div *ngIf="!startFlag">
+  <!-- <div *ngIf="!startFlag">
     <div class="instruction-wrap">
       <div class="card">
         <div class="card-header text-white">
@@ -31,18 +31,23 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <div class="outer-loader" *ngIf="loader">
     <img src="../assets/img/logo_cpd_combine_web.png" class="img-fluid" alt="">
     <div class="loader">
     </div>
   </div>
-  <div *ngIf="startFlag">
-    <h6 class="questionHead lineHeight">{{'L2common.caution' | translate}} <span [innerHTML]="inst"> </span></h6>
-    <div>
-      <span *ngIf="data">
-        <app-mcqcomponent [passFlags]='passFlags' [data]='data' (sendAns)="saveAnswer($event)"></app-mcqcomponent>
-      </span>
+  <div *ngIf="!loader">
+    <div class="card">
+      <div class="card-footer">
+        <h6 class="text-center">{{'L2Module0.subMenu1-3' | translate}}</h6>
+      </div>
+      <div class="card-block">
+        <app-static-video [receivedData]='passData'></app-static-video>
+      </div>
+      <!-- <div class="card-footer">
+            <h6 class="text-center">{{'Module5.subMenu1-3' | translate}}</h6>
+        </div> -->
     </div>
   </div>
 </div>

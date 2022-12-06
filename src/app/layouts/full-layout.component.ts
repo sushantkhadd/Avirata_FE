@@ -38,7 +38,7 @@ export class FullLayoutComponent implements OnInit {
   subFlagModule2 = 0;
   subFlagModule3 = 0;
   public token;
-  userId;starPopupFlag;
+  userId; starPopupFlag;
   userType;
   public admin;
   public disabled: boolean = false;
@@ -46,8 +46,8 @@ export class FullLayoutComponent implements OnInit {
   private trainee = false;
   imgUrl;
   rewardsFlag;
-  cupImg;profileFlag;
-  needEfforts;needEfforts1;
+  cupImg; profileFlag;
+  needEfforts; needEfforts1;
   subscription: Subscription; isloaded; grandPercent;
   @ViewChild("passwordChangeModal") public passwordChangeModal: ModalDirective;
   @ViewChild("moduleStatusModal") public moduleStatusModal: ModalDirective;
@@ -64,7 +64,7 @@ export class FullLayoutComponent implements OnInit {
   @ViewChild('screen') screen: ElementRef;
   @ViewChild('canvas') canvas: ElementRef;
   @ViewChild('downloadLink') downloadLink: ElementRef;
-  @ViewChild('cupPopup') cupPopup:ElementRef;
+  @ViewChild('cupPopup') cupPopup: ElementRef;
   @ViewChild('screen') screencup: ElementRef;
   @ViewChild('canvas') canvascup: ElementRef;
   @ViewChild('downloadLink') downloadLinkcup: ElementRef;
@@ -235,36 +235,36 @@ export class FullLayoutComponent implements OnInit {
     }
   }
 
-  downloadReward1(){
+  downloadReward1() {
     //this.isloaded = true;
-    if(this.rewardsFlag == 1){
-       this.LanguageService.googleEventTrack('L3RewardDownload', 'Gold', this.moduleCompleteStatus['finishHead'], 10);
+    if (this.rewardsFlag == 1) {
+      this.LanguageService.googleEventTrack('L3RewardDownload', 'Gold', this.moduleCompleteStatus['finishHead'], 10);
     }
-    else if(this.rewardsFlag == 2){
+    else if (this.rewardsFlag == 2) {
       this.LanguageService.googleEventTrack('L3RewardDownload', 'Silver', this.moduleCompleteStatus['finishHead'], 10);
     }
-    else if(this.rewardsFlag == 3){
+    else if (this.rewardsFlag == 3) {
       this.LanguageService.googleEventTrack('L3RewardDownload', 'Bronze', this.moduleCompleteStatus['finishHead'], 10);
     }
     setTimeout(() => {
-      if(window.localStorage.getItem("currentstatus")=='1' ||
-      window.localStorage.getItem("currentstatus")=='2' ||
-      window.localStorage.getItem("currentstatus")=='3' ||
-      window.localStorage.getItem("currentstatus")=='4' ||
-      window.localStorage.getItem("currentstatus")=='5'){
+      if (window.localStorage.getItem("currentstatus") == '1' ||
+        window.localStorage.getItem("currentstatus") == '2' ||
+        window.localStorage.getItem("currentstatus") == '3' ||
+        window.localStorage.getItem("currentstatus") == '4' ||
+        window.localStorage.getItem("currentstatus") == '5') {
         this.isloaded = true;
-        console.log('currentstatus,downloaded1',window.localStorage.getItem("currentstatus"))
-        html2canvas(this.screen.nativeElement,{backgroundColor:'transperent'}).then(canvas => {
+        console.log('currentstatus,downloaded1', window.localStorage.getItem("currentstatus"))
+        html2canvas(this.screen.nativeElement, { backgroundColor: 'transperent' }).then(canvas => {
           this.canvas.nativeElement.src = canvas.toDataURL();
           this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
           this.isloaded = false;
           this.downloadLink.nativeElement.download = 'Reward.png';
           this.downloadLink.nativeElement.click();
         });
-      } else if(window.localStorage.getItem("currentstatus")=='6'){
+      } else if (window.localStorage.getItem("currentstatus") == '6') {
         this.isloaded = true;
-        console.log('current 5,star',window.localStorage.getItem("currentstatus"))
-        html2canvas(this.screen.nativeElement,{backgroundColor:'transperent'}).then(canvas => {
+        console.log('current 5,star', window.localStorage.getItem("currentstatus"))
+        html2canvas(this.screen.nativeElement, { backgroundColor: 'transperent' }).then(canvas => {
           this.canvas.nativeElement.src = canvas.toDataURL();
           this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
           this.isloaded = false;
@@ -273,39 +273,39 @@ export class FullLayoutComponent implements OnInit {
         });
       }
     }, 1200);
-    
+
   }
-  
-  downloadReward(){
+
+  downloadReward() {
     //this.isloaded = true;
-    if(this.rewardsFlag == 1){
-       this.LanguageService.googleEventTrack('L3RewardDownload', 'Gold', this.moduleCompleteStatus['finishHead'], 10);
+    if (this.rewardsFlag == 1) {
+      this.LanguageService.googleEventTrack('L3RewardDownload', 'Gold', this.moduleCompleteStatus['finishHead'], 10);
     }
-    else if(this.rewardsFlag == 2){
+    else if (this.rewardsFlag == 2) {
       this.LanguageService.googleEventTrack('L3RewardDownload', 'Silver', this.moduleCompleteStatus['finishHead'], 10);
     }
-    else if(this.rewardsFlag == 3){
+    else if (this.rewardsFlag == 3) {
       this.LanguageService.googleEventTrack('L3RewardDownload', 'Bronze', this.moduleCompleteStatus['finishHead'], 10);
     }
     setTimeout(() => {
-      if(window.localStorage.getItem("currentstatus")=='1' ||
-      window.localStorage.getItem("currentstatus")=='2' ||
-      window.localStorage.getItem("currentstatus")=='3' ||
-      window.localStorage.getItem("currentstatus")=='4' ||
-      window.localStorage.getItem("currentstatus")=='5'){
+      if (window.localStorage.getItem("currentstatus") == '1' ||
+        window.localStorage.getItem("currentstatus") == '2' ||
+        window.localStorage.getItem("currentstatus") == '3' ||
+        window.localStorage.getItem("currentstatus") == '4' ||
+        window.localStorage.getItem("currentstatus") == '5') {
         this.isloaded = true;
-        console.log('currentstatus',window.localStorage.getItem("currentstatus"))
-        html2canvas(this.screen.nativeElement,{backgroundColor:'transperent'}).then(canvas => {
+        console.log('currentstatus', window.localStorage.getItem("currentstatus"))
+        html2canvas(this.screen.nativeElement, { backgroundColor: 'transperent' }).then(canvas => {
           this.canvas.nativeElement.src = canvas.toDataURL();
           this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
           this.isloaded = false;
           this.downloadLink.nativeElement.download = 'Reward.png';
           this.downloadLink.nativeElement.click();
         });
-      } else if(window.localStorage.getItem("currentstatus")=='6'){
+      } else if (window.localStorage.getItem("currentstatus") == '6') {
         this.isloaded = true;
-        console.log('current 5',window.localStorage.getItem("currentstatus"))
-        html2canvas(this.screen.nativeElement,{backgroundColor:'transperent'}).then(canvas => {
+        console.log('current 5', window.localStorage.getItem("currentstatus"))
+        html2canvas(this.screen.nativeElement, { backgroundColor: 'transperent' }).then(canvas => {
           this.canvas.nativeElement.src = canvas.toDataURL();
           this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
           this.isloaded = false;
@@ -314,22 +314,22 @@ export class FullLayoutComponent implements OnInit {
         });
       }
     }, 1200);
-    
+
   }
 
   downloadCupReward() {
-    if(this.cupImg == 1){
+    if (this.cupImg == 1) {
       this.LanguageService.googleEventTrack('L3RewardDownload', 'Gold', "CupImage", 10);
-   }
-   else if(this.cupImg == 2){
-     this.LanguageService.googleEventTrack('L3RewardDownload', 'Silver', "CupImage", 10);
-   }
-   else if(this.cupImg == 3){
-     this.LanguageService.googleEventTrack('L3RewardDownload', 'Bronze', "CupImage", 10);
-   }
+    }
+    else if (this.cupImg == 2) {
+      this.LanguageService.googleEventTrack('L3RewardDownload', 'Silver', "CupImage", 10);
+    }
+    else if (this.cupImg == 3) {
+      this.LanguageService.googleEventTrack('L3RewardDownload', 'Bronze', "CupImage", 10);
+    }
     this.isloaded = true;
     setTimeout(() => {
-      html2canvas(this.cupPopup.nativeElement,{backgroundColor:'transperent'}).then(canvas => {
+      html2canvas(this.cupPopup.nativeElement, { backgroundColor: 'transperent' }).then(canvas => {
         this.canvascup.nativeElement.src = canvas.toDataURL();
         this.downloadLinkcup.nativeElement.href = canvas.toDataURL('image/png');
         this.isloaded = false;
@@ -338,25 +338,25 @@ export class FullLayoutComponent implements OnInit {
       });
     }, 100);
   }
- 
+
   shareReward() {
     document.getElementById("popup").style.backgroundColor = '#ffffff'
-    html2canvas(document.body).then(     
+    html2canvas(document.body).then(
       canvas => {
-      // Export canvas as a blob  
-      this.shareableImage = canvas;
-      canvas.toBlob(function (blob) {
-        console.log(blob);
-        setTimeout(() => {
-          //fileSaver.saveAs(blob, "My-Reward.png")
-          var file = this.dataURLtoFile(blob, "My-Reward.png");
-          var shareUrl = "whatsapp://send?text=" + file.name;
-          this.getImage = this._sanitizer.bypassSecurityTrustResourceUrl(shareUrl);
-          console.log(file,file.name,this.getImage)
-        }, 1000);
+        // Export canvas as a blob  
+        this.shareableImage = canvas;
+        canvas.toBlob(function (blob) {
+          console.log(blob);
+          setTimeout(() => {
+            //fileSaver.saveAs(blob, "My-Reward.png")
+            var file = this.dataURLtoFile(blob, "My-Reward.png");
+            var shareUrl = "whatsapp://send?text=" + file.name;
+            this.getImage = this._sanitizer.bypassSecurityTrustResourceUrl(shareUrl);
+            console.log(file, file.name, this.getImage)
+          }, 1000);
+        });
       });
-    });
-    jQuery("#popup").css({ 'background-color' : '', 'opacity' : '' });
+    jQuery("#popup").css({ 'background-color': '', 'opacity': '' });
   }
 
   dataURLtoFile(dataurl, filename) {
@@ -384,13 +384,13 @@ export class FullLayoutComponent implements OnInit {
     // }
     this.hideMenuFlag = false;
     this.profileFlag = window.localStorage.getItem("is_profile_visible");
-  this.starPopupFlag = false;
+    this.starPopupFlag = false;
     this.subscription = this.sharedService.getData().subscribe(data => {
       console.log("sharedServicedata", data);
       if (data) {
         this.mainFlag = data["currentstatusFlag"];
-        if(data["currentstatus"] !=undefined && data["currentstatus"] !=null && data["currentstatus"] !=""){
-        this.currentStatus(data["currentstatus"]);
+        if (data["currentstatus"] != undefined && data["currentstatus"] != null && data["currentstatus"] != "") {
+          this.currentStatus(data["currentstatus"]);
         }
         this.sharedData = data;
         console.log(data);
@@ -436,7 +436,7 @@ export class FullLayoutComponent implements OnInit {
       );
     }
 
-    
+
     this.hideMenuAdminFlag = false;
     this.mainFlagModule7 = 0;
     if (window.localStorage.getItem("token") == null) {
@@ -611,7 +611,7 @@ export class FullLayoutComponent implements OnInit {
         error => {
           this.LanguageService.handleError(error.error.message);
         } //Catch Error if server is not Found
-        );
+      );
     }
   }
 
@@ -805,7 +805,7 @@ export class FullLayoutComponent implements OnInit {
     if (this.temp == false) {
       var i = 0;
       for (var key in obj) {
-        console.log("objuuif",obj)
+        console.log("objuuif", obj)
         if (key == "uuid") {
           if (obj[key] != null) {
             if (
@@ -2399,7 +2399,19 @@ export class FullLayoutComponent implements OnInit {
         if (source == "module 0.3") {
           this.subFlagModule0 = 1;
         }
-      } else if (
+      }
+      else if (source == "module 0.3.1") {
+        this.mainFlagModule0 = 3;
+        if (source == "module 0.3.1") {
+          this.subFlagModule0 = 1;
+        }
+      } else if (source == "module 0.3.2") {
+        this.mainFlagModule0 = 3;
+        if (source == "module 0.3.2") {
+          this.subFlagModule0 = 2;
+        }
+      } 
+      else if (
         source == "module 0.4" ||
         source == "module 0.4.1" ||
         source == "module 0.4.2" ||
@@ -2466,7 +2478,7 @@ export class FullLayoutComponent implements OnInit {
         // console.log('bronze');
       } else if (this.grandPercent >= 0 &&
         this.grandPercent < 10) {
-          this.cupImg = '';
+        this.cupImg = '';
       }
 
       if (perval0 == false && this.levelData[0].status == true) {
@@ -2535,12 +2547,12 @@ export class FullLayoutComponent implements OnInit {
           this.rewardImgUrl5 = this.imageJson["a3"];
         } else if (percent5 >= 0 && percent5 < 10) {
           // this.rewardImgUrl5 = this.imageJson["a4"];
-          if(this.cupImg==1){
-            this.rewardImgUrl5='fa-trophy gold_star'
-          }else if(this.cupImg==2){
-            this.rewardImgUrl5='fa-trophy silver_star'
-          }else if(this.cupImg==3){
-            this.rewardImgUrl5='fa-trophy bronze_star'
+          if (this.cupImg == 1) {
+            this.rewardImgUrl5 = 'fa-trophy gold_star'
+          } else if (this.cupImg == 2) {
+            this.rewardImgUrl5 = 'fa-trophy silver_star'
+          } else if (this.cupImg == 3) {
+            this.rewardImgUrl5 = 'fa-trophy bronze_star'
           }
         }
       }
@@ -3070,11 +3082,11 @@ export class FullLayoutComponent implements OnInit {
     }
   }
   instruction() {
-    if(this.starPopupFlag == false){
-    this.instructionModal.show();
-    this.LanguageService.toShow();
+    if (this.starPopupFlag == false) {
+      this.instructionModal.show();
+      this.LanguageService.toShow();
     }
-    else{
+    else {
       console.log("star function")
     }
   }
@@ -3137,12 +3149,12 @@ export class FullLayoutComponent implements OnInit {
     this.router.navigate(["/dashboard"]);
   }
 
-  showStarPopUp(val){
-    console.log("val",val)
+  showStarPopUp(val) {
+    console.log("val", val)
     var percent;
-    
-    if(val == 1){
-      if(parseInt(window.localStorage.getItem("currentstatus")) > 1){
+
+    if (val == 1) {
+      if (parseInt(window.localStorage.getItem("currentstatus")) > 1) {
         this.starPopupFlag = true;
         this.closeInstruction();
         // this.module5FinishFlag= false;
@@ -3153,11 +3165,11 @@ export class FullLayoutComponent implements OnInit {
         var current1;
         current1 = JSON.parse(window.localStorage.getItem("levelData"))
         percent = parseInt(current1[1].percent);
-        console.log("current1",percent,this.module5FinishFlag)
+        console.log("current1", percent, this.module5FinishFlag)
       }
     }
-    if(val == 2){
-      if(parseInt(window.localStorage.getItem("currentstatus")) > 2){
+    if (val == 2) {
+      if (parseInt(window.localStorage.getItem("currentstatus")) > 2) {
         this.starPopupFlag = true;
         this.moduleStatusModal.show()
         // this.module5FinishFlag= false;
@@ -3167,11 +3179,11 @@ export class FullLayoutComponent implements OnInit {
         var current1;
         current1 = JSON.parse(window.localStorage.getItem("levelData"))
         percent = parseInt(current1[2].percent);
-        console.log("current1",percent)
+        console.log("current1", percent)
       }
     }
-   if(val == 3){
-      if(parseInt(window.localStorage.getItem("currentstatus")) > 3){
+    if (val == 3) {
+      if (parseInt(window.localStorage.getItem("currentstatus")) > 3) {
         this.starPopupFlag = true;
         this.moduleStatusModal.show()
         // this.module5FinishFlag= false;
@@ -3181,11 +3193,11 @@ export class FullLayoutComponent implements OnInit {
         var current1;
         current1 = JSON.parse(window.localStorage.getItem("levelData"))
         percent = parseInt(current1[3].percent);
-        console.log("current1",percent)
+        console.log("current1", percent)
       }
     }
-   if(val == 4){
-      if(parseInt(window.localStorage.getItem("currentstatus")) > 4){
+    if (val == 4) {
+      if (parseInt(window.localStorage.getItem("currentstatus")) > 4) {
         this.starPopupFlag = true;
         this.moduleStatusModal.show()
         // this.module5FinishFlag= false;
@@ -3195,24 +3207,24 @@ export class FullLayoutComponent implements OnInit {
         var current1;
         current1 = JSON.parse(window.localStorage.getItem("levelData"))
         percent = parseInt(current1[4].percent);
-        console.log("current1",percent)
+        console.log("current1", percent)
       }
     }
-    if(val == 5){
-      if(parseInt(window.localStorage.getItem("currentstatus")) > 5){
+    if (val == 5) {
+      if (parseInt(window.localStorage.getItem("currentstatus")) > 5) {
         this.starPopupFlag = false;
         // this.moduleStatusModal.show()
-        
+
         let percent5 = parseInt(this.levelData[5].percent);
         var perval5 = isNaN(percent5);
 
-      if (perval5 == false && this.levelData[5].status == true) {
+        if (perval5 == false && this.levelData[5].status == true) {
           if (percent5 >= 0 && percent5 < 10) {
             this.moduleStatusCupModal.show();
-          }else{
+          } else {
             this.moduleStatusModal.show()
           }
-        }else{
+        } else {
           this.moduleStatusModal.show()
         }
 
@@ -3222,7 +3234,7 @@ export class FullLayoutComponent implements OnInit {
         var current1;
         current1 = JSON.parse(window.localStorage.getItem("levelData"))
         percent = parseInt(current1[5].percent);
-        console.log("current1",percent)
+        console.log("current1", percent)
       }
     }
     if (percent > 80) {
