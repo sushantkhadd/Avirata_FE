@@ -1,61 +1,66 @@
 <div *ngIf="mainFlagModule0 < 3">
   <div class="card">
     <div class="card-block">
-      <p>{{'module7.7_2' | translate}}</p>
+      <p>{{'subModule3_1.3_2' | translate}}</p>
       <p><strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
     </div>
   </div>
 </div>
+
+
 <div *ngIf="mainFlagModule0 == 3">
-  <!-- <div *ngIf="!startFlag">
-    <div class="instruction-wrap">
-      <div class="card">
-        <div class="card-header text-white">
-          <span class="exp-img instructions-img"></span>
-          <h4>{{'Quiz.note' | translate}}</h4>
-        </div>
-        <div class="card-block inst-text">
-          <p>{{'number.1' | translate}}.&nbsp;{{'L2Module0.inst0_2_1' | translate}}</p>
-          <p>{{'number.2' | translate}}.&nbsp;{{'L2Module0.inst0_2_2' | translate}}</p>
-          <p>{{'number.3' | translate}}.&nbsp;{{'L2Module0.inst0_2_3' | translate}}</p>
-          <p>{{'number.4' | translate}}.&nbsp;{{'L2Module0.inst0_2_4' | translate}}</p>
-          <p>{{'number.5' | translate}}.&nbsp;{{'L2Module0.inst0_2_5' | translate}}</p>
-          <p class="color_red">{{'number.6' | translate}}.&nbsp;{{'L2Module0.inst0_2_10' | translate}}</p>
-          <p>{{'L2Module0.inst0_2_13' | translate}}</p>
-        </div>
-        <div class="card-footer">
-          <div class="float-right">
-            <button class="btn btn-primary" appPreventDoubleClick
-              (debounceClick)="start();">{{'Module4.start' | translate}}</button>
+  <div *ngIf="showVideoFlag">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card ">
+            <div class="card-footer">
+                <h6 class="text-center">{{'L2Module0.subMenu1-3' | translate}}</h6>
+              </div>
+          <div class="card-block text-center">
+            <app-static-video [receivedData]='passData' (finishCall)="videoFinish($event)"></app-static-video>
           </div>
         </div>
       </div>
     </div>
-  </div> -->
-  <div class="outer-loader" *ngIf="loader">
-    <img src="../assets/img/logo_cpd_combine_web.png" class="img-fluid" alt="">
-    <div class="loader">
-    </div>
-  </div>
-  <div *ngIf="!loader">
-    <div class="card">
-      <div class="card-footer">
-        <h6 class="text-center">{{'L2Module0.subMenu1-3' | translate}}</h6>
-      </div>
-      <div class="card-block">
-        <app-static-video [receivedData]='passData'></app-static-video>
-      </div>
-      <!-- <div class="card-footer">
-            <h6 class="text-center">{{'Module5.subMenu1-3' | translate}}</h6>
-        </div> -->
-    </div>
+    <!-- <div class="text-center list-checklist">
+      <button type=" button " class="text-center btn btn-primary mt-2" [disabled]="!nextBtnFlag" data-toggle="modal " (click)="next(); ">{{'Stepper.Next' | translate}}</button>
+    </div> -->
   </div>
 </div>
+
 <div *ngIf="mainFlagModule0 > 3">
-  <div class="card submoduleBox">
-    <div class="card-block text-center greenText inst-text">
-      <span>{{'L2Module0Complete.sm_0_2' | translate}}</span>
+  <div class="card">
+    <div class="card-footer">
+      <h6 class="text-center">{{'L2Module0.subMenu1-3' | translate}}</h6>
+    </div>
+    <div class="card-block">
+      <app-static-video [receivedData]='passData' (finishCall)="videoFinish($event)"></app-static-video>
+    </div>
+    <!-- <div class="card-footer">
+          <h6 class="text-center">{{'Module5.subMenu1-3' | translate}}</h6>
+      </div> -->
+  </div>
+</div>
+
+<div class="videoFinishModal videoFinishedModel">
+  <div bsModal #instructionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1"
+    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <img class="img-responsive img-rotate" src="assets/img/mitra.png">
+        <div class="modal-header">
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button> -->
+        </div>
+        <div class="modal-body">
+          <p class="px-5 text-center">तुमचा व्हिडिओ पूर्ण झाला.</p>
+          <hr />
+          <div class="col-md-12 text-right">
+            <button class="btn btn-primary text-center" appPreventDoubleClick (debounceClick)="next()">{{'Stepper.Next' | translate}}</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
- 
