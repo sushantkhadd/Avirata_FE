@@ -805,7 +805,7 @@ export class FullLayoutComponent implements OnInit {
     if (this.temp == false) {
       var i = 0;
       for (var key in obj) {
-        console.log("objuuif", obj)
+        // console.log("objuuif", obj)
         if (key == "uuid") {
           if (obj[key] != null) {
             if (

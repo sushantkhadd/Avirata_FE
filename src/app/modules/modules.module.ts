@@ -140,6 +140,8 @@ import { Module03Component } from './module0/module0-3.component';
 import { FeedbackComponent } from '../components/feedback/feedback.component';
 import {AutosizeModule} from 'ngx-autosize';
 import { Module04Component } from './module0/module0-4.component';
+import { Module05Component } from './module0/module0-5.component';
+
 import { MasterstatComponent } from './masterstat/masterstat.component';
 import { PresentlistComponent } from "./masterstat/presentlist.component";
 import {DatePipe, DecimalPipe} from '@angular/common';
@@ -284,6 +286,7 @@ import { SetProfileComponent } from './admin-Report/set-profile/set-profile.comp
     Module03Component,
     FeedbackComponent,
     Module04Component,
+    Module05Component,
     MasterstatComponent,
     PresentlistComponent,
     SetProfileComponent

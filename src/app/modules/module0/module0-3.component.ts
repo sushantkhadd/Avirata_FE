@@ -18,12 +18,16 @@ export class Module03Component implements OnInit {
 
   public mainFlagModule0 = parseInt(window.localStorage.getItem('mainFlagModule0'));
   public subFlagModule0 = parseInt(window.localStorage.getItem('subFlagModule0'));
+  showCFU: boolean;
+  download: boolean;
+  passValues={};
+  finishJSONBody: any;
   constructor(public FullLayoutService: FullLayoutService, public LanguageService: LanguageService, public Module0Service: Module0Service, public router: Router, public LocalstoragedetailsService: LocalstoragedetailsService, public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService) {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
-  public showVideoFlag; nextBtnFlag; passData = {}; passUrl; videoData = {}; urlArray = {}; lnk1; lnk2; flag;parentUrlJson = {}
-  public statVideoFlag; thumb_title;vedioCompleteUrl;
+  public showVideoFlag; nextBtnFlag; passData = {}; passUrl; videoData = {}; urlArray = {}; lnk1; lnk2; flag; parentUrlJson = {}
+  public statVideoFlag; thumb_title; vedioCompleteUrl;
 
   ngOnInit() {
     this.lnk1 = ''
@@ -34,20 +38,18 @@ export class Module03Component implements OnInit {
 
     this.showVideoFlag = false
 
-    if (this.mainFlagModule0 == 3)
-    {
-        this.start()
+    if (this.mainFlagModule0 == 3) {
+      this.start()
     }
 
-    else if (this.mainFlagModule0 > 3)
-    {
-      
+    else if (this.mainFlagModule0 > 3) {
+
       var urlJson = {};
       urlJson = JSON.parse(window.localStorage.getItem("currentJson0"));
       console.log("vcxxxx", urlJson);
       if (urlJson["children"].length > 0) {
         var index = urlJson["children"].findIndex(
-          item => item.source == "module 0.2"
+          item => item.source == "module 0.3"
         );
         console.log("qWSS", index);
         // var mainJson;
@@ -69,9 +71,8 @@ export class Module03Component implements OnInit {
     this.apiCall(jsonBody, 'modulezerosingleurl/', 'start')
   }
   videoFinish(e) {
-    console.log('video finish',e)
-    if (e == true)
-    {
+    console.log('video finish', e)
+    if (e == true) {
       this.instructionModal.show()
       this.LanguageService.toShow();
       this.nextBtnFlag = true
@@ -89,17 +90,25 @@ export class Module03Component implements OnInit {
       data => {
         if (data["status"] == true) {
           if (fun == "start") {
-            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 0.2', window.localStorage.getItem('username'), 10);
+            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 0.3', window.localStorage.getItem('username'), 10);
+
             this.passData['apiUrl'] = "modulezerosingleurl/";
             this.passData['videoUrl'] = data['data'].url;
-            console.log("sacsac",this.passData)
+            console.log("sacsac", this.passData)
+
+            if (this.subFlagModule0 == 2) {
+              this.showCFU = false;
+              this.passValues['url'] = data['data'].url;
+            } else {
+
+            }
             this.showVideoFlag = true
             this.passUrl = data['data'].url;
             var current0 = [];
             current0 = JSON.parse(window.localStorage.getItem("currentJson0"));
             var index = current0["children"].findIndex(
-              item => item.source == "module 0.2");
-            current0["children"][index].url =this.passUrl;
+              item => item.source == "module 0.3");
+            current0["children"][index].url = this.passUrl;
 
             window.localStorage.setItem("currentJson0", JSON.stringify(current0));
           } else if (fun == "finish1") {
@@ -112,7 +121,7 @@ export class Module03Component implements OnInit {
             this.Module0Service.setLocalStorage0(3);
             var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module0.subMenu0-2'), "next": this.translate.instant('L2Module0Finish.subMenu0-3'), "nextRoute": "/modules/module0/baseline1" }
             this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
-          }  
+          }
         }
       },
       error => {
@@ -121,5 +130,10 @@ export class Module03Component implements OnInit {
     );
   }
 
-
+  finishPDF(e) {
+    var jsonBody = {}
+    jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
+    jsonBody['event'] = 'finish'
+    this.apiCall(jsonBody, 'modulezerosingleurl/', 'finish1')
+  }
 }

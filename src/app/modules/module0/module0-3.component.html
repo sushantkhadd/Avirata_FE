@@ -9,36 +9,39 @@
 
 
 <div *ngIf="mainFlagModule0 == 3">
-  <div *ngIf="showVideoFlag">
+  <div *ngIf="showVideoFlag && subFlagModule0 ==1">
     <div class="row">
       <div class="col-md-12">
         <div class="card ">
-            <div class="card-footer">
-                <h6 class="text-center">{{'L2Module0.subMenu1-3' | translate}}</h6>
-              </div>
+          <div class="card-footer">
+            <h6 class="text-center">{{'L2Module0.subMenu1-3' | translate}} ww</h6>
+          </div>
           <div class="card-block text-center">
             <app-static-video [receivedData]='passData' (finishCall)="videoFinish($event)"></app-static-video>
           </div>
         </div>
       </div>
     </div>
-    <!-- <div class="text-center list-checklist">
+    <div class="text-center list-checklist">
       <button type=" button " class="text-center btn btn-primary mt-2" [disabled]="!nextBtnFlag" data-toggle="modal " (click)="next(); ">{{'Stepper.Next' | translate}}</button>
-    </div> -->
+    </div>
   </div>
-</div>
-
-<div *ngIf="mainFlagModule0 > 3">
-  <div class="card">
-    <div class="card-footer">
-      <h6 class="text-center">{{'L2Module0.subMenu1-3' | translate}}</h6>
-    </div>
-    <div class="card-block">
-      <app-static-video [receivedData]='passData' (finishCall)="videoFinish($event)"></app-static-video>
-    </div>
-    <!-- <div class="card-footer">
+  <div *ngIf="showVideoFlag && subFlagModule0 ==2">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-footer">
+            <h6 class="text-center">{{'L2Module0.subMenu1-3' | translate}} pravin</h6> 
+          </div>
+          <div class="card-block">
+            <app-presentation [data]='passValues' (sendCfuAns)="finishPDF($event)"></app-presentation>
+          </div>
+          <!-- <div class="card-footer">
           <h6 class="text-center">{{'Module5.subMenu1-3' | translate}}</h6>
       </div> -->
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -57,7 +60,8 @@
           <p class="px-5 text-center">तुमचा व्हिडिओ पूर्ण झाला.</p>
           <hr />
           <div class="col-md-12 text-right">
-            <button class="btn btn-primary text-center" appPreventDoubleClick (debounceClick)="next()">{{'Stepper.Next' | translate}}</button>
+            <button class="btn btn-primary text-center" appPreventDoubleClick (debounceClick)="next()">{{'Stepper.Next'
+              | translate}}</button>
           </div>
         </div>
       </div>

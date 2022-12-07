@@ -92,6 +92,7 @@ import { DistrictTrainingReportComponent } from "./admin-Report/district-trainin
 import { Module02Component } from "./module0/module0-2.component";
 import { Module03Component } from "./module0/module0-3.component";
 import { Module04Component } from "./module0/module0-4.component";
+import { Module05Component } from "./module0/module0-5.component";
 import { MasterstatComponent } from "./masterstat/masterstat.component";
 import { PresentlistComponent } from "./masterstat/presentlist.component";
 
@@ -117,6 +118,10 @@ const routes: Routes = [
       {
         path: "module0/baseline2",
         component: Module04Component
+      },
+      {
+        path: "module0/baseline3",
+        component: Module05Component
       },
       {
         path: "Module1",
