@@ -105,6 +105,22 @@ import { Module012Component } from "./module0/module0-12.component";
 import { Module013Component } from "./module0/module0-13.component";
 import { Module014Component } from "./module0/module0-14.component";
 import { Module015Component } from "./module0/module0-15.component";
+import { Module016Component } from "./module0/module0-16.component";
+import { Module017Component } from "./module0/module0-17.component";
+import { Module018Component } from "./module0/module0-18.component";
+import { Module019Component } from "./module0/module0-19.component";
+import { Module020Component } from "./module0/module0-20.component";
+import { Module021Component } from "./module0/module0-21.component";
+import { Module022Component } from "./module0/module0-22.component";
+import { Module023Component } from "./module0/module0-23.component";
+import { Module024Component } from "./module0/module0-24.component";
+import { Module025Component } from "./module0/module0-25.component";
+import { Module026Component } from "./module0/module0-26.component";
+import { Module027Component } from "./module0/module0-27.component";
+import { Module028Component } from "./module0/module0-28.component";
+import { Module029Component } from "./module0/module0-29.component";
+import { Module030Component } from "./module0/module0-30.component";
+import { Module031Component } from "./module0/module0-31.component";
 
 const routes: Routes = [
   {
@@ -172,6 +188,70 @@ const routes: Routes = [
       {
         path: "module0/Module0.15",
         component: Module015Component
+      },
+      {
+        path: "module0/Module0.16",
+        component: Module016Component
+      },
+      {
+        path: "module0/Module0.17",
+        component: Module017Component
+      },
+      {
+        path: "module0/Module0.18",
+        component: Module018Component
+      },
+      {
+        path: "module0/Module0.19",
+        component: Module019Component
+      },
+      {
+        path: "module0/Module0.20",
+        component: Module020Component
+      },
+      {
+        path: "module0/Module0.21",
+        component: Module021Component
+      },
+      {
+        path: "module0/Module0.22",
+        component: Module022Component
+      },
+      {
+        path: "module0/Module0.23",
+        component: Module023Component
+      },
+      {
+        path: "module0/Module0.24",
+        component: Module024Component
+      },
+      {
+        path: "module0/Module0.25",
+        component: Module025Component
+      },
+      {
+        path: "module0/Module0.26",
+        component: Module026Component
+      },
+      {
+        path: "module0/Module0.27",
+        component: Module027Component
+      },
+      {
+        path: "module0/Module0.28",
+        component: Module028Component
+      },
+      {
+        path: "module0/Module0.29",
+        component: Module029Component
+      },
+      {
+        path: "module0/Module0.30",
+        component: Module030Component
+      },
+      {
+        path: "module0/Module0.31",
+        component: Module031Component
       },
       {
         path: "Module1",
