@@ -70,14 +70,20 @@ export class Module03Component implements OnInit {
     jsonBody['event'] = 'start'
     this.apiCall(jsonBody, 'modulezerosingleurl/', 'start')
   }
-  videoFinish(e) {
-    console.log('video finish', e)
+  videoFinish(e) {    
     if (e == true) {
       this.instructionModal.show()
       this.LanguageService.toShow();
       this.nextBtnFlag = true
     }
   }
+
+  nextvideo(){
+    this.start();
+    this.subFlagModule0 = this.subFlagModule0 + 1
+    window.localStorage.setItem('subFlagModule1', this.subFlagModule0.toString());
+  }
+
   next() {
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')

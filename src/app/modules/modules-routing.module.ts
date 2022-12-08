@@ -93,8 +93,18 @@ import { Module02Component } from "./module0/module0-2.component";
 import { Module03Component } from "./module0/module0-3.component";
 import { Module04Component } from "./module0/module0-4.component";
 import { Module05Component } from "./module0/module0-5.component";
+import { Module06Component } from "./module0/module0-6.component";
+import { Module07Component } from "./module0/module0-7.component";
 import { MasterstatComponent } from "./masterstat/masterstat.component";
 import { PresentlistComponent } from "./masterstat/presentlist.component";
+import { Module08Component } from "./module0/module0-8.component";
+import { Module09Component } from "./module0/module0-9.component";
+import { Module010Component } from "./module0/module0-10.component";
+import { Module011Component } from "./module0/module0-11.component";
+import { Module012Component } from "./module0/module0-12.component";
+import { Module013Component } from "./module0/module0-13.component";
+import { Module014Component } from "./module0/module0-14.component";
+import { Module015Component } from "./module0/module0-15.component";
 
 const routes: Routes = [
   {
@@ -112,16 +122,56 @@ const routes: Routes = [
         component: Module02Component
       },
       {
-        path: "module0/baseline1",
+        path: "module0/Module0.3",
         component: Module03Component
       },
       {
-        path: "module0/baseline2",
+        path: "module0/Module0.4",
         component: Module04Component
       },
       {
-        path: "module0/baseline3",
+        path: "module0/Module0.5",
         component: Module05Component
+      },
+      {
+        path: "module0/Module0.6",
+        component: Module06Component
+      },
+      {
+        path: "module0/Module0.7",
+        component: Module07Component
+      },
+      {
+        path: "module0/Module0.8",
+        component: Module08Component
+      },
+      {
+        path: "module0/Module0.9",
+        component: Module09Component
+      },
+      {
+        path: "module0/Module0.10",
+        component: Module010Component
+      },
+      {
+        path: "module0/Module0.11",
+        component: Module011Component
+      },
+      {
+        path: "module0/Module0.12",
+        component: Module012Component
+      },
+      {
+        path: "module0/Module0.13",
+        component: Module013Component
+      },
+      {
+        path: "module0/Module0.14",
+        component: Module014Component
+      },
+      {
+        path: "module0/Module0.15",
+        component: Module015Component
       },
       {
         path: "Module1",

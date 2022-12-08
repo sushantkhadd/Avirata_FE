@@ -1,4 +1,4 @@
-<div *ngIf="mainFlagModule0 < 5">
+<div *ngIf="mainFlagModule0 < 6">
   <div class="card">
     <div class="card-block">
       <p>{{'subModule3_1.3_2' | translate}}</p>
@@ -8,13 +8,13 @@
 </div>
 
 
-<div *ngIf="mainFlagModule0 == 5">
+<div *ngIf="mainFlagModule0 == 6">
   <div *ngIf="showVideoFlag">
     <div class="row">
       <div class="col-md-12">
         <div class="card ">
             <div class="card-footer">
-                <h6 class="text-center">{{'L2Module0.subMenu1-5' | translate}}</h6>
+                <h6 class="text-center">{{'L2Module0.subMenu1-6' | translate}}</h6>
               </div>
           <div class="card-block text-center">
             <app-static-video [receivedData]='passData' (finishCall)="videoFinish($event)"></app-static-video>
@@ -28,10 +28,10 @@
   </div>
 </div>
 
-<div *ngIf="mainFlagModule0 > 5">
+<div *ngIf="mainFlagModule0 > 6">
   <div class="card">
     <div class="card-footer">
-      <h6 class="text-center">{{'L2Module0.subMenu1-5' | translate}}</h6>
+      <h6 class="text-center">{{'L2Module0.subMenu1-6' | translate}}</h6>
     </div>
     <div class="card-block">
       <app-static-video [receivedData]='passData'></app-static-video>

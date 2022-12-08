@@ -8,10 +8,10 @@ import { TranslateService } from '@ngx-translate/core';
 import {Module0Service} from './module0.service'
 
 @Component({
-  selector: 'app-module0-4',
-  templateUrl: './module0-4.component.html'
+  selector: 'app-module0-7',
+  templateUrl: './module0-7.component.html'
 })
-export class Module04Component implements OnInit {
+export class Module07Component implements OnInit {
   @ViewChild('instructionModal') public instructionModal: ModalDirective;
 
   public mainFlagModule0 = parseInt(
@@ -35,36 +35,18 @@ export class Module04Component implements OnInit {
   }
   public passData = {}; 
   ngOnInit() {
+    console.log('heeee module 5')
     this.start(); 
   }
   start() {
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
     jsonBody['event'] = 'start'
-    this.apiCall(jsonBody, 'modulezerosingleurl/', 'start')
-    // console.log("dsshfjds")
-    // var jsonData = {}
-    // jsonData['submoduleid'] = window.localStorage.getItem('uuid')
-    // jsonData['event'] = "start"
-    // jsonData["useranswer"] = "";
-
-    // this.showPart1Flag = true;
-    // // this.apiEndStart = 'baselinetwoseconetwo/';
-    //   // this.apiEndSendAns = 'baselinetwoseconetwo/';
-    //   // this.apiEndFinish = 'baselinetwoseconetwo/';
-    //   // this.startJson['examtype'] = window.localStorage.getItem('uuid');
-
-    //   this.passData['start'] = this.apiEndStart;
-    //   this.passData['answer'] = this.apiEndSendAns;
-    //   this.passData['finish'] = this.apiEndFinish;
-    //   this.passData['jsonData'] = jsonData;
-    //   this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 0.4', window.localStorage.getItem('username'), 10);
+    this.apiCall(jsonBody, 'modulezerosingleurl/', 'start');   
   }
   videoFinish(e) {
-    console.log('heloooo11')
     if (e == true)
     {
-      console.log('heloooo')
       this.instructionModal.show()
       this.LanguageService.toShow();
       // this.nextBtnFlag = true
@@ -82,7 +64,7 @@ export class Module04Component implements OnInit {
       data => {
         if (data["status"] == true) {
           if (fun == "start") {
-            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 0.4', window.localStorage.getItem('username'), 10);
+            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 0.5', window.localStorage.getItem('username'), 10);
 
             this.passData['apiUrl'] = "modulezerosingleurl/";
             this.passData['videoUrl'] = data['data'].url;
@@ -92,7 +74,7 @@ export class Module04Component implements OnInit {
             var current0 = [];
             current0 = JSON.parse(window.localStorage.getItem("currentJson0"));
             var index = current0["children"].findIndex(
-              item => item.source == "module 0.4");
+              item => item.source == "module 0.7");
             current0["children"][index].url = this.passUrl;
 
             window.localStorage.setItem("currentJson0", JSON.stringify(current0));
@@ -100,11 +82,11 @@ export class Module04Component implements OnInit {
             this.instructionModal.hide();
             this.LanguageService.toHide();
             window.localStorage.setItem('uuid', data['data'].nextuuid)
-            window.localStorage.setItem('mainFlagModule0', '5');
+            window.localStorage.setItem('mainFlagModule0', '8');
             window.localStorage.setItem('subFlagModule0', '1');
-            window.localStorage.setItem('source', 'module 0.5');
+            window.localStorage.setItem('source', 'module 0.8');
             this.Module0Service.setLocalStorage0(3);
-            var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module0.subMenu0-4'), "next": this.translate.instant('L2Module0Finish.subMenu0-5'), "nextRoute": "/modules/module0/baseline1" }
+            var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module0.subMenu0-6'), "next": this.translate.instant('L2Module0Finish.subMenu0-6'), "nextRoute": "/modules/module0/Module0.8" }
             this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
           }
         }

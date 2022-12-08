@@ -141,11 +141,20 @@ import { FeedbackComponent } from '../components/feedback/feedback.component';
 import {AutosizeModule} from 'ngx-autosize';
 import { Module04Component } from './module0/module0-4.component';
 import { Module05Component } from './module0/module0-5.component';
-
+import { Module06Component } from './module0/module0-6.component';
+import { Module07Component } from './module0/module0-7.component';
+import { Module08Component } from './module0/module0-8.component';
+import { Module09Component } from './module0/module0-9.component';
 import { MasterstatComponent } from './masterstat/masterstat.component';
 import { PresentlistComponent } from "./masterstat/presentlist.component";
 import {DatePipe, DecimalPipe} from '@angular/common';
 import { SetProfileComponent } from './admin-Report/set-profile/set-profile.component';
+import { Module010Component } from "./module0/module0-10.component";
+import { Module011Component } from "./module0/module0-11.component";
+import { Module012Component } from "./module0/module0-12.component";
+import { Module013Component } from "./module0/module0-13.component";
+import { Module014Component } from "./module0/module0-14.component";
+import { Module015Component } from "./module0/module0-15.component";
 
 @NgModule({
   imports: [
@@ -287,6 +296,16 @@ import { SetProfileComponent } from './admin-Report/set-profile/set-profile.comp
     FeedbackComponent,
     Module04Component,
     Module05Component,
+    Module06Component,
+    Module07Component,
+    Module08Component,
+    Module09Component,
+    Module010Component,
+    Module011Component,
+    Module012Component,
+    Module013Component,
+    Module014Component,
+    Module015Component,
     MasterstatComponent,
     PresentlistComponent,
     SetProfileComponent
