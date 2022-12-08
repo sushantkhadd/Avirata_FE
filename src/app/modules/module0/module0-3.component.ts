@@ -22,6 +22,7 @@ export class Module03Component implements OnInit {
   download: boolean;
   passValues={};
   finishJSONBody: any;
+  startVideoEvent = false;
   constructor(public FullLayoutService: FullLayoutService, public LanguageService: LanguageService, public Module0Service: Module0Service, public router: Router, public LocalstoragedetailsService: LocalstoragedetailsService, public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService) {
     this.toastr.setRootViewContainerRef(vcr);
   }
@@ -36,9 +37,11 @@ export class Module03Component implements OnInit {
     this.urlArray["src2"] = "opHKXAPIynA";
     this.urlArray['v_thumb'] = './../../assets/img/video-thumb.png'
 
-    this.showVideoFlag = false
+    
+    this.startVideoEvent = false;
 
     if (this.mainFlagModule0 == 3) {
+      this.startVideoEvent = false;
       this.start()
     }
 
@@ -108,7 +111,7 @@ export class Module03Component implements OnInit {
             } else {
 
             }
-            this.showVideoFlag = true
+            this.startVideoEvent = true
             this.passUrl = data['data'].url;
             var current0 = [];
             current0 = JSON.parse(window.localStorage.getItem("currentJson0"));
@@ -125,7 +128,7 @@ export class Module03Component implements OnInit {
             window.localStorage.setItem('subFlagModule0', '1');
             window.localStorage.setItem('source', 'module 0.4');
             this.Module0Service.setLocalStorage0(3);
-            var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module0.subMenu0-2'), "next": this.translate.instant('L2Module0Finish.subMenu0-3'), "nextRoute": "/modules/module0/baseline1" }
+            var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module0.subMenu0-2'), "next": this.translate.instant('L2Module0Finish.subMenu0-4'), "nextRoute": "/modules/module0/Module0.4" }
             this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
           }
         }
