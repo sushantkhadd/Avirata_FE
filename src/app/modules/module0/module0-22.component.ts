@@ -51,6 +51,14 @@ export class Module022Component implements OnInit {
       // this.nextBtnFlag = true
     }
   }
+
+
+  nextvideo(){
+    this.start();
+    this.subFlagModule0 = this.subFlagModule0 + 1
+    window.localStorage.setItem('subFlagModule1', this.subFlagModule0.toString());
+  }
+
   next() {
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')

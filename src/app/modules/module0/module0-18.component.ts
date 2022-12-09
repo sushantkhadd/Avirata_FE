@@ -63,7 +63,7 @@ export class Module018Component implements OnInit {
       data => {
         if (data["status"] == true) {
           if (fun == "start") {
-            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 0.15', window.localStorage.getItem('username'), 10);
+            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 0.18', window.localStorage.getItem('username'), 10);
 
             this.passData['apiUrl'] = "modulezerosingleurl/";
             this.passData['videoUrl'] = data['data'].url;
@@ -73,7 +73,7 @@ export class Module018Component implements OnInit {
             var current0 = [];
             current0 = JSON.parse(window.localStorage.getItem("currentJson0"));
             var index = current0["children"].findIndex(
-              item => item.source == "module 0.15");
+              item => item.source == "module 0.18");
             current0["children"][index].url = this.passUrl;
 
             window.localStorage.setItem("currentJson0", JSON.stringify(current0));
@@ -81,11 +81,11 @@ export class Module018Component implements OnInit {
             this.instructionModal.hide();
             this.LanguageService.toHide();
             window.localStorage.setItem('uuid', data['data'].nextuuid)
-            window.localStorage.setItem('mainFlagModule0', '16');
+            window.localStorage.setItem('mainFlagModule0', '19');
             window.localStorage.setItem('subFlagModule0', '1');
-            window.localStorage.setItem('source', 'module 0.16');
+            window.localStorage.setItem('source', 'module 0.19');
             this.Module0Service.setLocalStorage0(3);
-            var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module0.subMenu0-6'), "next": this.translate.instant('L2Module0Finish.subMenu0-15'), "nextRoute": "/modules/module0/Module0.16" }
+            var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module0.subMenu0-18'), "next": this.translate.instant('L2Module0Finish.subMenu0-18'), "nextRoute": "/modules/module0/Module0.19" }
             this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
           }
         }
