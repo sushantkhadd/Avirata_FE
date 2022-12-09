@@ -78,7 +78,9 @@ export class StaticVideoComponent implements OnInit {
           window.localStorage.getItem('mainFlagModule5') == '19' || window.localStorage.getItem('mainFlagModule5') == '24' || window.localStorage.getItem('mainFlagModule0') == '1' || window.localStorage.getItem('mainFlagModule0') == '2') {
             this.finishCall.emit(true)
           }
-          if (window.localStorage.getItem('mainFlagModule0') == '1' || window.localStorage.getItem('mainFlagModule0') == '2')
+          if (
+            window.localStorage.getItem('mainFlagModule0') == '1' || window.localStorage.getItem('mainFlagModule0') == '2' || window.localStorage.getItem('mainFlagModule0') == '3' || window.localStorage.getItem('mainFlagModule0') == '4' || window.localStorage.getItem('mainFlagModule0') == '5' || window.localStorage.getItem('mainFlagModule0') == '6'|| window.localStorage.getItem('mainFlagModule0') == '7' || window.localStorage.getItem('mainFlagModule0') == '8'
+          )
           {
             this.finishCall.emit(true);
           }
