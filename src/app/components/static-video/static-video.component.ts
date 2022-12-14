@@ -79,7 +79,26 @@ export class StaticVideoComponent implements OnInit {
             this.finishCall.emit(true)
           }
           if (
-            window.localStorage.getItem('mainFlagModule0') == '1' || window.localStorage.getItem('mainFlagModule0') == '2' || window.localStorage.getItem('mainFlagModule0') == '3' || window.localStorage.getItem('mainFlagModule0') == '4' || window.localStorage.getItem('mainFlagModule0') == '5' || window.localStorage.getItem('mainFlagModule0') == '6'|| window.localStorage.getItem('mainFlagModule0') == '7' || window.localStorage.getItem('mainFlagModule0') == '8'
+            window.localStorage.getItem('mainFlagModule0') == '1' || window.localStorage.getItem('mainFlagModule0') == '2' || window.localStorage.getItem('mainFlagModule0') == '3' || window.localStorage.getItem('mainFlagModule0') == '4' || window.localStorage.getItem('mainFlagModule0') == '5' || 
+            window.localStorage.getItem('mainFlagModule0') == '6' || 
+            window.localStorage.getItem('mainFlagModule0') == '7' || 
+            window.localStorage.getItem('mainFlagModule0') == '8' || 
+            window.localStorage.getItem('mainFlagModule0') == '11'|| 
+            window.localStorage.getItem('mainFlagModule0') == '12'|| 
+            window.localStorage.getItem('mainFlagModule0') == '13'|| 
+            window.localStorage.getItem('mainFlagModule0') == '14'|| 
+            window.localStorage.getItem('mainFlagModule0') == '15'|| 
+            window.localStorage.getItem('mainFlagModule0') == '16'|| 
+            window.localStorage.getItem('mainFlagModule0') == '17'|| 
+            window.localStorage.getItem('mainFlagModule0') == '18'|| 
+            window.localStorage.getItem('mainFlagModule0') == '19'|| 
+            window.localStorage.getItem('mainFlagModule0') == '20'|| 
+            window.localStorage.getItem('mainFlagModule0') == '21'|| 
+            window.localStorage.getItem('mainFlagModule0') == '22'|| 
+            window.localStorage.getItem('mainFlagModule0') == '23'|| 
+            window.localStorage.getItem('mainFlagModule0') == '24'|| 
+            window.localStorage.getItem('mainFlagModule0') == '25'|| 
+            window.localStorage.getItem('mainFlagModule0') == '29'
           )
           {
             this.finishCall.emit(true);

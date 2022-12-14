@@ -22,6 +22,7 @@ export class Module011Component implements OnInit {
   )
   showVideoFlag: boolean;
   passUrl: any;
+  nextBtnFlag: boolean;
   constructor(
     public LanguageService: LanguageService,
     private LocalstoragedetailsService: LocalstoragedetailsService,
@@ -41,21 +42,21 @@ export class Module011Component implements OnInit {
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
     jsonBody['event'] = 'start';
-    console.log('hello start',jsonBody)
+    console.log('hello start', jsonBody)
     this.apiCall(jsonBody, 'modulezerosingleurl/', 'start');
-    
+
   }
   videoFinish(e) {
     if (e == true) {
-      this.instructionModal.show()
+      this.instructionModal.show();
       this.LanguageService.toShow();
-      // this.nextBtnFlag = true
     }
   }
   nextvideo() {
     this.subFlagModule0 = this.subFlagModule0 + 1
     window.localStorage.setItem('subFlagModule0', this.subFlagModule0.toString());
     this.instructionModal.hide();
+    this.nextBtnFlag = true
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
     jsonBody['event'] = 'finish'
@@ -69,7 +70,7 @@ export class Module011Component implements OnInit {
   }
 
   apiCall(jsonBody, apiUrl, fun) {
-    console.log('hello apicall',jsonBody)
+    console.log('hello apicall', jsonBody)
 
     this.Module0Service.apiCall(jsonBody, apiUrl).subscribe(
       data => {
@@ -95,7 +96,7 @@ export class Module011Component implements OnInit {
             window.localStorage.setItem('subFlagModule0', '1');
             window.localStorage.setItem('source', 'module 0.12');
             this.Module0Service.setLocalStorage0(3);
-            var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module0.subMenu0-6'), "next": this.translate.instant('L2Module0Finish.subMenu0-9'), "nextRoute": "/modules/module0/Module0.12" }
+            var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module0.subMenu0-12'), "next": this.translate.instant('L2Module0Finish.subMenu0-12'), "nextRoute": "/modules/module0/Module0.12" }
             this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
           }
         }
