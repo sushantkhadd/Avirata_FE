@@ -226,6 +226,7 @@ export class PresentationComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('hiiii',this.data)
     this.mySubModule2 = window.localStorage.getItem('mainFlagModule2');
     this.isLoaded = true;
     this.selectedValue = "";

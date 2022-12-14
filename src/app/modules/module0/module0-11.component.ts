@@ -89,7 +89,7 @@ export class Module011Component implements OnInit {
 
             window.localStorage.setItem("currentJson0", JSON.stringify(current0));
           } else if (fun == "finish1") {
-            // this.instructionModal.hide();
+            this.instructionModal.hide();
             this.LanguageService.toHide();
             window.localStorage.setItem('uuid', data['data'].nextuuid)
             window.localStorage.setItem('mainFlagModule0', '12');

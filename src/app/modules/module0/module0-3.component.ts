@@ -82,12 +82,11 @@ export class Module03Component implements OnInit {
           if (fun == "start") {
             this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 0.3', window.localStorage.getItem('username'), 10);            
             this.passData['apiUrl'] = "modulezerosingleurl/";
-            this.passData['videoUrl'] = data['data'].url;
-          
-
+            this.passData['videoUrl'] = data['data'].url;  
             if (this.subFlagModule0 == 2) {
               this.showCFU = false;
               this.passValues['url'] = data['data'].url;
+              this.showVideoFlag = true
             } else {
 
             }
@@ -101,8 +100,6 @@ export class Module03Component implements OnInit {
             window.localStorage.setItem("currentJson0", JSON.stringify(current0));
 
           } else if (fun == "finish1") {
-            console.log('hi 2222i',this.subFlagModule0)
-            // this.instructionModal.hide();
             this.LanguageService.toHide();
             window.localStorage.setItem('uuid', data['data'].nextuuid)
             window.localStorage.setItem('mainFlagModule0', '4');
