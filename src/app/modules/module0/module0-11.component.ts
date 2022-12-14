@@ -35,14 +35,15 @@ export class Module011Component implements OnInit {
   }
   public passData = {};
   ngOnInit() {
-    console.log('heeee module 5')
     this.start();
   }
   start() {
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
-    jsonBody['event'] = 'start'
+    jsonBody['event'] = 'start';
+    console.log('hello start',jsonBody)
     this.apiCall(jsonBody, 'modulezerosingleurl/', 'start');
+    
   }
   videoFinish(e) {
     if (e == true) {
@@ -68,6 +69,8 @@ export class Module011Component implements OnInit {
   }
 
   apiCall(jsonBody, apiUrl, fun) {
+    console.log('hello apicall',jsonBody)
+
     this.Module0Service.apiCall(jsonBody, apiUrl).subscribe(
       data => {
         if (data["status"] == true) {
