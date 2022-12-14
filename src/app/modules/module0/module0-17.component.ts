@@ -22,10 +22,11 @@ export class Module017Component implements OnInit {
   )
   showVideoFlag: boolean;
   passUrl: any;
+  nextBtnFlag: boolean;
   constructor(
     public LanguageService: LanguageService,
     private LocalstoragedetailsService: LocalstoragedetailsService,
-    private router: Router,     
+    private router: Router,
     public Module0Service: Module0Service,
     public toastr: ToastsManager,
     vcr: ViewContainerRef,
@@ -33,31 +34,34 @@ export class Module017Component implements OnInit {
   ) {
     this.toastr.setRootViewContainerRef(vcr);
   }
-  public passData = {}; 
+  public passData = {};
   ngOnInit() {
-    this.start(); 
+    this.start();
   }
   start() {
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
-    jsonBody['event'] = 'start'
-    this.apiCall(jsonBody, 'modulezerosingleurl/', 'start');   
+    jsonBody['event'] = 'start';
+    console.log('hello start', jsonBody)
+    this.apiCall(jsonBody, 'modulezerosingleurl/', 'start');
+
   }
   videoFinish(e) {
-    if (e == true)
-    {
-      this.instructionModal.show()
+    if (e == true) {
+      this.instructionModal.show();
       this.LanguageService.toShow();
-      // this.nextBtnFlag = true
     }
   }
-
-  nextvideo(){
-    this.start();
+  nextvideo() {
     this.subFlagModule0 = this.subFlagModule0 + 1
-    window.localStorage.setItem('subFlagModule1', this.subFlagModule0.toString());
+    window.localStorage.setItem('subFlagModule0', this.subFlagModule0.toString());
+    this.instructionModal.hide();
+    this.nextBtnFlag = true
+    var jsonBody = {}
+    jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
+    jsonBody['event'] = 'finish'
+    this.nextApiCall(jsonBody, 'modulezerosingleurl/', 'finish1')
   }
-  
   next() {
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
@@ -66,15 +70,15 @@ export class Module017Component implements OnInit {
   }
 
   apiCall(jsonBody, apiUrl, fun) {
+    console.log('hello apicall', jsonBody)
+
     this.Module0Service.apiCall(jsonBody, apiUrl).subscribe(
       data => {
         if (data["status"] == true) {
           if (fun == "start") {
             this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 0.17', window.localStorage.getItem('username'), 10);
-
             this.passData['apiUrl'] = "modulezerosingleurl/";
             this.passData['videoUrl'] = data['data'].url;
-            console.log("sacsac", this.passData)
             this.showVideoFlag = true
             this.passUrl = data['data'].url;
             var current0 = [];
@@ -85,15 +89,31 @@ export class Module017Component implements OnInit {
 
             window.localStorage.setItem("currentJson0", JSON.stringify(current0));
           } else if (fun == "finish1") {
-            this.instructionModal.hide();
+            // this.instructionModal.hide();
             this.LanguageService.toHide();
             window.localStorage.setItem('uuid', data['data'].nextuuid)
             window.localStorage.setItem('mainFlagModule0', '18');
             window.localStorage.setItem('subFlagModule0', '1');
             window.localStorage.setItem('source', 'module 0.18');
             this.Module0Service.setLocalStorage0(3);
-            var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module0.subMenu0-6'), "next": this.translate.instant('L2Module0Finish.subMenu0-17'), "nextRoute": "/modules/module0/Module0.18" }
+            var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module0.subMenu0-18'), "next": this.translate.instant('L2Module0Finish.subMenu0-18'), "nextRoute": "/modules/module0/Module0.18" }
             this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+          }
+        }
+      },
+      error => {
+        this.LanguageService.handleError(error.error.message);
+      }
+    );
+  }
+
+  nextApiCall(jsonBody, apiUrl, fun) {
+    this.Module0Service.apiCall(jsonBody, apiUrl).subscribe(
+      data => {
+        if (data["status"] == true) {
+          if (fun == "finish1") {
+            window.localStorage.setItem('uuid', data['data'].nextuuid)
+            this.start()
           }
         }
       },

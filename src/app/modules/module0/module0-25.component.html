@@ -1,4 +1,4 @@
-<div *ngIf="mainFlagModule0 < 12">
+<div *ngIf="mainFlagModule0 < 25">
   <div class="card">
     <div class="card-block">
       <p>{{'subModule3_1.3_2' | translate}}</p>
@@ -7,40 +7,34 @@
   </div>
 </div>
 
+<div *ngIf="mainFlagModule0 == 25">
 
-<div *ngIf="mainFlagModule0 == 12">
-  <div *ngIf="showVideoFlag">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card ">
-            <div class="card-footer">
-                <h6 class="text-center">{{'L2Module0.subMenu1-12' | translate}}</h6>
-              </div>
-          <div class="card-block text-center">
-            <app-static-video [receivedData]='passData' (finishCall)="videoFinish($event)"></app-static-video>
-          </div>
+  <div *ngIf="subFlagModule0 == 1">
+    <div *ngIf="showVideoFlag">
+      <div class="card">
+        <div class="card-footer">
+          <h6 class="text-center">{{'L2Module0.subMenu1-25' | translate}}</h6>
+        </div>
+        <div class="card-block">
+          <app-static-video [receivedData]='passData' (finishCall)="videoFinish($event)"></app-static-video>
         </div>
       </div>
     </div>
-    <div class="text-center list-checklist">
-      <button type=" button " class="text-center btn btn-primary mt-2" [disabled]="!nextBtnFlag" data-toggle="modal " (click)="next(); ">{{'Stepper.Next' | translate}}</button>
+  </div>
+  <div *ngIf="subFlagModule0 == 2">
+    <div *ngIf="showVideoFlag">
+      <div class="card">
+        <div class="card-footer">
+          <h6 class="text-center">{{'L2Module0.subMenu1-25' | translate}}</h6>
+        </div>
+        <div class="card-block">
+          <app-static-video [receivedData]='passData' (finishCall)="videoFinish($event)"></app-static-video>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<div *ngIf="mainFlagModule0 > 12">
-  <div class="card">
-    <div class="card-footer">
-      <h6 class="text-center">{{'L2Module0.subMenu1-12' | translate}}</h6>
-    </div>
-    <div class="card-block">
-      <app-static-video [receivedData]='passData'></app-static-video>
-    </div>
-    <!-- <div class="card-footer">
-          <h6 class="text-center">{{'Module5.subMenu1-3' | translate}}</h6>
-      </div> -->
-  </div>
-</div>
 
 <div class="videoFinishModal videoFinishedModel">
   <div bsModal #instructionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1"
@@ -57,7 +51,10 @@
           <p class="px-5 text-center">तुमचा व्हिडिओ पूर्ण झाला.</p>
           <hr />
           <div class="col-md-12 text-right">
-            <button class="btn btn-primary text-center" appPreventDoubleClick (debounceClick)="next()">{{'Stepper.Next' | translate}}</button>
+             <button class="btn btn-primary text-center" *ngIf="!nextBtnFlag" appPreventDoubleClick
+              (debounceClick)="nextvideo()">{{'Stepper.Next' | translate}}</button>
+              <button class="btn btn-primary text-center" *ngIf="nextBtnFlag" appPreventDoubleClick
+              (debounceClick)="next()">{{'Stepper.Next' | translate}}</button>
           </div>
         </div>
       </div>
