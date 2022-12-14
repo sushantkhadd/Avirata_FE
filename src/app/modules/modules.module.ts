@@ -171,6 +171,9 @@ import { Module028Component } from "./module0/module0-28.component";
 import { Module029Component } from "./module0/module0-29.component";
 import { Module030Component } from "./module0/module0-30.component";
 import { Module031Component } from "./module0/module0-31.component";
+import { Module113Component } from "./module1/module1-13.component";
+import { Module114Component } from "./module1/module1-14.component";
+import { Module115Component } from "./module1/module1-15.component";
 
 
 @NgModule({
@@ -339,6 +342,9 @@ import { Module031Component } from "./module0/module0-31.component";
     Module029Component,
     Module030Component,
     Module031Component,
+    Module113Component,
+    Module114Component,
+    Module115Component,
     MasterstatComponent,
     PresentlistComponent,
     SetProfileComponent

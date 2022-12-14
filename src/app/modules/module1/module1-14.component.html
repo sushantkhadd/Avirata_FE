@@ -1,0 +1,56 @@
+<div *ngIf="mainFlagModule1 < 12">
+  <div class="card">
+    <div class="card-block">
+      <p>{{'subModule4_1.4_8' | translate}}</p>
+      <p>
+        <strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
+    </div>
+  </div>
+</div>
+<div *ngIf="mainFlagModule1 == 12">
+  <!-- <app-presentation [data]='passValues'></app-presentation> -->
+
+  <div class="ins-block instruction-wrap" *ngIf="!startPdf">
+    <div class="">
+      <div class="card">
+        <div class="card-header">
+            <span class="exp-img instructions-img"></span>
+          <h5>
+            {{'Quiz.note' | translate}}</h5>
+        </div>
+        <div class="card-block inst-text">
+            <p>{{'number.1' | translate}}.&nbsp;{{'L2Instruction.inst_pdf1' | translate}}</p>
+            <p>{{'number.2' | translate}}.&nbsp;{{'L2Instruction.inst_pdf2' | translate}}</p>
+        </div>
+        <div class="card-footer">
+          <div class="float-right hidden-xs-down">
+            <button class="btn btn-primary" appPreventDoubleClick
+              (debounceClick)="start();">{{'Module4.start' | translate}}</button>
+          </div>
+          <!-- <div class="hidden-sm-up text-center">
+                    <button class="btn btn-primary" (click)="start();">{{'Module4.start' | translate}}</button>
+                </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" *ngIf="startPdf">
+      <div class="card-footer">
+        <h6 class="lineHeight">
+          <div class="text-center">{{'L2Module1.subMenu1-12' | translate}}</div>
+        </h6>
+      </div>
+      <app-presentation [data]='passValues' (sendCfuAns)="finishPDF($event)"></app-presentation>
+    </div>
+</div>
+<div *ngIf="mainFlagModule1 > 12">
+  <div class="card">
+    <div class="card-footer">
+      <h6 class="lineHeight">
+        <div class="text-center">{{'L2Module1.subMenu1-12' | translate}}</div>
+      </h6>
+    </div>
+    <app-presentation [data]='passValues'></app-presentation>
+  </div>
+</div>
