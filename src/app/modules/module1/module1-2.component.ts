@@ -58,10 +58,11 @@ export class Module12Component implements OnInit {
     jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
     jsonBody["useranswer"] = "";
     jsonBody["event"] = "start";
-    var apiUrl = "moduleonemcqone/";
+    var apiUrl = "moduleonepostdisplay/";
 
-    this.Module1Service.apiCall(jsonBody, apiUrl).subscribe(
+    this.Module1Service.getApiCall(apiUrl).subscribe(
       data => {
+        console.log("123",data);
         if (data["status"] == true)
         {
           this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 1.2', window.localStorage.getItem('username'), 10);

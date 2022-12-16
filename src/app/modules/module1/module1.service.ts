@@ -49,6 +49,22 @@ export class Module1Service {
   //     });
   // }
 
+  getApiCall(apiUrl) {
+    var headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      'Authorization': window.localStorage.getItem('token'),
+     // "Source": "WEB"
+    });
+    if (/Android/i.test(navigator.userAgent)) 
+    { 
+      headers= headers.append("Source",'MWEB')
+     }else
+     { 
+      headers= headers.append("Source",'WEB') 
+     }
+    let options = { headers: headers };
+    return this.httpClient.get(this.apiUrl + apiUrl, options);
+  }
 
   apiCall(jsonBody, apiUrl) {
     var headers = new HttpHeaders({

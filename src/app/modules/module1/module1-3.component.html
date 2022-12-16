@@ -1,104 +1,57 @@
 <div *ngIf="mainFlagModule1 < 3">
   <div class="card">
     <div class="card-block">
-      <p>{{'subModule5_3.5_3' | translate}}</p>
+      <p>{{'subModule3_1.3_2' | translate}}</p>
       <p><strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
     </div>
   </div>
 </div>
-<div *ngIf="mainFlagModule1 == 3">
-  <div class="instruction-wrap" *ngIf="!startVideoEvent">
-    <div>
-      <div class="card">
-        <div class="card-header text-white">
-          <span class="exp-img instructions-img"></span>
-          <h4>{{'Quiz.note' | translate}}</h4>
-        </div>
-        <div class="card-block inst-text">
-          <p>{{'number.1' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_1' | translate}}</p>
-          <p>{{'number.2' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_2' | translate}}</p>
-          <p>{{'number.3' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_3' | translate}}</p>
-          <p>{{'number.4' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_4' | translate}}</p>
-          <p>{{'number.5' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_5' | translate}}</p>
-          <p class="color_red">{{'number.6' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_13' | translate}}</p>
-        </div>
-        <div class="card-footer">
-          <div class="float-right hidden-xs-down">
-            <button class="btn btn-primary" appPreventDoubleClick
-              (debounceClick)="startVideoEvent=true;start();">{{'Module4.start' | translate}}</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+
+
+<div *ngIf="mainFlagModule1 == 3"> 
   <div *ngIf="subFlagModule1 == 1">
-    <div *ngIf="startVideoEvent">
+    <div *ngIf=" showVideoFlag ">
       <div class="card">
         <div class="card-footer">
-          <h6 class="text-center">{{'L2Module1.subMenu1-3a' | translate}}</h6>
+          <h6 class="text-center">{{'L2Module0.subMenu1-3' | translate}}</h6>
         </div>
         <div class="card-block">
-          <app-video-player [inputData]="videoData" (finishCall)="finishCFU1($event)"></app-video-player>
+          <app-static-video [receivedData]='passData' (finishCall)="videoFinish($event)"></app-static-video>
         </div>
       </div>
     </div>
   </div>
-   <div *ngIf="subFlagModule1 == 2">
-     <div *ngIf="startVideoEvent">
+   <div *ngIf="subFlagModule0 == 2">
+     <div *ngIf="showVideoFlag" >
        <div class="card">
          <div class="card-footer">
-           <h6 class="text-center">{{'L2Module1.subMenu1-3b' | translate}}</h6>
+           <h6 class="text-center">{{'L2Module0.subMenu1-3' | translate}}</h6>
          </div>
          <div class="card-block">
-           <app-video-player [inputData]="videoData" (finishCall)="finishCFU2($event)"></app-video-player>
+          <app-presentation [data]='passValues' (sendCfuAns)="finishPDF($event)"></app-presentation>
          </div>
        </div>
      </div>
    </div>
 </div>
-<div *ngIf="mainFlagModule1 > 3">
-  <div class="card submoduleBox unlock-view">
-    <div class="card-block text-center">
-      <div class="row static-content" *ngIf="flag == 0">
-        <div class="col-md-4">
-          <h6 class="title">{{'number.1' | translate}}. {{'L2Module1.subMenu1-3a' | translate}}</h6>
-          <div class="img-wrap">
-            <a (click)="showVideo(urlArray['src1'],1)">
-              <img class="img-fluid v_thumb" src="https://maacpd.s3-ap-southeast-1.amazonaws.com/L3_mr/thumbnails/1.3-A-video.png" alt="">
-              <div class="hover-opaque">
-                <i class="fa fa-play-circle fa-2x"></i>
-              </div>
-            </a>
-          </div>
+
+<div class="videoFinishModal videoFinishedModel">
+  <div bsModal #instructionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1"
+    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <img class="img-responsive img-rotate" src="assets/img/mitra.png">
+        <div class="modal-header">
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button> -->
         </div>
-        <div class="col-md-4">
-          <h6 class="title">{{'number.2' | translate}}. {{'L2Module1.subMenu1-3b' | translate}}</h6>
-          <div class="img-wrap">
-            <a (click)="showVideo(urlArray['src2'],2)">
-              <img class="img-fluid v_thumb" src="https://maacpd.s3-ap-southeast-1.amazonaws.com/L3_mr/thumbnails/1.3-B-video.png" alt="">
-              <div class="hover-opaque">
-                <i class="fa fa-play-circle fa-2x"></i>
-              </div>
-            </a>
+        <div class="modal-body">
+          <p class="px-5 text-center">तुमचा व्हिडिओ पूर्ण झाला.</p>
+          <hr />
+          <div class="col-md-12 text-right">
+            <button class="btn btn-primary text-center" appPreventDoubleClick (debounceClick)="nextvideo()">{{'Stepper.Next' | translate}}</button>
           </div>
-        </div>
-      </div>
-      <div *ngIf="flag == 1">
-          <div class="card-footer mb-4">
-              <h6 class="title">{{'number.1' | translate}}. {{'L2Module1.subMenu1-3a' | translate}}</h6>
-          </div>
-        <app-static-video [receivedData]='passData'></app-static-video>
-        <div class="card-footer text-center bg-white border-0">
-          <button class="btn btn-primary" (click)="flag=0;">{{'Stepper.Back' | translate}}</button>
-        </div>
-      </div>
-      <div *ngIf="flag == 2">
-          <div class="card-footer mb-4">
-              <h6 class="title">{{'number.2' | translate}}. {{'L2Module1.subMenu1-3b' | translate}}</h6>
-          </div>
-        <app-static-video [receivedData]='passData'></app-static-video>
-        <div class="card-footer text-center bg-white border-0">
-          <button class="btn btn-primary" (click)="flag=0;">{{'Stepper.Back' | translate}}</button>
         </div>
       </div>
     </div>
