@@ -25,7 +25,6 @@ export class McqcomponentComponent implements OnInit {
   constructor(public lang: LanguageService) { }
 
   ngOnInit() {
-    console.log('hiiiii mcq',this.data)
     this.submitFlagMCQ = false
     this.mysubModule = parseInt(window.localStorage.getItem('mainFlagModule5'))
     this.mysubModule3 = parseInt(window.localStorage.getItem('mainFlagModule3'))
@@ -258,7 +257,9 @@ export class McqcomponentComponent implements OnInit {
       if( window.localStorage.getItem('mainFlagModule0') == '30' || window.localStorage.getItem('mainFlagModule3') == '7' || window.localStorage.getItem('mainFlagModule4') == '11'){
         this.bunchList = this.data.splice(0,1)  
         this.queCount = parseInt( window.localStorage.getItem("baselineCounter"))
-        this.alreadyAns = this.bunchList[0].answer
+        if(this.bunchList[0].answer != undefined){
+          this.alreadyAns = this.bunchList[0].answer
+        }
         for(let i=0; i< this.bunchList[0].options.length; i++){
           if(this.bunchList[0].options[i].value !="" && this.bunchList[0].options[i].value !=null && this.bunchList[0].options[i].value !=undefined){
             this.mcqTextOption.push(this.bunchList[0].options[i])

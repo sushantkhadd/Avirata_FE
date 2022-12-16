@@ -30,28 +30,26 @@ export class Module030Component implements OnInit {
   ) {
     this.toastr.setRootViewContainerRef(vcr);
   }
-  public data=[];
+  public data;
   questionType;
   passFlags = {};
   showAnswer;count;
   saveData;
-  useranswer={};
-  answer;loader;
-  queId;
-  sumbitButton;questionlist;
+  answer;
+  sumbitButton;
   startFlag;
   public inst =
-    "खाली दिलेल्या पर्यायांपैकी योग्य पर्याय निवडा.";
+    "खालील विधान पूर्ण करा.";
   ngOnInit() {
     this.startFlag = false;
     this.showAnswer = true;
     this.saveData = true;
     this.passFlags["saveData"] = this.saveData;
     this.passFlags["showAnswer"] = this.showAnswer;
-    this.questionType = "mcqTextOption";
+    this.questionType = "checkBoxOption";
     this.passFlags["questionType"] = this.questionType;
 
-    if (this.mainFlagModule0 == 3)
+    if (this.mainFlagModule0 == 30)
     {
       // this.start()
     }
@@ -62,28 +60,15 @@ export class Module030Component implements OnInit {
     jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
     jsonBody["useranswer"] = "";
     jsonBody["event"] = "start";
-    var apiUrl = "baselineone/";
+    var apiUrl = "modulezeromcq/";
 
     this.Module0Service.apiCall(jsonBody, apiUrl).subscribe(
       data => {
         if (data["status"] == true)
         {
-          this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 0.30', window.localStorage.getItem('username'), 10);
-          this.questionlist =data["data"].questionlist
-          this.shuffle(this.questionlist);
-          for(let i=0; i< this.questionlist.length; i++){
-            if(this.questionlist[i].answer == ""){
-              this.data.push(this.questionlist[i])
-            }
-          }
-          var baselineCounter = 20-(this.data.length-1);
-          window.localStorage.setItem("baselineCounter",JSON.stringify(baselineCounter))
-          //this.data = data["data"];
-           console.log('mcq data', this.data,baselineCounter);
-         if(this.data.length == 0 || baselineCounter == 21){
-          this.answer = data["data"].questionlist[data["data"].questionlist.length-1].answer
-          this.submit("finish1")
-         }
+          this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 1.30', window.localStorage.getItem('username'), 10);
+          console.log("data ", data["data"]);
+          this.data = data["data"].questionlist;
           this.startFlag = true;
         }
       },
@@ -94,101 +79,47 @@ export class Module030Component implements OnInit {
   }
 
   saveAnswer(e) {
-    if(e){
-      this.loader = true;
-      console.log("ff ", e);
-      this.sumbitButton = true;
-      this.useranswer = e;
-      console.log("ff ", this.useranswer);
-      this.queId = Object.keys(this.useranswer)
-      this.answer = this.useranswer[this.queId]
-      console.log("savca",this.queId[0],this.answer)
-     
-      if(this.data.length == 0 || this.data.length == 0){
-        this.submit("finish")
-      }
-      else{
-        this.submit("answer");
-      }
-    }
-   
+    console.log("ff ", e);
+    this.sumbitButton = true;
+    this.answer = e;
+    this.submit();
   }
-  submit(val) {
-    if(val == "answer"){
+  submit() {
     var jsonBody = {};
 
     jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
-    jsonBody["questionid"] = this.queId[0];
     jsonBody["useranswer"] = this.answer;
     jsonBody["event"] = "answer";
-    var apiUrl = "baselineone/";
+    var apiUrl = "modulezeromcq/";
     console.log("dasd ", jsonBody);
-    }
-    else if(val == "finish"){ 
-      var jsonBody = {};
 
-      jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
-      jsonBody["questionid"] = this.queId[0];
-      jsonBody["useranswer"] = this.answer;
-      jsonBody["event"] = "finish";
-      var apiUrl = "baselineone/";
-    }
-    else if(val == "finish1"){ 
-      var jsonBody = {};
-
-      jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
-      jsonBody["questionid"] = this.questionlist[this.questionlist.length-1].questionid
-      jsonBody["useranswer"] = this.answer;
-      jsonBody["event"] = "finish";
-      var apiUrl = "baselineone/";
-    }
     this.Module0Service.apiCall(jsonBody, apiUrl).subscribe(
       data => {
-        this.loader = false;
-        if(data["message"] == "your answer stored"){
-          console.log("data",this.data)
-        }
-       else if (
+        if (
+          data["status"] == true &&
           data["message"] == "submodule finish"
         )
         {
           this.startFlag = false;
-          this.data=[];
           window.localStorage.setItem("uuid", data["data"].nextuuid);
-          this.mainFlagModule0 = 4;
+          this.mainFlagModule0 = 12;
           window.localStorage.setItem("mainFlagModule0", "31");
           window.localStorage.setItem("subFlagModule0", "1");
           window.localStorage.setItem('source', 'module 0.31');
           var obj = {
             "type": "submodule",
             "route": true,
-            "current": this.translate.instant("L2Module0.subMenu1-31"),
-            "next": this.translate.instant("L2Module0Finish.subMenu0-31"),
+            "current": this.translate.instant("L2Module5.subMenu0-31"),
+            "next": this.translate.instant("L2Module5Finish.subMenu0-31"),
             "nextRoute": "/modules/module0/Module0.31"
           };
           this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
-          this.Module0Service.setLocalStorage0(4);
+          this.Module0Service.setLocalStorage0(12);
         }
       },
       error => {
         this.LanguageService.handleError(error.error.message);
       }
     );
-  }
-
-  shuffle(arra1) {
-    var ctr = arra1.length, temp, index;
-    // While there are elements in the array
-    while (ctr > 0) {
-      // Pick a random index
-      index = Math.floor(Math.random() * ctr);
-      // Decrease ctr by 1
-      ctr--;
-      // And swap the last element with it
-      temp = arra1[ctr];
-      arra1[ctr] = arra1[index];
-      arra1[index] = temp;
-    }
-    return arra1;
   }
 }
