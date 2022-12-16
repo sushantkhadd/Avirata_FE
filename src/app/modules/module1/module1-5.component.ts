@@ -14,37 +14,40 @@ import { FullLayoutService } from "src/app/layouts/full-layout.service";
 })
 export class Module15Component implements OnInit {
 
-  @ViewChild('staticImageModal') public staticImageModal: ModalDirective;
-  @ViewChild('instructionModal') public instructionModal: ModalDirective;
-
   public mainFlagModule1 = parseInt(window.localStorage.getItem('mainFlagModule1'));
   public subFlagModule1 = parseInt(window.localStorage.getItem('subFlagModule1'));
-  constructor(public FullLayoutService: FullLayoutService, public LanguageService: LanguageService, public Module1Service: Module1Service, public router: Router, public LocalstoragedetailsService: LocalstoragedetailsService, public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService) {
-    this.toastr.setRootViewContainerRef(vcr);
-  }
-  public showVideoFlag; nextBtnFlag; passData = {}; passUrl; videoData = {}; urlArray = {}; lnk1; lnk2; flag;
-  public statVideoFlag; thumb_title;parentUrlJson={};
-  ngOnInit() {
-    this.lnk1 = ''
-    this.lnk2 = ''
-    this.urlArray["src1"] = "skGFDAhQrhE";
-    this.urlArray["src2"] = "opHKXAPIynA";
-    this.urlArray['v_thumb'] = './../../assets/img/video-thumb.png'
 
-    this.showVideoFlag = false
-    this.nextBtnFlag = false
+  public token; startVideoEvent;
+  public passData = {};//used when CFU completed
+  public videoData = {}; passUrl; flag; mainJson;
+  parentUrls = {}; urlArray = {};
+  public currentSource = window.localStorage.getItem('source');
+
+  constructor(public FullLayoutService: FullLayoutService, public LanguageService: LanguageService, public LocalstoragedetailsService: LocalstoragedetailsService, private router: Router, public Module1Service: Module1Service, public translate: TranslateService, public toastr: ToastsManager,
+    vcr: ViewContainerRef) {
+    this.toastr.setRootViewContainerRef(vcr);
+   }
+
+  ngOnInit() {
+    this.passUrl = 'IkzkQ-Xft4c'
+    this.currentSource = window.localStorage.getItem('source');
+    this.startVideoEvent = false;
+
+    this.token = this.LocalstoragedetailsService.token
 
     if (this.mainFlagModule1 == 5)
     {
-      if (this.subFlagModule1 == 1)
-      {
-        this.start()
-      } else if (this.subFlagModule1 == 2)
-      {
-        // this.start1()
-      }
+      this.startVideoEvent = false;
+      this.videoData["apiUrl"] = "moduleonecfustart/";
+      // if (this.subFlagModule1 == 1)
+      // {
+      //   this.start1();
+      // } else if (this.subFlagModule1 == 2)
+      // {
+      //   this.start2();
+      // }
     }
-    if (this.mainFlagModule1 > 5)
+    else if (this.mainFlagModule1 > 5)
     {
       this.flag = 0;
       var urlJson = {};
@@ -58,146 +61,89 @@ export class Module15Component implements OnInit {
         {
           var mainJson;
           mainJson = JSON.parse(urlJson["children"][index].url);
-          console.log("mainjson",mainJson)
-          this.urlArray["src1"] = mainJson["1.5.1"];
-          this.urlArray["src2"] = mainJson["1.5.2"];
+          this.urlArray["src1"] = mainJson["1"];
+          this.urlArray["src2"] = mainJson["2"];
         }
       }
     }
   }
 
-  mapJSON() {
-    this.urlArray['src1'] = this.lnk1
-    this.urlArray['src2'] = this.lnk2
+  start1() {
+    this.startVideoEvent = true;
   }
 
-  start() {
-    var jsonBody = {}
-    jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
-    jsonBody['event'] = 'start'
-    this.apiCall(jsonBody, 'moduleonesingleurl/', 'start')
-  }
-  videoFinish(e) {
-    if (e == true)
-    {
-      this.instructionModal.show()
-      this.LanguageService.toShow();
-      this.nextBtnFlag = true
+  showVideo(src, val) {
+    if (val == 1) {
+      this.flag = val;
+      this.passData["videoUrl"] = src;
+    } else if (val == 2) {
+      this.flag = val;
+      this.passData["videoUrl"] = src;
     }
   }
-  next() {
-    var jsonBody = {}
-    jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
-    jsonBody['event'] = 'finish'
-    this.apiCall(jsonBody, 'moduleonesingleurl/', 'finish1')
-  }
-  start1() {
-    this.showVideoFlag = true
-    this.videoData['apiUrl'] = 'moduleonecfustart/';
-  }
-  finishCFU(e) {
+  finishCFU1(e) {
     if (e)
     {
-      console.log("parenturl",this.parentUrlJson)
+      this.parentUrls['1'] = e['url'];
+      var current1 = [];
+      current1 = JSON.parse(window.localStorage.getItem("currentJson1"));
+      var index = current1["children"].findIndex(
+        item => item.source == "module 1.5");
+      current1["children"][index].url = JSON.stringify(this.parentUrls);
+      window.localStorage.setItem("currentJson1",JSON.stringify(current1));
+
+      this.videoData["apiUrl"] = "moduleonecfustart/";
+      this.subFlagModule1 = this.subFlagModule1 + 1
+      window.localStorage.setItem('subFlagModule1', this.subFlagModule1.toString());
+      console.log(current1, e,'1')
+    }
+  }
+
+  finishCFU2(e) {
+    if (e)
+    {
       var current1 = [];
       current1 = JSON.parse(window.localStorage.getItem("currentJson1"));
       var index = current1["children"].findIndex(
         item => item.source == "module 1.5");
       var moduleJson = current1["children"][index]
-      console.log("moduleJSON",moduleJson,moduleJson["children"].length)
       if(moduleJson["children"].length !=0){
       var index1 = moduleJson["children"].findIndex(
       item => item.source == "module 1.5.1");
       if(moduleJson["children"][index1].url !="" && moduleJson["children"][index1].url !=null && moduleJson["children"][index1].url !=undefined){
-        this.parentUrlJson['1.5.1'] = moduleJson["children"][index1].url;
+      this.parentUrls['1'] = moduleJson["children"][index1].url;
       }
       }
-      this.parentUrlJson['1.5.2'] = e['url'];
-      current1["children"][index].url = JSON.stringify(this.parentUrlJson);
-
+      this.parentUrls['2'] = e['url'];
+      current1["children"][index].url = JSON.stringify(this.parentUrls);
       window.localStorage.setItem("currentJson1", JSON.stringify(current1));
-
 
       window.localStorage.setItem('mainFlagModule1', '6');
       window.localStorage.setItem('subFlagModule1', '1');
-      window.localStorage.setItem('source', 'module 1.6.1');
-      this.Module1Service.setLocalStorage1(6);
+      window.localStorage.setItem('source', 'module 1.6');
+      this.Module1Service.setLocalStorage1(4);
       var obj = {
         "type": "submodule",
         "route": true,
         "current": this.translate.instant('L2Module1.subMenu1-5'),
         "next": this.translate.instant('L2Module1Finish.subMenu1-6'),
-        "nextRoute": "/modules/module1/Module1.6"
+        "nextRoute": "/modules/module1/Module1.5"
       }
       this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+      console.log(current1,e,'2')
+    }
+    else
+    {
+      window.localStorage.setItem('mainFlagModule1', '6');
+      this.router.navigate(['/modules/module1/Module1.6']);
     }
   }
-
-  apiCall(jsonBody, apiUrl, fun) {
-    this.Module1Service.apiCall(jsonBody, apiUrl)
-      .subscribe(
-        data => {
-          if (fun == 'start')
-          {
-            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 1.5', window.localStorage.getItem('username'), 10);
-            this.passData['apiUrl'] = "moduleonesingleurl/";
-            this.passData['videoUrl'] = data['data'].url;
-            this.showVideoFlag = true
-            this.passUrl = data['data'].url;
-
-            this.parentUrlJson["1.5.1"] = this.passUrl;
-            var current1 = [];
-            current1 = JSON.parse(window.localStorage.getItem("currentJson1"));
-            var index = current1["children"].findIndex(
-              item => item.source == "module 1.5");
-            current1["children"][index].url = JSON.stringify(this.parentUrlJson);
-
-            window.localStorage.setItem("currentJson1", JSON.stringify(current1));
-
-          } if (fun == 'finish1')
-          {
-            this.instructionModal.hide()
-            this.LanguageService.toHide();
-            this.showVideoFlag = false
-            window.localStorage.setItem('uuid', data['data'].nextuuid)
-            this.subFlagModule1 = this.subFlagModule1 + 1
-            window.localStorage.setItem('subFlagModule1', this.subFlagModule1.toString())
-            // this.start1()
-          }
-        },
-        error => {
-          this.LanguageService.handleError(error.error.message);
-        });
-  }
-
-  showVideo(src, title, value) {
-    // this.staticImageModal.show();
-    // this.statVideoFlag = true;
-    // this.statImageFlag = false;
-    if (value == 1)
-    {
-      this.passData['videoUrl'] = src;
-      this.thumb_title = title;
-      this.flag = value;
-    } else if (value == 2)
-    {
-      this.passData['videoUrl'] = src;
-      this.thumb_title = title;
-      this.flag = value;
-    }
-
-  }
-
-  closeModal() {
-    // this.imageSrc = "";
-    this.statVideoFlag = false;
-    this.passData['videoUrl'] = "";
-    this.staticImageModal.hide();
-    this.LanguageService.toHide();
-  }
-
   singleCFUComplete(e) {
-    // this.subFlagModule1++;
-    // window.localStorage.setItem('subFlagModule2', this.subFlagModule1.toString());
+    // console.log(this.subFlagModule1, "part 2")
+    this.subFlagModule1 = 2;
+    // window.localStorage.setItem('subFlagModule1', this.subFlagModule1.toString());
+  }
+  start() {
+    this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 1.5', window.localStorage.getItem('username'), 10);
   }
 }

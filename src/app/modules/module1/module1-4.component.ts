@@ -77,19 +77,17 @@ export class Module14Component implements OnInit {
   }
 
   saveAnswer(e) {
-    console.log("ff ", e);
     this.sumbitButton = true;
     this.answer = e;
     this.submit();
   }
+
   submit() {
     var jsonBody = {};
-
     jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
     jsonBody["useranswer"] = this.answer;
     jsonBody["event"] = "answer";
     var apiUrl = "moduleonemcqone/";
-    console.log("dasd ", jsonBody);
 
     this.Module1Service.apiCall(jsonBody, apiUrl).subscribe(
       data => {
@@ -104,7 +102,6 @@ export class Module14Component implements OnInit {
             "subFlagModule1",
             this.subFlagModule1.toString()
           );
-          console.log("data ", data["data"]);
           this.data = data["data"];
           this.sumbitButton = false;
         } else if (
@@ -117,7 +114,7 @@ export class Module14Component implements OnInit {
           this.mainFlagModule1 = 5;
           window.localStorage.setItem("mainFlagModule1", "5");
           window.localStorage.setItem("subFlagModule1", "1");
-          window.localStorage.setItem('source', 'module 1.5.1');
+          window.localStorage.setItem('source', 'module 1.5');
           var obj = {
             "type": "submodule",
             "route": true,
