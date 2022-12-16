@@ -113,7 +113,9 @@ export class Module017Component implements OnInit {
         if (data["status"] == true) {
           if (fun == "finish1") {
             window.localStorage.setItem('uuid', data['data'].nextuuid)
-            this.start()
+            this.start();
+            this.nextBtnFlag = false
+
           }
         }
       },

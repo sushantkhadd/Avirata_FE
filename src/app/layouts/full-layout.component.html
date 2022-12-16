@@ -270,6 +270,14 @@
             </li>
             <li routerLinkActive="activeMenu">
               <span *ngIf="mainFlagModule0 < 24">
+                <a class="deactive-menu" routerLinkActive="active">{{'L2Module0.subMenu1-24' | translate}}</a>
+              </span>
+              <span *ngIf="mainFlagModule0 >= 24">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['/modules/module0/Module0.24']">{{'L2Module0.subMenu1-24' | translate}}</a>
+              </span>
+            </li>
+            <li routerLinkActive="activeMenu">
+              <span *ngIf="mainFlagModule0 < 25">
                 <a class="deactive-menu" routerLinkActive="active">{{'L2Module0.subMenu1-25' | translate}}</a>
               </span>
               <span *ngIf="mainFlagModule0 >= 25">
