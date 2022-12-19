@@ -3,7 +3,7 @@ import { LocalstoragedetailsService } from "../../services/localstoragedetails.s
 import { LanguageService } from './../../language.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import {Module1Service} from './module1.service'
+import { Module1Service } from './module1.service'
 import { ToastsManager } from 'ng6-toastr';
 
 @Component({
@@ -83,9 +83,9 @@ export class Module12Component implements OnInit {
             var obj = {
               "type": "submodule",
               "route": true,
-              "current": this.translate.instant('L2Module5.subMenu1-3'),
-              "next": this.translate.instant('L2Module5Finish.subMenu1-3'),
-              "inst":this.translate.instant('L2Module5Finish.Inst1_2')
+              "current": this.translate.instant('L2Module1.subMenu1-3'),
+              "next": this.translate.instant('L2Module1Finish.subMenu1-3')
+              // "inst":this.translate.instant('L2Module1Finish.Inst1_2')
               }
               this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
           }

@@ -58,7 +58,7 @@ export class Module16Component implements OnInit {
     jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
     jsonBody["useranswer"] = "";
     jsonBody["event"] = "start";
-    var apiUrl = "moduleonemcqone/";
+    var apiUrl = "l4module1freetext/";
 
     this.Module1Service.apiCall(jsonBody, apiUrl).subscribe(
       data => {
@@ -88,7 +88,7 @@ export class Module16Component implements OnInit {
     jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
     jsonBody["useranswer"] = this.answer;
     jsonBody["event"] = "answer";
-    var apiUrl = "moduleonemcqone/";
+    var apiUrl = "l4module1freetext/";
     console.log("dasd ", jsonBody);
 
     this.Module1Service.apiCall(jsonBody, apiUrl).subscribe(
