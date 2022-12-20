@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { ModalDirective } from 'ngx-bootstrap';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { LocalstoragedetailsService } from "../../services/localstoragedetails.service";
 import { LanguageService } from './../../language.service';
 import { Router } from '@angular/router';
@@ -12,11 +11,10 @@ import {Module0Service} from './module0.service'
   templateUrl: './module0-30.component.html'
 })
 export class Module030Component implements OnInit {
-
-  public mainFlagModule0 = parseInt(
+  public mainFlagModule1 = parseInt(
     window.localStorage.getItem("mainFlagModule0")
   );
-  public subFlagModule0 = parseInt(
+  public subFlagModule1 = parseInt(
     window.localStorage.getItem("subFlagModule0")
   );
   constructor(
@@ -33,23 +31,23 @@ export class Module030Component implements OnInit {
   public data;
   questionType;
   passFlags = {};
-  showAnswer;count;
+  showAnswer;
   saveData;
   answer;
   sumbitButton;
   startFlag;
   public inst =
-    "खालील विधान पूर्ण करा.";
+    "खाली दिलेल्या अविवेकी विचारांना खोडून काढण्यासाठी तुम्ही कोणते प्रश्न विचाराल?";
   ngOnInit() {
     this.startFlag = false;
     this.showAnswer = true;
     this.saveData = true;
     this.passFlags["saveData"] = this.saveData;
     this.passFlags["showAnswer"] = this.showAnswer;
-    this.questionType = "checkBoxOption";
+    this.questionType = "mcqTextOption";
     this.passFlags["questionType"] = this.questionType;
 
-    if (this.mainFlagModule0 == 30)
+    if (this.mainFlagModule1 == 6)
     {
       // this.start()
     }
@@ -66,20 +64,22 @@ export class Module030Component implements OnInit {
       data => {
         if (data["status"] == true)
         {
-          this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 1.30', window.localStorage.getItem('username'), 10);
+          this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 0.30', window.localStorage.getItem('username'), 10);
           console.log("data ", data["data"]);
           this.data = data["data"].questionlist;
           this.startFlag = true;
         }
       },
       error => {
-        this.LanguageService.handleError(error.error.message);
+        this.LanguageService.handleError(error.error.message);   
       }
     );
   }
 
   saveAnswer(e) {
+    this.answer=''
     console.log("ff ", e);
+    console.log('heelii world',e)
     this.sumbitButton = true;
     this.answer = e;
     this.submit();
@@ -97,28 +97,41 @@ export class Module030Component implements OnInit {
       data => {
         if (
           data["status"] == true &&
+          data["message"] == "your answer stored next question and uuid is"
+        )
+        {
+          window.localStorage.setItem("uuid", data["data"].nextuuid);
+          this.subFlagModule1 = this.subFlagModule1 + 1;
+          window.localStorage.setItem(
+            "subFlagModule1",
+            this.subFlagModule1.toString()
+          );
+          console.log("data ", data["data"]);
+          this.data = data["data"].questionlist;
+          this.sumbitButton = false;
+        } else if (
+          data["status"] == true &&
           data["message"] == "submodule finish"
         )
         {
           this.startFlag = false;
           window.localStorage.setItem("uuid", data["data"].nextuuid);
-          this.mainFlagModule0 = 12;
-          window.localStorage.setItem("mainFlagModule0", "31");
-          window.localStorage.setItem("subFlagModule0", "1");
-          window.localStorage.setItem('source', 'module 0.31');
+          this.mainFlagModule1 = 9;
+          window.localStorage.setItem("mainFlagModule1", "31");
+          window.localStorage.setItem("subFlagModule1", "1");
           var obj = {
             "type": "submodule",
             "route": true,
-            "current": this.translate.instant("L2Module5.subMenu0-31"),
-            "next": this.translate.instant("L2Module5Finish.subMenu0-31"),
-            "nextRoute": "/modules/module0/Module0.31"
+            "current": this.translate.instant("L2Module1.subMenu0-31"),
+            "next": this.translate.instant("L2Module1Finish.subMenu1-31"),
+            "nextRoute": "/modules/module1/Module0.31"
           };
           this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
-          this.Module0Service.setLocalStorage0(12);
+          this.Module0Service.setLocalStorage0(7);
         }
       },
       error => {
-        this.LanguageService.handleError(error.error.message);
+        this.LanguageService.handleError(error.error.message);        
       }
     );
   }

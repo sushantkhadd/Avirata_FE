@@ -18,7 +18,6 @@ export class Module03Component implements OnInit {
 
   public mainFlagModule0 = parseInt(window.localStorage.getItem('mainFlagModule0'));
   public subFlagModule0 = parseInt(window.localStorage.getItem('subFlagModule0'));
-  showCFU: boolean;
   download: boolean;
   passValues = {};
   finishJSONBody: any;
@@ -76,6 +75,7 @@ export class Module03Component implements OnInit {
   }
 
   apiCall(jsonBody, apiUrl, fun) {
+    this.showVideoFlag = false
     this.Module0Service.apiCall(jsonBody, apiUrl).subscribe(
       data => {
         if (data["status"] == true) {
@@ -84,7 +84,6 @@ export class Module03Component implements OnInit {
             this.passData['apiUrl'] = "modulezerosingleurl/";
             this.passData['videoUrl'] = data['data'].url;  
             if (this.subFlagModule0 == 2) {
-              this.showCFU = false;
               this.passValues['url'] = data['data'].url;
               this.showVideoFlag = true
             } else {
