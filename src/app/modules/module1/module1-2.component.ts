@@ -3,7 +3,7 @@ import { LocalstoragedetailsService } from "../../services/localstoragedetails.s
 import { LanguageService } from './../../language.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import {Module1Service} from './module1.service'
+import { Module1Service } from './module1.service'
 import { ToastsManager } from 'ng6-toastr';
 
 @Component({
@@ -28,7 +28,7 @@ export class Module12Component implements OnInit {
   ) {
     this.toastr.setRootViewContainerRef(vcr);
   }
-  public data;
+  public data; checkAgree = false;
   questionType;
   passFlags = {};
   showAnswer;count;
@@ -36,6 +36,8 @@ export class Module12Component implements OnInit {
   answer;
   sumbitButton;
   startFlag;
+  public txtcomment: string
+
   public inst =
     "खालील स्वगतांमागे असणारा विचार / धारणा ओळखा. ती विवेकी आहे की अविवेकी?";
   ngOnInit() {
@@ -52,6 +54,63 @@ export class Module12Component implements OnInit {
       // this.start()
     }
   }
+
+  submitPost() {
+    var apiUrl = 'moduleonepost/'
+    var postJson = {};
+    postJson['post'] = this.txtcomment.trim();
+    postJson['submoduleid'] = window.localStorage.getItem('uuid');
+
+    this.Module1Service.apiCall(postJson, apiUrl)
+      .subscribe(
+        data => {
+          if (data["message"] == "post submitted successfully") {
+            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 1.2', window.localStorage.getItem('username'), 10);
+            window.localStorage.setItem("mainFlagModule1", "3");
+            window.localStorage.setItem("subFlagModule1", "1");
+            this.mainFlagModule1 = 23;
+            this.Module1Service.setLocalStorage1(23);
+            window.localStorage.setItem('source', 'module 1.3');
+            window.localStorage.setItem(
+              "uuid",
+              data["data"].nextuuid
+            );
+            this.toastr.success(
+              this.translate.instant(
+                "otherMessages.successfullySubmit"
+              )
+            );
+            var obj = {
+              "type": "submodule",
+              "route": true,
+              "current": this.translate.instant('L2Module1.subMenu1-3'),
+              "next": this.translate.instant('L2Module1Finish.subMenu1-3')
+              // "inst":this.translate.instant('L2Module1Finish.Inst1_2')
+              }
+              this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+          }
+        },
+        error => {
+          if (error.error.message == 'token not found' || error.error.message == 'token not match')
+          {
+            this.toastr.error(this.translate.instant('otherMessages.sessionLogout'));
+            setTimeout(() => {
+              this.router.navigate(['/']);
+            }, 4000)
+          } else if (error.error.message == 'json Key Error')
+          {
+            this.toastr.error(this.translate.instant('otherMessages.wrongInfo2'));
+          } else if (error.error.message == 'access denied')
+          {
+            this.toastr.error(this.translate.instant('otherMessages.accessDenied'))
+          }
+          else
+          {
+            this.toastr.error(this.translate.instant('Errors.cannotProceed'));
+          }
+        });
+  }
+
 
   start() {
     var jsonBody = {};
@@ -136,4 +195,16 @@ export class Module12Component implements OnInit {
       }
     );
   }
+
+  agree(e) {
+    if (e.target.checked)
+    {
+      this.checkAgree = true;
+    }
+    else
+    {
+      this.checkAgree = false;
+    }
+  }
+
 }

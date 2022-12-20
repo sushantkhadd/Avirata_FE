@@ -23,7 +23,7 @@ export class Module17Component implements OnInit {
   constructor(public FullLayoutService: FullLayoutService, public LanguageService: LanguageService, public LocalstoragedetailsService: LocalstoragedetailsService, private router: Router, public Module1Service: Module1Service, public translate: TranslateService) { }
 
   ngOnInit() {
-    this.passUrl = 'IkzkQ-Xft4c'
+    this.passUrl='IkzkQ-Xft4c';
     this.currentSource = window.localStorage.getItem('source');
     this.startVideoEvent = false;
 
@@ -49,15 +49,12 @@ export class Module17Component implements OnInit {
     {
       var urlJson = {};
       urlJson = JSON.parse(window.localStorage.getItem("currentJson1"));
-      console.log("vcxxxx",urlJson)
       if (urlJson["children"].length > 0) {
         var index = urlJson["children"].findIndex(
           item => item.source == "module 1.7"
         );
-        console.log("qWSS",index)
         if (urlJson["children"][index].url != null)
         {
-          console.log("qWSS",index,urlJson["children"][index].url)
           this.passData['videoUrl'] = urlJson["children"][index].url
         } else {
           this.passData['videoUrl'] = this.passUrl
@@ -67,10 +64,10 @@ export class Module17Component implements OnInit {
       }
     }
   }
+
   finishCFU(e) {
     if (e)
     {
-      console.log("event",e)
       var current1 = [];
       current1 = JSON.parse(window.localStorage.getItem("currentJson1"));
       var index = current1["children"].findIndex(
@@ -81,7 +78,7 @@ export class Module17Component implements OnInit {
       window.localStorage.setItem('mainFlagModule1', '8');
       window.localStorage.setItem('subFlagModule1', '1');
       window.localStorage.setItem('source', 'module 1.8.1');
-      this.Module1Service.setLocalStorage1(8);
+      this.Module1Service.setLocalStorage1(7);
       var obj = {
         "type": "submodule",
         "route": true,
