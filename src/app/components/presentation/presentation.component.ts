@@ -276,6 +276,7 @@ export class PresentationComponent implements OnInit {
     this.count = this.page;
 
     this.pdfURL = this.data.url;
+    console.log("pravin check",this.apiUrl, this.pdfURL);
 
     this.showCFU = this.data.showcfu;
     console.log("fdgdfxa", this.showCFU, this.data.state, this.pdfURL)
@@ -292,6 +293,8 @@ export class PresentationComponent implements OnInit {
         var jsonBody = {};
         console.log("mailnflag", window.localStorage.getItem('mainFlagModule4'))
         if (
+          window.localStorage.getItem("mainFlagModule1") == "10" ||
+          window.localStorage.getItem("mainFlagModule1") == "11" ||
           window.localStorage.getItem("mainFlagModule2") == "15" ||
           window.localStorage.getItem("mainFlagModule3") == "14" ||
           window.localStorage.getItem("mainFlagModule3") == "15" ||
@@ -322,6 +325,8 @@ export class PresentationComponent implements OnInit {
 
         this.apiUrl = this.data.apiurl;
         if (
+          window.localStorage.getItem("mainFlagModule1") == "10" ||
+          window.localStorage.getItem("mainFlagModule1") == "11" ||
           window.localStorage.getItem("mainFlagModule2") == "15" ||
           window.localStorage.getItem("mainFlagModule3") == "14" ||
           window.localStorage.getItem("mainFlagModule3") == "15" ||
@@ -332,7 +337,7 @@ export class PresentationComponent implements OnInit {
           window.localStorage.getItem("mainFlagModule5") == "4" ||
           window.localStorage.getItem("mainFlagModule5") == "5"
         ) {
-          console.log("ma ", this.mainFlagModule5);
+          console.log("ma ",this.apiUrl, this.mainFlagModule1);
           this.CommonComponentService.submoduleFinish(
             jsonBody,
             this.apiUrl
@@ -386,6 +391,10 @@ export class PresentationComponent implements OnInit {
                     ".jpg";
                 } else {
                   if (
+                    window.localStorage.getItem("mainFlagModule1") ==
+                    "10" ||
+                    window.localStorage.getItem("mainFlagModule1") ==
+                    "11" ||
                     window.localStorage.getItem("mainFlagModule2") ==
                     "15" ||
                     window.localStorage.getItem("mainFlagModule3") ==
@@ -521,7 +530,7 @@ export class PresentationComponent implements OnInit {
         if (this.showCFU == true) {
           console.log('next show cout', this.count, this.finalCount)
           this.buttonShowFlag = true;
-        } else if (this.showCFU == false && (this.mainFlagModule4 == 8 || this.mainFlagModule1 == 11 || this.mainFlagModule3 == 3 || this.mainFlagModule3 == 5 || this.mainFlagModule5 == 15)) {
+        } else if (this.showCFU == false && (this.mainFlagModule4 == 8 || this.mainFlagModule1 == 10 ||  this.mainFlagModule1 == 11 || this.mainFlagModule3 == 3 || this.mainFlagModule3 == 5 || this.mainFlagModule5 == 15)) {
           this.showFinish = true;
         }
       }
@@ -571,6 +580,8 @@ export class PresentationComponent implements OnInit {
           var jsonBody = {};
           this.apiUrl = this.data.apiurlResult;
           if (
+            window.localStorage.getItem("mainFlagModule1") == "10" ||
+            window.localStorage.getItem("mainFlagModule1") == "11" ||
             window.localStorage.getItem("mainFlagModule2") == "15" ||
             window.localStorage.getItem("mainFlagModule3") == "14" ||
             window.localStorage.getItem("mainFlagModule3") == "15" ||
@@ -619,6 +630,7 @@ export class PresentationComponent implements OnInit {
               jsonBody["event"] = "answer";
               jsonBody["review"] = "start";
               this.apiUrl = this.data.apiurl;
+              console.log("Pravin this.apiUrl", this.apiUrl);
             }
           }
 
@@ -770,8 +782,8 @@ export class PresentationComponent implements OnInit {
                 }
 
                 if (
-                  window.localStorage.getItem('mainFlagModule1') == '11' || window.localStorage.getItem('mainFlagModule3') == '5' || window.localStorage.getItem('mainFlagModule5') == '2' ||
-                  window.localStorage.getItem('mainFlagModule1') == '11' || window.localStorage.getItem('mainFlagModule3') == '5' || window.localStorage.getItem('mainFlagModule5') == '3' ||
+                  window.localStorage.getItem('mainFlagModule1') == '10' || window.localStorage.getItem('mainFlagModule1') == '11' || window.localStorage.getItem('mainFlagModule3') == '5' || window.localStorage.getItem('mainFlagModule5') == '2' ||
+                  window.localStorage.getItem('mainFlagModule1') == '10' || window.localStorage.getItem('mainFlagModule1') == '11' || window.localStorage.getItem('mainFlagModule3') == '5' || window.localStorage.getItem('mainFlagModule5') == '3' ||
                   window.localStorage.getItem('mainFlagModule5') == '4' ||
                   window.localStorage.getItem('mainFlagModule5') == '5'
                 ) {
