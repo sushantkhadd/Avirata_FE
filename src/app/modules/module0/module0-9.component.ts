@@ -36,7 +36,7 @@ export class Module09Component implements OnInit {
   ngOnInit() {
     console.log('modeule 2222')
     this.startPdf=false
-    this.start();
+    // this.start();
   }
   start() {
     var jsonBody = {}

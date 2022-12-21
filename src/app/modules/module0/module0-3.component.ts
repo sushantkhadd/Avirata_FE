@@ -60,11 +60,8 @@ export class Module03Component implements OnInit {
   nextvideo() {
     this.subFlagModule0 = this.subFlagModule0 + 1
     window.localStorage.setItem('subFlagModule0', this.subFlagModule0.toString());
-    this.instructionModal.hide();
-    var jsonBody = {}
-    jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
-    jsonBody['event'] = 'finish'
-    this.nextApiCall(jsonBody, 'modulezerosingleurl/', 'finish1')
+    this.instructionModal.hide(); 
+    this.showVideoFlag=false  
   }
 
   next() {
@@ -116,14 +113,15 @@ export class Module03Component implements OnInit {
     );
   }
 
-  nextApiCall(jsonBody, apiUrl, fun){
-    this.Module0Service.apiCall(jsonBody, apiUrl).subscribe(
+  nextApiCall(){
+    var jsonBody = {}
+    jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
+    jsonBody['event'] = 'finish'
+    this.Module0Service.apiCall(jsonBody, 'modulezerosingleurl/').subscribe(
       data => {
-        if (data["status"] == true) {
-          if (fun == "finish1") {
+        if (data["status"] == true) {          
             window.localStorage.setItem('uuid', data['data'].nextuuid)
             this.start()
-          } 
         }
       },
       error => {

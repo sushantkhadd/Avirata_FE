@@ -36,7 +36,7 @@ export class Module04Component implements OnInit {
 
     if (this.mainFlagModule0 == 4)
     {
-        this.start()
+        // this.start()
     }
 
     else if (this.mainFlagModule0 > 4)

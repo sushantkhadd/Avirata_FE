@@ -30,16 +30,9 @@ export class Module0Component implements OnInit {
     this.lnk2 = ''
     this.urlArray["src1"] = "skGFDAhQrhE";
     this.urlArray["src2"] = "opHKXAPIynA";
-    this.urlArray['v_thumb'] = './../../assets/img/video-thumb.png'
-
-    this.showVideoFlag = false
-
-    if (this.mainFlagModule0 == 1)
-    {
-        this.start()
-    }
-
-    else if (this.mainFlagModule0 > 1)
+    this.urlArray['v_thumb'] = './../../assets/img/video-thumb.png';
+    this.showVideoFlag = false;
+    if (this.mainFlagModule0 > 1)
     {
       var urlJson = {};
       urlJson = JSON.parse(window.localStorage.getItem("currentJson0"));
@@ -49,11 +42,7 @@ export class Module0Component implements OnInit {
           item => item.source == "module 0.1"
         );
         console.log("qWSS", index);
-        // var mainJson;
-        // mainJson = JSON.parse(urlJson["children"][index].url);
-        // console.log("hjbhjb", mainJson);
         if (urlJson["children"][index].url != null) {
-          // this.urlArray["src1"] = mainJson["4.1.1"];
           this.passData["videoUrl"] = urlJson["children"][index].url;
         }
       }

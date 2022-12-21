@@ -36,7 +36,7 @@ export class Module02Component implements OnInit {
 
     if (this.mainFlagModule0 == 2)
     {
-        this.start()
+        // this.start()
     }
 
     else if (this.mainFlagModule0 > 2)
