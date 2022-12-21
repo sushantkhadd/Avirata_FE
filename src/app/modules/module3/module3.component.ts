@@ -1,66 +1,166 @@
-import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { ModalDirective } from 'ngx-bootstrap';
-import { LocalstoragedetailsService } from "../../services/localstoragedetails.service";
-import { LanguageService } from './../../language.service';
-import { Router } from '@angular/router';
-import { ToastsManager } from 'ng6-toastr';
-import { TranslateService } from '@ngx-translate/core';
-import { Module3Service} from './module3.service'
-import { FullLayoutService} from '../../layouts/full-layout.service'
+import { Component, OnInit, ViewContainerRef, ViewChild } from "@angular/core";
+import { LanguageService } from "src/app/language.service";
+import { LocalstoragedetailsService } from "src/app/services/localstoragedetails.service";
+import { Module3Service } from "./module3.service";
+import { ToastsManager } from "ng6-toastr";
+import { Router } from "@angular/router";
+import { TranslateService } from "@ngx-translate/core";
+import { ModalDirective } from "ngx-bootstrap";
+import { FullLayoutService } from "src/app/layouts/full-layout.service";
 
 @Component({
-  selector: 'app-module3',
-  templateUrl: './module3.component.html'
+  selector: "app-module3",
+  templateUrl: "./module3.component.html"
 })
 export class Module3Component implements OnInit {
   @ViewChild('instructionModal') public instructionModal: ModalDirective;
   public mainFlagModule3 = parseInt(window.localStorage.getItem('mainFlagModule3'));
   public subFlagModule3 = parseInt(window.localStorage.getItem('subFlagModule3'));
-  constructor(public FullLayoutService: FullLayoutService, public LanguageService: LanguageService, public Module3Service: Module3Service, public router: Router, public LocalstoragedetailsService: LocalstoragedetailsService, public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService) {
+
+  public token; startVideoEvent;
+  public passData = {};//used when CFU completed
+  public videoData = {}; passUrl; flag; mainJson;
+  parentUrls = {}; urlArray = {};
+  public currentSource = window.localStorage.getItem('source');
+  showVideoFlag: boolean;
+  nextBtnFlag: boolean;
+
+  constructor(public FullLayoutService: FullLayoutService, public LanguageService: LanguageService, public LocalstoragedetailsService: LocalstoragedetailsService, private router: Router, public Module3Service: Module3Service, public translate: TranslateService, public toastr: ToastsManager,
+    vcr: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vcr);
-  }
-  public jsonData; queCount = 0; ansJson = {}; data; showAnswer; passFlags = {}; saveData; showInst; flag; urlArray = {}; thumb_title;
-  public dummy; deleteAdd = []; nextBtnFlag; passData = {}; showVideoFlag; passUrl; startFlag;
+   }
+
   ngOnInit() {
-    this.passUrl = "6hO_xfdRq1g";
-    this.showVideoFlag = false
-    this.nextBtnFlag = false
-    this.startFlag = false;
-    if (this.mainFlagModule3 == 1) {
-      this.startFlag = true;
-      if (this.subFlagModule3 == 1) {
-        this.start()
-      } else
-        if (this.subFlagModule3 == 2) {
-          this.showInst = true
-          this.start1()
-        }
-    } else if (this.mainFlagModule3 > 1) {
-      this.passData['apiUrl'] = "";
-      this.passData['status'] = false;  //first time call
+    this.passUrl = 'IkzkQ-Xft4c'
+    this.currentSource = window.localStorage.getItem('source');
+    this.startVideoEvent = false;
+
+    this.token = this.LocalstoragedetailsService.token
+    console.log("hi this is main flag",this.mainFlagModule3)
+    if (this.mainFlagModule3 == 1)
+    {
+      console.log("hello")
+      this.startVideoEvent = false;
+      this.videoData["apiUrl"] = "modulethreefustart/";
+      console.log("hi")
+      // if (this.subFlagModule3 == 1)
+      // {
+      this.start();
+      // } else if (this.subFlagModule3 == 2)
+      // {
+      //   this.start2();
+      // }
+    }
+    else if (this.mainFlagModule3 > 1)
+    {
+      this.flag = 0;
       var urlJson = {};
-      urlJson = JSON.parse(window.localStorage.getItem("currentJson3"));
-      if (urlJson["children"].length > 0) {
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson1"));
+      if (urlJson["children"].length > 0)
+      {
         var index = urlJson["children"].findIndex(
           item => item.source == "module 3.1"
         );
-        if (urlJson["children"][index].url != null) {
+        if (urlJson["children"][index].url != null)
+        {
           var mainJson;
           mainJson = JSON.parse(urlJson["children"][index].url);
-          this.passData["videoUrl"] = mainJson["3.1.1"];
+          this.urlArray["src1"] = mainJson["1"];
+          this.urlArray["src2"] = mainJson["2"];
         }
       }
     }
   }
 
+  start1() {
+    this.startVideoEvent = true;
+  }
+
+  showVideo(src, val) {
+    if (val == 1) {
+      this.flag = val;
+      this.passData["videoUrl"] = src;
+    } else if (val == 2) {
+      this.flag = val;
+      this.passData["videoUrl"] = src;
+    }
+  }
+  finishCFU1(e) {
+    if (e)
+    {
+      this.parentUrls['1'] = e['url'];
+      var current1 = [];
+      current1 = JSON.parse(window.localStorage.getItem("currentJson1"));
+      var index = current1["children"].findIndex(
+        item => item.source == "module 3.1");
+      current1["children"][index].url = JSON.stringify(this.parentUrls);
+      window.localStorage.setItem("currentJson1",JSON.stringify(current1));
+
+      this.videoData["apiUrl"] = "moduleonecfustart/";
+      this.subFlagModule3 = this.subFlagModule3 + 1
+      window.localStorage.setItem('subFlagModule3', this.subFlagModule3.toString());
+      console.log(current1, e,'1')
+    }
+  }
+
+  finishCFU2(e) {
+    if (e)
+    {
+      var current1 = [];
+      current1 = JSON.parse(window.localStorage.getItem("currentJson1"));
+      var index = current1["children"].findIndex(
+        item => item.source == "module 3.2");
+      var moduleJson = current1["children"][index]
+      if(moduleJson["children"].length !=0){
+      var index1 = moduleJson["children"].findIndex(
+      item => item.source == "module 2.1");
+      if(moduleJson["children"][index1].url !="" && moduleJson["children"][index1].url !=null && moduleJson["children"][index1].url !=undefined){
+      this.parentUrls['1'] = moduleJson["children"][index1].url;
+      }
+      }
+      this.parentUrls['2'] = e['url'];
+      current1["children"][index].url = JSON.stringify(this.parentUrls);
+      window.localStorage.setItem("currentJson1", JSON.stringify(current1));
+
+      window.localStorage.setItem('mainFlagModule3', '2');
+      window.localStorage.setItem('subFlagModule3', '1');
+      window.localStorage.setItem('source', 'module 3.2');
+      this.Module3Service.setLocalStorage3(4);
+      var obj = {
+        "type": "submodule",
+        "route": true,
+        "current": this.translate.instant('L2Module3.subMenu1-1'),
+        "next": this.translate.instant('L2Module1Finish.subMenu1-2'),
+        "nextRoute": "/modules/module3/Module3.2"
+      }
+      this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+      console.log(current1,e,'2')
+    }
+    else
+    {
+      window.localStorage.setItem('mainFlagModule1', '6');
+      this.router.navigate(['/modules/module1/Module1.6']);
+    }
+  }
+  singleCFUComplete(e) {
+    // console.log(this.subFlagModule3, "part 2")
+    this.subFlagModule3 = 2;
+    // window.localStorage.setItem('subFlagModule3', this.subFlagModule3.toString());
+  }
+  // start() {
+  //   this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 3.1', window.localStorage.getItem('username'), 10);
+  // }
+
   start() {
     var jsonBody = {}
+    console.log("event start ", window.localStorage.getItem('uuid'))
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
     jsonBody['event'] = 'start'
     this.apiCall(jsonBody, 'modulethreesingleurl/', 'start')
   }
   videoFinish(e) {
-    if (e == true) {
+    if (e == true)
+    {
       this.instructionModal.show()
       this.LanguageService.toShow();
       this.nextBtnFlag = true
@@ -70,189 +170,46 @@ export class Module3Component implements OnInit {
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
     jsonBody['event'] = 'finish'
-    this.apiCall(jsonBody, 'modulethreesingleurl/', 'finish1')
-  }
-
-  start1() {
-    var jsonBody = {}
-    jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
-    jsonBody['useranswer'] = ''
-    jsonBody['event'] = 'start'
-    this.apiCall(jsonBody, 'modulethreemcq/', 'start1')
-  }
-
-  getAnswer(e) {
-    var jsonBody = {}
-    jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
-    jsonBody['useranswer'] = e
-    // jsonBody['questionid'] = (this.data.questionid).toString()
-    jsonBody['event'] = "answer"
-    // console.log("json: ",jsonBody)
-    this.apiCall(jsonBody, 'modulethreemcq/', 'sendAns')
-    // }
+    this.apiCall(jsonBody, 'modulezerosingleurl/', 'finish1')
   }
 
   apiCall(jsonBody, apiUrl, fun) {
-    this.Module3Service.apiCall(jsonBody, apiUrl)
-      .subscribe(
+    this.Module3Service.apiCall(jsonBody, apiUrl).subscribe(
       data => {
-        if (fun == 'start') {
-          this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 3.1', window.localStorage.getItem('username'), 10);
-          this.passData['apiUrl'] = "modulethreesingleurl/";
-          this.passData['videoUrl'] = data['data'].url;
-          this.showVideoFlag = true
-          this.passUrl = data['data'].url;
-          var url = {}
-          url['3.1.1'] = this.passUrl;
-          var current3 = []
-          current3 = JSON.parse(window.localStorage.getItem('currentJson3'))
-          var index = current3['children'].findIndex(item => item.source == 'module 3.1');
-          current3["children"][index].url = JSON.stringify(url);
-          console.log("FINISH ", current3)
-          window.localStorage.setItem('currentJson3', JSON.stringify(current3))
-        } if (fun == 'finish1') {
-          this.instructionModal.hide()
-          this.LanguageService.toHide();
-          this.showVideoFlag = false
-          window.localStorage.setItem('uuid', data['data'].nextuuid)
-          this.subFlagModule3 = this.subFlagModule3 + 1
-          window.localStorage.setItem('subFlagModule3', this.subFlagModule3.toString())
-          this.start1()
-        }
-        if (fun == "start1") {
-          this.showAnswer = true;
-          this.saveData = true;
-          this.passFlags['saveData'] = this.saveData;
-          this.passFlags['showAnswer'] = this.showAnswer;
-          this.passFlags['questionType'] = "mcqTextOption";
-          this.jsonData = data['data'].questionlist
-          this.data = this.jsonData;
+        console.log("api data body", data)
+        if (data["status"] == true) {
+          if (fun == "start") {
+            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 0.2', window.localStorage.getItem('username'), 10);
+            this.passData['apiUrl'] = "modulezerosingleurl/";
+            this.passData['videoUrl'] = data['data'].url;
+            console.log("sacsac",this.passData)
+            this.showVideoFlag = true
+            this.passUrl = data['data'].url;
+            var current0 = [];
+            current0 = JSON.parse(window.localStorage.getItem("currentJson0"));
+            var index = current0["children"].findIndex(
+              item => item.source == "module 0.2");
+            current0["children"][index].url =this.passUrl;
 
-          this.dummy = this.jsonData
-
-          for (var rec in this.dummy) {
-            if (this.dummy[rec].answer == null || this.dummy[rec].answer == "") {
-              this.deleteAdd.push(this.dummy[rec])
-            }
-          }
-          this.dummy = []
-          this.dummy = this.deleteAdd
-          this.data = this.dummy[this.queCount]
-          console.log("quec",this.queCount)
-          this.queCount = 1;
-          if(window.localStorage.getItem("source") == "module 3.1.2.1" || window.localStorage.getItem("source") == "module 3.1.2" || window.localStorage.getItem("source") == "module 3.1.2"){
-            this.queCount = 1;
-          }
-          else if(window.localStorage.getItem("source") == "module 3.1.2.2"){
-            this.queCount = 2;
-          }
-          else if(window.localStorage.getItem("source") == "module 3.1.2.3"){
-            this.queCount = 3;
-          }
-          else if(window.localStorage.getItem("source") == "module 3.1.2.4"){
-            this.queCount = 4;
-          }
-          else if(window.localStorage.getItem("source") == "module 3.1.2.5"){
-            this.queCount = 5;
-          }
-          else if(window.localStorage.getItem("source") == "module 3.1.2.6"){
-            this.queCount = 6;
-          }
-          else if(window.localStorage.getItem("source") == "module 3.1.2.7"){
-            this.queCount = 7;
-          }
-          else if(window.localStorage.getItem("source") == "module 3.1.2.8"){
-            this.queCount = 8;
-          }
-          // for (var rec in this.dummy) {
-          //   if (this.dummy[rec].answer != null) {
-          //     this.deleteAdd.push(rec)
-          //     // delete this.dummy[rec]
-          //     // this.dummy.splice(this.dummy[rec], 1)
-          //     //   this.dummy=rec
-          //     //   index ++ ;
-          //   }
-          // }
-
-          // for (var i = 0; i < this.deleteAdd.length; i++) {
-          //   this.dummy.splice(this.dummy[this.deleteAdd[i]], 1)
-          // }
-          // this.data = this.dummy[this.queCount]
-
-          var index;
-
-          this.data.options.forEach(element => {
-            if (element.value == null) {
-              index = this.data.options.indexOf(element)
-              this.data.options.splice(index, 1)
-            }
-          });
-          this.showInst = false
-        }
-        if (fun == "sendAns") {
-          if (data['message'] == 'your answer stored' || data['message'] == 'your answer stored next question and uuid is') {
-            this.queCount = this.queCount + 1
+            window.localStorage.setItem("currentJson0", JSON.stringify(current0));
+          } else if (fun == "finish1") {
+            this.instructionModal.hide();
+            this.LanguageService.toHide();
             window.localStorage.setItem('uuid', data['data'].nextuuid)
-            this.showAnswer = true;
-            this.saveData = true;
-            this.passFlags['saveData'] = this.saveData;
-            this.passFlags['showAnswer'] = this.showAnswer;
-            this.passFlags['questionType'] = "mcqTextOption";
-            this.jsonData = data['data'].questionlist[0]
-            this.data = this.jsonData;
-            console.log("MY DATA ", this.data,this.queCount)
-            if(this.queCount==2){
-              window.localStorage.setItem('source', "module 3.1.2.2")
-            }
-            else if(this.queCount==3){
-              window.localStorage.setItem('source', "module 3.1.2.3")
-            }
-            else if(this.queCount==4){
-              window.localStorage.setItem('source', "module 3.1.2.4")
-            }
-            else if(this.queCount==5){
-              window.localStorage.setItem('source', "module 3.1.2.5")
-            }
-            else if(this.queCount==6){
-              window.localStorage.setItem('source', "module 3.1.2.6")
-            }
-            else if(this.queCount==7){
-              window.localStorage.setItem('source', "module 3.1.2.7")
-            }
-            else if(this.queCount==8){
-              window.localStorage.setItem('source', "module 3.1.2.8")
-            }
-          } else if (data['message'] == 'exam finish' || data['message'] == 'submodule finish')
-          {
-            this.showVideoFlag = false;
-            window.localStorage.setItem('uuid', data['data'].nextuuid)
-            var current3 = [];
-            current3 = JSON.parse(window.localStorage.getItem("currentJson3"));
-            var index = current3["children"].findIndex(
-              item => item.source == "module 3.1");
-            var moduleJson = current3["children"][index]
-            if(moduleJson["children"].length !=0){
-            var index1 = moduleJson["children"].findIndex(
-            item => item.source == "module 3.1.1");
-            var parentUrls = {}
-            if(moduleJson["children"][index1].url !="" && moduleJson["children"][index1].url !=null && moduleJson["children"][index1].url !=undefined){
-            parentUrls['3.1.1'] = moduleJson["children"][index1].url;
-            current3["children"][index].url = JSON.stringify(parentUrls);
-            }
-            window.localStorage.setItem("currentJson3", JSON.stringify(current3));
-          }
-            this.mainFlagModule3 = 2;
-            this.subFlagModule3 = 1;
-            window.localStorage.setItem('mainFlagModule3', '2');
-            window.localStorage.setItem('subFlagModule3', '1');
-            this.Module3Service.setLocalStorage3(2);
-            var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module3.subMenu3-1'), "next": this.translate.instant('L2Module3Finish.subMenu3-2'), "nextRoute": "/modules/module3/Module3.2" }
+            window.localStorage.setItem('mainFlagModule0                                        ', '3');
+            window.localStorage.setItem('subFlagModule0', '1');
+            window.localStorage.setItem('source', 'module 0.3');
+            this.Module3Service.setLocalStorage3(3);
+            var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module0.subMenu0-2'), "next": this.translate.instant('L2Module0Finish.subMenu0-3'), "nextRoute": "/modules/module0/Module0.3" }
             this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
-          }
+          }  
         }
       },
       error => {
         this.LanguageService.handleError(error.error.message);
-      });
+      }
+    );
   }
+
+
 }

@@ -23,6 +23,7 @@ export class Module022Component implements OnInit {
   showVideoFlag: boolean;
   passUrl: any;
   nextBtnFlag: boolean;
+  nextId=1;
   constructor(
     public LanguageService: LanguageService,
     private LocalstoragedetailsService: LocalstoragedetailsService,
@@ -60,7 +61,12 @@ export class Module022Component implements OnInit {
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
     jsonBody['event'] = 'finish'
-    this.nextApiCall(jsonBody, 'modulezerosingleurl/', 'finish1')
+    if (this.nextId == 2) {
+      this.next()
+    } else {
+      this.nextApiCall(jsonBody, 'modulezerosingleurl/', 'finish1')
+
+    }
   }
   next() {
     var jsonBody = {}
@@ -108,6 +114,7 @@ export class Module022Component implements OnInit {
   }
 
   nextApiCall(jsonBody, apiUrl, fun) {
+    this.nextId = 2;
     this.Module0Service.apiCall(jsonBody, apiUrl).subscribe(
       data => {
         if (data["status"] == true) {

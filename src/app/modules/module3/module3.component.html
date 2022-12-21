@@ -9,8 +9,8 @@
 </div>
 
 <div *ngIf=" mainFlagModule3 == 1">
-  <div *ngIf="startFlag">
-    <div *ngIf="subFlagModule3 == 1 && showVideoFlag">
+  <div>
+    <div *ngIf="subFlagModule3 ==1">
       <div class="row">
         <div class="col-md-12">
           <div class="card ">
@@ -28,17 +28,30 @@
           (click)="next(); ">{{'Stepper.Next' | translate}}</button>
       </div> -->
     </div>
-    <div *ngIf="subFlagModule3 == 2">
-      <div *ngIf="jsonData != undefined && !showInst">
-        <h6 class="questionHead lineHeight">
-          <!-- <b>{{'L2common.caution' | translate}}&nbsp;{{'L2Module3.que3_1' | translate}}</b> -->
-          <span [innerHTML]="'L2Module3.que3_1' | translate"></span>
-           <span class="mt-1 f-right">{{queCount | numberConvertor : 'Devanagari'}} / {{'number.8' | translate}}</span>
-        </h6>
-        <span *ngIf="data" class="custom_counter">{{queCount | numberConvertor : 'Devanagari'}}. </span>
-        <app-mcqcomponent [passFlags]='passFlags' [data]='data' (sendAns)="getAnswer($event)"></app-mcqcomponent>
+    <div *ngIf="subFlagModule3 == 2.1">
+      <div *ngIf="startVideoEvent">
+        <div class="card">
+          <div class="card-footer">
+            <h6 class="text-center">{{'L2Module1.subMenu1-3a' | translate}}</h6>
+          </div>
+          <div class="card-block">
+            <app-video-player [inputData]="videoData" (finishCall)="finishCFU1($event)"></app-video-player>
+          </div>
+        </div>
       </div>
     </div>
+     <div *ngIf="subFlagModule3 == 2.2">
+       <div *ngIf="startVideoEvent">
+         <div class="card">
+           <div class="card-footer">
+             <h6 class="text-center">{{'L2Module3.subMenu1-3b' | translate}}</h6>
+           </div>
+           <div class="card-block">
+             <app-video-player [inputData]="videoData" (finishCall)="finishCFU2($event)"></app-video-player>
+           </div>
+         </div>
+       </div>
+     </div>
   </div>
 </div>
 

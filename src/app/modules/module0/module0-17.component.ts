@@ -5,7 +5,7 @@ import { LanguageService } from './../../language.service';
 import { Router } from '@angular/router';
 import { ToastsManager } from 'ng6-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import {Module0Service} from './module0.service'
+import { Module0Service } from './module0.service'
 
 @Component({
   selector: 'app-module0-17',
@@ -23,6 +23,7 @@ export class Module017Component implements OnInit {
   showVideoFlag: boolean;
   passUrl: any;
   nextBtnFlag: boolean;
+  nextId=1;
   constructor(
     public LanguageService: LanguageService,
     private LocalstoragedetailsService: LocalstoragedetailsService,
@@ -56,11 +57,15 @@ export class Module017Component implements OnInit {
     this.subFlagModule0 = this.subFlagModule0 + 1
     window.localStorage.setItem('subFlagModule0', this.subFlagModule0.toString());
     this.instructionModal.hide();
-    this.nextBtnFlag = true
     var jsonBody = {}
-    jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
-    jsonBody['event'] = 'finish'
-    this.nextApiCall(jsonBody, 'modulezerosingleurl/', 'finish1')
+    jsonBody['submoduleiitemd'] = window.localStorage.getItem('uuid')
+    jsonBody['event'] = 'finish';
+    if (this.nextId == 2) {
+      this.next()
+    } else {
+      this.nextApiCall(jsonBody, 'modulezerosingleurl/', 'finish1')
+
+    }
   }
   next() {
     var jsonBody = {}
@@ -108,6 +113,7 @@ export class Module017Component implements OnInit {
   }
 
   nextApiCall(jsonBody, apiUrl, fun) {
+    this.nextId = 2;
     this.Module0Service.apiCall(jsonBody, apiUrl).subscribe(
       data => {
         if (data["status"] == true) {

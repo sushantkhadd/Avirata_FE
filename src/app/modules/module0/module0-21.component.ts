@@ -22,6 +22,7 @@ export class Module021Component implements OnInit {
   )
   showVideoFlag: boolean;
   passUrl: any;
+  
   constructor(
     public LanguageService: LanguageService,
     private LocalstoragedetailsService: LocalstoragedetailsService,

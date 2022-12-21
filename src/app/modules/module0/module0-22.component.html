@@ -51,10 +51,8 @@
           <p class="px-5 text-center">तुमचा व्हिडिओ पूर्ण झाला.</p>
           <hr />
           <div class="col-md-12 text-right">
-             <button class="btn btn-primary text-center" *ngIf="!nextBtnFlag" appPreventDoubleClick
-              (debounceClick)="nextvideo()">{{'Stepper.Next' | translate}}</button>
-              <button class="btn btn-primary text-center" *ngIf="nextBtnFlag" appPreventDoubleClick
-              (debounceClick)="next()">{{'Stepper.Next' | translate}}</button>
+             <button class="btn btn-primary text-center" appPreventDoubleClick
+              (debounceClick)="nextvideo()">{{'Stepper.Next' | translate}}</button>             
           </div>
         </div>
       </div>
