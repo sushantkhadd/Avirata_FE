@@ -35,7 +35,7 @@ export class Module019Component implements OnInit {
   }
   public passData = {}; 
   ngOnInit() {
-    this.start(); 
+    // this.start(); 
   }
   start() {
     var jsonBody = {}
