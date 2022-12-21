@@ -5,7 +5,7 @@ import { LanguageService } from './../../language.service';
 import { Router } from '@angular/router';
 import { ToastsManager } from 'ng6-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import {Module0Service} from './module0.service'
+import { Module0Service } from './module0.service'
 
 @Component({
   selector: 'app-module0-31',
@@ -21,7 +21,7 @@ export class Module031Component implements OnInit {
   constructor(
     public LanguageService: LanguageService,
     private LocalstoragedetailsService: LocalstoragedetailsService,
-    private router: Router,     
+    private router: Router,
     public Module0Service: Module0Service,
     public toastr: ToastsManager,
     vcr: ViewContainerRef,
@@ -33,7 +33,7 @@ export class Module031Component implements OnInit {
   public passFlags = {}; data; myjsondata; dummy; deleteAdd = []; questionCount;
   questionlist; optionArray; counter; disableIt; questionId; mainCounter;
   dummyArray = []; jsonObject = {}; ansJsonLength;
-  public apiEndStart; apiEndSendAns; apiEndFinish;startFlag;
+  public apiEndStart; apiEndSendAns; apiEndFinish; startFlag;
 
   ngOnInit() {
     this.questionlist = [];
@@ -43,13 +43,12 @@ export class Module031Component implements OnInit {
     this.startTest = false
     this.ansJsonLength = 0;
 
-    if (this.mainFlagModule0 == 4)
-    {
+    if (this.mainFlagModule0 == 31) {
       this.showPart1Flag = false
       if (this.subFlagModule0 == 1 || this.subFlagModule0 == 2) {
         // this.start1()
       }
-     else if(this.subFlagModule0 == 3) {
+      else if (this.subFlagModule0 == 3) {
         // this.start2()
       }
     }
@@ -65,31 +64,34 @@ export class Module031Component implements OnInit {
 
     this.showPart1Flag = true;
     this.apiEndStart = 'baselinetwoseconetwo/';
-      this.apiEndSendAns = 'baselinetwoseconetwo/';
-      this.apiEndFinish = 'baselinetwoseconetwo/';
-      // this.startJson['examtype'] = window.localStorage.getItem('uuid');
+    this.apiEndSendAns = 'baselinetwoseconetwo/';
+    this.apiEndFinish = 'baselinetwoseconetwo/';
+    // this.startJson['examtype'] = window.localStorage.getItem('uuid');
 
-      this.passData['start'] = this.apiEndStart;
-      this.passData['answer'] = this.apiEndSendAns;
-      this.passData['finish'] = this.apiEndFinish;
-      this.passData['jsonData'] = jsonData;
-      this.LanguageService.googleEventTrack('L3SubmoduleStatus', 
+    this.passData['start'] = this.apiEndStart;
+    this.passData['answer'] = this.apiEndSendAns;
+    this.passData['finish'] = this.apiEndFinish;
+    this.passData['jsonData'] = jsonData;
+    this.LanguageService.googleEventTrack('L3SubmoduleStatus',
       'Module 0.31', window.localStorage.getItem('username'), 10);
   }
 
-  saveAnswer(e){
-    if(e=="finish"){
-      this.showPart1Flag = false;
-      this.subFlagModule0=2;
-      console.log("dsffffffffffAWQEW",this.showPart1Flag,this.mainFlagModule0)
-      this.start1();
+  saveAnswer(e) {
+    this.subFlagModule0 = this.subFlagModule0 + 1;
+    window.localStorage.setItem('subFlagModule0', this.subFlagModule0.toString());
+    if (this.subFlagModule0 < 5) {
+      if (e == "finish") {
+        this.showPart1Flag = false;
+        this.start1();
+      }
+    } else {
+      if (e == "finish1") {
+        this.showPart1Flag = false;
+        this.start2();
+      }
     }
-    if(e=="finish1"){
-      this.showPart1Flag = false;
-      this.subFlagModule0=3;
-      console.log("dsffffffffffAWQEW",this.showPart1Flag,this.mainFlagModule0)
-      this.start2();
-    }
+
+
   }
 
   start2() {
@@ -101,13 +103,13 @@ export class Module031Component implements OnInit {
 
     this.showPart1Flag = true;
     this.apiEndStart = 'baselinetwosecthree/';
-      this.apiEndSendAns = 'baselinetwosecthree/';
-      this.apiEndFinish = 'baselinetwosecthree/';
-      // this.startJson['examtype'] = window.localStorage.getItem('uuid');
+    this.apiEndSendAns = 'baselinetwosecthree/';
+    this.apiEndFinish = 'baselinetwosecthree/';
+    // this.startJson['examtype'] = window.localStorage.getItem('uuid');
 
-      this.passData['start'] = this.apiEndStart;
-      this.passData['answer'] = this.apiEndSendAns;
-      this.passData['finish'] = this.apiEndFinish;
-      this.passData['jsonData'] = jsonData;
+    this.passData['start'] = this.apiEndStart;
+    this.passData['answer'] = this.apiEndSendAns;
+    this.passData['finish'] = this.apiEndFinish;
+    this.passData['jsonData'] = jsonData;
   }
 }
