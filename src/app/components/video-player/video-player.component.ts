@@ -51,6 +51,8 @@ export class VideoPlayerComponent implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
   ngOnInit() {
+
+    console.log('hiiiiiii rutu',this.inputData)
     this.selectedValue = "";
     this.viewCorrectAnswer = false;
     this.submitDisabled = false;

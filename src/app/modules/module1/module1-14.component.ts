@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewContainerRef } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { LanguageService } from "src/app/language.service";
 import { FullLayoutService } from "src/app/layouts/full-layout.service";
@@ -13,83 +13,124 @@ import { environment } from "src/environments/environment";
   templateUrl: "./module1-14.component.html"
 })
 export class Module114Component implements OnInit {
-  constructor(public FullLayoutService: FullLayoutService, public LanguageService: LanguageService, public Module1Service: Module1Service, public toastr: ToastsManager, public translate: TranslateService, public router: Router, public LocalstoragedetailsService: LocalstoragedetailsService) { }
 
-  public finalCount;
-  public imgUrl; passValues = {};
-  public download; link; showCFU; apiUrl;
-  public cfuQuestion = {};
-  public startPdf; mainFlagModule1; subFlagModule1; finishJSONBody = {};
-  private pdfUrl = environment.pdfUrl; pdf1;
-
+  constructor(public Module1Service: Module1Service, public translate: TranslateService, public LanguageService: LanguageService, public FullLayoutService: FullLayoutService, public router: Router, public LocalstoragedetailsService: LocalstoragedetailsService, public toastr: ToastsManager, vcr: ViewContainerRef) {
+    this.toastr.setRootViewContainerRef(vcr);
+  }
+  answer;
+  question;
+  public mainFlagModule1;
+  subFlagModule1;
+  questionid; trimFlag; showLimit; postWordCount; startFlag
   ngOnInit() {
-    this.pdf1 = 'https://s3-ap-southeast-1.amazonaws.com/maacpd/english/level1/module4/4.8_our+progress+card.pdf'
-    this.startPdf = false
-    this.mainFlagModule1 = parseInt(window.localStorage.getItem('mainFlagModule1'));
-    this.subFlagModule1 = parseInt(window.localStorage.getItem('subFlagModule1'));
+    this.answer = "";
+    this.question = "";
+    this.postWordCount = 0;
+    console.log('count', this.postWordCount)
+    this.mainFlagModule1 = parseInt(
+      window.localStorage.getItem("mainFlagModule1")
+    );
+    this.subFlagModule1 = parseInt(
+      window.localStorage.getItem("subFlagModule1")
+    );
 
-    if (this.mainFlagModule1 > 12)
-    {
-      this.showCFU = false;
-      this.download = false;
-      this.link = '';
-      this.apiUrl = '/assets/jsonfile/module4_6.json'
-      this.finalCount = 22;
-      this.passValues['download'] = this.download;
-      this.passValues['link'] = this.link;
-      this.passValues['finalcount'] = this.finalCount;
-      this.passValues['showcfu'] = this.showCFU;
-      this.passValues['apiurl'] = this.apiUrl;
-      this.passValues["unlockView"] = "static";
-      var unlockJson = {}
-      unlockJson = JSON.parse(window.localStorage.getItem('currentJson1'))
-      if (unlockJson['children'].length > 0)
-      {
-        var index = unlockJson['children'].findIndex(item =>
-          item.source == "module 1.12");
+    if (this.mainFlagModule1 == 14) {
+      this.startFlag = false;
+      // this.startEvent();
+    }
+  }
 
-        if (unlockJson['children'][index].url != null)
-        {
-          this.passValues['url'] = unlockJson['children'][index].url
-        }
+  ngDoCheck() {
+
+    if (this.answer) {
+      this.postWordCount = this.answer.trim().split(/\s+/).length;
+      if(this.postWordCount == 0 || this.postWordCount > 150){
+        this.showLimit=false
+      }
+      else if(this.postWordCount >=5){
+        this.showLimit=true
+      }
+
+    }
+
+    if (this.answer != null && this.answer != "" && this.answer != undefined) {
+      if (this.answer.trim().length == 0) {
+        this.trimFlag = true;
+      } else if (this.postWordCount > 150 || this.postWordCount < 5) {
+        this.trimFlag = true;
+      } else {
+        this.trimFlag = false;
       }
     }
-
-  }
-  finishPDF(e) {
-    this.finishJSONBody['submoduleid'] = window.localStorage.getItem('uuid');
-    this.finishJSONBody['useroption'] = "";
-    this.finishJSONBody['event'] = "finish";
-    if (e == true)
-    {
-      this.Module1Service.finishModuleCall(this.finishJSONBody, 12, '/modules/module2', '/modules/module2')
+    else{
+      if (this.answer == "" || this.answer == null || this.answer == undefined){
+        this.postWordCount = 0;
+      }
     }
   }
 
-  start() {
-    this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 1.12', window.localStorage.getItem('username'), 10);
-    this.finishJSONBody['submoduleid'] = window.localStorage.getItem('uuid');
-    this.finishJSONBody['useroption'] = "";
-    this.finishJSONBody['event'] = "start";
-
-    this.Module1Service.apiCall(this.finishJSONBody, 'moduleonesingleurl/')
-      .subscribe(
-        data => {
-          if (data['message'] == 'ok' || data['message'] == 'submodule started')
-          {
-            this.passValues['url'] = data['data'].url;
-            this.startPdf = true;
-            var current1 = []
-            current1 = JSON.parse(window.localStorage.getItem('currentJson1'))
-            var child = {}
-            var index = current1['children'].findIndex(item => item.source == 'module 1.12');
-            current1['children'][index].url = data['data'].url;
-            window.localStorage.setItem('currentJson1', JSON.stringify(current1))
-          }
-        },
-        error => {
-          this.LanguageService.handleError(error.error.message);
-        });
+  startEvent() {
+    var jsonBody = {};
+    jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
+    jsonBody["useranswer"] = "";
+    jsonBody["event"] = "start";
+    var apiUrl = "l4module1freetext/";
+    this.apiCall(jsonBody, apiUrl, "start");
   }
 
+  finish() {
+    var jsonBody = {};
+    jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
+    var ansJson = {};
+    ansJson[this.questionid] = (this.answer).trim();
+    jsonBody["useranswer"] = ansJson;
+    jsonBody["event"] = "answer";
+    var apiUrl = "l4module1freetext/";
+    this.apiCall(jsonBody, apiUrl, "finish");
+  }
+
+  apiCall(jsonBody, apiUrl, fun) {
+    this.Module1Service.apiCall(jsonBody, apiUrl)
+      .subscribe(
+      data => {
+        if (data['status'] == true) {
+          if (fun == 'start') {
+            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 1.14', window.localStorage.getItem('username'), 10);
+            this.startFlag = true;
+            this.question = data["data"]["questionlist"][0].question;
+            this.questionid = data["data"]["questionlist"][0].questionid;
+          }
+          else if (fun == "finish") {
+            this.mainFlagModule1 = 15;
+            window.localStorage.setItem("subFlagModule1", "1");
+            window.localStorage.setItem(
+              "uuid",
+              data["data"].nextuuid
+            );
+            window.localStorage.setItem("mainFlagModule1", "15");
+            window.localStorage.setItem("subFlagModule1", "1");
+            window.localStorage.setItem("source", "module 1.15.1");
+            this.Module1Service.setLocalStorage1(15);
+            var obj = {
+              type: "submodule",
+              route: true,
+              current: this.translate.instant(
+                "L2Module1.subMenu1-14"
+              ),
+              next: this.translate.instant(
+                "L2Module1Finish.subMenu1-15"
+              ),
+              nextRoute: "/modules/module1/Module1.15"
+            };
+            this.LocalstoragedetailsService.setModuleStatus(
+              JSON.stringify(obj)
+            );
+          }
+        }
+      },
+      error => {
+        this.LanguageService.handleError(error.error.message);
+      }
+      );
+  }
 }

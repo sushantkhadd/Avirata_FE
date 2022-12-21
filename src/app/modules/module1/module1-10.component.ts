@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { LocalstoragedetailsService } from 'src/app/services/localstoragedetails.service';
 import { ToastsManager } from 'ng6-toastr';
 import { TranslateService } from '@ngx-translate/core';
+import { FullLayoutService } from 'src/app/layouts/full-layout.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-module1-10',
@@ -12,88 +14,97 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class Module110Component implements OnInit {
 
-  public mainFlagModule1 = parseInt(window.localStorage.getItem('mainFlagModule1'));
-  public subFlagModule1 = parseInt(window.localStorage.getItem('subFlagModule1'));
-  constructor(public LanguageService: LanguageService, public Module43Service: Module1Service, public router: Router, public LocalstoragedetailsService: LocalstoragedetailsService, public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService) {
+  public finalCount;
+  public imgUrl; passValues = {};
+  public download; link; showCFU; apiUrl;
+  public cfuQuestion = {};
+  public startPdf; mainFlagModule1; subFlagModule1; finishJSONBody = {};
+  private pdfUrl = environment.pdfUrl; pdf1;
+
+  public showPDF; docData = {}; urlArray = {};
+
+  constructor(public Module1Service: Module1Service, public FullLayoutService: FullLayoutService, public LanguageService: LanguageService, public router: Router, public LocalstoragedetailsService: LocalstoragedetailsService, public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService) {
     this.toastr.setRootViewContainerRef(vcr);
   }
-  public mainJson = {}; passData6 = {}; showInst; queCount;
-  startFlag;audioSrc ={};startAudio;
-  public inst =
-    "दिलेल्या प्रसंगातील घटना (A) - अविवेकी धारणा (B) - प्रतिसाद (C) - वाद,संवाद, प्रतिवाद(D) हे ओळखा. प्रत्येक प्रसंगाचा ऑडिओ देखील तुम्ही ऐकला आहे. त्या त्या चौकटीत योग्य मुद्दा नेऊन (Drag-drop) ठेवा.";
+
   ngOnInit() {
-    this.queCount = 0
+    this.pdf1 = 'https://s3-ap-southeast-1.amazonaws.com/maacpd/Level2/Module5/5.7/%E0%A5%AB.%E0%A5%AD+-+%E0%A4%85%E0%A4%AD%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%AE%E0%A4%A4%E0%A4%BE+%E0%A4%9A%E0%A4%BE%E0%A4%9A%E0%A4%A3%E0%A5%80+%E0%A4%85%E0%A4%B9%E0%A4%B5%E0%A4%BE%E0%A4%B2+%E0%A4%B8%E0%A4%AE%E0%A4%9C%E0%A4%A3%E0%A5%87.pdf';
 
-    if (this.mainFlagModule1 == 10)
-    {
-      this.showInst = true
-      // this.start1()
+    this.mainFlagModule1 = parseInt(window.localStorage.getItem('mainFlagModule1'));
+    this.subFlagModule1 = parseInt(window.localStorage.getItem('subFlagModule1'));
+
+    this.urlArray['src1'] = ''
+    this.urlArray['pdf_thumb'] = './../../assets/img/pdf_thumb.png';
+
+
+    this.startPdf = false;
+
+    if (this.mainFlagModule1 < 10) {
+
+    }
+    else if (this.mainFlagModule1 == 10) {
+
+    }
+
+    else if (this.mainFlagModule1 > 10) {
+      this.docData['download'] = false
+      this.docData['link'] = ''
+      this.docData['state'] = 'static';
+      this.passValues["unlockView"] = "static";
+
+       var unlockJson={}
+       unlockJson=JSON.parse(window.localStorage.getItem('currentJson1'))
+
+      if (unlockJson['children'].length > 0) {
+        var index = unlockJson['children'].findIndex(item =>
+          item.source == "module 1.10");
+          console.log("unlockjson",unlockJson['children'][index].url)
+        if (unlockJson['children'][index].url != null) {
+          this.passValues['url'] = unlockJson['children'][index].url
+        }
+      }
+      this.docData['showcfu'] = false;
+
     }
   }
-  start1() {
-    var jsonBody = {}
-    jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
-    jsonBody['event'] = 'start'
-    this.apiCall(jsonBody, "moduleonemcqstartfinish/", "start1");
-  }
-  getAnswer6(e) {
-    console.log("get ans ", e)
-    var jsonBody = {}
-    jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
-    jsonBody['event'] = 'finish'
-    this.apiCall(jsonBody, "moduleonemcqstartfinish/", "finish1");
+  start() {
+    console.log("pdf")
+    this.startPdf = true;
+    this.docData['state'] = 'dyanamic';
+    this.docData['download'] = false;
+    this.docData['link'] = '';
+
+    this.docData['finalcount'] = 4;
+    this.docData['showcfu'] = true;
+    this.docData['apiurl'] = 'moduleonecfustart/';
+    this.docData['apiurlResult'] = 'moduleonecfustart/';
+    this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 1.10', window.localStorage.getItem('username'), 10);
   }
 
-  apiCall(jsonBody, apiUrl, fun) {
-    this.Module43Service.apiCall(jsonBody, apiUrl)
-      .subscribe(
-        data => {
-          if (fun == "start1")
-          {
-            this.passData6 = data["data"];
-            this.passData6['type'] = 'single'
-            this.showInst = false;
-            console.log("audioourl",data["data"].url)
-            this.audioSrc['url'] = data["data"].url;
-            this.audioSrc["state"] = "dynamic";
-            this.startAudio = true;
-            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 1.10', window.localStorage.getItem('username'), 10);
-          } else if (fun == "finish1")
-          {
-            if (data['message'] == "submodule finish next uuid is")
-            {
-              window.localStorage.setItem('uuid', data['data'].nextuuid)
-              this.subFlagModule1++;
-              window.localStorage.setItem("subFlagModule1", JSON.stringify(this.subFlagModule1));
-              this.start1();
-              // this.toastr.success(this.translate.instant("L2common.rightanswer"));
-            } else if (data['message'] == "submodule finish")
-            {
-              window.localStorage.setItem('uuid', data['data'].nextuuid)
-              this.mainFlagModule1 = 11;
-              this.subFlagModule1 = 1;
-              window.localStorage.setItem('mainFlagModule1', '11');
-              window.localStorage.setItem('subFlagModule1', '1');
-              this.Module43Service.setLocalStorage1(11);
-              var obj = {
-                "type": "submodule",
-                "route": true,
-                "current": this.translate.instant('L2Module1.subMenu1-10'),
-                "next": this.translate.instant('L2Module1Finish.subMenu1-11'),
-                "nextRoute": "/modules/module1/Module1.11"
-              }
-              this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
-            }
-          }
-        },
-        error => {
-          this.LanguageService.handleError(error.error.message);
-        });
-  }
+  checkAnswer(e) {
+ console.log("complete status")
+ console.log("com ",e)
+    var current1=[]
+    current1=JSON.parse(window.localStorage.getItem('currentJson1'))
+    var child={}
+     var index=current1['children'].findIndex(item => item.source=='module 1.10');
+    current1['children'][index].url=e['url']
+    console.log("urlllllllll",e['url'])
+    window.localStorage.setItem('currentJson1',JSON.stringify(current1))
 
-  finishAudio(e){
-    if(e){
-      this.startAudio=false;
-    }
+    this.mainFlagModule1 = 11;
+    this.subFlagModule1 = 1;
+    window.localStorage.setItem("mainFlagModule1", "11");
+    window.localStorage.setItem("subFlagModule1", "1");
+    this.Module1Service.setLocalStorage1(11);
+    var obj = {
+      type: "submodule",
+      route: true,
+      current: this.translate.instant("L2Module1.subMenu1-10"),
+      next: this.translate.instant("L2Module1Finish.subMenu1-11"),
+      nextRoute: "/modules/module1/Module1.11"
+    };
+    this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+
   }
 }
