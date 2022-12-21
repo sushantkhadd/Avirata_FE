@@ -1,30 +1,25 @@
 <div *ngIf="questionType == 'mcqTextOption'">
-    <span class="counter"
-        *ngIf="mysubModule1==2 || mysubModule2==3 || mysubModule3==5 || mysubModule3==9 || mysubModule3==11 || mysubModule4==5 || mysubModule4==7">{{queCount
-        | numberConvertor : 'Devanagari'}} / {{'number.5' | translate}}</span>
+    <span class="counter" *ngIf="mysubModule1==2 || mysubModule2==3 || mysubModule3==5 || mysubModule3==9 || mysubModule3==11 || mysubModule4==5 || mysubModule4==7">{{queCount | numberConvertor : 'Devanagari'}} / {{'number.5' | translate}}</span>
     <span class="counter" *ngIf="mysubModule1==4">{{queCount | numberConvertor : 'Devanagari'}} / १२</span>
     <span class="counter" *ngIf="mysubModule1==6">{{queCount | numberConvertor : 'Devanagari'}} / ७</span>
-    <span class="counter" *ngIf="mysubModule5==7">{{queCount | numberConvertor : 'Devanagari'}} / ३०</span>
-    <span class="counter" *ngIf="mysubModule0==30">{{queCount | numberConvertor : 'Devanagari'}} / २०</span>
-    <span class="counter" *ngIf="mysubModule3==7 || mysubModule4==11">{{queCount | numberConvertor : 'Devanagari'}} /
-        ५</span>
+    <span class="counter" *ngIf="mysubModule5==7">{{queCount | numberConvertor : 'Devanagari'}} / ३</span>
+    <span class="counter" *ngIf="mysubModule0==30">{{queCount | numberConvertor : 'Devanagari'}} / ३०</span>
+    <span class="counter" *ngIf="mysubModule3==7 || mysubModule4==11">{{queCount | numberConvertor : 'Devanagari'}} / ५</span>
     <div class="row">
         <div class="col-sm-12 col-md-12">
             <div class="card">
                 <div class="" *ngIf="statement">
                     <div *ngIf="queUrl" class="card-header mcq-title 123">
-                        <span class="inst-text" *ngIf="title"><strong>{{title}} :<br /> </strong></span>
+                        <span class="inst-text" *ngIf="title"><strong>{{title}} :<br/> </strong></span>
                         <label class="f-1x p-2"><span [innerHTML]="statement"></span>
-                        </label>
+                    </label>
                     </div>
                     <div *ngIf="!queUrl" class="card-header mcq-title">
-                        <span class="inst-text" *ngIf="title"><strong>{{title}} :<br /> </strong></span>
-                        <label class="f-1x p-2"><span *ngIf="queCount">{{queCount | numberConvertor : 'Devanagari'}}.
-                            </span><span [innerHTML]="statement"></span>
-                        </label><br>
-                        <label *ngIf="mysubModule0==30 && queDescription !=''" class="f-1x"><span
-                                [innerHTML]="queDescription"></span>
-                        </label>
+                        <span class="inst-text" *ngIf="title"><strong>{{title}} :<br/> </strong></span>
+                        <label class="f-1x p-2"><span [innerHTML]="statement"></span>
+                    </label><br>
+                    <label *ngIf="mysubModule0==30 && queDescription !=''" class="f-1x"><span [innerHTML]="queDescription"></span>
+                    </label>
                     </div>
                     <!-- <h6 *ngIf="!queUrl" class="lineHeight" [innerHTML]="statement"></h6> -->
                 </div>
@@ -41,13 +36,11 @@
                         <div class="dx-fieldset">
                             <div class="dx-field">
                                 <div class="dx-field-value" *ngIf="mysubModule3!=7 &&mysubModule4!=11">
-                                    <dx-radio-group #eventRadioGroup id="mcq" [items]="priorities"
-                                        (onValueChanged)="onValueChanged($event)" layout="layout">
+                                    <dx-radio-group #eventRadioGroup id="mcq" [items]="priorities" (onValueChanged)="onValueChanged($event)" layout="layout">
                                     </dx-radio-group>
                                 </div>
                                 <div class="dx-field-value" *ngIf="mysubModule3==7 || mysubModule4==11">
-                                    <dx-radio-group #eventRadioGroup id="mcq" [value]="alreadyAns1" [items]="priorities"
-                                        (onValueChanged)="onValueChanged($event)" layout="layout">
+                                    <dx-radio-group #eventRadioGroup id="mcq" [value]="alreadyAns1" [items]="priorities" (onValueChanged)="onValueChanged($event)" layout="layout">
                                     </dx-radio-group>
                                 </div>
                             </div>
@@ -59,10 +52,10 @@
     </div>
 
     <div class="text-center mt-4"
-        *ngIf="mysubModule == 3 || mysubModule0 == 30 || mysubModule6 == 2|| mysubModule7 == 2|| mysubModule7 == 3 || mysubModule2 == 3 || mysubModule3 == 1 || mysubModule3 == 5 || mysubModule3 == 9 || mysubModule3 == 11 || mysubModule4 == 5 || mysubModule4 == 7 || mysubModule5 == 7 || mysubModule3==7 || mysubModule4==11">
+      *ngIf="mysubModule == 3 || mysubModule0 == 30 || mysubModule6 == 2|| mysubModule7 == 2|| mysubModule7 == 3 || mysubModule2 == 3 || mysubModule3 == 1 || mysubModule3 == 5 || mysubModule3 == 9 || mysubModule3 == 11 || mysubModule4 == 5 || mysubModule4 == 7 || mysubModule5 == 7 || mysubModule3==7 || mysubModule4==11"> 
         <div class="">
             <button class="btn btn-primary" appPreventDoubleClick [disabled]="!submitFlag"
-                (debounceClick)="goNext5_3()">{{'Cfu.submit' | translate}}</button>
+              (debounceClick)="goNext5_3()">{{'Cfu.submit' | translate}}</button>
         </div><br>
     </div>
 </div>
@@ -82,9 +75,8 @@
                         <div class="col-md-12">
                             <div class="radio">
                                 <label class="radio-answer">
-                                    <input id={{item.option}} name="radios" type="radio" value={{item.option}}
-                                        (click)="setradio(item.option)"><span class="radio-label">{{item.value}}</span>
-                                </label>
+                                <input id={{item.option}} name="radios" type="radio" value={{item.option}} (click)="setradio(item.option)"><span class="radio-label">{{item.value}}</span>
+                            </label>
                             </div>
                         </div>
                         <div *ngIf="this.data.url">
@@ -104,20 +96,19 @@
                 <div class="card-header quetitle" *ngIf="statement">
                     <!-- <label><span [innerHTML]="statement"></span>
                  </label> -->
-                    <h6>
-                        <span *ngIf="mysubModule5 == 23" [innerHTML]="'L2Module5.sub_5_23_5' | translate"></span>
-                        <span [innerHTML]="statement"></span>
-                    </h6>
+                 <h6>
+                    <span *ngIf="mysubModule5 == 23" [innerHTML]="'L2Module5.sub_5_23_5' | translate"></span>
+                     <span [innerHTML]="statement"></span>
+                 </h6>
                 </div>
                 <div class="card-block pt-0" [class.pt-0]="queCount">
                     <div class="row">
                         <div class="radio-opt-group">
                             <div *ngFor="let item of tasks;let i=index" class="col-md-12">
                                 <span class="col-xs-11 col-sm-11 col-md-11">
-                                    <input type="checkbox" id={{i}} (change)="taskSelect($event,i,item.statementid)"
-                                        class="multiCheckStyle">&nbsp;
-                                    <label for={{i}}>{{item.statement}}</label>
-                                </span>
+                  <input type="checkbox" id={{i}} (change)="taskSelect($event,i,item.statementid)" class="multiCheckStyle">&nbsp;
+                  <label for={{i}}>{{item.statement}}</label>
+                </span>
                             </div>
                         </div>
                     </div>
@@ -129,7 +120,7 @@
     <div class="text-center">
         <div class="">
             <button class="btn btn-primary mt-4" appPreventDoubleClick [disabled]="!submitFlag"
-                (debounceClick)="goNext5_3()">{{'Cfu.submit' | translate}}</button>
+              (debounceClick)="goNext5_3()">{{'Cfu.submit' | translate}}</button>
         </div><br>
     </div>
 </div>
@@ -148,8 +139,7 @@
                         <div class="dx-fieldset">
                             <div class="dx-field">
                                 <div class="dx-field-value">
-                                    <dx-radio-group #eventRadioGroup id="mcq" [items]="priorities"
-                                        (onValueChanged)="onValueChangedYesNoType($event)">
+                                    <dx-radio-group #eventRadioGroup id="mcq" [items]="priorities" (onValueChanged)="onValueChangedYesNoType($event)">
                                     </dx-radio-group>
                                 </div>
                             </div>
@@ -172,8 +162,7 @@
                         <div class="dx-fieldset">
                             <div class="dx-field">
                                 <div class="dx-field-value">
-                                    <dx-radio-group #eventRadioGroup id="mcq" [items]="subPriorities"
-                                        (onValueChanged)="onValueChangedYesNoType2($event)">
+                                    <dx-radio-group #eventRadioGroup id="mcq" [items]="subPriorities" (onValueChanged)="onValueChangedYesNoType2($event)">
                                     </dx-radio-group>
                                 </div>
                             </div>
@@ -187,7 +176,7 @@
     <div class="text-center">
         <div class="">
             <button class="btn btn-primary" appPreventDoubleClick [disabled]="!submitFlag"
-                (debounceClick)="submitYesNo()">{{'Cfu.submit' | translate}}</button>
+              (debounceClick)="submitYesNo()">{{'Cfu.submit' | translate}}</button>
         </div><br>
     </div>
 </div>
@@ -199,20 +188,15 @@
                 <div class="card-header" [class.p-0]="mysubModule5==18" *ngIf="statement">
                     <!-- <label><span [innerHTML]="statement"></span>
                  </label> -->
-                    <h6 [class.questionHead]="mysubModule5==18 || mysubModule5==23"
-                        [class.lineHeight]="mysubModule5==18 || mysubModule5==23"><span
-                            *ngIf="mysubModule5==18 && mysubFlagModule5==3">({{'L2Module0.part3' | translate}}) -
-                        </span><span [innerHTML]="statement"></span></h6>
+                    <h6 [class.questionHead]="mysubModule5==18 || mysubModule5==23" [class.lineHeight]="mysubModule5==18 || mysubModule5==23"><span *ngIf="mysubModule5==18 && mysubFlagModule5==3">({{'L2Module0.part3' | translate}}) - </span><span [innerHTML]="statement"></span></h6>
                 </div>
                 <div class="card-block pt-0" [class.pt-0]="queCount">
-                    <div *ngIf="queCount" class="badge badge-custom ml-3">{{queCount | numberConvertor : 'Devanagari'}}
-                        / {{totalQueCount | numberConvertor : 'Devanagari'}}</div>
+                    <div *ngIf="queCount" class="badge badge-custom ml-3">{{queCount | numberConvertor : 'Devanagari'}} / {{totalQueCount | numberConvertor : 'Devanagari'}}</div>
                     <div class="form float-left">
                         <div class="dx-fieldset">
                             <div class="dx-field">
                                 <div class="dx-field-value">
-                                    <dx-radio-group #eventRadioGroup id="mcq" [items]="priorities"
-                                        (onValueChanged)="onValueChangedYesNoType($event)">
+                                    <dx-radio-group #eventRadioGroup id="mcq" [items]="priorities" (onValueChanged)="onValueChangedYesNoType($event)">
                                     </dx-radio-group>
                                 </div>
                             </div>
@@ -226,7 +210,7 @@
     <div class="text-center">
         <div class="">
             <button class="btn btn-primary mt-4" appPreventDoubleClick [disabled]="!submitFlag"
-                (debounceClick)="submitYesNo()">{{'Cfu.submit' | translate}}</button>
+              (debounceClick)="submitYesNo()">{{'Cfu.submit' | translate}}</button>
         </div><br>
     </div>
 </div>
@@ -236,41 +220,31 @@
         <div class="col-sm-12 col-md-12">
             <div class="card">
                 <div class="card-header" *ngIf="item.statement || item.question">
-                    <span *ngIf="mysubModule4==12 || mysubModule4==1" class="pr-2">{{totalBunchCounter +(i + 1) |
-                        numberConvertor : 'Devanagari'}}. </span>
-                    <span *ngIf="mysubModule5==23 || mysubModule5==18" class="pr-2">{{(i + 1) | numberConvertor :
-                        'Devanagari'}}. </span>
+                  <span *ngIf="mysubModule4==12 || mysubModule4==1" class="pr-2">{{totalBunchCounter +(i + 1) | numberConvertor : 'Devanagari'}}. </span>
+                  <span *ngIf="mysubModule5==23 || mysubModule5==18" class="pr-2">{{(i + 1) | numberConvertor : 'Devanagari'}}. </span>
                     <h6 [innerHTML]="item.statement" class="d-inline-block"></h6>
-                    <h6 *ngIf="mysubModule5==23 || mysubModule5==18" [innerHTML]="item.question" class="d-inline-block">
-                    </h6>
+                    <h6 *ngIf="mysubModule5==23 || mysubModule5==18" [innerHTML]="item.question" class="d-inline-block"></h6>
                 </div>
                 <div class="card-block pt-0" [class.pt-0]="queCount">
-                    <div *ngIf="queCount" class="badge badge-custom ml-3">{{queCount | numberConvertor : 'Devanagari'}}
-                        / {{totalQueCount | numberConvertor : 'Devanagari'}}</div>
+                    <div *ngIf="queCount" class="badge badge-custom ml-3">{{queCount | numberConvertor : 'Devanagari'}} / {{totalQueCount | numberConvertor : 'Devanagari'}}</div>
                     <div class="form float-left">
                         <div class="dx-fieldset">
                             <div class="dx-field">
                                 <div class="dx-field-value" *ngIf="mysubModule5==23 || mysubModule5==18">
-                                    <dx-radio-group *ngIf="i==0" #eventRadioGroup id="mcq" [items]="priorities"
-                                        (onValueChanged)="onValueChangedMcqBunch($event,item.questionid,i)">
+                                    <dx-radio-group *ngIf="i==0" #eventRadioGroup id="mcq" [items]="priorities" (onValueChanged)="onValueChangedMcqBunch($event,item.questionid,i)">
                                     </dx-radio-group>
-                                    <dx-radio-group *ngIf="i==1" #eventRadioGroup id="mcq" [items]="priorities1"
-                                        (onValueChanged)="onValueChangedMcqBunch($event,item.questionid,i)">
+                                    <dx-radio-group *ngIf="i==1" #eventRadioGroup id="mcq" [items]="priorities1" (onValueChanged)="onValueChangedMcqBunch($event,item.questionid,i)">
                                     </dx-radio-group>
-                                    <dx-radio-group *ngIf="i==2" #eventRadioGroup id="mcq" [items]="priorities2"
-                                        (onValueChanged)="onValueChangedMcqBunch($event,item.questionid,i)">
+                                    <dx-radio-group *ngIf="i==2" #eventRadioGroup id="mcq" [items]="priorities2" (onValueChanged)="onValueChangedMcqBunch($event,item.questionid,i)">
                                     </dx-radio-group>
                                 </div>
 
                                 <div class="dx-field-value" *ngIf="mysubModule4==1">
-                                    <dx-radio-group #eventRadioGroup id="mcq" [items]="priorities"
-                                        (onValueChanged)="onValueChangedMcqBunch($event,item.statementid,i)">
+                                    <dx-radio-group #eventRadioGroup id="mcq" [items]="priorities" (onValueChanged)="onValueChangedMcqBunch($event,item.statementid,i)">
                                     </dx-radio-group>
                                 </div>
                                 <div class="dx-field-value" *ngIf="mysubModule4==12">
-                                    <dx-radio-group #eventRadioGroup id="mcq" [value]="bunchSelectedAns[i]"
-                                        [items]="priorities"
-                                        (onValueChanged)="onValueChangedMcqBunch($event,item.statementid,i)">
+                                    <dx-radio-group #eventRadioGroup id="mcq" [value]="bunchSelectedAns[i]" [items]="priorities" (onValueChanged)="onValueChangedMcqBunch($event,item.statementid,i)">
                                     </dx-radio-group>
                                 </div>
                             </div>
@@ -285,95 +259,85 @@
     <div class="text-center">
         <div class="">
             <button class="btn btn-primary mt-4" appPreventDoubleClick [disabled]="!mcqBunchFlag"
-                (debounceClick)="submitYesNo()">{{'Cfu.submit' | translate}}</button>
+              (debounceClick)="submitYesNo()">{{'Cfu.submit' | translate}}</button>
         </div><br>
     </div>
 </div>
 
-<div [class.d-none]="mysubModule3 == 1 || mysubModule3 == 5 || mysubModule3 == 9 || mysubModule3 == 11"
-    class="text-center mt-4" *ngIf="correctAns != '' || passFlags['popuptype'] == 'description'">
+<div [class.d-none]="mysubModule3 == 1 || mysubModule3 == 5 || mysubModule3 == 9 || mysubModule3 == 11" class="text-center mt-4" *ngIf="correctAns != '' || passFlags['popuptype'] == 'description'">
     <div class="">
         <button class="btn btn-primary" [disabled]="!submitFlag" appPreventDoubleClick
-            (debounceClick)="submit()">{{'Cfu.submit' | translate}}</button>
+          (debounceClick)="submit()">{{'Cfu.submit' | translate}}</button>
     </div><br>
 </div>
 <!-- <p>dadjjk</p> -->
 <div class="mcqComponentModal">
-    <div bsModal #rankModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
-        aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-primary" role="document">
-            <div class="modal-content">
-                <div class="modal-header" [style.background-color]="rightFlag ? '#259d58' : '#ef0505'">
-                    <span class="exp-img img-fluid"
-                        [style.background-image]="rightFlag ? 'url(\'../../../assets/img/expressions/correct_ans.png\')' : 'url(\'../../../assets/img/expressions/wrong_ans.png\')'"></span>
-                    <!-- <button type="button" class="close" (click)="rankModal.hide()" aria-label="Close" id="btnCloseModal">
+<div bsModal #rankModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-primary" role="document">
+        <div class="modal-content">
+            <div class="modal-header" [style.background-color]="rightFlag ? '#259d58' : '#ef0505'">
+            <span class="exp-img img-fluid" [style.background-image]="rightFlag ? 'url(\'../../../assets/img/expressions/correct_ans.png\')' : 'url(\'../../../assets/img/expressions/wrong_ans.png\')'"></span>
+            <!-- <button type="button" class="close" (click)="rankModal.hide()" aria-label="Close" id="btnCloseModal">
             <span aria-hidden="true">&times;</span>
             </button> -->
-                    <h5 class="text-white mb-1" *ngIf="rightFlag==true && questionType != 'checkBoxOption'">
-                        {{'L2common.rightanswer' | translate }}</h5>
-                    <h5 class="text-white mb-1" *ngIf="rightFlag==false">{{'L2common.wronganswer' | translate }}</h5>
+                <h5 class="text-white mb-1" *ngIf="rightFlag==true && questionType != 'checkBoxOption'">{{'L2common.rightanswer' | translate }}</h5>
+                <h5 class="text-white mb-1" *ngIf="rightFlag==false">{{'L2common.wronganswer' | translate }}</h5>
 
-                    <h5 class="text-white mb-1" *ngIf="rightFlag==true && questionType == 'checkBoxOption'">
-                        {{'subModule1_9.correctAns' | translate }}</h5>
+                <h5 class="text-white mb-1" *ngIf="rightFlag==true && questionType == 'checkBoxOption'">{{'subModule1_9.correctAns' | translate }}</h5>
+            </div>
+            <div class="modal-body" *ngIf="questionType != 'checkBoxOption'" [class.d-none]="(mysubModule4==5 || mysubModule4==7 || mysubModule4==11 || mysubModule0==30) && rightFlag">
+                <span *ngIf="mysubModule4 != 9 && mysubModule4 != 13">
+                <p *ngIf="rightFlag==false"><b>{{'subModule1_9.correctAns' | translate }} :</b></p>
+                <p *ngIf="rightFlag==false">{{showCorrectAns}}</p>
+                <!-- <p *ngIf="mysubModule0==2"><b>{{'subModule1_9.correctAns' | translate }} :</b> {{showCorrectAns}}</p> -->
+                </span>
+                <div *ngIf="mysubModule0 == 30 && answerImg !=null" class="customimg text-center">
+                    <br>
+                    <img src={{answerImg}} class="imgOption center-block">
                 </div>
-                <div class="modal-body" *ngIf="questionType != 'checkBoxOption'"
-                    [class.d-none]="(mysubModule4==5 || mysubModule4==7 || mysubModule4==11 || mysubModule0==30) && rightFlag">
-                    <span *ngIf="mysubModule4 != 9 && mysubModule4 != 13">
-                        <p *ngIf="rightFlag==false"><b>{{'subModule1_9.correctAns' | translate }} :</b></p>
-                        <p *ngIf="rightFlag==false">{{showCorrectAns}}</p>
-                        <!-- <p *ngIf="mysubModule0==2"><b>{{'subModule1_9.correctAns' | translate }} :</b> {{showCorrectAns}}</p> -->
-                    </span>
-                    <div *ngIf="mysubModule0 == 30 && answerImg !=null" class="customimg text-center">
-                        <br>
-                        <img src={{answerImg}} class="imgOption center-block">
-                    </div>
-                    <p *ngIf="description && questionType != 'mcqWithTwoStatements'"><b>{{'newTranslate.description' |
-                            translate }}</b></p>
-                    <p *ngIf="description">
-                        <span [innerHTML]="description"></span>
-                    </p>
-                </div>
-                <!-- <div class="modal-body" *ngIf="rightFlag==true && questionType=='checkBoxOption'">
+                <p *ngIf="description && questionType != 'mcqWithTwoStatements'"><b>{{'newTranslate.description' | translate }}</b></p>
+                <p *ngIf="description">
+                    <span [innerHTML]="description"></span></p>
+            </div>
+            <!-- <div class="modal-body" *ngIf="rightFlag==true && questionType=='checkBoxOption'">
                 <p><b>{{'McqTest.correctAnswer' | translate }} :</b></p>
                 <p> {{showAns1}}<br> {{showAns2}}</p>
             </div> -->
+            
 
-
-                <div class="modal-body" *ngIf="questionType =='checkBoxOption'">
-                    <div *ngFor="let item of rightAnsArray;let i=index">
-                        <p>{{i+1}}. {{item}}</p>
-                    </div>
-                    <p *ngIf="description && mysubModule5!=13"><b>{{'newTranslate.description' | translate }}</b></p>
-                    <p *ngIf="description">
-                        <span [innerHTML]="description"></span>
-                    </p>
-                    <!-- <p><b>{{'subModule1_9.correctAns' | translate }} :</b></p>
+            <div class="modal-body" *ngIf="questionType =='checkBoxOption'">
+                <div *ngFor="let item of rightAnsArray;let i=index">
+                    <p>{{i+1}}. {{item}}</p>
+                </div>
+                <p *ngIf="description && mysubModule5!=13"><b>{{'newTranslate.description' | translate }}</b></p>
+                <p *ngIf="description">
+                    <span [innerHTML]="description"></span></p>
+                <!-- <p><b>{{'subModule1_9.correctAns' | translate }} :</b></p>
                 <p> {{showAns1}}<br>{{showAns2}}</p>
                 <p><b>{{'newTranslate.description' | translate }}</b></p>
                 <p> {{description}}</p> -->
-                </div>
-                <div class="modal-footer justify-content-center"
-                    [style.background-color]="rightFlag ? '#e7fff1' : '#ffeeee'">
-                    <!-- <button type="button" class="btn btn-primary" (click)="rankModal.hide();btn5=true;">{{'Profile.Make Change' |
-          translate}}</button> -->
-                    <button type="button" appPreventDoubleClick [ngClass]="rightFlag ? 'btn-success':'btn-danger'"
-                        class="btn" (debounceClick)="rankConfirmNext()">
-                        {{'Stepper.Next' | translate }}</button>
-                </div>
             </div>
-
+            <div class="modal-footer justify-content-center" [style.background-color]="rightFlag ? '#e7fff1' : '#ffeeee'">
+                <!-- <button type="button" class="btn btn-primary" (click)="rankModal.hide();btn5=true;">{{'Profile.Make Change' |
+          translate}}</button> -->
+                <button type="button" appPreventDoubleClick [ngClass]="rightFlag ? 'btn-success':'btn-danger'"
+                  class="btn" (debounceClick)="rankConfirmNext()">
+                  {{'Stepper.Next' | translate }}</button>
+            </div>
         </div>
+
     </div>
+</div>
 </div>
 
 <div class="mcqComponentModal">
-    <div bsModal #instructionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1"
-        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div bsModal #instructionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-primary" role="document">
             <div class="modal-content" [style.border-color]="'#20a8d8'">
                 <div class="modal-header pl-3">
-                    <span class="exp-img img-fluid"
-                        [style.background-image]="'url(\'../../../assets/img/expressions/instructions.png\')'"></span>
+                    <span class="exp-img img-fluid" [style.background-image]="'url(\'../../../assets/img/expressions/instructions.png\')'"></span>
                     <h4 class="modal-title pl-2 p-2 mt-2">{{'newTranslate.description' | translate}}</h4>
                 </div>
                 <div class="modal-body">
@@ -382,7 +346,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary text-center" appPreventDoubleClick
-                        (debounceClick)="emitData()">{{'Stepper.Next' | translate}}</button>
+                      (debounceClick)="emitData()">{{'Stepper.Next' | translate}}</button>
                 </div>
             </div>
         </div>

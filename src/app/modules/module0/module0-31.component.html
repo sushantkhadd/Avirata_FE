@@ -29,9 +29,9 @@
           </div>
           <div class="card-footer">
             <div class="float-right">
-              <button *ngIf="subFlagModule0 == 1 || subFlagModule0 == 2" class="btn btn-primary" appPreventDoubleClick
+              <button *ngIf="subFlagModule0 == 1 || subFlagModule0 == 2 || subFlagModule0 == 3 || subFlagModule0 == 4" class="btn btn-primary" appPreventDoubleClick
                 (debounceClick)="start1();">{{'Module4.start' | translate}}</button>
-                <button *ngIf="subFlagModule0 == 3" class="btn btn-primary" appPreventDoubleClick
+                <button *ngIf="subFlagModule0 == 5" class="btn btn-primary" appPreventDoubleClick
                 (debounceClick)="start2();">{{'Module4.start' | translate}}</button>
             </div>
           </div>
@@ -55,8 +55,22 @@
       </div>
     </div>
   </div>
-
   <div *ngIf="subFlagModule0 == 3">
+    <div *ngIf="showPart1Flag">
+      <div>
+        <app-new-baseline [passData]="passData" (sendAns)="saveAnswer($event)"></app-new-baseline>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="subFlagModule0 == 4">
+    <div *ngIf="showPart1Flag">
+      <div>
+        <app-new-baseline [passData]="passData" (sendAns)="saveAnswer($event)"></app-new-baseline>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="subFlagModule0 == 5">
     <div *ngIf="showPart1Flag">
       <div>
         <app-new-baseline [passData]="passData"></app-new-baseline>
