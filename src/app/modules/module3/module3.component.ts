@@ -176,7 +176,7 @@ export class Module3Component implements OnInit {
   apiCall(jsonBody, apiUrl, fun) {
     this.Module3Service.apiCall(jsonBody, apiUrl).subscribe(
       data => {
-        console.log("api data body", da)
+        console.log("api data body", data)
         if (data["status"] == true) {
           if (fun == "start") {
             this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 0.2', window.localStorage.getItem('username'), 10);
