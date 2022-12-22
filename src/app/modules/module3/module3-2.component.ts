@@ -13,7 +13,7 @@ import { FullLayoutService } from '../../layouts/full-layout.service';
 })
 export class Module32Component implements OnInit {
   public mainFlagModule3 = parseInt(window.localStorage.getItem('mainFlagModule3'));
-  public subFlagModule2 = parseInt(window.localStorage.getItem('subFlagModule2'));
+  public subFlagModule3 = parseInt(window.localStorage.getItem('subFlagModule3'));
   public token; startVideoEvent;
   public passData = {};//used when CFU completed
   public videoData = {}; passUrl;
@@ -33,7 +33,7 @@ export class Module32Component implements OnInit {
       this.router.navigate(['/']);
     }
 
-    if (this.subFlagModule2 == 1)
+    if (this.subFlagModule3 == 1)
     {
     }
     if (this.mainFlagModule3 < 2)
@@ -77,7 +77,7 @@ export class Module32Component implements OnInit {
       window.localStorage.setItem("currentJson3", JSON.stringify(current3));
       window.localStorage.setItem('mainFlagModule3', '3');
       window.localStorage.setItem('subFlagModule3', '1');
-      window.localStorage.setItem('source', 'module 3.2.2');
+      window.localStorage.setItem('source', 'module 3.3.1');
       this.Module3Service.setLocalStorage3(3);
       var obj = {
         "type": "submodule",
@@ -95,8 +95,8 @@ export class Module32Component implements OnInit {
     }
   }
   singleCFUComplete(e) {
-    this.subFlagModule2++;
-    window.localStorage.setItem('subFlagModule2', this.subFlagModule2.toString());
+    this.subFlagModule3++;
+    window.localStorage.setItem('subFlagModule3', this.subFlagModule3.toString());
   }
   start() {
     this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 3.2', window.localStorage.getItem('username'), 10);
