@@ -35,8 +35,7 @@ export class Module012Component implements OnInit {
   }
   public passData = {}; 
   ngOnInit() {
-    console.log('heeee module 5')
-    this.start(); 
+    // this.start(); 
   }
   start() {
     var jsonBody = {}
