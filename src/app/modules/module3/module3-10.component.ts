@@ -74,10 +74,10 @@ export class Module310Component implements OnInit {
       current3["children"][index].url = e['url'];
 
       window.localStorage.setItem("currentJson3", JSON.stringify(current3));
-      window.localStorage.setItem('mainFlagModule3', '3');
+      window.localStorage.setItem('mainFlagModule3', '11');
       window.localStorage.setItem('subFlagModule3', '1');
-      window.localStorage.setItem('source', 'module 3.10.2');
-      this.Module3Service.setLocalStorage3(4);
+      window.localStorage.setItem('source', 'module 3.11.1');
+      this.Module3Service.setLocalStorage3(11);
       var obj = {
         "type": "submodule",
         "route": true,

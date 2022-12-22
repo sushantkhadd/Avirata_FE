@@ -13,95 +13,94 @@ import { environment } from 'src/environments/environment';
   templateUrl: './module3-14.component.html'
 })
 export class Module314Component implements OnInit {
-  public finalCount;
-  public imgUrl; passValues = {};
-  public download; link; showCFU; apiUrl;
-  public cfuQuestion = {};
-  public startPdf; mainFlagModule3; subFlagModule3; finishJSONBody = {};
-  private pdfUrl = environment.pdfUrl; pdf1;
+  public mainFlagModule3 = parseInt(window.localStorage.getItem('mainFlagModule3'));
+  public subFlagModule3 = parseInt(window.localStorage.getItem('subFlagModule3'));
+  public token; startVideoEvent;
+  public passData = {};//used when CFU completed
+  public videoData = {}; passUrl;
 
-  public showPDF; docData = {}; urlArray = {};
+  public currentSource = window.localStorage.getItem('source');
 
-  constructor(public Module3Service: Module3Service, public FullLayoutService: FullLayoutService, public LanguageService: LanguageService, public router: Router, public LocalstoragedetailsService: LocalstoragedetailsService, public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService) {
-    this.toastr.setRootViewContainerRef(vcr);
-  }
+  constructor(public FullLayoutService: FullLayoutService, public LanguageService: LanguageService, public LocalstoragedetailsService: LocalstoragedetailsService, private router: Router, public Module3Service: Module3Service, public translate: TranslateService) { }
 
   ngOnInit() {
-    this.pdf1 = 'https://s3-ap-southeast-1.amazonaws.com/maacpd/Level2/Module5/5.7/%E0%A5%AB.%E0%A5%AD+-+%E0%A4%85%E0%A4%AD%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%AE%E0%A4%A4%E0%A4%BE+%E0%A4%9A%E0%A4%BE%E0%A4%9A%E0%A4%A3%E0%A5%80+%E0%A4%85%E0%A4%B9%E0%A4%B5%E0%A4%BE%E0%A4%B2+%E0%A4%B8%E0%A4%AE%E0%A4%9C%E0%A4%A3%E0%A5%87.pdf';
+    this.passUrl='IkzkQ-Xft4c';
+    this.currentSource = window.localStorage.getItem('source');
+    this.startVideoEvent = false;
 
-    this.mainFlagModule3 = parseInt(window.localStorage.getItem('mainFlagModule3'));
-    this.subFlagModule3 = parseInt(window.localStorage.getItem('subFlagModule3'));
-
-    this.urlArray['src1'] = ''
-    this.urlArray['pdf_thumb'] = './../../assets/img/pdf_thumb.png';
-
-
-    this.startPdf = false;
-
-    if (this.mainFlagModule3 < 14) {
-
-    }
-    else if (this.mainFlagModule3 == 14) {
-
+    this.token = this.LocalstoragedetailsService.token
+    if (this.token == null)
+    {
+      this.router.navigate(['/']);
     }
 
-    else if (this.mainFlagModule3 > 14) {
-      this.docData['download'] = false
-      this.docData['link'] = ''
-      this.docData['state'] = 'static';
-      this.passValues["unlockView"] = "static";
-       var unlockJson={}
-       unlockJson=JSON.parse(window.localStorage.getItem('currentJson3'))
-      if (unlockJson['children'].length > 0) {
-        var index = unlockJson['children'].findIndex(item =>
-          item.source == "module 3.14");
+    if (this.subFlagModule3 == 1)
+    {
+    }
+    if (this.mainFlagModule3 < 14)
+    {
 
-        if (unlockJson['children'][index].url != null) {
-          this.passValues['url'] = unlockJson['children'][index].url
+    }
+    else if (this.mainFlagModule3 == 14)
+    {
+      this.startVideoEvent = false;
+      this.videoData['apiUrl'] = 'modulethreecfustart/';
+    }
+    else if (this.mainFlagModule3 > 14)
+    {
+      var urlJson = {};
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson3"));
+      if (urlJson["children"].length > 0) {
+        var index = urlJson["children"].findIndex(
+          item => item.source == "module 3.14"
+        );
+        if (urlJson["children"][index].url != null)
+        {
+          this.passData['videoUrl'] = urlJson["children"][index].url
+        } else {
+          this.passData['videoUrl'] = this.passUrl
         }
+      } else {
+        this.passData['videoUrl'] = this.passUrl
       }
-      this.docData['showcfu'] = false;
-
     }
   }
-  start() {
-    console.log("pdf")
-    this.startPdf = true;
-    this.docData['state'] = 'dyanamic';
-    this.docData['download'] = false;
-    this.docData['link'] = '';
 
-    this.docData['finalcount'] = 4;
-    this.docData['showcfu'] = true;
-    this.docData['apiurl'] = 'modulethreecfustart/';
-    this.docData['apiurlResult'] = 'modulethreecfustart/';
+  finishCFU(e) {
+    if (e)
+    {
+      var current3 = [];
+      current3 = JSON.parse(window.localStorage.getItem("currentJson3"));
+      var index = current3["children"].findIndex(
+        item => item.source == "module 3.14");
+      current3["children"][index].url = e['url'];
+
+      window.localStorage.setItem("currentJson3", JSON.stringify(current3));
+      window.localStorage.setItem('mainFlagModule3', '15');
+      window.localStorage.setItem('subFlagModule3', '1');
+      window.localStorage.setItem('source', 'module 3.15.1');
+      this.Module3Service.setLocalStorage3(15);
+      var obj = {
+        "type": "submodule",
+        "route": true,
+        "current": this.translate.instant('L2Module3.subMenu3-14'),
+        "next": this.translate.instant('L2Module3Finish.subMenu3-15'),
+        "nextRoute": "/modules/module3/Module3.15"
+      }
+      this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+    }
+    else
+    {
+      window.localStorage.setItem('mainFlagModule3', '10');
+      this.router.navigate(['/modules/module3/Module3.14']);
+    }
+  }
+  singleCFUComplete(e) {
+    this.subFlagModule3++;
+    window.localStorage.setItem('subFlagModule3', this.subFlagModule3.toString());
+  }
+  start() {
     this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 3.14', window.localStorage.getItem('username'), 10);
   }
 
-  checkAnswer(e) {
- console.log("complete status")
- console.log("com ",e)
-    var current3=[]
-    current3=JSON.parse(window.localStorage.getItem('currentJson3'))
-    var child={}
-     var index=current3['children'].findIndex(item => item.source=='module 3.14');
-    current3['children'][index].url=e['url']
-    console.log("urlllllllll",e['url'])
-    window.localStorage.setItem('currentJson3',JSON.stringify(current3))
-
-    this.mainFlagModule3 = 15;
-    this.subFlagModule3 = 1;
-    window.localStorage.setItem("mainFlagModule3", "15");
-    window.localStorage.setItem("subFlagModule3", "1");
-    this.Module3Service.setLocalStorage3(15);
-    var obj = {
-      type: "submodule",
-      route: true,
-      current: this.translate.instant("L2Module3.subMenu3-14"),
-      next: this.translate.instant("L2Module3Finish.subMenu3-15"),
-      nextRoute: "/modules/module3/Module3.15"
-    };
-    this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
-
-  }
 }
