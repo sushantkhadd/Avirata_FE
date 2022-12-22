@@ -38,7 +38,7 @@ export class Module19Component implements OnInit {
   sumbitButton;
   startFlag;
   public inst =
-    "पुढे दिलेले विचार अविवेकी आहेत. ते कोणत्या प्रकारात मोडतात ते सांगा.";
+    "खालील ध्येय विधानांमध्ये काय चुकले आहे ते सांगा.";
   ngOnInit() {
     this.startFlag = false;
     this.showAnswer = true;

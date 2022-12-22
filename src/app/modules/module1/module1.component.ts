@@ -63,10 +63,7 @@ export class Module1Component implements OnInit {
     this.subFlagModule1 = this.subFlagModule1 + 1;
     window.localStorage.setItem('subFlagModule1', this.subFlagModule1.toString());
     this.instructionModal.hide();
-    var jsonBody = {};
-    jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
-    jsonBody['event'] = 'finish';
-    this.nextApiCall(jsonBody, 'moduleonesingleurl/', 'finish1');
+    this.showVideoFlag=false;    
   }
 
   next() {
@@ -118,14 +115,15 @@ export class Module1Component implements OnInit {
     );
   }
 
-  nextApiCall(jsonBody, apiUrl, fun){
-    this.Module1Service.apiCall(jsonBody, apiUrl).subscribe(
+  nextApiCall(fun){
+    var jsonBody = {};
+    jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
+    jsonBody['event'] = 'finish';
+    this.Module1Service.apiCall(jsonBody, 'moduleonesingleurl/').subscribe(
       data => {
-        if (data["status"] == true) {
-          if (fun == "finish1") {
+        if (data["status"] == true) {         
             window.localStorage.setItem('uuid', data['data'].nextuuid);
             this.start();
-          } 
         }
       },
       error => {

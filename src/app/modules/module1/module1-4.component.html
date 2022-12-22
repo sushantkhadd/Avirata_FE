@@ -32,7 +32,7 @@
     </div>
   </div>
   <div *ngIf="startFlag">
-    <h6 class="questionHead lineHeight">{{'L2common.caution' | translate}} <span [innerHTML]="inst"> </span></h6>
+    <h6 class="questionHead lineHeight">{{'L2common.caution' | translate}} <span [innerHTML]="'L2Module1_Sub.ins1_15' | translate"> </span></h6>
     <div>
       <span *ngIf="data">
         <app-mcqcomponent [passFlags]='passFlags' [data]='data' (sendAns)="saveAnswer($event)"></app-mcqcomponent>
