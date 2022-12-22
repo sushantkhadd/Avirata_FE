@@ -10,7 +10,7 @@
 
 <div *ngIf="mainFlagModule3 == 1">
   <div *ngIf="subFlagModule3 == 1">
-    <div *ngIf="showVideoFlag">
+    <div *ngIf="playVideo">
       <div class="row">
         <div class="col-md-12">
           <div class="card ">
@@ -29,7 +29,6 @@
     </div>
   </div>
   <div *ngIf="subFlagModule3 == 2">
-    <div *ngIf="showVideoCFU">
       <div *ngIf="!startVideoEvent">
         <div class="instruction-wrap">
           <div class="card">
@@ -48,7 +47,7 @@
             <div class="card-footer">
               <div class="float-right hidden-xs-down">
                 <button class="btn btn-primary" appPreventDoubleClick
-                  (debounceClick)="startVideoEvent=true;start();">{{'Module4.start' | translate}}</button>
+                  (debounceClick)="startVideoEvent=true;start2();">{{'Module4.start' | translate}}</button>
               </div>
               <!-- <div class="hidden-sm-up text-center">
                       <button class="btn btn-primary" (click)="startVideoEvent=true;start();">{{'Module4.start' | translate}}</button>
@@ -60,7 +59,7 @@
       <div *ngIf="startVideoEvent">
         <div class="card">
           <div class="card-footer">
-            <h6 class="text-center">{{'L2Module1.subMenu1-7' | translate}}</h6>
+            <h6 class="text-center">{{'L2Module3.subMenu3-1' | translate}}</h6>
           </div>
           <div class="card-block">
             <app-video-player [inputData]="videoData" (finishCall)="finishCFU($event)"
@@ -72,7 +71,6 @@
         </div>
       </div>
 
-    </div>
   </div>
 </div>
 
