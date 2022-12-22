@@ -12,7 +12,7 @@ import { FullLayoutService } from '../../layouts/full-layout.service';
 })
 export class Module36Component implements OnInit {
   public mainFlagModule3 = parseInt(window.localStorage.getItem('mainFlagModule3'));
-  public subFlagModule6 = parseInt(window.localStorage.getItem('subFlagModule6'));
+  public subFlagModule3 = parseInt(window.localStorage.getItem('subFlagModule3'));
   public token; startVideoEvent;
   public passData = {};//used when CFU completed
   public videoData = {}; passUrl;
@@ -32,7 +32,7 @@ export class Module36Component implements OnInit {
       this.router.navigate(['/']);
     }
 
-    if (this.subFlagModule6 == 1)
+    if (this.subFlagModule3 == 1)
     {
     }
     if (this.mainFlagModule3 < 6)
@@ -94,8 +94,8 @@ export class Module36Component implements OnInit {
     }
   }
   singleCFUComplete(e) {
-    this.subFlagModule6++;
-    window.localStorage.setItem('subFlagModule2', this.subFlagModule6.toString());
+    this.subFlagModule3++;
+    window.localStorage.setItem('subFlagModule2', this.subFlagModule3.toString());
   }
   start() {
     this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 3.6', window.localStorage.getItem('username'), 10);
