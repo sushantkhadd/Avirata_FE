@@ -35,7 +35,7 @@ export class Module18Component implements OnInit {
 
   ngOnInit() {
     this.startPdf=false
-    this.start();
+    // this.start();
   }
 
   start() {

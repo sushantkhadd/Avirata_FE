@@ -29,6 +29,26 @@
       </div>
   </div>
    <div *ngIf="subFlagModule1 == 2">
+    <div *ngIf="!showVideoFlag">
+      <div class="instruction-wrap">
+        <div class="card">
+          <div class="card-header text-white">
+            <span class="exp-img instructions-img"></span>
+            <h4>{{'Quiz.note' | translate}}</h4>
+          </div>
+          <div class="card-block inst-text">
+            <p [innerHTML]="'L2Module1.subMenu1-1_inst' | translate"></p>          
+  
+          </div>
+          <div class="card-footer">
+            <div class="float-right">
+              <button class="btn btn-primary" appPreventDoubleClick
+                (debounceClick)="nextApiCall();">{{'Module4.start' | translate}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
      <div *ngIf="showVideoFlag" >
        <div class="card">
          <div class="card-footer">

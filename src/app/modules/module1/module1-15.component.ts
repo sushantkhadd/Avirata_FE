@@ -35,7 +35,7 @@ export class Module115Component implements OnInit {
 
   ngOnInit() {
     this.startPdf=false
-    this.start();
+    // this.start();
   }
 
   start() {
@@ -69,7 +69,7 @@ export class Module115Component implements OnInit {
             window.localStorage.setItem('subFlagModule2', '1');
             window.localStorage.setItem('source', 'module 2.1');
             this.Module1Service.setLocalStorage1(3);
-            var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module1.subMenu1-15'), "next": this.translate.instant('L2Module1Finish.subMenu0-10'), "nextRoute": "/modules/module0/Module0.10" }
+            var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module1.submodule0-finish'), "next": this.translate.instant('L2Module1Finish.submodule0-finish'), "nextRoute": "/modules/module2" }
             this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
           }
         }
