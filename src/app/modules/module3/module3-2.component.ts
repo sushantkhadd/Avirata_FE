@@ -16,44 +16,45 @@ export class Module32Component implements OnInit {
   public subFlagModule3 = parseInt(window.localStorage.getItem('subFlagModule3'));
   public token; startVideoEvent;
   public passData = {};//used when CFU completed
-  public videoData = {};passUrl;
+  public videoData = {}; passUrl;
 
   public currentSource = window.localStorage.getItem('source');
 
-  constructor(public FullLayoutService:FullLayoutService, public LanguageService:LanguageService,public LocalstoragedetailsService: LocalstoragedetailsService, private router: Router, public Module3Service: Module3Service,public translate: TranslateService) { }
+  constructor(public FullLayoutService: FullLayoutService, public LanguageService: LanguageService, public LocalstoragedetailsService: LocalstoragedetailsService, private router: Router, public Module3Service: Module3Service, public translate: TranslateService) { }
 
   ngOnInit() {
-    this.passUrl='IkzkQ-Xft4c'
+    this.passUrl='IkzkQ-Xft4c';
     this.currentSource = window.localStorage.getItem('source');
     this.startVideoEvent = false;
 
     this.token = this.LocalstoragedetailsService.token
-    if (this.token == null) {
+    if (this.token == null)
+    {
       this.router.navigate(['/']);
     }
 
-    if (this.subFlagModule3 == 1) {
+    if (this.subFlagModule3 == 1)
+    {
     }
-     if (this.mainFlagModule3 < 2) {
+    if (this.mainFlagModule3 < 2)
+    {
 
     }
-     else if (this.mainFlagModule3 == 2)
-     {
+    else if (this.mainFlagModule3 == 2)
+    {
       this.startVideoEvent = false;
       this.videoData['apiUrl'] = 'modulethreecfustart/';
     }
-    else if (this.mainFlagModule3 > 2) {
+    else if (this.mainFlagModule3 > 2)
+    {
       var urlJson = {};
       urlJson = JSON.parse(window.localStorage.getItem("currentJson3"));
-      console.log("vcxxxx",urlJson)
       if (urlJson["children"].length > 0) {
         var index = urlJson["children"].findIndex(
           item => item.source == "module 3.2"
         );
-        console.log("qWSS",index)
         if (urlJson["children"][index].url != null)
         {
-          console.log("qWSS",index,urlJson["children"][index].url)
           this.passData['videoUrl'] = urlJson["children"][index].url
         } else {
           this.passData['videoUrl'] = this.passUrl
@@ -63,33 +64,43 @@ export class Module32Component implements OnInit {
       }
     }
   }
-  finishCFU(result) {
-    if (result["status"] == true) {
+
+  finishCFU(e) {
+    if (e)
+    {
       var current3 = [];
-      current3 = JSON.parse(window.localStorage.getItem("currentJson3")); 
+      current3 = JSON.parse(window.localStorage.getItem("currentJson3"));
       var index = current3["children"].findIndex(
-      item => item.source == "module 3.2" );
-      current3["children"][index].url = result["urls"]; 
+        item => item.source == "module 3.2");
+      current3["children"][index].url = e['url'];
+
       window.localStorage.setItem("currentJson3", JSON.stringify(current3));
       window.localStorage.setItem('mainFlagModule3', '3');
       window.localStorage.setItem('subFlagModule3', '1');
-      window.localStorage.setItem('source', 'module 3.3');
+      window.localStorage.setItem('source', 'module 3.3.1');
       this.Module3Service.setLocalStorage3(3);
-      var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module3.subMenu3-2'), "next": this.translate.instant('L2Module3Finish.subMenu3-3'), "nextRoute": "/modules/module3/Module3.3" }
+      var obj = {
+        "type": "submodule",
+        "route": true,
+        "current": this.translate.instant('L2Module3.subMenu3-2'),
+        "next": this.translate.instant('L2Module3Finish.subMenu3-3'),
+        "nextRoute": "/modules/module3/Module3.3"
+      }
       this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
     }
-    else {
+    else
+    {
       window.localStorage.setItem('mainFlagModule3', '2');
       this.router.navigate(['/modules/module3/Module3.2']);
     }
   }
   singleCFUComplete(e) {
-    console.log("event",e)
     this.subFlagModule3++;
     window.localStorage.setItem('subFlagModule3', this.subFlagModule3.toString());
   }
-  start(){
+  start() {
     this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 3.2', window.localStorage.getItem('username'), 10);
   }
 
 }
+

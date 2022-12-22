@@ -35,7 +35,7 @@ export class Module2Component implements OnInit {
   }
   public startTest; passData = {}; ansJson = {}; showPart1Flag = false;
   public passFlags = {}; data; myjsondata; dummy; deleteAdd = []; questionCount;
-  questionlist; optionArray; counter; disableIt; questionId; mainCounter;
+  questionlist; optionArray; counter; disableIt; mainCounter;
   dummyArray = []; jsonObject = {};
   public token;
   public playVideo = false;
@@ -45,6 +45,12 @@ export class Module2Component implements OnInit {
   activeItem;
   questionFlag;
   urlArray = {};nextFlag;
+
+  answer;
+  question;
+  subFlagModule1;
+  questionid; trimFlag; showLimit; postWordCount; startFlag
+
   ngOnInit() {
     this.vedioCompleteUrl = "79vHVVtmIoQ";
     this.mainFlagModule2 = parseInt(
@@ -57,12 +63,6 @@ export class Module2Component implements OnInit {
     if (this.token == null) {
       this.router.navigate(["/"]);
     }
-  console.log("ok ", this.mainFlagModule2, (this.mainFlagModule2 == 1))
-    this.questionlist = [];
-    this.dummyArray = [];
-    this.questionId = "";
-    this.disableIt = true;
-    this.startTest = false
 
     if (this.mainFlagModule2 == 1) {
       if (this.subFlagModule2 == 1) {
@@ -103,25 +103,7 @@ export class Module2Component implements OnInit {
     this.apiCall(jsonBody, apiUrl, "start1");
   }
 
-  startEvent2() {
-    var jsonData = {}
-    jsonData['submoduleid'] = window.localStorage.getItem('uuid')
-    jsonData['event'] = "start"
-    jsonData["useranswer"] = "";
-
-    this.showPart1Flag = true;
-    this.apiEndStart = 'l3moduletwomcq/';
-      this.apiEndSendAns = 'l3moduletwomcq/';
-      this.apiEndFinish = 'l3moduletwomcq/';
-      // this.startJson['examtype'] = window.localStorage.getItem('uuid');
-
-      this.passData['start'] = this.apiEndStart;
-      this.passData['answer'] = this.apiEndSendAns;
-      this.passData['finish'] = this.apiEndFinish;
-      this.passData['jsonData'] = jsonData;
-  }
-
-  finishVideo(e) {
+    finishVideo(e) {
     console.log("aaaaaaa");
     if (e == true) {
       console.log(e);
@@ -135,12 +117,35 @@ export class Module2Component implements OnInit {
     }
   }
 
+
+  startEvent2() {
+    var jsonBody = {};
+    jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
+    jsonBody["useranswer"] = "";
+    jsonBody["event"] = "start";
+    var apiUrl = "l4module2freetext/";
+    this.apiCall(jsonBody, apiUrl, "start2");
+  }
+
+
   finish1() {
     var jsonBody = {};
     jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
     jsonBody["event"] = "finish";
     this.apiCall(jsonBody, "moduletwosingleurl/", "finish1");
   }
+
+  finish2() {
+    var jsonBody = {};
+    jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
+    var ansJson = {};
+    ansJson[this.questionid] = (this.answer).trim();
+    jsonBody["useranswer"] = ansJson;
+    jsonBody["event"] = "answer";
+    var apiUrl = "l4module2freetext/";
+    this.apiCall(jsonBody, apiUrl, "finish2");
+  }
+
 
   apiCall(jsonBody, apiUrl, fun) {
     this.Module2Service.apiCall(jsonBody, apiUrl).subscribe(
@@ -173,7 +178,54 @@ export class Module2Component implements OnInit {
             this.questionFlag = true;
             this.startEvent2();
             this.nextFlag = false;
-          } 
+          
+          } else if (fun == "start2") {
+            console.log("start2");
+            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 2.2', window.localStorage.getItem('username'), 10);
+            this.startFlag = true;
+            this.question = data["data"]["questionlist"][0].question;
+            this.questionid = data["data"]["questionlist"][0].questionid;
+
+            // this.instructionModal.hide();
+            // this.LanguageService.toHide();
+            // this.playVideo = false;
+            // this.statVideoFlag = true;
+            // this.mainFlagModule2 = 1;
+            // window.localStorage.setItem("uuid", data["data"].nextuuid);
+            // console.log(data);
+            // this.subFlagModule2 = 2;
+            // window.localStorage.setItem("subFlagModule2", "2");
+            // this.questionFlag = true;
+            // this.startEvent2();
+            // this.nextFlag = false;
+          
+          } else if (fun == "finish2") {
+            this.mainFlagModule2 = 2;
+            window.localStorage.setItem("subFlagModule2", "2");
+            window.localStorage.setItem(
+              "uuid",
+              data["data"].nextuuid
+            );
+            window.localStorage.setItem("mainFlagModule2", "2");
+            window.localStorage.setItem("subFlagModule2", "1");
+            window.localStorage.setItem("source", "module 2.2.1");
+            this.Module2Service.setLocalStorage2(2);
+            var obj = {
+              type: "submodule",
+              route: true,
+              current: this.translate.instant(
+                "L2Module2.subMenu2-1"
+              ),
+              next: this.translate.instant(
+                "L2Module2Finish.subMenu2-2"
+              ),
+              nextRoute: "/modules/module2/Module2.2"
+            };
+            this.LocalstoragedetailsService.setModuleStatus(
+              JSON.stringify(obj)
+            );
+          }
+          
         }
       },
       error => {

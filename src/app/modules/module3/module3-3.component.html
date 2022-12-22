@@ -1,99 +1,65 @@
 <div *ngIf="mainFlagModule3 < 3">
   <div class="card">
     <div class="card-block">
-      <p>{{ "subModule1_1.1_1" | translate }}</p>
-      <p>
-        <strong>{{ "lock.note" | translate }}</strong>{{ "lock.warn" | translate }}
-      </p>
+      <p>{{'subModule5_3.5_3' | translate}}</p>
+      <p><strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
     </div>
   </div>
 </div>
 <div *ngIf="mainFlagModule3 == 3">
-  <div *ngIf="!startFlag" class="instruction-wrap">
-    <div class="borderBlue">
+  <div *ngIf="!startVideoEvent">
+    <div class="instruction-wrap">
       <div class="card">
         <div class="card-header text-white">
           <span class="exp-img instructions-img"></span>
           <h4>{{'Quiz.note' | translate}}</h4>
         </div>
         <div class="card-block inst-text">
-          <!-- <p class="color_red">{{'L2Instruction.inst1_2a' | translate}}</p> -->
-          <p>{{'L2Module3.inst3_3_1' | translate}}</p>
+          <p>{{'number.1' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_1' | translate}}</p>
+          <p>{{'number.2' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_2' | translate}}</p>
+          <p>{{'number.3' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_3' | translate}}</p>
+          <p>{{'number.4' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_4' | translate}}</p>
+          <p>{{'number.5' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_5' | translate}}</p>
+          <p class="color_red">{{'number.6' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_13' | translate}}</p>
         </div>
         <div class="card-footer">
-          <div class="float-right">
+          <div class="float-right hidden-xs-down">
             <button class="btn btn-primary" appPreventDoubleClick
-              (debounceClick)="startEvent();">{{'Module4.start' | translate}}</button>
+              (debounceClick)="startVideoEvent=true;start();">{{'Module4.start' | translate}}</button>
           </div>
+          <!-- <div class="hidden-sm-up text-center">
+                  <button class="btn btn-primary" (click)="startVideoEvent=true;start();">{{'Module4.start' | translate}}</button>
+              </div> -->
         </div>
       </div>
-      </div>
     </div>
-  <div class="assignForm" *ngIf="startFlag">
+  </div>
+  <div *ngIf="startVideoEvent">
     <div class="card">
-      <div class="card-footer p-0">
-        <h6 class="questionHead lineHeight p-3 font-weight-normal">{{"L2Module3.inst3_3" | translate }}</h6>
-        <h6 *ngIf="subFlagModule3 == 1" class="p-2">{{"L2Module3.v1" | translate }}</h6>
-        <h6 *ngIf="subFlagModule3 == 2" class="p-2">{{"L2Module3.v2" | translate }}</h6>
-        <h6 *ngIf="subFlagModule3 == 3" class="p-2">{{"L2Module3.v3" | translate }}</h6>
+      <div class="card-footer">
+        <h6 class="text-center">{{'L2Module3.subMenu3-3' | translate}}</h6>
       </div>
-      <div class="card-block pt-2">
-        <form #assignForm="ngForm">
-          <div class="form-group row">
-            <label class="col-sm-4 col-md-4 col-4 form-control-label" [for]="questionid1" [innerHTML]="question1"></label>
-            <div class="col-md-8 col-sm-8 col-8 controls">
-              <textarea autosize [minRows]="1" class="form-control" [id]="questionid1" name="answer1" [(ngModel)]="answer1" rows="3" #addr="ngModel" (focus)="showLimit['1']=true;zeroMsgFlag['1']=true" (focusout)="showLimit['1']=false;zeroMsgFlag['1']=false"
-                (keypress)="handleInput($event)" required></textarea>
-              </div> 
-              <div *ngIf="showLimit['1']==false && (postWordCount['1']>150 || postWordCount['1']<5)" class="offset-md-4 mt-2">
-                <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn5_150' | translate}}</p>
-              </div>
-            
-          </div> 
-            <p *ngIf="showLimit['1']" class="text-right pt-1">
-              <span *ngIf="postWordCount['1']!=0">
-                  {{'otherMessages.wordLimit' | translate}} {{postWordCount['1'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}
-              </span>
-              <span *ngIf="postWordCount['1']==0 && zeroMsgFlag['1']==true">
-                  {{'otherMessages.wordLimit' | translate}} {{'number.0' | translate}}/{{'number.150' | translate}}
-              </span>
-            </p>
-
-          <div class="form-group row">
-            <label class="col-sm-4 col-md-4 col-4 form-control-label" [for]="questionid2" [innerHTML]="question2"></label>
-            <div class="col-md-8 col-sm-8 col-8 controls">
-              <textarea autosize [minRows]="1" class="form-control" [id]="questionid2" name="answer2" [(ngModel)]="answer2" rows="3" #addr="ngModel" (focus)="showLimit['2']=true;zeroMsgFlag['2']=true" (focusout)="showLimit['2']=false;zeroMsgFlag['2']=false"
-                 (keypress)="handleInput($event)" required></textarea>
-              </div> 
-              <div *ngIf="showLimit['2']==false && (postWordCount['2']>150 || postWordCount['2']<5)" class="offset-md-4 mt-2">
-                <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn5_150' | translate}}</p>
-            </div>
-          </div>
-          <p *ngIf="showLimit['2']" class="text-right pt-1">
-            <span *ngIf="postWordCount['2']!=0">
-                {{'otherMessages.wordLimit' | translate}} {{postWordCount['2'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}
-            </span>
-            <span *ngIf="postWordCount['2']==0 && zeroMsgFlag['2']==true">
-                {{'otherMessages.wordLimit' | translate}} {{'number.0' | translate}}/{{'number.150' | translate}}</span>
-          </p>
-        </form>
+      <div class="card-block">
+        <app-video-player [inputData]="videoData" (finishCall)="finishCFU($event)"
+          (singleCFUCompleteStatus)="singleCFUComplete($event)"></app-video-player>
       </div>
-      <div class="card-footer text-center bg-white border-0">
-        <button *ngIf="subFlagModule3 == 1" class="btn btn-primary" appPreventDoubleClick [disabled]="assignForm.invalid || trimFlag"
-          (debounceClick)="finish(1);">{{'Login.Close' | translate}}</button>
-        <button *ngIf="subFlagModule3 == 2" class="btn btn-primary" appPreventDoubleClick [disabled]="assignForm.invalid || trimFlag"
-          (debounceClick)="finish(2);">{{'Login.Close' | translate}}</button>
-        <button *ngIf="subFlagModule3 == 3" class="btn btn-primary" appPreventDoubleClick [disabled]="assignForm.invalid || trimFlag"
-          (debounceClick)="finish(3);">{{'Login.Close' | translate}}</button>
-      </div>
+      <!-- <div class="card-footer">
+              <h6 class="text-center">{{'Module5.subMenu1-3' | translate}}</h6>
+          </div> -->
     </div>
   </div>
 </div>
-
 <div *ngIf="mainFlagModule3 > 3">
-  <div class="card submoduleBox">
-    <div class="card-block text-center greenText inst-text">
-      <span>{{ "L2Module3Complete.sm_3_3" | translate }}</span>
+  <div class="card">
+    <div class="card-footer">
+      <h6 class="text-center">{{'L2Module3.subMenu3-3' | translate}}</h6>
     </div>
+    <div class="card-block">
+      <app-static-video [receivedData]='passData'></app-static-video>
+    </div>
+    <!-- <div class="card-footer">
+          <h6 class="text-center">{{'Module5.subMenu1-3' | translate}}</h6>
+      </div> -->
   </div>
 </div>
+
