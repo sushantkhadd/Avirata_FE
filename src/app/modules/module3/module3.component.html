@@ -1,22 +1,22 @@
 <div *ngIf="mainFlagModule3 < 1">
   <div class="card">
     <div class="card-block">
-      <p>{{'subModule3_1.3_7' | translate}}</p>
-      <p>
-        <strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
+      <p>{{'subModule3_1.3_2' | translate}}</p>
+      <p><strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
     </div>
   </div>
 </div>
 
-<div *ngIf=" mainFlagModule3 == 1">
-  <div>
-    <div *ngIf="subFlagModule3 ==1 && showVideoFlag">
+
+<div *ngIf="mainFlagModule3 == 1">
+  <div *ngIf="subFlagModule3 == 1">
+    <div *ngIf="showVideoFlag">
       <div class="row">
         <div class="col-md-12">
           <div class="card ">
-             <div class="card-footer">
-               <h6 class="text-center">{{'L2Module2.mitra' | translate}}</h6>
-             </div>
+            <div class="card-footer">
+              <h6 class="text-center">{{'L2Module2.mitra' | translate}}</h6>
+            </div>
             <div class="card-block text-center">
               <app-static-video [receivedData]='passData' (finishCall)="videoFinish($event)"></app-static-video>
             </div>
@@ -24,11 +24,12 @@
         </div>
       </div>
       <!-- <div class="text-center list-checklist">
-        <button type=" button " class="text-center btn btn-primary mt-2" [disabled]="!nextBtnFlag" data-toggle="modal "
-          (click)="next(); ">{{'Stepper.Next' | translate}}</button>
+        <button type=" button " class="text-center btn btn-primary mt-2" [disabled]="!nextBtnFlag" data-toggle="modal " (click)="next(); ">{{'Stepper.Next' | translate}}</button>
       </div> -->
     </div>
-    <div *ngIf="subFlagModule3 == 2">
+  </div>
+  <div *ngIf="subFlagModule3 == 2">
+    <div *ngIf="showVideoCFU">
       <div *ngIf="!startVideoEvent">
         <div class="instruction-wrap">
           <div class="card">
@@ -70,20 +71,7 @@
               </div> -->
         </div>
       </div>
-    </div>
-  </div>
-</div>
 
-<div *ngIf="mainFlagModule3 > 1">
-
-  <div *ngIf="!startFlag">
-    <div class="card">
-      <div class="card-footer">
-        <h6 class="text-center">{{'L2Module2.mitra' | translate}}</h6>
-      </div>
-      <div class="card-block">
-        <app-static-video [receivedData]='passData'></app-static-video>
-      </div>
     </div>
   </div>
 </div>
@@ -103,7 +91,8 @@
           <p class="px-5 text-center">तुमचा व्हिडिओ पूर्ण झाला.</p>
           <hr />
           <div class="col-md-12 text-right">
-            <button class="btn btn-primary text-center" appPreventDoubleClick (debounceClick)="next()">{{'Stepper.Next' | translate}}</button>
+            <button class="btn btn-primary text-center" appPreventDoubleClick
+              (debounceClick)="next()">{{'Stepper.Next' | translate}}</button>
           </div>
         </div>
       </div>
