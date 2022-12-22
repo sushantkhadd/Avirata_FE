@@ -3,7 +3,8 @@
     <div class="card-block">
       <p>{{'subModule5_1.5_1' | translate}}</p>
       <p>
-        <strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
+        <strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}
+      </p>
     </div>
   </div>
 </div>
@@ -21,8 +22,8 @@
             <p>{{'subModule5_1.1' | translate}}</p>
           </div>
           <div class="card-footer text-right">
-            <button class="btn btn-primary" appPreventDoubleClick
-              (debounceClick)="startEvent1()">{{'Login.Close' | translate}}</button>
+            <button class="btn btn-primary" appPreventDoubleClick (debounceClick)="startEvent1()">{{'Login.Close' |
+              translate}}</button>
           </div>
         </div>
       </div>
@@ -38,12 +39,68 @@
       </div>
     </div>
   </div>
-  <div *ngIf="subFlagModule2 == 2 && !nextFlag">
-    <div *ngIf="showPart1Flag">
+  <div *ngIf="subFlagModule2 == 2">
+    <div>
       <!-- <app-new-baseline [passData]='passFlags' (exam2finish)="sendAnswer($event)"></app-new-baseline> -->
-      <div>
+      <!-- <div>
         <app-new-baseline [passData]='passData'></app-new-baseline>
+      </div> -->
+
+      <div class="instruction-wrap ins-block" *ngIf="!startFlag">
+        <div class="borderBlue">
+          <div class="card">
+            <div class="card-header text-white">
+              <span class="exp-img instructions-img"></span>
+              <h5>{{'Quiz.note' | translate}}</h5>
+            </div>
+            <div class="card-block inst-text">
+              <p>{{'L2Instruction.inst_2_14' | translate}}</p>
+            </div>
+            <div class="card-footer">
+              <div class="float-right hidden-xs-down">
+                <button class="btn btn-primary" appPreventDoubleClick (debounceClick)="startEvent()">{{'Module4.start' |
+                  translate}}</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+      <div class="assignForm" *ngIf="startFlag">
+        <div class="card">
+          <div class="card-footer p-0">
+            <h6 class="questionHead lineHeight font-weight-normal p-2">
+              <span [innerHTML]="'L2common.caution' | translate"></span>
+              <span [innerHTML]="question"></span>
+            </h6>
+          </div>
+          <div class="card-block pt-2">
+            <form #assignForm="ngForm">
+              <div class="form-group row">
+                <!-- <label class="col-sm-12 form-control-label" [for]="questionid" [innerHTML]="question"></label> -->
+                <div class="col-12 controls">
+                  <textarea autosize [minRows]="2" class="form-control" [id]="questionid" name="answer"
+                    [(ngModel)]="answer" #addr="ngModel" (focus)="showLimit=true" (focusout)="showLimit=false"
+                    required></textarea>
+                </div>
+                <div *ngIf="showLimit==false && (postWordCount>150 || postWordCount<5)" class="offset-md-4 mt-2">
+                  <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn5_150' | translate}}</p>
+                </div>
+              </div>
+              <p *ngIf="showLimit" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}}
+                <span *ngIf="postWordCount != 0">{{postWordCount | numberConvertor : 'Devanagari'}}/{{'number.150' |
+                  translate}}</span>
+                <span *ngIf="postWordCount == 0">{{'number.0' | translate}}/{{'number.150' | translate}}</span>
+              </p>
+
+            </form>
+          </div>
+          <div class="card-footer text-center bg-white border-0">
+            <button class="btn btn-primary" [disabled]="assignForm.invalid || trimFlag" appPreventDoubleClick
+              (debounceClick)="finish2();">{{'Login.Close' | translate}}</button>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -60,8 +117,8 @@
 </div>
 
 <div class="videoFinishModal videoFinishedModel">
-  <div bsModal #instructionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
-    aria-labelledby="myModalLabel" aria-hidden="true">
+  <div bsModal #instructionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1"
+    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <!-- <div class="modal-dialog modal-default modal-sm modal-finish" role="document">
           <div class="modal-content brad-0">
               <div class="modal-footer text-center justify-content-center border-0">
@@ -90,7 +147,8 @@
           <p class="px-5 text-center">तुमचा व्हिडिओ पूर्ण झाला.</p>
           <hr />
           <div class="col-md-12 text-right">
-            <button class="btn btn-primary text-center" appPreventDoubleClick (debounceClick)="finish1()">{{'Stepper.Next' | translate}}</button>
+            <button class="btn btn-primary text-center" appPreventDoubleClick
+              (debounceClick)="finish1()">{{'Stepper.Next' | translate}}</button>
           </div>
         </div>
       </div>
