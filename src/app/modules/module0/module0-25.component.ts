@@ -37,7 +37,7 @@ export class Module025Component implements OnInit {
   }
   public passData = {};
   ngOnInit() {
-    this.start();
+    // this.start();
   }
   start() {
     var jsonBody = {}
@@ -76,8 +76,6 @@ export class Module025Component implements OnInit {
   }
 
   apiCall(jsonBody, apiUrl, fun) {
-    console.log('hello apicall', jsonBody)
-
     this.Module0Service.apiCall(jsonBody, apiUrl).subscribe(
       data => {
         if (data["status"] == true) {
@@ -95,6 +93,7 @@ export class Module025Component implements OnInit {
 
             window.localStorage.setItem("currentJson0", JSON.stringify(current0));
           } else if (fun == "finish1") {
+            console.log('hi pravin patil',data['data'].nextuuid)
             // this.instructionModal.hide();
             this.LanguageService.toHide();
             window.localStorage.setItem('uuid', data['data'].nextuuid)

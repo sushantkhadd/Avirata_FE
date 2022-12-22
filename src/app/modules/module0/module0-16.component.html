@@ -10,10 +10,30 @@
 
 <div *ngIf="mainFlagModule0 == 16">
   <div *ngIf="subFlagModule0 == 1">
+    <div *ngIf="!showVideoFlag">
+      <div class="instruction-wrap">
+        <div class="card">
+          <div class="card-header text-white">
+            <span class="exp-img instructions-img"></span>
+            <h4>{{'Quiz.note' | translate}}</h4>
+          </div>
+          <div class="card-block inst-text">
+            <p [innerHTML]="'L2Module0.subMenu1-16_inst' | translate"></p>          
+  
+          </div>
+          <div class="card-footer">
+            <div class="float-right">
+              <button class="btn btn-primary" appPreventDoubleClick
+                (debounceClick)="start();">{{'Module4.start' | translate}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div *ngIf="showVideoFlag">
       <div class="card">
         <div class="card-footer">
-          <h6 class="text-center">{{'L2Module0.subMenu1-16' | translate}}</h6>
+          <h6 class="text-center">{{'L2Module0.subMenu1-16_1_inst' | translate}}</h6>
         </div>
         <div class="card-block">
           <app-presentation [data]='passValues' (sendCfuAns)="finishPDF($event,1)"></app-presentation>
@@ -25,7 +45,7 @@
     <div *ngIf="showVideoFlag">
       <div class="card">
         <div class="card-footer">
-          <h6 class="text-center">{{'L2Module0.subMenu1-16' | translate}}</h6>
+          <h6 class="text-center">{{'L2Module0.subMenu1-16_2_inst' | translate}}</h6>
         </div>
         <div class="card-block">
           <app-static-video [receivedData]='passData' (finishCall)="videoFinish($event,2)"></app-static-video>
@@ -37,7 +57,7 @@
     <div *ngIf="showVideoFlag">
       <div class="card">
         <div class="card-footer">
-          <h6 class="text-center">{{'L2Module0.subMenu1-16' | translate}}</h6>
+          <h6 class="text-center">{{'L2Module0.subMenu1-16_3_inst' | translate}}</h6>
         </div>
         <div class="card-block">
           <app-static-video [receivedData]='passData' (finishCall)="videoFinish($event,3)"></app-static-video>
@@ -49,7 +69,7 @@
     <div *ngIf="showVideoFlag">
       <div class="card">
         <div class="card-footer">
-          <h6 class="text-center">{{'L2Module0.subMenu1-16' | translate}}</h6>
+          <h6 class="text-center">{{'L2Module0.subMenu1-16_4_inst' | translate}}</h6>
         </div>
         <div class="card-block">
           <app-presentation [data]='passValues' (sendCfuAns)="finishPDF($event,4)"></app-presentation>
@@ -61,7 +81,7 @@
     <div *ngIf="showVideoFlag">
       <div class="card">
         <div class="card-footer">
-          <h6 class="text-center">{{'L2Module0.subMenu1-16' | translate}}</h6>
+          <h6 class="text-center">{{'L2Module0.subMenu1-16_5_inst' | translate}}</h6>
         </div>
         <div class="card-block">
           <app-static-video [receivedData]='passData' (finishCall)="videoFinish($event,5)"></app-static-video>
