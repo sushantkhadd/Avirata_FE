@@ -95,7 +95,7 @@ export class Module36Component implements OnInit {
   }
   singleCFUComplete(e) {
     this.subFlagModule3++;
-    window.localStorage.setItem('subFlagModule2', this.subFlagModule3.toString());
+    window.localStorage.setItem('subFlagModule3', this.subFlagModule3.toString());
   }
   start() {
     this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 3.6', window.localStorage.getItem('username'), 10);
