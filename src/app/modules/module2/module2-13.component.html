@@ -1,124 +1,121 @@
 <div *ngIf="mainFlagModule2 < 13">
   <div class="card">
     <div class="card-block">
-      <p>{{'subModule3_1.3_2' | translate}}</p>
+      <p>{{'subModule5_1.5_1' | translate}}</p>
       <p>
         <strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
     </div>
   </div>
 </div>
 
-
-<div *ngIf="mainFlagModule2 == 13">
-  <div *ngIf="subFlagModule2 == 1 && showVideoFlag">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card ">
-            <div class="card-footer">
-                <h6 class="text-center">{{'L2Module2.mitra' | translate}}</h6>
+<div *ngIf="mainFlagModule2 == 13">  
+  <div *ngIf="subFlagModule2 == 1">
+      <div class="instruction-wrap ins-block" *ngIf="instFlag">
+          <div>
+            <div class="card">
+              <div class="card-header">
+                  <span class="exp-img instructions-img"></span>
+                <h5>
+                  {{'Quiz.note' | translate}}</h5>
               </div>
-          <div class="card-block text-center">
-            <app-static-video [receivedData]='passData' (finishCall)="videoFinish($event)"></app-static-video>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- <div class="text-center list-checklist">
-        <button type=" button " class="text-center btn btn-primary mt-2" [disabled]="!nextBtnFlag" data-toggle="modal " (click)="next(); ">{{'Stepper.Next' | translate}}</button>
-      </div> -->
-  </div>
-
-  <div *ngIf="subFlagModule2 == 2">
-    <div class="instruction-wrap" *ngIf="!showVideoFlag">
-      <div class="borderBlue">
-        <div class="card">
-          <div class="card-header text-white">
-            <span class="exp-img instructions-img"></span>
-            <h4>{{'Quiz.note' | translate}}</h4>
-          </div>
-          <div class="card-block inst-text">
-            <p>{{'number.1' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_1' | translate}}</p>
-            <p>{{'number.2' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_2' | translate}}</p>
-            <p>{{'number.3' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_3' | translate}}</p>
-            <p>{{'number.4' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_4' | translate}}</p>
-            <p>{{'number.5' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_5' | translate}}</p>
-            <p class="color_red">{{'number.6' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_13' | translate}}</p>
-          </div>
-          <div class="card-footer">
-            <div class="float-right hidden-xs-down">
-              <button class="btn btn-primary" appPreventDoubleClick
-                (debounceClick)="start1();">{{'Module4.start' | translate}}</button>
+              <div class="card-block inst-text">
+                <p [innerHTML]="'L2Module1.inst1_11' | translate"></p>
+              </div>
+              <div class="card-footer text-right">
+                <button class="btn btn-primary" appPreventDoubleClick
+                  (debounceClick)="startEvent2()">{{'Login.Close' | translate}}</button>
+              </div>
             </div>
-            <!-- <div class="hidden-sm-up text-center">
-              <button class="btn btn-primary" (click)="start1();">{{'Module4.start' | translate}}</button>
-            </div> -->
           </div>
         </div>
-      </div>
-    </div>
-
-    <div *ngIf="showVideoFlag">
+    <div class="assignForm"  *ngIf="!instFlag">
       <div class="card">
-        <div class="card-footer">
-          <h6 class="text-center">{{'L2Module2.subMenu2-13' | translate}}</h6>
+          <h6 class="questionHead lineHeight">{{'L2common.caution' | translate}} <span [innerHTML]="inst"> </span></h6>
+        <div class="card-header">
+          <h5 [innerHTML]="description">
+          </h5>
         </div>
-        <div class="card-block">
-          <app-video-player [inputData]="videoData" (finishCall)="finishCFU($event)" (singleCFUCompleteStatus)="singleCFUComplete($event)"></app-video-player>
+        <div class="card-block pt-2">
+          <form #assignForm="ngForm">
+            <div class="form-group row">
+              <label class="col-sm-4 col-md-4 form-control-label" [class.font-weight-bold]="queFlag" for="answer1" [innerHTML]="question1"></label>
+              <div class="col-md-8 col-sm-8 controls">
+                <textarea autosize [minRows]="2" class="form-control" id="answer1" name="answer1" [(ngModel)]="answer1" rows="3" #addr="ngModel"
+                (focus)="zeroTrue()" (keypress)="handleInput($event)" (focusout)="showLimit['1']=false;zeroMsgFlag['1']=false" required></textarea>
+              </div>
+              <div *ngIf="showLimit['1']==false && (postWordCount['1']>150 || postWordCount['1']<5)" class="offset-md-4 mt-2">
+                  <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn5_150' | translate}}</p>
+              </div>
+            </div>
+            <p *ngIf="showLimit['1']" class="text-right pt-1">
+              <span *ngIf="postWordCount['1']!=0">{{'otherMessages.wordLimit' | translate}} {{postWordCount['1'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}</span>
+              <span *ngIf="postWordCount['1']==0 && zeroMsgFlag['1']==true">{{'otherMessages.wordLimit' | translate}} {{'number.0' | translate}}/{{'number.150' | translate}}</span>
+              
+            </p>
+            
+            <div class="form-group row">
+              <label class="col-sm-4 col-md-4 form-control-label" for="answer2" [innerHTML]="question2"></label>
+              <div class="col-md-8 col-sm-8 controls">
+                <textarea autosize [minRows]="2" class="form-control" (keypress)="handleInput($event)" id="answer2" name="answer2" [(ngModel)]="answer2" rows="3" #addr="ngModel" (focus)="showLimit['2']=true;zeroMsgFlag['2']=true" (focusout)="showLimit['2']=false;zeroMsgFlag['2']=false"
+                  required></textarea>
+              </div>
+              <div *ngIf="showLimit['2']==false && (postWordCount['2']>150 || postWordCount['2']<5)" class="offset-md-4 mt-2">
+                  <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn5_150' | translate}}</p>
+              </div>
+            </div>
+            <p *ngIf="showLimit['2']" class="text-right pt-1">
+              <span *ngIf="postWordCount['2']!=0">{{'otherMessages.wordLimit' | translate}} {{postWordCount['2'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}</span>
+              <span *ngIf="postWordCount['2']==0 && zeroMsgFlag['2']==true">{{'otherMessages.wordLimit' | translate}} {{'number.0' | translate}}/{{'number.150' | translate}}</span>
+            </p>
+            
+            <div class="form-group row">
+              <label class="col-sm-4 col-md-4 form-control-label" for="answer3" [innerHTML]="question3"></label>
+              <div class="col-md-8 col-sm-8 controls">
+                <textarea autosize [minRows]="2" class="form-control" (keypress)="handleInput($event)" id="answer3" name="answer3" [(ngModel)]="answer3" rows="3" #addr="ngModel" (focus)="showLimit['3']=true;zeroMsgFlag['3']=true" (focusout)="showLimit['3']=false;zeroMsgFlag['3']=false"
+                  required></textarea>
+              </div>
+              <div *ngIf="showLimit['3']==false && (postWordCount['3']>150 || postWordCount['3']<5)" class="offset-md-4 mt-2">
+                  <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn5_150' | translate}}</p>
+              </div>
+            </div>
+            <p *ngIf="showLimit['3']" class="text-right pt-1">
+              <span *ngIf="postWordCount['3']!=0">{{'otherMessages.wordLimit' | translate}} {{postWordCount['3'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}</span>
+              <span *ngIf="postWordCount['3']==0 && zeroMsgFlag['3']==true">{{'otherMessages.wordLimit' | translate}} {{'number.0' | translate}}/{{'number.150' | translate}}</span>
+            </p>
+            
+            <div class="form-group row">
+              <label class="col-sm-4 col-md-4 form-control-label" for="answer4" [innerHTML]="question4"></label>
+              <div class="col-md-8 col-sm-8 controls">
+                <textarea autosize [minRows]="2" class="form-control" (keypress)="handleInput($event)" id="answer4" name="answer4" [(ngModel)]="answer4" rows="3" #addr="ngModel" (focus)="showLimit['4']=true;zeroMsgFlag['4']=true" (focusout)="showLimit['4']=false;zeroMsgFlag['4']=false"
+                  required></textarea>
+              </div>
+              <div *ngIf="showLimit['4']==false && (postWordCount['4']>150 || postWordCount['4']<5)" class="offset-md-4 mt-2">
+                  <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn5_150' | translate}}</p>
+              </div>
+            </div>
+            <p *ngIf="showLimit['4']" class="text-right pt-1">
+              <span *ngIf="postWordCount['4']!=0">{{'otherMessages.wordLimit' | translate}} {{postWordCount['4'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}</span>
+              <span *ngIf="postWordCount['4']==0 && zeroMsgFlag['4']==true">{{'otherMessages.wordLimit' | translate}} {{'number.0' | translate}}/{{'number.150' | translate}}</span>
+            </p>
+            
+         
+          </form>
+
         </div>
-        <!-- <div class="card-footer">
-                  <h6 class="text-center">{{'Module5.subMenu1-3' | translate}}</h6>
-              </div> -->
+        <div class="card-footer text-right bg-white border-0">
+          <button class="btn btn-primary" [disabled]="assignForm.invalid || trimFlag"
+          appPreventDoubleClick (debounceClick)="queFlag ? submit() : finish2();">{{'Login.Close' | translate}}</button>
+        </div>
       </div>
+
     </div>
   </div>
 </div>
 
 <div *ngIf="mainFlagModule2 > 13">
-  <div class="card unlock-view">
-    <div class="card-block cc">
-      <div class="row static-content" *ngIf="flag == 0">
-        <div class="col-md-4">
-          <p class="title">{{'number.1' | translate}}. {{'L2Module2.mitra' | translate}}</p>
-          <div class="img-wrap">
-            <a (click)="showVideo(urlArray['src1'],'L2Module2.mitra',1)">
-              <img class="img-fluid v_thumb" src="./../../assets/img/thumb/3.8.1-Mitra-(M3B).png" alt="">
-            </a>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <p class="title">{{'number.2' | translate}}. {{'L2Module2.subMenu2-13' | translate}}</p>
-          <div class="img-wrap">
-            <a (click)="showVideo(urlArray['src2'],'L2Module2.subMenu2-13',2)">
-              <img class="img-fluid v_thumb" src="https://maacpd.s3-ap-southeast-1.amazonaws.com/L3_mr/thumbnails/2.13-video.png" alt="">
-              <div class="hover-opaque">
-                <i class="fa fa-play-circle-o fa-3x"></i>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div *ngIf="flag == 1">
-        <div class="card-header text-center bg-white border-0">
-          <h5>
-            {{thumb_title | translate}}
-          </h5>
-        </div>
-        <app-static-video [receivedData]='passData'></app-static-video>
-        <div class="card-footer bg-white border-0 mt-3 text-center">
-          <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>
-        </div>
-      </div>
-      <div *ngIf="flag == 2">
-        <div class="card-header text-center bg-white border-0">
-          <h5>
-            {{thumb_title | translate}}
-          </h5>
-        </div>
-        <app-static-video [receivedData]='passData'></app-static-video>
-        <div class="card-footer bg-white border-0 mt-3 text-center">
-          <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>
-        </div>
-      </div>
+  <div class="card submoduleBox">
+    <div class="card-block text-center greenText inst-text">
+      <span>{{'L2Module1Complete.sm1_6' | translate}}</span>
     </div>
   </div>
 </div>
@@ -126,13 +123,29 @@
 <div class="videoFinishModal videoFinishedModel">
   <div bsModal #instructionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
     aria-labelledby="myModalLabel" aria-hidden="true">
+    <!-- <div class="modal-dialog modal-default modal-sm modal-finish" role="document">
+          <div class="modal-content brad-0">
+              <div class="modal-footer text-center justify-content-center border-0">
+                  <div class="row p-1">
+                      <div class="col-md-12"><em class="fa fa-chevron-right"></em></div>
+                      <div class="col-md-12 mb-1">
+                          <p>आपका वीडियो पूरा हुआ।</p>
+                      </div>
+                      <div class="col-md-12">
+                          <button class="btn btn-primary text-center" (click)="next()">{{'Stepper.Next' | translate}}</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div> -->
+
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <img class="img-responsive img-rotate" src="assets/img/mitra.png">
         <div class="modal-header">
           <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button> -->
+                  <span aria-hidden="true">&times;</span>
+                </button> -->
         </div>
         <div class="modal-body">
           <p class="px-5 text-center">तुमचा व्हिडिओ पूर्ण झाला.</p>

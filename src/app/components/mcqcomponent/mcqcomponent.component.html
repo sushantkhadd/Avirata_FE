@@ -1,5 +1,5 @@
 <div *ngIf="questionType == 'mcqTextOption'">
-    <span class="counter" *ngIf="mysubModule1==2 || mysubModule2==6 || mysubModule2==4 || mysubModule2==3 || mysubModule3==5 || mysubModule3==8 || mysubModule3==9 || mysubModule3==11 || mysubModule4==5 || mysubModule4==7">{{queCount | numberConvertor : 'Devanagari'}} / {{'number.5' | translate}}</span>
+    <span class="counter" *ngIf="mysubModule1==2 || mysubModule2==9 || mysubModule2==6 || mysubModule2==4 || mysubModule2==3 || mysubModule3==5 || mysubModule3==8 || mysubModule3==9 || mysubModule3==11 || mysubModule4==5 || mysubModule4==7">{{queCount | numberConvertor : 'Devanagari'}} / {{'number.5' | translate}}</span>
     <span class="counter" *ngIf="mysubModule1==4">{{queCount | numberConvertor : 'Devanagari'}} / १२</span>
     <span class="counter" *ngIf="mysubModule1==6">{{queCount | numberConvertor : 'Devanagari'}} / ७</span>
     <span class="counter" *ngIf="mysubModule5==7">{{queCount | numberConvertor : 'Devanagari'}} / ३</span>
@@ -52,7 +52,7 @@
     </div>
 
     <div class="text-center mt-4"
-      *ngIf="mysubModule == 3 || mysubModule0 == 30 || mysubModule6 == 2|| mysubModule7 == 2|| mysubModule7 == 3 ||  mysubModule2 == 6 || mysubModule2 == 4 || mysubModule2 == 3 || mysubModule3 == 1 || mysubModule3 == 5 || mysubModule3 == 8 || mysubModule3 == 9 || mysubModule3 == 11 || mysubModule4 == 5 || mysubModule4 == 7 || mysubModule5 == 7 || mysubModule3==7 || mysubModule4==11"> 
+      *ngIf="mysubModule == 3 || mysubModule0 == 30 || mysubModule6 == 2|| mysubModule7 == 2|| mysubModule7 == 3 ||  mysubModule2 == 9 || mysubModule2 == 6 || mysubModule2 == 4 || mysubModule2 == 3 || mysubModule3 == 1 || mysubModule3 == 5 || mysubModule3 == 8 || mysubModule3 == 9 || mysubModule3 == 11 || mysubModule4 == 5 || mysubModule4 == 7 || mysubModule5 == 7 || mysubModule3==7 || mysubModule4==11"> 
         <div class="">
             <button class="btn btn-primary" appPreventDoubleClick [disabled]="!submitFlag"
               (debounceClick)="goNext5_3()">{{'Cfu.submit' | translate}}</button>

@@ -13,22 +13,43 @@ import { CommonService } from 'src/app/services/common.service';
   templateUrl: './module2-9.component.html'
 })
 export class Module29Component implements OnInit {
-  public mainFlagModule2 = parseInt(window.localStorage.getItem('mainFlagModule2'));
-  public subFlagModule2 = parseInt(window.localStorage.getItem('subFlagModule2'));
-  constructor(public LanguageService: LanguageService, public LocalstoragedetailsService: LocalstoragedetailsService, public Module2Service: Module2Service, public toastr: ToastsManager, vcr: ViewContainerRef, public router: Router, public translate: TranslateService) {
+
+  public mainFlagModule2 = parseInt(
+    window.localStorage.getItem("mainFlagModule2")
+  );
+  public subFlagModule2 = parseInt(
+    window.localStorage.getItem("subFlagModule2")
+  );
+
+  constructor(
+    public LanguageService: LanguageService,
+    public LocalstoragedetailsService: LocalstoragedetailsService,
+    public Module2Service: Module2Service,
+    public toastr: ToastsManager,
+    vcr: ViewContainerRef,
+    public router: Router,
+    public translate: TranslateService
+  ) {
     this.toastr.setRootViewContainerRef(vcr);
   }
-  public data; questionType; passFlags = {}; showAnswer; saveData; answer=[]; sumbitButton; startFlag;
-  public inst = "खालीलपैकी कोणते पर्याय हे विद्यार्थ्यांना स्वतःचे निर्णय घेण्याच्या, स्वावलंबी बनविण्याच्या दृष्टीने उपयुक्त आहेत असे तुम्हांला वाटते?"
+  public data;
+  questionType;
+  passFlags = {};
+  showAnswer;
+  saveData;
+  answer;
+  sumbitButton;
+  startFlag;
+  public inst =
+    "पुढे दिलेले विचार अविवेकी आहेत. ते कोणत्या प्रकारात मोडतात ते सांगा.";
   ngOnInit() {
     this.startFlag = false;
-    console.log(this.startFlag)
-    this.showAnswer = false;
+    this.showAnswer = true;
     this.saveData = true;
-    this.passFlags['saveData'] = this.saveData;
-    this.passFlags['showAnswer'] = this.showAnswer;
-    this.questionType = "mcqWithTwoStatements";
-    this.passFlags['questionType'] = this.questionType;
+    this.passFlags["saveData"] = this.saveData;
+    this.passFlags["showAnswer"] = this.showAnswer;
+    this.questionType = "mcqTextOption";
+    this.passFlags["questionType"] = this.questionType;
 
     if (this.mainFlagModule2 == 9)
     {
@@ -38,76 +59,81 @@ export class Module29Component implements OnInit {
 
   start() {
     var jsonBody = {};
-    jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
-    jsonBody['useranswer'] = ""
-    jsonBody['event'] = 'start';
-    var apiUrl = "mcqwithoption/";
+    jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
+    jsonBody["useranswer"] = "";
+    jsonBody["event"] = "start";
+    var apiUrl = "l4moduletwomcq/";
 
-    this.Module2Service.apiCall(jsonBody, apiUrl)
-      .subscribe(
-        data => {
-          if (data['status'] == true)
-          {
-            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 2.9', window.localStorage.getItem('username'), 10);
-            console.log("data ", data['data'])
-            this.data = data['data']
-            this.startFlag = true;
-          }
-        },
-        error => {
-          this.LanguageService.handleError(error.error.message);
-        });
+    this.Module2Service.apiCall(jsonBody, apiUrl).subscribe(
+      data => {
+        if (data["status"] == true)
+        {
+          this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 2.9', window.localStorage.getItem('username'), 10);
+          console.log("data ", data["data"]);
+          this.data = data["data"];
+          this.startFlag = true;
+        }
+      },
+      error => {
+        this.LanguageService.handleError(error.error.message);
+      }
+    );
   }
 
   saveAnswer(e) {
-    this.answer=[];
-    console.log("ff ", e)
     this.sumbitButton = true;
-    this.answer.push(e);
+    this.answer = e;
     this.submit();
   }
+
   submit() {
+    var jsonBody = {};
+    jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
+    jsonBody["useranswer"] = this.answer;
+    jsonBody["event"] = "answer";
+    var apiUrl = "l4moduletwomcq/";
 
-    var jsonBody = {}
-
-    jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
-    jsonBody['useranswer'] = this.answer
-    jsonBody['event'] = 'answer';
-    var apiUrl = "mcqwithoption/";
-    console.log("dasd ", jsonBody)
-
-    this.Module2Service.apiCall(jsonBody, apiUrl)
-      .subscribe(
-        data => {
-          if (data['status'] == true && data['message'] == "your answer stored next question and uuid is")
-          {
-            window.localStorage.setItem('uuid', data['data'].nextuuid);
-            this.subFlagModule2 = this.subFlagModule2 + 1
-            window.localStorage.setItem('subFlagModule2', this.subFlagModule2.toString())
-            console.log("data ", data['data'])
-            this.data = data['data']
-            this.sumbitButton = false;
-          } else if (data['status'] == true && data['message'] == "submodule finish")
-          {
-            this.startFlag = false;
-            this.mainFlagModule2 = 10;
-            window.localStorage.setItem('uuid', data['data'].nextuuid);
-            window.localStorage.setItem('mainFlagModule2', '10');
-            window.localStorage.setItem('source', 'module 2.10.1');
-            var obj = {
-              "type": "submodule",
-              "route": true,
-              "current": this.translate.instant('L2Module2.subMenu2-9'),
-              "next": this.translate.instant('L2Module2Finish.subMenu2-10'),
-              "nextRoute": "/modules/module2/Module2.10"
-            }
-            this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
-            this.Module2Service.setLocalStorage2(10);
-          }
-        },
-        error => {
-          this.LanguageService.handleError(error.error.message);
-        });
-
+    this.Module2Service.apiCall(jsonBody, apiUrl).subscribe(
+      data => {
+        if (
+          data["status"] == true &&
+          data["message"] == "your answer stored next question and uuid is"
+        )
+        {
+          window.localStorage.setItem("uuid", data["data"].nextuuid);
+          this.subFlagModule2 = this.subFlagModule2 + 1;
+          window.localStorage.setItem(
+            "subFlagModule2",
+            this.subFlagModule2.toString()
+          );
+          this.data = data["data"];
+          this.sumbitButton = false;
+        } else if (
+          data["status"] == true &&
+          data["message"] == "submodule finish"
+        )
+        {
+          this.startFlag = false;
+          window.localStorage.setItem("uuid", data["data"].nextuuid);
+          this.mainFlagModule2 = 10;
+          window.localStorage.setItem("mainFlagModule2", "10");
+          window.localStorage.setItem("subFlagModule2", "1");
+          window.localStorage.setItem('source', 'module 2.10');
+          var obj = {
+            "type": "submodule",
+            "route": true,
+            "current": this.translate.instant("L2Module2.subMenu2-9"),
+            "next": this.translate.instant("L2Module2Finish.subMenu2-10"),
+            "nextRoute": "/modules/module2/Module2.10"
+          };
+          this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+          this.Module2Service.setLocalStorage2(10);
+        }
+      },
+      error => {
+        this.LanguageService.handleError(error.error.message);
+      }
+    );
   }
+
 }

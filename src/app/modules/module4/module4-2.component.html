@@ -1,25 +1,64 @@
 <div *ngIf="mainFlagModule4 < 2">
   <div class="card">
     <div class="card-block">
-      <p>{{'subModule5_1.5_1' | translate}}</p>
+      <p>{{'subModule5_3.5_3' | translate}}</p>
       <p><strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
     </div>
   </div>
 </div>
-
 <div *ngIf="mainFlagModule4 == 2">
-      <div *ngIf="showPart1Flag">
-          <!-- <app-new-baseline [passData]='passFlags' (exam2finish)="sendAnswer($event)"></app-new-baseline> -->
-          <div>
-            <app-new-baseline [passData]='passData'></app-new-baseline>
+  <div *ngIf="!startVideoEvent">
+    <div class="instruction-wrap">
+      <div class="card">
+        <div class="card-header text-white">
+          <span class="exp-img instructions-img"></span>
+          <h4>{{'Quiz.note' | translate}}</h4>
         </div>
+        <div class="card-block inst-text">
+          <p>{{'number.1' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_1' | translate}}</p>
+          <p>{{'number.2' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_2' | translate}}</p>
+          <p>{{'number.3' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_3' | translate}}</p>
+          <p>{{'number.4' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_4' | translate}}</p>
+          <p>{{'number.5' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_5' | translate}}</p>
+          <p class="color_red">{{'number.6' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_13' | translate}}</p>
         </div>
-</div>
-
-<div *ngIf="mainFlagModule4 > 2">
-  <div class="card submoduleBox">
-    <div class="card-block text-center greenText inst-text">
-      <span>{{ "L2Module4Complete.sm_4_2" | translate }}</span>
+        <div class="card-footer">
+          <div class="float-right hidden-xs-down">
+            <button class="btn btn-primary" appPreventDoubleClick
+              (debounceClick)="startVideoEvent=true;start();">{{'Module4.start' | translate}}</button>
+          </div>
+          <!-- <div class="hidden-sm-up text-center">
+                  <button class="btn btn-primary" (click)="startVideoEvent=true;start();">{{'Module4.start' | translate}}</button>
+              </div> -->
+        </div>
+      </div>
     </div>
+  </div>
+  <div *ngIf="startVideoEvent">
+    <div class="card">
+      <div class="card-footer">
+        <h6 class="text-center">{{'L4Module4.subMenu4-2' | translate}}</h6>
+      </div>
+      <div class="card-block">
+        <app-video-player [inputData]="videoData" (finishCall)="finishCFU($event)"
+          (singleCFUCompleteStatus)="singleCFUComplete($event)"></app-video-player>
+      </div>
+      <!-- <div class="card-footer">
+              <h6 class="text-center">{{'Module5.subMenu1-3' | translate}}</h6>
+          </div> -->
+    </div>
+  </div>
+</div>
+<div *ngIf="mainFlagModule4 > 2">
+  <div class="card">
+    <div class="card-footer">
+      <h6 class="text-center">{{'L4Module4.subMenu4-2' | translate}}</h6>
+    </div>
+    <div class="card-block">
+      <app-static-video [receivedData]='passData'></app-static-video>
+    </div>
+    <!-- <div class="card-footer">
+          <h6 class="text-center">{{'Module5.subMenu1-3' | translate}}</h6>
+      </div> -->
   </div>
 </div>

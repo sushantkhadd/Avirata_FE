@@ -41,11 +41,6 @@
   </div>
   <div *ngIf="subFlagModule2 == 2">
     <div>
-      <!-- <app-new-baseline [passData]='passFlags' (exam2finish)="sendAnswer($event)"></app-new-baseline> -->
-      <!-- <div>
-        <app-new-baseline [passData]='passData'></app-new-baseline>
-      </div> -->
-
       <div class="instruction-wrap ins-block" *ngIf="!startFlag">
         <div class="borderBlue">
           <div class="card">
@@ -76,7 +71,6 @@
           <div class="card-block pt-2">
             <form #assignForm="ngForm">
               <div class="form-group row">
-                <!-- <label class="col-sm-12 form-control-label" [for]="questionid" [innerHTML]="question"></label> -->
                 <div class="col-12 controls">
                   <textarea autosize [minRows]="2" class="form-control" [id]="questionid" name="answer"
                     [(ngModel)]="answer" #addr="ngModel" (focus)="showLimit=true" (focusout)="showLimit=false"
@@ -119,29 +113,10 @@
 <div class="videoFinishModal videoFinishedModel">
   <div bsModal #instructionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1"
     role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <!-- <div class="modal-dialog modal-default modal-sm modal-finish" role="document">
-          <div class="modal-content brad-0">
-              <div class="modal-footer text-center justify-content-center border-0">
-                  <div class="row p-1">
-                      <div class="col-md-12"><em class="fa fa-chevron-right"></em></div>
-                      <div class="col-md-12 mb-1">
-                          <p>आपका वीडियो पूरा हुआ।</p>
-                      </div>
-                      <div class="col-md-12">
-                          <button class="btn btn-primary text-center" (click)="next()">{{'Stepper.Next' | translate}}</button>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div> -->
-
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <img class="img-responsive img-rotate" src="assets/img/mitra.png">
         <div class="modal-header">
-          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button> -->
         </div>
         <div class="modal-body">
           <p class="px-5 text-center">तुमचा व्हिडिओ पूर्ण झाला.</p>

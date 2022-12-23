@@ -14,81 +14,75 @@ import { FullLayoutService } from '../../layouts/full-layout.service';
 export class Module28Component implements OnInit {
   public mainFlagModule2 = parseInt(window.localStorage.getItem('mainFlagModule2'));
   public subFlagModule2 = parseInt(window.localStorage.getItem('subFlagModule2'));
-  public token; startVideoEvent;
-  public passData = {};//used when CFU completed
-  public videoData = {};passUrl;
 
-  public currentSource = window.localStorage.getItem('source');
+  passUrl: any;
+  passValues={};
+  startPdf: boolean;
+  constructor(
+    public LanguageService: LanguageService,
+    private LocalstoragedetailsService: LocalstoragedetailsService,
+    public Module2Service: Module2Service,
+    public toastr: ToastsManager,
+    vcr: ViewContainerRef,
+    public translate: TranslateService
+  ) {
+    this.toastr.setRootViewContainerRef(vcr);
+  }
 
-  constructor(public FullLayoutService:FullLayoutService, public LanguageService:LanguageService,public LocalstoragedetailsService: LocalstoragedetailsService, private router: Router, public Module2Service: Module2Service,public translate: TranslateService) { }
+  public passData = {};
 
   ngOnInit() {
-    this.passUrl='IkzkQ-Xft4c'
-    this.currentSource = window.localStorage.getItem('source');
-    this.startVideoEvent = false;
+    this.startPdf=false
+    // this.start();
+  }
 
-    this.token = this.LocalstoragedetailsService.token
-    if (this.token == null) {
-      this.router.navigate(['/']);
-    }
+  start() {
+    var jsonBody = {}
+    jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
+    jsonBody['event'] = 'start'
+    this.apiCall(jsonBody, 'moduletwosingleurl/', 'start');
+  }  
 
-    if (this.subFlagModule2 == 1) {
-    }
-     if (this.mainFlagModule2 < 8) {
+  apiCall(jsonBody, apiUrl, fun) {
+    this.Module2Service.apiCall(jsonBody, apiUrl).subscribe(
+      data => {
+        if (data["status"] == true) {
+          if (fun == "start") {
+            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 2.8', window.localStorage.getItem('username'), 10);
 
-    }
-     else if (this.mainFlagModule2 == 8)
-     {
-      this.startVideoEvent = false;
-      this.videoData['apiUrl'] = 'moduletwocfustart/';
-    }
-    else if (this.mainFlagModule2 > 8) {
-      var urlJson = {};
-      urlJson = JSON.parse(window.localStorage.getItem("currentJson2"));
-      console.log("vcxxxx",urlJson)
-      if (urlJson["children"].length > 0) {
-        var index = urlJson["children"].findIndex(
-          item => item.source == "module 2.8"
-        );
-        console.log("qWSS",index)
-        if (urlJson["children"][index].url != null)
-        {
-          console.log("qWSS",index,urlJson["children"][index].url)
-          this.passData['videoUrl'] = urlJson["children"][index].url
-        } else {
-          this.passData['videoUrl'] = this.passUrl
+            this.passValues["url"] = data["data"].url;
+            this.startPdf = true;
+            this.passUrl = data['data'].url;
+            var current2 = [];
+            current2 = JSON.parse(window.localStorage.getItem("currentJson2"));
+            var index = current2["children"].findIndex(
+              item => item.source == "module 2.8");
+            current2["children"][index].url = this.passUrl;
+
+            window.localStorage.setItem("currentJson2", JSON.stringify(current2));
+          } else if (fun == "finish1") {
+            this.LanguageService.toHide();
+            window.localStorage.setItem('uuid', data['data'].nextuuid)
+            window.localStorage.setItem('mainFlagModule2', '9');
+            window.localStorage.setItem('subFlagModule2', '1');
+            window.localStorage.setItem('source', 'module 9.1');
+            this.Module2Service.setLocalStorage2(9);
+            var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module2.submodule2-8'), "next": this.translate.instant('L2Module2Finish.submodule2-9'), "nextRoute": "/modules/module2/Module2.9" }
+            this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+          }
         }
-      } else {
-        this.passData['videoUrl'] = this.passUrl
+      },
+      error => {
+        this.LanguageService.handleError(error.error.message);
       }
-    }
+    );
   }
-  finishCFU(result) {
-    if (result["status"] == true) {
-      console.log("event",result)
-      var current2 = [];
-      current2 = JSON.parse(window.localStorage.getItem("currentJson2")); 
-      var index = current2["children"].findIndex(
-      item => item.source == "module 2.8" );
-      current2["children"][index].url = result["url"]; 
-      window.localStorage.setItem("currentJson2", JSON.stringify(current2))
-      window.localStorage.setItem('mainFlagModule2', '9');
-      window.localStorage.setItem('subFlagModule2', '1');
-      window.localStorage.setItem('source', 'module 2.9');
-      this.Module2Service.setLocalStorage2(9);
-      var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module2.subMenu2-8'), "next": this.translate.instant('L2Module2Finish.subMenu2-9'), "nextRoute": "/modules/module2/Module2.9" }
-      this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
-    }
-    else {
-      window.localStorage.setItem('mainFlagModule2', '8');
-      this.router.navigate(['/modules/module2/Module2.8']);
-    }
+
+  finishPDF(e) {
+    var jsonBody = {};
+    jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
+    jsonBody['event'] = 'finish';
+    this.apiCall(jsonBody, 'moduletwosingleurl/', 'finish1');
   }
-  singleCFUComplete(e) {
-    this.subFlagModule2++;
-    window.localStorage.setItem('subFlagModule2', this.subFlagModule2.toString());
-  }
-  start(){
-    this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 2.8', window.localStorage.getItem('username'), 10);
-  }
+  
 }

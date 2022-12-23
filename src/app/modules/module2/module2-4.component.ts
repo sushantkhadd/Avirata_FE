@@ -5,7 +5,7 @@ import { LanguageService } from './../../language.service';
 import { Router } from '@angular/router';
 import { ToastsManager } from 'ng6-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import {Module2Service} from './module2.service'
+import { Module2Service } from './module2.service'
 import { CommonService } from 'src/app/services/common.service';
 
 @Component({
@@ -124,7 +124,7 @@ export class Module24Component implements OnInit {
             "route": true,
             "current": this.translate.instant("L2Module2.subMenu2-4"),
             "next": this.translate.instant("L2Module2Finish.subMenu2-5"),
-            "nextRoute": "/modules/module1/Module2.5"
+            "nextRoute": "/modules/module2/Module2.5"
           };
           this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
           this.Module2Service.setLocalStorage2(5);

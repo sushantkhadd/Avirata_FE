@@ -1,10 +1,9 @@
-import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { ModalDirective } from 'ngx-bootstrap';
+import { Component, OnInit} from '@angular/core';
 import { LocalstoragedetailsService } from "../../services/localstoragedetails.service";
 import { LanguageService } from './../../language.service';
 import { Router } from '@angular/router';
-import { ToastsManager } from 'ng6-toastr';
 import { TranslateService } from '@ngx-translate/core';
+import { FullLayoutService } from '../../layouts/full-layout.service';
 import {Module4Service} from './module4.service'
 
 @Component({
@@ -13,60 +12,91 @@ import {Module4Service} from './module4.service'
 })
 export class Module42Component implements OnInit {
 
-  public mainFlagModule4 = parseInt(
-    window.localStorage.getItem("mainFlagModule4")
-  );
-  public subFlagModule4 = parseInt(
-    window.localStorage.getItem("subFlagModule4")
-  )
-  constructor(
-    public LanguageService: LanguageService,
-    private LocalstoragedetailsService: LocalstoragedetailsService,
-    private router: Router,
-    public Module4Service: Module4Service,
-    public toastr: ToastsManager,
-    vcr: ViewContainerRef,
-    public translate: TranslateService
-  ) {
-    this.toastr.setRootViewContainerRef(vcr);
-  }
-  public startTest; passData = {}; showPart1Flag = false;
-  public passFlags = {}; data; myjsondata; dummy; deleteAdd = []; questionCount;
-  questionlist; optionArray; counter; disableIt; questionId; mainCounter;
-  dummyArray = []; jsonObject = {}; ansJsonLength;
-  public apiEndStart; apiEndSendAns; apiEndFinish;
+  public mainFlagModule4 = parseInt(window.localStorage.getItem('mainFlagModule4'));
+  public subFlagModule4 = parseInt(window.localStorage.getItem('subFlagModule4'));
+  public token; startVideoEvent;
+  public passData = {};//used when CFU completed
+  public videoData = {};passUrl;
+
+  public currentSource = window.localStorage.getItem('source');
+
+  constructor(public FullLayoutService:FullLayoutService, public LanguageService:LanguageService,public LocalstoragedetailsService: LocalstoragedetailsService, private router: Router, public Module4Service: Module4Service,public translate: TranslateService) { }
 
   ngOnInit() {
-    this.questionlist = [];
-    this.dummyArray = [];
-    this.questionId = "";
-    this.disableIt = true;
-    this.startTest = false
-    this.ansJsonLength = 0;
-
-    if (this.mainFlagModule4 == 2)
-    {
-      this.start();
+    this.passUrl='IkzkQ-Xft4c'
+    this.currentSource = window.localStorage.getItem('source');
+    this.startVideoEvent = false;
+    console.log("main module flag",this.mainFlagModule4)
+    this.token = this.LocalstoragedetailsService.token
+    if (this.token == null) {
+      this.router.navigate(['/']);
     }
 
+    if (this.subFlagModule4 == 1) {
+    }
+     if (this.mainFlagModule4 < 2) {
 
+    }
+     else if (this.mainFlagModule4 == 2)
+     {
+      this.startVideoEvent = false;
+      this.videoData['apiUrl'] = 'modulefourfustart/';
+    }
+    else if (this.mainFlagModule4 > 2) {
+      var urlJson = {};
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson4"));
+      console.log("vcxxxx",urlJson)
+      if (urlJson["children"].length > 0) {
+        var index = urlJson["children"].findIndex(
+          item => item.source == "module 4.2"
+        );
+        console.log("qWSS",index)
+        if (urlJson["children"][index].url != null)
+        {
+          console.log("qWSS",index,urlJson["children"][index].url)
+          this.passData['videoUrl'] = urlJson["children"][index].url
+        } else {
+          this.passData['videoUrl'] = this.passUrl
+        }
+      } else {
+        this.passData['videoUrl'] = this.passUrl
+      }
+    }
   }
-  start() {
-    var jsonData = {}
-    jsonData['submoduleid'] = window.localStorage.getItem('uuid')
-    jsonData['event'] = "start"
-    jsonData["useranswer"] = "";
-
-    this.showPart1Flag = true;
-    this.apiEndStart = 'l3module4_ans_return_mcq/';
-      this.apiEndSendAns = 'l3module4_ans_return_mcq/';
-      this.apiEndFinish = 'l3module4_ans_return_mcq/';
-      // this.startJson['examtype'] = window.localStorage.getItem('uuid');
-
-      this.passData['start'] = this.apiEndStart;
-      this.passData['answer'] = this.apiEndSendAns;
-      this.passData['finish'] = this.apiEndFinish;
-      this.passData['jsonData'] = jsonData;
-      this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 4.2', window.localStorage.getItem('username'), 10);
+  finishCFU(result) {
+    if (result["status"] == true) {
+      console.log("event",result)
+      var current4 = [];
+      current4 = JSON.parse(window.localStorage.getItem("currentJson4")); 
+      var index = current4["children"].findIndex(
+      item => item.source == "module 4.2" );
+      current4["children"][index].url = result["url"]; 
+      window.localStorage.setItem("currentJson4", JSON.stringify(current4))
+      window.localStorage.setItem('mainFlagModule4', '3');
+      window.localStorage.setItem('subFlagModule4', '1');
+      window.localStorage.setItem('source', 'module 4.3.1');
+      this.Module4Service.setLocalStorage4(3);
+      var obj = { 
+        "type": "submodule", "route": true, 
+        "current": this.translate.instant('L4Module4.subMenu4-2'), 
+        "next": this.translate.instant('L4Module4Finish.subMenu4-3'), 
+        "nextRoute": "/modules/module4/Module4.3" 
+      }
+      this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+    }
+    else {
+      window.localStorage.setItem('mainFlagModule4', '2');
+      this.router.navigate(['/modules/module4/Module4.2']);
+    }
   }
+  singleCFUComplete(e) {
+    this.subFlagModule4++;
+    window.localStorage.setItem('subFlagModule4', this.subFlagModule4.toString());
+  }
+  start(){
+    this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 4.2', window.localStorage.getItem('username'), 10);
+  }
+
+
 }
+
