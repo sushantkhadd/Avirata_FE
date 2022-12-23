@@ -35,8 +35,22 @@ export class Module07Component implements OnInit {
   }
   public passData = {}; 
   ngOnInit() {
-    console.log('heeee module 5')
-    this.start(); 
+    if (this.mainFlagModule0 == 7) {
+      this.start();
+    }
+    else if (this.mainFlagModule0 > 7) {
+      var urlJson = {};
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson0"));
+      console.log("vcxxxx", urlJson);
+      if (urlJson["children"].length > 0) {
+        var index = urlJson["children"].findIndex(
+          item => item.source == "module 0.7"
+        );
+        if (urlJson["children"][index].url != null) {
+          this.passData["videoUrl"] = urlJson["children"][index].url;
+        }
+      }
+    }
   }
   start() {
     var jsonBody = {}

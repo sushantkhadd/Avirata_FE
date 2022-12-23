@@ -39,8 +39,36 @@ export class Module03Component implements OnInit {
     this.showVideoFlag=false
     if (this.mainFlagModule0 == 3) {
       this.start()
+    }else if (this.mainFlagModule0 > 3) {
+      this.flag = 0;
+      var urlJson = {};
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson0"));
+      console.log("vcxxxx",urlJson)
+      if (urlJson["children"].length > 0) {
+        var index = urlJson["children"].findIndex(
+          item => item.source == "module 0.3"
+        );
+        console.log("qWSS",index)
+        var mainJson;
+        mainJson = JSON.parse(urlJson["children"][index].url);
+        console.log("hjbhjb",mainJson['0.3.1'])
+        if (mainJson != null)
+        {
+          this.urlArray["src1"] = mainJson["0.3.1"];
+          this.urlArray["src2"] = mainJson["0.3.2"];
+        } else {
+          this.mapJSON();
+        }
+      } else {
+        this.mapJSON();
+      }
     }
   }
+
+  mapJSON() {
+    this.urlArray['src1'] = this.lnk1
+    this.urlArray['src2'] = this.lnk2
+    }
 
 
   start() {
@@ -135,5 +163,22 @@ export class Module03Component implements OnInit {
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
     jsonBody['event'] = 'finish'
     this.apiCall(jsonBody, 'modulezerosingleurl/', 'finish1')
+  } 
+  
+  
+  showVideo(src, title,value) {    
+    if (value == 1)
+    {
+      this.passData['videoUrl'] = src;
+      this.thumb_title = title;
+      this.flag = value;
+    } else if (value == 2)
+    {
+      this.passValues["url"] = src;
+      this.thumb_title = title;
+      this.flag = value;
+      this.passValues["unlockView"] = "static";
+    }
+  
   }
 }

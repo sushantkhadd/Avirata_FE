@@ -25,6 +25,9 @@ export class Module016Component implements OnInit {
   videoflag = 0;
   passValues = {};
   showCFU: boolean;
+  urlArray={};lnk1;lnk2;thumb_title;
+  flag: number;
+  pdfUrl
   constructor(
     public LanguageService: LanguageService,
     private LocalstoragedetailsService: LocalstoragedetailsService,
@@ -38,8 +41,43 @@ export class Module016Component implements OnInit {
   }
   public passData = {};
   ngOnInit() {
+    this.lnk1 = ''
+    this.lnk2 = ''
+    this.pdfUrl='https://s3-ap-southeast-1.amazonaws.com/maacpd/english/level1/module1/1.7_A.pdf'
     // this.start();
+
+    if (this.mainFlagModule0 > 16) {
+      this.flag = 0;
+      var urlJson = {};
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson0"));
+      console.log("vcxxxx",urlJson)
+      if (urlJson["children"].length > 0) {
+        var index = urlJson["children"].findIndex(
+          item => item.source == "module 0.16"
+        );
+        var mainJson;
+        mainJson = JSON.parse(urlJson["children"][index].url);
+        console.log("hjbhjb",mainJson["1"])
+        if (mainJson != null)
+        {
+          this.urlArray["src1"] = mainJson["1"];
+          this.urlArray["src2"] = mainJson["2"];
+          this.urlArray["src3"] = mainJson["3"];
+          this.urlArray["src4"] = mainJson["4"];
+          this.urlArray["src5"] = mainJson["5"];
+        } else {
+          this.mapJSON();
+        }
+      } else {
+        this.mapJSON();
+      }
+    }
   }
+
+  mapJSON() {
+    this.urlArray['src1'] = this.lnk1
+    this.urlArray['src2'] = this.lnk2
+    }
   start() {
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
@@ -155,5 +193,40 @@ export class Module016Component implements OnInit {
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
     jsonBody['event'] = 'finish'
     this.nextApiCall(jsonBody, 'modulezerosingleurl/', 'finish1')
+  }
+
+  showVideo(src, title,value) {
+    // this.staticImageModal.show();
+    // this.statVideoFlag = true;
+    // this.statImageFlag = false;
+    console.log('hello pravin',src,title,value)
+    if (value == 1)
+    {
+      this.passValues["url"] = src;
+      this.thumb_title = title;
+      this.flag = value;
+      this.passValues["unlockView"] = "static";
+    } else if (value == 2)
+    {
+      this.passData['videoUrl'] = src;
+      this.thumb_title = title;
+      this.flag = value;
+    }else if (value == 3)
+    {
+      this.passData['videoUrl'] = src;
+      this.thumb_title = title;
+      this.flag = value;
+    }else if (value == 4)
+    {
+      this.passValues["url"] = src;
+      this.thumb_title = title;
+      this.flag = value;
+      this.passValues["unlockView"] = "static";
+    }else if (value == 5)
+    {
+      this.passData['videoUrl'] = src;
+      this.thumb_title = title;
+      this.flag = value;
+    }  
   }
 }

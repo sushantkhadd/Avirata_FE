@@ -24,6 +24,11 @@ export class Module025Component implements OnInit {
   passUrl: any;
   nextBtnFlag: boolean;
   nextId=1;
+  lnk1: string;
+  urlArray={};
+  lnk2: string;
+  flag: number;
+  thumb_title: any;
   constructor(
     public LanguageService: LanguageService,
     private LocalstoragedetailsService: LocalstoragedetailsService,
@@ -37,7 +42,34 @@ export class Module025Component implements OnInit {
   }
   public passData = {};
   ngOnInit() {
+    this.lnk1 = ''
+    this.lnk2 = ''
+    this.urlArray["src1"] = "skGFDAhQrhE";
+    this.urlArray["src2"] = "opHKXAPIynA";
+    this.urlArray['v_thumb'] = './../../assets/img/video-thumb.png'
     // this.start();
+
+    if (this.mainFlagModule0 > 25) {
+      this.flag = 0;
+      var urlJson = {};
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson0"));
+      if (urlJson["children"].length > 0) {
+        var index = urlJson["children"].findIndex(
+          item => item.source == "module 0.25"
+        );
+        if (urlJson["children"][index].url != null) {
+          var mainJson;
+          mainJson = JSON.parse(urlJson["children"][index].url);
+          this.urlArray["src1"] = mainJson["0.25.1"];
+          this.urlArray["src2"] = mainJson["0.25.2"];
+        } else {
+          this.mapJSON();
+          console.log('map json', this.mapJSON);
+        }
+      } else {
+        this.mapJSON();
+      }
+    }
   }
   start() {
     var jsonBody = {}
@@ -128,5 +160,23 @@ export class Module025Component implements OnInit {
         this.LanguageService.handleError(error.error.message);
       }
     );
+  }
+  mapJSON() {
+    this.urlArray['src1'] = this.lnk1
+    this.urlArray['src2'] = this.lnk2
+  }
+  showVideo(src, title, value) {
+    // this.staticImageModal.show();
+    // this.statVideoFlag = true;
+    // this.statImageFlag = false;
+    if (value == 1) {
+      this.passData['videoUrl'] = src;
+      this.thumb_title = title;
+      this.flag = value;
+    } else if (value == 2) {
+      this.passData['videoUrl'] = src;
+      this.thumb_title = title;
+      this.flag = value;
+    }
   }
 }

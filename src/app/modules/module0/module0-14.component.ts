@@ -5,7 +5,7 @@ import { LanguageService } from './../../language.service';
 import { Router } from '@angular/router';
 import { ToastsManager } from 'ng6-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import {Module0Service} from './module0.service'
+import { Module0Service } from './module0.service'
 
 @Component({
   selector: 'app-module0-14',
@@ -25,7 +25,7 @@ export class Module014Component implements OnInit {
   constructor(
     public LanguageService: LanguageService,
     private LocalstoragedetailsService: LocalstoragedetailsService,
-    private router: Router,     
+    private router: Router,
     public Module0Service: Module0Service,
     public toastr: ToastsManager,
     vcr: ViewContainerRef,
@@ -33,20 +33,33 @@ export class Module014Component implements OnInit {
   ) {
     this.toastr.setRootViewContainerRef(vcr);
   }
-  public passData = {}; 
+  public passData = {};
   ngOnInit() {
-    console.log('heeee module 5')
-    this.start(); 
+    if (this.mainFlagModule0 == 14) {
+      this.start();
+    }
+    else if (this.mainFlagModule0 > 14) {
+      var urlJson = {};
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson0"));
+      console.log("vcxxxx", urlJson);
+      if (urlJson["children"].length > 0) {
+        var index = urlJson["children"].findIndex(
+          item => item.source == "module 0.14"
+        );
+        if (urlJson["children"][index].url != null) {
+          this.passData["videoUrl"] = urlJson["children"][index].url;
+        }
+      }
+    }
   }
   start() {
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
     jsonBody['event'] = 'start'
-    this.apiCall(jsonBody, 'modulezerosingleurl/', 'start');   
+    this.apiCall(jsonBody, 'modulezerosingleurl/', 'start');
   }
   videoFinish(e) {
-    if (e == true)
-    {
+    if (e == true) {
       this.instructionModal.show()
       this.LanguageService.toShow();
       // this.nextBtnFlag = true
