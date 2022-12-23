@@ -12,123 +12,76 @@ import { FullLayoutService } from '../../layouts/full-layout.service';
   templateUrl: './module2-14.component.html'
 })
 export class Module214Component implements OnInit {
-  constructor(public Module2Service: Module2Service, public translate: TranslateService, public LanguageService: LanguageService, public FullLayoutService: FullLayoutService, public router: Router, public LocalstoragedetailsService: LocalstoragedetailsService, public toastr: ToastsManager, vcr: ViewContainerRef) {
+  public mainFlagModule2 = parseInt(window.localStorage.getItem('mainFlagModule2'));
+  public subFlagModule2 = parseInt(window.localStorage.getItem('subFlagModule2'));
+
+  passUrl: any;
+  passValues = {};
+  startPdf: boolean;
+  constructor(
+    public LanguageService: LanguageService,
+    private LocalstoragedetailsService: LocalstoragedetailsService,
+    public Module2Service: Module2Service,
+    public toastr: ToastsManager,
+    vcr: ViewContainerRef,
+    public translate: TranslateService
+  ) {
     this.toastr.setRootViewContainerRef(vcr);
   }
-  answer;
-  question;
-  public mainFlagModule2;
-  subFlagModule2;
-  questionid; trimFlag; showLimit; postWordCount; startFlag
+
+  public passData = {};
+
   ngOnInit() {
-    this.answer = "";
-    this.question = "";
-    this.postWordCount = 0;
-    console.log('count', this.postWordCount)
-    this.mainFlagModule2 = parseInt(
-      window.localStorage.getItem("mainFlagModule2")
-    );
-    this.subFlagModule2 = parseInt(
-      window.localStorage.getItem("subFlagModule2")
-    );
-
-    if (this.mainFlagModule2 == 14) {
-      this.startFlag = false;
-      // this.startEvent();
-    }
+    this.startPdf = false
+    // this.start();
   }
 
-  ngDoCheck() {
-
-    if (this.answer) {
-      this.postWordCount = this.answer.trim().split(/\s+/).length;
-      if(this.postWordCount == 0 || this.postWordCount > 150){
-        this.showLimit=false
-      }
-      else if(this.postWordCount >=5){
-        this.showLimit=true
-      }
-
-    }
-
-    if (this.answer != null && this.answer != "" && this.answer != undefined) {
-      if (this.answer.trim().length == 0) {
-        this.trimFlag = true;
-      } else if (this.postWordCount > 150 || this.postWordCount < 5) {
-        this.trimFlag = true;
-      } else {
-        this.trimFlag = false;
-      }
-    }
-    else{
-      if (this.answer == "" || this.answer == null || this.answer == undefined){
-        this.postWordCount = 0;
-      }
-    }
-  }
-
-  startEvent() {
-    var jsonBody = {};
-    jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
-    jsonBody["useranswer"] = "";
-    jsonBody["event"] = "start";
-    var apiUrl = "l3freetext/";
-    this.apiCall(jsonBody, apiUrl, "start");
-  }
-
-  finish() {
-    var jsonBody = {};
-    jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
-    var ansJson = {};
-    ansJson[this.questionid] = (this.answer).trim();
-    jsonBody["useranswer"] = ansJson;
-    jsonBody["event"] = "answer";
-    var apiUrl = "l3freetext/";
-    this.apiCall(jsonBody, apiUrl, "finish");
+  start() {
+    var jsonBody = {}
+    jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
+    jsonBody['event'] = 'start'
+    this.apiCall(jsonBody, 'moduletwosingleurl/', 'start');
   }
 
   apiCall(jsonBody, apiUrl, fun) {
-    this.Module2Service.apiCall(jsonBody, apiUrl)
-      .subscribe(
+    this.Module2Service.apiCall(jsonBody, apiUrl).subscribe(
       data => {
-        if (data['status'] == true) {
-          if (fun == 'start') {
+        if (data["status"] == true) {
+          if (fun == "start") {
             this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 2.14', window.localStorage.getItem('username'), 10);
-            this.startFlag = true;
-            this.question = data["data"]["questionlist"][0].question;
-            this.questionid = data["data"]["questionlist"][0].questionid;
-          }
-          else if (fun == "finish") {
-            this.mainFlagModule2 = 15;
-            window.localStorage.setItem("subFlagModule2", "1");
-            window.localStorage.setItem(
-              "uuid",
-              data["data"].nextuuid
-            );
-            window.localStorage.setItem("mainFlagModule2", "15");
-            window.localStorage.setItem("subFlagModule2", "1");
-            window.localStorage.setItem("source", "module 2.15.1");
-            this.Module2Service.setLocalStorage2(15);
-            var obj = {
-              type: "submodule",
-              route: true,
-              current: this.translate.instant(
-                "L2Module2.subMenu2-14"
-              ),
-              next: this.translate.instant(
-                "L2Module2Finish.subMenu2-15"
-              ),
-              nextRoute: "/modules/module2/Module2.15"
-            };
-            this.LocalstoragedetailsService.setModuleStatus(
-              JSON.stringify(obj)
-            );
+
+            this.passValues["url"] = data["data"].url;
+            this.startPdf = true;
+            this.passUrl = data['data'].url;
+            var current2 = [];
+            current2 = JSON.parse(window.localStorage.getItem("currentJson2"));
+            var index = current2["children"].findIndex(
+              item => item.source == "module 2.14");
+            current2["children"][index].url = this.passUrl;
+
+            window.localStorage.setItem("currentJson2", JSON.stringify(current2));
+          } else if (fun == "finish1") {
+            this.LanguageService.toHide();
+            window.localStorage.setItem('uuid', data['data'].nextuuid)
+            window.localStorage.setItem('mainFlagModule3', '1');
+            window.localStorage.setItem('subFlagModule3', '1');
+            window.localStorage.setItem('source', 'module 1.1');
+            this.Module2Service.setLocalStorage2(3);
+            var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module2.submodule2-14'), "next": this.translate.instant('L2Module2Finish'), "nextRoute": "/modules/module3" }
+            this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
           }
         }
       },
       error => {
         this.LanguageService.handleError(error.error.message);
       }
-      );
+    );
+  }
+
+  finishPDF(e) {
+    var jsonBody = {};
+    jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
+    jsonBody['event'] = 'finish';
+    this.apiCall(jsonBody, 'moduletwosingleurl/', 'finish1');
   }
 }
