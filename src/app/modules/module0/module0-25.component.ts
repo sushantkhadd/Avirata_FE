@@ -113,10 +113,11 @@ export class Module025Component implements OnInit {
   }
 
   nextApiCall(jsonBody, apiUrl, fun) {
-    this.nextId = 2;
+    
     this.Module0Service.apiCall(jsonBody, apiUrl).subscribe(
       data => {
         if (data["status"] == true) {
+          this.nextId = 2;
           if (fun == "finish1") {
             window.localStorage.setItem('uuid', data['data'].nextuuid)
             this.start()
