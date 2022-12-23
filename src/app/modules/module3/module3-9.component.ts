@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ModalDirective } from 'ngx-bootstrap';
 
-
 @Component({
   selector: 'app-module3-9',
   templateUrl: './module3-9.component.html'
@@ -100,19 +99,7 @@ export class Module39Component implements OnInit {
             current3["children"][index].url = JSON.stringify(url); 
             window.localStorage.setItem("currentJson3", JSON.stringify(current3));
 
-            // this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 3.1', window.localStorage.getItem('username'), 10);            
-            // this.passData['apiUrl'] = "modulethreesingleurl/";
-            // this.passData['videoUrl'] = data['data'].url;  
-            // this.showVideoFlag = true;
-            // var current3 = [];
-            // current3 = JSON.parse(window.localStorage.getItem("currentJson3"));
-            // var index = current3["children"].findIndex(
-            //   item => item.source == "module 3.1");
-            // //current1["children"][index].url = this.passUrl;
-            // window.localStorage.setItem("currentJson3", JSON.stringify(current3));
-
           } else if (fun == "finish1") {
-
             this.instructionModal.hide();
             this.LanguageService.toHide();
             this.playVideo = false;
@@ -120,14 +107,6 @@ export class Module39Component implements OnInit {
             this.mainFlagModule3 = 9;
             window.localStorage.setItem("uuid", data["data"].nextuuid);
             this.start2();
-            // this.LanguageService.toHide();
-            // window.localStorage.setItem('uuid', data['data'].nextuuid)
-            // window.localStorage.setItem('mainFlagModule3', '2');
-            // window.localStorage.setItem('subFlagModule3', '1');
-            // window.localStorage.setItem('source', 'module 3.2');
-            // this.Module3Service.setLocalStorage3(2);
-            // var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module3.subMenu3-1'), "next": this.translate.instant('L2Module3Finish.subMenu3-2'), "nextRoute": "/modules/module3/Module3.2" }
-            // this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
           } else if (fun == "start2") {
             this.videoData['apiUrl'] = 'modulethreecfustart/';
             this.videoData['videoUrl'] = data['data'].url;
@@ -158,7 +137,7 @@ export class Module39Component implements OnInit {
       window.localStorage.setItem("currentJson3", JSON.stringify(current3));
       window.localStorage.setItem('mainFlagModule3', '10');
       window.localStorage.setItem('subFlagModule3', '1');
-      window.localStorage.setItem('source', 'module 3.10.1');
+      window.localStorage.setItem('source', 'module 3.10');
       this.Module3Service.setLocalStorage3(10);
       var obj = {
         "type": "submodule",
@@ -175,6 +154,5 @@ export class Module39Component implements OnInit {
       this.router.navigate(['/modules/module3/Module3.9']);
     }
   }
-
 
 }
