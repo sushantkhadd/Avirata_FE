@@ -46,20 +46,20 @@ export class Module026Component implements OnInit {
   }  
 
   apiCall(jsonBody, apiUrl, fun) {
+    this.startPdf=false;
     this.Module0Service.apiCall(jsonBody, apiUrl).subscribe(
       data => {
         if (data["status"] == true) {
           if (fun == "start") {
             this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 0.26', window.localStorage.getItem('username'), 10);
-
-            this.passValues["url"] = data["data"].url;
-            this.startPdf = true;
+            this.passValues["url"] = data["data"].url;            
             this.passUrl = data['data'].url;
             var current0 = [];
             current0 = JSON.parse(window.localStorage.getItem("currentJson0"));
             var index = current0["children"].findIndex(
               item => item.source == "module 0.26");
             current0["children"][index].url = this.passUrl;
+            this.startPdf = true;
 
             window.localStorage.setItem("currentJson0", JSON.stringify(current0));
           } else if (fun == "finish1") {

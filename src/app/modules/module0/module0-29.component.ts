@@ -35,7 +35,9 @@ export class Module029Component implements OnInit {
   }
   public passData = {}; 
   ngOnInit() {
-    // this.start(); 
+    if(this.mainFlagModule0 >29){
+      this.start();
+    }
   }
   start() {
     var jsonBody = {}

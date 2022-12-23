@@ -2525,6 +2525,101 @@ export class FullLayoutComponent implements OnInit {
           this.subFlagModule0 = 1;
         }
       }
+      else if (source == "module 0.20") {
+        this.mainFlagModule0 = 20;
+        if (source == "module 0.20") {
+          this.subFlagModule0 = 1;
+        }
+      }
+      else if (source == "module 0.21") {
+        this.mainFlagModule0 = 21;
+        if (source == "module 0.21") {
+          this.subFlagModule0 = 1;
+        }
+      }else if (
+        source == "module 0.22" ||
+        source == "module 0.22.1" ||
+        source == "module 0.22.2"
+      ) {
+        this.mainFlagModule0 = 22;
+        if (source == "module 0.22" || source == "module 0.22.1") {
+          this.subFlagModule0 = 1;
+        }
+        else if (source == "module 0.22.2") {
+          this.subFlagModule0 = 2;
+        }
+      }
+      else if (source == "module 0.23") {
+        this.mainFlagModule0 = 23;
+        if (source == "module 0.23") {
+          this.subFlagModule0 = 1;
+        }
+      }
+      else if (source == "module 0.24") {
+        this.mainFlagModule0 = 24;
+        if (source == "module 0.24") {
+          this.subFlagModule0 = 1;
+        }
+      }else if (
+        source == "module 0.25" ||
+        source == "module 0.25.1" ||
+        source == "module 0.25.2"
+      ) {
+        this.mainFlagModule0 = 25;
+        if (source == "module 0.25" || source == "module 0.25.1") {
+          this.subFlagModule0 = 1;
+        }
+        else if (source == "module 0.25.2") {
+          this.subFlagModule0 = 2;
+        }
+      }
+      else if (source == "module 0.26") {
+        this.mainFlagModule0 = 23;
+        if (source == "module 0.26") {
+          this.subFlagModule0 = 1;
+        }
+      }else if (source == "module 0.27") {
+        this.mainFlagModule0 = 27;
+        if (source == "module 0.27") {
+          this.subFlagModule0 = 1;
+        }
+      }else if (source == "module 0.28") {
+        this.mainFlagModule0 = 28;
+        if (source == "module 0.28") {
+          this.subFlagModule0 = 1;
+        }
+      }else if (source == "module 0.29") {
+        this.mainFlagModule0 = 29;
+        if (source == "module 0.29") {
+          this.subFlagModule0 = 1;
+        }
+      }else if (source == "module 0.30") {
+        this.mainFlagModule0 = 30;
+        if (source == "module 0.30") {
+          this.subFlagModule0 = 1;
+        }
+      }else if (
+        source == "module 0.31" ||
+        source == "module 0.31.1" ||
+        source == "module 0.31.2"||
+        source == "module 0.31.3"||
+        source == "module 0.31.4"||
+        source == "module 0.31.5"
+      ) {
+        this.mainFlagModule0 = 31;
+        if (source == "module 0.31" || source == "module 0.31.1") {
+          this.subFlagModule0 = 1;
+        }
+        else if (source == "module 0.31.2") {
+          this.subFlagModule0 = 2;
+        }else if (source == "module 0.31.3") {
+          this.subFlagModule0 = 3;
+        }else if (source == "module 0.31.4") {
+          this.subFlagModule0 = 4;
+        }else if (source == "module 0.31.5") {
+          this.subFlagModule0 = 5;
+        }
+      }
       window.localStorage.setItem(
         "subFlagModule0",
         this.subFlagModule0.toString()
