@@ -1126,11 +1126,11 @@ export class FullLayoutComponent implements OnInit {
       this.mainFlagModule4 = 15;
     } else {
       var source = window.localStorage.getItem("source");
-      if (source == "module 4.1.1" || source == "module 4.1.2") {
+      if (source == "module 4.1" || source == "module 4.2.1") {
         this.mainFlagModule4 = 1;
-        if (source == "module 4.1.1") {
+        if (source == "module 4.1") {
           this.subFlagModule4 = 1;
-        } else if (source == "module 4.1.2") {
+        } else if (source == "module 4.2.1") {
           this.subFlagModule4 = 2;
         }
         window.localStorage.setItem(

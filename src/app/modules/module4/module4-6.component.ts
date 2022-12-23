@@ -14,39 +14,41 @@ import { FullLayoutService } from 'src/app/layouts/full-layout.service';
   templateUrl: './module4-6.component.html'
 })
 export class Module46Component implements OnInit {
-  @ViewChild('staticImageModal') public staticImageModal: ModalDirective;
-  @ViewChild('instructionModal') public instructionModal: ModalDirective;
-
   public mainFlagModule4 = parseInt(window.localStorage.getItem('mainFlagModule4'));
   public subFlagModule4 = parseInt(window.localStorage.getItem('subFlagModule4'));
-  constructor(public FullLayoutService: FullLayoutService, public LanguageService: LanguageService, public Module4Service: Module4Service, public router: Router, public LocalstoragedetailsService: LocalstoragedetailsService, public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService) {
-    this.toastr.setRootViewContainerRef(vcr);
-  }
-  public showVideoFlag; nextBtnFlag; passData = {}; passUrl; videoData = {}; urlArray = {}; lnk1; lnk2; flag;
-  public statVideoFlag; thumb_title;parentUrlJson={}
+  public token; startVideoEvent;
+  public passData = {};//used when CFU completed
+  public videoData = {}; passUrl;
+
+  public currentSource = window.localStorage.getItem('source');
+
+  constructor(public FullLayoutService: FullLayoutService, public LanguageService: LanguageService, public LocalstoragedetailsService: LocalstoragedetailsService, private router: Router, public Module4Service: Module4Service, public translate: TranslateService) { }
+
   ngOnInit() {
-    this.lnk1 = ''
-    this.lnk2 = ''
-    this.urlArray["src1"] = "skGFDAhQrhE";
-    this.urlArray["src2"] = "opHKXAPIynA";
-    this.urlArray['v_thumb'] = './../../assets/img/video-thumb.png'
+    this.passUrl='IkzkQ-Xft4c';
+    this.currentSource = window.localStorage.getItem('source');
+    this.startVideoEvent = false;
 
-    this.showVideoFlag = false
-    this.nextBtnFlag = false
-
-    if (this.mainFlagModule4 == 6)
+    this.token = this.LocalstoragedetailsService.token
+    if (this.token == null)
     {
-      if (this.subFlagModule4 == 1)
-      {
-        this.start()
-      } else if (this.subFlagModule4 == 2)
-      {
-        // this.start1()
-      }
+      this.router.navigate(['/']);
     }
-    if (this.mainFlagModule4 > 6)
+
+    if (this.subFlagModule4 == 1)
     {
-      this.flag = 0;
+    }
+    if (this.mainFlagModule4 < 6)
+    {
+
+    }
+    else if (this.mainFlagModule4 == 6)
+    {
+      this.startVideoEvent = false;
+      this.videoData['apiUrl'] = 'modulefourcfustart/';
+    }
+    else if (this.mainFlagModule4 > 6)
+    {
       var urlJson = {};
       urlJson = JSON.parse(window.localStorage.getItem("currentJson4"));
       if (urlJson["children"].length > 0) {
@@ -55,141 +57,52 @@ export class Module46Component implements OnInit {
         );
         if (urlJson["children"][index].url != null)
         {
-          var mainJson;
-          mainJson = JSON.parse(urlJson["children"][index].url);
-          this.urlArray["src1"] = mainJson["1"];
-          this.urlArray["src2"] = mainJson["2"];
+          this.passData['videoUrl'] = urlJson["children"][index].url
         } else {
-          this.mapJSON();
+          this.passData['videoUrl'] = this.passUrl
         }
       } else {
-        this.mapJSON();
+        this.passData['videoUrl'] = this.passUrl
       }
     }
   }
 
-  mapJSON() {
-    this.urlArray['src1'] = this.lnk1
-    this.urlArray['src2'] = this.lnk2
-  }
-
-  start() {
-    var jsonBody = {}
-    jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
-    jsonBody['event'] = 'start'
-    this.apiCall(jsonBody, 'modulefoursingleurl/', 'start')
-  }
-  videoFinish(e) {
-    if (e == true)
-    {
-      this.instructionModal.show()
-      this.LanguageService.toShow();
-      this.nextBtnFlag = true
-    }
-  }
-  next() {
-    var jsonBody = {}
-    jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
-    jsonBody['event'] = 'finish'
-    this.apiCall(jsonBody, 'modulefoursingleurl/', 'finish1')
-  }
-  start1() {
-    this.showVideoFlag = true
-    this.videoData['apiUrl'] = 'modulefourcfustart/';
-  }
   finishCFU(e) {
     if (e)
     {
-      
       var current4 = [];
       current4 = JSON.parse(window.localStorage.getItem("currentJson4"));
       var index = current4["children"].findIndex(
         item => item.source == "module 4.6");
-      var moduleJson = current4["children"][index]
-      if(moduleJson["children"].length !=0){
-      var index1 = moduleJson["children"].findIndex(
-      item => item.source == "module 4.6.1");
-      if(moduleJson["children"][index1].url !="" && moduleJson["children"][index1].url !=null && moduleJson["children"][index1].url !=undefined){
-      this.parentUrlJson['1'] = moduleJson["children"][index1].url;
-      }
-      }
-      this.parentUrlJson['2'] = e['urls'];
-      current4["children"][index].url = JSON.stringify(this.parentUrlJson);
-      window.localStorage.setItem("currentJson4", JSON.stringify(current4));
+      current4["children"][index].url = e['url'];
 
       window.localStorage.setItem("currentJson4", JSON.stringify(current4));
       window.localStorage.setItem('mainFlagModule4', '7');
       window.localStorage.setItem('subFlagModule4', '1');
       window.localStorage.setItem('source', 'module 4.7.1');
       this.Module4Service.setLocalStorage4(7);
-      var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module4.subMenu4-6'), "next": this.translate.instant('L2Module4Finish.subMenu4-7'), "nextRoute": "/modules/module4/Module4.7" }
+      var obj = {
+        "type": "submodule",
+        "route": true,
+        "current": this.translate.instant('L4Module4.subMenu4-6'),
+        "next": this.translate.instant('L4Module4Finish.subMenu4-7'),
+        "nextRoute": "/modules/module4/Module4.3"
+      }
       this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
     }
-  }
-
-  apiCall(jsonBody, apiUrl, fun) {
-    this.Module4Service.apiCall(jsonBody, apiUrl)
-      .subscribe(
-        data => {
-          if (fun == 'start')
-          {
-            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 4.6', window.localStorage.getItem('username'), 10);
-            this.passData['apiUrl'] = "modulefoursingleurl/";
-            this.passData['videoUrl'] = data['data'].url;
-            this.showVideoFlag = true
-            this.passUrl = data['data'].url;
-
-            this.parentUrlJson['1'] = this.passUrl;
-            var dummylocal = JSON.parse(window.localStorage.getItem('currentJson4'))
-            var index1 = dummylocal.children.findIndex(item =>
-              item.source == "module 4.6");
-            dummylocal.children[index1].url = JSON.stringify(this.parentUrlJson)
-            window.localStorage.setItem('currentJson4', JSON.stringify(dummylocal))
-
-          } if (fun == 'finish1')
-          {
-            this.instructionModal.hide()
-            this.LanguageService.toHide();
-            this.showVideoFlag = false
-            window.localStorage.setItem('uuid', data['data'].nextuuid)
-            this.subFlagModule4 = this.subFlagModule4 + 1
-            window.localStorage.setItem('subFlagModule4', this.subFlagModule4.toString())
-            // this.start1()
-          }
-        },
-        error => {
-          this.LanguageService.handleError(error.error.message);
-        });
-  }
-
-  showVideo(src, title,value) {
-    // this.staticImageModal.show();
-    // this.statVideoFlag = true;
-    // this.statImageFlag = false;
-    if (value == 1)
+    else
     {
-      this.passData['videoUrl'] = src;
-      this.thumb_title = title;
-      this.flag = value;
-    } else if (value == 2)
-    {
-      this.passData['videoUrl'] = src;
-      this.thumb_title = title;
-      this.flag = value;
+      window.localStorage.setItem('mainFlagModule4', '6');
+      this.router.navigate(['/modules/module4/Module4.6']);
     }
-
   }
-
-  closeModal() {
-    // this.imageSrc = "";
-    this.statVideoFlag = false;
-    this.passData['videoUrl'] = "";
-    this.staticImageModal.hide();
-    this.LanguageService.toHide();
-  }
-
   singleCFUComplete(e) {
-    // this.subFlagModule1++;
-    // window.localStorage.setItem('subFlagModule2', this.subFlagModule1.toString());
+    this.subFlagModule4++;
+    window.localStorage.setItem('subFlagModule4', this.subFlagModule4.toString());
   }
+  start() {
+    this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 4.6', window.localStorage.getItem('username'), 10);
+  }
+
 }
+
