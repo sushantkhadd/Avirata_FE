@@ -16,101 +16,81 @@ export class Module412Component implements OnInit {
 
   public mainFlagModule4 = parseInt(window.localStorage.getItem('mainFlagModule4'));
   public subFlagModule4 = parseInt(window.localStorage.getItem('subFlagModule4'));
-  constructor(public LanguageService: LanguageService, public LocalstoragedetailsService: LocalstoragedetailsService, public Module4Service: Module4Service, public toastr: ToastsManager, vcr: ViewContainerRef, public router: Router, public translate: TranslateService) {
-    this.toastr.setRootViewContainerRef(vcr);
-  }
-  public data; questionType; passFlags = {}; showAnswer; saveData; answer; sumbitButton; startFlag;description;
-  public inst = "खाली दिलेल्या पर्यायांतील काही मानसिक अस्वास्थ्याशी निगडित आहेत, तर काही मानसिक आजाराशी निगडित आहेत आणि काही दोन्हीशी निगडित नाहीत.<b> याआधी '४.१- जरा विचार करा: मानसिक आरोग्याचे निकष'</b> या उपक्रमामध्ये तुम्ही निवडलेले पर्याय खाली दिसत आहेत. चौथ्या मॉड्यूलमध्ये सांगितलेल्या माहितीचा विचार करता, तुम्ही निवडलेल्या पर्यायांचा एकदा पुनर्विचार करून वाटल्यास उत्तरांत बदल करा."
-  ngOnInit() {
-    this.startFlag = false;
-    this.showAnswer = true;
-    this.saveData = true;
-    this.passFlags['saveData'] = this.saveData;
-    this.passFlags['showAnswer'] = this.showAnswer;
-    this.questionType = "mcqInBunch";
-    this.passFlags['questionType'] = this.questionType;
+  public token; startVideoEvent;
+  public passData = {};//used when CFU completed
+  public videoData = {};passUrl;
 
-    if (this.mainFlagModule4 == 12)
-    {
-      // this.start()
+  public currentSource = window.localStorage.getItem('source');
+
+  constructor(public FullLayoutService:FullLayoutService, public LanguageService:LanguageService,public LocalstoragedetailsService: LocalstoragedetailsService, private router: Router, public Module4Service: Module4Service,public translate: TranslateService) { }
+
+  ngOnInit() {
+    this.passUrl='IkzkQ-Xft4c'
+    this.currentSource = window.localStorage.getItem('source');
+    this.startVideoEvent = false;
+
+    this.token = this.LocalstoragedetailsService.token
+    if (this.token == null) {
+      this.router.navigate(['/']);
+    }
+
+    if (this.subFlagModule4 == 1) {
+    }
+     if (this.mainFlagModule4 < 12) {
+
+    }
+     else if (this.mainFlagModule4 == 12)
+     {
+      this.startVideoEvent = false;
+      this.videoData['apiUrl'] = 'modulefourcfustart/';
+    }
+    else if (this.mainFlagModule4 > 12) {
+      var urlJson = {};
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson4"));
+      console.log("vcxxxx",urlJson)
+      if (urlJson["children"].length > 0) {
+        var index = urlJson["children"].findIndex(
+          item => item.source == "module 4.12"
+        );
+        console.log("qWSS",index)
+        if (urlJson["children"][index].url != null)
+        {
+          console.log("qWSS",index,urlJson["children"][index].url)
+          this.passData['videoUrl'] = urlJson["children"][index].url
+        } else {
+          this.passData['videoUrl'] = this.passUrl
+        }
+      } else {
+        this.passData['videoUrl'] = this.passUrl
+      }
     }
   }
-
-  start() {
-    var jsonBody = {};
-    jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
-    jsonBody['useranswer'] = ""
-    jsonBody['event'] = 'reviewstart';
-    var apiUrl = "l3statement_with_mcq/";
-
-    this.Module4Service.apiCall(jsonBody, apiUrl)
-      .subscribe(
-        data => {
-          if (data['status'] == true)
-          {
-            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 4.12', window.localStorage.getItem('username'), 10);
-            console.log("data ", data['data'])
-            this.data = data['data']
-            this.startFlag = true;
-          }
-        },
-        error => {
-          this.LanguageService.handleError(error.error.message);
-        });
+  finishCFU(result) {
+    if (result["status"] == true) {
+      console.log("event",result)
+      var current4 = [];
+      current4 = JSON.parse(window.localStorage.getItem("currentJson4")); 
+      var index = current4["children"].findIndex(
+      item => item.source == "module 4.12" );
+      current4["children"][index].url = result["url"]; 
+      window.localStorage.setItem("currentJson4", JSON.stringify(current4))
+      window.localStorage.setItem('mainFlagModule4', '13');
+      window.localStorage.setItem('subFlagModule4', '1');
+      window.localStorage.setItem('source', 'module 4.13.1');
+      this.Module4Service.setLocalStorage4(13);
+      var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L4Module4.subMenu4-12'), "next": this.translate.instant('L4Module4Finish.subMenu4-12'), "nextRoute": "/modules/module4/Module4.13" }
+      this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+    }
+    else {
+      window.localStorage.setItem('mainFlagModule4', '12');
+      this.router.navigate(['/modules/module4/Module4.12']);
+    }
   }
-
-  saveAnswer(e) {
-    console.log("ff ", e)
-    this.sumbitButton = true;
-    this.answer = e;
-    this.submit();
+  singleCFUComplete(e) {
+    this.subFlagModule4++;
+    window.localStorage.setItem('subFlagModule4', this.subFlagModule4.toString());
   }
-  submit() {
-
-    var jsonBody = {}
-
-    jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
-    jsonBody['useranswer'] = this.answer
-    jsonBody['event'] = 'reviewanswer';
-    var apiUrl = "l3statement_with_mcq/";
-    console.log("dasd ", jsonBody)
-
-    this.Module4Service.apiCall(jsonBody, apiUrl)
-      .subscribe(
-        data => {
-          if (data['status'] == true && data['message'] == "your answer stored next question and uuid is")
-          {
-            window.localStorage.setItem('uuid', data['data'].nextuuid);
-            this.subFlagModule4 = this.subFlagModule4 + 1
-            window.localStorage.setItem('subFlagModule4', this.subFlagModule4.toString())
-            console.log("data ", data['data'])
-            this.data = data['data']
-            this.sumbitButton = false;
-            this.description = data['data'].description;
-          } else if (data['status'] == true && data['message'] == "submodule finish")
-          {
-            this.description = data['data'].description;
-           // this.startFlag = false;
-            window.localStorage.setItem('uuid', data['data'].nextuuid);
-            this.mainFlagModule4 = 13;
-            window.localStorage.setItem('mainFlagModule4', '13');
-            window.localStorage.setItem('subFlagModule4', '1');
-            window.localStorage.setItem('source', 'module 4.13.1');
-            var obj = {
-              "type": "submodule",
-              "route": true,
-              "current": this.translate.instant('L2Module4.subMenu4-12'),
-              "next": this.translate.instant('L2Module4Finish.subMenu4-13'),
-              "nextRoute": "/modules/module4/Module4.13"
-            }
-            this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
-            this.Module4Service.setLocalStorage4(13);
-          }
-        },
-        error => {
-          this.LanguageService.handleError(error.error.message);
-        });
-
+  start(){
+    this.LanguageService.googleEventTrack('L4SubmoduleStatus', 'Module 4.12', window.localStorage.getItem('username'), 10);
   }
-
 }
