@@ -94,7 +94,6 @@ export class Module2Component implements OnInit {
     }
   }
 
-  //removed this method if start event not required
   startEvent1() {
     var jsonBody = {};
     jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
@@ -103,7 +102,7 @@ export class Module2Component implements OnInit {
     this.apiCall(jsonBody, apiUrl, "start1");
   }
 
-    finishVideo(e) {
+  finishVideo(e) {
     console.log("aaaaaaa");
     if (e == true) {
       console.log(e);
@@ -117,7 +116,6 @@ export class Module2Component implements OnInit {
     }
   }
 
-
   startEvent2() {
     var jsonBody = {};
     jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
@@ -126,7 +124,6 @@ export class Module2Component implements OnInit {
     var apiUrl = "l4module2freetext/";
     this.apiCall(jsonBody, apiUrl, "start2");
   }
-
 
   finish1() {
     var jsonBody = {};
@@ -145,7 +142,6 @@ export class Module2Component implements OnInit {
     var apiUrl = "l4module2freetext/";
     this.apiCall(jsonBody, apiUrl, "finish2");
   }
-
 
   apiCall(jsonBody, apiUrl, fun) {
     this.Module2Service.apiCall(jsonBody, apiUrl).subscribe(
@@ -184,21 +180,7 @@ export class Module2Component implements OnInit {
             this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 2.2', window.localStorage.getItem('username'), 10);
             this.startFlag = true;
             this.question = data["data"]["questionlist"][0].question;
-            this.questionid = data["data"]["questionlist"][0].questionid;
-
-            // this.instructionModal.hide();
-            // this.LanguageService.toHide();
-            // this.playVideo = false;
-            // this.statVideoFlag = true;
-            // this.mainFlagModule2 = 1;
-            // window.localStorage.setItem("uuid", data["data"].nextuuid);
-            // console.log(data);
-            // this.subFlagModule2 = 2;
-            // window.localStorage.setItem("subFlagModule2", "2");
-            // this.questionFlag = true;
-            // this.startEvent2();
-            // this.nextFlag = false;
-          
+            this.questionid = data["data"]["questionlist"][0].questionid;          
           } else if (fun == "finish2") {
             this.mainFlagModule2 = 2;
             window.localStorage.setItem("subFlagModule2", "2");

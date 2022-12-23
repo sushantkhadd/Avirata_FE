@@ -1,15 +1,13 @@
 <div *ngIf="mainFlagModule2 < 6">
   <div class="card">
     <div class="card-block">
-      <p>{{'subModule5_3.5_3' | translate}}</p>
-      <p>
-        <strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
+      <p>{{'module7.7_2' | translate}}</p>
+      <p><strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
     </div>
   </div>
 </div>
-
 <div *ngIf="mainFlagModule2 == 6">
-  <div *ngIf="!startFlag" class="instruction-wrap">
+  <div class="instruction-wrap" *ngIf="!startFlag">
     <div>
       <div class="card">
         <div class="card-header text-white">
@@ -33,68 +31,19 @@
       </div>
     </div>
   </div>
-
   <div *ngIf="startFlag">
-    <h6 class="questionHead lineHeight" [innerHTML]="questionStatement"></h6>
-    <div class="borderBlue">
-      <div class="card p-2">
-        <div class="card-block mcqBlock">
-          <div class="form float-left">
-            <form #mcqForm="ngForm">
-              <!-- <p class="questionHead"><strong [innerHTML]="questionStatement"></strong></p> -->
-              <div class="dx-fieldset">
-                <div class="dx-field">
-                  <div class="dx-field-value">
-                    <div class="fa-1x" *ngFor="let enum of options;let i=index">
-                      <label for="{{enum.statementid}}" class="mb-2">
-                        <input class="mr-2" [id]='enum.statementid' type="checkbox" name="enums" (change)='onValueChanged($event,i,enum.statementid)'
-                          required> {{enum.statement}} </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-12 col-xs-12">
-                <button class="btn btn-info" [disabled]="mcqForm.invalid" appPreventDoubleClick (debounceClick)="sendAnswer()">{{'Cfu.submit' | translate}}</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
+    <h6 class="questionHead lineHeight">{{'L2common.caution' | translate}} <span [innerHTML]="inst"> </span></h6>
+    <div>
+      <span *ngIf="data">
+        <app-mcqcomponent [passFlags]='passFlags' [data]='data' (sendAns)="saveAnswer($event)"></app-mcqcomponent>
+      </span>
     </div>
   </div>
 </div>
-
 <div *ngIf="mainFlagModule2 > 6">
   <div class="card submoduleBox">
     <div class="card-block text-center greenText inst-text">
-      <span>{{ "L2Module2Complete.sm_2_6" | translate }}</span>
-    </div>
-  </div>
-</div>
-
-<div class="videoFinishModal videoFinishedModel correctAnsModal">
-  <div bsModal #instructionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
-    aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <img class="img-responsive sun-img" src="../../../assets/img/expressions/correct_ans.png">
-        <div class="modal-header">
-          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button> -->
-            <h5 class="text-white correctAns">{{'subModule1_9.correctAns' | translate }}</h5>
-        </div>
-        <div class="modal-body p-2">
-          <div *ngFor="let item of rightAns;let i=index">
-            <span class="ml-2 font-weight-normal">{{i+1}}.{{item}}</span>
-          </div>
-          <p class="font-weight-normal" [innerHTML]="description"></p>
-          <hr />
-          <div class="col-md-12 text-right correctfooter">
-            <button class="btn btn-success text-center" (click)="finish()">{{'Stepper.Next' | translate}}</button>
-          </div>
-        </div>
-      </div>
+      <span>{{'L2Module1Complete.sm1_4' | translate}}</span>
     </div>
   </div>
 </div>
