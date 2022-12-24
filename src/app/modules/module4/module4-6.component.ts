@@ -18,45 +18,44 @@ export class Module46Component implements OnInit {
   public subFlagModule4 = parseInt(window.localStorage.getItem('subFlagModule4'));
   public token; startVideoEvent;
   public passData = {};//used when CFU completed
-  public videoData = {}; passUrl;
+  public videoData = {};passUrl;
 
   public currentSource = window.localStorage.getItem('source');
 
-  constructor(public FullLayoutService: FullLayoutService, public LanguageService: LanguageService, public LocalstoragedetailsService: LocalstoragedetailsService, private router: Router, public Module4Service: Module4Service, public translate: TranslateService) { }
+  constructor(public FullLayoutService:FullLayoutService, public LanguageService:LanguageService,public LocalstoragedetailsService: LocalstoragedetailsService, private router: Router, public Module4Service: Module4Service,public translate: TranslateService) { }
 
   ngOnInit() {
-    this.passUrl='IkzkQ-Xft4c';
+    this.passUrl='IkzkQ-Xft4c'
     this.currentSource = window.localStorage.getItem('source');
     this.startVideoEvent = false;
 
     this.token = this.LocalstoragedetailsService.token
-    if (this.token == null)
-    {
+    if (this.token == null) {
       this.router.navigate(['/']);
     }
 
-    if (this.subFlagModule4 == 1)
-    {
+    if (this.subFlagModule4 == 1) {
     }
-    if (this.mainFlagModule4 < 6)
-    {
+     if (this.mainFlagModule4 < 6) {
 
     }
-    else if (this.mainFlagModule4 == 6)
-    {
+     else if (this.mainFlagModule4 == 6)
+     {
       this.startVideoEvent = false;
       this.videoData['apiUrl'] = 'modulefourcfustart/';
     }
-    else if (this.mainFlagModule4 > 6)
-    {
+    else if (this.mainFlagModule4 > 6) {
       var urlJson = {};
       urlJson = JSON.parse(window.localStorage.getItem("currentJson4"));
+      console.log("vcxxxx",urlJson)
       if (urlJson["children"].length > 0) {
         var index = urlJson["children"].findIndex(
           item => item.source == "module 4.6"
         );
+        console.log("qWSS",index)
         if (urlJson["children"][index].url != null)
         {
+          console.log("qWSS",index,urlJson["children"][index].url)
           this.passData['videoUrl'] = urlJson["children"][index].url
         } else {
           this.passData['videoUrl'] = this.passUrl
@@ -66,32 +65,28 @@ export class Module46Component implements OnInit {
       }
     }
   }
-
-  finishCFU(e) {
-    if (e)
-    {
+  finishCFU(result) {
+    if (result["status"] == true) {
+      console.log("event",result)
       var current4 = [];
-      current4 = JSON.parse(window.localStorage.getItem("currentJson4"));
+      current4 = JSON.parse(window.localStorage.getItem("currentJson4")); 
       var index = current4["children"].findIndex(
-        item => item.source == "module 4.6");
-      current4["children"][index].url = e['url'];
-
-      window.localStorage.setItem("currentJson4", JSON.stringify(current4));
-      window.localStorage.setItem('mainFlagModule4', '7');
+      item => item.source == "module 4.6" );
+      current4["children"][index].url = result["url"]; 
+      window.localStorage.setItem("currentJson4", JSON.stringify(current4))
+      window.localStorage.setItem('mainFlagModule4', '6');
       window.localStorage.setItem('subFlagModule4', '1');
       window.localStorage.setItem('source', 'module 4.7.1');
       this.Module4Service.setLocalStorage4(7);
-      var obj = {
-        "type": "submodule",
-        "route": true,
-        "current": this.translate.instant('L4Module4.subMenu4-6'),
-        "next": this.translate.instant('L4Module4Finish.subMenu4-7'),
-        "nextRoute": "/modules/module4/Module4.3"
-      }
+      var obj = { 
+        "type": "submodule", 
+        "route": true, 
+        "current": this.translate.instant('L2Module4.subMenu4-6'), 
+        "next": this.translate.instant('L2Module4Finish.subMenu4-7'), 
+        "nextRoute": "/modules/module4/Module4.4" }
       this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
     }
-    else
-    {
+    else {
       window.localStorage.setItem('mainFlagModule4', '6');
       this.router.navigate(['/modules/module4/Module4.6']);
     }
@@ -100,9 +95,8 @@ export class Module46Component implements OnInit {
     this.subFlagModule4++;
     window.localStorage.setItem('subFlagModule4', this.subFlagModule4.toString());
   }
-  start() {
-    this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 4.6', window.localStorage.getItem('username'), 10);
+  start(){
+    this.LanguageService.googleEventTrack('L2SubmoduleStatus', 'Module 4.6', window.localStorage.getItem('username'), 10);
   }
-
 }
 
