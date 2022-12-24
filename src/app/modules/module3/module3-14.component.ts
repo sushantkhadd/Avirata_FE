@@ -13,8 +13,10 @@ import { environment } from 'src/environments/environment';
   templateUrl: './module3-14.component.html'
 })
 export class Module314Component implements OnInit {
+
   public mainFlagModule3 = parseInt(window.localStorage.getItem('mainFlagModule3'));
   public subFlagModule3 = parseInt(window.localStorage.getItem('subFlagModule3'));
+
   public token; startVideoEvent;
   public passData = {};//used when CFU completed
   public videoData = {}; passUrl;
@@ -34,7 +36,7 @@ export class Module314Component implements OnInit {
       this.router.navigate(['/']);
     }
 
-    if (this.subFlagModule3 == 1)
+    if (this.subFlagModule3 == 14)
     {
     }
     if (this.mainFlagModule3 < 14)
@@ -91,7 +93,7 @@ export class Module314Component implements OnInit {
     }
     else
     {
-      window.localStorage.setItem('mainFlagModule3', '10');
+      window.localStorage.setItem('mainFlagModule3', '14');
       this.router.navigate(['/modules/module3/Module3.14']);
     }
   }

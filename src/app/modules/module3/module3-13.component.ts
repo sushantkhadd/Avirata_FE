@@ -24,14 +24,12 @@ export class Module313Component implements OnInit {
   }
   answer;
   question;
-  public mainFlagModule1;
-  subFlagModule1;
   questionid; trimFlag; showLimit; postWordCount; startFlag
   ngOnInit() {
     this.answer = "";
     this.question = "";
     this.postWordCount = 0;
-    if (this.mainFlagModule1 == 14) {
+    if (this.mainFlagModule3 == 13) {
       this.startFlag = false;
       // this.startEvent();
     }
@@ -104,8 +102,8 @@ export class Module313Component implements OnInit {
                 "uuid",
                 data["data"].nextuuid
               );
-              window.localStorage.setItem("mainFlagModule1", "14");
-              window.localStorage.setItem("subFlagModule1", "1");
+              window.localStorage.setItem("mainFlagModule3", "14");
+              window.localStorage.setItem("subFlagModule3", "1");
               window.localStorage.setItem("source", "module 1.14.1");
               this.Module3Service.setLocalStorage3(14);
               var obj = {
