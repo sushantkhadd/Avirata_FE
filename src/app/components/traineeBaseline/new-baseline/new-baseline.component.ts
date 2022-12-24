@@ -768,6 +768,7 @@ export class NewBaselineComponent implements OnInit {
                     console.log(current1, "fifirty")
                   }
                 }
+                this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
                 window.localStorage.setItem('mainFlagModule1', '1');
                 window.localStorage.setItem('uuid', data['data'].nextuuid)
                 window.localStorage.setItem("currentstatus", "1");
@@ -778,7 +779,7 @@ export class NewBaselineComponent implements OnInit {
                   "submoduleFinish": this.translate.instant('L2Module1Finish.submodule0-finish'),
                   "submoduleSuccess": this.translate.instant('L2Module1Finish.submodule0-success')
                 }
-                this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj1));
+               
               }
             }
 

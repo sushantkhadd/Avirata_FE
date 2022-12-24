@@ -36,8 +36,7 @@ export class Module13Component implements OnInit {
     if (this.token == null) {
       this.router.navigate(['/']);
     }
-
-    if (this.subFlagModule1 == 1) {
+    if (this.subFlagModule1 == 3) {
     }
      if (this.mainFlagModule1 < 3) {
 
