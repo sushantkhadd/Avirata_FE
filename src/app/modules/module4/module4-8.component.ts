@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { FullLayoutService } from 'src/app/layouts/full-layout.service';
 import { LanguageService } from 'src/app/language.service';
 import { LocalstoragedetailsService } from 'src/app/services/localstoragedetails.service';
@@ -7,6 +7,7 @@ import { Module4Service } from './module4.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ModalDirective } from 'ngx-bootstrap';
 import { Options } from 'ng5-slider';
+import { ToastsManager } from 'ng6-toastr';
 
 @Component({
   selector: "app-module4-8",
@@ -21,196 +22,100 @@ export class Module48Component implements OnInit {
   public subFlagModule4 = parseInt(
     window.localStorage.getItem("subFlagModule4")
   );
-  public token;
-  startVideoEvent;startFlag;
-  public passData = {}; //used when CFU completed
-  public videoData = {};
-  passUrl;
-  trimFlag;
-  mainQuestion;
-  assignData;
-  statementlist;
-  answer1;
-  answer2;
-  answer3;
-  answer4;
-  answer5;
-  question1;
-  question2;
-  question3;
-  question4;
-  question5;
-  description;
-  overallRating;
-
-  options: Options = {
-    showTicksValues: true,
-    showSelectionBar: true,
-    stepsArray: [
-      { value: 0 },
-      { value: 1 },
-      { value: 2 },
-      { value: 3 },
-      { value: 4 },
-      { value: 5 },
-      { value: 6 },
-      { value: 7 },
-      { value: 8 },
-      { value: 9 },
-      { value: 10 }
-    ]
-  };
-
-  public currentSource = window.localStorage.getItem("source");
-
-  constructor(
-    public FullLayoutService: FullLayoutService,
-    public LanguageService: LanguageService,
-    public LocalstoragedetailsService: LocalstoragedetailsService,
-    private router: Router,
-    public Module4Service: Module4Service,
-    public translate: TranslateService
-  ) {}
-
+  constructor(public LanguageService: LanguageService, public LocalstoragedetailsService: LocalstoragedetailsService, public Module4Service: Module4Service, public toastr: ToastsManager, vcr: ViewContainerRef, public router: Router, public translate: TranslateService) {
+    this.toastr.setRootViewContainerRef(vcr);
+  }
+  public data; questionType; passFlags = {}; showAnswer; saveData; answer; sumbitButton; startFlag;description;
+  public inst = "खालील व्यक्ती समायोजित आहेत की नाही त्याबद्दल योग्य पर्याय निवडा."
   ngOnInit() {
-    this.options.stepsArray.forEach(ele => {
-      console.log(ele)
-    })
-    this.passUrl = "IkzkQ-Xft4c";
-    this.currentSource = window.localStorage.getItem("source");
-    this.startVideoEvent = false;
+    this.startFlag = false;
+    this.showAnswer = true;
+    this.saveData = true;
+    this.passFlags['saveData'] = this.saveData;
+    this.passFlags['showAnswer'] = this.showAnswer;
+    this.questionType = "mcqTextOption";
+    this.passFlags['questionType'] = this.questionType;
 
-    this.answer1 = "";
-    this.answer2 = "";
-    this.answer3 = "";
-    this.answer4 = "";
-    this.answer5 = "";
-
-    this.token = this.LocalstoragedetailsService.token;
-    if (this.token == null) {
-      this.router.navigate(["/"]);
-    }
-
-    if (this.mainFlagModule4 == 8) {
-      this.startFlag = false;
-    }
-    if (this.mainFlagModule4 < 8) {
-    } else if (this.mainFlagModule4 == 8) {
-      this.startVideoEvent = false;
-      this.videoData["apiUrl"] = "modulefourcfustart/";
-    } else if (this.mainFlagModule4 > 8) {
-      this.passData["apiUrl"] = "";
-      this.passData["status"] = false; //first time call
-
-      if (this.FullLayoutService.currentJson4.length > 0) {
-        var index = this.FullLayoutService.currentJson4.findIndex(
-          item => item.source == "module 4.9"
-        );
-        if (this.FullLayoutService.currentJson4[index].url != null) {
-          this.passData["videoUrl"] = this.FullLayoutService.currentJson4[
-            index
-          ].url;
-        } else {
-          this.passData["videoUrl"] = this.passUrl;
-        }
-      } else {
-        this.passData["videoUrl"] = this.passUrl;
-      }
+    if (this.mainFlagModule4 == 5)
+    {
+      // this.start()
     }
   }
 
-  startEvent() {
-    var jsonBody = {};
-    jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
-    jsonBody["useranswer"] = "";
-    jsonBody["score"] = "";
-    jsonBody["event"] = "start";
-    var apiUrl = "modulefourmcqrating/";
-    this.apiCall(jsonBody, apiUrl, "start");
-  }
-
-  submit() {
-    this.overallRating =
-      this.answer1 + this.answer2 + this.answer3 + this.answer4 + this.answer5;
-    this.ratingModal.show();
-    this.LanguageService.toShow();
-  }
-
-  next() {
-    var jsonBody = {};
-    var apiUrl = "modulefourmcqrating/";
-    jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
-    var ansJson = {};
-    ansJson[this.statementlist[0].statementid] = this.answer1;
-    ansJson[this.statementlist[1].statementid] = this.answer2;
-    ansJson[this.statementlist[2].statementid] = this.answer3;
-    ansJson[this.statementlist[3].statementid] = this.answer4;
-    ansJson[this.statementlist[4].statementid] = this.answer5;
-    jsonBody["useranswer"] = ansJson;
-    jsonBody["event"] = "answer";
-    jsonBody["score"] = this.overallRating.toString();
-    console.log(ansJson, jsonBody);
-    this.apiCall(jsonBody, apiUrl, "finish");
-  }
-
-  ngDoCheck() {
-    if (
-      this.answer1 == "" ||
-      this.answer2 == "" ||
-      this.answer3 == "" ||
-      this.answer4 == "" ||
-      this.answer5 == ""
-    ) {
-      this.trimFlag = true;
-    } else {
-      this.trimFlag = false;
-    }
-  }
-  apiCall(jsonBody, apiUrl, fun) {
-    this.Module4Service.apiCall(jsonBody, apiUrl).subscribe(
-      data => {
-        if (data["status"] == true) {
-          if (fun == "start") {
-            this.startFlag = true;
-            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 4.8', window.localStorage.getItem('username'), 10);
-            this.assignData = data["data"];
-            this.mainQuestion = this.assignData.question;
-            this.description = this.assignData.description;
-            this.statementlist = this.assignData.statementlist;
-            this.question1 = this.statementlist[0].statement;
-            this.question2 = this.statementlist[1].statement;
-            this.question3 = this.statementlist[2].statement;
-            this.question4 = this.statementlist[3].statement;
-            this.question5 = this.statementlist[4].statement;
-            console.log(data);
-          } else if (fun == "finish") {
-            this.ratingModal.hide();
-            this.LanguageService.toHide();
-            this.mainFlagModule4 = 12;
-            window.localStorage.setItem("uuid", data["data"].nextuuid);
-            window.localStorage.setItem("mainFlagModule4", "9");
-            window.localStorage.setItem("subFlagModule4", "1");
-            window.localStorage.setItem("source", "module 4.9");
-            this.Module4Service.setLocalStorage4(12);
-            var obj = {
-              type: "submodule",
-              route: true,
-              current: this.translate.instant("L2Module4.subMenu4-8"),
-              next: this.translate.instant("L2Module4Finish.subMenu4-9"),
-              nextRoute: "/modules/module4/Module4.9"
-            };
-            this.LocalstoragedetailsService.setModuleStatus(
-              JSON.stringify(obj)
-            );
-          }
-        }
-      },
-      error => {
-        this.LanguageService.handleError(error.error.message);
-      }
-    );
-  }
   start() {
-    // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 1.2', window.localStorage.getItem('username'), 10);
+    var jsonBody = {};
+    jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
+    jsonBody['useranswer'] = ""
+    jsonBody['event'] = 'start';
+    var apiUrl = "modulefourmcq/";
+
+    this.Module4Service.apiCall(jsonBody, apiUrl)
+      .subscribe(
+        data => {
+          if (data['status'] == true)
+          {
+            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 4.8', window.localStorage.getItem('username'), 10);
+            console.log("data ", data['data'])
+            this.data = data['data']
+            this.startFlag = true;
+          }
+        },
+        error => {
+          this.LanguageService.handleError(error.error.message);
+        });
+  }
+
+  saveAnswer(e) {
+    console.log("ff ", e)
+    this.sumbitButton = true;
+    this.answer = e;
+    this.submit();
+  }
+  submit() {
+
+    var jsonBody = {}
+
+    jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
+    jsonBody['useranswer'] = this.answer
+    jsonBody['event'] = 'answer';
+    var apiUrl = "modulefourmcq/";
+    console.log("dasd ", jsonBody)
+
+    this.Module4Service.apiCall(jsonBody, apiUrl)
+      .subscribe(
+        data => {
+          if (data['status'] == true && data['message'] == "your answer stored next question and uuid is")
+          {
+            window.localStorage.setItem('uuid', data['data'].nextuuid);
+            this.subFlagModule4 = this.subFlagModule4 + 1
+            window.localStorage.setItem('subFlagModule4', this.subFlagModule4.toString())
+            console.log("data ", data['data'])
+            this.data = data['data']
+            this.sumbitButton = false;
+            this.description = data['data'].description;
+          } else if (data['status'] == true && data['message'] == "submodule finish")
+          {
+            this.description = data['data'].description;
+            this.startFlag = false;
+            window.localStorage.setItem('uuid', data['data'].nextuuid);
+            this.mainFlagModule4 = 9;
+            window.localStorage.setItem('mainFlagModule4', '9');
+            window.localStorage.setItem('subFlagModule4', '1');
+            window.localStorage.setItem('source', 'module 4.9.1');
+            var obj = {
+              "type": "submodule",
+              "route": true,
+              "current": this.translate.instant('L2Module4.subMenu4-8'),
+              "next": this.translate.instant('L2Module4Finish.subMenu4-9'),
+              "nextRoute": "/modules/module4/Module4.9"
+            }
+            this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+            this.Module4Service.setLocalStorage4(9);
+          }
+        },
+        error => {
+          this.LanguageService.handleError(error.error.message);
+        });
+
   }
 }

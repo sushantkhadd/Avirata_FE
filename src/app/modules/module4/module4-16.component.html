@@ -1,4 +1,4 @@
-<div *ngIf="mainFlagModule4 < 13">
+<div *ngIf="mainFlagModule4 < 16">
   <div class="card">
     <div class="card-block">
       <p>{{'subModule3_1.3_2' | translate}}</p>
@@ -8,7 +8,7 @@
 </div>
 
 
-<div *ngIf="mainFlagModule4 == 13">
+<div *ngIf="mainFlagModule4 == 16">
   <div *ngIf="!startPdf">
     <div class="instruction-wrap">
       <div class="card">
@@ -34,7 +34,7 @@
       <div class="col-md-12">
         <div class="card ">
             <div class="card-footer">
-                <h6 class="text-center">{{'L2Module4.subMenu4-13' | translate}}</h6>
+                <h6 class="text-center">{{'L2Module4.subMenu4-16' | translate}}</h6>
             </div>
             <div class="card-block text-center">
               <app-presentation [data]='passValues' (sendCfuAns)="finishPDF($event)"></app-presentation>          
@@ -45,10 +45,10 @@
   </div>
 </div>
 
-<div *ngIf="mainFlagModule4 > 13">
+<div *ngIf="mainFlagModule4 > 16">
   <div *ngIf="startPdf" class="card">
     <div class="card-footer">
-      <h6 class="text-center">{{'L2Module4.subMenu4-13' | translate}}</h6>
+      <h6 class="text-center">{{'L2Module4.subMenu4-16' | translate}}</h6>
     </div>
     <div class="card-block">
       <app-presentation [data]='passValues'></app-presentation>

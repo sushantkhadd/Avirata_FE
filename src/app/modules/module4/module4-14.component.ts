@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewContainerRef } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { LanguageService } from "src/app/language.service";
 import { FullLayoutService } from "src/app/layouts/full-layout.service";
@@ -13,83 +13,106 @@ import { environment } from "src/environments/environment";
   templateUrl: './module4-14.component.html'
 })
 export class Module414Component implements OnInit {
-  constructor(public FullLayoutService: FullLayoutService, public LanguageService: LanguageService, public Module4Service: Module4Service, public toastr: ToastsManager, public translate: TranslateService, public router: Router, public LocalstoragedetailsService: LocalstoragedetailsService) { }
 
-  public finalCount;
-  public imgUrl; passValues = {};
-  public download; link; showCFU; apiUrl;
-  public cfuQuestion = {};
-  public startPdf; mainFlagModule4; subFlagModule4; finishJSONBody = {};
-  private pdfUrl = environment.pdfUrl; pdf1;
+  public mainFlagModule4 = parseInt(window.localStorage.getItem('mainFlagModule4'));
+  public subFlagModule4 = parseInt(window.localStorage.getItem('subFlagModule4'));
 
-  ngOnInit() {
-    this.pdf1 = 'https://s3-ap-southeast-1.amazonaws.com/maacpd/english/level1/module4/4.8_our+progress+card.pdf'
-    this.startPdf = false
-    this.mainFlagModule4 = parseInt(window.localStorage.getItem('mainFlagModule4'));
-    this.subFlagModule4 = parseInt(window.localStorage.getItem('subFlagModule4'));
-
-    if (this.mainFlagModule4 > 14)
-    {
-      this.showCFU = false;
-      this.download = false;
-      this.link = '';
-      this.apiUrl = '/assets/jsonfile/module4_6.json'
-      this.finalCount = 22;
-      this.passValues['download'] = this.download;
-      this.passValues['link'] = this.link;
-      this.passValues['finalcount'] = this.finalCount;
-      this.passValues['showcfu'] = this.showCFU;
-      this.passValues['apiurl'] = this.apiUrl;
-      this.passValues["unlockView"] = "static";
-      var unlockJson = {}
-      unlockJson = JSON.parse(window.localStorage.getItem('currentJson4'))
-      if (unlockJson['children'].length > 0)
-      {
-        var index = unlockJson['children'].findIndex(item =>
-          item.source == "module 4.14");
-
-        if (unlockJson['children'][index].url != null)
-        {
-          this.passValues['url'] = unlockJson['children'][index].url
-        }
-      }
-    }
-
+  constructor(public LanguageService: LanguageService, public LocalstoragedetailsService: LocalstoragedetailsService, public Module4Service: Module4Service, public toastr: ToastsManager, vcr: ViewContainerRef, public router: Router, public translate: TranslateService) {
+    this.toastr.setRootViewContainerRef(vcr);
   }
-  finishPDF(e) {
-    this.finishJSONBody['submoduleid'] = window.localStorage.getItem('uuid');
-    this.finishJSONBody['useroption'] = "";
-    this.finishJSONBody['event'] = "finish";
-    if (e == true)
+  public data; questionType; passFlags = {}; showAnswer; saveData; answer; sumbitButton; startFlag;description;
+  public inst = "खालील व्यक्ती समायोजित आहेत की नाही त्याबद्दल योग्य पर्याय निवडा."
+  ngOnInit() {
+    this.startFlag = false;
+    this.showAnswer = true;
+    this.saveData = true;
+    this.passFlags['saveData'] = this.saveData;
+    this.passFlags['showAnswer'] = this.showAnswer;
+    this.questionType = "mcqTextOption";
+    this.passFlags['questionType'] = this.questionType;
+
+    if (this.mainFlagModule4 == 14)
     {
-      this.Module4Service.finishModuleCall(this.finishJSONBody, 14, '/modules/module5', '/modules/module5')
+      // this.start()
     }
   }
 
   start() {
-    this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 4.14', window.localStorage.getItem('username'), 10);
-    this.finishJSONBody['submoduleid'] = window.localStorage.getItem('uuid');
-    this.finishJSONBody['useroption'] = "";
-    this.finishJSONBody['event'] = "start";
+    var jsonBody = {};
+    jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
+    jsonBody['useranswer'] = ""
+    jsonBody['event'] = 'start';
+    var apiUrl = "modulefourmcq/";
 
-    this.Module4Service.apiCall(this.finishJSONBody, 'modulefoursingleurl/')
+    this.Module4Service.apiCall(jsonBody, apiUrl)
       .subscribe(
         data => {
-          if (data['message'] == 'ok' || data['message'] == 'submodule started')
+          if (data['status'] == true)
           {
-            this.passValues['url'] = data['data'].url;
-            this.startPdf = true;
-            var current4 = []
-            current4 = JSON.parse(window.localStorage.getItem('currentJson4'))
-            var child = {}
-            var index = current4['children'].findIndex(item => item.source == 'module 4.14');
-            current4['children'][index].url = data['data'].url;
-            window.localStorage.setItem('currentJson4', JSON.stringify(current4))
+            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 4.14', window.localStorage.getItem('username'), 10);
+            console.log("data ", data['data'])
+            this.data = data['data']
+            this.startFlag = true;
           }
         },
         error => {
           this.LanguageService.handleError(error.error.message);
         });
   }
+
+  saveAnswer(e) {
+    console.log("ff ", e)
+    this.sumbitButton = true;
+    this.answer = e;
+    this.submit();
+  }
+  submit() {
+
+    var jsonBody = {}
+
+    jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
+    jsonBody['useranswer'] = this.answer
+    jsonBody['event'] = 'answer';
+    var apiUrl = "modulefourmcq/";
+    console.log("dasd ", jsonBody)
+
+    this.Module4Service.apiCall(jsonBody, apiUrl)
+      .subscribe(
+        data => {
+          if (data['status'] == true && data['message'] == "your answer stored next question and uuid is")
+          {
+            window.localStorage.setItem('uuid', data['data'].nextuuid);
+            this.subFlagModule4 = this.subFlagModule4 + 1
+            window.localStorage.setItem('subFlagModule4', this.subFlagModule4.toString())
+            console.log("data ", data['data'])
+            this.data = data['data']
+            this.sumbitButton = false;
+            this.description = data['data'].description;
+          } else if (data['status'] == true && data['message'] == "submodule finish")
+          {
+            this.description = data['data'].description;
+            this.startFlag = false;
+            window.localStorage.setItem('uuid', data['data'].nextuuid);
+            this.mainFlagModule4 = 15;
+            window.localStorage.setItem('mainFlagModule4', '15');
+            window.localStorage.setItem('subFlagModule4', '1');
+            window.localStorage.setItem('source', 'module 4.15.1');
+            var obj = {
+              "type": "submodule",
+              "route": true,
+              "current": this.translate.instant('L2Module4.subMenu4-14'),
+              "next": this.translate.instant('L2Module4Finish.subMenu4-15'),
+              "nextRoute": "/modules/module4/Module4.15"
+            }
+            this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+            this.Module4Service.setLocalStorage4(15);
+          }
+        },
+        error => {
+          this.LanguageService.handleError(error.error.message);
+        });
+
+  }
+
 
 }
