@@ -36,7 +36,21 @@ export class Module09Component implements OnInit {
   ngOnInit() {
     console.log('modeule 2222')
     this.startPdf=false
-    // this.start();
+    if (this.mainFlagModule0 == 9) {
+    }
+    else if (this.mainFlagModule0 > 9) {
+      var urlJson = {};
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson0"));
+      console.log("vcxxxx", urlJson);
+      if (urlJson["children"].length > 0) {
+        var index = urlJson["children"].findIndex(
+          item => item.source == "module 0.9"
+        );
+        if (urlJson["children"][index].url != null) {
+          this.passValues["url"] = urlJson["children"][index].url;
+        }
+      }
+    }
   }
   start() {
     var jsonBody = {}

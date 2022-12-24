@@ -36,7 +36,10 @@ export class McqcomponentComponent implements OnInit {
     this.mysubModule7 = parseInt(window.localStorage.getItem('mainFlagModule7'))
     this.mysubModule1 = parseInt(window.localStorage.getItem('mainFlagModule1'))
     this.mysubModule2 = parseInt(window.localStorage.getItem('mainFlagModule2'))
-    if(window.localStorage.getItem('mainFlagModule0') == '30' || window.localStorage.getItem('mainFlagModule1')== '1' || window.localStorage.getItem('mainFlagModule1')== '4' || window.localStorage.getItem('mainFlagModule1')== '6'){
+    if(window.localStorage.getItem('mainFlagModule0') == '30'){
+      this.queCount = parseInt(window.localStorage.getItem('subFlagModule0'))
+    }
+    else if(window.localStorage.getItem('mainFlagModule1')== '1' || window.localStorage.getItem('mainFlagModule1')== '4' || window.localStorage.getItem('mainFlagModule1')== '6'){
       this.queCount = parseInt(window.localStorage.getItem('subFlagModule1'))
     }
     else if(window.localStorage.getItem('mainFlagModule2')== '9' || window.localStorage.getItem('mainFlagModule2')== '4' || window.localStorage.getItem('mainFlagModule2')== '6' || window.localStorage.getItem('mainFlagModule2')== '3' || window.localStorage.getItem('mainFlagModule2')== '9' || window.localStorage.getItem('mainFlagModule2')== '11'){

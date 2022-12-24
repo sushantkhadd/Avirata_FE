@@ -46,7 +46,7 @@ export class Module04Component implements OnInit {
       console.log("vcxxxx", urlJson);
       if (urlJson["children"].length > 0) {
         var index = urlJson["children"].findIndex(
-          item => item.source == "module 0.1"
+          item => item.source == "module 0.4"
         );
         console.log("qWSS", index);
         // var mainJson;

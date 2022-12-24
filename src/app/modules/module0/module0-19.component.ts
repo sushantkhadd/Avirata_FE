@@ -35,8 +35,21 @@ export class Module019Component implements OnInit {
   }
   public passData = {}; 
   ngOnInit() {
-    if(this.mainFlagModule0 >19){
-      this.start();
+    if (this.mainFlagModule0 == 19){
+
+    }else if (this.mainFlagModule0 > 19)
+    {
+      var urlJson = {};
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson0"));
+      console.log("vcxxxx", urlJson);
+      if (urlJson["children"].length > 0) {
+        var index = urlJson["children"].findIndex(
+          item => item.source == "module 0.19"
+        );
+        if (urlJson["children"][index].url != null) {
+          this.passData["videoUrl"] = urlJson["children"][index].url;
+        }
+      }
     }
   }
   start() {
