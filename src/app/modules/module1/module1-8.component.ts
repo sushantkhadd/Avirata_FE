@@ -35,7 +35,21 @@ export class Module18Component implements OnInit {
 
   ngOnInit() {
     this.startPdf=false
-    // this.start();
+    if (this.mainFlagModule1 == 8) {
+    }
+    else if (this.mainFlagModule1 > 8) {
+      var urlJson = {};
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson1"));
+      console.log("vcxxxx", urlJson);
+      if (urlJson["children"].length > 0) {
+        var index = urlJson["children"].findIndex(
+          item => item.source == "module 1.8"
+        );
+        if (urlJson["children"][index].url != null) {
+          this.passValues["url"] = urlJson["children"][index].url;
+        }
+      }
+    }
   }
 
   start() {

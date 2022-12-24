@@ -73,7 +73,6 @@ export class Module110Component implements OnInit {
     this.docData['state'] = 'dyanamic';
     this.docData['download'] = false;
     this.docData['link'] = '';
-
     this.docData['finalcount'] = 4;
     this.docData['showcfu'] = true;
     this.docData['apiurl'] = 'moduleonecfustart/';

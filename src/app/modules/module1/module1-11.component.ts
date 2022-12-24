@@ -1,113 +1,101 @@
-import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Module1Service } from './module1.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from 'src/app/language.service';
 import { FullLayoutService } from 'src/app/layouts/full-layout.service';
-import { LocalstoragedetailsService } from 'src/app/services/localstoragedetails.service';
 import { Router } from '@angular/router';
-import { Module1Service } from './module1.service';
+import { LocalstoragedetailsService } from 'src/app/services/localstoragedetails.service';
 import { ToastsManager } from 'ng6-toastr';
-import { ModalDirective } from 'ngx-bootstrap';
-import { CommonService } from 'src/app/services/common.service';
-
-declare var jQuery: any;
 
 @Component({
   selector: "app-module1-11",
   templateUrl: "./module1-11.component.html"
 })
 export class Module111Component implements OnInit {
-  public finalCount;
-  public imgUrl; passValues = {};
-  public download; link; showCFU; apiUrl;
-  public cfuQuestion = {};
-  public startPdf; mainFlagModule1; subFlagModule1; finishJSONBody = {};
-  private pdfUrl = environment.pdfUrl; pdf1;
+  mainFlagModule1;
+  subFlagModule1;
+  startPdf;
+  flag;
+  audioSrc = {};
+  passValues = {};
+  thumb_title;
+  docData = {};
+  urlArray = {};
 
-  public showPDF; docData = {}; urlArray = {};
-
-  constructor(public Module1Service: Module1Service, public FullLayoutService: FullLayoutService, public LanguageService: LanguageService, public router: Router, public LocalstoragedetailsService: LocalstoragedetailsService, public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService) {
+  constructor(
+    public Module1Service: Module1Service,
+    public translate: TranslateService,
+    public LanguageService: LanguageService,
+    public FullLayoutService: FullLayoutService,
+    public router: Router,
+    public LocalstoragedetailsService: LocalstoragedetailsService,
+    public toastr: ToastsManager,
+    vcr: ViewContainerRef
+  ) {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
   ngOnInit() {
-    this.pdf1 = 'https://s3-ap-southeast-1.amazonaws.com/maacpd/Level2/Module5/5.7/%E0%A5%AB.%E0%A5%AD+-+%E0%A4%85%E0%A4%AD%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%AE%E0%A4%A4%E0%A4%BE+%E0%A4%9A%E0%A4%BE%E0%A4%9A%E0%A4%A3%E0%A5%80+%E0%A4%85%E0%A4%B9%E0%A4%B5%E0%A4%BE%E0%A4%B2+%E0%A4%B8%E0%A4%AE%E0%A4%9C%E0%A4%A3%E0%A5%87.pdf';
+    this.mainFlagModule1 = parseInt(
+      window.localStorage.getItem("mainFlagModule1")
+    );
+    this.subFlagModule1 = parseInt(
+      window.localStorage.getItem("subFlagModule1")
+    );
 
-    this.mainFlagModule1 = parseInt(window.localStorage.getItem('mainFlagModule1'));
-    this.subFlagModule1 = parseInt(window.localStorage.getItem('subFlagModule1'));
-
-    this.urlArray['src1'] = ''
-    this.urlArray['pdf_thumb'] = './../../assets/img/pdf_thumb.png';
-
-
-    this.startPdf = false;
-
-    if (this.mainFlagModule1 < 11) {
-
-    }
-    else if (this.mainFlagModule1 == 11) {
-
-    }
-
-    else if (this.mainFlagModule1 > 11) {
-      this.docData['download'] = false
-      this.docData['link'] = ''
-      this.docData['state'] = 'static';
+    if (this.mainFlagModule1 < 5) {
+    } else if (this.mainFlagModule1 == 5) {
+      // this.startEvent();
+    } else if (this.mainFlagModule1 > 5) {
       this.passValues["unlockView"] = "static";
-
-       var unlockJson={}
-       unlockJson=JSON.parse(window.localStorage.getItem('currentJson1'))
-
-      if (unlockJson['children'].length > 0) {
+      var unlockJson = {}
+      unlockJson = JSON.parse(window.localStorage.getItem('currentJson1'))
+      if (unlockJson['children'].length > 0)
+      {
         var index = unlockJson['children'].findIndex(item =>
-          item.source == "module 1.10");
-          console.log("unlockjson",unlockJson['children'][index].url)
-        if (unlockJson['children'][index].url != null) {
+          item.source == "module 1.11");
+
+        if (unlockJson['children'][index].url != null)
+        {
           this.passValues['url'] = unlockJson['children'][index].url
         }
       }
-      this.docData['showcfu'] = false;
-
     }
   }
-  start() {
-    console.log("pdf")
-    this.startPdf = true;
-    this.docData['state'] = 'dyanamic';
-    this.docData['download'] = false;
-    this.docData['link'] = '';
 
-    this.docData['finalcount'] = 4;
-    this.docData['showcfu'] = true;
-    this.docData['apiurl'] = 'moduleonecfustart/';
-    this.docData['apiurlResult'] = 'moduleonecfustart/';
+  startEvent() {
+    this.startPdf = true;
+    this.docData["state"] = "dyanamic";
+    this.docData["download"] = false;
+    this.docData["link"] = "";
+    this.docData["finalcount"] = 4;
+    this.docData["showcfu"] = true;
+    this.docData["apiurl"] = "moduleonecfustart/";
+    this.docData["apiurlResult"] = "moduleonecfustart/";
     this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 1.11', window.localStorage.getItem('username'), 10);
   }
 
   checkAnswer(e) {
- console.log("complete status")
- console.log("com ",e)
-    var current1=[]
-    current1=JSON.parse(window.localStorage.getItem('currentJson1'))
-    var child={}
-     var index=current1['children'].findIndex(item => item.source=='module 1.11');
-    current1['children'][index].url=e['url']
-    console.log("urlllllllll",e['url'])
-    window.localStorage.setItem('currentJson1',JSON.stringify(current1))
-
+    var current5 = [];
+    current5 = JSON.parse(window.localStorage.getItem("currentJson1"));
+    var index = current5["children"].findIndex(
+      item => item.source == "module 1.11"
+    );
+    this.audioSrc["state"] = "static";
+    current5["children"][index].url = e["url"];
+    window.localStorage.setItem("currentJson5", JSON.stringify(current5));
     this.mainFlagModule1 = 12;
-    this.subFlagModule1 = 1;
-    window.localStorage.setItem("mainFlagModule1", "12");
-    window.localStorage.setItem("subFlagModule1", "1");
-    this.Module1Service.setLocalStorage1(11);
+    window.localStorage.setItem("mainFlagModule5", "12");
+    window.localStorage.setItem("subFlagModule5", "1");
+    window.localStorage.setItem("source", "module 1.12");
+    this.Module1Service.setLocalStorage1(6);
     var obj = {
       type: "submodule",
       route: true,
-      current: this.translate.instant("L2Module1.subMenu1-11"),
-      next: this.translate.instant("L2Module1Finish.subMenu1-12"),
-      nextRoute: "/modules/module1/Module1.12"
+      current: this.translate.instant("L2Module5.subMenu11-11"),
+      next: this.translate.instant("L2Module5Finish.subMenu1-12"),
+      nextRoute: "/modules/module5/Module1.12"
     };
     this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
-
   }
 }

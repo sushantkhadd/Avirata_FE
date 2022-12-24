@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./completed-forum.component.scss']
 })
 export class CompletedForumComponent implements OnInit {
-public replyBox = false; token;showCoomentArea=false
+  public replyBox = false; token; showCoomentArea = false
   public txtcommentSub: string
 
   public show: boolean = false;
@@ -20,7 +20,7 @@ public replyBox = false; token;showCoomentArea=false
   public comments = []; userName;
   public disableCommentSubmit; mainPosts;
   public commentFlag = false; viewCommentFlag = false;
-  constructor(public CommonComponentService: CommonComponentService, public router: Router, public toastr: ToastsManager, vcr: ViewContainerRef,  public translate: TranslateService) {
+  constructor(public CommonComponentService: CommonComponentService, public router: Router, public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService) {
     this.toastr.setRootViewContainerRef(vcr);
     this.replyBox = false;
   }
@@ -40,7 +40,11 @@ public replyBox = false; token;showCoomentArea=false
     }
     this.commentFlag = false;
     this.viewCommentFlag = false;
-    this.getPosts("modulefivepostdisplay/", 1);
+    if (window.localStorage.getItem('mainFlagModule1') > '2') {
+      this.getPosts("moduleonepostdisplay/", 1);
+    } else if (window.localStorage.getItem('mainFlagModule5') > '2') {
+      this.getPosts("modulefivepostdisplay/", 1);
+    }
     this.userName = window.localStorage.getItem('name')
 
   }
@@ -88,43 +92,42 @@ public replyBox = false; token;showCoomentArea=false
   getPosts(url, call) {
     this.CommonComponentService.getForumPostDetails(url, call)
       .subscribe(
-      data => {
-        if (data['message'] == "ok") {
-          this.allPosts = data;
-          this.mainPosts = data["data"].posts;
-          this.posts.push.apply(this.posts, data['data'].posts);
-          this.posts.forEach(element => {
-            element.show = false;
-            element.type = "post";
-            element.viewComments = false;
-          });
+        data => {
+          if (data['message'] == "ok") {
+            this.allPosts = data;
+            this.mainPosts = data["data"].posts;
+            this.posts.push.apply(this.posts, data['data'].posts);
+            this.posts.forEach(element => {
+              element.show = false;
+              element.type = "post";
+              element.viewComments = false;
+            });
 
-        }
-        else if (data['message'] == 'posts not found')
-        {
-          this.sendData.emit(true)
-          this.toastr.error(this.translate.instant('Errors.noPost'));
-        }
-      },
-      error => {
-        if (error.error.message == 'token not found' || error.error.message == 'token not match'
-        || error.error.message == 'token not matches please re-login') {
-          this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
-          setTimeout(() => {
-            this.router.navigate(['/']);
-          }, 500)
+          }
+          else if (data['message'] == 'posts not found') {
+            this.sendData.emit(true)
+            this.toastr.error(this.translate.instant('Errors.noPost'));
+          }
+        },
+        error => {
+          if (error.error.message == 'token not found' || error.error.message == 'token not match'
+            || error.error.message == 'token not matches please re-login') {
+            this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
+            setTimeout(() => {
+              this.router.navigate(['/']);
+            }, 500)
 
-        } else if (error.error.message == 'json Key Error') {
-          this.toastr.error(this.translate.instant('Errors.wrongInfo'));
-        }
-        else {
-          this.toastr.error(this.translate.instant('Errors.cannotProceed'));
-        }
-      });
+          } else if (error.error.message == 'json Key Error') {
+            this.toastr.error(this.translate.instant('Errors.wrongInfo'));
+          }
+          else {
+            this.toastr.error(this.translate.instant('Errors.cannotProceed'));
+          }
+        });
   }
 
   viewComments(postid, index) {
-    console.log(postid,index,this.viewCommentFlag)
+    console.log(postid, index, this.viewCommentFlag)
     if (this.viewCommentFlag == true) {
       this.viewAllComments(index, postid);
     } else {
@@ -144,40 +147,46 @@ public replyBox = false; token;showCoomentArea=false
       jsonBody['refCommentId'] = null;
 
     }
+    var apiurl;
+    if (window.localStorage.getItem('mainFlagModule1') > '2') {
+      apiurl = 'moduleonecomment/';
+    } else if (window.localStorage.getItem('mainFlagModule5') > '2') {
+      apiurl = 'modulefivecomment/';
+    }
 
 
-    this.CommonComponentService.viewComment(jsonBody, 'modulefivecomment/')
+    this.CommonComponentService.viewComment(jsonBody,apiurl)
       .subscribe(
-      data => {
-        if (data['message'] == "comment submitted successfully") {
+        data => {
+          if (data['message'] == "comment submitted successfully") {
 
-          this.txtcommentSub = "";
+            this.txtcommentSub = "";
 
-          this.commentFlag = false;
-          this.posts[index].viewComments = false;
-          var indexof = this.posts.findIndex(x => x['postid'] == postid);
-          this.posts[indexof].show = false;
-          this.removeAllComments(indexof, postid);
-          setTimeout(() => {
-            this.viewAllComments(indexof, postid);
-          }, 100);
-        }
-      },
-      error => {
-        if (error.error.message == 'token not found' || error.error.message == 'token not match'
-        || error.error.message == 'token not matches please re-login') {
-          this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
+            this.commentFlag = false;
+            this.posts[index].viewComments = false;
+            var indexof = this.posts.findIndex(x => x['postid'] == postid);
+            this.posts[indexof].show = false;
+            this.removeAllComments(indexof, postid);
+            setTimeout(() => {
+              this.viewAllComments(indexof, postid);
+            }, 100);
+          }
+        },
+        error => {
+          if (error.error.message == 'token not found' || error.error.message == 'token not match'
+            || error.error.message == 'token not matches please re-login') {
+            this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
 
-          setTimeout(() => {
-            this.router.navigate(['/']);
-          }, 500)
-        } else if (error.error.message == 'json Key Error') {
-          this.toastr.error(this.translate.instant('Errors.wrongInfo'));
-        }
-        else {
-          this.toastr.error(this.translate.instant('Errors.cannotProceed'));
-        }
-      });
+            setTimeout(() => {
+              this.router.navigate(['/']);
+            }, 500)
+          } else if (error.error.message == 'json Key Error') {
+            this.toastr.error(this.translate.instant('Errors.wrongInfo'));
+          }
+          else {
+            this.toastr.error(this.translate.instant('Errors.cannotProceed'));
+          }
+        });
 
   }
   ngDoCheck() {
@@ -192,7 +201,7 @@ public replyBox = false; token;showCoomentArea=false
       this.disableCommentSubmit = true;
     }
 
-    if(this.viewCommentFlag == false){
+    if (this.viewCommentFlag == false) {
       // this.post=
     }
   }
@@ -200,56 +209,62 @@ public replyBox = false; token;showCoomentArea=false
 
     var jsonBody = {};
     jsonBody['postid'] = postid;
-    this.CommonComponentService.viewComment(jsonBody, 'modulefivegetcomments/')
+    var apiurlcmt;
+    if (window.localStorage.getItem('mainFlagModule1') > '2') {     
+      apiurlcmt = 'moduleonegetcomments/';
+    } else if (window.localStorage.getItem('mainFlagModule5') > '2') {
+      apiurlcmt = 'modulefivegetcomments/';
+    }
+    this.CommonComponentService.viewComment(jsonBody, apiurlcmt)
       .subscribe(
-      data => {
-        if (data['message'] == "ok") {
+        data => {
+          if (data['message'] == "ok") {
 
-          this.comments =[]
+            this.comments = []
             this.comments = data['data'].comments;
-          this.comments.forEach(element => {
+            this.comments.forEach(element => {
 
-            element.show = false;
-            element.type = "comment";
-            element.viewComments = false;
-          });
-          this.posts[index]["commentcount"] = this.comments.length;
+              element.show = false;
+              element.type = "comment";
+              element.viewComments = false;
+            });
+            this.posts[index]["commentcount"] = this.comments.length;
 
-          var temp1 = []
-          temp1 = this.posts.slice(0, index + 1);
-          var temp2 = []
-          temp2 = this.posts.slice(index + 1);
-          //           console.log("post2 ",temp2)
-          temp1.push.apply(temp1, this.comments);
-          temp1.push.apply(temp1, temp2);
-          //           console.log("post 3",this.posts)
+            var temp1 = []
+            temp1 = this.posts.slice(0, index + 1);
+            var temp2 = []
+            temp2 = this.posts.slice(index + 1);
+            //           console.log("post2 ",temp2)
+            temp1.push.apply(temp1, this.comments);
+            temp1.push.apply(temp1, temp2);
+            //           console.log("post 3",this.posts)
 
-          this.posts = [];
-          this.posts = temp1;
-          console.log("post ",this.posts)
+            this.posts = [];
+            this.posts = temp1;
+            console.log("post ", this.posts)
 
-        } else if (data['message'] == "no comments") {
-        }
-        this.posts[index].viewComments = true;
-      },
-      error => {
-        if (error.error.message == 'token not found' || error.error.message == 'token not match'
-        || error.error.message == 'token not matches please re-login') {
-          this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
-          setTimeout(() => {
-            this.router.navigate(['/']);
-          }, 500)
-        } else if (error.error.message == 'json Key Error') {
-          this.toastr.error(this.translate.instant('Errors.wrongInfo'));
-        }
-        else {
-          this.toastr.error(this.translate.instant('Errors.cannotProceed'));
-        }
+          } else if (data['message'] == "no comments") {
+          }
+          this.posts[index].viewComments = true;
+        },
+        error => {
+          if (error.error.message == 'token not found' || error.error.message == 'token not match'
+            || error.error.message == 'token not matches please re-login') {
+            this.toastr.error(this.translate.instant('Errors.tokenNotFound'));
+            setTimeout(() => {
+              this.router.navigate(['/']);
+            }, 500)
+          } else if (error.error.message == 'json Key Error') {
+            this.toastr.error(this.translate.instant('Errors.wrongInfo'));
+          }
+          else {
+            this.toastr.error(this.translate.instant('Errors.cannotProceed'));
+          }
 
-      });
+        });
   }
   removeAllComments(index, postid) {
-    console.log("1 ",index,postid)
+    console.log("1 ", index, postid)
     this.posts[index].viewComments = false;
     var count = 0;
     this.posts.forEach((elem, index2) => {
@@ -258,53 +273,53 @@ public replyBox = false; token;showCoomentArea=false
       }
     })
 
-    var at=[]
+    var at = []
     var index1 = 0;
 
-   for(let i of this.posts){
-    //  console.log("saSA ",i['postid'],i['type'])
-     if(i['postId']==postid && i['type']=='comment'){
-     at.push(index1)
-    //  this.posts.findIndex()
+    for (let i of this.posts) {
+      //  console.log("saSA ",i['postid'],i['type'])
+      if (i['postId'] == postid && i['type'] == 'comment') {
+        at.push(index1)
+        //  this.posts.findIndex()
 
-     }
-  index1++
-   }
-   console.log("at ",at,at[0],at[(at.length)-1])
-   this.posts.splice(at[0],(at.length))
-    console.log("saSAsaSAs ",this.posts)
+      }
+      index1++
+    }
+    console.log("at ", at, at[0], at[(at.length) - 1])
+    this.posts.splice(at[0], (at.length))
+    console.log("saSAsaSAs ", this.posts)
 
-  //   var temp1 = this.posts.slice(0, index + 1);
-  //   console.log("2 ",temp1)
-  //   var temp2 = this.posts.slice(index + count);
-  //       console.log("4 ",temp1[(temp1.length)-1]['commentCount'])
-  //      var du={}
-  //       du=temp2.splice(temp1[(temp1.length)-1]['commentCount'],temp2.length)
+    //   var temp1 = this.posts.slice(0, index + 1);
+    //   console.log("2 ",temp1)
+    //   var temp2 = this.posts.slice(index + count);
+    //       console.log("4 ",temp1[(temp1.length)-1]['commentCount'])
+    //      var du={}
+    //       du=temp2.splice(temp1[(temp1.length)-1]['commentCount'],temp2.length)
 
-  //       var arry=[]
-  //   // temp1.push.apply(temp1, du);
-  //       arry.push.apply(temp1, du);
+    //       var arry=[]
+    //   // temp1.push.apply(temp1, du);
+    //       arry.push.apply(temp1, du);
 
 
-  //   // temp2.forEach(function(result, index) {
-  //   // if(result['type'] === 'comment') {
-  //     //Remove from array
-  //     console.log("arr: ",du)
-  // //     // array.splice(index, 1);
-  // //   }
-  // // });
+    //   // temp2.forEach(function(result, index) {
+    //   // if(result['type'] === 'comment') {
+    //     //Remove from array
+    //     console.log("arr: ",du)
+    // //     // array.splice(index, 1);
+    // //   }
+    // // });
 
-  //     // });
+    //     // });
 
-  //   // for(let item of temp2)
-  //   //   {
-  //       console.log(index)
+    //   // for(let item of temp2)
+    //   //   {
+    //       console.log(index)
 
-  //     // }
+    //     // }
 
-  //   console.log("5 ",temp1)
-  //   this.posts = [];
-  //   this.posts = temp1;
+    //   console.log("5 ",temp1)
+    //   this.posts = [];
+    //   this.posts = temp1;
 
     this.posts[index].viewComments = false;
   }
