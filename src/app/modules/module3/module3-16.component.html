@@ -1,255 +1,60 @@
 <div *ngIf="mainFlagModule3 < 16">
   <div class="card">
     <div class="card-block">
-      <p>{{'subModule2_1.2_15' | translate}}</p>
-      <p>
-        <strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
+      <p>{{'subModule3_1.3_2' | translate}}</p>
+      <p><strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
     </div>
   </div>
 </div>
+
+
 <div *ngIf="mainFlagModule3 == 16">
-  <div class="instruction-wrap" *ngIf="!startEvent">
-    <div class="card">
-      <div class="card-header text-white">
-        <span class="exp-img instructions-img"></span>
-        <h5>{{'Quiz.note' | translate}}</h5>
-      </div>
-      <div class="card-block inst-text">
-          <p class="" *ngIf="subFlagModule3!=4">{{'L2Instruction.inst_image1' | translate}}</p>
-          <p *ngIf="subFlagModule3==4">{{'L2Instruction.inst_2_15_4' | translate}}</p>
-      </div>
-      <div class="card-footer">
-        <div class="float-right hidden-xs-down">
-          <button class="btn btn-primary" appPreventDoubleClick (debounceClick)="startEvent=true;start();">{{'Login.Close' | translate}}</button>
+  <div *ngIf="!startPdf">
+    <div class="instruction-wrap">
+      <div class="card">
+        <div class="card-header text-white">
+          <span class="exp-img instructions-img"></span>
+          <h4>{{'Quiz.note' | translate}}</h4>
         </div>
-        <!-- <div class="hidden-sm-up text-center">
-                    <button class="btn btn-primary" (click)="startEvent=true;start();">{{'Module2.see' | translate}}</button>
-                </div> -->
+        <div class="card-block inst-text">
+          <p [innerHTML]="'L2Module0.subMenu1-3_inst' | translate"></p>          
+
+        </div>
+        <div class="card-footer">
+          <div class="float-right">
+            <button class="btn btn-primary" appPreventDoubleClick
+              (debounceClick)="start();">{{'Module4.start' | translate}}</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div *ngIf="startEvent || startPdf">
-    <div class="card">
-      <div class="card-footer text-center">
-        <h6 class="text-center" *ngIf="subFlagModule3 == 1">{{'L2Module3.unlock_sub3_16_1' | translate}}</h6>
-        <h6 class="text-center" *ngIf="subFlagModule3 == 2">{{'L2Module3.unlock_sub3_16_2' | translate}}</h6>
-        <h6 class="text-center" *ngIf="subFlagModule3 == 3">{{'L2Module3.unlock_sub3_16_3' | translate}}</h6>
-        <h6 class="text-center" *ngIf="subFlagModule3 == 4">{{'L2Module3.unlock_sub3_16_4' | translate}}</h6>
-        <h6 class="text-center" *ngIf="subFlagModule3 == 5">{{'L2Module3.unlock_sub3_16_5' | translate}}</h6>
-        <h6 class="text-center" *ngIf="subFlagModule3 == 6">{{'L2Module3.unlock_sub3_16_6' | translate}}</h6>
-      </div>
-      <div class="card-block text-center" *ngIf="subFlagModule3 == 1">
-        <img alt="image" *ngIf="imgUrl" [src]="imgUrl" class="mx-auto img-fluid w-50">
-        <hr>
-        <div class="text-center" *ngIf="mainFlagModule3 ==16">
-          <button class="btn btn-primary btn-pad " appPreventDoubleClick (debounceClick)="finish()">{{'Stepper.Next' | translate}}</button>
-        </div>
-        <div class="text-center" *ngIf="mainFlagModule3 >16">
-          <button class="btn btn-primary btn-pad " appPreventDoubleClick (debounceClick)="nextRoute()">{{'Stepper.Next' | translate}}</button>
-        </div>
-      </div>
-      <div *ngIf="subFlagModule3 == 2 || subFlagModule3 == 3 || subFlagModule3 == 5 || subFlagModule3 == 6">
-        <div *ngIf="playVideo">
-          <div class="card">
-            <h6 class="text-center pt-3" *ngIf="subFlagModule3 == 2">{{'L2Instruction.inst_2_15_2' | translate}}</h6>
-            <h6 class="text-center pt-3" *ngIf="subFlagModule3 == 3">{{'L2Instruction.inst_2_15_3' | translate}}</h6>
-            <h6 class="text-center pt-3" *ngIf="subFlagModule3 == 5">{{'L2Instruction.inst_3_16_5' | translate}}</h6>
-            <!-- <div class="card-footer">
-                <h6 class="text-center"><strong>मित्र</strong></h6>
-              </div> -->
-            <div class="moduleOne card-block">
-              <app-static-video [receivedData]='passData' (finishCall)="finishVideo($event)"></app-static-video>
+  <div *ngIf="startPdf">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card ">
+            <div class="card-footer">
+                <h6 class="text-center">{{'L2Module3.subMenu3-16' | translate}}</h6>
             </div>
-          </div>
+            <div class="card-block text-center">
+              <app-presentation [data]='passValues' (sendCfuAns)="finishPDF($event)"></app-presentation>          
+            </div>
         </div>
       </div>
-
-    </div>
-    <div *ngIf="subFlagModule3 == 4">
-      <div *ngIf="startPdf" class="mb-2">
-        <div class="card mt5 pt-3">
-          <app-presentation [data]='docData' (ansCorrect)="checkAnswer($event)"></app-presentation>
-        </div>
-      </div>
-    </div>
+    </div>    
   </div>
 </div>
-
-<div class="videoFinishModal videoFinishedModel">
-  <div bsModal #instructionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
-    aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <img class="img-responsive img-rotate" src="assets/img/mitra.png">
-        <div class="modal-header">
-          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button> -->
-        </div>
-        <div class="modal-body">
-          <p class="px-5 text-center">तुमचा व्हिडिओ पूर्ण झाला.</p>
-          <hr />
-          <div class="col-md-12 text-right">
-            <button class="btn btn-primary text-center" appPreventDoubleClick (debounceClick)="finish()">{{'Stepper.Next' | translate}}</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- <div *ngIf="mainFlagModule3 > 16">
-    <div class="card submoduleBox unlock-view">
-      <div class="card-block text-center">
-        <div *ngIf="flag == 0">
-          <img class="img-fluid" [src]="mainJson['1']" alt="">
-          <div class="card-footer text-center bg-white border-0">
-            <button class="btn btn-primary" (click)="playNext(1);">{{'Login.Close' | translate}}</button>
-          </div>
-        </div>
-        <div *ngIf="flag == 1">
-          <app-static-video [receivedData]='passData'></app-static-video>
-          <div class="card-footer text-center bg-white border-0">
-            <button class="btn btn-primary" (click)="playNext(2);">{{'Login.Close' | translate}}</button>
-          </div>
-        </div>
-        <div *ngIf="flag == 2">
-          <app-static-video [receivedData]='passData'></app-static-video>
-          <div class="card-footer text-center bg-white border-0">
-            <button class="btn btn-primary" (click)="playNext(3);">{{'Login.Close' | translate}}</button>
-          </div>
-        </div>
-        <div *ngIf="flag == 3">
-          <app-presentation [data]='passValues'></app-presentation>
-          <div class="card-footer text-center bg-white border-0">
-            <button class="btn btn-primary" (click)="playNext(4);">{{'Login.Close' | translate}}</button>
-          </div>
-        </div>
-        <div *ngIf="flag == 4">
-          <app-static-video [receivedData]='passData'></app-static-video>
-          <div class="card-footer text-center bg-white border-0">
-            <button class="btn btn-primary" (click)="playNext(5);">{{'Login.Close' | translate}}</button>
-          </div>
-        </div>
-        <div *ngIf="flag == 5">
-          <app-static-video [receivedData]='passData'></app-static-video>
-          <div class="card-footer text-center bg-white border-0">
-            <button class="btn btn-primary" (click)="playNext(6);">{{'Login.Close' | translate}}</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
 
 <div *ngIf="mainFlagModule3 > 16">
-  <div class="card unlock-view">
-    <div class="card-footer text-center mb-3">
-      <h6 class="text-center" *ngIf="flag == 0">{{'L2Module3.subMenu3-16' | translate}}</h6>
-      <h6 class="text-center" *ngIf="flag != 0">{{thumb_title | translate}}</h6>
-
+  <div *ngIf="startPdf" class="card">
+    <div class="card-footer">
+      <h6 class="text-center">{{'L2Module3.subMenu3-16' | translate}}</h6>
     </div>
-    <div class="card-block cc">
-      <div class="row static-content" *ngIf="flag == 0">
-        <div class="col-md-4">
-          <p class="title">{{'number.1' | translate}}. {{'L2Module3.unlock_sub3_16_1' | translate}}</p>
-          <div class="img-wrap">
-            <a (click)="showVideo(urlArray['src1'],'L2Module3.unlock_sub3_16_1',1)">
-              <img class="img-fluid v_thumb" [src]="urlArray['src1']" alt="">
-            </a>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <p class="title">{{'number.2' | translate}}. {{'L2Module3.unlock_sub3_16_2' | translate}}</p>
-          <div class="img-wrap">
-            <a (click)="showVideo(urlArray['src2'],'L2Module3.unlock_sub3_16_2',2)">
-              <img class="img-fluid v_thumb" src="https://maacpd.s3-ap-southeast-1.amazonaws.com/L3_mr/thumbnails/3.16.2-video.png" alt="">
-              <div class="hover-opaque">
-                <i class="fa fa-play-circle fa-2x"></i>
-              </div>
-            </a>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <p class="title">{{'number.3' | translate}}. {{'L2Module3.unlock_sub3_16_3' | translate}}</p>
-          <div class="img-wrap">
-            <a (click)="showVideo(urlArray['src3'],'L2Module3.unlock_sub3_16_3',3)">
-              <img class="img-fluid v_thumb" src="https://maacpd.s3-ap-southeast-1.amazonaws.com/L3_mr/thumbnails/3.16.3-video.png" alt="">
-              <div class="hover-opaque">
-                <i class="fa fa-play-circle fa-2x"></i>
-              </div>
-            </a>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <p class="title">{{'number.4' | translate}}. {{'L2Module3.unlock_sub3_16_4' | translate}}</p>
-          <div class="img-wrap">
-            <a (click)="showVideo(urlArray['src4'],'L2Module3.unlock_sub3_16_4',4)">
-              <img class="img-fluid v_thumb" src="./../../assets/img/pdf_thumb.png" alt="">
-              <div class="hover-opaque">
-              </div>
-            </a>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <p class="title">{{'number.5' | translate}}. {{'L2Module3.unlock_sub3_16_5' | translate}}</p>
-          <div class="img-wrap">
-            <a (click)="showVideo(urlArray['src5'],'L2Module3.unlock_sub3_16_5',5)">
-              <img class="img-fluid v_thumb" src="https://maacpd.s3-ap-southeast-1.amazonaws.com/L3_mr/thumbnails/3.16.5-video.png" alt="">
-              <div class="hover-opaque">
-                <i class="fa fa-play-circle fa-2x"></i>
-              </div>
-            </a>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <p class="title">{{'number.6' | translate}}. {{'L2Module3.unlock_sub3_16_6' | translate}}</p>
-          <div class="img-wrap">
-            <a (click)="showVideo(urlArray['src6'],'L2Module3.unlock_sub3_16_6',6)">
-              <img class="img-fluid v_thumb" src="./../../assets/img/thumb/3.8.1-Mitra-(M3B).png" alt="">
-              <div class="hover-opaque">
-                <i class="fa fa-play-circle fa-2x"></i>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="text-center" *ngIf="flag == 1">
-        <img class="img-fluid w-50" [src]="urlArray['src1']" alt="">
-        <div class="card-footer text-center bg-white border-0">
-          <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>
-        </div>
-      </div>
-      <div *ngIf="flag == 2">
-        <app-static-video [receivedData]='passData'></app-static-video>
-        <div class="card-footer text-center bg-white border-0">
-          <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>
-        </div>
-      </div>
-      <div *ngIf="flag == 3">
-        <app-static-video [receivedData]='passData'></app-static-video>
-        <div class="card-footer text-center bg-white border-0">
-          <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>
-        </div>
-      </div>
-      <div *ngIf="flag == 4">
-        <app-presentation [data]='passValues'></app-presentation>
-        <div class="card-footer text-center bg-white border-0">
-          <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>
-        </div>
-      </div>
-      <div *ngIf="flag == 5">
-        <app-static-video [receivedData]='passData'></app-static-video>
-        <div class="card-footer text-center bg-white border-0">
-          <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>
-        </div>
-      </div>
-      <div *ngIf="flag == 6">
-        <app-static-video [receivedData]='passData'></app-static-video>
-        <div class="card-footer text-center bg-white border-0">
-          <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>
-        </div>
-      </div>
+    <div class="card-block">
+      <app-presentation [data]='passValues'></app-presentation>
     </div>
+    <!-- <div class="card-footer">
+          <h6 class="text-center">{{'Module5.subMenu1-3' | translate}}</h6>
+      </div> -->
   </div>
 </div>

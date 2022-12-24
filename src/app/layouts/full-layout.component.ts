@@ -1126,9 +1126,9 @@ export class FullLayoutComponent implements OnInit {
       this.mainFlagModule4 = 15;
     } else {
       var source = window.localStorage.getItem("source");
-      if (source == "module 4.1" || source == "module 4.2.1") {
+      if (source == "module 4.1.1" || source == "module 4.2.1") {
         this.mainFlagModule4 = 1;
-        if (source == "module 4.1") {
+        if (source == "module 4.1.1") {
           this.subFlagModule4 = 1;
         } else if (source == "module 4.2.1") {
           this.subFlagModule4 = 2;
@@ -1137,8 +1137,15 @@ export class FullLayoutComponent implements OnInit {
           "subFlagModule4",
           this.subFlagModule4.toString()
         );
-      } else if (source == "module 4.2") {
+      } else if ( source == "module 4.2" ||
+      source == "module 4.2.1" ||
+      source == "module 4.2.2") {
         this.mainFlagModule4 = 2;
+        if (source == "module 4.2" || source == "module 4.2.1") {
+          this.subFlagModule4 = 1;
+        } else if (source == "module 4.2.2") {
+          this.subFlagModule4 = 2;
+        }
         window.localStorage.setItem(
           "subFlagModule4",
           this.subFlagModule4.toString()
