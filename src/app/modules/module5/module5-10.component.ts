@@ -1,94 +1,85 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
-import { LanguageService } from 'src/app/language.service';
-import { LocalstoragedetailsService } from 'src/app/services/localstoragedetails.service';
-import { Module5Service } from './module5.service';
-import { ToastsManager } from 'ng6-toastr';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { ModalDirective } from 'ngx-bootstrap';
+import { LocalstoragedetailsService } from "../../services/localstoragedetails.service";
+import { LanguageService } from './../../language.service';
 import { Router } from '@angular/router';
+import { ToastsManager } from 'ng6-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import {FullLayoutService} from '../../layouts/full-layout.service'
+import { Module5Service } from './module5.service'
+import { FullLayoutService } from 'src/app/layouts/full-layout.service';
 
 @Component({
   selector: 'app-module5-10',
   templateUrl: './module5-10.component.html'
 })
 export class Module510Component implements OnInit {
+
+  @ViewChild('instructionModal') public instructionModal: ModalDirective;
+
   public mainFlagModule5 = parseInt(window.localStorage.getItem('mainFlagModule5'));
   public subFlagModule5 = parseInt(window.localStorage.getItem('subFlagModule5'));
-  public token; startVideoEvent;
-  public passData = {};//used when CFU completed
-  public videoData = {};passUrl;
+  download: boolean;
+  passValues = {};
+  finishJSONBody: any;
+  startVideoEvent = true;
+  showpdfFlag: boolean;
+  constructor(public FullLayoutService: FullLayoutService, public LanguageService: LanguageService, public Module5Service: Module5Service, public router: Router, public LocalstoragedetailsService: LocalstoragedetailsService, public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService) {
+    this.toastr.setRootViewContainerRef(vcr);
+  }
 
-  public currentSource = window.localStorage.getItem('source');
-
-  constructor(public FullLayoutService:FullLayoutService, public LanguageService:LanguageService,public LocalstoragedetailsService: LocalstoragedetailsService, private router: Router, public Module5Service: Module5Service,public translate: TranslateService) { }
+  public showVideoFlag; nextBtnFlag; passUrl; videoData = {};
 
   ngOnInit() {
-    this.passUrl='IkzkQ-Xft4c'
-    this.currentSource = window.localStorage.getItem('source');
-    this.startVideoEvent = false;
+    this.showVideoFlag=false    
+  }
+  start() {
+    var jsonBody = {}
+    jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
+    jsonBody['event'] = 'start'
+    this.apiCall(jsonBody, 'modulefivesingleurl/', 'start')
+  }
 
-    this.token = this.LocalstoragedetailsService.token
-    if (this.token == null) {
-      this.router.navigate(['/']);
-    }
+  next() {
+    var jsonBody = {}
+    jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
+    jsonBody['event'] = 'finish'
+    this.apiCall(jsonBody, 'modulefivesingleurl/', 'finish1')
+  }
 
-    if (this.subFlagModule5 == 1) {
-    }
-     if (this.mainFlagModule5 < 10) {
+  apiCall(jsonBody, apiUrl, fun) {
+    this.showVideoFlag = false
+    this.Module5Service.apiCall(jsonBody, apiUrl).subscribe(
+      data => {
+        if (data["status"] == true) {
+          if (fun == "start") {
+            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 5.10', window.localStorage.getItem('username'), 10);   
+              this.passValues['url'] = data['data'].url;
+              this.showVideoFlag = true
+            
+            this.showVideoFlag = true
+            var current0 = [];
+            current0 = JSON.parse(window.localStorage.getItem("currentJson5"));
+            var index = current0["children"].findIndex(
+              item => item.source == "module 5.10");
+            current0["children"][index].url = this.passUrl;
 
-    }
-     else if (this.mainFlagModule5 == 10)
-     {
-      this.startVideoEvent = false;
-      this.videoData['apiUrl'] = 'modulefivecfustart/';
-    }
-    else if (this.mainFlagModule5 > 10) {
-      var urlJson = {};
-      urlJson = JSON.parse(window.localStorage.getItem("currentJson5"));
-      console.log("vcxxxx",urlJson)
-      if (urlJson["children"].length > 0) {
-        var index = urlJson["children"].findIndex(
-          item => item.source == "module 5.10"
-        );
-        console.log("qWSS",index)
-        if (urlJson["children"][index].url != null)
-        {
-          console.log("qWSS",index,urlJson["children"][index].url)
-          this.passData['videoUrl'] = urlJson["children"][index].url
-        } else {
-          this.passData['videoUrl'] = this.passUrl
+            window.localStorage.setItem("currentJson0", JSON.stringify(current0));
+
+          } else if (fun == "finish1") {
+            this.LanguageService.toHide();
+            window.localStorage.setItem('uuid', data['data'].nextuuid)
+            window.localStorage.setItem('mainFlagModule5', '11');
+            window.localStorage.setItem('subFlagModule5', '1');
+            window.localStorage.setItem('source', 'module 5.11');
+            this.Module5Service.setLocalStorage5(9);
+            var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module5.subMenu5-11'), "next": this.translate.instant('L2Module5Finish.subMenu5-11'), "nextRoute": "/modules/module5/Module5.11" }
+            this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+          }
         }
-      } else {
-        this.passData['videoUrl'] = this.passUrl
+      },
+      error => {
+        this.LanguageService.handleError(error.error.message);
       }
-    }
+    );
   }
-  finishCFU(result) {
-    if (result["status"] == true) {
-      var current5 = [];
-      current5 = JSON.parse(window.localStorage.getItem("currentJson5")); 
-      var index = current5["children"].findIndex(
-      item => item.source == "module 5.10" );
-      current5["children"][index].url = result["url"]; 
-      window.localStorage.setItem("currentJson5", JSON.stringify(current5))
-      window.localStorage.setItem('mainFlagModule5', '11');
-      window.localStorage.setItem('subFlagModule5', '1');
-      window.localStorage.setItem('source', 'module 5.11');
-      this.Module5Service.setLocalStorage5(11);
-      var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module5.subMenu5-10'), "next": this.translate.instant('L2Module5Finish.subMenu5-11'), "nextRoute": "/modules/module5/Module5.11" }
-      this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
-    }
-    else {
-      window.localStorage.setItem('mainFlagModule5', '10');
-      this.router.navigate(['/modules/module5/Module5.10']);
-    }
-  }
-  singleCFUComplete(e) {
-    this.subFlagModule5++;
-    window.localStorage.setItem('subFlagModule5', this.subFlagModule5.toString());
-  }
-  start(){
-    this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 5.10', window.localStorage.getItem('username'), 10);
-  }
-
 }
