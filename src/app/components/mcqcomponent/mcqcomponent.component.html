@@ -1,10 +1,10 @@
 <div *ngIf="questionType == 'mcqTextOption'">
-    <span class="counter" *ngIf="mysubModule1==2 || mysubModule2==9 || mysubModule2==6 || mysubModule2==4 || mysubModule2==3 || mysubModule3==5 || mysubModule3==8 || mysubModule3==9 || mysubModule3==11 || mysubModule4==5 || mysubModule4==7">{{queCount | numberConvertor : 'Devanagari'}} / {{'number.5' | translate}}</span>
+    <span class="counter" *ngIf="mysubModule1==2 || mysubModule2==9 || mysubModule2==6 || mysubModule2==4 || mysubModule2==3 || mysubModule3==5 || mysubModule3==8 || mysubModule3==9 || mysubModule3==11 || mysubModule4==5 || mysubModule4==8 || mysubModule4==11 || mysubModule4==14 || mysubModule4==7">{{queCount | numberConvertor : 'Devanagari'}} / {{'number.5' | translate}}</span>
     <span class="counter" *ngIf="mysubModule1==4">{{queCount | numberConvertor : 'Devanagari'}} / १२</span>
     <span class="counter" *ngIf="mysubModule1==6">{{queCount | numberConvertor : 'Devanagari'}} / ७</span>
     <span class="counter" *ngIf="mysubModule5==7">{{queCount | numberConvertor : 'Devanagari'}} / ३</span>
     <span class="counter" *ngIf="mysubModule0==30">{{queCount | numberConvertor : 'Devanagari'}} / ३०</span>
-    <span class="counter" *ngIf="mysubModule3==7 || mysubModule4==11">{{queCount | numberConvertor : 'Devanagari'}} / ५</span>
+    <span class="counter" *ngIf="mysubModule3==7">{{queCount | numberConvertor : 'Devanagari'}} / ५</span>
     <div class="row">
         <div class="col-sm-12 col-md-12">
             <div class="card">
@@ -35,11 +35,11 @@
                     <div class="col-12 float-left">
                         <div class="dx-fieldset">
                             <div class="dx-field">
-                                <div class="dx-field-value" *ngIf="mysubModule3!=7 &&mysubModule4!=11">
+                                <div class="dx-field-value" *ngIf="mysubModule3!=7">
                                     <dx-radio-group #eventRadioGroup id="mcq" [items]="priorities" (onValueChanged)="onValueChanged($event)" layout="layout">
                                     </dx-radio-group>
                                 </div>
-                                <div class="dx-field-value" *ngIf="mysubModule3==7 || mysubModule4==11">
+                                <div class="dx-field-value" *ngIf="mysubModule3==7">
                                     <dx-radio-group #eventRadioGroup id="mcq" [value]="alreadyAns1" [items]="priorities" (onValueChanged)="onValueChanged($event)" layout="layout">
                                     </dx-radio-group>
                                 </div>
@@ -52,7 +52,7 @@
     </div>
 
     <div class="text-center mt-4"
-      *ngIf="mysubModule == 3 || mysubModule0 == 30 || mysubModule6 == 2|| mysubModule7 == 2|| mysubModule7 == 3 ||  mysubModule2 == 9 || mysubModule2 == 6 || mysubModule2 == 4 || mysubModule2 == 3 || mysubModule3 == 1 || mysubModule3 == 5 || mysubModule3 == 8 || mysubModule3 == 9 || mysubModule3 == 11 || mysubModule4 == 5 || mysubModule4 == 7 || mysubModule5 == 7 || mysubModule3==7 || mysubModule4==11"> 
+      *ngIf="mysubModule == 3 || mysubModule0 == 30 || mysubModule6 == 2|| mysubModule7 == 2|| mysubModule7 == 3 ||  mysubModule2 == 9 || mysubModule2 == 6 || mysubModule2 == 4 || mysubModule2 == 3 || mysubModule3 == 1 || mysubModule3 == 5 || mysubModule3 == 8 || mysubModule3 == 9 || mysubModule3 == 11 || mysubModule4 == 5 || mysubModule4 == 8 || mysubModule4==11 || mysubModule4==14 || mysubModule4 == 7 || mysubModule5 == 7 || mysubModule3==7 || mysubModule4==11"> 
         <div class="">
             <button class="btn btn-primary" appPreventDoubleClick [disabled]="!submitFlag"
               (debounceClick)="goNext5_3()">{{'Cfu.submit' | translate}}</button>
@@ -286,7 +286,7 @@
 
                 <h5 class="text-white mb-1" *ngIf="rightFlag==true && questionType == 'checkBoxOption'">{{'subModule1_9.correctAns' | translate }}</h5>
             </div>
-            <div class="modal-body" *ngIf="questionType != 'checkBoxOption'" [class.d-none]="(mysubModule4==5 || mysubModule4==7 || mysubModule4==11 || mysubModule0==30) && rightFlag">
+            <div class="modal-body" *ngIf="questionType != 'checkBoxOption'" [class.d-none]="(mysubModule4==5 || mysubModule4==8 || mysubModule4==14 || mysubModule4==7 || mysubModule4==11 || mysubModule0==30) && rightFlag">
                 <span *ngIf="mysubModule4 != 9 && mysubModule4 != 13">
                 <p *ngIf="rightFlag==false"><b>{{'subModule1_9.correctAns' | translate }} :</b></p>
                 <p *ngIf="rightFlag==false">{{showCorrectAns}}</p>

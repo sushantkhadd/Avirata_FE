@@ -124,6 +124,8 @@ import { Module031Component } from "./module0/module0-31.component";
 import { Module113Component } from "./module1/module1-13.component";
 import { Module114Component } from "./module1/module1-14.component";
 import { Module115Component } from "./module1/module1-15.component";
+import { Module415Component } from "./module4/module4-15.component";
+import { Module416Component } from "./module4/module4-16.component";
 
 const routes: Routes = [
   {
@@ -511,6 +513,14 @@ const routes: Routes = [
       {
         path: "module4/Module4.14",
         component: Module414Component
+      },
+      {
+        path: "module4/Module4.15",
+        component: Module415Component
+      },
+      {
+        path: "module4/Module4.16",
+        component: Module416Component
       },
       {
         path: "module5",

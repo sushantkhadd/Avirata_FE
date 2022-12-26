@@ -7,7 +7,6 @@ import { ToastsManager } from 'ng6-toastr';
 import { TranslateService } from '@ngx-translate/core';
 import { Module4Service } from './module4.service'
 import { CommonService } from 'src/app/services/common.service';
-declare var jQuery: any;
 
 @Component({
   selector: 'app-module4-1',

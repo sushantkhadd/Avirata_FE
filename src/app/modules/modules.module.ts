@@ -174,6 +174,8 @@ import { Module031Component } from "./module0/module0-31.component";
 import { Module113Component } from "./module1/module1-13.component";
 import { Module114Component } from "./module1/module1-14.component";
 import { Module115Component } from "./module1/module1-15.component";
+import { Module415Component } from "./module4/module4-15.component";
+import { Module416Component } from "./module4/module4-16.component";
 
 
 @NgModule({
@@ -268,6 +270,8 @@ import { Module115Component } from "./module1/module1-15.component";
     Module412Component,
     Module413Component,
     Module414Component,
+    Module415Component,
+    Module416Component,
     NewBaselineComponent,
     Module5Component,
     Module52Component,

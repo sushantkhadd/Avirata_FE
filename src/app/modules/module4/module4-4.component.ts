@@ -55,7 +55,7 @@ export class Module44Component implements OnInit {
             var current4 = [];
             current4 = JSON.parse(window.localStorage.getItem("currentJson4"));
             var index = current4["children"].findIndex(
-              item => item.source == "module 4.5");
+              item => item.source == "module 4.4");
             current4["children"][index].url = this.passUrl;
             window.localStorage.setItem("currentJson4", JSON.stringify(current4));
           } else if (fun == "finish1") {
