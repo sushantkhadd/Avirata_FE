@@ -34,7 +34,7 @@ export class Module311Component implements OnInit {
   sumbitButton;
   startFlag;
   public inst =
-    "पुढे दिलेले विचार अविवेकी आहेत. ते कोणत्या प्रकारात मोडतात ते सांगा.";
+    "खालील व्यक्तींमध्ये आढळून आलेली लक्षणे ही कुठल्या आजाराची असू शकतील?";
   ngOnInit() {
     this.startFlag = false;
     this.showAnswer = true;
@@ -93,7 +93,7 @@ export class Module311Component implements OnInit {
           window.localStorage.setItem("uuid", data["data"].nextuuid);
           this.subFlagModule3 = this.subFlagModule3 + 1;
           window.localStorage.setItem(
-            "subFlagModule1",
+            "subFlagModule3",
             this.subFlagModule3.toString()
           );
           this.data = data["data"];
@@ -111,7 +111,7 @@ export class Module311Component implements OnInit {
           var obj = {
             "type": "submodule",
             "route": true,
-            "current": this.translate.instant("L2Module3.subMenu3-11"),
+            "current": this.translate.instant("L2Module3.subMenu3-12"),
             "next": this.translate.instant("L2Module3Finish.subMenu3-12"),
             "nextRoute": "/modules/module3/Module3.12"
           };

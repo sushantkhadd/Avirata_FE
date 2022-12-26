@@ -17,7 +17,7 @@ export class Module35Component implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
   public data; questionType; passFlags = {}; showAnswer; saveData; answer; sumbitButton; startFlag;description;
-  public inst = "खालील लक्ष वेधून घेणाऱ्या विद्यार्थ्यांबाबत शिक्षकांनी केलेल्या उपाययोजना योग्य आहेत का ते सांगा:"
+  public inst = "दिलेल्या पात्रांना कोणता मानसिक आजार झाला असण्याची शक्यता आहे?"
   ngOnInit() {
     this.startFlag = false;
     this.showAnswer = true;

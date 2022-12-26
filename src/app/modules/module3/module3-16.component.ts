@@ -49,38 +49,33 @@ export class Module316Component implements OnInit {
   }  
 
   apiCall(jsonBody, apiUrl, fun) {
-    this.Module3Service.apiCall(jsonBody, apiUrl).subscribe(
-      data => {
-        if (data["status"] == true) {
-          if (fun == "start") {
-            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 3.16', window.localStorage.getItem('username'), 10);
+    if(fun == "finish1"){
+      this.Module3Service.finishModuleCall(jsonBody, 16, '/modules/module4', '/modules/module4')
+    }else{
+      this.Module3Service.apiCall(jsonBody, apiUrl).subscribe(
+        data => {
+          if (data["status"] == true) {
+            if (fun == "start") {
+              this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 3.16', window.localStorage.getItem('username'), 10);
 
-            this.passValues["url"] = data["data"].url;
-            this.startPdf = true;
-            this.passUrl = data['data'].url;
-            var current3 = [];
-            current3 = JSON.parse(window.localStorage.getItem("currentJson3"));
-            var index = current3["children"].findIndex(
-              item => item.source == "module 3.16");
-            current3["children"][index].url = this.passUrl;
+              this.passValues["url"] = data["data"].url;
+              this.startPdf = true;
+              this.passUrl = data['data'].url;
+              var current3 = [];
+              current3 = JSON.parse(window.localStorage.getItem("currentJson3"));
+              var index = current3["children"].findIndex(
+                item => item.source == "module 3.16");
+              current3["children"][index].url = this.passUrl;
 
-            window.localStorage.setItem("currentJson3", JSON.stringify(current3));
-          } else if (fun == "finish1") {
-            this.LanguageService.toHide();
-            window.localStorage.setItem('uuid', data['data'].nextuuid)
-            window.localStorage.setItem('mainFlagModule3', '1');
-            window.localStorage.setItem('subFlagModule3', '1');
-            window.localStorage.setItem('source', 'module 4.1');
-            this.Module3Service.setLocalStorage3(13);
-            var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module3.subMenu3-12'), "next": this.translate.instant('L2Module3Finish.subMenu3-13'), "nextRoute": "/modules/module4" }
-            this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+              window.localStorage.setItem("currentJson3", JSON.stringify(current3));
+            } 
           }
+        },
+        error => {
+          this.LanguageService.handleError(error.error.message);
         }
-      },
-      error => {
-        this.LanguageService.handleError(error.error.message);
-      }
-    );
+      );
+    }
   }
 
   finishPDF(e) {
