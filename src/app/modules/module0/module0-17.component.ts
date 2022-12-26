@@ -95,7 +95,7 @@ export class Module017Component implements OnInit {
     window.localStorage.setItem('subFlagModule0', this.subFlagModule0.toString());
     this.instructionModal.hide();
     var jsonBody = {}
-    jsonBody['submoduleiitemd'] = window.localStorage.getItem('uuid')
+    jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
     jsonBody['event'] = 'finish';
     if (this.nextId == 2) {
       this.next()
