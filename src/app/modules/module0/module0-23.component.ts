@@ -63,7 +63,6 @@ export class Module023Component implements OnInit {
     {
       this.instructionModal.show()
       this.LanguageService.toShow();
-      // this.nextBtnFlag = true
     }
   }
   next() {

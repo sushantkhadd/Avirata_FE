@@ -100,7 +100,12 @@ export class Module03Component implements OnInit {
   }
 
   apiCall(jsonBody, apiUrl, fun) {
-    this.showVideoFlag = false
+    if (fun == "finish1"){
+      this.showVideoFlag = true
+    }else{
+      this.showVideoFlag = false
+    }
+    
     this.Module0Service.apiCall(jsonBody, apiUrl).subscribe(
       data => {
         if (data["status"] == true) {

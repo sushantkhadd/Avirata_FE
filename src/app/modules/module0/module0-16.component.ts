@@ -97,7 +97,6 @@ export class Module016Component implements OnInit {
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
     jsonBody['event'] = 'finish'
     if (item == 5) {
-
       this.apiCall(jsonBody, 'modulezerosingleurl/', 'finish1', item)
     } else {
       this.apiCall(jsonBody, 'modulezerosingleurl/', 'finish1', item)
