@@ -126,8 +126,8 @@ export class Module58Component implements OnInit {
           } else if (fun == "finish1") {
             this.LanguageService.toHide();
             window.localStorage.setItem('uuid', data['data'].nextuuid)
-            window.localStorage.setItem('mainFlagModule0', '9');
-            window.localStorage.setItem('subFlagModule0', '1');
+            window.localStorage.setItem('mainFlagModule5', '9');
+            window.localStorage.setItem('subFlagModule5', '1');
             window.localStorage.setItem('source', 'module 5.9');
             this.Module5Service.setLocalStorage5(9);
             var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module5.subMenu5-9'), "next": this.translate.instant('L2Module5Finish.subMenu5-9'), "nextRoute": "/modules/module5/Module5.9" }

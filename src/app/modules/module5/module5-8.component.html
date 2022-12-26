@@ -29,7 +29,7 @@
                         <h4>{{'Quiz.note' | translate}}</h4>
                     </div>
                     <div class="card-block inst-text">
-                        <p [innerHTML]="'L2Module5.subMenu5-8-1_inst' | translate"></p>
+                        <p [innerHTML]="'L2Module5.subMenu5-8_inst' | translate"></p>
 
                     </div>
                     <div class="card-footer">
@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div class="text-center list-checklist">
-                <button type=" button " class="text-center btn btn-primary mt-2" [disabled]="!nextBtnFlag"
+                <button type=" button " class="text-center btn btn-primary mt-2" 
                     data-toggle="modal " (click)="next(); ">{{'Stepper.Next' | translate}}</button>
             </div>
         </div>
@@ -80,5 +80,9 @@
 </div>
 
 <div *ngIf="mainFlagModule5 > 8">
-
+    <div class="card submoduleBox">
+        <div class="card-block text-center greenText inst-text">
+          <span>{{ "L2Module5Complete.sm_5_8" | translate }}</span>
+        </div>
+      </div>
 </div>

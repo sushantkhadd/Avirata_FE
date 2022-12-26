@@ -1,13 +1,14 @@
 <div *ngIf="mainFlagModule5 < 13">
   <div class="card">
     <div class="card-block">
-      <p>{{'module7.7_2' | translate}}</p>
+      <p>{{'subModule3_1.3_2' | translate}}</p>
       <p><strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
     </div>
   </div>
 </div>
+
 <div *ngIf="mainFlagModule5 == 13">
-  <div *ngIf="!startFlag">
+  <div *ngIf="!showVideoFlag">
     <div class="instruction-wrap">
       <div class="card">
         <div class="card-header text-white">
@@ -15,34 +16,37 @@
           <h4>{{'Quiz.note' | translate}}</h4>
         </div>
         <div class="card-block inst-text">
-          <p>{{'number.1' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_6' | translate}}</p>
-          <p>{{'number.2' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_7' | translate}}</p>
-          <p>{{'number.3' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_8' | translate}}</p>
-          <p>{{'number.4' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_9' | translate}}</p>
+          <p [innerHTML]="'L2Module5.subMenu5-8_inst' | translate"></p>
 
         </div>
         <div class="card-footer">
           <div class="float-right">
-            <button class="btn btn-primary" appPreventDoubleClick
-              (debounceClick)="start();">{{'Module4.start' | translate}}</button>
+            <button class="btn btn-primary" appPreventDoubleClick (debounceClick)="start();">{{'Module4.start' |
+              translate}}</button>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div *ngIf="startFlag">
-    <!-- <h6 class="questionHead lineHeight">{{'L2common.caution' | translate}} <span [innerHTML]="inst"> </span></h6> -->
-    <div>
-      <span *ngIf="data">
-        <app-mcqcomponent [passFlags]='passFlags' [data]='data' (sendAns)="saveAnswer($event)"></app-mcqcomponent>
-      </span>
+  <div *ngIf="showVideoFlag">
+    <div class="card">
+      <div class="card-footer">
+        <h6 class="text-center" [innerHTML]="'L2Module5.subMenu5-13-1_inst' | translate"></h6>
+      </div>
+      <div class="card-block text-center">
+        <a href="{{passValues.url}}" target="_blank" rel="noopener noreferrer">{{passValues.url}}</a>
+      </div>
+    </div>
+    <div class="text-center list-checklist">
+      <button type=" button " class="text-center btn btn-primary mt-2" data-toggle="modal "
+        (click)="next(); ">{{'Stepper.Next' | translate}}</button>
     </div>
   </div>
 </div>
 <div *ngIf="mainFlagModule5 > 13">
   <div class="card submoduleBox">
     <div class="card-block text-center greenText inst-text">
-      <span>{{'L2Module5Complete.sm_5_13' | translate}}</span>
+      <span>{{ "L2Module5Complete.sm_5_13" | translate }}</span>
     </div>
   </div>
 </div>
