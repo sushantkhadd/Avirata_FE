@@ -19,7 +19,7 @@ export class Module56Component implements OnInit {
     window.localStorage.getItem("subFlagModule5")
   )
   passUrl: any;
-  passValues={};
+  passValues = {};
   startPdf: boolean;
   constructor(
     public LanguageService: LanguageService,
@@ -33,15 +33,14 @@ export class Module56Component implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
   public passData = {};
+
   ngOnInit() {
-    console.log('modeule 2222')
-    this.startPdf=false
-    if (this.mainFlagModule5 == 9) {
+    this.startPdf = false;
+    if (this.mainFlagModule5 == 6) {
     }
-    else if (this.mainFlagModule5 > 9) {
+    else if (this.mainFlagModule5 > 6) {
       var urlJson = {};
       urlJson = JSON.parse(window.localStorage.getItem("currentJson5"));
-      console.log("vcxxxx", urlJson);
       if (urlJson["children"].length > 0) {
         var index = urlJson["children"].findIndex(
           item => item.source == "module 5.6"
@@ -52,12 +51,13 @@ export class Module56Component implements OnInit {
       }
     }
   }
+
   start() {
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
     jsonBody['event'] = 'start'
     this.apiCall(jsonBody, 'modulefivesingleurl/', 'start');
-  }  
+  }
 
   apiCall(jsonBody, apiUrl, fun) {
     this.Module5Service.apiCall(jsonBody, apiUrl).subscribe(
@@ -79,11 +79,11 @@ export class Module56Component implements OnInit {
           } else if (fun == "finish1") {
             this.LanguageService.toHide();
             window.localStorage.setItem('uuid', data['data'].nextuuid)
-            window.localStorage.setItem('mainFlagModule0', '7');
-            window.localStorage.setItem('subFlagModule0', '1');
+            window.localStorage.setItem('mainFlagModule5', '7');
+            window.localStorage.setItem('subFlagModule5', '1');
             window.localStorage.setItem('source', 'module 5.7');
-            this.Module5Service.setLocalStorage5(3);
-            var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module5.subMenu5-7'), "next": this.translate.instant('L2Module5Finish.subMenu5-7'), "nextRoute": "/modules/module0/Module5.7" }
+            this.Module5Service.setLocalStorage5(7);
+            var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module5.subMenu5-6'), "next": this.translate.instant('L2Module5Finish.subMenu5-7'), "nextRoute": "/modules/module5/Module5.7" }
             this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
           }
         }
