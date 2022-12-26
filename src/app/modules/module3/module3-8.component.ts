@@ -35,7 +35,7 @@ export class Module38Component implements OnInit {
   sumbitButton;
   startFlag;
   public inst =
-    "पुढे दिलेले विचार अविवेकी आहेत. ते कोणत्या प्रकारात मोडतात ते सांगा.";
+    "दिलेल्या पात्रांना कोणता मानसिक आजार झाला असण्याची शक्यता आहे?";
   ngOnInit() {
     this.startFlag = false;
     this.showAnswer = true;

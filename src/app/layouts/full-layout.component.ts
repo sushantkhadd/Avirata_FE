@@ -984,6 +984,7 @@ export class FullLayoutComponent implements OnInit {
         );
       } else if (source == "module 5.14") {
         this.mainFlagModule5 = 14;
+        this.subFlagModule5 = 1;
         window.localStorage.setItem(
           "subFlagModule5",
           this.subFlagModule5.toString()
