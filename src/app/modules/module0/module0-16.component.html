@@ -180,7 +180,7 @@
         </div>   
       </div>
       <div class="text-center" *ngIf="flag == 1">
-        <img class="img-fluid w-50" [src]="urlArray['src1']" alt="">
+        <app-presentation [data]='passValues'></app-presentation>
         <div class="card-footer text-center bg-white border-0">
           <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>
         </div>
