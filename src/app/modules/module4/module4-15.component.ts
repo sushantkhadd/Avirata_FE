@@ -42,7 +42,6 @@ export class Module415Component implements OnInit {
     this.zeroMsgFlag['1'] = false;
     this.zeroMsgFlag['2'] = false;
     this.zeroMsgFlag['3'] = false;
-    this.zeroMsgFlag['4'] = false;
 
     this.vedioCompleteUrl = "79vHVVtmIoQ";
     this.mainFlagModule4 = parseInt(
@@ -74,13 +73,11 @@ export class Module415Component implements OnInit {
     this.answer1 = "";
     this.answer2 = "";
     this.answer3 = "";
-    this.answer4 = "";
     this.queFlag = false;
 
     this.postWordCount['1'] = 0;
     this.postWordCount['2'] = 0;
     this.postWordCount['3'] = 0;
-    this.postWordCount['4'] = 0;
 
     if (this.mainFlagModule4 == 15) {
       this.instFlag = true;
@@ -93,11 +90,9 @@ export class Module415Component implements OnInit {
     this.answer1 = "";
     this.answer2 = "";
     this.answer3 = "";
-    this.answer4 = "";
     this.question1 = "";
     this.question2 = "";
     this.question3 = "";
-    this.question4 = "";
   }
 
   ngDoCheck() {
@@ -110,9 +105,6 @@ export class Module415Component implements OnInit {
     }
     if (this.answer3) {
       this.postWordCount['3'] = this.answer3.trim().split(/\s+/).length;
-    }
-    if (this.answer4) {
-      this.postWordCount['4'] = this.answer4.trim().split(/\s+/).length;
     }
 
     if (this.answer1 == "" || this.answer1 == null || this.answer1 == undefined) {
@@ -127,21 +119,15 @@ export class Module415Component implements OnInit {
       this.postWordCount['3'] = 0;
       // this.zeroMsgFlag['3']=true
     }
-    if (this.answer4 == "" || this.answer4 == null || this.answer4 == undefined) {
-      this.postWordCount['4'] = 0;
-      // this.zeroMsgFlag['4']=true
-    }
 
     if (this.questionFlag == true) {
       if (this.answer1 != null && this.answer1 != "" && this.answer1 != undefined ||
         this.answer2 != null && this.answer2 != "" && this.answer2 != undefined ||
-        this.answer3 != null && this.answer3 != "" && this.answer3 != undefined ||
-        this.answer4 != null && this.answer4 != "" && this.answer4 != undefined) {
+        this.answer3 != null && this.answer3 != "" && this.answer3 != undefined) {
         if (
           this.answer1.trim().length == 0 ||
           this.answer2.trim().length == 0 ||
-          this.answer3.trim().length == 0 ||
-          this.answer4.trim().length == 0
+          this.answer3.trim().length == 0 
         ) {
           this.trimFlag = true;
         } else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 5) {
@@ -149,8 +135,6 @@ export class Module415Component implements OnInit {
         } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 5) {
           this.trimFlag = true;
         } else if (this.postWordCount['3'] > 150 || this.postWordCount['3'] < 5) {
-          this.trimFlag = true;
-        } else if (this.postWordCount['4'] > 150 || this.postWordCount['4'] < 5) {
           this.trimFlag = true;
         } else {
           this.trimFlag = false;
@@ -162,14 +146,12 @@ export class Module415Component implements OnInit {
     else {
       if (this.answer1 != null && this.answer1 != "" && this.answer1 != undefined ||
         this.answer2 != null && this.answer2 != "" && this.answer2 != undefined ||
-        this.answer3 != null && this.answer3 != "" && this.answer3 != undefined ||
-        this.answer4 != null && this.answer4 != "" && this.answer4 != undefined 
+        this.answer3 != null && this.answer3 != "" && this.answer3 != undefined 
       ) {
         if (
           this.answer1.trim().length == 0 ||
           this.answer2.trim().length == 0 ||
-          this.answer3.trim().length == 0 ||
-          this.answer4.trim().length == 0 
+          this.answer3.trim().length == 0
         ) {
           this.trimFlag = true;
         } else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 5) {
@@ -178,8 +160,6 @@ export class Module415Component implements OnInit {
           this.trimFlag = true;
         } else if (this.postWordCount['3'] > 150 || this.postWordCount['3'] < 5) {
           this.trimFlag = true;
-        } else if (this.postWordCount['4'] > 150 || this.postWordCount['4'] < 5) {
-          this.trimFlag = true;
         } else {
           this.trimFlag = false;
         }
@@ -187,6 +167,7 @@ export class Module415Component implements OnInit {
 
     }
   }
+
   startEvent2() {
     this.instFlag = false;
     this.nextFlag = false;
@@ -207,7 +188,6 @@ export class Module415Component implements OnInit {
     ansJson[this.questionlist[0].questionid] = (this.answer1).trim();
     ansJson[this.questionlist[1].questionid] = (this.answer2).trim();
     ansJson[this.questionlist[2].questionid] = (this.answer3).trim();
-    ansJson[this.questionlist[3].questionid] = (this.answer4).trim();
     jsonBody["useranswer"] = ansJson;
     jsonBody["event"] = "answer";
     console.log(ansJson, jsonBody);
@@ -222,7 +202,6 @@ export class Module415Component implements OnInit {
     ansJson[this.questionlist[0].questionid] = (this.answer1).trim();
     ansJson[this.questionlist[1].questionid] = (this.answer2).trim();
     ansJson[this.questionlist[2].questionid] = (this.answer3).trim();
-    ansJson[this.questionlist[3].questionid] = (this.answer4).trim();
     jsonBody["useranswer"] = ansJson;
     jsonBody["event"] = "answer";
     console.log(ansJson, jsonBody);
@@ -260,7 +239,6 @@ export class Module415Component implements OnInit {
             this.question1 = this.questionlist[0].question;
             this.question2 = this.questionlist[1].question;
             this.question3 = this.questionlist[2].question;
-            this.question4 = this.questionlist[3].question;
             if (this.questionlist.length == 6) {
               this.queFlag = true;
               console.log(this.subFlagModule4, "subFlagModule4");
@@ -274,15 +252,12 @@ export class Module415Component implements OnInit {
             this.zeroMsgFlag['1'] = false;
             this.zeroMsgFlag['2'] = false;
             this.zeroMsgFlag['3'] = false;
-            this.zeroMsgFlag['4'] = false;
             this.showLimit['1'] = true;
             this.showLimit['2'] = true;
             this.showLimit['3'] = true;
-            this.showLimit['4'] = true;
             this.postWordCount['1'] = 0;
             this.postWordCount['2'] = 0;
             this.postWordCount['3'] = 0;
-            this.postWordCount['4'] = 0;
             this.mainFlagModule4 = 15;
             window.localStorage.setItem("uuid", data["data"].nextuuid);
             console.log(data);
