@@ -2012,7 +2012,7 @@ export class FullLayoutComponent implements OnInit {
   }
   setStatus1(val) {
     if (val == true) {
-      this.mainFlagModule1 = 13;
+      this.mainFlagModule1 = 15;
     } else {
       var source = window.localStorage.getItem("source");
 
@@ -2290,6 +2290,39 @@ export class FullLayoutComponent implements OnInit {
         );
       } else if (source == "module 1.12") {
         this.mainFlagModule1 = 12;
+        window.localStorage.setItem(
+          "subFlagModule1",
+          this.subFlagModule1.toString()
+        );
+      }
+      else if (
+        source == "module 1.13" ||
+        source == "module 1.13.1" ||
+        source == "module 1.13.2" 
+      ) {
+        this.mainFlagModule1 = 13;
+        if (
+        source == "module 1.13" || 
+        source == "module 1.13.1"
+        ) {
+          this.subFlagModule1 = 1;
+        } else if (
+          source == "module 1.13.2" 
+        ) {
+          this.subFlagModule1 = 2;
+        }
+        window.localStorage.setItem(
+          "subFlagModule1",
+          this.subFlagModule1.toString()
+        );
+      }else if (source == "module 1.14") {
+        this.mainFlagModule1 = 14;
+        window.localStorage.setItem(
+          "subFlagModule1",
+          this.subFlagModule1.toString()
+        );
+      }else if (source == "module 1.15") {
+        this.mainFlagModule1 = 15;
         window.localStorage.setItem(
           "subFlagModule1",
           this.subFlagModule1.toString()
@@ -2835,7 +2868,7 @@ export class FullLayoutComponent implements OnInit {
     this.mainFlagModule0 = parseInt(
       window.localStorage.getItem("mainFlagModule0")
     );
-    if (this.mainFlagModule0 > 4) {
+    if (this.mainFlagModule0 > 30) {
       // this.currentFlag1 = false;
       this.module0OnOffFlag = true;
       this.module1OnOffFlag = true;
@@ -2859,7 +2892,7 @@ export class FullLayoutComponent implements OnInit {
     this.mainFlagModule1 = parseInt(
       window.localStorage.getItem("mainFlagModule1")
     );
-    if (this.mainFlagModule1 > 12) {
+    if (this.mainFlagModule1 > 14) {
       this.currentFlag2 = false;
       this.module1OnOffFlag = true;
       this.module2OnOffFlag = true;
@@ -3131,7 +3164,7 @@ export class FullLayoutComponent implements OnInit {
       this.currentFlag5 = true;
       this.currentFlag6 = true;
       this.currentFlag7 = true;
-      this.mainFlagModule1 = 14;
+      this.mainFlagModule1 = 15;
       this.LocalstoragedetailsService.timelineState = 2;
     } else if (this.moduleStatusCheck == 3) {
       this.module1OnOffFlag = true;
@@ -3145,7 +3178,7 @@ export class FullLayoutComponent implements OnInit {
       this.currentFlag5 = true;
       this.currentFlag6 = true;
       this.currentFlag7 = true;
-      this.mainFlagModule1 = 14;
+      this.mainFlagModule1 = 15;
       this.mainFlagModule2 = 8;
       this.LocalstoragedetailsService.timelineState = 3;
     } else if (this.moduleStatusCheck == 4) {
@@ -3159,7 +3192,7 @@ export class FullLayoutComponent implements OnInit {
       this.currentFlag5 = true;
       this.currentFlag6 = true;
       this.currentFlag7 = true;
-      this.mainFlagModule1 = 14;
+      this.mainFlagModule1 = 15;
       this.mainFlagModule2 = 8;
       this.mainFlagModule3 = 18;
       this.LocalstoragedetailsService.timelineState = 4;
@@ -3171,7 +3204,7 @@ export class FullLayoutComponent implements OnInit {
       this.module5OnOffFlag = true;
       this.module6OnOffFlag = false;
       this.module7OnOffFlag = false;
-      this.mainFlagModule1 = 14;
+      this.mainFlagModule1 = 15;
       this.mainFlagModule2 = 8;
       this.mainFlagModule3 = 18;
       this.mainFlagModule4 = 16;
@@ -3186,7 +3219,7 @@ export class FullLayoutComponent implements OnInit {
       this.module5OnOffFlag = true;
       this.module6OnOffFlag = true;
       this.module7OnOffFlag = false;
-      this.mainFlagModule1 = 14;
+      this.mainFlagModule1 = 15;
       this.mainFlagModule2 = 8;
       this.mainFlagModule3 = 18;
       this.mainFlagModule4 = 16;
@@ -3201,7 +3234,7 @@ export class FullLayoutComponent implements OnInit {
       this.module5OnOffFlag = true;
       this.module6OnOffFlag = true;
       this.module7OnOffFlag = true;
-      this.mainFlagModule1 = 14;
+      this.mainFlagModule1 = 15;
       this.mainFlagModule2 = 8;
       this.mainFlagModule3 = 18;
       this.mainFlagModule4 = 16;
@@ -3216,7 +3249,7 @@ export class FullLayoutComponent implements OnInit {
       this.module5OnOffFlag = true;
       this.module6OnOffFlag = true;
       this.module7OnOffFlag = true;
-      this.mainFlagModule1 = 14;
+      this.mainFlagModule1 = 15;
       this.mainFlagModule2 = 8;
       this.mainFlagModule3 = 18;
       this.mainFlagModule4 = 16;
@@ -3367,7 +3400,7 @@ export class FullLayoutComponent implements OnInit {
         this.moduleStatusModal.show()
         this.moduleCompleteStatus['type'] = 'moduleFinish'
         this.moduleCompleteStatus['moduleNo'] = "१"
-        this.moduleCompleteStatus['finishHead'] = "शिक्षक - एक व्यक्ती"
+        this.moduleCompleteStatus['finishHead'] = "यश आणि अपयश "
         var current1;
         current1 = JSON.parse(window.localStorage.getItem("levelData"))
         percent = parseInt(current1[1].percent);
@@ -3381,7 +3414,7 @@ export class FullLayoutComponent implements OnInit {
         // this.module5FinishFlag= false;
         this.moduleCompleteStatus['type'] = 'moduleFinish'
         this.moduleCompleteStatus['moduleNo'] = "२"
-        this.moduleCompleteStatus['finishHead'] = "शिक्षक - एक सुलभक"
+        this.moduleCompleteStatus['finishHead'] = "प्रेम, मैत्री, आकर्षण"
         var current1;
         current1 = JSON.parse(window.localStorage.getItem("levelData"))
         percent = parseInt(current1[2].percent);
@@ -3395,7 +3428,7 @@ export class FullLayoutComponent implements OnInit {
         // this.module5FinishFlag= false;
         this.moduleCompleteStatus['type'] = 'moduleFinish'
         this.moduleCompleteStatus['moduleNo'] = "३"
-        this.moduleCompleteStatus['finishHead'] = "शिक्षक - लोकशाहीचा अध्वर्यु"
+        this.moduleCompleteStatus['finishHead'] = "मानसिक आरोग्य : प्रथमोपचार "
         var current1;
         current1 = JSON.parse(window.localStorage.getItem("levelData"))
         percent = parseInt(current1[3].percent);
@@ -3409,7 +3442,7 @@ export class FullLayoutComponent implements OnInit {
         // this.module5FinishFlag= false;
         this.moduleCompleteStatus['type'] = 'moduleFinish'
         this.moduleCompleteStatus['moduleNo'] = "४"
-        this.moduleCompleteStatus['finishHead'] = "शिक्षक - एक मार्गदर्शक"
+        this.moduleCompleteStatus['finishHead'] = "सकारात्मक मानसिकता"
         var current1;
         current1 = JSON.parse(window.localStorage.getItem("levelData"))
         percent = parseInt(current1[4].percent);
@@ -3436,7 +3469,7 @@ export class FullLayoutComponent implements OnInit {
 
         this.moduleCompleteStatus['type'] = 'allFinish'
         this.moduleCompleteStatus['moduleNo'] = "५"
-        this.moduleCompleteStatus['finishHead'] = "शिक्षक - एक करिअर मार्गदर्शक"
+        this.moduleCompleteStatus['finishHead'] = "करिअर्स"
         var current1;
         current1 = JSON.parse(window.localStorage.getItem("levelData"))
         percent = parseInt(current1[5].percent);

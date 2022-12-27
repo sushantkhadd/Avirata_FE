@@ -53,14 +53,14 @@ export class Module113Component implements OnInit {
       urlJson = JSON.parse(window.localStorage.getItem("currentJson1"));
       if (urlJson["children"].length > 0) {
         var index = urlJson["children"].findIndex(
-          item => item.source == "module 1.1"
+          item => item.source == "module 1.13"
         );
         if (urlJson["children"][index].url != null)
         {
           var mainJson;
           mainJson = JSON.parse(urlJson["children"][index].url);
-          this.urlArray["src1"] = mainJson["1.1.1"];
-          this.urlArray["src2"] = mainJson["1.1.2"];
+          this.urlArray["src1"] = mainJson["1.13.1"];
+          this.urlArray["src2"] = mainJson["1.13.2"];
         } else {
           this.mapJSON();
         }
