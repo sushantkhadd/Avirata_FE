@@ -2012,7 +2012,7 @@ export class FullLayoutComponent implements OnInit {
   }
   setStatus1(val) {
     if (val == true) {
-      this.mainFlagModule1 = 15;
+      this.mainFlagModule1 = 16;
     } else {
       var source = window.localStorage.getItem("source");
 
