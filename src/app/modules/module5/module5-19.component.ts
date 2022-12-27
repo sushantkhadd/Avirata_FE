@@ -5,7 +5,7 @@ import { LanguageService } from './../../language.service';
 import { Router } from '@angular/router';
 import { ToastsManager } from 'ng6-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import {Module5Service} from './module5.service'
+import { Module5Service } from './module5.service'
 
 @Component({
   selector: 'app-module5-19',
@@ -13,144 +13,195 @@ import {Module5Service} from './module5.service'
 })
 export class Module519Component implements OnInit {
 
-  @ViewChild("instructionModal") public instructionModal: ModalDirective;
+  public mainFlagModule5 = parseInt(window.localStorage.getItem('mainFlagModule5'));
 
-  public mainFlagModule5 = parseInt(
-    window.localStorage.getItem("mainFlagModule5")
-  );
-  public subFlagModule5 = parseInt(
-    window.localStorage.getItem("subFlagModule5")
-  )
-  constructor(
-    public LanguageService: LanguageService,
-    private LocalstoragedetailsService: LocalstoragedetailsService,
-    private router: Router,
-    public Module5Service: Module5Service,
-    public toastr: ToastsManager,
-    vcr: ViewContainerRef,
-    public translate: TranslateService
-  ) {
+  public token; postWordCount;
+  public txtcomment: string
+
+  public submitPostDisable = true; startEvent;
+  public checkAgree = false; missingPost = false; noPost;
+  constructor(public translate: TranslateService, public LanguageService: LanguageService, public router: Router, public Module5Service: Module5Service, public toastr: ToastsManager, public LocalstoragedetailsService: LocalstoragedetailsService, vcr: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
-  public vedioCompleteUrl;token;
-  public passData = {};
-  public playVideo = false;statVideoFlag = false;
-
   ngOnInit() {
-    this.vedioCompleteUrl = "79vHVVtmIoQ";
-    this.mainFlagModule5 = parseInt(
-      window.localStorage.getItem("mainFlagModule5")
-    );
-    this.subFlagModule5 = parseInt(
-      window.localStorage.getItem("subFlagModule5")
-    );
-    this.token = this.LocalstoragedetailsService.token;
+    this.postWordCount = 0;
+    this.submitPostDisable = true;
+    this.mainFlagModule5 = parseInt(window.localStorage.getItem('mainFlagModule5'));
+    this.token = window.localStorage.getItem('token');
     if (this.token == null) {
-      this.router.navigate(["/"]);
+      this.router.navigate(['/']);
     }
+    if (this.mainFlagModule5 < 19) {
 
-    if (this.mainFlagModule5 == 19) {
+    }
+    else if (this.mainFlagModule5 == 19) {
+      // this.startEvent = true;
+      // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 1.7', window.localStorage.getItem('username'), 10);
+    }
+    else if (this.mainFlagModule5 > 19) {
+      // this.startEvent = false;
 
-    } else if (this.mainFlagModule5 > 19) {
-      this.statVideoFlag = false;
-      var urlJson = {};
-      urlJson = JSON.parse(window.localStorage.getItem("currentJson5"));
-      console.log("vcxxxx", urlJson);
-      if (urlJson["children"].length > 0) {
-        var index = urlJson["children"].findIndex(
-          item => item.source == "module 5.19"
-        );
-        console.log("qWSS", index);
-        // var mainJson;
-        // mainJson = JSON.parse(urlJson["children"][index].url);
-        // console.log("hjbhjb", mainJson);
-        if (urlJson["children"][index].url != null) {
-          // this.urlArray["src1"] = mainJson["4.1.1"];
-          this.passData["videoUrl"] = urlJson["children"][index].url;
-        }
-      }
+
     }
   }
 
-  startEvent() {
-    var jsonBody = {};
-    jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
-    jsonBody["event"] = "start";
-    var apiUrl = "modulefivesingleurl/";
-    this.apiCall(jsonBody, apiUrl, "start");
-  }
-
-  finishVideo(e) {
+  getData(e) {
     if (e) {
-      this.instructionModal.show();
-      this.LanguageService.toShow();
+      this.noPost = true;
     } else {
-      window.localStorage.setItem("mainFlagModule5", "19");
-      this.router.navigate(["/modules/module5/Module5.19"]);
+      this.noPost = false;
+    }
+  }
+  ngDoCheck() {
+    if (this.txtcomment == undefined || this.txtcomment == "") {
+      this.postWordCount = 0;
+      this.submitPostDisable = true;
+    } else {
+      if (Object.keys(this.txtcomment.trim()).length == 0)
+        this.submitPostDisable = true;
+      else if (this.txtcomment.trim().split(/\s+/).length > 150 || this.txtcomment.trim().split(/\s+/).length < 5) {
+        this.submitPostDisable = true;
+      } else {
+        this.submitPostDisable = false;
+      }
+    }
+
+    if (this.txtcomment) {
+      this.postWordCount = this.txtcomment.trim().split(/\s+/).length;
+    }
+  }
+  nextRoute() {
+    this.router.navigate(['/modules/module5/Module5.20']);
+  }
+  handleInput(e) {
+    if (this.txtcomment != undefined) {
+      if (this.txtcomment.trim().split(/\s+/).length > 150) {
+        this.toastr.error(this.translate.instant('otherMessages.150Words'));
+      }
+    }
+  }
+  submitPost() {
+    var apiUrl = 'modulefivepost/'
+    var postJson = {};
+    postJson['post'] = this.txtcomment.trim();
+    postJson['submoduleid'] = window.localStorage.getItem('uuid');
+
+    this.Module5Service.apiCall(postJson, apiUrl)
+      .subscribe(
+        data => {
+          if (data["message"] == "post submitted successfully") {
+            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 5.19', window.localStorage.getItem('username'), 10);
+            window.localStorage.setItem("mainFlagModule5", "20");
+            window.localStorage.setItem("subFlagModule5", "1");
+            this.mainFlagModule5 = 23;
+            this.Module5Service.setLocalStorage5(23);
+            window.localStorage.setItem('source', 'module 5.20.1');
+            window.localStorage.setItem(
+              "uuid",
+              data["data"].nextuuid
+            );
+            this.toastr.success(
+              this.translate.instant(
+                "otherMessages.successfullySubmit"
+              )
+            );
+            var obj = {
+              "type": "submodule",
+              "route": true,
+              "current": this.translate.instant('L2Module5.subMenu5-20'),
+              "next": this.translate.instant('L2Module5Finish.subMenu5-20'),
+              "inst": this.translate.instant('L2Module5Finish.Inst5_22')
+            }
+            this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+          }
+        },
+        error => {
+          if (error.error.message == 'token not found' || error.error.message == 'token not match') {
+            this.toastr.error(this.translate.instant('otherMessages.sessionLogout'));
+            setTimeout(() => {
+              this.router.navigate(['/']);
+            }, 4000)
+          } else if (error.error.message == 'json Key Error') {
+            this.toastr.error(this.translate.instant('otherMessages.wrongInfo2'));
+          } else if (error.error.message == 'access denied') {
+            this.toastr.error(this.translate.instant('otherMessages.accessDenied'))
+          }
+          else {
+            this.toastr.error(this.translate.instant('Errors.cannotProceed'));
+          }
+        });
+  }
+
+  repost() {
+    var apiUrl = 'mspost/'
+    var postJson = {};
+    postJson['key'] = "module_1_7";
+    postJson['post'] = this.txtcomment.trim();
+
+    this.Module5Service.apiCall(postJson, apiUrl)
+      .subscribe(
+        data => {
+          if (data['message'] == 'post submited successfully') {
+            // window.localStorage.setItem('mainFlagModule5', '8');
+            this.toastr.success(this.translate.instant('otherMessages.successfullySubmit'));
+            this.missingPost = false;
+            window.localStorage.setItem('mspost', 'false');
+
+            setTimeout(() => {
+              this.router.navigate(['/dashboard']);
+            }, 2000)
+          }
+        },
+        error => {
+          if (error.error.message == 'token not found' || error.error.message == 'token not match' || error.error.message == 'token not matches please re-login') {
+            this.toastr.error(this.translate.instant('otherMessages.sessionLogout'));
+            setTimeout(() => {
+              this.router.navigate(['/']);
+            }, 4000)
+          } else if (error.error.message == 'json key error') {
+            this.toastr.error(this.translate.instant('otherMessages.wrongInfo2'));
+          } else if (error.error.message == 'access denied') {
+            this.toastr.error(this.translate.instant('otherMessages.accessDenied'))
+          }
+          else if (error.error.message == 'unknown source') {
+            this.toastr.error(this.translate.instant('otherMessages.incorrectInfo'))
+          }
+          else if (error.error.message == 'invalid key') {
+            this.toastr.error(this.translate.instant('Errors.cannotProceed'))
+          }
+          else if (error.error.message == 'invalid post') {
+            this.toastr.error(this.translate.instant('Errors.cannotProceed'))
+          }
+          else if (error.error.message == 'post already taken') {
+            // this.toastr.error(this.translate.instant('Errors.cannotProceed'))
+            this.missingPost = false;
+            window.localStorage.setItem('mspost', 'false');
+          }
+          else {
+            this.toastr.error(this.translate.instant('Errors.cannotProceed'));
+          }
+        });
+  }
+  agree(e) {
+    if (e.target.checked) {
+      this.checkAgree = true;
+    }
+    else {
+      this.checkAgree = false;
     }
   }
 
-  next() {
-    var jsonBody = {};
-    jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
-    jsonBody["event"] = "finish";
-    this.apiCall(jsonBody, "modulefivesingleurl/", "finish");
-  }
+  ngAfterViewInit() {
+    if (window.localStorage.getItem('mspost') == 'true') {
+      this.missingPost = true;
+      setTimeout(() => {
+        this.toastr.error(this.translate.instant('otherMessages.teacherSkill'));
+      }, 1500);
 
-  apiCall(jsonBody, apiUrl, fun) {
-    this.Module5Service.apiCall(jsonBody, apiUrl).subscribe(
-      data => {
-        if (data["status"] == true) {
-          if (fun == "start") {
-            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 5.19', window.localStorage.getItem('username'), 10);
-            this.passData["videoUrl"] = data["data"].url;
-            this.vedioCompleteUrl = data["data"].url;
-            var current5 = [];
-            current5 = JSON.parse(window.localStorage.getItem("currentJson5"));
-            var index = current5["children"].findIndex(
-              item => item.source == "module 5.19");
-            current5["children"][index].url = this.vedioCompleteUrl;
-            window.localStorage.setItem("currentJson5", JSON.stringify(current5));
-            this.playVideo = true;
-          } else if (fun == "finish") {
-            if (data['message'] == "submodule finish next uuid is" || data['message'] == "submodule finish")
-            {
-              this.instructionModal.hide();
-              this.LanguageService.toHide();
-              this.statVideoFlag = true;
-              window.localStorage.setItem(
-                "uuid",
-                data["data"].nextuuid
-              );
-              window.localStorage.setItem("mainFlagModule5", "20");
-              window.localStorage.setItem("subFlagModule5", "1");
-              window.localStorage.setItem("source", "module 5.20");
-              var obj = {
-                type: "submodule",
-                route: true,
-                current: this.translate.instant(
-                  "L2Module5.subMenu5-20"
-                ),
-                next: this.translate.instant(
-                  "L2Module5Finish.subMenu5-20"
-                ),
-                nextRoute: "/modules/module5/Module5.20"
-              };
-              this.LocalstoragedetailsService.setModuleStatus(
-                JSON.stringify(obj)
-              );
-              this.Module5Service.setLocalStorage5(20);
-            }
-
-
-          }
-        }
-      },
-      error => {
-        this.LanguageService.handleError(error.error.message);
-      }
-    );
+    } else {
+      this.missingPost = false;
+    }
   }
 
 }

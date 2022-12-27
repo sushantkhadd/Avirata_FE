@@ -107,7 +107,7 @@ export class Module514Component implements OnInit {
             window.localStorage.setItem("uuid", data["data"].nextuuid);
             this.start2();
           } else if (fun == "start2") {
-            this.videoData['apiUrl'] = 'modulefourcfustart/';
+            this.videoData['apiUrl'] = 'modulefivecfustart/';
             this.videoData['videoUrl'] = data['data'].url;
             this.passUrl = 'IkzkQ-Xft4c';
             this.currentSource = window.localStorage.getItem('source');

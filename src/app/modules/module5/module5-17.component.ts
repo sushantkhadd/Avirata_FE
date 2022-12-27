@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { FullLayoutService } from 'src/app/layouts/full-layout.service';
 import { LanguageService } from 'src/app/language.service';
 import { Module5Service } from './module5.service';
@@ -14,196 +14,126 @@ import { ModalDirective } from 'ngx-bootstrap';
   templateUrl: "./module5-17.component.html"
 })
 export class Module517Component implements OnInit {
-  constructor(
-    public FullLayoutService: FullLayoutService,
-    public LanguageService: LanguageService,
-    public Module5Service: Module5Service,
-    public toastr: ToastsManager,
-    public translate: TranslateService,
-    public router: Router,
-    public LocalstoragedetailsService: LocalstoragedetailsService
-  ) {}
-  @ViewChild("instructionModal") public instructionModal: ModalDirective;
+  
+  @ViewChild('staticImageModal') public staticImageModal: ModalDirective;
+  @ViewChild('instructionModal') public instructionModal: ModalDirective;
 
-  public finalCount;
-  public imgUrl;
+  public mainFlagModule5 = parseInt(window.localStorage.getItem('mainFlagModule5'));
+  public subFlagModule5 = parseInt(window.localStorage.getItem('subFlagModule5'));
+
+  download: boolean;
   passValues = {};
-  public download;
-  link;
-  showCFU;
-  apiUrl;
-  public cfuQuestion = {};
-  public startPdf;
-  mainFlagModule5;
-  subFlagModule5;
-  playVideo; flag;
-  jsonBody = {}; thumb_title;
-  passData = {};
-  urlObject = {};
-  private pdfUrl = environment.pdfUrl;
-  pdf1;
+  finishJSONBody: any;
+  startVideoEvent = true;
+  showpdfFlag: boolean;
+  constructor(public FullLayoutService: FullLayoutService, public LanguageService: LanguageService, public Module5Service: Module5Service, public router: Router, public LocalstoragedetailsService: LocalstoragedetailsService, public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService) {
+    this.toastr.setRootViewContainerRef(vcr);
+  }
+
+  public showVideoFlag; nextBtnFlag; passData = {}; passUrl; videoData = {}; urlArray = {}; lnk1; lnk2; flag; parentUrlJson = {}
+  public statVideoFlag; thumb_title; vedioCompleteUrl;
 
   ngOnInit() {
-    this.pdf1 =
-      "https://s3-ap-southeast-1.amazonaws.com/maacpd/english/level1/module4/4.8_our+progress+card.pdf";
-    this.startPdf = false;
-    this.mainFlagModule5 = parseInt(
-      window.localStorage.getItem("mainFlagModule5")
-    );
-    this.subFlagModule5 = parseInt(
-      window.localStorage.getItem("subFlagModule5")
-    );
-
+    this.lnk1 = ''
+    this.lnk2 = ''
+    this.urlArray["src1"] = "skGFDAhQrhE";
+    this.urlArray["src2"] = "opHKXAPIynA";
+    this.urlArray['v_thumb'] = './../../assets/img/video-thumb.png';
+    this.showVideoFlag = false
     if (this.mainFlagModule5 == 17) {
-      if (this.subFlagModule5 == 1) {
-        this.startPdf = false;
-      } else if (this.subFlagModule5 == 2) {
-        this.startEvent2();
-      }
+      this.start()
     } else if (this.mainFlagModule5 > 17) {
-      // this.showCFU = false;
-      // this.download = false;
-      // this.link = "";
-      // this.apiUrl = "/assets/jsonfile/module4_6.json";
-      // this.finalCount = 22;
-      // this.passValues["download"] = this.download;
-      // this.passValues["link"] = this.link;
-      // this.passValues["finalcount"] = this.finalCount;
-      // this.passValues["showcfu"] = this.showCFU;
-      // this.passValues["apiurl"] = this.apiUrl;
-      // this.passValues["unlockView"] = "static";
-      var unlockJson = {};
       this.flag = 0;
-      unlockJson = JSON.parse(window.localStorage.getItem("currentJson5"));
-      if (unlockJson["children"].length > 0) {
-        var index = unlockJson["children"].findIndex(
+      var urlJson = {};
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson5"));
+      console.log("vcxxxx", urlJson)
+      if (urlJson["children"].length > 0) {
+        var index = urlJson["children"].findIndex(
           item => item.source == "module 5.17"
         );
+        console.log("qWSS", index)
         var mainJson;
-        mainJson = JSON.parse(unlockJson["children"][index].url);
-        console.log("hjbhjb", mainJson["5.17.1"])
-        if (mainJson != null)
-        {
-          this.urlObject["src1"] = mainJson["5.17.1"];
-          this.urlObject["src2"] = mainJson["5.17.2"];
+        mainJson = JSON.parse(urlJson["children"][index].url);
+        console.log("hjbhjb", mainJson['5.17.1'])
+        if (mainJson != null) {
+          this.urlArray["src1"] = mainJson["0.3.1"];
+          this.urlArray["src2"] = mainJson["0.3.2"];
+        } else {
+          this.mapJSON();
         }
-        // if (unlockJson["children"][index].url != null) {
-        //   this.passValues["url"] = unlockJson["children"][index].url;
-        // }
+      } else {
+        this.mapJSON();
       }
     }
   }
-  finishPDF(e) {
-    if (e) {
-      this.jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
-      this.jsonBody["event"] = "finish";
-      var apiUrl = "modulefivesingleurl/";
-      this.apiCall(this.jsonBody, apiUrl, "finish1");
-    }
+
+  mapJSON() {
+    this.urlArray['src1'] = this.lnk1
+    this.urlArray['src2'] = this.lnk2
   }
 
-  finish2() {
-    this.jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
-    this.jsonBody["event"] = "finish";
-    var apiUrl = "modulefivesingleurl/";
-    this.apiCall(this.jsonBody, apiUrl, "finish2");
+  start() {
+    var jsonBody = {}
+    jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
+    jsonBody['event'] = 'start'
+    this.apiCall(jsonBody, 'modulefivesingleurl/', 'start')
   }
 
-  finishVideo(e) {
-    if (e) {
-      this.instructionModal.show();
+  videoFinish(e) {
+    if (e == true) {
+      this.instructionModal.show()
       this.LanguageService.toShow();
+      this.nextBtnFlag = true
     }
   }
 
-  startEvent1() {
-    this.jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
-    this.jsonBody["event"] = "start";
-    var apiUrl = "modulefivesingleurl/";
-    this.apiCall(this.jsonBody, apiUrl, "start1");
+  nextvideo() {
+    this.subFlagModule5 = this.subFlagModule5 + 1
+    window.localStorage.setItem('subFlagModule5', this.subFlagModule5.toString());
+    this.instructionModal.hide();
+    this.showVideoFlag = false
   }
 
-  startEvent2() {
-    this.jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
-    this.jsonBody["event"] = "start";
-    var apiUrl = "modulefivesingleurl/";
-    this.apiCall(this.jsonBody, apiUrl, "start2");
+  next() {
+    var jsonBody = {}
+    jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
+    jsonBody['event'] = 'finish'
+    this.apiCall(jsonBody, 'modulefivesingleurl/', 'finish1')
   }
 
   apiCall(jsonBody, apiUrl, fun) {
+    this.showVideoFlag = false
     this.Module5Service.apiCall(jsonBody, apiUrl).subscribe(
       data => {
         if (data["status"] == true) {
-          if (fun == "start1")
-          {
+          if (fun == "start") {
             this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 5.17', window.localStorage.getItem('username'), 10);
-            this.startPdf = true;
-            this.passValues["url"] = data["data"].url;
-            this.urlObject["5.17.1"] = data["data"].url;
-            var current5 = [];
-            current5 = JSON.parse(window.localStorage.getItem("currentJson5"));
-            var index = current5["children"].findIndex(
-              item => item.source == "module 5.17"
-            );
-            current5["children"][index].url = JSON.stringify(this.urlObject);
-            window.localStorage.setItem(
-              "currentJson5",
-              JSON.stringify(current5)
-            );
-          } else if (fun == "finish1") {
-            window.localStorage.setItem("uuid", data["data"].nextuuid);
-            this.subFlagModule5 = 2;
-            window.localStorage.setItem("subFlagModule5", "2");
-            this.startEvent2();
-            console.log('finish1')
-          } else if (fun == "start2")
-          {
-            this.playVideo = true;
-            this.passData["videoUrl"] = data["data"].url;
-            console.log("start2",this.passData);
-            this.urlObject["5.17.2"] = data["data"].url;
-            var current5 = [];
-            current5 = JSON.parse(window.localStorage.getItem("currentJson5"));
-            var index = current5["children"].findIndex(
-              item => item.source == "module 5.17"
-            );
-            current5["children"][index].url = JSON.stringify(this.urlObject);
-            window.localStorage.setItem(
-              "currentJson5",
-              JSON.stringify(current5)
-            );
-          } else if (fun == "finish2")
-          {
-            this.instructionModal.hide();
-            this.LanguageService.toHide();
-            this.mainFlagModule5 = 18;
-            console.log("parent",JSON.parse(data['data'].parenturl))
-            var current5 = [];
-            current5 = JSON.parse(window.localStorage.getItem("currentJson5"));
-            var index = current5["children"].findIndex(
-              item => item.source == "module 5.17"
-            );
-            current5["children"][index].url = data['data'].parenturl;
-            window.localStorage.setItem(
-              "currentJson5",
-              JSON.stringify(current5)
-            ); 
+            this.passData['apiUrl'] = "modulefivesingleurl/";
+            this.passData['videoUrl'] = data['data'].url;
+            if (this.subFlagModule5 == 2) {
+              this.passValues['url'] = data['data'].url;
+              this.showVideoFlag = true
+            } else {
 
-            window.localStorage.setItem("uuid", data["data"].nextuuid);
-            window.localStorage.setItem("mainFlagModule5", "18");
-            window.localStorage.setItem("subFlagModule5", "1");
-            window.localStorage.setItem("source", "module 5.18.1");
-            var obj = {
-              type: "submodule",
-              route: true,
-              current: this.translate.instant("L2Module5.subMenu5-17"),
-              next: this.translate.instant("L2Module5Finish.subMenu5-18"),
-              nextRoute: "/modules/module5/Module5.18"
-            };
-            this.LocalstoragedetailsService.setModuleStatus(
-              JSON.stringify(obj)
-            );
-            this.Module5Service.setLocalStorage5(18);
+            }
+            this.showVideoFlag = true
+            var current0 = [];
+            current0 = JSON.parse(window.localStorage.getItem("currentJson5"));
+            var index = current0["children"].findIndex(
+              item => item.source == "module 5.8");
+            current0["children"][index].url = this.passUrl;
+
+            window.localStorage.setItem("currentJson0", JSON.stringify(current0));
+
+          } else if (fun == "finish1") {
+            this.LanguageService.toHide();
+            window.localStorage.setItem('uuid', data['data'].nextuuid)
+            window.localStorage.setItem('mainFlagModule5', '9');
+            window.localStorage.setItem('subFlagModule5', '1');
+            window.localStorage.setItem('source', 'module 5.9');
+            this.Module5Service.setLocalStorage5(9);
+            var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module5.subMenu5-9'), "next": this.translate.instant('L2Module5Finish.subMenu5-9'), "nextRoute": "/modules/module5/Module5.9" }
+            this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
           }
         }
       },
@@ -213,48 +143,42 @@ export class Module517Component implements OnInit {
     );
   }
 
+  nextApiCall() {
+    var jsonBody = {}
+    jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
+    jsonBody['event'] = 'finish'
+    this.Module5Service.apiCall(jsonBody, 'modulefivesingleurl/').subscribe(
+      data => {
+        if (data["status"] == true) {
+          window.localStorage.setItem('uuid', data['data'].nextuuid)
+          this.start()
+        }
+      },
+      error => {
+        this.LanguageService.handleError(error.error.message);
+      }
+    );
+  }
+
+  finishPDF(e) {
+    var jsonBody = {}
+    jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
+    jsonBody['event'] = 'finish'
+    this.apiCall(jsonBody, 'modulefivesingleurl/', 'finish1')
+  }
+
+
   showVideo(src, title, value) {
-    if (value == 1)
-    {
-      console.log(src)
+    if (value == 1) {
+      this.passData['videoUrl'] = src;
+      this.thumb_title = title;
+      this.flag = value;
+    } else if (value == 2) {
       this.passValues["url"] = src;
       this.thumb_title = title;
       this.flag = value;
       this.passValues["unlockView"] = "static";
-    } else if (value == 2)
-    {
-      console.log(src)
-      this.passData["videoUrl"] = src;
-      this.thumb_title = title;
-      this.flag = value;
     }
+
   }
-
-  // start() {
-  //   // this.LanguageService.googleEventTrack('SubmoduleStatus', 'Module 4.9', window.localStorage.getItem('username'), 10);
-  //   this.jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
-  //   this.jsonBody["event"] = "start";
-
-  //   this.Module5Service.apiCall(
-  //     this.jsonBody,
-  //     "modulefivesingleurl/"
-  //   ).subscribe(
-  //     data => {
-  //       if (data["message"] == "ok" || data["message"] == "submodule started") {
-  //         this.passValues["url"] = data["data"].url;
-  //         this.startPdf = true;
-  //         var current5 = [];
-  //         current5 = JSON.parse(window.localStorage.getItem("currentJson5"));
-  //         var index = current5["children"].findIndex(
-  //           item => item.source == "module 5.17"
-  //         );
-  //         current5["children"][index].url = data["data"].url;
-  //         window.localStorage.setItem("currentJson5", JSON.stringify(current5));
-  //       }
-  //     },
-  //     error => {
-  //       this.LanguageService.handleError(error.error.message);
-  //     }
-  //   );
-  // }
 }

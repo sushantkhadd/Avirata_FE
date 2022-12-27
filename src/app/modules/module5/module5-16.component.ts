@@ -13,83 +13,93 @@ import {FullLayoutService} from '../../layouts/full-layout.service'
 })
 export class Module516Component implements OnInit {
 
-  public mainFlagModule5 = parseInt(window.localStorage.getItem('mainFlagModule5'));
-  public subFlagModule5 = parseInt(window.localStorage.getItem('subFlagModule5'));
-  public token; startVideoEvent;
-  public passData = {};//used when CFU completed
-  public videoData = {};passUrl;
-
-  public currentSource = window.localStorage.getItem('source');
-
-  constructor(public FullLayoutService:FullLayoutService, public LanguageService:LanguageService,public LocalstoragedetailsService: LocalstoragedetailsService, private router: Router, public Module5Service: Module5Service,public translate: TranslateService) { }
+  public mainFlagModule5 = parseInt(
+    window.localStorage.getItem("mainFlagModule5")
+  );
+  public subFlagModule5 = parseInt(
+    window.localStorage.getItem("subFlagModule5")
+  )
+  passUrl: any;
+  passValues = {};
+  startPdf: boolean;
+  constructor(
+    public LanguageService: LanguageService,
+    private LocalstoragedetailsService: LocalstoragedetailsService,
+    private router: Router,
+    public Module5Service: Module5Service,
+    public toastr: ToastsManager,
+    vcr: ViewContainerRef,
+    public translate: TranslateService
+  ) {
+    this.toastr.setRootViewContainerRef(vcr);
+  }
+  public passData = {};
 
   ngOnInit() {
-    this.passUrl='IkzkQ-Xft4c'
-    this.currentSource = window.localStorage.getItem('source');
-    this.startVideoEvent = false;
-
-    this.token = this.LocalstoragedetailsService.token
-    if (this.token == null) {
-      this.router.navigate(['/']);
-    }
-
-    if (this.subFlagModule5 == 1) {
-    }
-     if (this.mainFlagModule5 < 16) {
-
-    }
-     else if (this.mainFlagModule5 == 16)
-     {
-      this.startVideoEvent = false;
-      this.videoData['apiUrl'] = 'modulefivecfustart/';
+    this.startPdf = false;
+    if (this.mainFlagModule5 == 16) {
     }
     else if (this.mainFlagModule5 > 16) {
       var urlJson = {};
       urlJson = JSON.parse(window.localStorage.getItem("currentJson5"));
-      console.log("vcxxxx",urlJson)
       if (urlJson["children"].length > 0) {
         var index = urlJson["children"].findIndex(
           item => item.source == "module 5.16"
         );
-        console.log("qWSS",index)
-        if (urlJson["children"][index].url != null)
-        {
-          console.log("qWSS",index,urlJson["children"][index].url)
-          this.passData['videoUrl'] = urlJson["children"][index].url
-        } else {
-          this.passData['videoUrl'] = this.passUrl
+        if (urlJson["children"][index].url != null) {
+          this.passValues["url"] = urlJson["children"][index].url;
         }
-      } else {
-        this.passData['videoUrl'] = this.passUrl
       }
     }
   }
-  finishCFU(result) {
-    if (result["status"] == true) {
-      var current5 = [];
-      current5 = JSON.parse(window.localStorage.getItem("currentJson5")); 
-      var index = current5["children"].findIndex(
-      item => item.source == "module 5.16" );
-      current5["children"][index].url = result["url"]; 
-      window.localStorage.setItem("currentJson5", JSON.stringify(current5))
-      window.localStorage.setItem('mainFlagModule5', '17');
-      window.localStorage.setItem('subFlagModule5', '1');
-      window.localStorage.setItem('source', 'module 5.17');
-      this.Module5Service.setLocalStorage5(9);
-      var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module5.subMenu5-16'), "next": this.translate.instant('L2Module5Finish.subMenu5-17'), "nextRoute": "/modules/module5/Module5.17" }
-      this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
-    }
-    else {
-      window.localStorage.setItem('mainFlagModule5', '9');
-      this.router.navigate(['/modules/module5/Module5.8']);
-    }
+
+  start() {
+    var jsonBody = {}
+    jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
+    jsonBody['event'] = 'start'
+    this.apiCall(jsonBody, 'modulefivesingleurl/', 'start');
   }
-  singleCFUComplete(e) {
-    this.subFlagModule5++;
-    window.localStorage.setItem('subFlagModule5', this.subFlagModule5.toString());
+
+  apiCall(jsonBody, apiUrl, fun) {
+    this.Module5Service.apiCall(jsonBody, apiUrl).subscribe(
+      data => {
+        if (data["status"] == true) {
+          if (fun == "start") {
+            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 5.16', window.localStorage.getItem('username'), 10);
+
+            this.passValues["url"] = data["data"].url;
+            this.startPdf = true;
+            this.passUrl = data['data'].url;
+            var current5 = [];
+            current5 = JSON.parse(window.localStorage.getItem("currentJson5"));
+            var index = current5["children"].findIndex(
+              item => item.source == "module 5.16");
+            current5["children"][index].url = this.passUrl;
+
+            window.localStorage.setItem("currentJson5", JSON.stringify(current5));
+          } else if (fun == "finish1") {
+            this.LanguageService.toHide();
+            window.localStorage.setItem('uuid', data['data'].nextuuid)
+            window.localStorage.setItem('mainFlagModule5', '17');
+            window.localStorage.setItem('subFlagModule5', '1');
+            window.localStorage.setItem('source', 'module 5.17');
+            this.Module5Service.setLocalStorage5(17);
+            var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module5.subMenu5-17'), "next": this.translate.instant('L2Module5Finish.subMenu5-17'), "nextRoute": "/modules/module5/Module5.17" }
+            this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+          }
+        }
+      },
+      error => {
+        this.LanguageService.handleError(error.error.message);
+      }
+    );
   }
-  start(){
-    this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 5.16', window.localStorage.getItem('username'), 10);
+
+  finishPDF(e) {
+    var jsonBody = {}
+    jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
+    jsonBody['event'] = 'finish'
+    this.apiCall(jsonBody, 'modulefivesingleurl/', 'finish1')
   }
 
 }
