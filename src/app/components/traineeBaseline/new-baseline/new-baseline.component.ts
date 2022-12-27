@@ -549,7 +549,8 @@ export class NewBaselineComponent implements OnInit {
       window.localStorage.getItem('mainFlagModule4') == '2' ||
       window.localStorage.getItem('mainFlagModule5') == '23' ||
       window.localStorage.getItem('mainFlagModule4') == '11' ||
-      (window.localStorage.getItem('mainFlagModule0') == '31' && window.localStorage.getItem('subFlagModule0') == '5') || window.localStorage.getItem('mainFlagModule5') == '18') {
+      (window.localStorage.getItem('mainFlagModule0') == '31' && 
+      window.localStorage.getItem('subFlagModule0') == '5') || window.localStorage.getItem('mainFlagModule5') == '18') {
       if ((this.lastAns != "" && this.lastAns != null && this.lastAns != undefined) && (this.lastQueId != "" && this.lastQueId != null && this.lastQueId != undefined)) {
         console.log("lastans", this.lastAns, this.dummyAnsJson, this.lastQueId)
       }
@@ -584,7 +585,13 @@ export class NewBaselineComponent implements OnInit {
     else {
       mainAns['event'] = "answer";
     }
-    if (window.localStorage.getItem('mainFlagModule2') == '1' || (window.localStorage.getItem('mainFlagModule0') == '31' && (window.localStorage.getItem('subFlagModule0') == '1' || window.localStorage.getItem('subFlagModule0') == '2' || window.localStorage.getItem('subFlagModule0') == '3' || window.localStorage.getItem('subFlagModule0') == '4'))) {
+    if (
+      window.localStorage.getItem('mainFlagModule2') == '1' || 
+      (window.localStorage.getItem('mainFlagModule0') == '31' && 
+      (window.localStorage.getItem('subFlagModule0') == '1' || 
+      window.localStorage.getItem('subFlagModule0') == '2' || 
+      window.localStorage.getItem('subFlagModule0') == '3' || 
+      window.localStorage.getItem('subFlagModule0') == '4'))) {
       mainAns['useranswer'] = JSON.parse(dummyAns);
     }
     else if (
@@ -732,32 +739,35 @@ export class NewBaselineComponent implements OnInit {
 
               window.localStorage.setItem('mainFlagModule4', '12')
               window.localStorage.setItem('subFlagModule4', '1')
-            } else if (window.localStorage.getItem('mainFlagModule0') == '31') {
-              if (window.localStorage.getItem('subFlagModule0') == '1') {
+            } 
+            else if(window.localStorage.getItem('mainFlagModule0') == '31'){
+              if(window.localStorage.getItem('subFlagModule0') == '1'){
                 window.localStorage.setItem('uuid', data['data'].nextuuid)
                 window.localStorage.setItem('subFlagModule0', '2')
                 this.sendAns.emit("finish")
               }
-              else if (window.localStorage.getItem('subFlagModule0') == '2') {
+              else if(window.localStorage.getItem('subFlagModule0') == '2'){
                 window.localStorage.setItem('uuid', data['data'].nextuuid)
                 window.localStorage.setItem('subFlagModule0', '3')
                 this.sendAns.emit("finish")
               }
-              else if (window.localStorage.getItem('subFlagModule0') == '3') {
+              else if(window.localStorage.getItem('subFlagModule0') == '3'){
                 window.localStorage.setItem('uuid', data['data'].nextuuid)
                 window.localStorage.setItem('subFlagModule0', '4')
                 this.sendAns.emit("finish")
               }
-              else if (window.localStorage.getItem('subFlagModule0') == '4') {
+              else if(window.localStorage.getItem('subFlagModule0') == '4'){
                 window.localStorage.setItem('uuid', data['data'].nextuuid)
                 window.localStorage.setItem('subFlagModule0', '5')
                 this.sendAns.emit("finish1")
               }
-              else if (window.localStorage.getItem('subFlagModule0') == '5') {
+              else if(window.localStorage.getItem('subFlagModule0') == '5'){
                 window.localStorage.setItem('moduleFinishCount', JSON.stringify(data['data']));
-                this.levelData = localStorage.getItem("levelData");
-                for (let index = 0; index < this.levelData.length; index++) {
-                  if (parseInt(window.localStorage.getItem("currentstatus")) == index) {
+                this.levelData =localStorage.getItem("levelData");
+                for (let index = 0; index < this.levelData.length; index++)
+                {
+                  if (parseInt(window.localStorage.getItem("currentstatus")) == index)
+                  {
                     let current1 = [];
                     current1 = JSON.parse(window.localStorage.getItem("levelData"));
                     let index1 = current1.findIndex(
@@ -768,18 +778,15 @@ export class NewBaselineComponent implements OnInit {
                     console.log(current1, "fifirty")
                   }
                 }
-                this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
-                window.localStorage.setItem('mainFlagModule1', '1');
+                window.localStorage.setItem('mainFlagModule0', '32');
                 window.localStorage.setItem('uuid', data['data'].nextuuid)
                 window.localStorage.setItem("currentstatus", "1");
                 window.localStorage.setItem('mainFlagModule1', '1');
                 this.Module2Service.setLocalStorage2(5);
-                var obj1 = {
-                  "type": "moduleFinish", "route": true, "current": this.translate.instant('L2Module0.subMenu1-31'), "next": this.translate.instant('L2Module1.title'), "nextRoute": "/dashboard", "finishHead": this.translate.instant('L2Module0.title'),
-                  "submoduleFinish": this.translate.instant('L2Module1Finish.submodule0-finish'),
-                  "submoduleSuccess": this.translate.instant('L2Module1Finish.submodule0-success')
-                }
-               
+                 var obj1 = { "type": "moduleFinish", "route": true, "current": this.translate.instant('L2Module0.subMenu1-4'), "next": this.translate.instant('L2Module1.title'), "nextRoute": "/dashboard", "finishHead": this.translate.instant('L2Module0.title'),
+                "submoduleFinish":this.translate.instant('L2Module1Finish.submodule0-finish'),
+              "submoduleSuccess":this.translate.instant('L2Module1Finish.submodule0-success') }
+                 this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj1));
               }
             }
 

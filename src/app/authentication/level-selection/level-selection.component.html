@@ -602,8 +602,15 @@
                     </div>
                   </div>
                   <div class="col-md-3">
-                    <div class="mt-2" *ngIf="certificate.L3!=''">
+                    <div class="mt-2" *ngIf="certificate.L2!=''">
                       <a class="downloadtable" href="{{pdfUrl}}L3/{{cLink}}/{{certificate.L3}}.pdf" target="_blank">
+                        <img class="img-fluid" src="../../../assets/img/certificate_3.png">
+                      </a>
+                  </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="mt-2" *ngIf="certificate.L4!=''">
+                      <a class="downloadtable" href="{{pdfUrl}}L4/{{cLink}}/{{certificate.L4}}.pdf" target="_blank">
                         <img class="img-fluid" src="../../../assets/img/certificate_3.png">
                       </a>
                   </div>

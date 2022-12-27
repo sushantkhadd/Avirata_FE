@@ -22,7 +22,7 @@ export class Module13Component implements OnInit {
   public token; startVideoEvent;
   public passData = {}; //used when CFU completed
   public videoData = {}; passUrl;
-
+  inst="मोहनच्या केसस्टडीमध्ये अपेक्षा, अपयश, नैराश्य आणि मग आत्महत्येचे विचार अशी एक साखळीच आपल्याला दिसते आहे. यापैकी नैराश्य म्हणजे काय आणि आत्महत्येचे विचार का येतात हे आपण पुढील मोड्यूल मध्ये पाहुयात. या मोड्यूलमध्ये आपण यश आणि अपयश यांची चर्चा करू."
   public currentSource = window.localStorage.getItem('source');
 
   constructor(public FullLayoutService:FullLayoutService, public LanguageService:LanguageService,public LocalstoragedetailsService: LocalstoragedetailsService, private router: Router, public Module1Service: Module1Service,public translate: TranslateService) { }

@@ -245,33 +245,33 @@ export class TimelineComponent implements OnInit {
       }
       if (this.mainFlagModule0 && this.currentstatus  == 0)
       {
-        this.counterValue1 = Math.round((this.mainFlagModule0 - 1) * this.calPercentage(4));
+        this.counterValue1 = Math.round((this.mainFlagModule0 - 1) * this.calPercentage(31));
         this.totalPer = this.counterValue1;
         this.barWidth1 = this.counterValue1 * this.width + '%';
       }
       else if (this.mainFlagModule1 && this.currentstatus  == 1)
       {
         this.totalPer =16
-        this.counterValue1 = Math.round((this.mainFlagModule1 - 1) * this.calPercentage(12));
+        this.counterValue1 = Math.round((this.mainFlagModule1 - 1) * this.calPercentage(15));
         this.totalPer = 16 + this.counterValue1;
         this.barWidth1 = this.counterValue1 * this.width + '%';
       } else if (this.mainFlagModule2 && this.currentstatus  == 2)
       {
         this.totalPer =32
-        this.counterValue2 = Math.round((this.mainFlagModule2 - 1) * this.calPercentage(17));
+        this.counterValue2 = Math.round((this.mainFlagModule2 - 1) * this.calPercentage(14));
         this.totalPer = 32 + this.counterValue2;
         this.barWidth2 = this.counterValue2 * this.width + '%';
 
       } else if (this.mainFlagModule3 && this.currentstatus  == 3)
       {
         this.totalPer =48
-        this.counterValue3 = Math.round((this.mainFlagModule3 - 1) * this.calPercentage(18));
+        this.counterValue3 = Math.round((this.mainFlagModule3 - 1) * this.calPercentage(16));
         this.totalPer = 48 + this.counterValue3;
         this.barWidth3 = this.counterValue3 * this.width + '%';
       } else if (this.mainFlagModule4 && this.currentstatus  == 4)
       {
         this.totalPer =64
-        this.counterValue4 = Math.round((this.mainFlagModule4 - 1) * this.calPercentage(14));
+        this.counterValue4 = Math.round((this.mainFlagModule4 - 1) * this.calPercentage(16));
         this.totalPer = 64 + this.counterValue4;
         this.barWidth4 = this.counterValue4 * this.width + '%';
       } else if (this.mainFlagModule5 && this.currentstatus  == 5)

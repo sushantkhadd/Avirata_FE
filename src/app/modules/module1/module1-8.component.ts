@@ -17,6 +17,7 @@ export class Module18Component implements OnInit {
   public subFlagModule1 = parseInt(
     window.localStorage.getItem("subFlagModule1")
   )
+  
   passUrl: any;
   passValues={};
   startPdf: boolean;
