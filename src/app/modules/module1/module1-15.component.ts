@@ -66,12 +66,8 @@ export class Module115Component implements OnInit {
           } else if (fun == "finish1") {
             this.LanguageService.toHide();
             window.localStorage.setItem('uuid', data['data'].nextuuid)
-            window.localStorage.setItem('mainFlagModule2', '1');
-            window.localStorage.setItem('subFlagModule2', '1');
-            window.localStorage.setItem('source', 'module 2.1');
-            this.Module1Service.setLocalStorage1(3);
-            var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module1.submodule0-finish'), "next": this.translate.instant('L2Module1Finish.submodule0-finish'), "nextRoute": "/modules/module2" }
-            this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+            window.localStorage.setItem('mainFlagModule1', '16');
+            this.Module1Service.finishModuleCall(this.finishJSONBody, 15, '/modules/module2', '/modules/module2')
           }
         }
       },
