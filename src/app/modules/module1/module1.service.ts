@@ -141,7 +141,7 @@ export class Module1Service {
            }
            window.scroll(0,0)
            window.localStorage.setItem("currentstatus", "2");
-           window.localStorage.setItem('mainFlagModule1', '15');
+           window.localStorage.setItem('mainFlagModule1', '16');
            window.localStorage.setItem('mainFlagModule2', '1');
             this.setLocalStorage1(13);
            var obj1 = {

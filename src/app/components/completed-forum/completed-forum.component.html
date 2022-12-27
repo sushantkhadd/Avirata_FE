@@ -1,5 +1,5 @@
 <div class="forum">
-  <div class="blog-comment">
+  <div class="blog-comment" *ngIf="posts.length !=0">
     <ul class="comments" *ngFor="let post of posts; let i= index">
       <li class="clearfix" id={{i}} *ngIf="post['type']=='post'">
         <div class="post-comments">
@@ -72,6 +72,13 @@
       <button class="btn btn-secondary links mb-3" *ngIf="counter > 3" appPreventDoubleClick (debounceClick)="less()"><i
           class="fa fa-arrow-up"
           aria-hidden="true"></i>&nbsp;&nbsp;Less</button>
+    </div>
+  </div>
+  <div *ngIf="posts.length ==0">
+    <div class="card submoduleBox mb-2">
+      <div class="card-block text-center greenText inst-text">
+        <span>{{inst | translate}}</span>
+      </div>
     </div>
   </div>
 </div>

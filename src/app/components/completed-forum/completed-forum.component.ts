@@ -24,8 +24,10 @@ export class CompletedForumComponent implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
     this.replyBox = false;
   }
+  public mainFlagModule1 =parseInt(window.localStorage.getItem('mainFlagModule1'));
+  public mainFlagModule5 =parseInt(window.localStorage.getItem('mainFlagModule5'));
   @Output() public sendData = new EventEmitter<any>();
-
+  inst="पोस्ट उपलब्ध नाहीत. कृपया काही काळाने पुन्हा या सबमोड्यूल वर क्लिक करून जेव्हा इतर प्रशिक्षणार्थींच्या पोस्ट उपलब्ध होतील, तेव्हा त्यावर प्रतिक्रिया द्या. "
   posts = [{ 'comment': 'first comment', 'show': false, 'type': 'comment', 'viewComments': false }];
 
   ngOnInit() {
@@ -40,9 +42,9 @@ export class CompletedForumComponent implements OnInit {
     }
     this.commentFlag = false;
     this.viewCommentFlag = false;
-    if (window.localStorage.getItem('mainFlagModule1') > '2') {
+    if (this.mainFlagModule1 > 2) {
       this.getPosts("moduleonepostdisplay/", 1);
-    } else if (window.localStorage.getItem('mainFlagModule5') > '2') {
+    } else if (this.mainFlagModule5  > 2) {
       this.getPosts("modulefivepostdisplay/", 1);
     }
     this.userName = window.localStorage.getItem('name')
@@ -148,9 +150,9 @@ export class CompletedForumComponent implements OnInit {
 
     }
     var apiurl;
-    if (window.localStorage.getItem('mainFlagModule1') > '2') {
+    if (this.mainFlagModule1  > 2) {
       apiurl = 'moduleonecomment/';
-    } else if (window.localStorage.getItem('mainFlagModule5') > '2') {
+    } else if (this.mainFlagModule5  > 2) {
       apiurl = 'modulefivecomment/';
     }
 
