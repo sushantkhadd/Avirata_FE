@@ -85,8 +85,8 @@ export class Module111Component implements OnInit {
     current5["children"][index].url = e["url"];
     window.localStorage.setItem("currentJson5", JSON.stringify(current5));
     this.mainFlagModule1 = 12;
-    window.localStorage.setItem("mainFlagModule5", "12");
-    window.localStorage.setItem("subFlagModule5", "1");
+    window.localStorage.setItem("mainFlagModule1", "12");
+    window.localStorage.setItem("subFlagModule1", "1");
     window.localStorage.setItem("source", "module 1.12");
     this.Module1Service.setLocalStorage1(6);
     var obj = {

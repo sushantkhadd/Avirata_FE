@@ -114,9 +114,9 @@ export class Module1Service {
           window.localStorage.setItem('mainFlagModule1', id);
           window.localStorage.setItem('uuid', data['data'].nextuuid);
 
-          if (submoduleId == 11) {
+          if (submoduleId == 14) {
             this.setLocalStorage1(id);
-            var obj = { "type": "submodule", "route": true, "current": this.translate.instant('otherMessages.1-11Current'), "next": this.translate.instant('otherMessages.1-12Next'), "nextRoute": "/modules/module1/Module1.12" }
+            var obj = { "type": "submodule", "route": true, "current": this.translate.instant('otherMessages.1-11Current'), "next": this.translate.instant('otherMessages.1-12Next'), "nextRoute": "/modules/module1/Module1.15" }
             this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
           }
 
