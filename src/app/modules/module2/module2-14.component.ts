@@ -16,7 +16,7 @@ export class Module214Component implements OnInit {
   public subFlagModule2 = parseInt(window.localStorage.getItem('subFlagModule2'));
 
   passUrl: any;
-  passValues = {};
+  passValues={};
   startPdf: boolean;
   constructor(
     public LanguageService: LanguageService,
@@ -32,7 +32,7 @@ export class Module214Component implements OnInit {
   public passData = {};
 
   ngOnInit() {
-    this.startPdf = false
+    this.startPdf=false
     // this.start();
   }
 
@@ -41,7 +41,7 @@ export class Module214Component implements OnInit {
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
     jsonBody['event'] = 'start'
     this.apiCall(jsonBody, 'moduletwosingleurl/', 'start');
-  }
+  }  
 
   apiCall(jsonBody, apiUrl, fun) {
     this.Module2Service.apiCall(jsonBody, apiUrl).subscribe(
@@ -60,15 +60,15 @@ export class Module214Component implements OnInit {
             current2["children"][index].url = this.passUrl;
 
             window.localStorage.setItem("currentJson2", JSON.stringify(current2));
-          } else if (fun == "finish1") {
-            this.LanguageService.toHide();
-            window.localStorage.setItem('uuid', data['data'].nextuuid)
-            window.localStorage.setItem('mainFlagModule3', '1');
-            window.localStorage.setItem('subFlagModule3', '1');
-            window.localStorage.setItem('source', 'module 1.1');
-            this.Module2Service.setLocalStorage2(3);
-            var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module2.submodule2-14'), "next": this.translate.instant('L2Module2Finish'), "nextRoute": "/modules/module3" }
-            this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+          // } else if (fun == "finish1") {
+          //   this.LanguageService.toHide();
+          //   window.localStorage.setItem('uuid', data['data'].nextuuid)
+          //   window.localStorage.setItem('mainFlagModule2', '9');
+          //   window.localStorage.setItem('subFlagModule2', '1');
+          //   window.localStorage.setItem('source', 'module 9.1');
+          //   this.Module2Service.setLocalStorage2(9);
+          //   var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module2.submodule2-8'), "next": this.translate.instant('L2Module2Finish.subMenu2-9'), "nextRoute": "/modules/module2/Module2.9" }
+          //   this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
           }
         }
       },
@@ -80,8 +80,15 @@ export class Module214Component implements OnInit {
 
   finishPDF(e) {
     var jsonBody = {};
+    // jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
+    // jsonBody['event'] = 'finish';
+    // this.apiCall(jsonBody, 'moduletwosingleurl/', 'finish1');
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
-    jsonBody['event'] = 'finish';
-    this.apiCall(jsonBody, 'moduletwosingleurl/', 'finish1');
+    jsonBody['useroption'] = "";
+    jsonBody['event'] = "finish";
+    if (e == true) {
+      this.Module2Service.finishModuleCall(jsonBody, 14, '/modules/module3', '/modules/module3')
+    }
+
   }
 }

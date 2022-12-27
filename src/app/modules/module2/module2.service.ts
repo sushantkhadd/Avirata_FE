@@ -109,7 +109,7 @@ export class Module2Service {
          else if (data['message'] == "module2 finish")
          {
           window.localStorage.setItem('moduleFinishCount', JSON.stringify(data['data']));
-           window.localStorage.setItem('mainFlagModule2', '18');
+           window.localStorage.setItem('mainFlagModule2', '15');
            this.levelData = localStorage.getItem("levelData");
            for (let index = 0; index < this.levelData.length; index++)
            {
