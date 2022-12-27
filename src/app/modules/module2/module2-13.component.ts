@@ -287,7 +287,8 @@ export class Module213Component implements OnInit {
             window.localStorage.setItem("uuid", data["data"].nextuuid);
             console.log(data);
             this.subFlagModule2 = 2;
-            window.localStorage.setItem("subFlagModule2", "14");
+            window.localStorage.setItem('mainFlagModule2', '14');
+            window.localStorage.setItem("subFlagModule2", "1");
             window.localStorage.setItem("source", "module 2.14");
             this.questionFlag = false;
             localStorage.removeItem("questionFlag");
@@ -314,8 +315,8 @@ export class Module213Component implements OnInit {
             this.statVideoFlag = true;
             this.mainFlagModule2 = 14;
             window.localStorage.setItem("uuid", data["data"].nextuuid);
-            window.localStorage.setItem("mainFlagModule1", "14");
-            window.localStorage.setItem("subFlagModule1", "1");
+            window.localStorage.setItem("mainFlagModule2", "14");
+            window.localStorage.setItem("subFlagModule2", "1");
             window.localStorage.setItem("source", "module 2.14");
             this.Module2Service.setLocalStorage2(14);
             var obj = {
