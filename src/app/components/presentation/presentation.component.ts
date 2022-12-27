@@ -663,7 +663,7 @@ export class PresentationComponent implements OnInit {
                 this.showToasterPopup();
                 window.localStorage.setItem('uuid', data['data'].nextuuid);
                 if (window.localStorage.getItem('mainFlagModule2') == '15' || window.localStorage.getItem('mainFlagModule3') == '14' || window.localStorage.getItem('mainFlagModule3') == '15' || window.localStorage.getItem('mainFlagModule3') == '16' || window.localStorage.getItem('mainFlagModule4') == '13' || window.localStorage.getItem('mainFlagModule5') == '10' || window.localStorage.getItem('mainFlagModule5') == '11' || window.localStorage.getItem('mainFlagModule5') == '12' || window.localStorage.getItem('mainFlagModule5') == '2' ||
-                  window.localStorage.getItem('mainFlagModule5') == '3' || window.localStorage.getItem('mainFlagModule5') == '4' || window.localStorage.getItem('mainFlagModule5') == '5') {
+                  window.localStorage.getItem('mainFlagModule5') == '3' || window.localStorage.getItem('mainFlagModule5') == '4' || window.localStorage.getItem('mainFlagModule5') == '5' || window.localStorage.getItem('mainFlagModule1') == '11' || window.localStorage.getItem('mainFlagModule1') == '10') {
                   this.options = []
 
                   this.eventRadioGroup.instance.option("value", '');

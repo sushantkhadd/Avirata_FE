@@ -20,6 +20,7 @@ export class Module115Component implements OnInit {
   passUrl: any;
   passValues={};
   startPdf: boolean;
+  finishJSONBody = {};
   constructor(
     public LanguageService: LanguageService,
     private LocalstoragedetailsService: LocalstoragedetailsService,
@@ -81,9 +82,12 @@ export class Module115Component implements OnInit {
   }
 
   finishPDF(e) {
-    var jsonBody = {};
-    jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
-    jsonBody['event'] = 'finish';
-    this.apiCall(jsonBody, 'moduleonesingleurl/', 'finish1');
+    this.finishJSONBody['submoduleid'] = window.localStorage.getItem('uuid');
+    this.finishJSONBody['useroption'] = "";
+    this.finishJSONBody['event'] = "finish";
+    if (e == true)
+    {
+      this.Module1Service.finishModuleCall(this.finishJSONBody, 15, '/modules/module2', '/modules/module2')
+    }
   }
 }

@@ -16,7 +16,7 @@ import { ModalDirective } from 'ngx-bootstrap';
 export class Module112Component implements OnInit {
   @ViewChild("ratingModal") public ratingModal: ModalDirective;
 
-  startFlag: boolean;
+  startFlag=false;
   senAns: {};
   tasks: any[];
   question3: any;
@@ -29,38 +29,9 @@ export class Module112Component implements OnInit {
   public startPdf; mainFlagModule1; subFlagModule1; finishJSONBody = {};
   private pdfUrl = environment.pdfUrl; pdf1;
 
-  ngOnInit() {
-    // this.pdf1 = 'https://s3-ap-southeast-1.amazonaws.com/maacpd/english/level1/module4/4.8_our+progress+card.pdf';
-    // this.startPdf = false;
+  ngOnInit() {  
     this.mainFlagModule1 = parseInt(window.localStorage.getItem('mainFlagModule1'));
     this.subFlagModule1 = parseInt(window.localStorage.getItem('subFlagModule1'));
-
-    // if (this.mainFlagModule1 > 12)
-    // {
-    //   this.showCFU = false;
-    //   this.download = false;
-    //   this.link = '';
-    //   this.apiUrl = '/assets/jsonfile/module4_6.json'
-    //   this.finalCount = 22;
-    //   this.passValues['download'] = this.download;
-    //   this.passValues['link'] = this.link;
-    //   this.passValues['finalcount'] = this.finalCount;
-    //   this.passValues['showcfu'] = this.showCFU;
-    //   this.passValues['apiurl'] = this.apiUrl;
-    //   this.passValues["unlockView"] = "static";
-    //   var unlockJson = {}
-    //   unlockJson = JSON.parse(window.localStorage.getItem('currentJson1'))
-    //   if (unlockJson['children'].length > 0)
-    //   {
-    //     var index = unlockJson['children'].findIndex(item =>
-    //       item.source == "module 1.12");
-
-    //     if (unlockJson['children'][index].url != null)
-    //     {
-    //       this.passValues['url'] = unlockJson['children'][index].url
-    //     }
-    //   }
-    // }
 
   }
   finishPDF(e) {
