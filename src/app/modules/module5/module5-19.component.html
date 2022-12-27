@@ -1,71 +1,179 @@
-<div *ngIf="mainFlagModule5 < 19">
+<div class="forum-component">
+  <!-- <div *ngIf="mainFlagModule5 < 22">
+   <div class="card">
+     <div class="card-block">
+       <p>{{'subModule1_1.1_22' | translate}}</p>
+       <p><strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
+     </div>
+   </div>
+ </div>
+
+ <div class="row">
+   <div class="col-md-12">
+     <div *ngIf="mainFlagModule5 == 22">
+       <div class="ins-block instruction-wrap">
+         <div class="borderBlue">
+           <div class="card" *ngIf="startEvent">
+             <div class="card-header color_red">
+               <span class="exp-img instructions-img"></span>
+               <h5>
+                 {{ "Quiz.note" | translate }}
+               </h5>
+             </div>
+             <div class="card-block inst-text">
+               <p>{{'number.1' | translate}}. {{'L2Module1.forum1' | translate}}</p>
+               <p>{{'number.2' | translate}}. {{'L2Module1.forum2' | translate}}</p>
+               <p>{{'number.3' | translate}}. {{'L2Module1.forum3' | translate}}</p>
+               <p>{{'number.4' | translate}}. {{'L2Module1.forum4' | translate}}</p>
+               <div class="form-group row">
+                 <div class="col-md-12">
+                   <label for="checkbox1" class="btn-pad">
+                     <input id="checkbox2" class="multiCheckStyle" name="agree1" type="checkbox" id="check"
+                       [(ngModel)]="checkAgree" (change)="agree($event)">
+                   </label>
+                   <label class="color_red" for="check">{{'L2Module1.terms' | translate}}</label>
+                 </div>
+               </div>
+             </div>
+             <div class="card-footer">
+               <div class="text-center">
+                 <button class="btn btn-primary" (click)="startEvent=false"
+                   [disabled]="!checkAgree">{{'Module4.start' | translate}}</button>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+       <div class="blog-comment" *ngIf="!startEvent">
+         <div class="mainCommentTextbox" *ngIf="mainFlagModule5>=22">
+           <h6 class="text-primary text-left lineHeight">
+             {{'otherMessages.teacherSpeciality' | translate}} </h6>
+           <hr />
+           <div class="post-comments-text form-group" *ngIf="mainFlagModule5==22">
+             <textarea class="form-control txtarea" id="exampleTextarea"
+               placeholder="{{'otherMessages.writePostHere' | translate}}" rows="10" #newHero [(ngModel)]="txtcomment"
+               (keypress)="handleInput($event)"></textarea>
+
+             <p class="text-right">{{'otherMessages.wordLimit' | translate}} {{postWordCount}}/150</p>
+             <button class="float-right btn btn-primary btn-pad" (click)="submitPost()"
+               [disabled]="submitPostDisable">{{'forum.post' | translate}}</button>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div *ngIf="mainFlagModule5 > 22">
+       <h6 class="text-primary text-left lineHeight" *ngIf="!missingPost">
+         {{'otherMessages.teacherSpeciality' | translate}} </h6>
+       <hr />
+       <div *ngIf="!missingPost">
+         <app-forum></app-forum>
+         <button class="btn btn-primary btn-pad right" (click)="nextRoute()">{{'Login.Close' | translate}}<i
+             class="fa fa-arrow-right btn-arrow" aria-hidden="true"></i></button>
+       </div>
+
+
+     </div>
+   </div>
+ </div>
+ <div *ngIf="missingPost">
+   <h6 class="text-primary text-left lineHeight">
+     {{'otherMessages.teacherSpeciality' | translate}} </h6>
+   <hr />
+   <div class="post-comments-text form-group">
+     <textarea class="form-control txtarea" id="exampleTextarea"
+       placeholder="{{'otherMessages.writePostHere' | translate}}" rows="10" #newHero [(ngModel)]="txtcomment"
+       (keypress)="handleInput($event)"></textarea>
+
+     <p class="text-right">{{'otherMessages.wordLimit' | translate}} {{postWordCount}}/150</p>
+     <button class="float-right btn btn-primary btn-pad" (click)="repost()"
+       [disabled]="submitPostDisable">{{'forum.post' | translate}}</button>
+   </div>
+ </div>-->
+
+  <div *ngIf="mainFlagModule5 < 19">
     <div class="card">
       <div class="card-block">
-        <p>{{'subModule3_1.3_2' | translate}}</p>
+        <p>{{'subModule4_1.4_3' | translate}}</p>
         <p><strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
       </div>
     </div>
   </div>
-
   <div *ngIf="mainFlagModule5 == 19">
-        <div class="instruction-wrap ins-block" *ngIf="!playVideo">
-          <div class="card">
-            <div class="card-header text-white">
-              <span class="exp-img instructions-img"></span>
-              <h5>{{'Quiz.note' | translate}}</h5>
-            </div>
-            <div class="card-block inst-text">
-              <p>{{'subModule5_1.1' | translate}}</p>
-            </div>
-            <div class="card-footer text-right">
-              <button class="btn btn-primary" appPreventDoubleClick
-                (debounceClick)="startEvent()">{{'Login.Close' | translate}}</button>
+    <div class="row">
+      <div class="col-sm-12 col-md-12">
+        <div class="ins-block instruction-wrap" *ngIf="!startEvent">
+          <div class="borderBlue">
+            <div class="card">
+              <div class="card-header color_red">
+                <span class="exp-img instructions-img"></span>
+                <h5>
+                  {{ "Quiz.note" | translate }}
+                </h5>
+              </div>
+              <div class="card-block inst-text">
+                <p>{{'number.1' | translate}}. {{'L2Module1.forum1' | translate}}</p>
+                <p>{{'number.2' | translate}}. {{'L2Module1.forum2' | translate}}</p>
+                <p>{{'number.3' | translate}}. {{'L2Module1.forum3' | translate}}</p>
+                <!-- <p>{{'number.4' | translate}}. {{'L2Module1.forum4' | translate}}</p> -->
+                <div class="form-group row">
+                  <div class="col-md-12">
+                    <label for="checkbox1" class="btn-pad">
+                      <input id="checkbox2" class="multiCheckStyle" name="agree1" type="checkbox" id="check"
+                        [(ngModel)]="checkAgree" (change)="agree($event)">
+                    </label>
+                    <label class="color_red ml-2" for="check">{{'L2Module1.terms' | translate}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="text-center">
+                  <button class="btn btn-primary" appPreventDoubleClick (debounceClick)="startEvent=true"
+                    [disabled]="!checkAgree">{{'Module4.start' | translate}}</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div *ngIf="playVideo">
+        <form #assignment="ngForm" *ngIf="startEvent">
           <div class="card">
-            <div class="card-footer">
-              <h6 class="text-center">{{'L2Module5.subMenu5-19' | translate}}</h6>
+            <div class="card-header p-0">
+              <!-- <label class="f-1x mb-0"> -->
+                <h6 class="questionHead lineHeight" [innerHTML]="'L2Module5.que5_22'| translate">
+                </h6>
+              <!-- </label> -->
             </div>
             <div class="card-block">
-              <app-static-video [receivedData]='passData' (finishCall)="finishVideo($event)"></app-static-video>
+              <textarea class="form-control marathi" id="txt1" name="txtaraea" [(ngModel)]="txtcomment"
+                placeholder="{{'otherMessages.writePostHere' | translate}}" rows="3" autocomplete='off'
+                required></textarea>
+               <p class="text-right pt-1">
+                 <span *ngIf="postWordCount!=0">
+                   {{'otherMessages.wordLimit' | translate}} {{postWordCount | numberConvertor : 'Devanagari'}} / {{'number.150' | translate}}
+                 </span>
+                 <span *ngIf="postWordCount==0">{{'number.0' | translate}}/{{'number.150' | translate}}</span>
+               </p>
+            </div>
+            <div class="card-footer text-center">
+              <button class="btn btn-primary float-right" appPreventDoubleClick (debounceClick)="submitPost()"
+                [disabled]="assignment.form.invalid || submitPostDisable">{{'Login.Submit'|
+             translate}}</button>
             </div>
           </div>
-        </div>
+        </form>
       </div>
-
+    </div>
+  </div>
   <div *ngIf="mainFlagModule5 > 19">
-    <div class="card" *ngIf="!statVideoFlag">
-      <div class="card-footer">
-        <h6 class="text-center">{{'L2Module5.subMenu5-19' | translate}}</h6>
-      </div>
-      <div class="card-block">
-        <app-static-video [receivedData]='passData'></app-static-video>
+    <app-completed-forum (sendData)="getData($event)"></app-completed-forum>
+    <div class="card submoduleBox" *ngIf="noPost">
+      <div class="card-block text-center greenText inst-text">
+        <span>{{'Errors.noPost' | translate}}</span>
       </div>
     </div>
+     <div [class.card-footer]="noPost">
+       <div class="text-center">
+         <a class="btn btn-primary" [routerLink]="['/modules/module5/Module5.20']">{{'Stepper.Next' | translate}}</a>
+       </div>
+     </div>
   </div>
-
-  <div class="videoFinishModal videoFinishedModel">
-    <div bsModal #instructionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1"
-      role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <img class="img-responsive img-rotate" src="assets/img/mitra.png">
-          <div class="modal-header">
-            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button> -->
-          </div>
-          <div class="modal-body">
-            <p class="px-5 text-center">तुमचा व्हिडिओ पूर्ण झाला.</p>
-            <hr />
-            <div class="col-md-12 text-right">
-              <button class="btn btn-primary text-center" appPreventDoubleClick
-                (debounceClick)="next()">{{'Stepper.Next' | translate}}</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+</div>
