@@ -1,61 +1,59 @@
 <div *ngIf="mainFlagModule3 < 15">
-    <div class="card">
-      <div class="card-block">
-        <p>{{'subModule3_1.3_2' | translate}}</p>
-        <p><strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
+  <div class="card">
+    <div class="card-block">
+      <p>{{'subModule3_1.3_2' | translate}}</p>
+      <p><strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="mainFlagModule3 == 15">
+  <div *ngIf="!startPdf">
+    <div class="instruction-wrap">
+      <div class="card">
+        <div class="card-header text-white">
+          <span class="exp-img instructions-img"></span>
+          <h4>{{'Quiz.note' | translate}}</h4>
+        </div>
+        <div class="card-block inst-text">
+          <p [innerHTML]="'L2Module0.subMenu1-3_inst' | translate"></p>
+
+        </div>
+        <div class="card-footer">
+          <div class="float-right">
+            <button class="btn btn-primary" appPreventDoubleClick (debounceClick)="start();">{{'Module4.start' |
+              translate}}</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  
-  
-  <div *ngIf="mainFlagModule3 == 15">
-    <div *ngIf="!startPdf">
-      <div class="instruction-wrap">
-        <div class="card">
-          <div class="card-header text-white">
-            <span class="exp-img instructions-img"></span>
-            <h4>{{'Quiz.note' | translate}}</h4>
-          </div>
-          <div class="card-block inst-text">
-            <p [innerHTML]="'L2Module0.subMenu1-3_inst' | translate"></p>          
-  
-          </div>
+  <div *ngIf="startPdf">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card ">
           <div class="card-footer">
-            <div class="float-right">
-              <button class="btn btn-primary" appPreventDoubleClick
-                (debounceClick)="start();">{{'Module4.start' | translate}}</button>
-            </div>
+            <h6 class="text-center">{{'L2Module3.subMenu3-15' | translate}}</h6>
+          </div>
+          <div class="card-block text-center">
+            <app-presentation [data]='passValues' (sendCfuAns)="finishPDF($event)"></app-presentation>
           </div>
         </div>
       </div>
-    </div>
-    <div *ngIf="startPdf">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card ">
-              <div class="card-footer">
-                  <h6 class="text-center">{{'L2Module3.subMenu3-15' | translate}}</h6>
-              </div>
-              <div class="card-block text-center">
-                <app-presentation [data]='passValues' (sendCfuAns)="finishPDF($event)"></app-presentation>          
-              </div>
-          </div>
-        </div>
-      </div>    
     </div>
   </div>
-  
-  <div *ngIf="mainFlagModule3 > 15">
-    <div *ngIf="startPdf" class="card">
-      <div class="card-footer">
-        <h6 class="text-center">{{'L2Module3.subMenu3-15' | translate}}</h6>
-      </div>
-      <div class="card-block">
-        <app-presentation [data]='passValues'></app-presentation>
-      </div>
-      <!-- <div class="card-footer">
+</div>
+
+<div *ngIf="mainFlagModule3 > 15">
+  <div class="card">
+    <div class="card-footer">
+      <h6 class="text-center">{{'L2Module3.subMenu3-15' | translate}}</h6>
+    </div>
+    <div class="card-block">
+      <app-presentation [data]='passValues'></app-presentation>
+    </div>
+    <!-- <div class="card-footer">
             <h6 class="text-center">{{'Module5.subMenu1-3' | translate}}</h6>
         </div> -->
-    </div>
   </div>
-  
+</div>

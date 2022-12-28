@@ -44,6 +44,46 @@ export class Module39Component implements OnInit {
       if(this.subFlagModule3 == 1){
         this.start();
       }
+    } else if (this.mainFlagModule3 > 9) {
+      this.flag = 0;
+      var urlJson = {};
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson3"));
+      if (urlJson["children"].length > 0) {
+        var index = urlJson["children"].findIndex(
+          item => item.source == "module 3.9"
+        );
+        if (urlJson["children"][index].url != null) {
+          var mainJson;
+          mainJson = JSON.parse(urlJson["children"][index].url);
+          this.urlArray["src1"] = mainJson["3.9.1"];
+          this.urlArray["src2"] = mainJson["3.9.2"];
+        } else {
+          this.mapJSON();
+          console.log('map json', this.mapJSON);
+        }
+      } else {
+        this.mapJSON();
+      }
+    }
+  }
+
+  mapJSON() {
+    this.urlArray['src1'] = this.lnk1
+    this.urlArray['src2'] = this.lnk2
+  }
+
+  showVideo(src, title, value) {
+    // this.staticImageModal.show();
+    // this.statVideoFlag = true;
+    // this.statImageFlag = false;
+    if (value == 1) {
+      this.passData['videoUrl'] = src;
+      this.thumb_title = title;
+      this.flag = value;
+    } else if (value == 2) {
+      this.passData['videoUrl'] = src;
+      this.thumb_title = title;
+      this.flag = value;
     }
   }
 

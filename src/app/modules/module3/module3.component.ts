@@ -20,19 +20,13 @@ export class Module3Component implements OnInit {
   public mainFlagModule3 = parseInt(window.localStorage.getItem('mainFlagModule3'));
   public subFlagModule3 = parseInt(window.localStorage.getItem('subFlagModule3'));
 
-  showCFU: boolean;
-  download: boolean;
-  passValues = {};
-  finishJSONBody: any;
-  startVideoEvent;
-  showpdfFlag: boolean;
-  showVideoCFU; currentSource;
+  public showVideoFlag; nextBtnFlag; passData = {}; passUrl; videoData = {}; urlArray = {}; lnk1; lnk2; flag; parentUrlJson = {}; playVideo; statVideoFlag; thumb_title; vedioCompleteUrl;
+  showCFU: boolean; download: boolean; passValues = {}; finishJSONBody: any;
+  startVideoEvent; showpdfFlag: boolean; showVideoCFU; currentSource;
+
   constructor(public FullLayoutService: FullLayoutService, public LanguageService: LanguageService, public Module3Service: Module3Service, public router: Router, public LocalstoragedetailsService: LocalstoragedetailsService, public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService) {
     this.toastr.setRootViewContainerRef(vcr);
   }
-
-  public showVideoFlag; nextBtnFlag; passData = {}; passUrl; videoData = {}; urlArray = {}; lnk1; lnk2; flag; parentUrlJson = {}; playVideo;
-  public statVideoFlag; thumb_title; vedioCompleteUrl;
 
   ngOnInit() {
     this.lnk1 = '';
@@ -45,6 +39,46 @@ export class Module3Component implements OnInit {
       if(this.subFlagModule3 == 1){
         this.start();
       }
+    } else if (this.mainFlagModule3 > 1) {
+      this.flag = 0;
+      var urlJson = {};
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson3"));
+      if (urlJson["children"].length > 0) {
+        var index = urlJson["children"].findIndex(
+          item => item.source == "module 3.1"
+        );
+        if (urlJson["children"][index].url != null) {
+          var mainJson;
+          mainJson = JSON.parse(urlJson["children"][index].url);
+          this.urlArray["src1"] = mainJson["3.1.1"];
+          this.urlArray["src2"] = mainJson["3.1.2"];
+        } else {
+          this.mapJSON();
+          console.log('map json', this.mapJSON);
+        }
+      } else {
+        this.mapJSON();
+      }
+    }
+  }
+
+  mapJSON() {
+    this.urlArray['src1'] = this.lnk1
+    this.urlArray['src2'] = this.lnk2
+  }
+
+  showVideo(src, title, value) {
+    // this.staticImageModal.show();
+    // this.statVideoFlag = true;
+    // this.statImageFlag = false;
+    if (value == 1) {
+      this.passData['videoUrl'] = src;
+      this.thumb_title = title;
+      this.flag = value;
+    } else if (value == 2) {
+      this.passData['videoUrl'] = src;
+      this.thumb_title = title;
+      this.flag = value;
     }
   }
 
@@ -103,7 +137,7 @@ export class Module3Component implements OnInit {
             this.instructionModal.hide();
             this.LanguageService.toHide();
             this.playVideo = false;
-            this.statVideoFlag = true;
+            this.statVideoFlag = false;
             this.mainFlagModule3 = 1;
             window.localStorage.setItem("uuid", data["data"].nextuuid);
             this.start2();

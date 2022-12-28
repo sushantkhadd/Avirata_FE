@@ -18,9 +18,9 @@ export class Module312Component implements OnInit {
   public subFlagModule3 = parseInt(
     window.localStorage.getItem("subFlagModule3")
   );
-  passUrl: any;
-  passValues={};
-  startPdf: boolean;
+
+  public passData = {}; passUrl: any; passValues={}; startPdf: boolean;
+  
   constructor(
     public LanguageService: LanguageService,
     private LocalstoragedetailsService: LocalstoragedetailsService,
@@ -32,11 +32,21 @@ export class Module312Component implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
-  public passData = {};
-
   ngOnInit() {
     this.startPdf=false
-    // this.start();
+    if (this.mainFlagModule3 == 12) {
+    }else if (this.mainFlagModule3 > 12) {
+      var urlJson = {};
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson3"));
+      if (urlJson["children"].length > 0) {
+        var index = urlJson["children"].findIndex(
+          item => item.source == "module 3.12"
+        );
+        if (urlJson["children"][index].url != null) {
+          this.passValues["url"] = urlJson["children"][index].url;
+        }
+      }
+    }
   }
 
   start() {

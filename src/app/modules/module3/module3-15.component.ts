@@ -3,25 +3,23 @@ import { LanguageService } from 'src/app/language.service';
 import { LocalstoragedetailsService } from 'src/app/services/localstoragedetails.service';
 import { Module3Service } from './module3.service';
 import { ToastsManager } from 'ng6-toastr';
-import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import {FullLayoutService} from '../../layouts/full-layout.service'
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-module3-15',
   templateUrl: './module3-15.component.html'
 })
 export class Module315Component implements OnInit {
+
   public mainFlagModule3 = parseInt(
     window.localStorage.getItem("mainFlagModule3")
   );
   public subFlagModule3 = parseInt(
     window.localStorage.getItem("subFlagModule3")
   );
-  passUrl: any;
-  passValues={};
-  startPdf: boolean;
+
+  public passData = {}; passUrl: any; passValues={}; startPdf: boolean;
+
   constructor(
     public LanguageService: LanguageService,
     private LocalstoragedetailsService: LocalstoragedetailsService,
@@ -33,11 +31,21 @@ export class Module315Component implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
-  public passData = {};
-
   ngOnInit() {
     this.startPdf=false
-    // this.start();
+    if (this.mainFlagModule3 == 15) {
+    }else if (this.mainFlagModule3 > 15) {
+      var urlJson = {};
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson3"));
+      if (urlJson["children"].length > 0) {
+        var index = urlJson["children"].findIndex(
+          item => item.source == "module 3.15"
+        );
+        if (urlJson["children"][index].url != null) {
+          this.passValues["url"] = urlJson["children"][index].url;
+        }
+      }
+    }
   }
 
   start() {
