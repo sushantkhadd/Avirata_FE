@@ -1,24 +1,21 @@
 import { Component, OnInit,ViewContainerRef, ViewChild} from '@angular/core';
 import { LocalstoragedetailsService } from "../../services/localstoragedetails.service";
 import { LanguageService } from './../../language.service';
-import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import {Module4Service} from './module4.service'
-import { FullLayoutService } from '../../layouts/full-layout.service';
 import { ToastsManager } from 'ng6-toastr';
-import { ModalDirective } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-module4-7',
   templateUrl: './module4-7.component.html'
 })
 export class Module47Component implements OnInit {
+
   public mainFlagModule4 = parseInt(window.localStorage.getItem('mainFlagModule4'));
   public subFlagModule4 = parseInt(window.localStorage.getItem('subFlagModule4'));
 
-  passUrl: any;
-  passValues={};
-  startPdf: boolean;
+  public passData = {}; passUrl: any; passValues={}; startPdf: boolean;
+
   constructor(
     public LanguageService: LanguageService,
     private LocalstoragedetailsService: LocalstoragedetailsService,
@@ -30,17 +27,27 @@ export class Module47Component implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
-  public passData = {};
-
   ngOnInit() {
-    this.startPdf=false
-    // this.start();
+    this.startPdf=false;
+    if (this.mainFlagModule4 == 7) {
+    }else if (this.mainFlagModule4 > 7) {
+      var urlJson = {};
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson4"));
+      if (urlJson["children"].length > 0) {
+        var index = urlJson["children"].findIndex(
+          item => item.source == "module 4.7"
+        );
+        if (urlJson["children"][index].url != null) {
+          this.passValues["url"] = urlJson["children"][index].url;
+        }
+      }
+    }
   }
 
   start() {
-    var jsonBody = {}
-    jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
-    jsonBody['event'] = 'start'
+    var jsonBody = {};
+    jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
+    jsonBody['event'] = 'start';
     this.apiCall(jsonBody, 'modulefoursingleurl/', 'start');
   }  
 
@@ -50,7 +57,6 @@ export class Module47Component implements OnInit {
         if (data["status"] == true) {
           if (fun == "start") {
             this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 4.7', window.localStorage.getItem('username'), 10);
-
             this.passValues["url"] = data["data"].url;
             this.startPdf = true;
             this.passUrl = data['data'].url;

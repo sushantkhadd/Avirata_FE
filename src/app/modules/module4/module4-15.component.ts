@@ -35,8 +35,7 @@ export class Module415Component implements OnInit {
   answer1; answer2; answer3; answer4; answer5; answer6; question1; question2; question3;
   question4; question5; question6; description; questionFlag; trimFlag; mainFlagModule4;
   urlArray = {}; nextFlag; queFlag; zeroMsgFlag = {}; subFlagModule4;
-  public inst =
-    "दिलेल्या प्रसंगांमध्ये पात्रांचा प्रतिसाद कोणत्या अविवेकी विचारांमधून (धारणांमधून) निर्माण झाला आहे ते लिहा.";
+  inst = "तुमच्या वर्गातील विद्यार्थ्यांमध्ये सकारात्मक मानसिकता निर्माण करण्याच्या दृष्टिने तुम्ही कोणते  उपक्रम घ्याल ते सविस्तर लिहा. खालील प्रत्येक विषयासंदर्भात एक उपक्रम नेमकेपणाने लिहा.";
 
   ngOnInit() {
     this.zeroMsgFlag['1'] = false;
@@ -291,13 +290,13 @@ export class Module415Component implements OnInit {
             window.localStorage.setItem("uuid", data["data"].nextuuid);
             window.localStorage.setItem("mainFlagModule4", "16");
             window.localStorage.setItem("subFlagModule4", "1");
-            window.localStorage.setItem("source", "module 2.16");
+            window.localStorage.setItem("source", "module 4.16");
             this.Module4Service.setLocalStorage4(16);
             var obj = {
               type: "submodule",
               route: true,
-              current: this.translate.instant("L2Module4.subMenu2-15"),
-              next: this.translate.instant("L2Module4Finish.subMenu2-16"),
+              current: this.translate.instant("L2Module4.subMenu4-15"),
+              next: this.translate.instant("L2Module4Finish.subMenu4-16"),
               nextRoute: "/modules/module4/Module4.16"
             };
             this.LocalstoragedetailsService.setModuleStatus(

@@ -20,8 +20,9 @@ export class Module414Component implements OnInit {
   constructor(public LanguageService: LanguageService, public LocalstoragedetailsService: LocalstoragedetailsService, public Module4Service: Module4Service, public toastr: ToastsManager, vcr: ViewContainerRef, public router: Router, public translate: TranslateService) {
     this.toastr.setRootViewContainerRef(vcr);
   }
-  public data; questionType; passFlags = {}; showAnswer; saveData; answer; sumbitButton; startFlag;description;
-  public inst = "खालील व्यक्ती समायोजित आहेत की नाही त्याबद्दल योग्य पर्याय निवडा."
+
+  public data; questionType; passFlags = {}; showAnswer; saveData; answer; sumbitButton; startFlag;description; inst = "दिलेली उदाहरणे सबलीकरणाची आहेत का ते लिहा.";
+
   ngOnInit() {
     this.startFlag = false;
     this.showAnswer = true;

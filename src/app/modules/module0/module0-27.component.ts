@@ -36,7 +36,7 @@ export class Module027Component implements OnInit {
   ngOnInit() {
     this.startPdf=false;    
     if (this.mainFlagModule0 == 27) {
-      this.start();
+      // this.start();
     }
     else if (this.mainFlagModule0 > 27) {
       var urlJson = {};

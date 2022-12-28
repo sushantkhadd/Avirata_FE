@@ -90,3 +90,56 @@
     </div>
   </div>
 </div>
+
+<div *ngIf="mainFlagModule4 > 1">
+  <div class="card unlock-view">
+    <div class="card-block cc">
+      <div class="row static-content" *ngIf="flag == 0">
+        <div class="col-md-4">
+          <p class="title">{{'number.1' | translate}}. {{'L2Module2.mitra' | translate}}</p>
+          <div class="img-wrap">
+            <a (click)="showVideo(urlArray['src1'],'L2Module2.mitra',1)">
+              <img class="img-fluid v_thumb" src="./../../assets/img/thumb/3.8.1-Mitra-(M3B).png" alt="">
+              <div class="hover-opaque">
+                <i class="fa fa-play-circle fa-2x"></i>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <p class="title">{{'number.2' | translate}}. {{'L2Module4.subMenu4-1' | translate}}</p>
+          <div class="img-wrap">
+            <a (click)="showVideo(urlArray['src2'],'L2Module4.subMenu4-1',2)">
+              <img class="img-fluid v_thumb" src="https://maacpd.s3-ap-southeast-1.amazonaws.com/L3_mr/thumbnails/5.1-video.png" alt="">
+              <div class="hover-opaque">
+                <i class="fa fa-play-circle fa-2x"></i>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="flag == 1">
+        <div class="card-header text-center border-0">
+          <h5>
+            {{thumb_title | translate}}
+          </h5>
+        </div>
+        <app-static-video [receivedData]='passData'></app-static-video>
+        <div class="card-footer bg-white border-0 mt-3 text-center">
+          <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>
+        </div>
+      </div>
+      <div *ngIf="flag == 2">
+        <div class="card-header text-center border-0">
+          <h5>
+            {{thumb_title | translate}}
+          </h5>
+        </div>
+        <app-static-video [receivedData]='passData'></app-static-video>
+        <div class="card-footer bg-white border-0 mt-3 text-center">
+          <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
