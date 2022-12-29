@@ -491,7 +491,7 @@ export class McqcomponentComponent implements OnInit {
              this.userOptions[this.bunchList[0].questionid]=optionId
           console.log("val",$event.value,optionId,this.userOptions,this.showCorrectAns)
 
-        }  else if (window.localStorage.getItem('mainFlagModule0') == '30' || window.localStorage.getItem('mainFlagModule3') == '7')
+        }  else if (window.localStorage.getItem('mainFlagModule3') == '7')
         {
           console.log("bunchList",this.bunchList,$event.value)
         

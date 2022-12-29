@@ -1,25 +1,26 @@
 <div *ngIf="mainFlagModule5 < 17">
   <div class="card">
-      <div class="card-block">
-          <p>{{'subModule3_1.3_2' | translate}}</p>
-          <p><strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
-      </div>
+    <div class="card-block">
+      <p>{{'subModule3_1.3_2' | translate}}</p>
+      <p><strong>{{'lock.note' | translate}}</strong>{{'lock.warn' | translate}}</p>
+    </div>
   </div>
 </div>
 
 <div *ngIf="mainFlagModule5 == 17">
   <div *ngIf="subFlagModule5 == 1">
-      <div *ngIf=" showVideoFlag ">
-          <div class="card">
-              <div class="card-footer">
-                  <h6 class="text-center">{{'L2Module0.sub1-3_1' | translate}}</h6>
-              </div>
-              <div class="card-block">
-                  <app-static-video [receivedData]='passData' (finishCall)="videoFinish($event)"></app-static-video>
-              </div>
-          </div>
+    <div *ngIf=" showVideoFlag ">
+      <div class="card">
+        <div class="card-footer">
+          <h6 class="text-center">{{'L2Module0.sub1-3_1' | translate}}</h6>
+        </div>
+        <div class="card-block">
+          <app-static-video [receivedData]='passData' (finishCall)="videoFinish($event)"></app-static-video>
+        </div>
       </div>
+    </div>
   </div>
+
   <div *ngIf="subFlagModule5 == 2">
     <div *ngIf="!showPart1Flag">
       <div class="instruction-wrap">
@@ -29,91 +30,86 @@
             <h4>{{'Quiz.note' | translate}}</h4>
           </div>
           <div class="card-block inst-text">
-            <p [innerHTML]="'L2Module0.subMenu1-31_inst' | translate"></p>          
-  
+            <p [innerHTML]="'L2Module0.subMenu1-31_inst' | translate"></p>
+
           </div>
           <div class="card-footer">
             <div class="float-right">
-              <button *ngIf="subFlagModule0 == 1 || subFlagModule0 == 2 || subFlagModule0 == 3 || subFlagModule0 == 4" class="btn btn-primary" appPreventDoubleClick
-                (debounceClick)="start1();">{{'Module4.start' | translate}}</button>
-                <button *ngIf="subFlagModule0 == 5" class="btn btn-primary" appPreventDoubleClick
-                (debounceClick)="start2();">{{'Module4.start' | translate}}</button>
+              <button *ngIf="subFlagModule5 == 1 || subFlagModule5 == 2 || subFlagModule5 == 3 || subFlagModule5 == 4"
+                class="btn btn-primary" appPreventDoubleClick (debounceClick)="start1();">{{'Module4.start' |
+                translate}} 1</button>
+              <button *ngIf="subFlagModule5 == 5" class="btn btn-primary" appPreventDoubleClick
+                (debounceClick)="start2();">{{'Module4.start' | translate}} 2</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    <div *ngIf="subFlagModule0 == 1">
-      <div *ngIf="showPart1Flag">
-        <div>
-          <app-new-baseline
-            [passData]="passData"
-            (sendAns)="saveAnswer($event)"
-          ></app-new-baseline>
-        </div>
+    <div *ngIf="showPart1Flag">
+      <div>
+        <app-new-baseline [passData]="passData" (sendAns)="saveAnswer($event)"></app-new-baseline>
       </div>
     </div>
-  
-    <div *ngIf="subFlagModule0 == 2">
-      <div *ngIf="showPart1Flag">
-        <div>
-          <app-new-baseline [passData]="passData" (sendAns)="saveAnswer($event)"></app-new-baseline>
-        </div>
+  </div>
+
+  <div *ngIf="subFlagModule5 == 3">
+    <div *ngIf="showPart1Flag">
+      <div>
+        <app-new-baseline [passData]="passData" (sendAns)="saveAnswer($event)"></app-new-baseline>
       </div>
     </div>
-  
-    <div *ngIf="subFlagModule0 == 3">
-      <div *ngIf="showPart1Flag">
-        <div>
-          <app-new-baseline [passData]="passData" (sendAns)="saveAnswer($event)"></app-new-baseline>
-        </div>
+  </div>
+
+  <div *ngIf="subFlagModule5 == 4">
+    <div *ngIf="showPart1Flag">
+      <div>
+        <app-new-baseline [passData]="passData" (sendAns)="saveAnswer($event)"></app-new-baseline>
       </div>
     </div>
-  
-    <div *ngIf="subFlagModule0 == 4">
-      <div *ngIf="showPart1Flag">
-        <div>
-          <app-new-baseline [passData]="passData" (sendAns)="saveAnswer($event)"></app-new-baseline>
-        </div>
+  </div>
+
+  <div *ngIf="subFlagModule5 == 5">
+    <div *ngIf="showPart1Flag">
+      <div>
+        <app-new-baseline [passData]="passData" (sendAns)="saveAnswer($event)"></app-new-baseline>
       </div>
     </div>
-  
-    <div *ngIf="subFlagModule0 == 5">
-      <div *ngIf="showPart1Flag">
-        <div>
-          <app-new-baseline [passData]="passData"></app-new-baseline>
-        </div>
+  </div>
+
+  <div *ngIf="subFlagModule5 == 6">
+    <div *ngIf="showPart1Flag">
+      <div>
+        <app-new-baseline [passData]="passData"></app-new-baseline>
       </div>
-    </div> 
     </div>
+  </div>
 </div>
 
 <div class="videoFinishModal videoFinishedModel">
   <div bsModal #instructionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1"
-      role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-              <img class="img-responsive img-rotate" src="assets/img/mitra.png">
-              <div class="modal-header">
-              </div>
-              <div class="modal-body">
-                  <p class="px-5 text-center">तुमचा व्हिडिओ पूर्ण झाला.</p>
-                  <hr />
-                  <div class="col-md-12 text-right">
-                      <button class="btn btn-primary text-center" appPreventDoubleClick
-                          (debounceClick)="nextvideo()">{{'Stepper.Next' | translate}}</button>
-                  </div>
-              </div>
+    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <img class="img-responsive img-rotate" src="assets/img/mitra.png">
+        <div class="modal-header">
+        </div>
+        <div class="modal-body">
+          <p class="px-5 text-center">तुमचा व्हिडिओ पूर्ण झाला.</p>
+          <hr />
+          <div class="col-md-12 text-right">
+            <button class="btn btn-primary text-center" appPreventDoubleClick
+              (debounceClick)="nextvideo()">{{'Stepper.Next' | translate}}</button>
           </div>
+        </div>
       </div>
+    </div>
   </div>
 </div>
 
 <div *ngIf="mainFlagModule5 > 17">
   <div class="card submoduleBox">
-      <div class="card-block text-center greenText inst-text">
-        <span>{{ "L2Module5Complete.sm_5_8" | translate }}</span>
-      </div>
+    <div class="card-block text-center greenText inst-text">
+      <span>{{ "L2Module5Complete.sm_5_8" | translate }}</span>
     </div>
+  </div>
 </div>

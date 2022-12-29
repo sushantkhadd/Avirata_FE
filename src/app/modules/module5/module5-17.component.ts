@@ -14,7 +14,7 @@ import { ModalDirective } from 'ngx-bootstrap';
   templateUrl: "./module5-17.component.html"
 })
 export class Module517Component implements OnInit {
-  
+
   @ViewChild('staticImageModal') public staticImageModal: ModalDirective;
   @ViewChild('instructionModal') public instructionModal: ModalDirective;
 
@@ -26,6 +26,10 @@ export class Module517Component implements OnInit {
   finishJSONBody: any;
   startVideoEvent = true;
   showpdfFlag: boolean;
+  showPart1Flag: boolean;
+  apiEndStart: string;
+  apiEndSendAns: string;
+  apiEndFinish: string;
   constructor(public FullLayoutService: FullLayoutService, public LanguageService: LanguageService, public Module5Service: Module5Service, public router: Router, public LocalstoragedetailsService: LocalstoragedetailsService, public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService) {
     this.toastr.setRootViewContainerRef(vcr);
   }
@@ -41,7 +45,10 @@ export class Module517Component implements OnInit {
     this.urlArray['v_thumb'] = './../../assets/img/video-thumb.png';
     this.showVideoFlag = false
     if (this.mainFlagModule5 == 17) {
-      this.start()
+      if(window.localStorage.getItem('subFlagModule5') == '1'){
+        this.start()
+      }
+      
     } else if (this.mainFlagModule5 > 17) {
       this.flag = 0;
       var urlJson = {};
@@ -54,7 +61,6 @@ export class Module517Component implements OnInit {
         console.log("qWSS", index)
         var mainJson;
         mainJson = JSON.parse(urlJson["children"][index].url);
-        console.log("hjbhjb", mainJson['5.17.1'])
         if (mainJson != null) {
           this.urlArray["src1"] = mainJson["0.3.1"];
           this.urlArray["src2"] = mainJson["0.3.2"];
@@ -91,7 +97,8 @@ export class Module517Component implements OnInit {
     this.subFlagModule5 = this.subFlagModule5 + 1
     window.localStorage.setItem('subFlagModule5', this.subFlagModule5.toString());
     this.instructionModal.hide();
-    this.showVideoFlag = false
+    this.showVideoFlag = false;
+    this.nextApiCall();
   }
 
   next() {
@@ -151,7 +158,7 @@ export class Module517Component implements OnInit {
       data => {
         if (data["status"] == true) {
           window.localStorage.setItem('uuid', data['data'].nextuuid)
-          this.start()
+          // this.start()
         }
       },
       error => {
@@ -159,15 +166,67 @@ export class Module517Component implements OnInit {
       }
     );
   }
+  
+  saveAnswer(e) {
+    this.subFlagModule5 = this.subFlagModule5 + 1;
+    
+    window.localStorage.setItem('subFlagModule5', this.subFlagModule5.toString());
+    if (e == "finish") {
+    if (this.subFlagModule5 == 2 || this.subFlagModule5 == 4 || this.subFlagModule5 == 6) {      
+        this.showPart1Flag = false;
+        this.start1();
+      }else{
+        this.showPart1Flag = false;
+        this.start2();
+      }
+    } else {
+      if (this.subFlagModule5 > 6) {
+        this.showPart1Flag = false;
+        this.start1();
+      }
+    }
 
-  finishPDF(e) {
-    var jsonBody = {}
-    jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
-    jsonBody['event'] = 'finish'
-    this.apiCall(jsonBody, 'modulefivesingleurl/', 'finish1')
+
   }
 
+  start1() {
+    console.log("dsshfjds")
+    var jsonData = {}
+    jsonData['submoduleid'] = window.localStorage.getItem('uuid')
+    jsonData['event'] = "start"
+    jsonData["useranswer"] = "";
 
+    this.showPart1Flag = true;
+    this.apiEndStart = 'modulefivecmcq/';
+    this.apiEndSendAns = 'modulefivecmcq/';
+    this.apiEndFinish = 'modulefivecmcq/';
+    // this.startJson['examtype'] = window.localStorage.getItem('uuid');
+
+    this.passData['start'] = this.apiEndStart;
+    this.passData['answer'] = this.apiEndSendAns;
+    this.passData['finish'] = this.apiEndFinish;
+    this.passData['jsonData'] = jsonData;
+    this.LanguageService.googleEventTrack('L3SubmoduleStatus',
+      'Module 5.17', window.localStorage.getItem('username'), 10);
+  }
+
+  start2() {
+    var jsonData = {}
+    jsonData['submoduleid'] = window.localStorage.getItem('uuid')
+    jsonData['event'] = "start"
+    jsonData["useranswer"] = "";
+
+    this.showPart1Flag = true;
+    this.apiEndStart = 'modulefive_return_answer/';
+    this.apiEndSendAns = 'modulefive_return_answer/';
+    this.apiEndFinish = 'modulefive_return_answer/';
+    // this.startJson['examtype'] = window.localStorage.getItem('uuid');
+
+    this.passData['start'] = this.apiEndStart;
+    this.passData['answer'] = this.apiEndSendAns;
+    this.passData['finish'] = this.apiEndFinish;
+    this.passData['jsonData'] = jsonData;
+  }
   showVideo(src, title, value) {
     if (value == 1) {
       this.passData['videoUrl'] = src;

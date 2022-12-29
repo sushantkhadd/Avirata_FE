@@ -1013,13 +1013,26 @@ export class FullLayoutComponent implements OnInit {
       } else if (
         source == "module 5.17" ||
         source == "module 5.17.1" ||
-        source == "module 5.17.2"
+        source == "module 5.17.2" ||
+        source == "module 5.17.2.1" ||
+        source == "module 5.17.2.2" ||
+        source == "module 5.17.2.3" ||
+        source == "module 5.17.2.4"||
+        source == "module 5.17.2.5"
       ) {
         this.mainFlagModule5 = 17;
-        if (source == "module 5.17.1") {
+        if ( source == "module 5.17" || source == "module 5.17.1") {
           this.subFlagModule5 = 1;
-        } else if (source == "module 5.17.2") {
+        } else if (source == "module 5.17.2" || source == "module 5.17.2.1" ) {
           this.subFlagModule5 = 2;
+        } else if (source == "module 5.17.2.2") {
+          this.subFlagModule5 = 3;
+        } else if (source == "module 5.17.2.3") {
+          this.subFlagModule5 = 4;
+        } else if (source == "module 5.17.2.4") {
+          this.subFlagModule5 = 5;
+        } else if (source == "module 5.17.2.5") {
+          this.subFlagModule5 = 6;
         }
         window.localStorage.setItem(
           "subFlagModule5",
@@ -2298,16 +2311,16 @@ export class FullLayoutComponent implements OnInit {
       else if (
         source == "module 1.13" ||
         source == "module 1.13.1" ||
-        source == "module 1.13.2" 
+        source == "module 1.13.2"
       ) {
         this.mainFlagModule1 = 13;
         if (
-        source == "module 1.13" || 
-        source == "module 1.13.1"
+          source == "module 1.13" ||
+          source == "module 1.13.1"
         ) {
           this.subFlagModule1 = 1;
         } else if (
-          source == "module 1.13.2" 
+          source == "module 1.13.2"
         ) {
           this.subFlagModule1 = 2;
         }
@@ -2315,13 +2328,13 @@ export class FullLayoutComponent implements OnInit {
           "subFlagModule1",
           this.subFlagModule1.toString()
         );
-      }else if (source == "module 1.14") {
+      } else if (source == "module 1.14") {
         this.mainFlagModule1 = 14;
         window.localStorage.setItem(
           "subFlagModule1",
           this.subFlagModule1.toString()
         );
-      }else if (source == "module 1.15") {
+      } else if (source == "module 1.15") {
         this.mainFlagModule1 = 15;
         window.localStorage.setItem(
           "subFlagModule1",
