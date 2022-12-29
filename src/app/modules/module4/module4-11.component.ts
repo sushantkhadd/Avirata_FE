@@ -15,11 +15,15 @@ export class Module411Component implements OnInit {
 
   public mainFlagModule4 = parseInt(window.localStorage.getItem('mainFlagModule4'));
   public subFlagModule4 = parseInt(window.localStorage.getItem('subFlagModule4'));
+
   constructor(public LanguageService: LanguageService, public LocalstoragedetailsService: LocalstoragedetailsService, public Module4Service: Module4Service, public toastr: ToastsManager, vcr: ViewContainerRef, public router: Router, public translate: TranslateService) {
     this.toastr.setRootViewContainerRef(vcr);
   }
+
   public data; questionType; passFlags = {}; showAnswer; saveData; answer; sumbitButton; startFlag; description;
-  public inst = "खालील व्यक्ती समायोजित आहेत की नाही त्याबद्दल योग्य पर्याय निवडा."
+
+  public inst = "विद्यार्थ्यांना प्रेरणा मिळण्याच्या दृष्टिने शिक्षकांनी केलेल्या खालील कृती योग्य आहेत की अयोग्य?";
+
   ngOnInit() {
     this.startFlag = false;
     this.showAnswer = true;
@@ -35,8 +39,6 @@ export class Module411Component implements OnInit {
   }
 
   start() {
-
-    console.log("mcq 4");
     var jsonBody = {};
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
     jsonBody['useranswer'] = ""
@@ -59,30 +61,27 @@ export class Module411Component implements OnInit {
   }
 
   saveAnswer(e) {
-    console.log("ff ", e)
     this.sumbitButton = true;
     this.answer = e;
     this.submit();
   }
+
   submit() {
-
-    var jsonBody = {}
-
+    var jsonBody = {};
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
     jsonBody['useranswer'] = this.answer
     jsonBody['event'] = 'answer';
     var apiUrl = "modulefourmcq/";
-    console.log("dasd ", jsonBody)
 
     this.Module4Service.apiCall(jsonBody, apiUrl)
       .subscribe(
         data => {
           if (data['status'] == true && data['message'] == "your answer stored next question and uuid is") {
             window.localStorage.setItem('uuid', data['data'].nextuuid);
-            this.subFlagModule4 = this.subFlagModule4 + 1
-            window.localStorage.setItem('subFlagModule4', this.subFlagModule4.toString())
-            console.log("data ", data['data'])
-            this.data = data['data']
+            this.subFlagModule4 = this.subFlagModule4 + 1;
+            window.localStorage.setItem('subFlagModule4', this.subFlagModule4.toString());
+            console.log("data ", data['data']);
+            this.data = data['data'];
             this.sumbitButton = false;
             this.description = data['data'].description;
           } else if (data['status'] == true && data['message'] == "submodule finish") {

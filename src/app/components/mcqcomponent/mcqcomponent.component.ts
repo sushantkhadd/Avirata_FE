@@ -613,7 +613,7 @@ export class McqcomponentComponent implements OnInit {
   goNext5_3() {
     console.log("qsaDDDDDD",this.onlyPopUpAns)
     this.submitFlagMCQ = false
-    if (window.localStorage.getItem('mainFlagModule2')== '9' || window.localStorage.getItem('mainFlagModule2') == '4' || window.localStorage.getItem('mainFlagModule2') == '6' || window.localStorage.getItem('mainFlagModule2') == '3' || window.localStorage.getItem('mainFlagModule3') == '11' || window.localStorage.getItem('mainFlagModule3') == '8'  || window.localStorage.getItem('mainFlagModule3') == '5' || window.localStorage.getItem('mainFlagModule4') == '5' || window.localStorage.getItem('mainFlagModule4')== '11' || window.localStorage.getItem('mainFlagModule4')== '14' || window.localStorage.getItem('mainFlagModule4') == '7'){
+    if (window.localStorage.getItem('mainFlagModule2')== '9' || window.localStorage.getItem('mainFlagModule2') == '4' || window.localStorage.getItem('mainFlagModule2') == '6' || window.localStorage.getItem('mainFlagModule2') == '3' || window.localStorage.getItem('mainFlagModule3') == '11' || window.localStorage.getItem('mainFlagModule3') == '8'  || window.localStorage.getItem('mainFlagModule3') == '5' || window.localStorage.getItem('mainFlagModule4') == '5' || window.localStorage.getItem('mainFlagModule4')== '8' || window.localStorage.getItem('mainFlagModule4')== '11' || window.localStorage.getItem('mainFlagModule4')== '14' || window.localStorage.getItem('mainFlagModule4') == '7'){
       this.rankModal.show()
       this.lang.toShow();
      //this.data.description = this.data.description
