@@ -71,7 +71,7 @@ export class Module520Component implements OnInit {
     this.postWordCount['1']=0;
     this.postWordCount['2']=0;
     this.postWordCount['3']=0;
-    if (this.mainFlagModule5 == 23)
+    if (this.mainFlagModule5 == 20)
     {
       if (this.subFlagModule5 == 1) {
         this.startFlag = false;
@@ -187,7 +187,7 @@ export class Module520Component implements OnInit {
     this.passData['url'] = this.apiUrl;
     this.passData['jsonData'] = jsonData;
     console.log("start1")
-    this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 5.23', window.localStorage.getItem('username'), 10);
+    this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 5.20', window.localStorage.getItem('username'), 10);
   }
 
   finish1(e){
@@ -223,8 +223,8 @@ export class Module520Component implements OnInit {
               data["message"] == "submodule finish"
             ){
             window.localStorage.setItem("uuid", data["data"].nextuuid);
-            this.mainFlagModule5 = 23;
-            window.localStorage.setItem("mainFlagModule5", "23");
+            this.mainFlagModule5 = 20;
+            window.localStorage.setItem("mainFlagModule5", "20");
             window.localStorage.setItem("subFlagModule5", "3");
             this.subFlagModule5 = 3;
             this.start3();
@@ -240,8 +240,8 @@ export class Module520Component implements OnInit {
           }
           if(fun == "finish3"){
             window.localStorage.setItem("uuid", data["data"].nextuuid);
-            this.mainFlagModule5 = 23;
-            window.localStorage.setItem("mainFlagModule5", "23");
+            this.mainFlagModule5 = 20;
+            window.localStorage.setItem("mainFlagModule5", "20");
             window.localStorage.setItem("subFlagModule5", "4");
             this.subFlagModule5 = 4;
             this.start4();
@@ -270,8 +270,8 @@ export class Module520Component implements OnInit {
           }
           if(fun == "finish4"){
             window.localStorage.setItem("uuid", data["data"].nextuuid);
-            this.mainFlagModule5 = 23;
-            window.localStorage.setItem("mainFlagModule5", "23");
+            this.mainFlagModule5 = 20;
+            window.localStorage.setItem("mainFlagModule5", "20");
             window.localStorage.setItem("subFlagModule5", "5");
             this.subFlagModule5 = 5;
             this.start5();
@@ -283,8 +283,8 @@ export class Module520Component implements OnInit {
           }
           if(fun == "finish5"){
             window.localStorage.setItem("uuid", data["data"].nextuuid);
-            this.mainFlagModule5 = 23;
-            window.localStorage.setItem("mainFlagModule5", "23");
+            this.mainFlagModule5 = 20;
+            window.localStorage.setItem("mainFlagModule5", "20");
             window.localStorage.setItem("subFlagModule5", "6");
             this.subFlagModule5 = 6;
             this.start6()
@@ -327,18 +327,18 @@ export class Module520Component implements OnInit {
             else{
               window.localStorage.setItem("uuid", data["data"].nextuuid);
               this.mainFlagModule5 = 24;
-              window.localStorage.setItem('mainFlagModule5', '24');
+              window.localStorage.setItem('mainFlagModule5', '21');
               window.localStorage.setItem('subFlagModule5', '1');
-              window.localStorage.setItem('source', 'module 5.24.1');
+              window.localStorage.setItem('source', 'module 5.21');
               var obj = {
               "type": "submodule",
               "route": true,
-              "current": this.translate.instant('L2Module5.subMenu5-24'),
-              "next": this.translate.instant('L2Module5Finish.subMenu5-24'),
-              "nextRoute": "/modules/module5/Module5.24"
+              "current": this.translate.instant('L2Module5.subMenu5-21'),
+              "next": this.translate.instant('L2Module5Finish.subMenu5-21'),
+              "nextRoute": "/modules/module5/Module5.21"
               }
               this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
-              this.Module5Service.setLocalStorage5(24);
+              this.Module5Service.setLocalStorage5(21);
             }
           }
         },
