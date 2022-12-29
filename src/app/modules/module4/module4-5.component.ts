@@ -19,7 +19,7 @@ export class Module45Component implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
   public data; questionType; passFlags = {}; showAnswer; saveData; answer; sumbitButton; startFlag;description;
-  public inst = "खालील व्यक्ती समायोजित आहेत की नाही त्याबद्दल योग्य पर्याय निवडा."
+  public inst = "दिलेल्या परिस्थितीमध्ये तुम्ही काय कराल?"
   ngOnInit() {
     this.startFlag = false;
     this.showAnswer = true;

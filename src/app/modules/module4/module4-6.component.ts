@@ -74,7 +74,7 @@ export class Module46Component implements OnInit {
       item => item.source == "module 4.6" );
       current4["children"][index].url = result["url"]; 
       window.localStorage.setItem("currentJson4", JSON.stringify(current4))
-      window.localStorage.setItem('mainFlagModule4', '6');
+      window.localStorage.setItem('mainFlagModule4', '7');
       window.localStorage.setItem('subFlagModule4', '1');
       window.localStorage.setItem('source', 'module 4.7.1');
       this.Module4Service.setLocalStorage4(7);

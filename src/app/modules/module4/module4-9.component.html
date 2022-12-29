@@ -9,28 +9,26 @@
 
 
 <div *ngIf="mainFlagModule4 == 9">
-  <div *ngIf="subFlagModule4 == 1">
-    <div *ngIf="playVideo">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card ">
-            <div class="card-footer">
-              <h6 class="text-center">{{'L2Module2.mitra' | translate}}</h6>
-            </div>
-            <div class="card-block text-center">
-              <app-static-video [receivedData]='passData' (finishCall)="videoFinish($event)"></app-static-video>
-            </div>
+  <div *ngIf="subFlagModule4 == 1 && showVideoFlag">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card ">
+          <div class="card-footer">
+            <h6 class="text-center">{{'L2Module2.mitra' | translate}}</h6>
+          </div>
+          <div class="card-block text-center">
+            <app-static-video [receivedData]='passData' (finishCall)="videoFinish($event)"></app-static-video>
           </div>
         </div>
       </div>
-      <!-- <div class="text-center list-checklist">
-          <button type=" button " class="text-center btn btn-primary mt-2" [disabled]="!nextBtnFlag" data-toggle="modal " (click)="next(); ">{{'Stepper.Next' | translate}}</button>
-        </div> -->
     </div>
+    <!-- <div class="text-center list-checklist">
+      <button type=" button " class="text-center btn btn-primary mt-2" [disabled]="!nextBtnFlag" data-toggle="modal " (click)="next(); ">{{'Stepper.Next' | translate}}</button>
+    </div> -->
   </div>
 
   <div *ngIf="subFlagModule4 == 2">
-    <div *ngIf="!startVideoEvent">
+    <div *ngIf="!showVideoFlag">
       <div class="instruction-wrap">
         <div class="card">
           <div class="card-header text-white">
@@ -47,17 +45,18 @@
           </div>
           <div class="card-footer">
             <div class="float-right hidden-xs-down">
-              <button class="btn btn-primary" appPreventDoubleClick
-                (debounceClick)="startVideoEvent=true;start2();">{{'Module4.start' | translate}}</button>
+              <button class="btn btn-primary" appPreventDoubleClick (debounceClick)="start1();">{{'Module4.start' |
+                translate}}</button>
             </div>
             <!-- <div class="hidden-sm-up text-center">
-                        <button class="btn btn-primary" (click)="startVideoEvent=true;start();">{{'Module4.start' | translate}}</button>
-                    </div> -->
+            <button class="btn btn-primary" (click)="start1();">{{'Module4.start' | translate}}</button>
+          </div> -->
           </div>
         </div>
       </div>
     </div>
-    <div *ngIf="startVideoEvent">
+
+    <div *ngIf="showVideoFlag">
       <div class="card">
         <div class="card-footer">
           <h6 class="text-center">{{'L2Module4.subMenu4-9' | translate}}</h6>
@@ -67,38 +66,12 @@
             (singleCFUCompleteStatus)="singleCFUComplete($event)"></app-video-player>
         </div>
         <!-- <div class="card-footer">
-                    <h6 class="text-center">{{'Module5.subMenu1-3' | translate}}</h6>
-                </div> -->
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<div class="videoFinishModal videoFinishedModel">
-  <div bsModal #instructionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1"
-    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <img class="img-responsive img-rotate" src="assets/img/mitra.png">
-        <div class="modal-header">
-          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button> -->
-        </div>
-        <div class="modal-body">
-          <p class="px-5 text-center">तुमचा व्हिडिओ पूर्ण झाला.</p>
-          <hr />
-          <div class="col-md-12 text-right">
-            <button class="btn btn-primary text-center" appPreventDoubleClick (debounceClick)="next()">{{'Stepper.Next'
-              | translate}}</button>
-          </div>
-        </div>
+                <h6 class="text-center">{{'Module5.subMenu1-3' | translate}}</h6>
+            </div> -->
       </div>
     </div>
   </div>
 </div>
-
 
 <div *ngIf="mainFlagModule4 > 9">
   <div class="card unlock-view">
@@ -119,7 +92,8 @@
           <p class="title">{{'number.2' | translate}}. {{'L2Module4.subMenu4-9' | translate}}</p>
           <div class="img-wrap">
             <a (click)="showVideo(urlArray['src2'],'L2Module4.subMenu4-9',2)">
-              <img class="img-fluid v_thumb" src="https://maacpd.s3-ap-southeast-1.amazonaws.com/L3_mr/thumbnails/5.1-video.png" alt="">
+              <img class="img-fluid v_thumb"
+                src="https://maacpd.s3-ap-southeast-1.amazonaws.com/L3_mr/thumbnails/1.1-video.png" alt="">
               <div class="hover-opaque">
                 <i class="fa fa-play-circle fa-2x"></i>
               </div>
@@ -147,6 +121,30 @@
         <app-static-video [receivedData]='passData'></app-static-video>
         <div class="card-footer bg-white border-0 mt-3 text-center">
           <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="videoFinishModal videoFinishedModel">
+  <div bsModal #instructionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1"
+    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <img class="img-responsive img-rotate" src="assets/img/mitra.png">
+        <div class="modal-header">
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button> -->
+        </div>
+        <div class="modal-body">
+          <p class="px-5 text-center">तुमचा व्हिडिओ पूर्ण झाला.</p>
+          <hr />
+          <div class="col-md-12 text-right">
+            <button class="btn btn-primary text-center" appPreventDoubleClick (debounceClick)="next()">{{'Stepper.Next'
+              | translate}}</button>
+          </div>
         </div>
       </div>
     </div>
