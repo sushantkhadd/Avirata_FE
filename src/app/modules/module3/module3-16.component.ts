@@ -38,7 +38,20 @@ export class Module316Component implements OnInit {
 
   ngOnInit() {
     this.startPdf=false
-    this.start();
+    // this.start();
+    if (this.mainFlagModule3 == 16) {
+    }else if (this.mainFlagModule3 > 16) {
+      var urlJson = {};
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson3"));
+      if (urlJson["children"].length > 0) {
+        var index = urlJson["children"].findIndex(
+          item => item.source == "module 3.16"
+        );
+        if (urlJson["children"][index].url != null) {
+          this.passValues["url"] = urlJson["children"][index].url;
+        }
+      }
+    }
   }
 
   start() {

@@ -17,9 +17,8 @@ export class Module416Component implements OnInit {
   public mainFlagModule4 = parseInt(window.localStorage.getItem('mainFlagModule4'));
   public subFlagModule4 = parseInt(window.localStorage.getItem('subFlagModule4'));
 
-  passUrl: any;
-  passValues={};
-  startPdf: boolean;
+  public passData = {}; passUrl: any; passValues={}; startPdf: boolean;
+
   constructor(
     public LanguageService: LanguageService,
     private LocalstoragedetailsService: LocalstoragedetailsService,
@@ -31,11 +30,21 @@ export class Module416Component implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
-  public passData = {};
-
   ngOnInit() {
-    this.startPdf=false
-    // this.start();
+    this.startPdf=false;
+    if (this.mainFlagModule4 == 16) {
+    }else if (this.mainFlagModule4 > 16) {
+      var urlJson = {};
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson4"));
+      if (urlJson["children"].length > 0) {
+        var index = urlJson["children"].findIndex(
+          item => item.source == "module 4.16"
+        );
+        if (urlJson["children"][index].url != null) {
+          this.passValues["url"] = urlJson["children"][index].url;
+        }
+      }
+    }
   }
 
   start() {
@@ -81,8 +90,14 @@ export class Module416Component implements OnInit {
 
   finishPDF(e) {
     var jsonBody = {};
+    // jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
+    // jsonBody['event'] = 'finish';
+    // this.apiCall(jsonBody, 'modulefoursingleurl/', 'finish1');
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
-    jsonBody['event'] = 'finish';
-    this.apiCall(jsonBody, 'modulefoursingleurl/', 'finish1');
+    jsonBody['event'] = "finish";
+    if (e == true)
+    {
+      this.Module4Service.finishModuleCall(jsonBody, 16, '/modules/module5', '/modules/module5')
+    }
   }
 }

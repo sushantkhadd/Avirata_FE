@@ -1,10 +1,8 @@
 import { Component, OnInit,ViewContainerRef} from '@angular/core';
 import { LocalstoragedetailsService } from "../../services/localstoragedetails.service";
 import { LanguageService } from './../../language.service';
-import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import {Module4Service} from './module4.service'
-import { FullLayoutService } from '../../layouts/full-layout.service';
+import { Module4Service } from './module4.service'
 import { ToastsManager } from 'ng6-toastr';
 
 @Component({
@@ -12,11 +10,12 @@ import { ToastsManager } from 'ng6-toastr';
   templateUrl: './module4-4.component.html'
 })
 export class Module44Component implements OnInit {
+
   public mainFlagModule4 = parseInt(window.localStorage.getItem('mainFlagModule4'));
   public subFlagModule4 = parseInt(window.localStorage.getItem('subFlagModule4'));
-  passUrl: any;
-  passValues={};
-  startPdf: boolean;
+
+  public passData = {}; passUrl: any; passValues={}; startPdf: boolean;
+
   constructor(
     public LanguageService: LanguageService,
     private LocalstoragedetailsService: LocalstoragedetailsService,
@@ -28,17 +27,27 @@ export class Module44Component implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
-  public passData = {};
-
   ngOnInit() {
-    this.startPdf=false
-    // this.start();
+    this.startPdf=false;
+    if (this.mainFlagModule4 == 4) {
+    }else if (this.mainFlagModule4 > 4) {
+      var urlJson = {};
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson4"));
+      if (urlJson["children"].length > 0) {
+        var index = urlJson["children"].findIndex(
+          item => item.source == "module 4.4"
+        );
+        if (urlJson["children"][index].url != null) {
+          this.passValues["url"] = urlJson["children"][index].url;
+        }
+      }
+    }
   }
 
   start() {
-    var jsonBody = {}
-    jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
-    jsonBody['event'] = 'start'
+    var jsonBody = {};
+    jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
+    jsonBody['event'] = 'start';
     this.apiCall(jsonBody, 'modulefoursingleurl/', 'start');
   }  
 
@@ -48,7 +57,6 @@ export class Module44Component implements OnInit {
         if (data["status"] == true) {
           if (fun == "start") {
             this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 4.4', window.localStorage.getItem('username'), 10);
-
             this.passValues["url"] = data["data"].url;
             this.startPdf = true;
             this.passUrl = data['data'].url;
@@ -60,7 +68,7 @@ export class Module44Component implements OnInit {
             window.localStorage.setItem("currentJson4", JSON.stringify(current4));
           } else if (fun == "finish1") {
             this.LanguageService.toHide();
-            window.localStorage.setItem('uuid', data['data'].nextuuid)
+            window.localStorage.setItem('uuid', data['data'].nextuuid);
             window.localStorage.setItem('mainFlagModule4', '5');
             window.localStorage.setItem('subFlagModule4', '1');
             window.localStorage.setItem('source', 'module 4.5');

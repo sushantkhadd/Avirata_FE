@@ -93,7 +93,7 @@ export class Module4Service {
          if (data['message'] == "module4 finish")
          {
            window.localStorage.setItem('moduleFinishCount', JSON.stringify(data['data']));
-           window.localStorage.setItem('mainFlagModule4', '15');
+           window.localStorage.setItem('mainFlagModule4', '17');
            this.levelData = localStorage.getItem("levelData");
            for (let index = 0; index < this.levelData.length; index++)
            {
@@ -116,7 +116,7 @@ export class Module4Service {
            var obj1 = {
              "type": "moduleFinish",
              "route": true,
-             "current": this.translate.instant('L2Module4.subMenu4-14'),
+             "current": this.translate.instant('L2Module4.subMenu4-16'),
              "next": this.translate.instant('L2Module5.title'),
              "nextRoute": "/dashboard", "finishHead": this.translate.instant('L2Module4.title'),
              "moduleNo": this.translate.instant('number.4')

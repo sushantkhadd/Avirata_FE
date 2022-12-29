@@ -13,11 +13,12 @@ import { ToastsManager } from 'ng6-toastr';
   templateUrl: './module4-13.component.html'
 })
 export class Module413Component implements OnInit {
+
   public mainFlagModule4 = parseInt(window.localStorage.getItem('mainFlagModule4'));
   public subFlagModule4 = parseInt(window.localStorage.getItem('subFlagModule4'));
-  passUrl: any;
-  passValues={};
-  startPdf: boolean;
+
+  public passData = {}; passUrl: any; passValues={}; startPdf: boolean;
+
   constructor(
     public LanguageService: LanguageService,
     private LocalstoragedetailsService: LocalstoragedetailsService,
@@ -29,11 +30,21 @@ export class Module413Component implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
-  public passData = {};
-
   ngOnInit() {
     this.startPdf=false
-    // this.start();
+    if (this.mainFlagModule4 == 13) {
+    }else if (this.mainFlagModule4 > 13) {
+      var urlJson = {};
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson4"));
+      if (urlJson["children"].length > 0) {
+        var index = urlJson["children"].findIndex(
+          item => item.source == "module 4.13"
+        );
+        if (urlJson["children"][index].url != null) {
+          this.passValues["url"] = urlJson["children"][index].url;
+        }
+      }
+    }
   }
 
   start() {

@@ -42,7 +42,7 @@
             <div class="col-12 controls">
               <textarea autosize [minRows]="2" class="form-control" [id]="questionid" name="answer" [(ngModel)]="answer" #addr="ngModel" (focus)="showLimit=true" (focusout)="showLimit=false" required></textarea>
             </div>
-            <div *ngIf="showLimit==false && (postWordCount>150 || postWordCount<5)" class="offset-md-4 mt-2">
+            <div *ngIf="showLimit==false && (postWordCount>150 || postWordCount<7)" class="offset-md-4 mt-2">
               <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn5_150' | translate}}</p>
           </div>
           </div>
@@ -64,7 +64,7 @@
 <div *ngIf="mainFlagModule3 > 13">
   <div class="card submoduleBox">
     <div class="card-block text-center greenText inst-text">
-      <span>{{ "L2Module2Complete.sm_2_14" | translate }}</span>
+      <span>{{ "L2Module3Complete.sm_3_13" | translate }}</span>
     </div>
   </div>
 </div>
