@@ -45,7 +45,32 @@ export class Module514Component implements OnInit {
       if (this.subFlagModule5 == 1) {
         this.start();
       }
+    } else if (this.mainFlagModule5 > 14) {
+      this.flag = 0;
+      var urlJson = {};
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson5"));
+      if (urlJson["children"].length > 0) {
+        var index = urlJson["children"].findIndex(
+          item => item.source == "module 5.14"
+        );
+        if (urlJson["children"][index].url != null) {
+          var mainJson;
+          mainJson = JSON.parse(urlJson["children"][index].url);
+          this.urlArray["src1"] = mainJson["5.14.1"];
+          this.urlArray["src2"] = mainJson["5.14.2"];
+        } else {
+          this.mapJSON();
+          console.log('map json', this.mapJSON);
+        }
+      } else {
+        this.mapJSON();
+      }
     }
+  }
+
+  mapJSON() {
+    this.urlArray['src1'] = this.lnk1
+    this.urlArray['src2'] = this.lnk2
   }
 
   start() {
@@ -148,6 +173,22 @@ export class Module514Component implements OnInit {
     else {
       window.localStorage.setItem('mainFlagModule5', '14');
       this.router.navigate(['/modules/module5/Module5.14']);
+    }
+  }
+
+
+  showVideo(src, title, value) {
+    // this.staticImageModal.show();
+    // this.statVideoFlag = true;
+    // this.statImageFlag = false;
+    if (value == 1) {
+      this.passData['videoUrl'] = src;
+      this.thumb_title = title;
+      this.flag = value;
+    } else if (value == 2) {
+      this.passData['videoUrl'] = src;
+      this.thumb_title = title;
+      this.flag = value;
     }
   }
 }

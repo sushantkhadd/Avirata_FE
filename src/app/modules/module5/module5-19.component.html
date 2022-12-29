@@ -165,11 +165,11 @@
   </div>
   <div *ngIf="mainFlagModule5 > 19">
     <app-completed-forum (sendData)="getData($event)"></app-completed-forum>
-    <div class="card submoduleBox" *ngIf="noPost">
+    <!-- <div class="card submoduleBox" *ngIf="noPost">
       <div class="card-block text-center greenText inst-text">
         <span>{{'Errors.noPost' | translate}}</span>
       </div>
-    </div>
+    </div> -->
      <div [class.card-footer]="noPost">
        <div class="text-center">
          <a class="btn btn-primary" [routerLink]="['/modules/module5/Module5.20']">{{'Stepper.Next' | translate}}</a>

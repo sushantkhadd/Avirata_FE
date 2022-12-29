@@ -1013,13 +1013,26 @@ export class FullLayoutComponent implements OnInit {
       } else if (
         source == "module 5.17" ||
         source == "module 5.17.1" ||
-        source == "module 5.17.2"
+        source == "module 5.17.2" ||
+        source == "module 5.17.2.1" ||
+        source == "module 5.17.2.2" ||
+        source == "module 5.17.2.3" ||
+        source == "module 5.17.2.4"||
+        source == "module 5.17.2.5"
       ) {
         this.mainFlagModule5 = 17;
-        if (source == "module 5.17.1") {
+        if ( source == "module 5.17" || source == "module 5.17.1") {
           this.subFlagModule5 = 1;
-        } else if (source == "module 5.17.2") {
+        } else if (source == "module 5.17.2" || source == "module 5.17.2.1" ) {
           this.subFlagModule5 = 2;
+        } else if (source == "module 5.17.2.2") {
+          this.subFlagModule5 = 3;
+        } else if (source == "module 5.17.2.3") {
+          this.subFlagModule5 = 4;
+        } else if (source == "module 5.17.2.4") {
+          this.subFlagModule5 = 5;
+        } else if (source == "module 5.17.2.5") {
+          this.subFlagModule5 = 6;
         }
         window.localStorage.setItem(
           "subFlagModule5",
@@ -1050,13 +1063,35 @@ export class FullLayoutComponent implements OnInit {
           "subFlagModule5",
           this.subFlagModule5.toString()
         );
-      } else if (source == "module 5.20") {
+      } else if (
+        source == "module 5.20" ||
+        source == "module 5.20.1" ||
+        source == "module 5.20.2" ||
+        source == "module 5.20.3" ||
+        source == "module 5.20.4" ||
+        source == "module 5.20.5" ||
+        source == "module 5.20.6"
+      ) {
         this.mainFlagModule5 = 20;
+        if (source == "module 5.20.1") {
+          this.subFlagModule5 = 1;
+        } else if (source == "module 5.20.2") {
+          this.subFlagModule5 = 2;
+        } else if (source == "module 5.20.3") {
+          this.subFlagModule5 = 3;
+        } else if (source == "module 5.20.4") {
+          this.subFlagModule5 = 4;
+        } else if (source == "module 5.20.5") {
+          this.subFlagModule5 = 5;
+        } else if (source == "module 5.20.6") {
+          this.subFlagModule5 = 6;
+        }
         window.localStorage.setItem(
           "subFlagModule5",
           this.subFlagModule5.toString()
         );
-      } else if (
+      } 
+      else if (
         source == "module 5.21" ||
         source == "module 5.21.1" ||
         source == "module 5.21.2" ||
@@ -1074,13 +1109,15 @@ export class FullLayoutComponent implements OnInit {
           "subFlagModule5",
           this.subFlagModule5.toString()
         );
-      } else if (source == "module 5.22") {
+      } 
+      else if (source == "module 5.22") {
         this.mainFlagModule5 = 22;
         window.localStorage.setItem(
           "subFlagModule5",
           this.subFlagModule5.toString()
         );
-      } else if (
+      } 
+      else if (
         source == "module 5.23" ||
         source == "module 5.23.1" ||
         source == "module 5.23.2" ||
@@ -1110,7 +1147,8 @@ export class FullLayoutComponent implements OnInit {
           "subFlagModule5",
           this.subFlagModule5.toString()
         );
-      } else if (source == "module 5.24") {
+      } 
+      else if (source == "module 5.24") {
         this.mainFlagModule5 = 24;
         window.localStorage.setItem(
           "subFlagModule5",
@@ -2298,16 +2336,16 @@ export class FullLayoutComponent implements OnInit {
       else if (
         source == "module 1.13" ||
         source == "module 1.13.1" ||
-        source == "module 1.13.2" 
+        source == "module 1.13.2"
       ) {
         this.mainFlagModule1 = 13;
         if (
-        source == "module 1.13" || 
-        source == "module 1.13.1"
+          source == "module 1.13" ||
+          source == "module 1.13.1"
         ) {
           this.subFlagModule1 = 1;
         } else if (
-          source == "module 1.13.2" 
+          source == "module 1.13.2"
         ) {
           this.subFlagModule1 = 2;
         }
@@ -2315,13 +2353,13 @@ export class FullLayoutComponent implements OnInit {
           "subFlagModule1",
           this.subFlagModule1.toString()
         );
-      }else if (source == "module 1.14") {
+      } else if (source == "module 1.14") {
         this.mainFlagModule1 = 14;
         window.localStorage.setItem(
           "subFlagModule1",
           this.subFlagModule1.toString()
         );
-      }else if (source == "module 1.15") {
+      } else if (source == "module 1.15") {
         this.mainFlagModule1 = 15;
         window.localStorage.setItem(
           "subFlagModule1",

@@ -1,12 +1,13 @@
-import { Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
-import { LocalstoragedetailsService } from "../../services/localstoragedetails.service";
-import { LanguageService } from './../../language.service';
-import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { Module5Service } from './module5.service'
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FullLayoutService } from 'src/app/layouts/full-layout.service';
+import { LanguageService } from 'src/app/language.service';
 import { ToastsManager } from 'ng6-toastr';
-import { ModalDirective } from 'ngx-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
+import { LocalstoragedetailsService } from 'src/app/services/localstoragedetails.service';
 import { environment } from 'src/environments/environment';
+import { Module5Service } from './module5.service';
+import { ModalDirective } from 'ngx-bootstrap';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -14,8 +15,8 @@ import { NgForm } from '@angular/forms';
   templateUrl: './module5-18.component.html'
 })
 export class Module518Component implements OnInit {
-
   constructor(
+    public FullLayoutService: FullLayoutService,
     public LanguageService: LanguageService,
     public Module5Service: Module5Service,
     public toastr: ToastsManager,
@@ -23,10 +24,8 @@ export class Module518Component implements OnInit {
     public router: Router,
     public LocalstoragedetailsService: LocalstoragedetailsService
   ) { }
-  
   @ViewChild('confirmationModal') public confirmationModal: ModalDirective;
   @ViewChild('pdfModal') public pdfModal: ModalDirective;
-  
   public finalCount;
   public imgUrl;
   passValues = {};
@@ -43,8 +42,7 @@ export class Module518Component implements OnInit {
   pdf1; personId; userAnswer = {}; showLimit = {}; postWordCount = {}; zeroMsgFlag = {}
   public questionArray; que1; queId1; que2; queId2; que3; queId3; que4; queId4; que5; queId5; que6; queId6; que7; queId7; answer1; answer2; answer3; answer4; answer5; answer6; answer7;
   @ViewChild('assignForm') assignForm: NgForm; noHitFlag; 
-  public inst = "तुम्ही स्वतः करिअर मार्गदर्शन केलेल्या ५ मुलांची नावे आणि त्यात तुम्हांला आलेले अनुभव आणि अडचणी लिहा.  त्यात  तुम्हांला अविरतचा कसा उपयोग झाला ते सविस्तर लिहा. हे लिहिण्यासाठी खालील आराखड्याचा वापर करा."  
-  ""
+  public inst = "तुम्ही स्वतः करिअर मार्गदर्शन केलेल्या ५ मुलांची नावे आणि त्यात तुम्हांला आलेले अनुभव आणि अडचणी लिहा. त्यात  तुम्हांला अविरतचा कसा उपयोग झाला ते सविस्तर लिहा. हे लिहिण्यासाठी खालील आराखड्याचा वापर करा."
 
   ngOnInit() {
     this.pdf1 =
@@ -72,7 +70,7 @@ export class Module518Component implements OnInit {
     this.queId4 = "";
     this.queId5 = "";
     this.queId6 = "";
-    this.queId7 = "";
+    // this.queId7 = "";
 
     this.answer1 = "";
     this.answer2 = "";
@@ -90,7 +88,7 @@ export class Module518Component implements OnInit {
     this.zeroMsgFlag['6'] = false;
     this.zeroMsgFlag['7'] = false;
 
-    if (this.mainFlagModule5 == 18) {
+    if (this.mainFlagModule5 == 18) {     
         this.start1("");
     }
     if (this.mainFlagModule5 > 18) {
@@ -114,8 +112,7 @@ export class Module518Component implements OnInit {
         );
         if (unlockJson["children"][index].url != null) {
           var mainJson = JSON.parse(unlockJson["children"][index].url);
-          this.urlArray["src1"] = mainJson["5.18.1"];
-          this.urlArray["src2"] = mainJson["5.18.3"];
+          this.urlArray["src1"] = mainJson["1"];
         }
       }
     }
@@ -127,6 +124,40 @@ export class Module518Component implements OnInit {
     this.postWordCount['5'] = 0;
     this.postWordCount['6'] = 0;
     this.postWordCount['7'] = 0;
+  }
+
+
+  
+
+  start() {
+    this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 5.18', window.localStorage.getItem('username'), 10);
+    this.finishJSONBody["submoduleid"] = window.localStorage.getItem("uuid");
+    this.finishJSONBody["event"] = "start";
+
+    this.Module5Service.apiCall(
+      this.finishJSONBody,
+      "modulefivesingleurl/"
+    ).subscribe(
+      data => {
+        if (data["message"] == "ok" || data["message"] == "submodule started") {
+          this.passValues["url"] = data["data"].url;
+          // this.passValues["url"] ="https://s3-ap-southeast-1.amazonaws.com/maacpd/Level2/Module1/1.10/RM-+1.pdf"
+          this.startPdf = true;
+          var url = {}
+          url['5.21.1'] = data["data"].url;
+          console.log("urllll", url)
+          var current5 = [];
+          current5 = JSON.parse(window.localStorage.getItem("currentJson5"));
+          var index = current5["children"].findIndex(
+            item => item.source == "module 5.21");
+          current5["children"][index].url = JSON.stringify(url);
+          window.localStorage.setItem("currentJson5", JSON.stringify(current5));
+        }
+      },
+      error => {
+        this.LanguageService.handleError(error.error.message);
+      }
+      );
   }
 
   start1(val) {
@@ -158,8 +189,8 @@ export class Module518Component implements OnInit {
           this.queId5 = this.questionArray[4].questionid;
           this.que6 = this.questionArray[5].question;
           this.queId6 = this.questionArray[5].questionid;
-          this.que7 = this.questionArray[6].question;
-          this.queId7 = this.questionArray[6].questionid;
+          // this.que7 = this.questionArray[6].question;
+          // this.queId7 = this.questionArray[6].questionid;
           if (data['data'].person1 == null || data['data'].person1 == "" || data['data'].person1 == undefined) {
             this.personId = 1
           } else if (data['data'].person2 == null || data['data'].person2 == "" || data['data'].person2 == undefined) {
@@ -192,7 +223,7 @@ export class Module518Component implements OnInit {
             this.answer4 = data['data'].person1[this.queId4]
             this.answer5 = data['data'].person1[this.queId5]
             this.answer6 = data['data'].person1[this.queId6]
-            this.answer7 = data['data'].person1[this.queId7]
+            // this.answer7 = data['data'].person1[this.queId7]
 
           }
           if ((data['data'].person2 != null && data['data'].person2 != "" && data['data'].person2 != undefined) && window.localStorage.getItem("personId") == "2") {
@@ -202,7 +233,7 @@ export class Module518Component implements OnInit {
             this.answer4 = data['data'].person2[this.queId4]
             this.answer5 = data['data'].person2[this.queId5]
             this.answer6 = data['data'].person2[this.queId6]
-            this.answer7 = data['data'].person2[this.queId7]
+            // this.answer7 = data['data'].person2[this.queId7]
 
           }
           if ((data['data'].person3 != null && data['data'].person3 != "" && data['data'].person3 != undefined) && window.localStorage.getItem("personId") == "3") {
@@ -212,7 +243,7 @@ export class Module518Component implements OnInit {
             this.answer4 = data['data'].person3[this.queId4]
             this.answer5 = data['data'].person3[this.queId5]
             this.answer6 = data['data'].person3[this.queId6]
-            this.answer7 = data['data'].person3[this.queId7]
+            // this.answer7 = data['data'].person3[this.queId7]
 
           }
           if ((data['data'].person4 != null && data['data'].person4 != "" && data['data'].person4 != undefined) && window.localStorage.getItem("personId") == "4") {
@@ -222,7 +253,7 @@ export class Module518Component implements OnInit {
             this.answer4 = data['data'].person4[this.queId4]
             this.answer5 = data['data'].person4[this.queId5]
             this.answer6 = data['data'].person4[this.queId6]
-            this.answer7 = data['data'].person4[this.queId7]
+            // this.answer7 = data['data'].person4[this.queId7]
 
           }
           if ((data['data'].person5 != null && data['data'].person5 != "" && data['data'].person5 != undefined) && window.localStorage.getItem("personId") == "5") {
@@ -232,7 +263,7 @@ export class Module518Component implements OnInit {
             this.answer4 = data['data'].person5[this.queId4]
             this.answer5 = data['data'].person5[this.queId5]
             this.answer6 = data['data'].person5[this.queId6]
-            this.answer7 = data['data'].person5[this.queId7]
+            // this.answer7 = data['data'].person5[this.queId7]
 
           }
           // if(this.assignForm.value !=null && this.assignForm.value !="" && this.assignForm.value !=undefined){
@@ -300,19 +331,19 @@ export class Module518Component implements OnInit {
           window.localStorage.setItem("uuid", data['data'].nextuuid)
           this.startPdf = false;
           // this.start();
-          //   this.mainFlagModule5 = 22;
-          //   window.localStorage.setItem('mainFlagModule5', '22');
-          //   window.localStorage.setItem('subFlagModule5', '1');
-          //   window.localStorage.setItem('source', 'module 5.22.1');
-          //   var obj = {
-          //   "type": "submodule",
-          //   "route": true,
-          //   "current": this.translate.instant('L2Module5.subMenu5-21'),
-          //   "next": this.translate.instant('L2Module5Finish.subMenu5-22'),
-          //   "nextRoute": "/modules/module5/Module5.22"
-          // }
-          // this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
-          // this.Module5Service.setLocalStorage5(22);
+            this.mainFlagModule5 = 22;
+            window.localStorage.setItem('mainFlagModule5', '19');
+            window.localStorage.setItem('subFlagModule5', '1');
+            window.localStorage.setItem('source', 'module 5.19');
+            var obj = {
+            "type": "submodule",
+            "route": true,
+            "current": this.translate.instant('L2Module5.subMenu5-19'),
+            "next": this.translate.instant('L2Module5Finish.subMenu5-19'),
+            "nextRoute": "/modules/module5/Module5.19"
+          }
+          this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+          this.Module5Service.setLocalStorage5(19);
         }
       },
       error => {
@@ -422,34 +453,20 @@ export class Module518Component implements OnInit {
         this.showLimit['6'] = true;
       }
     }
-    if (this.answer7) {
-      this.postWordCount['7'] = this.answer7.trim().split(/\s+/).length;
-      if(this.postWordCount['7']>150 || this.postWordCount['7']<5){
-        this.errorMsgFlag['7']=true;
-      } else{
-        this.errorMsgFlag['7']=false;
-      }
-      if(this.postWordCount['7']>150 || this.postWordCount['7']==0){
-        this.showLimit['7'] = false;
-      } else if(this.postWordCount['7'] >=5){
-        this.showLimit['7'] = true;
-      }
-    }
+    
 
     if (this.answer1 != "" && this.answer1 != undefined && this.answer1 != null ||
       this.answer2 != "" && this.answer2 != undefined && this.answer2 != null ||
       this.answer3 != "" && this.answer3 != undefined && this.answer3 != null ||
       this.answer4 != "" && this.answer4 != undefined && this.answer4 != null ||
       this.answer5 != "" && this.answer5 != undefined && this.answer5 != null ||
-      this.answer6 != "" && this.answer6 != undefined && this.answer6 != null ||
-      this.answer7 != "" && this.answer7 != undefined && this.answer7 != null) {
+      this.answer6 != "" && this.answer6 != undefined && this.answer6 != null ) {
       if (this.answer1.trim().length == 0 ||
         this.answer2.trim().length == 0 ||
         this.answer3.trim().length == 0 ||
         this.answer4.trim().length == 0 ||
         this.answer5.trim().length == 0 ||
-        this.answer6.trim().length == 0 ||
-        this.answer7.trim().length == 0) {
+        this.answer6.trim().length == 0 ) {
         this.submitFlag = true;
       } 
       // else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 5) {
@@ -462,8 +479,6 @@ export class Module518Component implements OnInit {
       else if (this.postWordCount['5'] > 150 || this.postWordCount['5'] < 5) {
         this.submitFlag = true;
       } else if (this.postWordCount['6'] > 150 || this.postWordCount['6'] < 5) {
-        this.submitFlag = true;
-      } else if (this.postWordCount['7'] > 150 || this.postWordCount['7'] < 5) {
         this.submitFlag = true;
       } else {
         this.submitFlag = false;
@@ -501,7 +516,7 @@ export class Module518Component implements OnInit {
     this.userAnswer[this.queId4] = this.answer4.trim();
     this.userAnswer[this.queId5] = this.answer5.trim();
     this.userAnswer[this.queId6] = this.answer6.trim();
-    this.userAnswer[this.queId7] = this.answer7.trim();
+    // this.userAnswer[this.queId7] = this.answer7.trim();
     console.log("userAnswer", this.userAnswer)
     var jsonData = {}
     jsonData['submoduleid'] = window.localStorage.getItem("uuid");
@@ -543,11 +558,11 @@ export class Module518Component implements OnInit {
     unlockJson = JSON.parse(window.localStorage.getItem("currentJson5"));
     if (unlockJson["children"].length > 0) {
       var index = unlockJson["children"].findIndex(
-        item => item.source == "module 5.21"
+        item => item.source == "module 5.18"
       );
       if (unlockJson["children"][index].url != null) {
         var mainJson = JSON.parse(unlockJson["children"][index].url);
-        this.urlArray["src1"] = mainJson["5.21.1"];
+        this.urlArray["src1"] = mainJson["1"];
       }
     }
     this.passValues['url'] = this.urlArray["src1"]

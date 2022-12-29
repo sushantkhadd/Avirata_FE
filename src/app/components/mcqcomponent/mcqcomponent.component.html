@@ -98,7 +98,7 @@
                     <!-- <label><span [innerHTML]="statement"></span>
                  </label> -->
                  <h6>
-                    <span *ngIf="mysubModule5 == 23" [innerHTML]="'L2Module5.sub_5_23_5' | translate"></span>
+                    <span *ngIf="mysubModule5 == 20" [innerHTML]="'L2Module5.sub_5_23_5' | translate"></span>
                      <span [innerHTML]="statement"></span>
                  </h6>
                 </div>
@@ -189,7 +189,7 @@
                 <div class="card-header" [class.p-0]="mysubModule5==18" *ngIf="statement">
                     <!-- <label><span [innerHTML]="statement"></span>
                  </label> -->
-                    <h6 [class.questionHead]="mysubModule5==18 || mysubModule5==23" [class.lineHeight]="mysubModule5==18 || mysubModule5==23"><span *ngIf="mysubModule5==18 && mysubFlagModule5==3">({{'L2Module0.part3' | translate}}) - </span><span [innerHTML]="statement"></span></h6>
+                    <h6 [class.questionHead]="mysubModule5==18 || mysubModule5==20" [class.lineHeight]="mysubModule5==18 || mysubModule5==20"><span *ngIf="mysubModule5==18 && mysubFlagModule5==3">({{'L2Module0.part3' | translate}}) - </span><span [innerHTML]="statement"></span></h6>
                 </div>
                 <div class="card-block pt-0" [class.pt-0]="queCount">
                     <div *ngIf="queCount" class="badge badge-custom ml-3">{{queCount | numberConvertor : 'Devanagari'}} / {{totalQueCount | numberConvertor : 'Devanagari'}}</div>
@@ -222,16 +222,16 @@
             <div class="card">
                 <div class="card-header" *ngIf="item.statement || item.question">
                   <span *ngIf="mysubModule4==12 || mysubModule4==1" class="pr-2">{{totalBunchCounter +(i + 1) | numberConvertor : 'Devanagari'}}. </span>
-                  <span *ngIf="mysubModule5==23 || mysubModule5==18" class="pr-2">{{(i + 1) | numberConvertor : 'Devanagari'}}. </span>
+                  <span *ngIf="mysubModule5==20 || mysubModule5==18" class="pr-2">{{(i + 1) | numberConvertor : 'Devanagari'}}. </span>
                     <h6 [innerHTML]="item.statement" class="d-inline-block"></h6>
-                    <h6 *ngIf="mysubModule5==23 || mysubModule5==18" [innerHTML]="item.question" class="d-inline-block"></h6>
+                    <h6 *ngIf="mysubModule5==20 || mysubModule5==18" [innerHTML]="item.question" class="d-inline-block"></h6>
                 </div>
                 <div class="card-block pt-0" [class.pt-0]="queCount">
                     <div *ngIf="queCount" class="badge badge-custom ml-3">{{queCount | numberConvertor : 'Devanagari'}} / {{totalQueCount | numberConvertor : 'Devanagari'}}</div>
                     <div class="form float-left">
                         <div class="dx-fieldset">
                             <div class="dx-field">
-                                <div class="dx-field-value" *ngIf="mysubModule5==23 || mysubModule5==18">
+                                <div class="dx-field-value" *ngIf="mysubModule5==20 || mysubModule5==18">
                                     <dx-radio-group *ngIf="i==0" #eventRadioGroup id="mcq" [items]="priorities" (onValueChanged)="onValueChangedMcqBunch($event,item.questionid,i)">
                                     </dx-radio-group>
                                     <dx-radio-group *ngIf="i==1" #eventRadioGroup id="mcq" [items]="priorities1" (onValueChanged)="onValueChangedMcqBunch($event,item.questionid,i)">

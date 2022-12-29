@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewContainerRef} from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { LocalstoragedetailsService } from "../../services/localstoragedetails.service";
 import { LanguageService } from './../../language.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import {Module5Service} from './module5.service'
+import { Module5Service } from './module5.service'
 import { ToastsManager } from 'ng6-toastr';
 
 @Component({
@@ -11,13 +11,13 @@ import { ToastsManager } from 'ng6-toastr';
   templateUrl: './module5-7.component.html'
 })
 export class Module57Component implements OnInit {
-
   public mainFlagModule5 = parseInt(
     window.localStorage.getItem("mainFlagModule5")
   );
   public subFlagModule5 = parseInt(
     window.localStorage.getItem("subFlagModule5")
   );
+  lastAnsKey;
   constructor(
     public LanguageService: LanguageService,
     public LocalstoragedetailsService: LocalstoragedetailsService,
@@ -32,13 +32,14 @@ export class Module57Component implements OnInit {
   public data;
   questionType;
   passFlags = {};
-  showAnswer;count;
+  showAnswer;
   saveData;
   answer;
-  sumbitButton;loader;
+  sumbitButton;
   startFlag;
+  startFlagmcq: boolean
   public inst =
-    "खालील दिलेल्या पर्यायांपैकी योग्य पर्याय निवडा.";
+    "पुढे दिलेले विचार अविवेकी आहेत. ते कोणत्या प्रकारात मोडतात ते सांगा.";
   ngOnInit() {
     this.startFlag = false;
     this.showAnswer = true;
@@ -48,13 +49,13 @@ export class Module57Component implements OnInit {
     this.questionType = "mcqTextOption";
     this.passFlags["questionType"] = this.questionType;
 
-    if (this.mainFlagModule5 == 7)
-    {
+    if (this.mainFlagModule5 == 7) {
       // this.start()
     }
   }
 
   start() {
+    this.startFlagmcq = false
     var jsonBody = {};
     jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
     jsonBody["useranswer"] = "";
@@ -63,13 +64,12 @@ export class Module57Component implements OnInit {
 
     this.Module5Service.apiCall(jsonBody, apiUrl).subscribe(
       data => {
-        if (data["status"] == true)
-        {
+        if (data["status"] == true) {
           this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 5.7', window.localStorage.getItem('username'), 10);
           console.log("data ", data["data"]);
           this.data = data["data"];
-          // console.log('mcq data', this.data);
           this.startFlag = true;
+          this.startFlagmcq = true
         }
       },
       error => {
@@ -79,18 +79,13 @@ export class Module57Component implements OnInit {
   }
 
   saveAnswer(e) {
-    if(e){
-      this.loader = true;
-      console.log("ff ", e);
-      this.sumbitButton = true;
-      this.answer = e;
-      this.submit();
-    }
-   
+    this.answer = '';
+    this.sumbitButton = true;
+    this.answer = e;
+    this.submit();
   }
   submit() {
     var jsonBody = {};
-
     jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
     jsonBody["useranswer"] = this.answer;
     jsonBody["event"] = "answer";
@@ -99,23 +94,33 @@ export class Module57Component implements OnInit {
 
     this.Module5Service.apiCall(jsonBody, apiUrl).subscribe(
       data => {
-        this.loader = false;
         if (
           data["status"] == true &&
+          data["message"] == "your answer stored next question and uuid is"
+        ) {
+          window.localStorage.setItem("uuid", data["data"].nextuuid);
+          this.subFlagModule5 = this.subFlagModule5 + 1;
+          window.localStorage.setItem(
+            "subFlagModule1",
+            this.subFlagModule5.toString()
+          );
+          console.log("data ", data["data"]);
+          this.data = data["data"];
+          this.sumbitButton = false;
+        } else if (
+          data["status"] == true &&
           data["message"] == "submodule finish"
-        )
-        {
+        ) {
           this.startFlag = false;
-          this.data="";
           window.localStorage.setItem("uuid", data["data"].nextuuid);
           this.mainFlagModule5 = 8;
           window.localStorage.setItem("mainFlagModule5", "8");
           window.localStorage.setItem("subFlagModule5", "1");
-          window.localStorage.setItem('source', 'module 5.8.1');
+          window.localStorage.setItem('source', 'module 5.8');
           var obj = {
             "type": "submodule",
             "route": true,
-            "current": this.translate.instant("L2Module5.subMenu5-7"),
+            "current": this.translate.instant("L2Module5.subMenu5-8"),
             "next": this.translate.instant("L2Module5Finish.subMenu5-8"),
             "nextRoute": "/modules/module5/Module5.8"
           };

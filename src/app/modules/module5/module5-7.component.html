@@ -7,6 +7,7 @@
   </div>
 </div>
 <div *ngIf="mainFlagModule5 == 7">
+
   <div *ngIf="!startFlag">
     <div class="instruction-wrap">
       <div class="card">
@@ -15,10 +16,7 @@
           <h4>{{'Quiz.note' | translate}}</h4>
         </div>
         <div class="card-block inst-text">
-          <p>{{'number.1' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_6' | translate}}</p>
-          <p>{{'number.2' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_7' | translate}}</p>
-          <p>{{'number.3' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_8' | translate}}</p>
-          <p>{{'number.4' | translate}}.&nbsp;{{'L2Module1_Sub.ins1_9' | translate}}</p>
+          <p [innerHTML]="'L2Module0.subMenu1-30_inst' | translate"></p>          
 
         </div>
         <div class="card-footer">
@@ -30,20 +28,15 @@
       </div>
     </div>
   </div>
-  <div class="outer-loader" *ngIf="loader">
-    <img src="../assets/img/logo_cpd_combine_web.png" class="img-fluid" alt="">
-    <div class="loader">
-    </div>
-  </div>
   <div *ngIf="startFlag">
-    <h6 class="questionHead lineHeight">{{'L2common.caution' | translate}} <span [innerHTML]="inst"> </span></h6>
+    <h6 class="questionHead lineHeight">{{'L2Module0.subMenu1-30_1_inst' | translate}}</h6>
     <div>
-      <span *ngIf="data">
+      <span *ngIf="startFlagmcq">
         <app-mcqcomponent [passFlags]='passFlags' [data]='data' (sendAns)="saveAnswer($event)"></app-mcqcomponent>
       </span>
     </div>
   </div>
-</div> 
+</div>
 <div *ngIf="mainFlagModule5 > 7">
   <div class="card submoduleBox">
     <div class="card-block text-center greenText inst-text">
