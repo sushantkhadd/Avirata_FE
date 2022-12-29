@@ -42,7 +42,7 @@ export class Module313Component implements OnInit {
       if (this.postWordCount == 0 || this.postWordCount > 150) {
         this.showLimit = false
       }
-      else if (this.postWordCount >= 5) {
+      else if (this.postWordCount >= 7) {
         this.showLimit = true
       }
 
@@ -51,7 +51,7 @@ export class Module313Component implements OnInit {
     if (this.answer != null && this.answer != "" && this.answer != undefined) {
       if (this.answer.trim().length == 0) {
         this.trimFlag = true;
-      } else if (this.postWordCount > 150 || this.postWordCount < 5) {
+      } else if (this.postWordCount > 150 || this.postWordCount < 7) {
         this.trimFlag = true;
       } else {
         this.trimFlag = false;
