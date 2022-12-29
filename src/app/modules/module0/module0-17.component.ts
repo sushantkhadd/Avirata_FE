@@ -49,7 +49,7 @@ export class Module017Component implements OnInit {
     this.urlArray['v_thumb'] = './../../assets/img/video-thumb.png'
     // this.start();
 
-    if (this.mainFlagModule0 > 1) {
+    if (this.mainFlagModule0 > 17) {
       this.flag = 0;
       var urlJson = {};
       urlJson = JSON.parse(window.localStorage.getItem("currentJson0"));

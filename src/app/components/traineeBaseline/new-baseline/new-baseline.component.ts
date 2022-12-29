@@ -262,6 +262,8 @@ export class NewBaselineComponent implements OnInit {
     if (e.target.checked) {
       question.answered = true;
       console.log("check", question, option, e, id)
+      console.log("check 22",e, id)
+
       //  question.id = parseInt(this.LanguageService.get('aesEncryptionKey', question.id))
       console.log("question.id", this.filteredQuestions, this.pager.index, this.pager.index + this.pager.size, this.quiz.questions, question.id)
       this.lastAns = '';
@@ -550,7 +552,7 @@ export class NewBaselineComponent implements OnInit {
       window.localStorage.getItem('mainFlagModule5') == '23' ||
       window.localStorage.getItem('mainFlagModule4') == '11' ||
       (window.localStorage.getItem('mainFlagModule0') == '31' &&
-        window.localStorage.getItem('subFlagModule0') == '5') || window.localStorage.getItem('mainFlagModule5') == '17' && window.localStorage.getItem('subFlagModule5') == '6') 
+        window.localStorage.getItem('subFlagModule0') == '5') || window.localStorage.getItem('mainFlagModule5') == '17') 
     {
         if ((this.lastAns != "" && this.lastAns != null && this.lastAns != undefined) && (this.lastQueId != "" && this.lastQueId != null && this.lastQueId != undefined)) {
           console.log("lastans", this.lastAns, this.dummyAnsJson, this.lastQueId)
