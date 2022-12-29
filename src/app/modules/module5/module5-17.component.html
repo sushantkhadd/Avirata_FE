@@ -79,7 +79,7 @@
   <div *ngIf="subFlagModule5 == 6">
     <div *ngIf="showPart1Flag">
       <div>
-        <app-new-baseline [passData]="passData"></app-new-baseline>
+        <app-new-baseline [passData]="passData" (sendAns)="saveAnswer($event)"></app-new-baseline>
       </div>
     </div>
   </div>
@@ -109,7 +109,7 @@
 <div *ngIf="mainFlagModule5 > 17">
   <div class="card submoduleBox">
     <div class="card-block text-center greenText inst-text">
-      <span>{{ "L2Module5Complete.sm_5_8" | translate }}</span>
+      <span>{{ "L2Module5Complete.sm_5_17" | translate }}</span>
     </div>
   </div>
 </div>

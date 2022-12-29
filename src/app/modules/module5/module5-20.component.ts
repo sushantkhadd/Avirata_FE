@@ -459,21 +459,21 @@ export class Module520Component implements OnInit {
     jsonBody["useranswer"] = "";
     jsonBody["event"] = "start";
     this.apiCall(jsonBody, "modulefivefeedbacksec6/", "start6");
-    // if(window.localStorage.getItem("section6Counter")!="" && window.localStorage.getItem("section6Counter")!=null && window.localStorage.getItem("section6Counter")!=undefined){
-    //   this.section6Counter = window.localStorage.getItem("section6Counter")
-    // }
-    // else{
-    // if(window.localStorage.getItem("source")=="module 5.23.6.1"){
-    //   this.section6Counter = 1;
-    // } else if(window.localStorage.getItem("source")=="module 5.23.6.2"){
-    //   this.section6Counter = 2;
-    // } else if(window.localStorage.getItem("source")=="module 5.23.6.3"){
-    //   this.section6Counter = 3;
-    // }
-  //   else{
-  //     this.section6Counter = 1
-  //   // }
-  // }
+    if(window.localStorage.getItem("section6Counter")!="" && window.localStorage.getItem("section6Counter")!=null && window.localStorage.getItem("section6Counter")!=undefined){
+      this.section6Counter = window.localStorage.getItem("section6Counter")
+    }
+    else{
+    if(window.localStorage.getItem("source")=="module 5.20.6.1"){
+      this.section6Counter = 1;
+    } else if(window.localStorage.getItem("source")=="module 5.20.6.2"){
+      this.section6Counter = 2;
+    } else if(window.localStorage.getItem("source")=="module 5.20.6.3"){
+      this.section6Counter = 3;
+    }
+    else{
+      this.section6Counter = 1
+    }
+  }
    
   }
 

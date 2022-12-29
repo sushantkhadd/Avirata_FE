@@ -148,54 +148,12 @@
   </div>
 </div>
 
-<div *ngIf="mainFlagModule5 > 18">
-  <div class="card unlock-view">
-    <div class="card-block cc">
-      <div class="row static-content" *ngIf="flag == 0">
-        <div class="col-md-4">
-          <p class="title">{{'number.1' | translate}}. {{'L2Module5.subMenu5-21' | translate}}</p>
-          <div class="img-wrap">
-            <a (click)="showVideo(urlArray['src1'],'L2Module5.subMenu5-21',1)" class="c-pointer">
-              <img class="img-fluid v_thumb" src="./../../assets/img/pdf_thumb.png" alt="">
-            </a>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <p class="title">{{'number.2' | translate}}. {{'L2Module5.subMenu5-21' | translate}}</p>
-          <div class="img-wrap">
-            <a (click)="showVideo(urlArray['src2'],'L2Module5.subMenu5-21',2)" class="c-pointer">
-              <img class="img-fluid v_thumb" src="./../../assets/img/pdf_thumb.png" alt="">
-              <div class="hover-opaque">
-                <i class="fa fa-play-circle-o fa-3x"></i>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div *ngIf="flag == 1">
-        <div class="card-header text-center bg-white border-0">
-          <h5>
-            {{thumb_title | translate}}
-          </h5>
-        </div>
-        <app-presentation [data]='passValues'></app-presentation>
-        <div class="card-footer bg-white border-0 mt-3 text-center">
-          <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>
-        </div>
-      </div>
-      <div *ngIf="flag == 2">
-        <div class="card-header text-center bg-white border-0">
-          <h5>
-            {{thumb_title | translate}}
-          </h5>
-        </div>
-        <app-presentation [data]='passValues'></app-presentation>
-        <div class="card-footer bg-white border-0 mt-3 text-center">
-          <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>
-        </div>
+<div *ngIf="mainFlagModule5 > 18">  
+    <div class="card submoduleBox">
+      <div class="card-block text-center greenText inst-text">
+        <span>{{'L2Module5Complete.sm_5_18' | translate}}</span>
       </div>
     </div>
-  </div>
 </div>
 
 
