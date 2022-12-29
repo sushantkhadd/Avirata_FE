@@ -108,7 +108,7 @@ export class Module39Component implements OnInit {
       var current3 = [];
       current3 = JSON.parse(window.localStorage.getItem("currentJson3"));
       var index = current3["children"].findIndex(
-      item => item.source == "module 3.1");
+      item => item.source == "module 3.9");
       var moduleJson = current3["children"][index]
       if(moduleJson["children"].length !=0){
       var index1 = moduleJson["children"].findIndex(
