@@ -13,6 +13,7 @@ import { CommonService } from 'src/app/services/common.service';
   templateUrl: './module2.component.html'
 })
 export class Module2Component implements OnInit {
+
   @ViewChild("instructionModal") public instructionModal: ModalDirective;
 
   public mainFlagModule2 = parseInt(
@@ -21,6 +22,7 @@ export class Module2Component implements OnInit {
   public subFlagModule2 = parseInt(
     window.localStorage.getItem("subFlagModule2")
   );
+
   constructor(
     public CommonService: CommonService,
     public LanguageService: LanguageService,
@@ -33,23 +35,11 @@ export class Module2Component implements OnInit {
   ) {
     this.toastr.setRootViewContainerRef(vcr);
   }
-  public startTest; passData = {}; ansJson = {}; showPart1Flag = false;
-  public passFlags = {}; data; myjsondata; dummy; deleteAdd = []; questionCount;
-  questionlist; optionArray; counter; disableIt; mainCounter;
-  dummyArray = []; jsonObject = {};
-  public token;
-  public playVideo = false;
-  vedioCompleteUrl;
-  statVideoFlag;
-  public apiEndStart; apiEndSendAns; apiEndFinish;
-  activeItem;
-  questionFlag;
-  urlArray = {};nextFlag;
 
-  answer;
-  question;
-  subFlagModule1;
-  questionid; trimFlag; showLimit; postWordCount; startFlag
+  public passData = {}; ansJson = {}; data; jsonObject = {}; token; playVideo = false;
+  vedioCompleteUrl; questionFlag; urlArray = {}; nextFlag; answer; question;
+  subFlagModule1; questionid; trimFlag; showLimit; postWordCount; startFlag;
+  inst="तुमच्यामते या सगळ्यात कोणाचं चुकलं? झालं ते टाळता आलं असतं का? कसं? याबद्दल तुमचे मत लिहा.";
 
   ngOnInit() {
     this.vedioCompleteUrl = "79vHVVtmIoQ";
@@ -72,7 +62,8 @@ export class Module2Component implements OnInit {
         this.passData["currentSubmodule"] = "Career - a process"; //static msg
         this.passData["nextSubmodule"] = "Career magic framework"; //static msg
       } else if (this.subFlagModule2 == 2) {
-        this.startEvent2();
+        // this.startEvent2();
+        this.startFlag = false;
       }
     } else if (this.mainFlagModule2 > 1) {
       var urlJson = {};
@@ -165,14 +156,13 @@ export class Module2Component implements OnInit {
             this.instructionModal.hide();
             this.LanguageService.toHide();
             this.playVideo = false;
-            this.statVideoFlag = true;
             this.mainFlagModule2 = 1;
             window.localStorage.setItem("uuid", data["data"].nextuuid);
             console.log(data);
             this.subFlagModule2 = 2;
             window.localStorage.setItem("subFlagModule2", "2");
             this.questionFlag = true;
-            this.startEvent2();
+            // this.startEvent2();
             this.nextFlag = false;
           
           } else if (fun == "start2") {
@@ -180,6 +170,8 @@ export class Module2Component implements OnInit {
             this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 2.2', window.localStorage.getItem('username'), 10);
             this.startFlag = true;
             this.question = data["data"]["questionlist"][0].question;
+
+            console.log(this.question);
             this.questionid = data["data"]["questionlist"][0].questionid;          
           } else if (fun == "finish2") {
             this.mainFlagModule2 = 2;
@@ -215,4 +207,36 @@ export class Module2Component implements OnInit {
       }
     );
   }
+
+
+  ngDoCheck() {
+
+    if (this.answer) {
+      this.postWordCount = this.answer.trim().split(/\s+/).length;
+      if (this.postWordCount == 0 || this.postWordCount > 150) {
+        this.showLimit = false
+      }
+      else if (this.postWordCount >= 7) {
+        this.showLimit = true
+      }
+
+    }
+
+    if (this.answer != null && this.answer != "" && this.answer != undefined) {
+      if (this.answer.trim().length == 0) {
+        this.trimFlag = true;
+      } else if (this.postWordCount > 150 || this.postWordCount < 7) {
+        this.trimFlag = true;
+      } else {
+        this.trimFlag = false;
+      }
+    }
+    else {
+      if (this.answer == "" || this.answer == null || this.answer == undefined) {
+        this.postWordCount = 0;
+      }
+    }
+  }
+
+
 }

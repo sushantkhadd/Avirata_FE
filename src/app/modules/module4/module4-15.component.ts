@@ -18,6 +18,9 @@ export class Module415Component implements OnInit {
   @ViewChild('staticImageModal') public staticImageModal: ModalDirective;
   @ViewChild('instructionModal') public instructionModal: ModalDirective;
 
+  public mainFlagModule4 = parseInt(window.localStorage.getItem('mainFlagModule4'));
+  public subFlagModule4 = parseInt(window.localStorage.getItem('subFlagModule4'));
+
   constructor(
     public LanguageService: LanguageService,
     private LocalstoragedetailsService: LocalstoragedetailsService,
@@ -31,58 +34,57 @@ export class Module415Component implements OnInit {
   }
 
   public token; incomplete = false; playVideo = false; vedioCompleteUrl; showLimit = {};
-  statVideoFlag; instFlag = true; postWordCount = {}; zeroFlag; assignData; questionlist;
+  statVideoFlag; instFlag = false; postWordCount = {}; zeroFlag; assignData; questionlist;
   answer1; answer2; answer3; answer4; answer5; answer6; question1; question2; question3;
-  question4; question5; question6; description; questionFlag; trimFlag; mainFlagModule4;
-  urlArray = {}; nextFlag; queFlag; zeroMsgFlag = {}; subFlagModule4;
+  question4; question5; question6; description; questionFlag; trimFlag; 
+  urlArray = {}; nextFlag; queFlag; zeroMsgFlag = {}; 
   inst = "तुमच्या वर्गातील विद्यार्थ्यांमध्ये सकारात्मक मानसिकता निर्माण करण्याच्या दृष्टिने तुम्ही कोणते  उपक्रम घ्याल ते सविस्तर लिहा. खालील प्रत्येक विषयासंदर्भात एक उपक्रम नेमकेपणाने लिहा.";
 
   ngOnInit() {
-    this.zeroMsgFlag['1'] = false;
-    this.zeroMsgFlag['2'] = false;
-    this.zeroMsgFlag['3'] = false;
-
-    this.vedioCompleteUrl = "79vHVVtmIoQ";
-    this.mainFlagModule4 = parseInt(
-      window.localStorage.getItem("mainFlagModule4")
-    );
-    this.subFlagModule4 = parseInt(
-      window.localStorage.getItem("subFlagModule4")
-    );
-    this.token = this.LocalstoragedetailsService.token;
-    if (this.token == null) {
-      this.router.navigate(["/"]);
-    }
-
-    if ((localStorage.getItem("questionFlag") != undefined && localStorage.getItem("questionFlag") != null && localStorage.getItem("questionFlag") != "") ||
-      this.subFlagModule4 == 2) {
-      this.questionFlag = true;
-      console.log('qweqweqew')
-
-    } else {
-      this.questionFlag = false;
-      console.log('qqqq')
-    }
-
-    if (window.localStorage.getItem("source") == "module 4.15.1") {
-      this.questionFlag = false;
-      console.log("btn scenario")
-    }
-
-    this.answer1 = "";
-    this.answer2 = "";
-    this.answer3 = "";
-    this.queFlag = false;
-
-    this.postWordCount['1'] = 0;
-    this.postWordCount['2'] = 0;
-    this.postWordCount['3'] = 0;
 
     if (this.mainFlagModule4 == 15) {
-      this.instFlag = true;
-    } else if (this.mainFlagModule4 > 15) {
+      if(this.subFlagModule4 == 1){
+        this.instFlag = true;
 
+        this.zeroMsgFlag['1'] = false;
+        this.zeroMsgFlag['2'] = false;
+        this.zeroMsgFlag['3'] = false;
+        this.vedioCompleteUrl = "79vHVVtmIoQ";
+        this.token = this.LocalstoragedetailsService.token;
+    
+        if (this.token == null) {
+          this.router.navigate(["/"]);
+        }
+    
+        if ((localStorage.getItem("questionFlag") != undefined && localStorage.getItem("questionFlag") != null && localStorage.getItem("questionFlag") != "")) {
+          this.questionFlag = true;
+          console.log('qweqweqew')
+    
+        } else {
+          this.questionFlag = false;
+          console.log('qqqq')
+        }
+    
+        if (window.localStorage.getItem("source") == "module 4.15.1") {
+          this.questionFlag = false;
+          console.log("btn scenario")
+        }
+    
+        this.answer1 = "";
+        this.answer2 = "";
+        this.answer3 = "";
+        this.queFlag = false;
+    
+        this.postWordCount['1'] = 0;
+        this.postWordCount['2'] = 0;
+        this.postWordCount['3'] = 0;
+      }
+    } else if (this.mainFlagModule4 > 15) {
+      this.instFlag = false;
     }
+
+   
+
   }
 
   reset() {
@@ -260,7 +262,7 @@ export class Module415Component implements OnInit {
             this.mainFlagModule4 = 15;
             window.localStorage.setItem("uuid", data["data"].nextuuid);
             console.log(data);
-            this.subFlagModule4 = 2;
+            // this.subFlagModule4 = 2;
             window.localStorage.setItem("subFlagModule4", "16");
             window.localStorage.setItem("source", "module 4.16");
             this.questionFlag = false;

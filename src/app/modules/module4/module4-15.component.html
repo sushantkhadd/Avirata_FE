@@ -110,14 +110,6 @@
   </div>
 </div>
 
-<div *ngIf="mainFlagModule4 > 15">
-  <div class="card submoduleBox">
-    <div class="card-block text-center greenText inst-text">
-      <span>{{'L2Module4Complete.sm_4_15' | translate}}</span>
-    </div>
-  </div>
-</div>
-
 <div class="videoFinishModal videoFinishedModel">
   <div bsModal #instructionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1"
     role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -154,6 +146,14 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="mainFlagModule4 > 15">
+  <div class="card submoduleBox">
+    <div class="card-block text-center greenText inst-text">
+      <span>{{ "L2Module4Complete.sm_4_15" | translate }}</span>
     </div>
   </div>
 </div>
