@@ -21,6 +21,8 @@ export class AdminPanelComponent implements OnInit {
   alluserstatusreportL1;
   alluserstatusreportL2;
   alluserstatusreportL3;
+  alluserstatusreportL4;
+
   public showDistrictData;
   showParticipantData;
   showSearchData;
@@ -37,11 +39,16 @@ export class AdminPanelComponent implements OnInit {
   classFlag; piechartFlag;showProfileData;
   l1TotalUsersCount; l1DesktopCount; l1MobCount; l1TabCount;
   l2TotalUsersCount; l2DesktopCount; l2MobCount; l2TabCount; loader; refreshLoader;
-  l3TotalUsersCount; l3DesktopCount; l3MobCount; l3TabCount; inModuleCountL3; 
+  l3TotalUsersCount; l3DesktopCount; l3MobCount; l3TabCount; inModuleCountL3;
+  l4TotalUsersCount; l4DesktopCount; l4MobCount; l4TabCount; inModuleCountL4; 
   inModuleCountL1; inModuleCountL2; L1_status; L2_status; L3_status; mouseOvered1; mouseOvered2; mouseOvered3; reportUrl; isLoaded;
   resultl1;resultl2;resultl3;l1_graph =[];l2_graph =[];l3_graph =[];
   calculateTotall1;
   resolveOverlappingTypes = ["shift", "hide", "none"];
+  totalCountL4: any;
+  notStartedCountL4: any;
+  l4_graph=[];
+  resultl4: any;
 
   // public time1; tmSec1; countDown; tick = 1000;time2; tmSec2; countDown2; tick2 = 1000;time3; tmSec3; countDown3; tick3 = 1000;
   constructor(
@@ -329,6 +336,7 @@ export class AdminPanelComponent implements OnInit {
         var activeUserDataL1 = data['data'].level1;
         var activeUserDataL2 = data['data'].level2;
         var activeUserDataL3 = data['data'].level3;
+        var activeUserDataL4 = data['data'].level4;
         
         this.l1TotalUsersCount = activeUserDataL1['totalusers'];
         this.l1DesktopCount = activeUserDataL1['desktop'];
@@ -345,7 +353,12 @@ export class AdminPanelComponent implements OnInit {
         this.l3MobCount = activeUserDataL3['mobile'];
         this.l3TabCount = activeUserDataL3['tablet'];
 
-        if (activeUserDataL1 && activeUserDataL2 && activeUserDataL3) {
+        this.l4TotalUsersCount = activeUserDataL4['totalusers'];
+        this.l4DesktopCount = activeUserDataL4['desktop'];
+        this.l4MobCount = activeUserDataL4['mobile'];
+        this.l4TabCount = activeUserDataL4['tablet'];
+
+        if (activeUserDataL1 && activeUserDataL2 && activeUserDataL3 && activeUserDataL4) {
           this.loader = true;
         } else {
           this.loader = false;
@@ -633,6 +646,7 @@ export class AdminPanelComponent implements OnInit {
           {"que":"Completed"+ " ("+this.number.transform(this.totalCountL3)+")","val":this.totalCountL3}]
 
           // this.alluserstatusreportL3 = demo;
+          this.allUserStatusReportL4();
           
           console.log('demoL33', this.alluserstatusreportL3)
         }
@@ -661,8 +675,98 @@ export class AdminPanelComponent implements OnInit {
       }
       );
   }
-  
+  allUserStatusReportL4() {
+    var jsonBody={};
+    jsonBody["level"] = "4"
+    var apiUrl = "alluserstatusreport/";
+    this.AdminReportService.postCall(
+      jsonBody,
+      apiUrl
+    ).subscribe(
+      data => {
+        if (data['message'] == "ok") {
+          this.resultl4 = data['data'].result[0];
+          console.log(this.resultl3)
+          // this.timeCounter3(data['data'].cachetime)
+          var dJson = {};
+          var demo = [];
+          dJson = this.resultl4;
+          for (let i in dJson) {
+            var j = {};
+            console.log("key : " + i + " - value : " + dJson[i]);
+            j["que"] = i;
+            j["val"] = dJson[i];
 
+            i == "total" ? j["que"] = "Total" : "";
+            i == "not_started" ? j["que"] = "Pending" + " ("+dJson[i]+")" : "";
+            i == "in_module0" ? j["que"] = "Just Started" + " ("+dJson[i]+")" : "";
+            i == "com_module0" ? j["que"] = "In Module 1" + " ("+dJson[i]+")" : "";
+            i == "com_module1" ? j["que"] = "In Module 2" + " ("+dJson[i]+")" : "";
+            i == "com_module2" ? j["que"] = "In Module 3" + " ("+dJson[i]+")" : "";
+            i == "com_module3" ? j["que"] = "In Module 4" + " ("+dJson[i]+")" : "";
+            i == "com_module4" ? j["que"] = "In Module 5" + " ("+dJson[i]+")" : "";
+            // i == "com_module5" ? j["que"] = "Endline" + " ("+dJson[i]+")" : "";
+            i == "completed" ? j["que"] = "completed" + " ("+dJson[i]+")" : "";
+            // i == "com_module7" ? j["que"] = "Project Complete" + " ("+dJson[i]+")" : "";
+
+            if (i == "completed") {
+              this.totalCountL4 = dJson[i];
+            }
+
+            if (i == "not_started") {
+              this.notStartedCountL4 = dJson[i];
+            }
+
+            if (i == "in_module") {
+              this.inModuleCountL4 = dJson[i];
+            }
+
+            if (i == "in_module" || i == "com_module5") {
+              delete j["que"];
+            }
+            demo.push(j);
+          }
+          this.l4_graph=[{"que":"Completed" + " ("+this.number.transform(this.totalCountL4)+")","val":this.totalCountL4},
+          {"que":"In Module" + " ("+this.number.transform(this.inModuleCountL4)+")","val":this.inModuleCountL4},
+          {"que":"Pending"+ " ("+this.number.transform(this.notStartedCountL4)+")" ,"val":this.notStartedCountL4}]
+          this.alluserstatusreportL4=[{"que":"Pending"+ " ("+this.number.transform(this.resultl4['not_started'])+")","val":this.resultl4['not_started']},
+          {"que":"Just Started"+ " ("+this.number.transform(this.resultl4['in_module0'])+")","val":this.resultl4['in_module0']},
+          {"que":"In Module 1"+ " ("+this.number.transform(this.resultl4['com_module0'])+")","val":this.resultl4['com_module0']},
+          {"que":"In Module 2"+ " ("+this.number.transform(this.resultl4['com_module1'])+")","val":this.resultl4['com_module1']},
+          {"que":"In Module 3"+ " ("+this.number.transform(this.resultl4['com_module2'])+")","val":this.resultl4['com_module2']},
+          {"que":"In Module 4"+ " ("+this.number.transform(this.resultl4['com_module3'])+")","val":this.resultl4['com_module3']},
+          {"que":"In Module 5"+ "("+this.number.transform(this.resultl4['com_module4'])+")","val":this.resultl4['com_module4']},
+          {"que":"Completed"+ " ("+this.number.transform(this.totalCountL4)+")","val":this.totalCountL4}]
+
+          // this.alluserstatusreportL3 = demo;
+          
+          console.log('demoL33', this.alluserstatusreportL4)
+        }
+      },
+      error => {
+        if (error.error.message == "token not found" || error.error.message == 'token not matches please re-login') {
+          this.toastr.error(this.translate.instant("Errors.tokenNotFound"));
+          setTimeout(() => {
+            this.router.navigate(["/"]);
+          }, 5000);
+        } else if (
+          error.error.message == "session not matches please re-login"
+        ) {
+          this.toastr.error(this.translate.instant("Errors.sessionNotMatches"));
+          setTimeout(() => {
+            this.router.navigate(["/"]);
+          }, 5000);
+        } else if (
+          error.error.message == "source is required" ||
+          error.error.message == "unknown source"
+        ) {
+          console.log(error.error.message);
+        } else {
+          this.toastr.error(this.translate.instant("Errors.cannotProceed"));
+        }
+      }
+      );
+  }
   // timeCounter(catche) {
   //   //Timer for catche
   //   this.time1 = catche
