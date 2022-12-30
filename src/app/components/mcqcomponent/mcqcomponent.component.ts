@@ -52,6 +52,9 @@ export class McqcomponentComponent implements OnInit {
       this.queCount = parseInt(window.localStorage.getItem('subFlagModule3'));
       console.log("1 queCount", this.queCount );
     }
+    if(window.localStorage.getItem('mainFlagModule5') == '7'){
+      this.queCount = parseInt(window.localStorage.getItem('subFlagModule5'))
+    }
 
     if(window.localStorage.getItem('mainFlagModule2')== '9'){
       this.totalQueCount = 7;
