@@ -44,9 +44,23 @@ export class Module016Component implements OnInit {
     this.lnk1 = ''
     this.lnk2 = ''
     this.pdfUrl='https://s3-ap-southeast-1.amazonaws.com/maacpd/english/level1/module1/1.7_A.pdf'
-    // this.start();
-
-    if (this.mainFlagModule0 > 16) {
+    if (this.mainFlagModule0 == 16) {
+      this.showVideoFlag = false; 
+      if (this.subFlagModule0 == 4 ) {
+        this.showVideoFlag = false;
+          this.start();
+        // this.startPdf = false;
+      }else if (this.subFlagModule0 == 2 || 
+        this.subFlagModule0 == 3 || 
+        this.subFlagModule0 == 5) {
+        this.start();
+        this.passData['apiUrl'] = "modulefoursingleurl/";
+        this.passData['videoUrl'] = "";
+        this.passData['status'] = true;  //first time call
+        // this.passData['currentSubmodule'] = 'Career - a process' //static msg
+        // this.passData['nextSubmodule'] = 'Career magic framework' //static msg
+      }      
+    }else if (this.mainFlagModule0 > 16) {
       this.flag = 0;
       var urlJson = {};
       urlJson = JSON.parse(window.localStorage.getItem("currentJson0"));
@@ -135,7 +149,7 @@ export class Module016Component implements OnInit {
               window.localStorage.setItem('mainFlagModule0', '17');
               window.localStorage.setItem('subFlagModule0', '1');
               window.localStorage.setItem('source', 'module 0.17');
-              this.Module0Service.setLocalStorage0(3);
+              this.Module0Service.setLocalStorage0(17);
               var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module0.subMenu0-17'), "next": this.translate.instant('L2Module0Finish.subMenu0-17'), "nextRoute": "/modules/module0/Module0.17" }
               this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
             } else {
