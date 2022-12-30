@@ -75,8 +75,9 @@
             </div>
             <label class="col-md-2 col-sm-2 form-control-label" [for]="queId4" [innerHTML]="que4"></label>
             <div class="col-sm-4 col-md-4 controls">
-              <textarea autosize [minRows]="2" class="form-control" [id]="queId4" name="answer4" [(ngModel)]="answer4" pattern="^[0-9]*$" onpaste="return false;"
-                (keypress)="numberOnly($event);handleInput($event)" rows="2" #addr="ngModel" minlength="2" maxlength="2" required></textarea>
+              <textarea autosize [minRows]="2" class="form-control" [id]="queId4" name="answer4" [(ngModel)]="answer4" rows="2" minlength="7" #addr="ngModel"
+              (keypress)="handleInput($event)" required></textarea>
+                    
             </div>
           </div>
 

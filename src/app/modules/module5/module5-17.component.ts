@@ -164,7 +164,7 @@ export class Module517Component implements OnInit {
     this.subFlagModule5 = this.subFlagModule5 + 1;    
     window.localStorage.setItem('subFlagModule5', this.subFlagModule5.toString());
     if (e == "finish") {
-    if (this.subFlagModule5 == 2 || this.subFlagModule5 == 4 || this.subFlagModule5 == 6) {      
+    if (this.subFlagModule5 == 2 || this.subFlagModule5 == 4 || this.subFlagModule5 >= 6) {      
         this.showPart1Flag = false;
         this.start1();
       }else{

@@ -561,7 +561,8 @@ export class NewBaselineComponent implements OnInit {
       window.localStorage.getItem('mainFlagModule5') == '23' ||
       window.localStorage.getItem('mainFlagModule4') == '11' ||
       (window.localStorage.getItem('mainFlagModule0') == '31' &&
-        window.localStorage.getItem('subFlagModule0') == '5') || window.localStorage.getItem('mainFlagModule5') == '17' && window.localStorage.getItem('subFlagModule5') == '7') 
+        window.localStorage.getItem('subFlagModule0') == '5') || 
+        window.localStorage.getItem('mainFlagModule5') == '17')
     {
         if ((this.lastAns != "" && this.lastAns != null && this.lastAns != undefined) && (this.lastQueId != "" && this.lastQueId != null && this.lastQueId != undefined)) {
           console.log("lastans", this.lastAns, this.dummyAnsJson, this.lastQueId)
@@ -589,7 +590,8 @@ export class NewBaselineComponent implements OnInit {
       window.localStorage.getItem('mainFlagModule4') == '2' ||
       window.localStorage.getItem('mainFlagModule5') == '23' ||
       window.localStorage.getItem('mainFlagModule4') == '11' ||
-      (window.localStorage.getItem('mainFlagModule0') == '31' && window.localStorage.getItem('subFlagModule0') == '5') ||
+      (window.localStorage.getItem('mainFlagModule0') == '31' && 
+      window.localStorage.getItem('subFlagModule0') == '5') ||
       window.localStorage.getItem('mainFlagModule5') == '17')
       && Object.keys(this.dummyAnsJson).length == this.pager.count) {
       mainAns['event'] = "finish";
@@ -721,8 +723,9 @@ export class NewBaselineComponent implements OnInit {
               window.localStorage.setItem('mainFlagModule4', '3')
               window.localStorage.setItem('subFlagModule4', '1')
             }
-            else if (window.localStorage.getItem('mainFlagModule5') == '17') {              
-              if (window.localStorage.getItem('subFlagModule5') == '6') {
+            else if (window.localStorage.getItem('mainFlagModule5') == '17') {   
+              console.log('subFlagModule5 local',window.localStorage.getItem('subFlagModule5'))           
+              if (window.localStorage.getItem('subFlagModule5') > '6') {
                 var obj = {
                   "type": "submodule",
                   "route": true,
