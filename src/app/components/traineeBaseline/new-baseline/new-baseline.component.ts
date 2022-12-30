@@ -419,7 +419,16 @@ export class NewBaselineComponent implements OnInit {
                 console.log("NOTSAME hit2", this.baselineSelectedAns, this.baselineSelectedQuestion)
                 console.log("NOTSAME hit1.2", this.quiz.questions[index - 1].ans, this.quiz.questions[index - 1].id)
                 if (window.localStorage.getItem('mainFlagModule2') == '1' ||
-                  (window.localStorage.getItem('mainFlagModule0') == '31' && (window.localStorage.getItem('subFlagModule0') == '1' || window.localStorage.getItem('subFlagModule0') == '2' || window.localStorage.getItem('subFlagModule0') == '3' || window.localStorage.getItem('subFlagModule0') == '4'))) {
+                  (window.localStorage.getItem('mainFlagModule0') == '31' && 
+                  (window.localStorage.getItem('subFlagModule0') == '1' || 
+                  window.localStorage.getItem('subFlagModule0') == '2' || 
+                  window.localStorage.getItem('subFlagModule0') == '3' || 
+                  window.localStorage.getItem('subFlagModule0') == '4')) 
+                  ||(window.localStorage.getItem('mainFlagModule5') == '17' && 
+                  (window.localStorage.getItem('subFlagModule5') == '2' || 
+                  window.localStorage.getItem('subFlagModule5') == '3' || 
+                  window.localStorage.getItem('subFlagModule5') == '4' || 
+                  window.localStorage.getItem('subFlagModule5') == '5'))) {
                   this.quiz.questions[index - 1].ans = this.baselineSelectedAns
                   this.userOption[this.quiz.questions[index - 1].id] = this.quiz.questions[index - 1].ans;
                   console.log("useroption", this.userOption)
@@ -552,7 +561,8 @@ export class NewBaselineComponent implements OnInit {
       window.localStorage.getItem('mainFlagModule5') == '23' ||
       window.localStorage.getItem('mainFlagModule4') == '11' ||
       (window.localStorage.getItem('mainFlagModule0') == '31' &&
-        window.localStorage.getItem('subFlagModule0') == '5') || window.localStorage.getItem('mainFlagModule5') == '17') 
+        window.localStorage.getItem('subFlagModule0') == '5') || 
+        window.localStorage.getItem('mainFlagModule5') == '17')
     {
         if ((this.lastAns != "" && this.lastAns != null && this.lastAns != undefined) && (this.lastQueId != "" && this.lastQueId != null && this.lastQueId != undefined)) {
           console.log("lastans", this.lastAns, this.dummyAnsJson, this.lastQueId)
@@ -580,7 +590,8 @@ export class NewBaselineComponent implements OnInit {
       window.localStorage.getItem('mainFlagModule4') == '2' ||
       window.localStorage.getItem('mainFlagModule5') == '23' ||
       window.localStorage.getItem('mainFlagModule4') == '11' ||
-      (window.localStorage.getItem('mainFlagModule0') == '31' && window.localStorage.getItem('subFlagModule0') == '5') ||
+      (window.localStorage.getItem('mainFlagModule0') == '31' && 
+      window.localStorage.getItem('subFlagModule0') == '5') ||
       window.localStorage.getItem('mainFlagModule5') == '17')
       && Object.keys(this.dummyAnsJson).length == this.pager.count) {
       mainAns['event'] = "finish";
@@ -603,13 +614,19 @@ export class NewBaselineComponent implements OnInit {
       window.localStorage.getItem('mainFlagModule4') == '2' ||
       window.localStorage.getItem('mainFlagModule5') == '23' ||
       window.localStorage.getItem('mainFlagModule4') == '11' ||
-      (window.localStorage.getItem('mainFlagModule0') == '31' && window.localStorage.getItem('subFlagModule0') == '5') || (window.localStorage.getItem('mainFlagModule5') == '17' && window.localStorage.getItem('subFlagModule5') == '3' || window.localStorage.getItem('subFlagModule5') == '5')) {
+      (window.localStorage.getItem('mainFlagModule0') == '31' && 
+      window.localStorage.getItem('subFlagModule0') == '5') || 
+      (window.localStorage.getItem('mainFlagModule5') == '17' && 
+      window.localStorage.getItem('subFlagModule5') == '3' ||
+       window.localStorage.getItem('subFlagModule5') == '5')) {
       mainAns['useranswer'] = this.lastAns;
       mainAns['questionid'] = this.lastQueId;
-    } else if (window.localStorage.getItem('mainFlagModule5') == '17' && window.localStorage.getItem('subFlagModule5') == '2' || window.localStorage.getItem('subFlagModule5') == '4' || window.localStorage.getItem('subFlagModule5') == '6') {
+    } else if (window.localStorage.getItem('mainFlagModule5') == '17' && 
+    window.localStorage.getItem('subFlagModule5') == '2' || 
+    window.localStorage.getItem('subFlagModule5') == '4' ||
+    window.localStorage.getItem('subFlagModule5') == '6') {
       mainAns['useranswer'] = this.userOption;
     }
-    console.log("jsonbody", mainAns)
     this.quizService.sendAnswer(mainAns, this.token, apiEndSendAns)
       .subscribe(
         data => {
@@ -706,8 +723,9 @@ export class NewBaselineComponent implements OnInit {
               window.localStorage.setItem('mainFlagModule4', '3')
               window.localStorage.setItem('subFlagModule4', '1')
             }
-            else if (window.localStorage.getItem('mainFlagModule5') == '17') {
-              if (window.localStorage.getItem('subFlagModule5') == '6') {
+            else if (window.localStorage.getItem('mainFlagModule5') == '17') {   
+              console.log('subFlagModule5 local',window.localStorage.getItem('subFlagModule5'))           
+              if (window.localStorage.getItem('subFlagModule5') > '6') {
                 var obj = {
                   "type": "submodule",
                   "route": true,

@@ -25,9 +25,10 @@ export class Module011Component implements OnInit {
   nextBtnFlag: boolean;
   lnk1: string;
   lnk2: string;
-  urlArray={}
+  urlArray = {}
   flag: number;
   thumb_title: any;
+  nextId: number;
   constructor(
     public LanguageService: LanguageService,
     private LocalstoragedetailsService: LocalstoragedetailsService,
@@ -48,7 +49,13 @@ export class Module011Component implements OnInit {
     this.urlArray['v_thumb'] = './../../assets/img/video-thumb.png'
     // this.start();
 
-    if (this.mainFlagModule0 > 1) {
+    if (this.mainFlagModule0 == 11) {
+      if (this.subFlagModule0 == 2) {
+        this.nextId = 2
+        this.start()
+      }
+    }
+    else if (this.mainFlagModule0 > 11) {
       this.flag = 0;
       var urlJson = {};
       urlJson = JSON.parse(window.localStorage.getItem("currentJson0"));
@@ -97,7 +104,13 @@ export class Module011Component implements OnInit {
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
     jsonBody['event'] = 'finish'
-    this.nextApiCall(jsonBody, 'modulezerosingleurl/', 'finish1')
+    if (this.nextId == 2) {
+      console.log('hello pravin',this.nextId)
+      this.next()
+    } else {
+      this.nextApiCall(jsonBody, 'modulezerosingleurl/', 'finish1')
+
+    }
   }
   next() {
     var jsonBody = {}
@@ -145,8 +158,10 @@ export class Module011Component implements OnInit {
   }
 
   nextApiCall(jsonBody, apiUrl, fun) {
+    this.nextId = 2;
     this.Module0Service.apiCall(jsonBody, apiUrl).subscribe(
       data => {
+        
         if (data["status"] == true) {
           if (fun == "finish1") {
             window.localStorage.setItem('uuid', data['data'].nextuuid)

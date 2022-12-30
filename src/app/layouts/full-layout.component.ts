@@ -2678,10 +2678,103 @@ export class FullLayoutComponent implements OnInit {
         if (source == "module 0.29") {
           this.subFlagModule0 = 1;
         }
-      } else if (source == "module 0.30") {
+      } else if (
+        source == "module 0.30" ||
+        source == "module 0.30.1" ||
+        source == "module 0.30.2" ||
+        source == "module 0.30.3" ||
+        source == "module 0.30.4" ||
+        source == "module 0.30.5"||
+        source == "module 0.30.6" ||
+        source == "module 0.30.7" ||
+        source == "module 0.30.8" ||
+        source == "module 0.30.9" ||
+        source == "module 0.30.10"||
+        source == "module 0.30.11"||
+        source == "module 0.30.12" ||
+        source == "module 0.30.13"||
+        source == "module 0.30.14"||
+        source == "module 0.30.15"||
+        source == "module 0.30.16"||
+        source == "module 0.30.17"||
+        source == "module 0.30.18"||
+        source == "module 0.30.18"||
+        source == "module 0.30.19"||
+        source == "module 0.30.20"||
+        source == "module 0.30.21"||
+        source == "module 0.30.22"||
+        source == "module 0.30.23"||
+        source == "module 0.30.24"||
+        source == "module 0.30.25"||
+        source == "module 0.30.26"||
+        source == "module 0.30.27"||
+        source == "module 0.30.28"||
+        source == "module 0.30.29"||
+        source == "module 0.30.30"
+        ) {
         this.mainFlagModule0 = 30;
-        if (source == "module 0.30") {
+        if (source == "module 0.30" || source == "module 0.30.1") {
           this.subFlagModule0 = 1;
+        }
+        else if (source == "module 0.30.2") {
+          this.subFlagModule0 = 2;
+        }else if (source == "module 0.30.3") {
+          this.subFlagModule0 = 3;
+        }
+        else if (source == "module 0.30.4") {
+          this.subFlagModule0 = 4;
+        }else if (source == "module 0.30.5") {
+          this.subFlagModule0 = 5;
+        }else if (source == "module 0.30.6") {
+          this.subFlagModule0 = 6;
+        }else if (source == "module 0.30.7") {
+          this.subFlagModule0 = 7;
+        }else if (source == "module 0.30.8") {
+          this.subFlagModule0 = 8;
+        }else if (source == "module 0.30.9") {
+          this.subFlagModule0 = 9;
+        }else if (source == "module 0.30.10") {
+          this.subFlagModule0 = 10;
+        }else if (source == "module 0.30.11") {
+          this.subFlagModule0 = 11;
+        }else if (source == "module 0.30.12") {
+          this.subFlagModule0 = 12;
+        }else if (source == "module 0.30.13") {
+          this.subFlagModule0 = 13;
+        }else if (source == "module 0.30.14") {
+          this.subFlagModule0 = 14;
+        }else if (source == "module 0.30.15") {
+          this.subFlagModule0 = 15;
+        }else if (source == "module 0.30.16") {
+          this.subFlagModule0 = 16;
+        }else if (source == "module 0.30.17") {
+          this.subFlagModule0 = 17;
+        }else if (source == "module 0.30.18") {
+          this.subFlagModule0 = 18;
+        }else if (source == "module 0.30.19") {
+          this.subFlagModule0 = 19;
+        }else if (source == "module 0.30.20") {
+          this.subFlagModule0 = 20;
+        }else if (source == "module 0.30.21") {
+          this.subFlagModule0 = 21;
+        }else if (source == "module 0.30.22") {
+          this.subFlagModule0 = 22;
+        }else if (source == "module 0.30.23") {
+          this.subFlagModule0 = 23;
+        }else if (source == "module 0.30.24") {
+          this.subFlagModule0 = 24;
+        }else if (source == "module 0.30.25") {
+          this.subFlagModule0 = 25;
+        }else if (source == "module 0.30.26") {
+          this.subFlagModule0 = 26;
+        }else if (source == "module 0.30.27") {
+          this.subFlagModule0 = 27;
+        }else if (source == "module 0.30.28") {
+          this.subFlagModule0 = 28;
+        }else if (source == "module 0.30.29") {
+          this.subFlagModule0 = 29;
+        }else if (source == "module 0.30.30") {
+          this.subFlagModule0 = 30;
         }
       } else if (
         source == "module 0.31" ||
@@ -2906,7 +2999,7 @@ export class FullLayoutComponent implements OnInit {
     this.mainFlagModule0 = parseInt(
       window.localStorage.getItem("mainFlagModule0")
     );
-    if (this.mainFlagModule0 > 30) {
+    if (this.mainFlagModule0 > 31) {
       // this.currentFlag1 = false;
       this.module0OnOffFlag = true;
       this.module1OnOffFlag = true;

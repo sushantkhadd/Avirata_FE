@@ -116,21 +116,14 @@ export class Module517Component implements OnInit {
           if (fun == "start") {
             this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 5.17', window.localStorage.getItem('username'), 10);
             this.passData['apiUrl'] = "modulefivesingleurl/";
-            this.passData['videoUrl'] = data['data'].url;
-            if (this.subFlagModule5 == 2) {
-              this.passValues['url'] = data['data'].url;
-              this.showVideoFlag = true
-            } else {
-
-            }
+            this.passData['videoUrl'] = data['data'].url;           
             this.showVideoFlag = true
             var current0 = [];
             current0 = JSON.parse(window.localStorage.getItem("currentJson5"));
             var index = current0["children"].findIndex(
-              item => item.source == "module 5.8");
+            item => item.source == "module 5.8");
             current0["children"][index].url = this.passUrl;
-
-            window.localStorage.setItem("currentJson0", JSON.stringify(current0));
+            window.localStorage.setItem("currentJson5", JSON.stringify(current0));
 
           } else if (fun == "finish1") {
             this.LanguageService.toHide();
@@ -168,11 +161,10 @@ export class Module517Component implements OnInit {
   }
   
   saveAnswer(e) {
-    this.subFlagModule5 = this.subFlagModule5 + 1;
-    
+    this.subFlagModule5 = this.subFlagModule5 + 1;    
     window.localStorage.setItem('subFlagModule5', this.subFlagModule5.toString());
     if (e == "finish") {
-    if (this.subFlagModule5 == 2 || this.subFlagModule5 == 4 || this.subFlagModule5 == 6) {      
+    if (this.subFlagModule5 == 2 || this.subFlagModule5 == 4 || this.subFlagModule5 >= 6) {      
         this.showPart1Flag = false;
         this.start1();
       }else{
@@ -180,7 +172,7 @@ export class Module517Component implements OnInit {
         this.start2();
       }
     } else {
-      if (this.subFlagModule5 > 6) {
+      if (this.subFlagModule5 == 6) {
         this.showPart1Flag = false;
         this.start1();
       }
