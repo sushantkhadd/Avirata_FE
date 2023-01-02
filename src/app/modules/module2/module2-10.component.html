@@ -49,11 +49,11 @@
                 <h5>{{'Quiz.note' | translate}}</h5>
               </div>
               <div class="card-block inst-text">
-                <p>{{'L2Instruction.inst_2_14' | translate}}</p>
+                <p [innerHTML]="'L2Module1.inst1_11' | translate"></p>
               </div>
               <div class="card-footer">
                 <div class="float-right hidden-xs-down">
-                  <button class="btn btn-primary" appPreventDoubleClick (debounceClick)="startEvent()">{{'Module4.start' |
+                  <button class="btn btn-primary" appPreventDoubleClick (debounceClick)="startEvent2()">{{'Module4.start' |
                     translate}}</button>
                 </div>
               </div>
@@ -65,9 +65,13 @@
             <div class="card-footer p-0">
               <h6 class="questionHead lineHeight font-weight-normal p-2">
                 <span [innerHTML]="'L2common.caution' | translate"></span>
-                <span [innerHTML]="question"></span>
+                <span [innerHTML]="inst"></span>
               </h6>
             </div>
+            <div class="card-footer">
+              <span [innerHTML]="question"></span>
+            </div>
+    
             <div class="card-block pt-2">
               <form #assignForm="ngForm">
                 <div class="form-group row">
@@ -76,7 +80,7 @@
                       [(ngModel)]="answer" #addr="ngModel" (focus)="showLimit=true" (focusout)="showLimit=false"
                       required></textarea>
                   </div>
-                  <div *ngIf="showLimit==false && (postWordCount>150 || postWordCount<5)" class="offset-md-4 mt-2">
+                  <div *ngIf="showLimit==false && (postWordCount>150 || postWordCount<7)" class="offset-md-4 mt-2">
                     <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn5_150' | translate}}</p>
                   </div>
                 </div>
@@ -100,16 +104,13 @@
   </div>
   
   <div *ngIf="mainFlagModule2 > 10">
-    <div class="card" *ngIf="!statVideoFlag">
-      <div class="card-footer">
-        <h6 class="text-center">{{'L2Module2.mitra' | translate}}</h6>
-      </div>
-      <div class="card-block">
-        <app-static-video [receivedData]='passData'></app-static-video>
+    <div class="card submoduleBox">
+      <div class="card-block text-center greenText inst-text">
+        <span>{{ "L2Module2Complete.sm_2_10" | translate }}</span>
       </div>
     </div>
   </div>
-  
+    
   <div class="videoFinishModal videoFinishedModel">
     <div bsModal #instructionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1"
       role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

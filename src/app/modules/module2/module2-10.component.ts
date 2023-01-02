@@ -46,11 +46,11 @@ export class Module210Component implements OnInit {
   activeItem;
   questionFlag;
   urlArray = {};nextFlag;
-
   answer;
   question;
   subFlagModule1;
-  questionid; trimFlag; showLimit; postWordCount; startFlag
+  questionid; trimFlag; showLimit; postWordCount; startFlag;
+  inst="सुनील असं का वागला असेल? तुमचे मत लिहा."
 
   ngOnInit() {
     this.vedioCompleteUrl = "79vHVVtmIoQ";
@@ -67,9 +67,10 @@ export class Module210Component implements OnInit {
 
     if (this.mainFlagModule2 == 10) {
       if (this.subFlagModule2 == 1) {
-        // this.startEvent1();
+        this.startEvent1();
       } else if (this.subFlagModule2 == 2) {
-        this.startEvent2();
+        this.startFlag = false;
+        // this.startEvent2();
       }
     } else if (this.mainFlagModule2 > 1) {
       var urlJson = {};
@@ -167,9 +168,8 @@ export class Module210Component implements OnInit {
             this.subFlagModule2 = 2;
             window.localStorage.setItem("subFlagModule2", "2");
             this.questionFlag = true;
-            this.startEvent2();
+            // this.startEvent2();
             this.nextFlag = false;
-          
           } else if (fun == "start2") {
             console.log("start2");
             this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 2.10', window.localStorage.getItem('username'), 10);
@@ -210,4 +210,31 @@ export class Module210Component implements OnInit {
       }
     );
   }
+
+  ngDoCheck() {
+    if (this.answer) {
+      this.postWordCount = this.answer.trim().split(/\s+/).length;
+      if (this.postWordCount == 0 || this.postWordCount > 150) {
+        this.showLimit = false
+      }
+      else if (this.postWordCount >= 7) {
+        this.showLimit = true
+      }
+    }
+    if (this.answer != null && this.answer != "" && this.answer != undefined) {
+      if (this.answer.trim().length == 0) {
+        this.trimFlag = true;
+      } else if (this.postWordCount > 150 || this.postWordCount < 7) {
+        this.trimFlag = true;
+      } else {
+        this.trimFlag = false;
+      }
+    }
+    else {
+      if (this.answer == "" || this.answer == null || this.answer == undefined) {
+        this.postWordCount = 0;
+      }
+    }
+  }
+
 }

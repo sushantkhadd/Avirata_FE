@@ -53,14 +53,14 @@ export class Module2Component implements OnInit {
     if (this.token == null) {
       this.router.navigate(["/"]);
     }
-
     if (this.mainFlagModule2 == 1) {
       if (this.subFlagModule2 == 1) {
-        this.passData["apiUrl"] = "moduletwosingleurl/";
-        this.passData["videoUrl"] = "";
-        this.passData["status"] = true; //first time call
-        this.passData["currentSubmodule"] = "Career - a process"; //static msg
-        this.passData["nextSubmodule"] = "Career magic framework"; //static msg
+        this.startEvent1();
+        // this.passData["apiUrl"] = "moduletwosingleurl/";
+        // this.passData["videoUrl"] = "";
+        // this.passData["status"] = true; //first time call
+        // this.passData["currentSubmodule"] = "Career - a process"; //static msg
+        // this.passData["nextSubmodule"] = "Career magic framework"; //static msg
       } else if (this.subFlagModule2 == 2) {
         // this.startEvent2();
         this.startFlag = false;
@@ -208,9 +208,7 @@ export class Module2Component implements OnInit {
     );
   }
 
-
   ngDoCheck() {
-
     if (this.answer) {
       this.postWordCount = this.answer.trim().split(/\s+/).length;
       if (this.postWordCount == 0 || this.postWordCount > 150) {
@@ -219,7 +217,6 @@ export class Module2Component implements OnInit {
       else if (this.postWordCount >= 7) {
         this.showLimit = true
       }
-
     }
 
     if (this.answer != null && this.answer != "" && this.answer != undefined) {
@@ -237,6 +234,5 @@ export class Module2Component implements OnInit {
       }
     }
   }
-
 
 }

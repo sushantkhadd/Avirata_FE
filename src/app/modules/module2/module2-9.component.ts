@@ -32,16 +32,9 @@ export class Module29Component implements OnInit {
   ) {
     this.toastr.setRootViewContainerRef(vcr);
   }
-  public data;
-  questionType;
-  passFlags = {};
-  showAnswer;
-  saveData;
-  answer;
-  sumbitButton;
-  startFlag;
-  public inst =
-    "पुढे दिलेले विचार अविवेकी आहेत. ते कोणत्या प्रकारात मोडतात ते सांगा.";
+  
+  public data; questionType; passFlags = {}; showAnswer; saveData; answer;
+  sumbitButton; startFlag; inst ="दिलेल्या उदाहरणांमध्ये शिक्षक / पालक वागले ते योग्य होते का?";
   ngOnInit() {
     this.startFlag = false;
     this.showAnswer = true;

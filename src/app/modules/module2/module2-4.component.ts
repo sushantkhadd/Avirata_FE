@@ -13,6 +13,7 @@ import { CommonService } from 'src/app/services/common.service';
   templateUrl: './module2-4.component.html'
 })
 export class Module24Component implements OnInit {
+
   @ViewChild("instructionModal") public instructionModal: ModalDirective;
 
   public mainFlagModule2 = parseInt(
@@ -32,16 +33,9 @@ export class Module24Component implements OnInit {
   ) {
     this.toastr.setRootViewContainerRef(vcr);
   }
-  public data;
-  questionType;
-  passFlags = {};
-  showAnswer;
-  saveData;
-  answer;
-  sumbitButton;
-  startFlag;
-  public inst =
-    "पुढे दिलेले विचार अविवेकी आहेत. ते कोणत्या प्रकारात मोडतात ते सांगा.";
+
+  public data; questionType; passFlags = {}; showAnswer; saveData; answer; sumbitButton; startFlag; inst ="खालील विधाने चूक आहेत की बरोबर ते सांगा.";
+  
   ngOnInit() {
     this.startFlag = false;
     this.showAnswer = true;

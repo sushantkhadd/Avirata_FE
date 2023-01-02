@@ -34,8 +34,7 @@ export class Module213Component implements OnInit {
   answer1; answer2; answer3; answer4; answer5; answer6; question1; question2; question3;
   question4; question5; question6; description; questionFlag; trimFlag; mainFlagModule2;
   urlArray = {}; nextFlag; queFlag; zeroMsgFlag = {}; subFlagModule2;
-  public inst =
-    "दिलेल्या प्रसंगांमध्ये पात्रांचा प्रतिसाद कोणत्या अविवेकी विचारांमधून (धारणांमधून) निर्माण झाला आहे ते लिहा.";
+  public inst = "तुमच्या वर्गातील एका मुलाचे एका मुलीवर प्रेम आहे असे तुम्हांला समजते. मुलीच्या घरी समजल्याने गोंधळ झाला आहे आणि त्यामुळे मुलगा मुलगी पळून जाऊन लग्न करणार असल्याची बातमी तुम्हांला मिळते. ही समस्या तुम्ही कशी हाताळाल ते सविस्तर लिहा.";
 
   ngOnInit() {
     this.zeroMsgFlag['1'] = false;
@@ -144,13 +143,13 @@ export class Module213Component implements OnInit {
           this.answer4.trim().length == 0
         ) {
           this.trimFlag = true;
-        } else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 5) {
+        } else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 7) {
           this.trimFlag = true;
-        } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 5) {
+        } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 7) {
           this.trimFlag = true;
-        } else if (this.postWordCount['3'] > 150 || this.postWordCount['3'] < 5) {
+        } else if (this.postWordCount['3'] > 150 || this.postWordCount['3'] < 7) {
           this.trimFlag = true;
-        } else if (this.postWordCount['4'] > 150 || this.postWordCount['4'] < 5) {
+        } else if (this.postWordCount['4'] > 150 || this.postWordCount['4'] < 7) {
           this.trimFlag = true;
         } else {
           this.trimFlag = false;
@@ -172,13 +171,13 @@ export class Module213Component implements OnInit {
           this.answer4.trim().length == 0 
         ) {
           this.trimFlag = true;
-        } else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 5) {
+        } else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 7) {
           this.trimFlag = true;
-        } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 5) {
+        } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 7) {
           this.trimFlag = true;
-        } else if (this.postWordCount['3'] > 150 || this.postWordCount['3'] < 5) {
+        } else if (this.postWordCount['3'] > 150 || this.postWordCount['3'] < 7) {
           this.trimFlag = true;
-        } else if (this.postWordCount['4'] > 150 || this.postWordCount['4'] < 5) {
+        } else if (this.postWordCount['4'] > 150 || this.postWordCount['4'] < 7) {
           this.trimFlag = true;
         } else {
           this.trimFlag = false;

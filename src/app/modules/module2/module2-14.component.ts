@@ -33,7 +33,20 @@ export class Module214Component implements OnInit {
 
   ngOnInit() {
     this.startPdf=false
-    // this.start();
+    if (this.mainFlagModule2 == 14) {
+    } else if (this.mainFlagModule2 > 14) {
+      var urlJson = {};
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson2"));
+      if (urlJson["children"].length > 0) {
+        var index = urlJson["children"].findIndex(
+          item => item.source == "module 2.14"
+        );
+        if (urlJson["children"][index].url != null) {
+          this.passValues["url"] = urlJson["children"][index].url;
+        }
+      }
+    }
+
   }
 
   start() {
