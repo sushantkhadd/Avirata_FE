@@ -54,7 +54,21 @@
               <!-- </label> -->
             </div>
             <div class="card-block">
-              <textarea class="form-control marathi" id="txt1" name="txtaraea" [(ngModel)]="txtcomment"
+
+              <textarea rows="3" class="form-control marathi" [id]="txt1" name="txtaraea"
+                [(ngModel)]="txtcomment" (focus)="showLimit=true" (focusout)="showLimit=false"
+                required autocomplete='off'></textarea>
+              <div *ngIf="showLimit==false && (postWordCount>150 || postWordCount<7)" class="offset-md-4 mt-2">
+                <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn7_150' | translate}}</p>
+              </div>
+              <p *ngIf="showLimit" class="text-right pt-1">{{'otherMessages.wordLimit' | translate}}
+                <span *ngIf="postWordCount != 0">{{postWordCount | numberConvertor : 'Devanagari'}}/{{'number.150' |
+                  translate}}</span>
+                <span *ngIf="postWordCount == 0">{{'number.0' | translate}}/{{'number.150' | translate}}</span>
+              </p>
+
+
+              <!-- <textarea class="form-control marathi" id="txt1" name="txtaraea" [(ngModel)]="txtcomment"
                 placeholder="{{'otherMessages.writePostHere' | translate}}" rows="3" autocomplete='off'
                 required></textarea>
               <p class="text-right pt-1">
@@ -63,11 +77,13 @@
                   {{'number.150' | translate}}
                 </span>
                 <span *ngIf="postWordCount==0">{{'number.0' | translate}}/{{'number.150' | translate}}</span>
-              </p>
+              </p> -->
             </div>
+
+            
             <div class="card-footer text-center">
               <button class="btn btn-primary float-right" appPreventDoubleClick (debounceClick)="submitPost()"
-                [disabled]="assignment.form.invalid || submitPostDisable">{{'Login.Submit'|
+                [disabled]="assignment.form.invalid || submitPostDisable || trimFlag">{{'Login.Submit'|
                 translate}}</button>
             </div>
           </div>

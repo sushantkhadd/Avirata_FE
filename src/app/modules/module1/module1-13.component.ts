@@ -110,16 +110,16 @@ export class Module113Component implements OnInit {
       var current1 = [];
       current1 = JSON.parse(window.localStorage.getItem("currentJson1"));
       var index = current1["children"].findIndex(
-      item => item.source == "module 1.1");
+      item => item.source == "module 1.13");
       var moduleJson = current1["children"][index]
       if(moduleJson["children"].length !=0){
       var index1 = moduleJson["children"].findIndex(
-      item => item.source == "module 1.1.1");
+      item => item.source == "module 1.13.1");
       if(moduleJson["children"][index1].url !="" && moduleJson["children"][index1].url !=null && moduleJson["children"][index1].url !=undefined){
-      this.parentUrlJson['1.1.1'] = moduleJson["children"][index1].url;
+      this.parentUrlJson['1.13.1'] = moduleJson["children"][index1].url;
       }
       }
-      this.parentUrlJson['1.1.2'] = e['url'];
+      this.parentUrlJson['1.13.2'] = e['url'];
       current1["children"][index].url = JSON.stringify(this.parentUrlJson);
 
       window.localStorage.setItem("currentJson1", JSON.stringify(current1));
@@ -138,17 +138,17 @@ export class Module113Component implements OnInit {
         data => {
           if (fun == 'start')
           {
-            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 1.1', window.localStorage.getItem('username'), 10);
+            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 1.13', window.localStorage.getItem('username'), 10);
             this.passData['apiUrl'] = "moduleonesingleurl/";
             this.passData['videoUrl'] = data['data'].url;
             this.showVideoFlag = true
             this.passUrl = data['data'].url;
 
-            this.parentUrlJson["1.1.1"] = this.passUrl;
+            this.parentUrlJson["1.13.1"] = this.passUrl;
             var current1 = [];
             current1 = JSON.parse(window.localStorage.getItem("currentJson1"));
             var index = current1["children"].findIndex(
-              item => item.source == "module 1.1");
+              item => item.source == "module 1.13");
             current1["children"][index].url = JSON.stringify(this.parentUrlJson);
 
             window.localStorage.setItem("currentJson1", JSON.stringify(current1));

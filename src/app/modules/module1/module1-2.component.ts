@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewContainerRef} from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { LocalstoragedetailsService } from "../../services/localstoragedetails.service";
 import { LanguageService } from './../../language.service';
 import { Router } from '@angular/router';
@@ -28,18 +28,12 @@ export class Module12Component implements OnInit {
   ) {
     this.toastr.setRootViewContainerRef(vcr);
   }
-  public data; checkAgree = false;
-  questionType;
-  passFlags = {};
-  showAnswer;count;
-  saveData;
-  answer;
-  sumbitButton;
-  startFlag;
-  public txtcomment: string
 
-  public inst =
-    "खालील स्वगतांमागे असणारा विचार / धारणा ओळखा. ती विवेकी आहे की अविवेकी?";
+  public data; checkAgree = false; questionType; passFlags = {}; showAnswer; count;
+  saveData; answer; sumbitButton; startFlag; txtcomment: string; postWordCount = {};
+  trimFlag; inst = "खालील स्वगतांमागे असणारा विचार / धारणा ओळखा. ती विवेकी आहे की अविवेकी?";
+  showLimit = {};
+
   ngOnInit() {
     this.startFlag = false;
     this.showAnswer = true;
@@ -49,8 +43,7 @@ export class Module12Component implements OnInit {
     this.questionType = "mcqTextOption";
     this.passFlags["questionType"] = this.questionType;
 
-    if (this.mainFlagModule1 == 2)
-    {
+    if (this.mainFlagModule1 == 2) {
       // this.start()
     }
   }
@@ -86,26 +79,22 @@ export class Module12Component implements OnInit {
               "current": this.translate.instant('L2Module1.subMenu1-3'),
               "next": this.translate.instant('L2Module1Finish.subMenu1-3')
               // "inst":this.translate.instant('L2Module1Finish.Inst1_2')
-              }
-              this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+            }
+            this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
           }
         },
         error => {
-          if (error.error.message == 'token not found' || error.error.message == 'token not match')
-          {
+          if (error.error.message == 'token not found' || error.error.message == 'token not match') {
             this.toastr.error(this.translate.instant('otherMessages.sessionLogout'));
             setTimeout(() => {
               this.router.navigate(['/']);
             }, 4000)
-          } else if (error.error.message == 'json Key Error')
-          {
+          } else if (error.error.message == 'json Key Error') {
             this.toastr.error(this.translate.instant('otherMessages.wrongInfo2'));
-          } else if (error.error.message == 'access denied')
-          {
+          } else if (error.error.message == 'access denied') {
             this.toastr.error(this.translate.instant('otherMessages.accessDenied'))
           }
-          else
-          {
+          else {
             this.toastr.error(this.translate.instant('Errors.cannotProceed'));
           }
         });
@@ -121,9 +110,8 @@ export class Module12Component implements OnInit {
 
     this.Module1Service.getApiCall(apiUrl).subscribe(
       data => {
-        console.log("123",data);
-        if (data["status"] == true)
-        {
+        console.log("123", data);
+        if (data["status"] == true) {
           this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 1.2', window.localStorage.getItem('username'), 10);
           console.log("data ", data["data"]);
           this.data = data["data"];
@@ -143,9 +131,9 @@ export class Module12Component implements OnInit {
     this.answer = e;
     this.submit();
   }
+
   submit() {
     var jsonBody = {};
-
     jsonBody["submoduleid"] = window.localStorage.getItem("uuid");
     jsonBody["useranswer"] = this.answer;
     jsonBody["event"] = "answer";
@@ -157,8 +145,7 @@ export class Module12Component implements OnInit {
         if (
           data["status"] == true &&
           data["message"] == "your answer stored next question and uuid is"
-        )
-        {
+        ) {
           window.localStorage.setItem("uuid", data["data"].nextuuid);
           this.subFlagModule1 = this.subFlagModule1 + 1;
           window.localStorage.setItem(
@@ -171,8 +158,7 @@ export class Module12Component implements OnInit {
         } else if (
           data["status"] == true &&
           data["message"] == "submodule finish"
-        )
-        {
+        ) {
           this.startFlag = false;
           window.localStorage.setItem("uuid", data["data"].nextuuid);
           this.mainFlagModule1 = 3;
@@ -197,14 +183,38 @@ export class Module12Component implements OnInit {
   }
 
   agree(e) {
-    if (e.target.checked)
-    {
+    if (e.target.checked) {
       this.checkAgree = true;
     }
-    else
-    {
+    else {
       this.checkAgree = false;
     }
   }
 
+  ngDoCheck() {
+    if (this.txtcomment) {
+      this.postWordCount = this.txtcomment.trim().split(/\s+/).length;
+      if (this.postWordCount == 0 || this.postWordCount > 150) {
+        this.showLimit = false
+      }
+      else if (this.postWordCount >= 7) {
+        this.showLimit = true
+      }
+    }
+
+    if (this.txtcomment != null && this.txtcomment != "" && this.txtcomment != undefined) {
+      if (this.txtcomment.trim().length == 0) {
+        this.trimFlag = true;
+      } else if (this.postWordCount > 150 || this.postWordCount < 7) {
+        this.trimFlag = true;
+      } else {
+        this.trimFlag = false;
+      }
+    }
+    else {
+      if (this.txtcomment == "" || this.txtcomment == null || this.txtcomment == undefined) {
+        this.postWordCount = 0;
+      }
+    }
+  }
 }

@@ -43,14 +43,13 @@
                 <textarea autosize [minRows]="2" class="form-control" id="answer1" name="answer1" [(ngModel)]="answer1" rows="3" #addr="ngModel"
                 (focus)="zeroTrue()" (keypress)="handleInput($event)" (focusout)="showLimit['1']=false;zeroMsgFlag['1']=false" required></textarea>
               </div>
-              <div *ngIf="showLimit['1']==false && (postWordCount['1']>150 || postWordCount['1']<5)" class="offset-md-4 mt-2">
-                  <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn5_150' | translate}}</p>
+              <div *ngIf="showLimit['1']==false && (postWordCount['1']>150 || postWordCount['1']<1)" class="offset-md-4 mt-2">
+                  <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn1_150' | translate}}</p>
               </div>
             </div>
             <p *ngIf="showLimit['1']" class="text-right pt-1">
               <span *ngIf="postWordCount['1']!=0">{{'otherMessages.wordLimit' | translate}} {{postWordCount['1'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}</span>
               <span *ngIf="postWordCount['1']==0 && zeroMsgFlag['1']==true">{{'otherMessages.wordLimit' | translate}} {{'number.0' | translate}}/{{'number.150' | translate}}</span>
-              
             </p>
             
             <div class="form-group row">
@@ -59,8 +58,8 @@
                 <textarea autosize [minRows]="2" class="form-control" (keypress)="handleInput($event)" id="answer2" name="answer2" [(ngModel)]="answer2" rows="3" #addr="ngModel" (focus)="showLimit['2']=true;zeroMsgFlag['2']=true" (focusout)="showLimit['2']=false;zeroMsgFlag['2']=false"
                   required></textarea>
               </div>
-              <div *ngIf="showLimit['2']==false && (postWordCount['2']>150 || postWordCount['2']<5)" class="offset-md-4 mt-2">
-                  <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn5_150' | translate}}</p>
+              <div *ngIf="showLimit['2']==false && (postWordCount['2']>150 || postWordCount['2']<1)" class="offset-md-4 mt-2">
+                  <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn1_150' | translate}}</p>
               </div>
             </div>
             <p *ngIf="showLimit['2']" class="text-right pt-1">
@@ -74,8 +73,8 @@
                 <textarea autosize [minRows]="2" class="form-control" (keypress)="handleInput($event)" id="answer3" name="answer3" [(ngModel)]="answer3" rows="3" #addr="ngModel" (focus)="showLimit['3']=true;zeroMsgFlag['3']=true" (focusout)="showLimit['3']=false;zeroMsgFlag['3']=false"
                   required></textarea>
               </div>
-              <div *ngIf="showLimit['3']==false && (postWordCount['3']>150 || postWordCount['3']<5)" class="offset-md-4 mt-2">
-                  <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn5_150' | translate}}</p>
+              <div *ngIf="showLimit['3']==false && (postWordCount['3']>150 || postWordCount['3']<1)" class="offset-md-4 mt-2">
+                  <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn1_150' | translate}}</p>
               </div>
             </div>
             <p *ngIf="showLimit['3']" class="text-right pt-1">
@@ -89,8 +88,8 @@
                 <textarea autosize [minRows]="2" class="form-control" (keypress)="handleInput($event)" id="answer4" name="answer4" [(ngModel)]="answer4" rows="3" #addr="ngModel" (focus)="showLimit['4']=true;zeroMsgFlag['4']=true" (focusout)="showLimit['4']=false;zeroMsgFlag['4']=false"
                   required></textarea>
               </div>
-              <div *ngIf="showLimit['4']==false && (postWordCount['4']>150 || postWordCount['4']<5)" class="offset-md-4 mt-2">
-                  <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn5_150' | translate}}</p>
+              <div *ngIf="showLimit['4']==false && (postWordCount['4']>150 || postWordCount['4']<1)" class="offset-md-4 mt-2">
+                  <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn1_150' | translate}}</p>
               </div>
             </div>
             <p *ngIf="showLimit['4']" class="text-right pt-1">
@@ -104,8 +103,8 @@
                 <textarea autosize [minRows]="2" class="form-control" (keypress)="handleInput($event)" id="answer5" name="answer5" [(ngModel)]="answer5" rows="3" #addr="ngModel" (focus)="showLimit['5']=true;zeroMsgFlag['5']=true" (focusout)="showLimit['5']=false;zeroMsgFlag['5']=false"
                   required></textarea>
               </div>
-              <div *ngIf="showLimit['5']==false && (postWordCount['5']>150 || postWordCount['5']<5)" class="offset-md-4 mt-2">
-                  <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn5_150' | translate}}</p>
+              <div *ngIf="showLimit['5']==false && (postWordCount['5']>150 || postWordCount['5']<1)" class="offset-md-4 mt-2">
+                  <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn1_150' | translate}}</p>
               </div>
             </div>
             <p *ngIf="showLimit['5']" class="text-right pt-1">
@@ -119,8 +118,8 @@
                 <textarea autosize [minRows]="2" class="form-control" (keypress)="handleInput($event)" id="answer6" name="answer6" [(ngModel)]="answer6" rows="3" #addr="ngModel" (focus)="showLimit['6']=true;zeroMsgFlag['6']=true" (focusout)="showLimit['6']=false;zeroMsgFlag['6']=false"
                   required></textarea>
               </div>
-              <div *ngIf="showLimit['6']==false && (postWordCount['6']>150 || postWordCount['6']<5)" class="offset-md-4 mt-2">
-                  <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn5_150' | translate}}</p>
+              <div *ngIf="showLimit['6']==false && (postWordCount['6']>150 || postWordCount['6']<1)" class="offset-md-4 mt-2">
+                  <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn1_150' | translate}}</p>
               </div>
             </div>
             <p *ngIf="showLimit['6']" class="text-right pt-1">

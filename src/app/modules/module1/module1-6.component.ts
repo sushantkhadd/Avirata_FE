@@ -199,17 +199,17 @@ export class Module16Component implements OnInit {
           this.answer6.trim().length == 0
         ) {
           this.trimFlag = true;
-        } else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 5) {
+        } else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 1) {
           this.trimFlag = true;
-        } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 5) {
+        } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 1) {
           this.trimFlag = true;
-        } else if (this.postWordCount['3'] > 150 || this.postWordCount['3'] < 5) {
+        } else if (this.postWordCount['3'] > 150 || this.postWordCount['3'] < 1) {
           this.trimFlag = true;
-        } else if (this.postWordCount['4'] > 150 || this.postWordCount['4'] < 5) {
+        } else if (this.postWordCount['4'] > 150 || this.postWordCount['4'] < 1) {
           this.trimFlag = true;
-        } else if (this.postWordCount['5'] > 150 || this.postWordCount['5'] < 5) {
+        } else if (this.postWordCount['5'] > 150 || this.postWordCount['5'] < 1) {
           this.trimFlag = true;
-        } else if (this.postWordCount['6'] > 150 || this.postWordCount['6'] < 5) {
+        } else if (this.postWordCount['6'] > 150 || this.postWordCount['6'] < 1) {
           this.trimFlag = true;
         } else {
           this.trimFlag = false;
@@ -233,15 +233,15 @@ export class Module16Component implements OnInit {
           this.answer5.trim().length == 0
         ) {
           this.trimFlag = true;
-        } else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 5) {
+        } else if (this.postWordCount['1'] > 150 || this.postWordCount['1'] < 1) {
           this.trimFlag = true;
-        } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 5) {
+        } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 1) {
           this.trimFlag = true;
-        } else if (this.postWordCount['3'] > 150 || this.postWordCount['3'] < 5) {
+        } else if (this.postWordCount['3'] > 150 || this.postWordCount['3'] < 1) {
           this.trimFlag = true;
-        } else if (this.postWordCount['4'] > 150 || this.postWordCount['4'] < 5) {
+        } else if (this.postWordCount['4'] > 150 || this.postWordCount['4'] < 1) {
           this.trimFlag = true;
-        } else if (this.postWordCount['5'] > 150 || this.postWordCount['5'] < 5) {
+        } else if (this.postWordCount['5'] > 150 || this.postWordCount['5'] < 1) {
           this.trimFlag = true;
         } else {
           this.trimFlag = false;

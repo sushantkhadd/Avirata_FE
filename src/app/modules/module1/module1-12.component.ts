@@ -32,15 +32,15 @@ export class Module112Component implements OnInit {
   ngOnInit() {  
     this.mainFlagModule1 = parseInt(window.localStorage.getItem('mainFlagModule1'));
     this.subFlagModule1 = parseInt(window.localStorage.getItem('subFlagModule1'));
-
   }
+
   finishPDF(e) {
     this.finishJSONBody['submoduleid'] = window.localStorage.getItem('uuid');
     this.finishJSONBody['useroption'] = "";
     this.finishJSONBody['event'] = "finish";
     if (e == true)
     {
-      this.Module1Service.finishModuleCall(this.finishJSONBody, 12, '/modules/module2', '/modules/module2')
+      this.Module1Service.finishModuleCall(this.finishJSONBody, 12, '/modules/module1', '/modules/module1')
     }
   }
 
@@ -62,7 +62,7 @@ export class Module112Component implements OnInit {
             console.log("data apiCall", data["status"], fun);
 
             if (fun == "start4") {
-              console.log("data ", data["data"]);
+              console.log("data ???", data["data"]);
               this.question3 = data['data'].question;
               var newArr =[]
               newArr = data["data"].statementlist;

@@ -34,8 +34,7 @@ export class Module28Component implements OnInit {
   ngOnInit() {
     this.startPdf=false
     if (this.mainFlagModule2 == 8) {
-    }
-    else if (this.mainFlagModule2 > 8) {
+    } else if (this.mainFlagModule2 > 8) {
       var urlJson = {};
       urlJson = JSON.parse(window.localStorage.getItem("currentJson2"));
       console.log("vcxxxx", urlJson);

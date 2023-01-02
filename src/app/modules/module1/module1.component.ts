@@ -35,8 +35,8 @@ export class Module1Component implements OnInit {
   ngOnInit() {
     this.lnk1 = '';
     this.lnk2 = '';
-    this.urlArray["src1"] = "skGFDAhQrhE";
-    this.urlArray["src2"] = "opHKXAPIynA";
+    // this.urlArray["src1"] = "skGFDAhQrhE";
+    // this.urlArray["src2"] = "opHKXAPIynA";
     this.urlArray['v_thumb'] = './../../assets/img/video-thumb.png';
     this.showVideoFlag=false;
     if (this.mainFlagModule1 == 1) {
@@ -66,7 +66,9 @@ export class Module1Component implements OnInit {
       }
     }
   }
+
   mapJSON() {
+    console.log("mapJSON",this.lnk1, this.lnk2);
     this.urlArray['src1'] = this.lnk1
     this.urlArray['src2'] = this.lnk2
     }
@@ -177,7 +179,7 @@ export class Module1Component implements OnInit {
       this.passValues["url"] = src;
       this.thumb_title = title;
       this.flag = value;
-      this.passValues["unlockView"] = "static";
+      // this.passValues["unlockView"] = "static";
     }
   
   }

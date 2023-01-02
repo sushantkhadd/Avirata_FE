@@ -2336,7 +2336,10 @@ export class FullLayoutComponent implements OnInit {
       else if (
         source == "module 1.13" ||
         source == "module 1.13.1" ||
-        source == "module 1.13.2"
+        source == "module 1.13.2" ||
+        source == "module 1.13.2.1" ||
+        source == "module 1.13.2.2" ||
+        source == "module 1.13.2.3"
       ) {
         this.mainFlagModule1 = 13;
         if (
@@ -2345,7 +2348,10 @@ export class FullLayoutComponent implements OnInit {
         ) {
           this.subFlagModule1 = 1;
         } else if (
-          source == "module 1.13.2"
+          source == "module 1.13.2" ||
+          source == "module 1.13.2.1" ||
+          source == "module 1.13.2.2" ||
+          source == "module 1.13.2.3"  
         ) {
           this.subFlagModule1 = 2;
         }
