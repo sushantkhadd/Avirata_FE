@@ -48,7 +48,7 @@ export class Module19Component implements OnInit {
     this.questionType = "mcqTextOption";
     this.passFlags["questionType"] = this.questionType;
 
-    if (this.mainFlagModule1 == 4)
+    if (this.mainFlagModule1 == 9)
     {
       // this.start()
     }

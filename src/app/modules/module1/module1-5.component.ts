@@ -122,7 +122,7 @@ export class Module15Component implements OnInit {
       window.localStorage.setItem('mainFlagModule1', '6');
       window.localStorage.setItem('subFlagModule1', '1');
       window.localStorage.setItem('source', 'module 1.6');
-      this.Module1Service.setLocalStorage1(4);
+      this.Module1Service.setLocalStorage1(6);
       var obj = {
         "type": "submodule",
         "route": true,
