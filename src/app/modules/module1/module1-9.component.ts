@@ -112,7 +112,7 @@ export class Module19Component implements OnInit {
         {
           this.startFlag = false;
           window.localStorage.setItem("uuid", data["data"].nextuuid);
-          this.mainFlagModule1 = 5;
+          this.mainFlagModule1 = 10;
           window.localStorage.setItem("mainFlagModule1", "10");
           window.localStorage.setItem("subFlagModule1", "1");
           window.localStorage.setItem('source', 'module 1.10');
