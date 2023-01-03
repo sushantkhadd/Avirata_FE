@@ -43,65 +43,66 @@
       </div>
     </div>
   </div>
-   <div *ngIf="subFlagModule1 == 2">
-     <div *ngIf="startVideoEvent">
-       <div class="card">
-         <div class="card-footer">
-           <h6 class="text-center">{{'L2Module1.subMenu1-5b' | translate}}</h6>
-         </div>
-         <div class="card-block">
-           <app-video-player [inputData]="videoData" (finishCall)="finishCFU2($event)"></app-video-player>
-         </div>
-       </div>
-     </div>
-   </div>
+  <div *ngIf="subFlagModule1 == 2">
+    <div *ngIf="startVideoEvent">
+      <div class="card">
+        <div class="card-footer">
+          <h6 class="text-center">{{'L2Module1.subMenu1-5b' | translate}}</h6>
+        </div>
+        <div class="card-block">
+          <app-video-player [inputData]="videoData" (finishCall)="finishCFU2($event)"></app-video-player>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
 <div *ngIf="mainFlagModule1 > 5">
-  <div class="card submoduleBox unlock-view">
-    <div class="card-block text-center">
+  <div class="card unlock-view">
+    <div class="card-footer text-center mb-3">
+      <h6 class="text-center" *ngIf="flag == 0">{{'L2Module1.subMenu1-5' | translate}}</h6>
+      <h6 class="text-center" *ngIf="flag != 0">{{thumb_title | translate}}</h6>
+    </div>
+    <div class="card-block cc">
       <div class="row static-content" *ngIf="flag == 0">
-        <div class="col-md-1"></div>
-        <div class="col-md-5">
-          <h6 class="title">{{'number.1' | translate}}. {{'L2Module1.subMenu1-5a' | translate}}</h6>
+        <div class="col-md-4">
+          <p class="title">{{'number.1' | translate}}. {{'L2Module1.subMenu1-5a' | translate}}</p>
           <div class="img-wrap">
             <a (click)="showVideo(urlArray['src1'],1)">
-              <img class="img-fluid v_thumb" src="https://maacpd.s3-ap-southeast-1.amazonaws.com/L3_mr/thumbnails/1.3-A-video.png" alt="">
+              <img class="img-fluid v_thumb"
+                src="https://maacpd.s3-ap-southeast-1.amazonaws.com/L3_mr/thumbnails/1.3-A-video.png" alt="">
               <div class="hover-opaque">
                 <i class="fa fa-play-circle fa-2x"></i>
               </div>
             </a>
           </div>
         </div>
-        <div class="col-md-5">
-          <h6 class="title">{{'number.2' | translate}}. {{'L2Module1.subMenu1-5b' | translate}}</h6>
+        <div class="col-md-4">
+          <p class="title">{{'number.2' | translate}}. {{'L2Module1.subMenu1-5b' | translate}}</p>
           <div class="img-wrap">
             <a (click)="showVideo(urlArray['src2'],2)">
-              <img class="img-fluid v_thumb" src="https://maacpd.s3-ap-southeast-1.amazonaws.com/L3_mr/thumbnails/1.3-B-video.png" alt="">
+              <img class="img-fluid v_thumb"
+                src="https://maacpd.s3-ap-southeast-1.amazonaws.com/L3_mr/thumbnails/1.3-B-video.png" alt="">
               <div class="hover-opaque">
                 <i class="fa fa-play-circle fa-2x"></i>
               </div>
             </a>
           </div>
         </div>
-      </div>
+      </div>     
       <div *ngIf="flag == 1">
-          <div class="card-footer mb-4">
-              <h6 class="title">{{'number.1' | translate}}. {{'L2Module1.subMenu1-5a' | translate}}</h6>
-          </div>
         <app-static-video [receivedData]='passData'></app-static-video>
         <div class="card-footer text-center bg-white border-0">
-          <button class="btn btn-primary" (click)="flag=0;">{{'Stepper.Back' | translate}}</button>
+          <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>
         </div>
       </div>
+     
       <div *ngIf="flag == 2">
-          <div class="card-footer mb-4">
-              <h6 class="title">{{'number.2' | translate}}. {{'L2Module1.subMenu1-5b' | translate}}</h6>
-          </div>
         <app-static-video [receivedData]='passData'></app-static-video>
         <div class="card-footer text-center bg-white border-0">
-          <button class="btn btn-primary" (click)="flag=0;">{{'Stepper.Back' | translate}}</button>
+          <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>
         </div>
-      </div>
+      </div>      
     </div>
   </div>
 </div>

@@ -15,7 +15,7 @@ import { ModalDirective } from "ngx-bootstrap";
 })
 export class Module113Component implements OnInit {
 
-  
+
   @ViewChild('staticImageModal') public staticImageModal: ModalDirective;
   @ViewChild('instructionModal') public instructionModal: ModalDirective;
 
@@ -24,30 +24,26 @@ export class Module113Component implements OnInit {
   constructor(public FullLayoutService: FullLayoutService, public LanguageService: LanguageService, public Module1Service: Module1Service, public router: Router, public LocalstoragedetailsService: LocalstoragedetailsService, public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService) {
     this.toastr.setRootViewContainerRef(vcr);
   }
-  public showVideoFlag; nextBtnFlag; passData = {}; passUrl; videoData = {}; urlArray = {}; lnk1; lnk2; flag;parentUrlJson = {}
+  public showVideoFlag; nextBtnFlag; passData = {}; passUrl; videoData = {}; urlArray = {}; lnk1; lnk2; flag; parentUrlJson = {}
   public statVideoFlag; thumb_title;
   ngOnInit() {
     this.lnk1 = ''
     this.lnk2 = ''
-    this.urlArray["src1"] = "skGFDAhQrhE";
-    this.urlArray["src2"] = "opHKXAPIynA";
+    this.urlArray["src1"] = "lTTajzrSkCw";
+    this.urlArray["src2"] = "lTTajzrSkCw";
     this.urlArray['v_thumb'] = './../../assets/img/video-thumb.png'
 
     this.showVideoFlag = false
     this.nextBtnFlag = false
 
-    if (this.mainFlagModule1 == 13)
-    {
-      if (this.subFlagModule1 == 1)
-      {
+    if (this.mainFlagModule1 == 13) {
+      if (this.subFlagModule1 == 1) {
         this.start()
-      } else if (this.subFlagModule1 == 2)
-      {
+      } else if (this.subFlagModule1 == 2) {
         // this.start1()
       }
     }
-    if (this.mainFlagModule1 > 13)
-    {
+    if (this.mainFlagModule1 > 13) {
       this.flag = 0;
       var urlJson = {};
       urlJson = JSON.parse(window.localStorage.getItem("currentJson1"));
@@ -55,8 +51,7 @@ export class Module113Component implements OnInit {
         var index = urlJson["children"].findIndex(
           item => item.source == "module 1.13"
         );
-        if (urlJson["children"][index].url != null)
-        {
+        if (urlJson["children"][index].url != null) {
           var mainJson;
           mainJson = JSON.parse(urlJson["children"][index].url);
           this.urlArray["src1"] = mainJson["1.13.1"];
@@ -83,9 +78,8 @@ export class Module113Component implements OnInit {
   }
 
   videoFinish(e) {
-    console.log("videoFinish",e);
-    if (e == true)
-    {
+    console.log("videoFinish", e);
+    if (e == true) {
       this.instructionModal.show()
       this.LanguageService.toShow();
       this.nextBtnFlag = true
@@ -105,19 +99,18 @@ export class Module113Component implements OnInit {
   }
 
   finishCFU(e) {
-    if (e)
-    {
+    if (e) {
       var current1 = [];
       current1 = JSON.parse(window.localStorage.getItem("currentJson1"));
       var index = current1["children"].findIndex(
-      item => item.source == "module 1.13");
+        item => item.source == "module 1.13");
       var moduleJson = current1["children"][index]
-      if(moduleJson["children"].length !=0){
-      var index1 = moduleJson["children"].findIndex(
-      item => item.source == "module 1.13.1");
-      if(moduleJson["children"][index1].url !="" && moduleJson["children"][index1].url !=null && moduleJson["children"][index1].url !=undefined){
-      this.parentUrlJson['1.13.1'] = moduleJson["children"][index1].url;
-      }
+      if (moduleJson["children"].length != 0) {
+        var index1 = moduleJson["children"].findIndex(
+          item => item.source == "module 1.13.1");
+        if (moduleJson["children"][index1].url != "" && moduleJson["children"][index1].url != null && moduleJson["children"][index1].url != undefined) {
+          this.parentUrlJson['1.13.1'] = moduleJson["children"][index1].url;
+        }
       }
       this.parentUrlJson['1.13.2'] = e['url'];
       current1["children"][index].url = JSON.stringify(this.parentUrlJson);
@@ -136,8 +129,7 @@ export class Module113Component implements OnInit {
     this.Module1Service.apiCall(jsonBody, apiUrl)
       .subscribe(
         data => {
-          if (fun == 'start')
-          {
+          if (fun == 'start') {
             this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 1.13', window.localStorage.getItem('username'), 10);
             this.passData['apiUrl'] = "moduleonesingleurl/";
             this.passData['videoUrl'] = data['data'].url;
@@ -174,17 +166,15 @@ export class Module113Component implements OnInit {
         });
   }
 
-  showVideo(src, title,value) {
+  showVideo(src, title, value) {
     // this.staticImageModal.show();
     // this.statVideoFlag = true;
     // this.statImageFlag = false;
-    if (value == 1)
-    {
+    if (value == 1) {
       this.passData['videoUrl'] = src;
       this.thumb_title = title;
       this.flag = value;
-    } else if (value == 2)
-    {
+    } else if (value == 2) {
       this.passData['videoUrl'] = src;
       this.thumb_title = title;
       this.flag = value;

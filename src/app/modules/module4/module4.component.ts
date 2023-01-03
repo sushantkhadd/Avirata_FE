@@ -32,8 +32,8 @@ export class Module4Component implements OnInit {
   ngOnInit() {
     this.lnk1 = '';
     this.lnk2 = '';
-    this.urlArray["src1"] = "skGFDAhQrhE";
-    this.urlArray["src2"] = "opHKXAPIynA";
+    this.urlArray["src1"] = "lTTajzrSkCw";
+    this.urlArray["src2"] = "rUWxSEwctFU";
     this.urlArray['v_thumb'] = './../../assets/img/video-thumb.png';
     this.showVideoFlag = false;
     this.nextBtnFlag = false;
