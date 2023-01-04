@@ -940,18 +940,22 @@ export class FullLayoutComponent implements OnInit {
           "subFlagModule5",
           this.subFlagModule5.toString()
         );
-      } else if (source == "module 5.8" || source == "module 5.8.1" ||
-        source == "module 5.8.1") {
-        this.mainFlagModule5 = 8;
-        if (source == "module 5.8" || source == "module 5.8.1") {
-          this.subFlagModule5 = 1;
-        } else if (source == "module 5.8.2") {
-          this.subFlagModule5 = 2;
-        }
-        window.localStorage.setItem(
-          "subFlagModule5",
-          this.subFlagModule5.toString()
-        );
+      } else if (
+          source == "module 5.8" || 
+          source == "module 5.8.1" ||
+          source == "module 5.8.2"
+        ) 
+        {
+          this.mainFlagModule5 = 8;
+          if (source == "module 5.8" || source == "module 5.8.1") {
+            this.subFlagModule5 = 1;
+          } else if (source == "module 5.8.2") {
+            this.subFlagModule5 = 2;
+          }
+          window.localStorage.setItem(
+            "subFlagModule5",
+            this.subFlagModule5.toString()
+          );
       } else if (source == "module 5.9") {
         this.mainFlagModule5 = 9;
         window.localStorage.setItem(

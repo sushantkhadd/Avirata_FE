@@ -15,6 +15,7 @@ import { NgForm } from '@angular/forms';
   templateUrl: './module5-18.component.html'
 })
 export class Module518Component implements OnInit {
+  showInst: boolean;
   constructor(
     public FullLayoutService: FullLayoutService,
     public LanguageService: LanguageService,
@@ -42,12 +43,13 @@ export class Module518Component implements OnInit {
   pdf1; personId; userAnswer = {}; showLimit = {}; postWordCount = {}; zeroMsgFlag = {}
   public questionArray; que1; queId1; que2; queId2; que3; queId3; que4; queId4; que5; queId5; que6; queId6; que7; queId7; answer1; answer2; answer3; answer4; answer5; answer6; answer7;
   @ViewChild('assignForm') assignForm: NgForm; noHitFlag; 
-  public inst = "तुम्ही स्वतः करिअर मार्गदर्शन केलेल्या ५ मुलांची नावे आणि त्यात तुम्हांला आलेले अनुभव आणि अडचणी लिहा. त्यात  तुम्हांला अविरतचा कसा उपयोग झाला ते सविस्तर लिहा. हे लिहिण्यासाठी खालील आराखड्याचा वापर करा."
+  public inst = "तुम्ही स्वतः करिअर मार्गदर्शन केलेल्या ५ मुलांची नावे आणि त्यात तुम्हांला आलेले अनुभव आणि अडचणी लिहा. त्यात तुम्हांला अविरतचा कसा उपयोग झाला ते सविस्तर लिहा. हे लिहिण्यासाठी खालील आराखड्याचा वापर करा."
 
   ngOnInit() {
     this.pdf1 =
       "https://s3-ap-southeast-1.amazonaws.com/maacpd/english/level1/module4/4.8_our+progress+card.pdf";
     this.startPdf = false;
+    this.showInst = false;
     // this.noHitFlag = false;
     this.mainFlagModule5 = parseInt(
       window.localStorage.getItem("mainFlagModule5")
@@ -89,7 +91,7 @@ export class Module518Component implements OnInit {
     this.zeroMsgFlag['7'] = false;
 
     if (this.mainFlagModule5 == 18) {     
-        this.start1("");
+        // this.start1("");
     }
     if (this.mainFlagModule5 > 18) {
       this.flag = 0;
@@ -143,6 +145,7 @@ export class Module518Component implements OnInit {
           this.passValues["url"] = data["data"].url;
           // this.passValues["url"] ="https://s3-ap-southeast-1.amazonaws.com/maacpd/Level2/Module1/1.10/RM-+1.pdf"
           this.startPdf = true;
+          // this.showInst = true;
           var url = {}
           url['5.21.1'] = data["data"].url;
           console.log("urllll", url)
@@ -176,6 +179,7 @@ export class Module518Component implements OnInit {
           console.log("data", data)
           this.questionArray = data['data'].questionlist;
           this.noHitFlag = true;
+          this.showInst = true;
           console.log('questions', this.questionArray)
           this.que1 = this.questionArray[0].question;
           this.queId1 = this.questionArray[0].questionid;

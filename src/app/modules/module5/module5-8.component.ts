@@ -22,6 +22,7 @@ export class Module58Component implements OnInit {
   passValues = {};
   finishJSONBody: any;
   startVideoEvent = true;
+  youtubeVideoFlag = false;
   showpdfFlag: boolean;
   constructor(public FullLayoutService: FullLayoutService, public LanguageService: LanguageService, public Module5Service: Module5Service, public router: Router, public LocalstoragedetailsService: LocalstoragedetailsService, public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService) {
     this.toastr.setRootViewContainerRef(vcr);
@@ -165,7 +166,6 @@ export class Module58Component implements OnInit {
     this.apiCall(jsonBody, 'modulefivesingleurl/', 'finish1')
   } 
   
-  
   showVideo(src, title,value) {    
     if (value == 1)
     {
@@ -179,6 +179,9 @@ export class Module58Component implements OnInit {
       this.flag = value;
       this.passValues["unlockView"] = "static";
     }
-  
+  }
+
+  videoShowInst(){
+    this.youtubeVideoFlag = true;
   }
 }
