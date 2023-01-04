@@ -102,14 +102,13 @@ export class Module114Component implements OnInit {
           }
           else if (fun == "finish") {
             this.mainFlagModule1 = 15;
-            window.localStorage.setItem("subFlagModule1", "1");
             window.localStorage.setItem(
               "uuid",
               data["data"].nextuuid
             );
             window.localStorage.setItem("mainFlagModule1", "15");
             window.localStorage.setItem("subFlagModule1", "1");
-            window.localStorage.setItem("source", "module 1.15.1");
+            window.localStorage.setItem("source", "module 1.15");
             this.Module1Service.setLocalStorage1(15);
             var obj = {
               type: "submodule",

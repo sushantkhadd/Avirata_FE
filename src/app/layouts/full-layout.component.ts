@@ -1391,6 +1391,19 @@ export class FullLayoutComponent implements OnInit {
           "subFlagModule4",
           this.subFlagModule4.toString()
         );
+      } else if (source == "module 4.15") {
+        this.mainFlagModule4 = 15;
+        this.subFlagModule4 = 1;
+        window.localStorage.setItem(
+          "subFlagModule4",
+          this.subFlagModule4.toString()
+        );
+      } else if (source == "module 4.16") {
+        this.mainFlagModule4 = 16;
+        window.localStorage.setItem(
+          "subFlagModule4",
+          this.subFlagModule4.toString()
+        );
       }
     }
     window.localStorage.setItem(
@@ -1401,7 +1414,7 @@ export class FullLayoutComponent implements OnInit {
   setStatus2(val) {
     console.log("so ", window.localStorage.getItem("source"));
     if (val == true) {
-      this.mainFlagModule2 = 18;
+      this.mainFlagModule2 = 15;
     } else {
       var source = window.localStorage.getItem("source");
 
@@ -1653,22 +1666,11 @@ export class FullLayoutComponent implements OnInit {
           this.subFlagModule2.toString()
         );
       } else if (
-        source == "module 2.13" ||
-        source == "module 2.13.1" ||
-        source == "module 2.13.2" ||
-        source == "module 2.13.2.1" ||
-        source == "module 2.13.2.2"
+        source == "module 2.13"
       ) {
         this.mainFlagModule2 = 13;
-        if (source == "module 2.13.1") {
-          this.subFlagModule2 = 1;
-        } else if (
-          source == "module 2.13.2" ||
-          source == "module 2.13.2.1" ||
-          source == "module 2.13.2.2"
-        ) {
-          this.subFlagModule2 = 2;
-        }
+        this.subFlagModule2 = 1;
+        
         window.localStorage.setItem(
           "subFlagModule2",
           this.subFlagModule2.toString()
@@ -1676,57 +1678,64 @@ export class FullLayoutComponent implements OnInit {
       } else if (source == "module 2.14") {
         this.mainFlagModule2 = 14;
         window.localStorage.setItem(
-          "subFlagModule2",
-          this.subFlagModule2.toString()
+          "mainFlagModule2",
+          this.mainFlagModule2.toString()
         );
-      } else if (
-        source == "module 2.15" ||
-        source == "module 2.15.1" ||
-        source == "module 2.15.2" ||
-        source == "module 2.15.3" ||
-        source == "module 2.15.4" ||
-        source == "module 2.15.4.1" ||
-        source == "module 2.15.4.2" ||
-        source == "module 2.15.4.3" ||
-        source == "module 2.15.5" ||
-        source == "module 2.15.6"
-      ) {
-        this.mainFlagModule2 = 15;
-        if (source == "module 2.15.1") {
-          this.subFlagModule2 = 1;
-        } else if (source == "module 2.15.2") {
-          this.subFlagModule2 = 2;
-        } else if (source == "module 2.15.3") {
-          this.subFlagModule2 = 3;
-        } else if (
-          source == "module 2.15.4" ||
-          source == "module 2.15.4.1" ||
-          source == "module 2.15.4.2" ||
-          source == "module 2.15.4.3"
-        ) {
-          this.subFlagModule2 = 4;
-        } else if (source == "module 2.15.5") {
-          this.subFlagModule2 = 5;
-        } else if (source == "module 2.15.6") {
-          this.subFlagModule2 = 6;
-        }
-        window.localStorage.setItem(
-          "subFlagModule2",
-          this.subFlagModule2.toString()
-        );
-      } else if (source == "module 2.16") {
-        this.mainFlagModule2 = 16;
-        window.localStorage.setItem(
-          "subFlagModule2",
-          this.subFlagModule2.toString()
-        );
-      } else if (source == "module 2.17") {
-        this.mainFlagModule2 = 17;
-        window.localStorage.setItem(
-          "subFlagModule2",
-          this.subFlagModule2.toString()
-        );
-      }
+        console.log("adsasd ", this.mainFlagModule2);
+    
+        // window.localStorage.setItem(
+        //   "subFlagModule2",
+        //   this.subFlagModule2.toString()
+        // );
+      } 
+      // else if (
+      //   source == "module 2.15" ||
+      //   source == "module 2.15.1" ||
+      //   source == "module 2.15.2" ||
+      //   source == "module 2.15.3" ||
+      //   source == "module 2.15.4" ||
+      //   source == "module 2.15.4.1" ||
+      //   source == "module 2.15.4.2" ||
+      //   source == "module 2.15.4.3" ||
+      //   source == "module 2.15.5" ||
+      //   source == "module 2.15.6"
+      // ) {
+      //   this.mainFlagModule2 = 15;
+      //   if (source == "module 2.15.1") {
+      //     this.subFlagModule2 = 1;
+      //   } else if (source == "module 2.15.2") {
+      //     this.subFlagModule2 = 2;
+      //   } else if (source == "module 2.15.3") {
+      //     this.subFlagModule2 = 3;
+      //   } else if (
+      //     source == "module 2.15.4" ||
+      //     source == "module 2.15.4.1" ||
+      //     source == "module 2.15.4.2" ||
+      //     source == "module 2.15.4.3"
+      //   ) {
+      //     this.subFlagModule2 = 4;
+      //   } else if (source == "module 2.15.5") {
+      //     this.subFlagModule2 = 5;
+      //   } else if (source == "module 2.15.6") {
+      //     this.subFlagModule2 = 6;
+      //   }
+      //   window.localStorage.setItem(
+      //     "subFlagModule2",
+      //     this.subFlagModule2.toString()
+      //   );
+      // } else if (source == "module 2.16") {
+      //   this.mainFlagModule2 = 16;
+      //   window.localStorage.setItem(
+      //     "subFlagModule2",
+      //     this.subFlagModule2.toString()
+      //   );
+      // } else if (source == "module 2.17") {
+      //   this.mainFlagModule2 = 17;
+      //   window.localStorage.setItem(
+      //     "subFlagModule2",
+      //     this.subFlagModule2.toString()
+      //   );
+      // }
     }
     window.localStorage.setItem(
       "mainFlagModule2",
@@ -1737,7 +1746,7 @@ export class FullLayoutComponent implements OnInit {
 
   setStatus3(val) {
     if (val == true) {
-      this.mainFlagModule3 = 19;
+      this.mainFlagModule3 = 17;
     } else {
       var source = window.localStorage.getItem("source");
       if (
@@ -2391,6 +2400,7 @@ export class FullLayoutComponent implements OnInit {
         );
       }
     }
+
     window.localStorage.setItem(
       "mainFlagModule1",
       this.mainFlagModule1.toString()
@@ -3047,7 +3057,7 @@ export class FullLayoutComponent implements OnInit {
     this.mainFlagModule1 = parseInt(
       window.localStorage.getItem("mainFlagModule1")
     );
-    if (this.mainFlagModule1 > 14) {
+    if (this.mainFlagModule1 > 15) {
       this.currentFlag2 = false;
       this.module1OnOffFlag = true;
       this.module2OnOffFlag = true;
@@ -3071,7 +3081,7 @@ export class FullLayoutComponent implements OnInit {
     this.mainFlagModule2 = parseInt(
       window.localStorage.getItem("mainFlagModule2")
     );
-    if (this.mainFlagModule2 > 17) {
+    if (this.mainFlagModule2 > 14) {
       this.currentFlag3 = false;
       this.module1OnOffFlag = true;
       this.module3OnOffFlag = true;
@@ -3096,7 +3106,7 @@ export class FullLayoutComponent implements OnInit {
     this.mainFlagModule3 = parseInt(
       window.localStorage.getItem("mainFlagModule3")
     );
-    if (this.mainFlagModule3 > 18) {
+    if (this.mainFlagModule3 > 16) {
       this.currentFlag4 = false;
       this.module4OnOffFlag = true;
       this.module1OnOffFlag = true;
@@ -3119,7 +3129,7 @@ export class FullLayoutComponent implements OnInit {
     this.mainFlagModule4 = parseInt(
       window.localStorage.getItem("mainFlagModule4")
     );
-    if (this.mainFlagModule4 > 14) {
+    if (this.mainFlagModule4 > 16) {
       this.currentFlag5 = false;
       this.module5OnOffFlag = true;
       this.module1OnOffFlag = true;
@@ -3144,7 +3154,7 @@ export class FullLayoutComponent implements OnInit {
     this.mainFlagModule5 = parseInt(
       window.localStorage.getItem("mainFlagModule5")
     );
-    if (this.mainFlagModule5 > 24) {
+    if (this.mainFlagModule5 > 21) {
       this.currentFlag6 = false;
       this.module6OnOffFlag = true;
       this.module5OnOffFlag = true;

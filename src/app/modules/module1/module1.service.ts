@@ -143,11 +143,11 @@ export class Module1Service {
            window.localStorage.setItem("currentstatus", "2");
            window.localStorage.setItem('mainFlagModule1', '16');
            window.localStorage.setItem('mainFlagModule2', '1');
-            this.setLocalStorage1(13);
+            this.setLocalStorage1(16);
            var obj1 = {
              "type": "moduleFinish",
              "route": true,
-             "current": this.translate.instant('L2Module1.subMenu1-12'),
+             "current": this.translate.instant('L2Module1.subMenu1-15'),
              "next": this.translate.instant('L2Module2.title'),
              "nextRoute": "/dashboard", "finishHead": this.translate.instant('L2Module1.title'),
              "moduleNo": this.translate.instant('number.1')

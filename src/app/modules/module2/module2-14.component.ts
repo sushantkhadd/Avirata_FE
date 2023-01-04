@@ -29,7 +29,7 @@ export class Module214Component implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
-  public passData = {};
+  public passData = {}; finishJSONBody = {};
 
   ngOnInit() {
     this.startPdf=false
@@ -91,17 +91,26 @@ export class Module214Component implements OnInit {
     );
   }
 
-  finishPDF(e) {
-    var jsonBody = {};
-    // jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
-    // jsonBody['event'] = 'finish';
-    // this.apiCall(jsonBody, 'moduletwosingleurl/', 'finish1');
-    jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
-    jsonBody['useroption'] = "";
-    jsonBody['event'] = "finish";
-    if (e == true) {
-      this.Module2Service.finishModuleCall(jsonBody, 14, '/modules/module3', '/modules/module3')
-    }
+  // finishPDF(e) {
+  //   var jsonBody = {};
+  //   // jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
+  //   // jsonBody['event'] = 'finish';
+  //   // this.apiCall(jsonBody, 'moduletwosingleurl/', 'finish1');
+  //   jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
+  //   jsonBody['useroption'] = "";
+  //   jsonBody['event'] = "finish";
+  //   if (e == true) {
+  //     this.Module2Service.finishModuleCall(jsonBody, 14, '/modules/module3', '/modules/module3')
+  //   }
 
+  // }
+
+  finishPDF(e) {
+    this.finishJSONBody['submoduleid'] = window.localStorage.getItem('uuid');
+    this.finishJSONBody['useroption'] = "";
+    this.finishJSONBody['event'] = "finish";
+    if (e == true) {
+      this.Module2Service.finishModuleCall(this.finishJSONBody, 14, '/modules/module3', '/modules/module3')
+    }
   }
 }
