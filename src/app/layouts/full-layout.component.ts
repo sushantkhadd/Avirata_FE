@@ -1113,7 +1113,10 @@ export class FullLayoutComponent implements OnInit {
         source == "module 5.20.3" ||
         source == "module 5.20.4" ||
         source == "module 5.20.5" ||
-        source == "module 5.20.6"
+        source == "module 5.20.6" ||
+        source == "module 5.20.6.1" ||
+        source == "module 5.20.6.2" ||
+        source == "module 5.20.6.3"
       ) {
         this.mainFlagModule5 = 20;
         if (source == "module 5.20.1") {
@@ -1126,7 +1129,12 @@ export class FullLayoutComponent implements OnInit {
           this.subFlagModule5 = 4;
         } else if (source == "module 5.20.5") {
           this.subFlagModule5 = 5;
-        } else if (source == "module 5.20.6") {
+        } else if (
+          source == "module 5.20.6" || 
+          source == "module 5.20.6.1" || 
+          source == "module 5.20.6.2" ||
+          source == "module 5.20.6.3"
+        ) {
           this.subFlagModule5 = 6;
         }
         window.localStorage.setItem(

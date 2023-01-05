@@ -35,11 +35,11 @@
           </div>
           <div class="card-footer">
             <div class="float-right">
-              <button *ngIf="subFlagModule5 == 1 || subFlagModule5 == 2 || subFlagModule5 == 3 || subFlagModule5 == 4"
+              <button
                 class="btn btn-primary" appPreventDoubleClick (debounceClick)="start1();">{{'Module4.start' |
                 translate}}</button>
-              <button *ngIf="subFlagModule5 == 5" class="btn btn-primary" appPreventDoubleClick
-                (debounceClick)="start2();">{{'Module4.start' | translate}}</button>
+              <!-- <button *ngIf="subFlagModule5 == 5" class="btn btn-primary" appPreventDoubleClick
+                (debounceClick)="start2();">{{'Module4.start' | translate}}</button> -->
             </div>
           </div>
         </div>
@@ -53,6 +53,30 @@
   </div>
 
   <div *ngIf="subFlagModule5 == 3">
+    <div *ngIf="!showPart1Flag">
+      <div class="instruction-wrap">
+        <div class="card">
+          <div class="card-header text-white">
+            <span class="exp-img instructions-img"></span>
+            <h4>{{'Quiz.note' | translate}}</h4>
+          </div>
+          <div class="card-block inst-text">
+            <p [innerHTML]="'L2Module5.subMenu5-17-2_inst' | translate"></p>
+
+          </div>
+          <div class="card-footer">
+            <div class="float-right">
+              <button
+                class="btn btn-primary" appPreventDoubleClick (debounceClick)="start2();">{{'Module4.start' |
+                translate}}</button>
+              <!-- <button *ngIf="subFlagModule5 == 5" class="btn btn-primary" appPreventDoubleClick
+                (debounceClick)="start2();">{{'Module4.start' | translate}}</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div *ngIf="showPart1Flag">
       <div>
         <app-new-baseline [passData]="passData" (sendAns)="saveAnswer($event)"></app-new-baseline>
@@ -61,6 +85,29 @@
   </div>
 
   <div *ngIf="subFlagModule5 == 4">
+    <div *ngIf="!showPart1Flag">
+      <div class="instruction-wrap">
+        <div class="card">
+          <div class="card-header text-white">
+            <span class="exp-img instructions-img"></span>
+            <h4>{{'Quiz.note' | translate}}</h4>
+          </div>
+          <div class="card-block inst-text">
+            <p [innerHTML]="'L2Module5.subMenu5-17-2_inst' | translate"></p>
+
+          </div>
+          <div class="card-footer">
+            <div class="float-right">
+              <button
+                class="btn btn-primary" appPreventDoubleClick (debounceClick)="start1();">{{'Module4.start' |
+                translate}}</button>
+              <!-- <button *ngIf="subFlagModule5 == 5" class="btn btn-primary" appPreventDoubleClick
+                (debounceClick)="start2();">{{'Module4.start' | translate}}</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div *ngIf="showPart1Flag">
       <div>
         <app-new-baseline [passData]="passData" (sendAns)="saveAnswer($event)"></app-new-baseline>
@@ -69,6 +116,30 @@
   </div>
 
   <div *ngIf="subFlagModule5 == 5">
+    <div *ngIf="!showPart1Flag">
+      <div class="instruction-wrap">
+        <div class="card">
+          <div class="card-header text-white">
+            <span class="exp-img instructions-img"></span>
+            <h4>{{'Quiz.note' | translate}}</h4>
+          </div>
+          <div class="card-block inst-text">
+            <p [innerHTML]="'L2Module5.subMenu5-17-2_inst' | translate"></p>
+
+          </div>
+          <div class="card-footer">
+            <div class="float-right">
+              <button
+                class="btn btn-primary" appPreventDoubleClick (debounceClick)="start2();">{{'Module4.start' |
+                translate}}</button>
+              <!-- <button *ngIf="subFlagModule5 == 5" class="btn btn-primary" appPreventDoubleClick
+                (debounceClick)="start2();">{{'Module4.start' | translate}}</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div *ngIf="showPart1Flag">
       <div>
         <app-new-baseline [passData]="passData" (sendAns)="saveAnswer($event)"></app-new-baseline>
@@ -77,6 +148,30 @@
   </div>
 
   <div *ngIf="subFlagModule5 == 6">
+    <div *ngIf="!showPart1Flag">
+      <div class="instruction-wrap">
+        <div class="card">
+          <div class="card-header text-white">
+            <span class="exp-img instructions-img"></span>
+            <h4>{{'Quiz.note' | translate}}</h4>
+          </div>
+          <div class="card-block inst-text">
+            <p [innerHTML]="'L2Module5.subMenu5-17-2_inst' | translate"></p>
+
+          </div>
+          <div class="card-footer">
+            <div class="float-right">
+              <button
+                class="btn btn-primary" appPreventDoubleClick (debounceClick)="start1();">{{'Module4.start' |
+                translate}}</button>
+              <!-- <button *ngIf="subFlagModule5 == 5" class="btn btn-primary" appPreventDoubleClick
+                (debounceClick)="start2();">{{'Module4.start' | translate}}</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div *ngIf="showPart1Flag">
       <div>
         <app-new-baseline [passData]="passData" (sendAns)="saveAnswer($event)"></app-new-baseline>
