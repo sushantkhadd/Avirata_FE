@@ -72,7 +72,7 @@ export class Module210Component implements OnInit {
         this.startFlag = false;
         // this.startEvent2();
       }
-    } else if (this.mainFlagModule2 > 1) {
+    } else if (this.mainFlagModule2 > 10) {
       var urlJson = {};
       urlJson = JSON.parse(window.localStorage.getItem("currentJson2"));
       if (urlJson["children"].length > 0) {
