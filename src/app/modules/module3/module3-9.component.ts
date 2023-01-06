@@ -32,8 +32,8 @@ export class Module39Component implements OnInit {
     this.urlArray["src2"] = "opHKXAPIynA";
     this.urlArray['v_thumb'] = './../../assets/img/video-thumb.png'
 
-    this.showVideoFlag = false
-    this.nextBtnFlag = false
+    this.showVideoFlag = false;
+    this.nextBtnFlag = false;
 
     if (this.mainFlagModule3 == 9)
     {
@@ -49,7 +49,7 @@ export class Module39Component implements OnInit {
     {
       this.flag = 0;
       var urlJson = {};
-      urlJson = JSON.parse(window.localStorage.getItem("currentJson3"));
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson1"));
       if (urlJson["children"].length > 0) {
         var index = urlJson["children"].findIndex(
           item => item.source == "module 3.9"

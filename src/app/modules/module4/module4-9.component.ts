@@ -30,29 +30,36 @@ export class Module49Component implements OnInit {
   public showVideoFlag; nextBtnFlag; passData = {}; passUrl; videoData = {}; urlArray = {}; lnk1; lnk2; flag; parentUrlJson = {}; statVideoFlag; thumb_title;
 
   ngOnInit() {
-    this.lnk1 = '';
-    this.lnk2 = '';
+    this.lnk1 = ''
+    this.lnk2 = ''
     this.urlArray["src1"] = "skGFDAhQrhE";
     this.urlArray["src2"] = "opHKXAPIynA";
-    this.urlArray['v_thumb'] = './../../assets/img/video-thumb.png';
+    this.urlArray['v_thumb'] = './../../assets/img/video-thumb.png'
+
     this.showVideoFlag = false;
     this.nextBtnFlag = false;
 
-    if (this.mainFlagModule4 == 9) {
-      if (this.subFlagModule4 == 1) {
-        this.start();
-      } else if (this.subFlagModule4 == 2) {
+    if (this.mainFlagModule4 == 9)
+    {
+      if (this.subFlagModule4 == 1)
+      {
+        this.start()
+      } else if (this.subFlagModule4 == 2)
+      {
+        // this.start1()
       }
     }
-    if (this.mainFlagModule4 > 9) {
+    if (this.mainFlagModule4 > 9)
+    {
       this.flag = 0;
       var urlJson = {};
-      urlJson = JSON.parse(window.localStorage.getItem("currentJson4"));
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson1"));
       if (urlJson["children"].length > 0) {
         var index = urlJson["children"].findIndex(
           item => item.source == "module 4.9"
         );
-        if (urlJson["children"][index].url != null) {
+        if (urlJson["children"][index].url != null)
+        {
           var mainJson;
           mainJson = JSON.parse(urlJson["children"][index].url);
           this.urlArray["src1"] = mainJson["4.9.1"];

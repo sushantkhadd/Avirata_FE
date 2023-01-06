@@ -49,7 +49,7 @@ export class Module5Component implements OnInit {
     if (this.mainFlagModule5 > 1) {
       this.flag = 0;
       var urlJson = {};
-      urlJson = JSON.parse(window.localStorage.getItem("currentJson5"));
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson1"));
       if (urlJson["children"].length > 0) {
         var index = urlJson["children"].findIndex(
           item => item.source == "module 5.1"

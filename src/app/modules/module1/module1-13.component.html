@@ -106,22 +106,12 @@
         </div>
       </div>
       <div *ngIf="flag == 1">
-        <div class="card-header text-center border-0">
-          <h5>
-            {{thumb_title | translate}}
-          </h5>
-        </div>
         <app-static-video [receivedData]='passData'></app-static-video>
         <div class="card-footer bg-white border-0 mt-3 text-center">
           <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>
         </div>
       </div>
       <div *ngIf="flag == 2">
-        <div class="card-header text-center border-0">
-          <h5>
-            {{thumb_title | translate}}
-          </h5>
-        </div>
         <app-static-video [receivedData]='passData'></app-static-video>
         <div class="card-footer bg-white border-0 mt-3 text-center">
           <a class="btn btn-primary text-white c-pointer" (click)="flag=0">{{'Stepper.Back' | translate}}</a>

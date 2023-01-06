@@ -33,29 +33,28 @@ export class Module1Component implements OnInit {
   public statVideoFlag; thumb_title; vedioCompleteUrl;
 
   ngOnInit() {
-    this.lnk1 = '';
-    this.lnk2 = '';
-    // this.urlArray["src1"] = "skGFDAhQrhE";
-    // this.urlArray["src2"] = "opHKXAPIynA";
+    this.lnk1 = ''
+    this.lnk2 = ''
+    this.urlArray["src1"] = "lTTajzrSkCw";
+    this.urlArray["src2"] = "https://s3-ap-southeast-1.amazonaws.com/maacpd/Level2/Module1/1.10/RM-+1.pdf";
     this.urlArray['v_thumb'] = './../../assets/img/video-thumb.png';
-    this.showVideoFlag=false;
+
+    this.showVideoFlag = false
     if (this.mainFlagModule1 == 1) {
       this.start()
-    }else if (this.mainFlagModule1 > 1) {
+    } else if (this.mainFlagModule1 > 1) {
       this.flag = 0;
       var urlJson = {};
-      urlJson = JSON.parse(window.localStorage.getItem("currentJson1"));
-      console.log("vcxxxx",urlJson)
+      urlJson = JSON.parse(window.localStorage.getItem("currentJson0"));
+      console.log("vcxxxx", urlJson)
       if (urlJson["children"].length > 0) {
         var index = urlJson["children"].findIndex(
           item => item.source == "module 1.1"
         );
-        console.log("qWSS",index)
+        console.log("qWSS", index)
         var mainJson;
         mainJson = JSON.parse(urlJson["children"][index].url);
-        console.log("hjbhjb",mainJson['1.1.1'])
-        if (mainJson != null)
-        {
+        if (mainJson != null) {
           this.urlArray["src1"] = mainJson["1.1.1"];
           this.urlArray["src2"] = mainJson["1.1.2"];
         } else {
@@ -68,10 +67,9 @@ export class Module1Component implements OnInit {
   }
 
   mapJSON() {
-    console.log("mapJSON",this.lnk1, this.lnk2);
     this.urlArray['src1'] = this.lnk1
     this.urlArray['src2'] = this.lnk2
-    }
+  }
 
   start() {
     var jsonBody = {}
@@ -92,7 +90,7 @@ export class Module1Component implements OnInit {
     this.subFlagModule1 = this.subFlagModule1 + 1;
     window.localStorage.setItem('subFlagModule1', this.subFlagModule1.toString());
     this.instructionModal.hide();
-    this.showVideoFlag=false;    
+    this.showVideoFlag = false;
   }
 
   next() {
@@ -107,9 +105,9 @@ export class Module1Component implements OnInit {
       data => {
         if (data["status"] == true) {
           if (fun == "start") {
-            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 0.1', window.localStorage.getItem('username'), 10);            
+            this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 1.1', window.localStorage.getItem('username'), 10);
             this.passData['apiUrl'] = "moduleonesingleurl/";
-            this.passData['videoUrl'] = data['data'].url;  
+            this.passData['videoUrl'] = data['data'].url;
             if (this.subFlagModule1 == 2) {
               this.showCFU = false;
               this.passValues['url'] = data['data'].url;
@@ -121,7 +119,7 @@ export class Module1Component implements OnInit {
             var current1 = [];
             current1 = JSON.parse(window.localStorage.getItem("currentJson1"));
             var index = current1["children"].findIndex(
-              item => item.source == "module 0.1");
+              item => item.source == "module 1.1");
             //current1["children"][index].url = this.passUrl;
 
             window.localStorage.setItem("currentJson1", JSON.stringify(current1));
@@ -144,15 +142,15 @@ export class Module1Component implements OnInit {
     );
   }
 
-  nextApiCall(fun){
+  nextApiCall(fun) {
     var jsonBody = {};
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid');
     jsonBody['event'] = 'finish';
     this.Module1Service.apiCall(jsonBody, 'moduleonesingleurl/').subscribe(
       data => {
-        if (data["status"] == true) {         
-            window.localStorage.setItem('uuid', data['data'].nextuuid);
-            this.start();
+        if (data["status"] == true) {
+          window.localStorage.setItem('uuid', data['data'].nextuuid);
+          this.start();
         }
       },
       error => {
@@ -168,19 +166,17 @@ export class Module1Component implements OnInit {
     this.apiCall(jsonBody, 'moduleonesingleurl/', 'finish1');
   }
 
-  showVideo(src, title,value) {    
-    if (value == 1)
-    {
+  showVideo(src, title, value) {
+    if (value == 1) {
       this.passData['videoUrl'] = src;
       this.thumb_title = title;
       this.flag = value;
-    } else if (value == 2)
-    {
+    } else if (value == 2) {
       this.passValues["url"] = src;
       this.thumb_title = title;
       this.flag = value;
       // this.passValues["unlockView"] = "static";
     }
-  
+
   }
 }
