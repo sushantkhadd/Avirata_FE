@@ -9,6 +9,26 @@
 
 
 <div *ngIf="mainFlagModule0 == 27">
+  <div *ngIf="!startPdf">
+    <div class="instruction-wrap">
+      <div class="card">
+        <div class="card-header text-white">
+          <span class="exp-img instructions-img"></span>
+          <h4>{{'Quiz.note' | translate}}</h4>
+        </div>
+        <div class="card-block inst-text">
+          <p [innerHTML]="'L2Module0.subMenu1-3_inst' | translate"></p>          
+
+        </div>
+        <div class="card-footer">
+          <div class="float-right">
+            <button class="btn btn-primary" appPreventDoubleClick
+              (debounceClick)="start();">{{'Module4.start' | translate}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div *ngIf="startPdf">
     <div class="row">
       <div class="col-md-12">
@@ -23,6 +43,21 @@
       </div>
     </div>
   </div>
+
+  <!-- <div *ngIf="startPdf">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card ">
+          <div class="card-footer">
+            <h6 class="text-center">{{'L2Module0.subMenu1-27' | translate}}</h6>
+          </div>
+          <div class="card-block text-center">
+            <app-presentation [data]='passValues' (sendCfuAns)="finishPDF($event)"></app-presentation>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
 </div>
 
 <div *ngIf="mainFlagModule0 > 27">

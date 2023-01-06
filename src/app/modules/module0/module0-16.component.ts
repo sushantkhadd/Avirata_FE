@@ -27,7 +27,10 @@ export class Module016Component implements OnInit {
   showCFU: boolean;
   urlArray={};lnk1;lnk2;thumb_title;
   flag: number;
-  pdfUrl
+  pdfUrl;
+  lnk3;
+  lnk4;
+  lnk5;
   constructor(
     public LanguageService: LanguageService,
     private LocalstoragedetailsService: LocalstoragedetailsService,
@@ -41,9 +44,17 @@ export class Module016Component implements OnInit {
   }
   public passData = {};
   ngOnInit() {
-    this.lnk1 = ''
-    this.lnk2 = ''
-    this.pdfUrl='https://s3-ap-southeast-1.amazonaws.com/maacpd/english/level1/module1/1.7_A.pdf'
+    this.lnk1 = '';
+    this.lnk2 = '';
+    this.lnk3 = '';
+    this.lnk4 = '';
+    this.lnk5 = '';
+    this.urlArray["src1"] = "https://s3-ap-southeast-1.amazonaws.com/maacpd/Level2/Module1/1.10/RM-+1.pdf";
+    this.urlArray["src2"] = "lTTajzrSkCw";
+    this.urlArray["src3"] = "lTTajzrSkCw";
+    this.urlArray["src4"] = "https://s3-ap-southeast-1.amazonaws.com/maacpd/Level2/Module1/1.10/RM-+1.pdf";
+    this.urlArray["src5"] = "lTTajzrSkCw";
+
     if (this.mainFlagModule0 == 16) {
       this.showVideoFlag = false; 
       if (this.subFlagModule0 == 4 ) {
@@ -71,9 +82,10 @@ export class Module016Component implements OnInit {
         );
         var mainJson;
         mainJson = JSON.parse(urlJson["children"][index].url);
-        console.log("hjbhjb",mainJson["1"])
         if (mainJson != null)
         {
+          console.log("hjbhjb",mainJson["1"], mainJson["2"], mainJson["3"], mainJson["4"], mainJson["5"])
+
           this.urlArray["src1"] = mainJson["1"];
           this.urlArray["src2"] = mainJson["2"];
           this.urlArray["src3"] = mainJson["3"];
@@ -89,15 +101,20 @@ export class Module016Component implements OnInit {
   }
 
   mapJSON() {
-    this.urlArray['src1'] = this.lnk1
-    this.urlArray['src2'] = this.lnk2
-    }
+    this.urlArray['src1'] = this.lnk1;
+    this.urlArray['src2'] = this.lnk2;
+    this.urlArray['src3'] = this.lnk3;
+    this.urlArray['src4'] = this.lnk4;
+    this.urlArray['src5'] = this.lnk5;
+  }
+
   start() {
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
     jsonBody['event'] = 'start'
     this.apiCall(jsonBody, 'modulezerosingleurl/', 'start', 0);
   }
+
   videoFinish(e, item) {
     this.videoflag = item
     if (e == true) {
@@ -106,6 +123,7 @@ export class Module016Component implements OnInit {
       // this.nextBtnFlag = true
     }
   }
+
   next(item) {
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')

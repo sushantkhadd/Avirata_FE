@@ -33,8 +33,8 @@ export class Module03Component implements OnInit {
   ngOnInit() {
     this.lnk1 = ''
     this.lnk2 = ''
-    this.urlArray["src1"] = "skGFDAhQrhE";
-    this.urlArray["src2"] = "opHKXAPIynA";
+    this.urlArray["src1"] = "lTTajzrSkCw";
+    this.urlArray["src2"] = "https://s3-ap-southeast-1.amazonaws.com/maacpd/Level2/Module1/1.10/RM-+1.pdf";
     this.urlArray['v_thumb'] = './../../assets/img/video-thumb.png';
     this.showVideoFlag=false
     if (this.mainFlagModule0 == 3) {
