@@ -32,11 +32,7 @@
     <div class="assignForm" *ngIf="!instFlag">
       <div class="card">
         <h6 class="questionHead lineHeight">{{'L2common.caution' | translate}} <span [innerHTML]="inst"> </span></h6>
-        <div class="card-header">
-          <h5 [innerHTML]="description">
-          </h5>
-        </div>
-        <div class="card-block pt-2">
+        <div class="card-block mt-1 pt-2">
           <form #assignForm="ngForm">
             <div class="form-group row">
               <label class="col-sm-4 col-md-4 form-control-label" [class.font-weight-bold]="queFlag" for="answer1"

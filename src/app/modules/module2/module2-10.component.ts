@@ -72,22 +72,7 @@ export class Module210Component implements OnInit {
         this.startFlag = false;
         // this.startEvent2();
       }
-    } else if (this.mainFlagModule2 > 10) {
-      var urlJson = {};
-      urlJson = JSON.parse(window.localStorage.getItem("currentJson2"));
-      if (urlJson["children"].length > 0) {
-        var index = urlJson["children"].findIndex(
-          item => item.source == "module 2.10"
-        );
-        var mainJson;
-        mainJson = JSON.parse(urlJson["children"][index].url);
-        console.log("hjbhjb", mainJson);
-        if (urlJson["children"][index].url != null) {
-          this.urlArray["src1"] = mainJson["2.10.1"];
-          this.passData["videoUrl"] = this.urlArray["src1"];
-        }
-      }
-    }
+    } 
   }
 
   startEvent1() {
@@ -185,7 +170,7 @@ export class Module210Component implements OnInit {
             );
             window.localStorage.setItem("mainFlagModule2", "11");
             window.localStorage.setItem("subFlagModule2", "1");
-            window.localStorage.setItem("source", "module 2.11.1");
+            window.localStorage.setItem("source", "module 2.11");
             this.Module2Service.setLocalStorage2(11);
             var obj = {
               type: "submodule",

@@ -77,8 +77,8 @@ export class Module12Component implements OnInit {
               "type": "submodule",
               "route": true,
               "current": this.translate.instant('L2Module1.subMenu1-3'),
-              "next": this.translate.instant('L2Module1Finish.subMenu1-3')
-              // "inst":this.translate.instant('L2Module1Finish.Inst1_2')
+              "next": this.translate.instant('L2Module1Finish.subMenu1-3'),
+              "inst":this.translate.instant('L2Module1Finish.Inst1_2')
             }
             this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
           }

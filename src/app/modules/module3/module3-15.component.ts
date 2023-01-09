@@ -19,7 +19,7 @@ export class Module315Component implements OnInit {
   );
 
   public passData = {}; passUrl: any; passValues={}; startPdf: boolean;
-  inst="सूचना - मानसिक आजारांसाठी काय प्रथमोपचार करता येतील? याविषयी अधिक जाणून घेण्यासाठी इयत्ता १२ वीच्या मानसशास्त्र विषयाच्या पुस्तकातील ‘प्रकरण ७ - मानसिक आरोग्यासाठी प्रथमोपचार’ हे प्रकरण वाचा.ई-पुस्तकाची लिंक - <a href='http://ekatmik.balbharati.in/pdfs/1201000505.pdf' target='_blank'>http://ekatmik.balbharati.in/pdfs/1201000505.pdf</a>"
+  inst="<b>सूचना -</b> मानसिक आजारांसाठी काय प्रथमोपचार करता येतील? याविषयी अधिक जाणून घेण्यासाठी इयत्ता १२ वीच्या मानसशास्त्र विषयाच्या पुस्तकातील <b>‘प्रकरण ७ - मानसिक आरोग्यासाठी प्रथमोपचार’</b> हे प्रकरण वाचा.ई-पुस्तकाची लिंक - <a href='http://ekatmik.balbharati.in/pdfs/1201000505.pdf' target='_blank'>http://ekatmik.balbharati.in/pdfs/1201000505.pdf</a>"
   constructor(
     public LanguageService: LanguageService,
     private LocalstoragedetailsService: LocalstoragedetailsService,

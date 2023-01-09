@@ -32,12 +32,7 @@ export class Module211Component implements OnInit {
       this.router.navigate(['/']);
     }
 
-    if (this.subFlagModule2 == 1) {
-    }
-     if (this.mainFlagModule2 < 11) {
-
-    }
-     else if (this.mainFlagModule2 == 11)
+    if (this.mainFlagModule2 == 11)
      {
       this.startVideoEvent = false;
       this.videoData['apiUrl'] = 'moduletwocfustart/';

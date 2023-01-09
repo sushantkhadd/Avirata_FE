@@ -41,7 +41,11 @@ export class Module1Component implements OnInit {
 
     this.showVideoFlag = false
     if (this.mainFlagModule1 == 1) {
-      this.start()
+      if(this.subFlagModule1 == 1){
+        this.start();
+      }else if(this.subFlagModule1 == 2){
+        this.showVideoFlag = false;
+      }
     } else if (this.mainFlagModule1 > 1) {
       this.flag = 0;
       var urlJson = {};

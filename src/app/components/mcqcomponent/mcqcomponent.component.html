@@ -272,7 +272,7 @@
     </div><br>
 </div>
 <!-- <p>dadjjk</p> -->
-<div class="mcqComponentModal">
+<div class="mcqComponentModal check">
 <div bsModal #rankModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-primary" role="document">
@@ -288,7 +288,7 @@
                 <h5 class="text-white mb-1" *ngIf="rightFlag==true && questionType == 'checkBoxOption'">{{'subModule1_9.correctAns' | translate }}</h5>
             </div>
             <div class="modal-body" *ngIf="questionType != 'checkBoxOption'" [class.d-none]="(mysubModule1==4 || mysubModule1==9 || mysubModule2==9 || mysubModule2==6 || mysubModule3==5 || mysubModule3==8 || mysubModule3==11 || mysubModule4==5 || mysubModule4==8 || mysubModule4==14 || mysubModule4==7 || mysubModule4==11 || mysubModule5==7 || mysubModule0==30) && rightFlag">
-                <span *ngIf="mysubModule4 != 9 && mysubModule4 != 13">
+                <span *ngIf="mysubModule4 != 9 && mysubModule4 != 13 && mysubModule2 != 4">
                 <p *ngIf="rightFlag==false"><b>{{'subModule1_9.correctAns' | translate }} :</b></p>
                 <p *ngIf="rightFlag==false">{{showCorrectAns}}</p>
                 <!-- <p *ngIf="mysubModule0==2"><b>{{'subModule1_9.correctAns' | translate }} :</b> {{showCorrectAns}}</p> -->
@@ -332,7 +332,7 @@
 </div>
 </div>
 
-<div class="mcqComponentModal">
+<div class="mcqComponentModal hello">
     <div bsModal #instructionModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
         aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-primary" role="document">
