@@ -94,28 +94,38 @@
                 </p> -->
               </div>
             </div>
-
-            <div class="form-group row">
-              
-              <label class="col-md-2 col-sm-2 form-control-label" [for]="queId4" [innerHTML]="que4"></label>
-              <div class="col-sm-10 col-md-10 controls">
-                <textarea autosize [minRows]="2" class="form-control" [id]="queId4" name="answer4" [(ngModel)]="answer4" rows="2" minlength="7" #addr="ngModel"
-                (keypress)="handleInput($event)" required></textarea>
-                      
-              </div>
-            </div>
-
             <hr>
+
             <div class="form-group row">
               <div class="col-12 col-md-12 col-sm-12 form-control-label">
                 {{'number.1' | translate}}.
+                <label [for]="queId4" [innerHTML]="que4"></label>
+              </div>
+              <div class="col-12 col-sm-12 col-md-12 controls">
+                <textarea autosize [minRows]="2" class="form-control" [id]="queId4" name="answer4" [(ngModel)]="answer4" rows="2" minlength="7" #addr="ngModel"
+                (focus)="showLimit['4']=true;zeroMsgFlag['4']=true;errorMsgFlag['4']=false"
+                (focusout)="showLimit['4']=false;zeroMsgFlag['4']=false;errorMsgFlag['4']=true"(keypress)="handleInput($event)" required></textarea>
+                <div *ngIf="showLimit['4']==false && (postWordCount['4']>150 || postWordCount['4']<7) && errorMsgFlag['4']" class="offset-md-2 mt-2">
+                  <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn7_150' | translate}}</p>
+                </div>
+                <p *ngIf="showLimit['4']" class="text-right pt-1">
+                  <span *ngIf="postWordCount['4']!=0">{{'otherMessages.wordLimit' | translate}} {{postWordCount['4'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}</span>
+                  <span *ngIf="postWordCount['4']==0 && zeroMsgFlag['4']==true">
+                    {{'otherMessages.wordLimit' | translate}} {{'number.0' | translate}}/{{'number.150' | translate}}</span>
+                </p>      
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-12 col-md-12 col-sm-12 form-control-label">
+                {{'number.2' | translate}}.
                 <label [for]="queId5" [innerHTML]="que5"></label>
               </div>
               <div class="col-12 col-sm-12 col-md-12 controls">
                 <textarea autosize [minRows]="2" class="form-control" [id]="queId5" name="answer5" [(ngModel)]="answer5" rows="2" #addr="ngModel" (focus)="showLimit['5']=true;zeroMsgFlag['5']=true;errorMsgFlag['5']=false"
                   (focusout)="showLimit['5']=false;zeroMsgFlag['5']=false;errorMsgFlag['5']=true" (keypress)="handleInput($event)" required></textarea>
-                <div *ngIf="showLimit['5']==false && (postWordCount['5']>150 || postWordCount['5']<5) && errorMsgFlag['5']" class="offset-md-2 mt-2">
-                  <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn5_150' | translate}}</p>
+                <div *ngIf="showLimit['5']==false && (postWordCount['5']>150 || postWordCount['5']<7) && errorMsgFlag['5']" class="offset-md-2 mt-2">
+                  <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn7_150' | translate}}</p>
                 </div>
                 <p *ngIf="showLimit['5']" class="text-right pt-1">
                   <span *ngIf="postWordCount['5']!=0">{{'otherMessages.wordLimit' | translate}} {{postWordCount['5'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}</span>
@@ -127,14 +137,14 @@
 
             <div class="form-group row">
               <div class="col-12 col-md-12 col-sm-12 form-control-label">
-                {{'number.2' | translate}}.
+                {{'number.3' | translate}}.
                 <label [for]="queId6" [innerHTML]="que6"></label>
               </div>
               <div class="col-12 col-sm-12 col-md-12 controls">
                 <textarea autosize [minRows]="2" class="form-control" [id]="queId6" name="answer6" [(ngModel)]="answer6" rows="2" #addr="ngModel" (focus)="showLimit['6']=true;zeroMsgFlag['6']=true;errorMsgFlag['6']=false"
                   (focusout)="showLimit['6']=false;zeroMsgFlag['6']=false;errorMsgFlag['6']=true" (keypress)="handleInput($event)" required></textarea>
-                <div *ngIf="showLimit['6']==false && (postWordCount['6']>150 || postWordCount['6']<5) && errorMsgFlag['6']" class="offset-md-2 mt-2">
-                  <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn5_150' | translate}}</p>
+                <div *ngIf="showLimit['6']==false && (postWordCount['6']>150 || postWordCount['6']<7) && errorMsgFlag['6']" class="offset-md-2 mt-2">
+                  <p class="color_red pt-1 mb-0">{{'otherMessages.ansIn7_150' | translate}}</p>
                 </div>
                 <p *ngIf="showLimit['6']" class="text-right pt-1">
                   <span *ngIf="postWordCount['6']!=0">{{'otherMessages.wordLimit' | translate}} {{postWordCount['6'] | numberConvertor : 'Devanagari'}}/{{'number.150' | translate}}</span>
@@ -182,7 +192,6 @@
       </div>
     </div>
 </div>
-
 
 <div class="videoFinishModal videoFinishedModel marks-modal">
   <div bsModal #confirmationModal="bs-modal" class="modal fade" [config]="{backdrop: 'static'}" tabindex="-1"

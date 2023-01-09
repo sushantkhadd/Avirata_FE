@@ -335,7 +335,7 @@ export class Module518Component implements OnInit {
           window.localStorage.setItem("uuid", data['data'].nextuuid)
           this.startPdf = false;
           // this.start();
-            this.mainFlagModule5 = 22;
+            this.mainFlagModule5 = 19;
             window.localStorage.setItem('mainFlagModule5', '19');
             window.localStorage.setItem('subFlagModule5', '1');
             window.localStorage.setItem('source', 'module 5.19');
@@ -394,7 +394,7 @@ export class Module518Component implements OnInit {
       this.start1(this.personId);
     }
     else {
-      if((this.postWordCount['5']<5 || this.postWordCount['5']>150) || (this.postWordCount['6']<5 || this.postWordCount['6']>150) || (this.postWordCount['7']<5 || this.postWordCount['7']>150)){
+      if((this.postWordCount['4']<7 || this.postWordCount['4']>150) || (this.postWordCount['5']<7 || this.postWordCount['5']>150) || (this.postWordCount['6']<7 || this.postWordCount['6']>150) || (this.postWordCount['7']<7 || this.postWordCount['7']>150)){
         console.log("No hit11111111111111")
         this.personId = parseInt(window.localStorage.getItem("personId"))
         window.localStorage.setItem("personId", JSON.stringify(this.personId - 1))
@@ -431,29 +431,42 @@ export class Module518Component implements OnInit {
     // if (this.answer3) {
     //   this.postWordCount['3'] = this.answer3.trim().split(' ').length;
     // }
+    if (this.answer4) {
+      this.postWordCount['4'] = this.answer5.trim().split(/\s+/).length;
+      if(this.postWordCount['4']>150 || this.postWordCount['4']<7){
+        this.errorMsgFlag['4']=true;
+      } else{
+        this.errorMsgFlag['4']=false;
+      }
+      if(this.postWordCount['4']>150 || this.postWordCount['4']==0){
+        this.showLimit['4'] = false;
+      } else if(this.postWordCount['4'] >=7){
+        this.showLimit['4'] = true;
+      }
+    }
     if (this.answer5) {
       this.postWordCount['5'] = this.answer5.trim().split(/\s+/).length;
-      if(this.postWordCount['5']>150 || this.postWordCount['5']<5){
+      if(this.postWordCount['5']>150 || this.postWordCount['5']<7){
         this.errorMsgFlag['5']=true;
       } else{
         this.errorMsgFlag['5']=false;
       }
       if(this.postWordCount['5']>150 || this.postWordCount['5']==0){
         this.showLimit['5'] = false;
-      } else if(this.postWordCount['5'] >=5){
+      } else if(this.postWordCount['5'] >=7){
         this.showLimit['5'] = true;
       }
     }
     if (this.answer6) {
       this.postWordCount['6'] = this.answer6.trim().split(/\s+/).length;
-      if(this.postWordCount['6']>150 || this.postWordCount['6']<5){
+      if(this.postWordCount['6']>150 || this.postWordCount['6']<7){
         this.errorMsgFlag['6']=true;
       } else{
         this.errorMsgFlag['6']=false;
       }
       if(this.postWordCount['6']>150 || this.postWordCount['6']==0){
         this.showLimit['6'] = false;
-      } else if(this.postWordCount['6'] >=5){
+      } else if(this.postWordCount['6'] >=7){
         this.showLimit['6'] = true;
       }
     }
@@ -477,12 +490,12 @@ export class Module518Component implements OnInit {
       //   this.submitFlag = true;
       // } else if (this.postWordCount['2'] > 150 || this.postWordCount['2'] < 5) {
       //   this.submitFlag = true;
-      // } else if (this.postWordCount['3'] > 150 || this.postWordCount['3'] < 5) {
-      //   this.submitFlag = true;
       // } 
-      else if (this.postWordCount['5'] > 150 || this.postWordCount['5'] < 5) {
+      else if (this.postWordCount['4'] > 150 || this.postWordCount['4'] < 7) {
         this.submitFlag = true;
-      } else if (this.postWordCount['6'] > 150 || this.postWordCount['6'] < 5) {
+      } else if (this.postWordCount['5'] > 150 || this.postWordCount['5'] < 7) {
+        this.submitFlag = true;
+      } else if (this.postWordCount['6'] > 150 || this.postWordCount['6'] < 7) {
         this.submitFlag = true;
       } else {
         this.submitFlag = false;
@@ -498,9 +511,9 @@ export class Module518Component implements OnInit {
     // if (this.answer3 == "" || this.answer3 == null || this.answer3 == undefined) {
     //   this.postWordCount['3'] = 0;
     // }
-    // if (this.answer4 == "" || this.answer4 == null || this.answer4 == undefined) {
-    //   this.postWordCount['4'] = 0;
-    // }
+    if (this.answer4 == "" || this.answer4 == null || this.answer4 == undefined) {
+      this.postWordCount['4'] = 0;
+    }
     if (this.answer5 == "" || this.answer5 == null || this.answer5 == undefined) {
       this.postWordCount['5'] = 0;
     }
@@ -573,7 +586,6 @@ export class Module518Component implements OnInit {
     this.pdfModal.show();
     this.LanguageService.toShow();
   }
-
 
   numberOnly(event) {
     const charCode = (event.which) ? event.which : event.keyCode;

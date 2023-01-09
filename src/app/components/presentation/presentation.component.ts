@@ -58,7 +58,7 @@ export class PresentationComponent implements OnInit {
   loaderSrc = "../../../assets/img/loader-fb.svg";
   rewardImgUrl1;
   rewardImgUrl2; selectedValue;
-  rewardsOptions = []; hideMe; mySubModule2;
+  rewardsOptions = []; hideMe; mySubModule2; mySubModule1;
 
   constructor(public _eleRef: ElementRef, public CommonService: CommonService, public CommonComponentService: CommonComponentService, public router: Router, public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService, private sanitizer: DomSanitizer, public domSanitizer: DomSanitizerPipe, public LanguageService: LanguageService) {
     this.toastr.setRootViewContainerRef(vcr);
@@ -227,6 +227,7 @@ export class PresentationComponent implements OnInit {
 
   ngOnInit() {
     console.log('hiiii',this.data)
+    this.mySubModule1 = parseInt(window.localStorage.getItem('mainFlagModule1'));
     this.mySubModule2 = window.localStorage.getItem('mainFlagModule2');
     this.isLoaded = true;
     this.selectedValue = "";
