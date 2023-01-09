@@ -26,7 +26,7 @@ export class Module48Component implements OnInit {
     this.toastr.setRootViewContainerRef(vcr);
   }
   public data; questionType; passFlags = {}; showAnswer; saveData; answer; sumbitButton; startFlag;description;
-  public inst = "सहवेदना निर्माण करण्याच्या दृष्टिने खालील प्रसंगी शिक्षकांनी केलेली कृती योग्य आहे की अयोग्य ते लिहा."
+  public inst = "सहवेदना निर्माण करण्याच्या दृष्टिने खालील प्रसंगी शिक्षकांनी केलेली कृती योग्य आहे की अयोग्य?"
   
   ngOnInit() {
     this.startFlag = false;

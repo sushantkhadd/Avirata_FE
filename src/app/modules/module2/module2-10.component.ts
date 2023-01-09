@@ -54,16 +54,16 @@ export class Module210Component implements OnInit {
 
   ngOnInit() {
     this.vedioCompleteUrl = "79vHVVtmIoQ";
-    this.mainFlagModule2 = parseInt(
-      window.localStorage.getItem("mainFlagModule2")
-    );
-    this.subFlagModule2 = parseInt(
-      window.localStorage.getItem("subFlagModule2")
-    );
-    this.token = this.LocalstoragedetailsService.token;
-    if (this.token == null) {
-      this.router.navigate(["/"]);
-    }
+    // this.mainFlagModule2 = parseInt(
+    //   window.localStorage.getItem("mainFlagModule2")
+    // );
+    // this.subFlagModule2 = parseInt(
+    //   window.localStorage.getItem("subFlagModule2")
+    // );
+    // this.token = this.LocalstoragedetailsService.token;
+    // if (this.token == null) {
+    //   this.router.navigate(["/"]);
+    // }
 
     if (this.mainFlagModule2 == 10) {
       if (this.subFlagModule2 == 1) {
@@ -72,7 +72,9 @@ export class Module210Component implements OnInit {
         this.startFlag = false;
         // this.startEvent2();
       }
-    } 
+    } else if(this.mainFlagModule2 > 10){
+
+    }
   }
 
   startEvent1() {
@@ -162,7 +164,7 @@ export class Module210Component implements OnInit {
             this.question = data["data"]["questionlist"][0].question;
             this.questionid = data["data"]["questionlist"][0].questionid;          
           } else if (fun == "finish2") {
-            this.mainFlagModule2 = 2;
+            this.mainFlagModule2 = 10;
             window.localStorage.setItem("subFlagModule2", "2");
             window.localStorage.setItem(
               "uuid",
