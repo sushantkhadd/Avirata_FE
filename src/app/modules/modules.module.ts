@@ -176,6 +176,7 @@ import { Module114Component } from "./module1/module1-14.component";
 import { Module115Component } from "./module1/module1-15.component";
 import { Module415Component } from "./module4/module4-15.component";
 import { Module416Component } from "./module4/module4-16.component";
+import { StaticVideoModule0Component } from "../components/static-video-module0/static-video-module0.component";
 
 
 @NgModule({
@@ -351,7 +352,8 @@ import { Module416Component } from "./module4/module4-16.component";
     Module115Component,
     MasterstatComponent,
     PresentlistComponent,
-    SetProfileComponent
+    SetProfileComponent,
+    StaticVideoModule0Component
   ],
   providers: [
     Module0Service,
