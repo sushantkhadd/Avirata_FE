@@ -28,7 +28,7 @@ export class Module02Component implements OnInit {
   ngOnInit() {
     this.lnk1 = ''
     this.lnk2 = ''
-    this.urlArray["src1"] = "skGFDAhQrhE";
+    this.urlArray["src1"] = "Pqjvi6VF08A";
     this.urlArray["src2"] = "opHKXAPIynA";
     this.urlArray['v_thumb'] = './../../assets/img/video-thumb.png'
 
@@ -44,12 +44,12 @@ export class Module02Component implements OnInit {
       
       var urlJson = {};
       urlJson = JSON.parse(window.localStorage.getItem("currentJson0"));
-      console.log("vcxxxx", urlJson);
+      console.log("currentJson0.2", urlJson);
       if (urlJson["children"].length > 0) {
         var index = urlJson["children"].findIndex(
           item => item.source == "module 0.2"
         );
-        console.log("qWSS", index);
+        console.log("currentJson0.2 index", index);
         // var mainJson;
         // mainJson = JSON.parse(urlJson["children"][index].url);
         // console.log("hjbhjb", mainJson);
@@ -61,13 +61,13 @@ export class Module02Component implements OnInit {
     }
   }
 
-
   start() {
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
     jsonBody['event'] = 'start'
     this.apiCall(jsonBody, 'modulezerosingleurl/', 'start')
   }
+
   videoFinish(e) {
     if (e == true)
     {
@@ -76,6 +76,7 @@ export class Module02Component implements OnInit {
       this.nextBtnFlag = true
     }
   }
+
   next() {
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
@@ -98,8 +99,8 @@ export class Module02Component implements OnInit {
             current0 = JSON.parse(window.localStorage.getItem("currentJson0"));
             var index = current0["children"].findIndex(
               item => item.source == "module 0.2");
-            current0["children"][index].url =this.passUrl;
-
+            current0["children"][index].url = this.passUrl;
+            console.log("current json 0.2", JSON.stringify(current0));
             window.localStorage.setItem("currentJson0", JSON.stringify(current0));
           } else if (fun == "finish1") {
             this.instructionModal.hide();

@@ -12,6 +12,7 @@ import {Module0Service} from './module0.service'
   templateUrl: './module0-5.component.html'
 })
 export class Module05Component implements OnInit {
+
   @ViewChild('instructionModal') public instructionModal: ModalDirective;
 
   public mainFlagModule0 = parseInt(
@@ -33,8 +34,12 @@ export class Module05Component implements OnInit {
   ) {
     this.toastr.setRootViewContainerRef(vcr);
   }
-  public passData = {}; 
+  public passData = {}; lnk1; urlArray = {};
   ngOnInit() {
+    this.lnk1 = ''
+    this.urlArray["src1"] = "OQpEQpiJbzo";
+    this.showVideoFlag = false;
+
     if (this.mainFlagModule0 > 5)
     {
       var urlJson = {};
@@ -86,7 +91,7 @@ export class Module05Component implements OnInit {
             var current0 = [];
             current0 = JSON.parse(window.localStorage.getItem("currentJson0"));
             var index = current0["children"].findIndex(
-              item => item.source == "module 0.4");
+              item => item.source == "module 0.5");
             current0["children"][index].url = this.passUrl;
 
             window.localStorage.setItem("currentJson0", JSON.stringify(current0));

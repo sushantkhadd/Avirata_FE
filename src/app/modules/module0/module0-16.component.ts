@@ -137,6 +137,7 @@ export class Module016Component implements OnInit {
   }
 
   apiCall(jsonBody, apiUrl, fun, item) {
+    console.log();
     this.passData['videoUrl']='';
     this.showVideoFlag = false;
     this.Module0Service.apiCall(jsonBody, apiUrl).subscribe(
@@ -158,24 +159,21 @@ export class Module016Component implements OnInit {
             current0["children"][index].url = this.passUrl;
 
             window.localStorage.setItem("currentJson0", JSON.stringify(current0));
-          } else if (fun == "finish1") {
-
-            if (item == 5) {
-              this.instructionModal.hide();
-              this.LanguageService.toHide();
-              window.localStorage.setItem('uuid', data['data'].nextuuid)
-              window.localStorage.setItem('mainFlagModule0', '17');
-              window.localStorage.setItem('subFlagModule0', '1');
-              window.localStorage.setItem('source', 'module 0.17');
-              this.Module0Service.setLocalStorage0(17);
-              var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module0.subMenu0-17'), "next": this.translate.instant('L2Module0Finish.subMenu0-17'), "nextRoute": "/modules/module0/Module0.17" }
-              this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
-            } else {
-              this.instructionModal.hide();
-              this.LanguageService.toHide();
-            }
-
+          } else if (fun == "finish1" && item == 5) {
+            this.instructionModal.hide();
+            this.LanguageService.toHide();
+            window.localStorage.setItem('uuid', data['data'].nextuuid)
+            window.localStorage.setItem('mainFlagModule0', '17');
+            window.localStorage.setItem('subFlagModule0', '1');
+            window.localStorage.setItem('source', 'module 0.17');
+            this.Module0Service.setLocalStorage0(17);
+            var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module0.subMenu0-17'), "next": this.translate.instant('L2Module0Finish.subMenu0-17'), "nextRoute": "/modules/module0/Module0.17" }
+            this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
+          } else  if (fun == "finish1" && item != 5){
+            this.instructionModal.hide();
+            this.LanguageService.toHide();
           }
+
         }
       },
       error => {
@@ -186,15 +184,14 @@ export class Module016Component implements OnInit {
 
 
   nextvideo(item) {
+    this.instructionModal.hide();
     this.subFlagModule0 = this.subFlagModule0 + 1
     window.localStorage.setItem('subFlagModule0', this.subFlagModule0.toString());
-    this.instructionModal.hide();
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
     jsonBody['event'] = 'finish'
     if (item == 5) {
       this.apiCall(jsonBody, 'modulezerosingleurl/', 'finish1', item)
-
     } else {
       this.nextApiCall(jsonBody, 'modulezerosingleurl/', 'finish1')
     }

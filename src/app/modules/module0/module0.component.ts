@@ -26,9 +26,9 @@ export class Module0Component implements OnInit {
   public statVideoFlag; thumb_title;vedioCompleteUrl;
 
   ngOnInit() {
-    this.lnk1 = ''
-    this.lnk2 = ''
-    this.urlArray["src1"] = "skGFDAhQrhE";
+    this.lnk1 = '';
+    this.lnk2 = '';
+    this.urlArray["src1"] = "KMiJVeDBh7M";
     this.urlArray["src2"] = "opHKXAPIynA";
     this.urlArray['v_thumb'] = './../../assets/img/video-thumb.png';
     this.showVideoFlag = false;
@@ -36,12 +36,12 @@ export class Module0Component implements OnInit {
     {
       var urlJson = {};
       urlJson = JSON.parse(window.localStorage.getItem("currentJson0"));
-      console.log("vcxxxx", urlJson);
+      console.log("currentJson0.1", urlJson);
       if (urlJson["children"].length > 0) {
         var index = urlJson["children"].findIndex(
           item => item.source == "module 0.1"
         );
-        console.log("qWSS", index);
+        console.log("currentJson0.1 index", index);
         if (urlJson["children"][index].url != null) {
           this.passData["videoUrl"] = urlJson["children"][index].url;
         }
@@ -49,13 +49,13 @@ export class Module0Component implements OnInit {
     }
   }
 
-
   start() {
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
     jsonBody['event'] = 'start'
     this.apiCall(jsonBody, 'modulezerosingleurl/', 'start')
   }
+
   videoFinish(e) {
     if (e == true)
     {
@@ -64,6 +64,7 @@ export class Module0Component implements OnInit {
       this.nextBtnFlag = true
     }
   }
+
   next() {
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
@@ -79,15 +80,15 @@ export class Module0Component implements OnInit {
             this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 0.1', window.localStorage.getItem('username'), 10);
             this.passData['apiUrl'] = "modulezerosingleurl/";
             this.passData['videoUrl'] = data['data'].url;
-            console.log("sacsac",this.passData)
-            this.showVideoFlag = true
+            console.log("api call 0.1",this.passData)
+            this.showVideoFlag = true;
             this.passUrl = data['data'].url;
             var current0 = [];
             current0 = JSON.parse(window.localStorage.getItem("currentJson0"));
             var index = current0["children"].findIndex(
               item => item.source == "module 0.1");
             current0["children"][index].url =this.passUrl;
-
+            console.log("current json 0.1",JSON.stringify(current0));
             window.localStorage.setItem("currentJson0", JSON.stringify(current0));
           } else if (fun == "finish1") {
             this.instructionModal.hide();
