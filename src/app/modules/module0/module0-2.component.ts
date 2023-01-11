@@ -37,24 +37,15 @@ export class Module02Component implements OnInit {
     if (this.mainFlagModule0 == 2)
     {
         // this.start()
-    }
-
-    else if (this.mainFlagModule0 > 2)
+    } else if (this.mainFlagModule0 > 2)
     {
-      
       var urlJson = {};
       urlJson = JSON.parse(window.localStorage.getItem("currentJson0"));
-      console.log("currentJson0.2", urlJson);
       if (urlJson["children"].length > 0) {
         var index = urlJson["children"].findIndex(
           item => item.source == "module 0.2"
         );
-        console.log("currentJson0.2 index", index);
-        // var mainJson;
-        // mainJson = JSON.parse(urlJson["children"][index].url);
-        // console.log("hjbhjb", mainJson);
         if (urlJson["children"][index].url != null) {
-          // this.urlArray["src1"] = mainJson["4.1.1"];
           this.passData["videoUrl"] = urlJson["children"][index].url;
         }
       }
@@ -92,7 +83,6 @@ export class Module02Component implements OnInit {
             this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 0.2', window.localStorage.getItem('username'), 10);
             this.passData['apiUrl'] = "modulezerosingleurl/";
             this.passData['videoUrl'] = data['data'].url;
-            console.log("sacsac",this.passData)
             this.showVideoFlag = true
             this.passUrl = data['data'].url;
             var current0 = [];
@@ -100,7 +90,6 @@ export class Module02Component implements OnInit {
             var index = current0["children"].findIndex(
               item => item.source == "module 0.2");
             current0["children"][index].url = this.passUrl;
-            console.log("current json 0.2", JSON.stringify(current0));
             window.localStorage.setItem("currentJson0", JSON.stringify(current0));
           } else if (fun == "finish1") {
             this.instructionModal.hide();

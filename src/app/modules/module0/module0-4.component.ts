@@ -38,28 +38,20 @@ export class Module04Component implements OnInit {
     {
         // this.start()
     }
-
     else if (this.mainFlagModule0 > 4)
     {
       var urlJson = {};
       urlJson = JSON.parse(window.localStorage.getItem("currentJson0"));
-      console.log("vcxxxx", urlJson);
       if (urlJson["children"].length > 0) {
         var index = urlJson["children"].findIndex(
           item => item.source == "module 0.4"
         );
-        console.log("qWSS", index);
-        // var mainJson;
-        // mainJson = JSON.parse(urlJson["children"][index].url);
-        // console.log("hjbhjb", mainJson);
         if (urlJson["children"][index].url != null) {
-          // this.urlArray["src1"] = mainJson["4.1.1"];
           this.passData["videoUrl"] = urlJson["children"][index].url;
         }
       }
     }
   }
-
 
   start() {
     var jsonBody = {}
@@ -67,6 +59,7 @@ export class Module04Component implements OnInit {
     jsonBody['event'] = 'start'
     this.apiCall(jsonBody, 'modulezerosingleurl/', 'start')
   }
+
   videoFinish(e) {
     if (e == true)
     {
@@ -75,6 +68,7 @@ export class Module04Component implements OnInit {
       this.nextBtnFlag = true
     }
   }
+  
   next() {
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')

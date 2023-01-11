@@ -44,15 +44,15 @@ export class Module011Component implements OnInit {
   ngOnInit() {
     this.lnk1 = ''
     this.lnk2 = ''
-    this.urlArray["src1"] = "skGFDAhQrhE";
-    this.urlArray["src2"] = "opHKXAPIynA";
+    this.urlArray["src1"] = "xQ_vb4Pa-vQ";
+    this.urlArray["src2"] = "xaaORpVl8is";
     this.urlArray['v_thumb'] = './../../assets/img/video-thumb.png'
     // this.start();
 
     if (this.mainFlagModule0 == 11) {
       if (this.subFlagModule0 == 2) {
         this.nextId = 2
-        this.start()
+        this.start();
       }
     }
     else if (this.mainFlagModule0 > 11) {
@@ -79,23 +79,25 @@ export class Module011Component implements OnInit {
   }
 
   mapJSON() {
-    this.urlArray['src1'] = this.lnk1
-    this.urlArray['src2'] = this.lnk2
+    this.urlArray['src1'] = this.lnk1;
+    this.urlArray['src2'] = this.lnk2;
   }
+
   start() {
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
     jsonBody['event'] = 'start';
     console.log('hello start', jsonBody)
     this.apiCall(jsonBody, 'modulezerosingleurl/', 'start');
-
   }
+
   videoFinish(e) {
     if (e == true) {
       this.instructionModal.show();
       this.LanguageService.toShow();
     }
   }
+
   nextvideo() {
     this.subFlagModule0 = this.subFlagModule0 + 1
     window.localStorage.setItem('subFlagModule0', this.subFlagModule0.toString());
@@ -112,6 +114,7 @@ export class Module011Component implements OnInit {
 
     }
   }
+
   next() {
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')

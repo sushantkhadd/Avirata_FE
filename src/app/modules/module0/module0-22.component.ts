@@ -48,7 +48,7 @@ export class Module022Component implements OnInit {
     this.urlArray["src2"] = "opHKXAPIynA";
     this.urlArray['v_thumb'] = './../../assets/img/video-thumb.png'
     // this.start();
-    if (this.mainFlagModule0 == 21) {
+    if (this.mainFlagModule0 == 22) {
       if (this.subFlagModule0 == 2) {
         this.nextId = 2
         this.start()

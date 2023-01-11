@@ -117,7 +117,7 @@ export class Module017Component implements OnInit {
 
   apiCall(jsonBody, apiUrl, fun) {
     console.log('hello apicall', jsonBody)
-
+    this.showVideoFlag = false;
     this.Module0Service.apiCall(jsonBody, apiUrl).subscribe(
       data => {
         if (data["status"] == true) {

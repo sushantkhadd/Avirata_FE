@@ -33,8 +33,12 @@ export class Module013Component implements OnInit {
   ) {
     this.toastr.setRootViewContainerRef(vcr);
   }
-  public passData = {}; 
+  public passData = {}; lnk1; urlArray = {};
+
   ngOnInit() {
+    this.lnk1 = '';
+    this.urlArray["src1"] = "r_ztXa-Dh88";
+    this.urlArray['v_thumb'] = './../../assets/img/video-thumb.png';
     
     if (this.mainFlagModule0 == 13) {   
       this.start();  
@@ -42,7 +46,6 @@ export class Module013Component implements OnInit {
     else if (this.mainFlagModule0 > 13) {
       var urlJson = {};
       urlJson = JSON.parse(window.localStorage.getItem("currentJson0"));
-      console.log("vcxxxx", urlJson);
       if (urlJson["children"].length > 0) {
         var index = urlJson["children"].findIndex(
           item => item.source == "module 0.13"
@@ -53,12 +56,14 @@ export class Module013Component implements OnInit {
       }
     }
   }
+
   start() {
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
     jsonBody['event'] = 'start'
     this.apiCall(jsonBody, 'modulezerosingleurl/', 'start');   
   }
+
   videoFinish(e) {
     if (e == true)
     {
@@ -67,6 +72,7 @@ export class Module013Component implements OnInit {
       // this.nextBtnFlag = true
     }
   }
+  
   next() {
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')

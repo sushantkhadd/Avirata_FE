@@ -36,12 +36,10 @@ export class Module0Component implements OnInit {
     {
       var urlJson = {};
       urlJson = JSON.parse(window.localStorage.getItem("currentJson0"));
-      console.log("currentJson0.1", urlJson);
       if (urlJson["children"].length > 0) {
         var index = urlJson["children"].findIndex(
           item => item.source == "module 0.1"
         );
-        console.log("currentJson0.1 index", index);
         if (urlJson["children"][index].url != null) {
           this.passData["videoUrl"] = urlJson["children"][index].url;
         }
@@ -80,7 +78,6 @@ export class Module0Component implements OnInit {
             this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 0.1', window.localStorage.getItem('username'), 10);
             this.passData['apiUrl'] = "modulezerosingleurl/";
             this.passData['videoUrl'] = data['data'].url;
-            console.log("api call 0.1",this.passData)
             this.showVideoFlag = true;
             this.passUrl = data['data'].url;
             var current0 = [];
@@ -88,7 +85,6 @@ export class Module0Component implements OnInit {
             var index = current0["children"].findIndex(
               item => item.source == "module 0.1");
             current0["children"][index].url =this.passUrl;
-            console.log("current json 0.1",JSON.stringify(current0));
             window.localStorage.setItem("currentJson0", JSON.stringify(current0));
           } else if (fun == "finish1") {
             this.instructionModal.hide();

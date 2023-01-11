@@ -34,14 +34,12 @@ export class Module09Component implements OnInit {
   }
   public passData = {};
   ngOnInit() {
-    console.log('modeule 2222')
     this.startPdf=false
     if (this.mainFlagModule0 == 9) {
     }
     else if (this.mainFlagModule0 > 9) {
       var urlJson = {};
       urlJson = JSON.parse(window.localStorage.getItem("currentJson0"));
-      console.log("vcxxxx", urlJson);
       if (urlJson["children"].length > 0) {
         var index = urlJson["children"].findIndex(
           item => item.source == "module 0.9"
@@ -82,7 +80,7 @@ export class Module09Component implements OnInit {
             window.localStorage.setItem('mainFlagModule0', '10');
             window.localStorage.setItem('subFlagModule0', '1');
             window.localStorage.setItem('source', 'module 0.10');
-            this.Module0Service.setLocalStorage0(3);
+            this.Module0Service.setLocalStorage0(10);
             var obj = { "type": "submodule", "route": true, "current": this.translate.instant('L2Module0.subMenu0-10'), "next": this.translate.instant('L2Module0Finish.subMenu0-10'), "nextRoute": "/modules/module0/Module0.10" }
             this.LocalstoragedetailsService.setModuleStatus(JSON.stringify(obj));
           }

@@ -33,15 +33,18 @@ export class Module08Component implements OnInit {
   ) {
     this.toastr.setRootViewContainerRef(vcr);
   }
-  public passData = {}; 
+  public passData = {}; lnk1; urlArray = {};
   ngOnInit() {
+    this.lnk1 = '';
+    this.urlArray["src1"] = "yYocIWthNSY";
+    this.urlArray['v_thumb'] = './../../assets/img/video-thumb.png';
+
     if (this.mainFlagModule0 == 8) {
       this.start();
     }
     else if (this.mainFlagModule0 > 8) {
       var urlJson = {};
       urlJson = JSON.parse(window.localStorage.getItem("currentJson0"));
-      console.log("vcxxxx", urlJson);
       if (urlJson["children"].length > 0) {
         var index = urlJson["children"].findIndex(
           item => item.source == "module 0.8"

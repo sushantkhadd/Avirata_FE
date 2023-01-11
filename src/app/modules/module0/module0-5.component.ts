@@ -38,13 +38,14 @@ export class Module05Component implements OnInit {
   ngOnInit() {
     this.lnk1 = ''
     this.urlArray["src1"] = "OQpEQpiJbzo";
+    this.urlArray['v_thumb'] = './../../assets/img/video-thumb.png'
+
     this.showVideoFlag = false;
 
     if (this.mainFlagModule0 > 5)
     {
       var urlJson = {};
       urlJson = JSON.parse(window.localStorage.getItem("currentJson0"));
-      console.log("vcxxxx", urlJson);
       if (urlJson["children"].length > 0) {
         var index = urlJson["children"].findIndex(
           item => item.source == "module 0.5"
@@ -55,12 +56,14 @@ export class Module05Component implements OnInit {
       }
     }
   }
+
   start() {
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
     jsonBody['event'] = 'start'
     this.apiCall(jsonBody, 'modulezerosingleurl/', 'start');   
   }
+
   videoFinish(e) {
     if (e == true)
     {
@@ -69,6 +72,7 @@ export class Module05Component implements OnInit {
       // this.nextBtnFlag = true
     }
   }
+  
   next() {
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')

@@ -109,6 +109,7 @@ export class Module016Component implements OnInit {
   }
 
   start() {
+    this.showVideoFlag=false;
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
     jsonBody['event'] = 'start'
@@ -137,7 +138,6 @@ export class Module016Component implements OnInit {
   }
 
   apiCall(jsonBody, apiUrl, fun, item) {
-    console.log();
     this.passData['videoUrl']='';
     this.showVideoFlag = false;
     this.Module0Service.apiCall(jsonBody, apiUrl).subscribe(
@@ -150,13 +150,14 @@ export class Module016Component implements OnInit {
             this.passData['videoUrl'] = data['data'].url;
             this.passData['apiUrl'] = "modulezerosingleurl/";
 
-            this.showVideoFlag = true
+          
             this.passUrl = data['data'].url;
             var current0 = [];
             current0 = JSON.parse(window.localStorage.getItem("currentJson0"));
             var index = current0["children"].findIndex(
               item => item.source == "module 0.16");
             current0["children"][index].url = this.passUrl;
+            this.showVideoFlag = true
 
             window.localStorage.setItem("currentJson0", JSON.stringify(current0));
           } else if (fun == "finish1" && item == 5) {
@@ -203,8 +204,10 @@ export class Module016Component implements OnInit {
       data => {
         if (data["status"] == true) {
           if (fun == "finish1") {
+            console.log("e, item",jsonBody);
+
             window.localStorage.setItem('uuid', data['data'].nextuuid)
-            this.start()
+            this.start();
           }
         }
       },
@@ -215,6 +218,7 @@ export class Module016Component implements OnInit {
   }
 
   finishPDF(e, item) {
+    console.log("e, item",e, item);
     this.subFlagModule0 = this.subFlagModule0 + 1;
     window.localStorage.setItem('subFlagModule0', this.subFlagModule0.toString());
     var jsonBody = {}
