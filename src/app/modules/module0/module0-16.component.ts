@@ -49,11 +49,11 @@ export class Module016Component implements OnInit {
     this.lnk3 = '';
     this.lnk4 = '';
     this.lnk5 = '';
-    this.urlArray["src1"] = "https://s3-ap-southeast-1.amazonaws.com/maacpd/Level2/Module1/1.10/RM-+1.pdf";
-    this.urlArray["src2"] = "lTTajzrSkCw";
-    this.urlArray["src3"] = "lTTajzrSkCw";
-    this.urlArray["src4"] = "https://s3-ap-southeast-1.amazonaws.com/maacpd/Level2/Module1/1.10/RM-+1.pdf";
-    this.urlArray["src5"] = "lTTajzrSkCw";
+    this.urlArray["src1"] = "https://maacpd.s3.ap-southeast-1.amazonaws.com/L4_mr/Base+Module/0.16.1+-+%E0%A4%AE%E0%A5%81%E0%A4%B2%E0%A4%BE%E0%A4%82%E0%A4%A8%E0%A4%BE+%E0%A4%AE%E0%A5%8B%E0%A4%AC%E0%A4%BE%E0%A4%88%E0%A4%B2%E0%A4%9A%E0%A5%87+%E0%A4%B5%E0%A5%8D%E0%A4%AF%E0%A4%B8%E0%A4%A8+%E0%A4%B2%E0%A4%BE%E0%A4%97%E0%A4%B2%E0%A5%87+%E0%A4%86%E0%A4%B9%E0%A5%87..pdf";
+    this.urlArray["src2"] = "cx9QeER3kTk";
+    this.urlArray["src3"] = "etIOkZ04woM";
+    this.urlArray["src4"] = "https://maacpd.s3.ap-southeast-1.amazonaws.com/L4_mr/Base+Module/0.16.4+-+%E0%A4%B8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%AF%E0%A4%BE+%E0%A4%B5%E0%A4%BF%E0%A4%B6%E0%A5%8D%E0%A4%B2%E0%A5%87%E0%A4%B7%E0%A4%A3.pdf";
+    this.urlArray["src5"] = "w_f7tvD7mD0";
 
     if (this.mainFlagModule0 == 16) {
       this.showVideoFlag = false; 

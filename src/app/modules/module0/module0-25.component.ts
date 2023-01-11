@@ -42,10 +42,10 @@ export class Module025Component implements OnInit {
   }
   public passData = {};
   ngOnInit() {
-    this.lnk1 = ''
-    this.lnk2 = ''
-    this.urlArray["src1"] = "skGFDAhQrhE";
-    this.urlArray["src2"] = "opHKXAPIynA";
+    this.lnk1 = '';
+    this.lnk2 = '';
+    this.urlArray["src1"] = "d4B2DLZG81g";
+    this.urlArray["src2"] = "KynWb7LE1_o";
     this.urlArray['v_thumb'] = './../../assets/img/video-thumb.png'
     // this.start();
     if (this.mainFlagModule0 == 25) {
@@ -64,31 +64,37 @@ export class Module025Component implements OnInit {
         if (urlJson["children"][index].url != null) {
           var mainJson;
           mainJson = JSON.parse(urlJson["children"][index].url);
-          this.urlArray["src1"] = mainJson["0.25.1"];
-          this.urlArray["src2"] = mainJson["0.25.2"];
+          if (mainJson != null)
+          {
+            this.urlArray["src1"] = mainJson["0.25.1"];
+            this.urlArray["src2"] = mainJson["0.25.2"];
+          } else {
+            this.mapJSON();
+          }
         } else {
           this.mapJSON();
-          console.log('map json', this.mapJSON);
         }
       } else {
         this.mapJSON();
       }
     }
   }
+
   start() {
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
     jsonBody['event'] = 'start';
     console.log('hello start', jsonBody)
     this.apiCall(jsonBody, 'modulezerosingleurl/', 'start');
-
   }
+
   videoFinish(e) {
     if (e == true) {
       this.instructionModal.show();
       this.LanguageService.toShow();
     }
   }
+
   nextvideo() {
     this.subFlagModule0 = this.subFlagModule0 + 1
     window.localStorage.setItem('subFlagModule0', this.subFlagModule0.toString());
@@ -101,9 +107,9 @@ export class Module025Component implements OnInit {
       this.next()
     } else {
       this.nextApiCall(jsonBody, 'modulezerosingleurl/', 'finish1')
-
     }
   }
+
   next() {
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
@@ -129,7 +135,6 @@ export class Module025Component implements OnInit {
 
             window.localStorage.setItem("currentJson0", JSON.stringify(current0));
           } else if (fun == "finish1") {
-            console.log('hi pravin patil',data['data'].nextuuid)
             // this.instructionModal.hide();
             this.LanguageService.toHide();
             window.localStorage.setItem('uuid', data['data'].nextuuid)
@@ -149,7 +154,6 @@ export class Module025Component implements OnInit {
   }
 
   nextApiCall(jsonBody, apiUrl, fun) {
-    
     this.Module0Service.apiCall(jsonBody, apiUrl).subscribe(
       data => {
         if (data["status"] == true) {
@@ -165,10 +169,12 @@ export class Module025Component implements OnInit {
       }
     );
   }
+
   mapJSON() {
-    this.urlArray['src1'] = this.lnk1
-    this.urlArray['src2'] = this.lnk2
+    this.urlArray['src1'] = this.lnk1;
+    this.urlArray['src2'] = this.lnk2;
   }
+
   showVideo(src, title, value) {
     // this.staticImageModal.show();
     // this.statVideoFlag = true;

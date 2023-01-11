@@ -18,27 +18,36 @@ export class Module03Component implements OnInit {
 
   public mainFlagModule0 = parseInt(window.localStorage.getItem('mainFlagModule0'));
   public subFlagModule0 = parseInt(window.localStorage.getItem('subFlagModule0'));
-  download: boolean;
-  passValues = {};
-  finishJSONBody: any;
-  startVideoEvent = true;
-  showpdfFlag: boolean;
-  constructor(public FullLayoutService: FullLayoutService, public LanguageService: LanguageService, public Module0Service: Module0Service, public router: Router, public LocalstoragedetailsService: LocalstoragedetailsService, public toastr: ToastsManager, vcr: ViewContainerRef, public translate: TranslateService) {
+
+  constructor(
+    public FullLayoutService: FullLayoutService, 
+    public LanguageService: LanguageService, 
+    public Module0Service: Module0Service, 
+    public router: Router, 
+    public LocalstoragedetailsService: LocalstoragedetailsService, 
+    public toastr: ToastsManager, 
+    vcr: ViewContainerRef, 
+    public translate: TranslateService
+  ) {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
-  public showVideoFlag; nextBtnFlag; passData = {}; passUrl; videoData = {}; urlArray = {}; lnk1; lnk2; flag; parentUrlJson = {}
-  public statVideoFlag; thumb_title; vedioCompleteUrl;
+  public download: boolean; passValues = {}; finishJSONBody: any; startVideoEvent = true;
+  showpdfFlag: boolean; showVideoFlag; nextBtnFlag; passData = {}; passUrl; videoData = {}; 
+  urlArray = {}; lnk1; lnk2; flag; parentUrlJson = {}; statVideoFlag; thumb_title; 
+  vedioCompleteUrl;
 
   ngOnInit() {
-    this.lnk1 = ''
-    this.lnk2 = ''
+    this.lnk1 = "en-ytDYRRvg";
+    this.lnk2 = "https://maacpd.s3.ap-southeast-1.amazonaws.com/L4_mr/Base+Module/0.3+-+%E0%A4%AE%E0%A5%87%E0%A4%82%E0%A4%A6%E0%A5%82%E0%A4%9A%E0%A5%87+%E0%A4%AD%E0%A4%BE%E0%A4%97%2C+%E0%A4%95%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%AF+%E0%A4%B5+%E0%A4%B5%E0%A5%88%E0%A4%9A%E0%A4%BE%E0%A4%B0%E0%A4%BF%E0%A4%95+%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%95%E0%A5%8D%E0%A4%B0%E0%A4%BF%E0%A4%AF%E0%A4%BE.pdf";
+
     this.urlArray["src1"] = "en-ytDYRRvg";
     this.urlArray["src2"] = "https://maacpd.s3.ap-southeast-1.amazonaws.com/L4_mr/Base+Module/0.3+-+%E0%A4%AE%E0%A5%87%E0%A4%82%E0%A4%A6%E0%A5%82%E0%A4%9A%E0%A5%87+%E0%A4%AD%E0%A4%BE%E0%A4%97%2C+%E0%A4%95%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%AF+%E0%A4%B5+%E0%A4%B5%E0%A5%88%E0%A4%9A%E0%A4%BE%E0%A4%B0%E0%A4%BF%E0%A4%95+%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%95%E0%A5%8D%E0%A4%B0%E0%A4%BF%E0%A4%AF%E0%A4%BE.pdf";
     this.urlArray['v_thumb'] = './../../assets/img/video-thumb.png';
 
     this.showVideoFlag = false;
     this.nextBtnFlag = false;
+
     if (this.mainFlagModule0 == 3) {
       if (this.subFlagModule0 == 1) {
         this.start();
@@ -55,6 +64,7 @@ export class Module03Component implements OnInit {
         );
         var mainJson;
         mainJson = JSON.parse(urlJson["children"][index].url);
+        console.log("mainJson",mainJson);
         if (mainJson != null) {
           this.urlArray["src1"] = mainJson["0.3.1"];
           this.urlArray["src2"] = mainJson["0.3.2"];
@@ -70,6 +80,7 @@ export class Module03Component implements OnInit {
   mapJSON() {
     this.urlArray['src1'] = this.lnk1;
     this.urlArray['src2'] = this.lnk2;
+    this.passValues["url"] = this.lnk2;
   }
 
   start() {
@@ -109,7 +120,6 @@ export class Module03Component implements OnInit {
     this.apiCall(jsonBody, 'modulezerosingleurl/', 'finish2')
   } 
 
-
   apiCall(jsonBody, apiUrl, fun) {
     this.Module0Service.apiCall(jsonBody, apiUrl)
       .subscribe(
@@ -117,7 +127,7 @@ export class Module03Component implements OnInit {
           if (fun == 'start') {
             this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 0.3', window.localStorage.getItem('username'), 10);
             this.passData['videoUrl'] = data['data'].url;
-            this.showVideoFlag = true
+            this.showVideoFlag = true;
             this.passUrl = data['data'].url;
 
             this.parentUrlJson["0.3.1"] = this.passUrl;
@@ -126,7 +136,9 @@ export class Module03Component implements OnInit {
             var index = current0["children"].findIndex(
               item => item.source == "module 0.3");
             current0["children"][index].url = JSON.stringify(this.parentUrlJson);
+            console.log("JSON.stringify(current0) 1",JSON.stringify(current0));
             window.localStorage.setItem("currentJson1", JSON.stringify(current0));
+
           } else if (fun == 'start2') {
             this.LanguageService.googleEventTrack('L3SubmoduleStatus', 'Module 0.3', window.localStorage.getItem('username'), 10);
             this.passValues["url"] = data["data"].url;
@@ -138,15 +150,18 @@ export class Module03Component implements OnInit {
             var index = current0["children"].findIndex(
               item => item.source == "module 0.3");
             current0["children"][index].url = JSON.stringify(this.parentUrlJson);
+            console.log("JSON.stringify(current0) 2",JSON.stringify(current0));
+
             window.localStorage.setItem("currentJson1", JSON.stringify(current0));
+
           } else if (fun == 'finish1') {
             this.instructionModal.hide();
             this.LanguageService.toHide();
             this.showVideoFlag = false;
             window.localStorage.setItem('uuid', data['data'].nextuuid)
             this.subFlagModule0 = this.subFlagModule0 + 1
-            window.localStorage.setItem('subFlagModule1', this.subFlagModule0.toString())
-            // this.start1()
+            window.localStorage.setItem('subFlagModule1', this.subFlagModule0.toString());
+
           } else if (fun == "finish2") {
             this.LanguageService.toHide();
             window.localStorage.setItem('uuid', data['data'].nextuuid)

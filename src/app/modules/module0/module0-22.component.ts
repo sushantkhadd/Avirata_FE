@@ -44,8 +44,8 @@ export class Module022Component implements OnInit {
   ngOnInit() {
     this.lnk1 = ''
     this.lnk2 = ''
-    this.urlArray["src1"] = "skGFDAhQrhE";
-    this.urlArray["src2"] = "opHKXAPIynA";
+    this.urlArray["src1"] = "AG35AQ50nNw";
+    this.urlArray["src2"] = "C2vlt9B9BUQ";
     this.urlArray['v_thumb'] = './../../assets/img/video-thumb.png'
     // this.start();
     if (this.mainFlagModule0 == 22) {
@@ -64,11 +64,15 @@ export class Module022Component implements OnInit {
         if (urlJson["children"][index].url != null) {
           var mainJson;
           mainJson = JSON.parse(urlJson["children"][index].url);
-          this.urlArray["src1"] = mainJson["0.22.1"];
-          this.urlArray["src2"] = mainJson["0.22.2"];
+          if (mainJson != null)
+          {
+            this.urlArray["src1"] = mainJson["0.22.1"];
+            this.urlArray["src2"] = mainJson["0.22.2"];
+          } else {
+            this.mapJSON();
+          }
         } else {
           this.mapJSON();
-          console.log('map json', this.mapJSON);
         }
       } else {
         this.mapJSON();

@@ -44,8 +44,8 @@ export class Module017Component implements OnInit {
   ngOnInit() {
     this.lnk1 = ''
     this.lnk2 = ''
-    this.urlArray["src1"] = "skGFDAhQrhE";
-    this.urlArray["src2"] = "opHKXAPIynA";
+    this.urlArray["src1"] = "kKmksudB9Ak";
+    this.urlArray["src2"] = "Qx_Db_6Xeqw";
     this.urlArray['v_thumb'] = './../../assets/img/video-thumb.png'
     // this.start();
     if (this.mainFlagModule0 == 17) {
@@ -64,11 +64,15 @@ export class Module017Component implements OnInit {
         if (urlJson["children"][index].url != null) {
           var mainJson;
           mainJson = JSON.parse(urlJson["children"][index].url);
-          this.urlArray["src1"] = mainJson["0.17.1"];
-          this.urlArray["src2"] = mainJson["0.17.2"];
+          if (mainJson != null)
+          {
+            this.urlArray["src1"] = mainJson["0.17.1"];
+            this.urlArray["src2"] = mainJson["0.17.2"];
+          } else {
+            this.mapJSON();
+          } 
         } else {
           this.mapJSON();
-          console.log('map json', this.mapJSON);
         }
       } else {
         this.mapJSON();
@@ -77,9 +81,10 @@ export class Module017Component implements OnInit {
   }
 
   mapJSON() {
-    this.urlArray['src1'] = this.lnk1
-    this.urlArray['src2'] = this.lnk2
+    this.urlArray['src1'] = this.lnk1;
+    this.urlArray['src2'] = this.lnk2;
   }
+
   start() {
     var jsonBody = {}
     jsonBody['submoduleid'] = window.localStorage.getItem('uuid')
