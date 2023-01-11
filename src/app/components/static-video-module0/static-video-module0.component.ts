@@ -32,7 +32,7 @@ export class StaticVideoModule0Component implements OnInit {
     console.log("Receive:: ", this.receivedData)
     player = YouTubePlayer('ytplayer', {
       videoId: "",
-      playerVars: { 'autoplay': 0, 'rel': 0, 'controls': 1, 'modestbranding': 1, 'iv_load_policy': 3, 'disablekb': 0 }
+      playerVars: { 'autoplay': 0, 'rel': 0, 'controls': 1, 'modestbranding': 1, 'iv_load_policy': 3, 'disablekb': 0 ,'showinfo':0,'cc_load_policy':0,'enablejsapi':0,'playslinline':0,'fs':0}
     });
   }
   ngOnChanges() {
