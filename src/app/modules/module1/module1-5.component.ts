@@ -20,7 +20,7 @@ export class Module15Component implements OnInit {
   public token; startVideoEvent;
   public passData = {};//used when CFU completed
   public videoData = {}; passUrl; flag; mainJson;
-  parentUrls = {}; urlArray = {};
+  parentUrls = {}; urlArray = {}; lnk1; lnk2; 
   public currentSource = window.localStorage.getItem('source');
 
   constructor(public FullLayoutService: FullLayoutService, public LanguageService: LanguageService, public LocalstoragedetailsService: LocalstoragedetailsService, private router: Router, public Module1Service: Module1Service, public translate: TranslateService, public toastr: ToastsManager,
@@ -29,6 +29,11 @@ export class Module15Component implements OnInit {
    }
 
   ngOnInit() {
+    this.lnk1 = "Ucp36uqTLdc";
+    this.lnk2 = "LeqAYr54R0E";
+    this.urlArray["src1"] = "Ucp36uqTLdc";
+    this.urlArray["src2"] = "LeqAYr54R0E";
+
     this.passUrl = 'IkzkQ-Xft4c'
     this.currentSource = window.localStorage.getItem('source');
     this.startVideoEvent = false;
@@ -39,13 +44,6 @@ export class Module15Component implements OnInit {
     {
       this.startVideoEvent = false;
       this.videoData["apiUrl"] = "moduleonecfustart/";
-      // if (this.subFlagModule1 == 1)
-      // {
-      //   this.start1();
-      // } else if (this.subFlagModule1 == 2)
-      // {
-      //   this.start2();
-      // }
     }
     else if (this.mainFlagModule1 > 5)
     {
@@ -59,14 +57,29 @@ export class Module15Component implements OnInit {
         );
         if (urlJson["children"][index].url != null)
         {
+          console.log('hiiiiii pravin 1',urlJson["children"][index].url)
           var mainJson;
           mainJson = JSON.parse(urlJson["children"][index].url);
-          this.urlArray["src1"] = mainJson["1.5.1"];
-          this.urlArray["src2"] = mainJson["1.5.2"];
-          console.log('hiiiiii pravin',this.urlArray)
+          console.log("mainJson", mainJson["1.5.1"]);
+          if(mainJson["1.5.1"] != undefined && mainJson["1.5.2"] != undefined){
+            this.urlArray["src1"] = mainJson["1.5.1"];
+            this.urlArray["src2"] = mainJson["1.5.2"];
+            console.log('hiiiiii pravin',this.urlArray)
+          } else {
+            this.mapJSON();
+          }
+        }else {
+          this.mapJSON();
         }
+      } else {
+        this.mapJSON();
       }
     }
+  }
+
+  mapJSON() {
+    this.urlArray['src1'] = this.lnk1;
+    this.urlArray['src2'] = this.lnk2;
   }
 
   start1() {
@@ -82,10 +95,12 @@ export class Module15Component implements OnInit {
       this.passData["videoUrl"] = src;
     }
   }
+
   finishCFU1(e) {
     if (e)
-    {
-      this.parentUrls['1'] = e['url'];
+    { 
+      console.log("finishCFU1",e['url']);
+      //this.parentUrls['1'] = e['url'];
       var current1 = [];
       current1 = JSON.parse(window.localStorage.getItem("currentJson1"));
       var index = current1["children"].findIndex(
@@ -96,7 +111,7 @@ export class Module15Component implements OnInit {
       this.videoData["apiUrl"] = "moduleonecfustart/";
       this.subFlagModule1 = this.subFlagModule1 + 1
       window.localStorage.setItem('subFlagModule1', this.subFlagModule1.toString());
-      console.log(current1, e,'1')
+      console.log(current1, e,'finishCFU1 1')
     }
   }
 
@@ -112,10 +127,11 @@ export class Module15Component implements OnInit {
       var index1 = moduleJson["children"].findIndex(
       item => item.source == "module 1.5.1");
       if(moduleJson["children"][index1].url !="" && moduleJson["children"][index1].url !=null && moduleJson["children"][index1].url !=undefined){
-      this.parentUrls['1'] = moduleJson["children"][index1].url;
+      this.parentUrls = moduleJson["children"][index1].url;
       }
       }
-      this.parentUrls['2'] = e['url'];
+      this.parentUrls = e['url'];
+      console.log("finishCFU2",JSON.stringify(this.parentUrls));
       current1["children"][index].url = JSON.stringify(this.parentUrls);
       window.localStorage.setItem("currentJson1", JSON.stringify(current1));
 

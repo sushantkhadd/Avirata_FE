@@ -203,7 +203,7 @@ export class PresentationComponent implements OnInit {
         if ((window.localStorage.getItem('mainFlagModule5')) == '4' || (window.localStorage.getItem('mainFlagModule4')) == '14' ||
         (window.localStorage.getItem('mainFlagModule2')) == '17' ||
         (window.localStorage.getItem('mainFlagModule5')) == '20' ||
-        ((window.localStorage.getItem('mainFlagModule5')) == '21' && window.localStorage.getItem("subFlagModule5")=="3") || ((window.localStorage.getItem('mainFlagModule0')) == '16' && window.localStorage.getItem("subFlagModule0")=="1")) {
+        ((window.localStorage.getItem('mainFlagModule5')) == '21' && window.localStorage.getItem("subFlagModule5")=="3") || ((window.localStorage.getItem('mainFlagModule0')) == '16' && window.localStorage.getItem("subFlagModule0")=="1") || (window.localStorage.getItem('mainFlagModule1') == '15')) {
           this.showFinish = true;
         } else {
           this.showFinish = false;

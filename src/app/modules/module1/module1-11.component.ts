@@ -52,6 +52,7 @@ export class Module111Component implements OnInit {
       unlockJson = JSON.parse(window.localStorage.getItem('currentJson1'))
       if (unlockJson['children'].length > 0)
       {
+        console.log("unlockJson['children']",unlockJson['children']);
         var index = unlockJson['children'].findIndex(item =>
           item.source == "module 1.11");
 
@@ -76,14 +77,14 @@ export class Module111Component implements OnInit {
   }
 
   checkAnswer(e) {
-    var current5 = [];
-    current5 = JSON.parse(window.localStorage.getItem("currentJson1"));
-    var index = current5["children"].findIndex(
+    var current1 = [];
+    current1 = JSON.parse(window.localStorage.getItem("currentJson1"));
+    var index = current1["children"].findIndex(
       item => item.source == "module 1.11"
     );
     this.audioSrc["state"] = "static";
-    current5["children"][index].url = e["url"];
-    window.localStorage.setItem("currentJson5", JSON.stringify(current5));
+    current1["children"][index].url = e["url"];
+    window.localStorage.setItem("currentJson1", JSON.stringify(current1));
     this.mainFlagModule1 = 12;
     window.localStorage.setItem("mainFlagModule1", "12");
     window.localStorage.setItem("subFlagModule1", "1");
