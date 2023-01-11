@@ -68,6 +68,7 @@ export class Module03Component implements OnInit {
         if (mainJson != null) {
           this.urlArray["src1"] = mainJson["0.3.1"];
           this.urlArray["src2"] = mainJson["0.3.2"];
+          this.passValues["url"] = mainJson["0.3.2"];
         } else {
           this.mapJSON();
         }
